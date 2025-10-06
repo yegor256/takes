@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 476.012304743
+  seconds: 714.167261391
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-06 17:04:35.000043960 Z
+  when: 2025-10-06 18:07:46.834227920 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -6815,71 +6815,6 @@
   when: 2025-10-03 06:59:12.000000000 Z
   where: github
   who: 526301
-- _id: 12838
-  _job: 18216439648
-  _time: 2025-10-03 08:03:55.320675307 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#379 has been earlier opened by @alxn.
-  is_human: 1
-  issue: 379
-  repository: 28924109
-  tombstone: 2025-10-03 09:11:18.663754382 Z
-  what: issue-was-opened
-  when: 2015-08-28 18:03:51.000000000 Z
-  where: github
-  who: 4368287
-- _id: 12839
-  _job: 18216439648
-  _time: 2025-10-03 08:03:55.524912985 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#377 has been earlier opened by @pinaf.
-  is_human: 1
-  issue: 377
-  repository: 28924109
-  tombstone: 2025-10-03 09:11:18.614928809 Z
-  what: issue-was-opened
-  when: 2015-08-21 19:51:38.000000000 Z
-  where: github
-  who: 1054771
-- _id: 12840
-  _job: 18216439648
-  _time: 2025-10-03 08:03:55.861141095 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#376 has been earlier opened by @yegor256.
-  is_human: 1
-  issue: 376
-  repository: 28924109
-  tombstone: 2025-10-03 09:11:18.558478019 Z
-  what: issue-was-opened
-  when: 2015-08-20 13:57:48.000000000 Z
-  where: github
-  who: 526301
-- _id: 12841
-  _job: 18216439648
-  _time: 2025-10-03 08:03:55.918850391 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#375 has been earlier opened by @yegor256.
-  is_human: 1
-  issue: 375
-  repository: 28924109
-  tombstone: 2025-10-03 09:11:18.511991230 Z
-  what: issue-was-opened
-  when: 2015-08-17 11:39:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 12842
-  _job: 18216439648
-  _time: 2025-10-03 08:03:56.011242556 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#373 has been earlier opened by @carlosmiranda.
-  is_human: 1
-  issue: 373
-  repository: 28924109
-  tombstone: 2025-10-03 09:11:18.463068025 Z
-  what: issue-was-opened
-  when: 2015-07-27 08:44:08.000000000 Z
-  where: github
-  who: 1917892
 - _id: 12845
   _job: 41103
   _time: 2025-10-03 08:07:30.201302038 Z
@@ -6916,381 +6851,6 @@
   when: *27
   where: github
   who: 29139614
-- _id: 12849
-  _job: 18217756752
-  _time: 2025-10-03 08:57:13.777263023 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: "#41"
-  comments: 21
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 20
-  comments_resolved: 0
-  comments_to_code: 1
-  details: Apparently, yegor256/takes#192 has been "pull-was-merged".
-  done: 2025-10-03 09:11:15.948891661 Z
-  failed_builds: 0
-  files: 3
-  hoc: 160
-  is_human: 0
-  issue: 192
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.718296394 Z
-  what: pull-was-merged
-  when: 2015-04-22 03:53:38.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12850
-  _job: 18217756752
-  _time: 2025-10-03 08:57:27.752241474 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: n136
-  comments: 34
-  comments_appreciated: 0
-  comments_by_author: 3
-  comments_by_reviewers: 31
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#193 has been "pull-was-merged".
-  done: 2025-10-03 09:11:15.977139367 Z
-  failed_builds: 0
-  files: 13
-  hoc: 184
-  is_human: 0
-  issue: 193
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.732907097 Z
-  what: pull-was-merged
-  when: 2015-04-29 20:13:40.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12851
-  _job: 18217756752
-  _time: 2025-10-03 08:57:40.920398223 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '94'
-  comments: 38
-  comments_appreciated: 0
-  comments_by_author: 8
-  comments_by_reviewers: 30
-  comments_resolved: 0
-  comments_to_code: 16
-  details: Apparently, yegor256/takes#197 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.004281960 Z
-  failed_builds: 0
-  files: 4
-  hoc: 301
-  is_human: 0
-  issue: 197
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.747866172 Z
-  what: pull-was-merged
-  when: 2015-04-24 18:34:17.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12852
-  _job: 18217756752
-  _time: 2025-10-03 08:57:56.138110578 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: PsLinkedinTest
-  comments: 81
-  comments_appreciated: 0
-  comments_by_author: 18
-  comments_by_reviewers: 63
-  comments_resolved: 0
-  comments_to_code: 36
-  details: Apparently, yegor256/takes#200 has been "pull-was-closed".
-  done: 2025-10-03 09:11:17.335779898 Z
-  failed_builds: 0
-  files: 9
-  hoc: 357
-  is_human: 1
-  issue: 200
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.763759666 Z
-  what: pull-was-closed
-  when: 2015-06-16 21:58:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 12853
-  _job: 18217756752
-  _time: 2025-10-03 08:58:24.787219166 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '195'
-  comments: 27
-  comments_appreciated: 0
-  comments_by_author: 6
-  comments_by_reviewers: 21
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#202 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.036269807 Z
-  failed_builds: 0
-  files: 2
-  hoc: 15
-  is_human: 0
-  issue: 202
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.777100564 Z
-  what: pull-was-merged
-  when: 2015-05-09 19:32:04.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12854
-  _job: 18217756752
-  _time: 2025-10-03 08:58:35.832888428 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: "#194"
-  comments: 34
-  comments_appreciated: 0
-  comments_by_author: 7
-  comments_by_reviewers: 27
-  comments_resolved: 0
-  comments_to_code: 2
-  details: Apparently, yegor256/takes#203 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.064756618 Z
-  failed_builds: 0
-  files: 2
-  hoc: 136
-  is_human: 0
-  issue: 203
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.790176815 Z
-  what: pull-was-merged
-  when: 2015-05-08 19:16:14.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12855
-  _job: 18217756752
-  _time: 2025-10-03 08:58:49.200785647 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: "#184"
-  comments: 20
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 19
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#204 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.091846374 Z
-  failed_builds: 0
-  files: 2
-  hoc: 32
-  is_human: 0
-  issue: 204
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.811425570 Z
-  what: pull-was-merged
-  when: 2015-04-24 19:20:59.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12856
-  _job: 18217756752
-  _time: 2025-10-03 08:58:58.596955970 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: "#113"
-  comments: 14
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 13
-  comments_resolved: 0
-  comments_to_code: 3
-  details: Apparently, yegor256/takes#207 has been "pull-was-closed".
-  done: 2025-10-03 09:11:17.369056135 Z
-  failed_builds: 0
-  files: 1
-  hoc: 27
-  is_human: 1
-  issue: 207
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.826797751 Z
-  what: pull-was-closed
-  when: 2015-04-24 08:41:32.000000000 Z
-  where: github
-  who: 7552413
-- _id: 12857
-  _job: 18217756752
-  _time: 2025-10-03 08:59:05.902961983 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '206'
-  comments: 22
-  comments_appreciated: 0
-  comments_by_author: 3
-  comments_by_reviewers: 19
-  comments_resolved: 0
-  comments_to_code: 4
-  details: Apparently, yegor256/takes#208 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.123638932 Z
-  failed_builds: 0
-  files: 2
-  hoc: 100
-  is_human: 0
-  issue: 208
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.841493894 Z
-  what: pull-was-merged
-  when: 2015-04-24 08:26:41.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12858
-  _job: 18217756752
-  _time: 2025-10-03 08:59:15.795098859 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '113'
-  comments: 42
-  comments_appreciated: 0
-  comments_by_author: 9
-  comments_by_reviewers: 33
-  comments_resolved: 0
-  comments_to_code: 4
-  details: Apparently, yegor256/takes#210 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.152039782 Z
-  failed_builds: 0
-  files: 2
-  hoc: 39
-  is_human: 0
-  issue: 210
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.856491644 Z
-  what: pull-was-merged
-  when: 2015-05-05 19:22:30.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12859
-  _job: 18217756752
-  _time: 2025-10-03 08:59:32.389333826 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '166'
-  comments: 33
-  comments_appreciated: 0
-  comments_by_author: 2
-  comments_by_reviewers: 31
-  comments_resolved: 0
-  comments_to_code: 8
-  details: Apparently, yegor256/takes#212 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.179492444 Z
-  failed_builds: 0
-  files: 2
-  hoc: 42
-  is_human: 0
-  issue: 212
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.870897817 Z
-  what: pull-was-merged
-  when: 2015-04-29 20:45:45.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12860
-  _job: 18217756752
-  _time: 2025-10-03 08:59:45.453452933 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: "#105"
-  comments: 36
-  comments_appreciated: 0
-  comments_by_author: 5
-  comments_by_reviewers: 31
-  comments_resolved: 0
-  comments_to_code: 9
-  details: Apparently, yegor256/takes#214 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.213086223 Z
-  failed_builds: 0
-  files: 2
-  hoc: 180
-  is_human: 0
-  issue: 214
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.885109308 Z
-  what: pull-was-merged
-  when: 2015-05-08 19:36:37.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12861
-  _job: 18217756752
-  _time: 2025-10-03 08:59:59.670207246 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: TkConsumesTsConsumes#107
-  comments: 36
-  comments_appreciated: 0
-  comments_by_author: 8
-  comments_by_reviewers: 28
-  comments_resolved: 0
-  comments_to_code: 9
-  details: Apparently, yegor256/takes#215 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.241045570 Z
-  failed_builds: 0
-  files: 4
-  hoc: 415
-  is_human: 0
-  issue: 215
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.897779349 Z
-  what: pull-was-merged
-  when: 2015-05-11 23:21:46.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12862
-  _job: 18217756752
-  _time: 2025-10-03 09:00:13.797599738 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '211'
-  comments: 43
-  comments_appreciated: 0
-  comments_by_author: 11
-  comments_by_reviewers: 32
-  comments_resolved: 0
-  comments_to_code: 1
-  details: Apparently, yegor256/takes#216 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.268175164 Z
-  failed_builds: 0
-  files: 3
-  hoc: 258
-  is_human: 0
-  issue: 216
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.917989783 Z
-  what: pull-was-merged
-  when: 2015-04-30 16:44:36.000000000 Z
-  where: github
-  who: 8086956
-- _id: 12863
-  _job: 18217756752
-  _time: 2025-10-03 09:00:30.363971216 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  comments: 132
-  comments_appreciated: 0
-  comments_by_author: 23
-  comments_by_reviewers: 109
-  comments_resolved: 0
-  comments_to_code: 85
-  details: Apparently, yegor256/takes#218 has been "pull-was-merged".
-  done: 2025-10-03 09:11:16.300496227 Z
-  failed_builds: 0
-  files: 2
-  hoc: 180
-  is_human: 0
-  issue: 218
-  repository: 28924109
-  succeeded_builds: 0
-  tombstone: 2025-10-03 09:11:37.932951079 Z
-  what: pull-was-merged
-  when: 2015-05-07 18:47:41.000000000 Z
-  where: github
-  who: 8086956
 - _id: 12864
   _job: 18217756752
   _time: 2025-10-03 09:01:14.233676214 Z
@@ -46025,6 +45585,7 @@
   is_human: 1
   issue: 134
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.121047120 Z
   what: pull-was-opened
   when: 2015-04-05 19:04:03.000000000 Z
   where: github
@@ -46038,6 +45599,7 @@
   is_human: 1
   issue: 142
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.160204941 Z
   what: pull-was-opened
   when: 2015-04-06 20:10:02.000000000 Z
   where: github
@@ -46051,6 +45613,7 @@
   is_human: 1
   issue: 143
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.650182497 Z
   what: pull-was-opened
   when: 2015-04-06 22:34:04.000000000 Z
   where: github
@@ -46064,6 +45627,7 @@
   is_human: 1
   issue: 150
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.206975480 Z
   what: pull-was-opened
   when: 2015-04-07 11:14:00.000000000 Z
   where: github
@@ -46077,6 +45641,7 @@
   is_human: 1
   issue: 151
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.695246905 Z
   what: pull-was-opened
   when: 2015-04-07 11:21:03.000000000 Z
   where: github
@@ -46090,6 +45655,7 @@
   is_human: 1
   issue: 156
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.771534486 Z
   what: pull-was-opened
   when: 2015-04-07 21:36:30.000000000 Z
   where: github
@@ -46103,6 +45669,7 @@
   is_human: 1
   issue: 157
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.808786570 Z
   what: pull-was-opened
   when: 2015-04-08 06:27:28.000000000 Z
   where: github
@@ -46116,6 +45683,7 @@
   is_human: 1
   issue: 162
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.853884721 Z
   what: pull-was-opened
   when: 2015-04-09 05:51:57.000000000 Z
   where: github
@@ -46129,6 +45697,7 @@
   is_human: 1
   issue: 164
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.888846643 Z
   what: pull-was-opened
   when: 2015-04-09 09:58:58.000000000 Z
   where: github
@@ -46142,6 +45711,7 @@
   is_human: 1
   issue: 165
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.938040963 Z
   what: pull-was-opened
   when: 2015-04-09 10:24:25.000000000 Z
   where: github
@@ -46155,6 +45725,7 @@
   is_human: 1
   issue: 168
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.249497525 Z
   what: pull-was-opened
   when: 2015-04-10 12:54:51.000000000 Z
   where: github
@@ -46168,6 +45739,7 @@
   is_human: 1
   issue: 169
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.289394409 Z
   what: pull-was-opened
   when: 2015-04-13 09:23:33.000000000 Z
   where: github
@@ -46181,6 +45753,7 @@
   is_human: 1
   issue: 175
   repository: 28924109
+  tombstone: 2025-10-06 17:05:34.974570776 Z
   what: pull-was-opened
   when: 2015-04-15 10:46:13.000000000 Z
   where: github
@@ -46194,6 +45767,7 @@
   is_human: 1
   issue: 176
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.023516690 Z
   what: pull-was-opened
   when: 2015-04-15 12:01:23.000000000 Z
   where: github
@@ -46207,13 +45781,620 @@
   is_human: 1
   issue: 177
   repository: 28924109
+  tombstone: 2025-10-06 17:05:35.066055370 Z
   what: pull-was-opened
   when: 2015-04-15 13:45:54.000000000 Z
   where: github
   who: 9972909
-- _id: 15470
-  _job: 41767
-  _time: 2025-10-06 16:03:06.295796109 Z
+- _id: 15472
+  _job: 18288332001
+  _time: 2025-10-06 16:59:45.838343609 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '46'
+  comments: 27
+  comments_appreciated: 0
+  comments_by_author: 8
+  comments_by_reviewers: 19
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#134 has been "pull-was-closed".
+  done: 2025-10-06 17:05:35.093296233 Z
+  failed_builds: 0
+  files: 2
+  hoc: 21
+  issue: 134
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.104097856 Z
+  what: pull-was-closed
+  when: 2015-04-13 05:00:01.000000000 Z
+  where: github
+  who: 1265978
+- _id: 15473
+  _job: 18288332001
+  _time: 2025-10-06 17:00:01.701861357 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '115'
+  comments: 24
+  comments_appreciated: 0
+  comments_by_author: 5
+  comments_by_reviewers: 19
+  comments_resolved: 0
+  comments_to_code: 1
+  details: Apparently, yegor256/takes#142 has been "pull-was-closed".
+  done: 2025-10-06 17:05:35.140622232 Z
+  failed_builds: 0
+  files: 1
+  hoc: 222
+  issue: 142
+  repository: 28924109
+  stale: who
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.123023837 Z
+  what: pull-was-closed
+  when: 2015-04-22 09:16:47.000000000 Z
+  where: github
+- _id: 15474
+  _job: 18288332001
+  _time: 2025-10-06 17:00:10.985908335 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: rsWithHeaderValidation
+  comments: 43
+  comments_appreciated: 0
+  comments_by_author: 9
+  comments_by_reviewers: 34
+  comments_resolved: 0
+  comments_to_code: 12
+  details: Apparently, yegor256/takes#143 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.617435462 Z
+  failed_builds: 0
+  files: 2
+  hoc: 53
+  issue: 143
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.140964199 Z
+  what: pull-was-merged
+  when: 2015-04-09 05:10:56.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15475
+  _job: 18288332001
+  _time: 2025-10-06 17:00:24.721578391 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 11
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 10
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#150 has been "pull-was-closed".
+  done: 2025-10-06 17:05:35.185796985 Z
+  failed_builds: 0
+  files: 0
+  hoc: 0
+  issue: 150
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.169098235 Z
+  what: pull-was-closed
+  when: 2015-04-10 00:41:02.000000000 Z
+  where: github
+  who: 2527943
+- _id: 15476
+  _job: 18288332001
+  _time: 2025-10-06 17:00:29.908924191 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 36
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 32
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#151 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.667902370 Z
+  failed_builds: 0
+  files: 1
+  hoc: 6
+  issue: 151
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.189110938 Z
+  what: pull-was-merged
+  when: 2015-04-08 07:35:07.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15477
+  _job: 18288332001
+  _time: 2025-10-06 17:00:42.425330708 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: new_attributes_file
+  comments: 22
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 22
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#156 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.714131798 Z
+  failed_builds: 0
+  files: 1
+  hoc: 20
+  issue: 156
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.208892930 Z
+  what: pull-was-merged
+  when: 2015-04-10 03:27:18.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15478
+  _job: 18288332001
+  _time: 2025-10-06 17:00:50.495047508 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '153'
+  comments: 23
+  comments_appreciated: 0
+  comments_by_author: 3
+  comments_by_reviewers: 20
+  comments_resolved: 0
+  comments_to_code: 5
+  details: Apparently, yegor256/takes#157 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.788962858 Z
+  failed_builds: 0
+  files: 2
+  hoc: 10
+  issue: 157
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.227287802 Z
+  what: pull-was-merged
+  when: 2015-04-09 19:20:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15479
+  _job: 18288332001
+  _time: 2025-10-06 17:00:59.159908556 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '140'
+  comments: 32
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 28
+  comments_resolved: 0
+  comments_to_code: 4
+  details: Apparently, yegor256/takes#162 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.833185154 Z
+  failed_builds: 0
+  files: 5
+  hoc: 153
+  issue: 162
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.245016784 Z
+  what: pull-was-merged
+  when: 2015-04-13 03:25:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15480
+  _job: 18288332001
+  _time: 2025-10-06 17:01:10.892742711 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: 108_ts_tk_produces_decorators
+  comments: 31
+  comments_appreciated: 0
+  comments_by_author: 3
+  comments_by_reviewers: 28
+  comments_resolved: 0
+  comments_to_code: 6
+  details: Apparently, yegor256/takes#164 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.870900691 Z
+  failed_builds: 0
+  files: 2
+  hoc: 168
+  issue: 164
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.272371530 Z
+  what: pull-was-merged
+  when: 2015-04-15 21:33:09.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15481
+  _job: 18288332001
+  _time: 2025-10-06 17:01:21.627251738 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '139'
+  comments: 30
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 26
+  comments_resolved: 0
+  comments_to_code: 4
+  details: Apparently, yegor256/takes#165 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.916165353 Z
+  failed_builds: 0
+  files: 17
+  hoc: 111
+  issue: 165
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.291984624 Z
+  what: pull-was-merged
+  when: 2015-04-09 20:04:49.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15482
+  _job: 18288332001
+  _time: 2025-10-06 17:01:32.017864960 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 15
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 14
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#168 has been "pull-was-closed".
+  done: 2025-10-06 17:05:35.223917723 Z
+  failed_builds: 0
+  files: 4
+  hoc: 61
+  issue: 168
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.312071506 Z
+  what: pull-was-closed
+  when: 2015-04-26 06:49:57.000000000 Z
+  where: github
+  who: 2527943
+- _id: 15483
+  _job: 18288332001
+  _time: 2025-10-06 17:01:38.355467125 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '46'
+  comments: 27
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 26
+  comments_resolved: 0
+  comments_to_code: 7
+  details: Apparently, yegor256/takes#169 has been "pull-was-closed".
+  done: 2025-10-06 17:05:35.269199251 Z
+  failed_builds: 0
+  files: 2
+  hoc: 37
+  issue: 169
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.330837904 Z
+  what: pull-was-closed
+  when: 2015-04-23 19:40:16.000000000 Z
+  where: github
+  who: 6305016
+- _id: 15484
+  _job: 18288332001
+  _time: 2025-10-06 17:01:47.777826127 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '11'
+  comments: 54
+  comments_appreciated: 0
+  comments_by_author: 11
+  comments_by_reviewers: 43
+  comments_resolved: 0
+  comments_to_code: 6
+  details: Apparently, yegor256/takes#175 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.955156700 Z
+  failed_builds: 0
+  files: 2
+  hoc: 210
+  issue: 175
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.347880679 Z
+  what: pull-was-merged
+  when: 2015-04-29 04:43:53.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15485
+  _job: 18288332001
+  _time: 2025-10-06 17:02:04.985350213 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '46'
+  comments: 43
+  comments_appreciated: 0
+  comments_by_author: 10
+  comments_by_reviewers: 33
+  comments_resolved: 0
+  comments_to_code: 11
+  details: Apparently, yegor256/takes#176 has been "pull-was-merged".
+  done: 2025-10-06 17:05:34.999765055 Z
+  failed_builds: 0
+  files: 2
+  hoc: 79
+  issue: 176
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.376011636 Z
+  what: pull-was-merged
+  when: 2015-04-17 06:24:56.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15486
+  _job: 18288332001
+  _time: 2025-10-06 17:02:19.462570364 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '137'
+  comments: 25
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 21
+  comments_resolved: 0
+  comments_to_code: 3
+  details: Apparently, yegor256/takes#177 has been "pull-was-merged".
+  done: 2025-10-06 17:05:35.040657963 Z
+  failed_builds: 0
+  files: 4
+  hoc: 70
+  issue: 177
+  repository: 28924109
+  succeeded_builds: 0
+  tombstone: 2025-10-06 17:06:21.395349679 Z
+  what: pull-was-merged
+  when: 2015-04-15 20:14:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15487
+  _job: 18288332001
+  _time: 2025-10-06 17:03:08.300654092 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#485 has been earlier opened by @carlosmiranda.
+  is_human: 1
+  issue: 485
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-12-26 13:14:25.000000000 Z
+  where: github
+  who: 1917892
+- _id: 15488
+  _job: 18288332001
+  _time: 2025-10-06 17:03:09.702384617 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#454 has been earlier opened by @hdouss.
+  is_human: 1
+  issue: 454
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-12-06 17:47:46.000000000 Z
+  where: github
+  who: 2956255
+- _id: 15489
+  _job: 18288332001
+  _time: 2025-10-06 17:03:11.524124524 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#396 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 396
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-29 03:50:22.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15490
+  _job: 18288332001
+  _time: 2025-10-06 17:03:11.832498854 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#395 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 395
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-29 03:34:04.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15491
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.020759345 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#394 has been earlier opened by @yegor256.
+  is_human: 1
+  issue: 394
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-27 01:21:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 15492
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.372232766 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#392 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 392
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-24 14:41:26.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15493
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.535493883 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#391 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 391
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-24 10:31:47.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15494
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.641067427 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#390 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 390
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-22 01:27:00.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15495
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.715624068 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#389 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 389
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-21 16:08:14.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15496
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.864274925 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#388 has been earlier opened by @hs3180.
+  is_human: 1
+  issue: 388
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-21 15:58:19.000000000 Z
+  where: github
+  who: 1643451
+- _id: 15497
+  _job: 18288332001
+  _time: 2025-10-06 17:03:12.941407163 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#387 has been earlier opened by @tiaped.
+  is_human: 1
+  issue: 387
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-19 20:01:47.000000000 Z
+  where: github
+  who: 262875
+- _id: 15498
+  _job: 18288332001
+  _time: 2025-10-06 17:03:13.263773539 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#384 has been earlier opened by @yegor256.
+  is_human: 1
+  issue: 384
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-18 08:07:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 15499
+  _job: 18288332001
+  _time: 2025-10-06 17:03:13.359425615 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#383 has been earlier opened by @dmzaytsev.
+  is_human: 1
+  issue: 383
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-17 17:09:57.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15500
+  _job: 18288332001
+  _time: 2025-10-06 17:03:13.705998768 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The issue yegor256/takes#382 has been earlier opened by @dmzaytsev.
+  is_human: 1
+  issue: 382
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-09-15 17:53:17.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15502
+  _job: 18288332001
+  _time: 2025-10-06 17:03:32.674261267 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  details: The missing pull yegor256/takes#183 has been opened by @super132.
+  is_human: 1
+  issue: 183
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-16 02:38:51.000000000 Z
+  where: github
+  who: 6581896
+- _id: 15503
+  _job: 18288332001
+  _time: 2025-10-06 17:03:33.768587435 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '166'
+  details: The missing pull yegor256/takes#185 has been opened by @erimerturk.
+  is_human: 1
+  issue: 185
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-16 06:57:39.000000000 Z
+  where: github
+  who: 416283
+- _id: 15504
+  _job: 18288332001
+  _time: 2025-10-06 17:03:34.826110309 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: ccCipher
+  details: The missing pull yegor256/takes#186 has been opened by @super132.
+  is_human: 1
+  issue: 186
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-16 08:36:38.000000000 Z
+  where: github
+  who: 6581896
+- _id: 15505
+  _job: 18288332001
+  _time: 2025-10-06 17:03:35.716890499 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '187'
+  details: The missing pull yegor256/takes#188 has been opened by @dmzaytsev.
+  is_human: 1
+  issue: 188
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-18 18:02:46.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15506
+  _job: 18288332001
+  _time: 2025-10-06 17:03:36.680391873 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '58'
+  details: The missing pull yegor256/takes#189 has been opened by @popprem.
+  is_human: 1
+  issue: 189
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-18 20:22:34.000000000 Z
+  where: github
+  who: 1265978
+- _id: 15507
+  _job: 18288332001
+  _time: 2025-10-06 17:03:37.835596683 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  details: The missing pull yegor256/takes#191 has been opened by @lauresh.
+  is_human: 1
+  issue: 191
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-20 08:37:37.000000000 Z
+  where: github
+  who: 6518123
+- _id: 15509
+  _job: 41777
+  _time: 2025-10-06 17:06:21.008278692 Z
   _version: 0.16.8/0.54.0/0.15.50
   issues:
   - 1-223
@@ -46284,576 +46465,873 @@
   repository: 28924109
   what: tombstone
   where: github
-- _id: 15472
-  _job: 18288332001
-  _time: 2025-10-06 16:59:45.838343609 Z
+- _id: 15511
+  _job: 18289815325
+  _time: 2025-10-06 17:57:13.482053470 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: '46'
-  comments: 27
-  comments_appreciated: 0
-  comments_by_author: 8
-  comments_by_reviewers: 19
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#134 has been "pull-was-closed".
-  failed_builds: 0
-  files: 2
-  hoc: 21
-  issue: 134
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-closed
-  when: 2015-04-13 05:00:01.000000000 Z
-  where: github
-  who: 1265978
-- _id: 15473
-  _job: 18288332001
-  _time: 2025-10-06 17:00:01.701861357 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '115'
-  comments: 24
-  comments_appreciated: 0
-  comments_by_author: 5
-  comments_by_reviewers: 19
-  comments_resolved: 0
-  comments_to_code: 1
-  details: Apparently, yegor256/takes#142 has been "pull-was-closed".
-  failed_builds: 0
-  files: 1
-  hoc: 222
-  issue: 142
-  repository: 28924109
-  stale: who
-  succeeded_builds: 0
-  what: pull-was-closed
-  when: 2015-04-22 09:16:47.000000000 Z
-  where: github
-- _id: 15474
-  _job: 18288332001
-  _time: 2025-10-06 17:00:10.985908335 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: rsWithHeaderValidation
-  comments: 43
-  comments_appreciated: 0
-  comments_by_author: 9
-  comments_by_reviewers: 34
-  comments_resolved: 0
-  comments_to_code: 12
-  details: Apparently, yegor256/takes#143 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 53
-  issue: 143
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-09 05:10:56.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15475
-  _job: 18288332001
-  _time: 2025-10-06 17:00:24.721578391 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  comments: 11
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 10
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#150 has been "pull-was-closed".
-  failed_builds: 0
-  files: 0
-  hoc: 0
-  issue: 150
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-closed
-  when: 2015-04-10 00:41:02.000000000 Z
-  where: github
-  who: 2527943
-- _id: 15476
-  _job: 18288332001
-  _time: 2025-10-06 17:00:29.908924191 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  comments: 36
-  comments_appreciated: 0
-  comments_by_author: 4
-  comments_by_reviewers: 32
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#151 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 6
-  issue: 151
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-08 07:35:07.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15477
-  _job: 18288332001
-  _time: 2025-10-06 17:00:42.425330708 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: new_attributes_file
-  comments: 22
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 22
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#156 has been "pull-was-merged".
-  failed_builds: 0
-  files: 1
-  hoc: 20
-  issue: 156
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-10 03:27:18.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15478
-  _job: 18288332001
-  _time: 2025-10-06 17:00:50.495047508 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '153'
-  comments: 23
-  comments_appreciated: 0
-  comments_by_author: 3
-  comments_by_reviewers: 20
-  comments_resolved: 0
-  comments_to_code: 5
-  details: Apparently, yegor256/takes#157 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 10
-  issue: 157
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-09 19:20:59.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15479
-  _job: 18288332001
-  _time: 2025-10-06 17:00:59.159908556 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '140'
-  comments: 32
-  comments_appreciated: 0
-  comments_by_author: 4
-  comments_by_reviewers: 28
-  comments_resolved: 0
-  comments_to_code: 4
-  details: Apparently, yegor256/takes#162 has been "pull-was-merged".
-  failed_builds: 0
-  files: 5
-  hoc: 153
-  issue: 162
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-13 03:25:38.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15480
-  _job: 18288332001
-  _time: 2025-10-06 17:01:10.892742711 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: 108_ts_tk_produces_decorators
-  comments: 31
-  comments_appreciated: 0
-  comments_by_author: 3
-  comments_by_reviewers: 28
-  comments_resolved: 0
-  comments_to_code: 6
-  details: Apparently, yegor256/takes#164 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 168
-  issue: 164
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-15 21:33:09.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15481
-  _job: 18288332001
-  _time: 2025-10-06 17:01:21.627251738 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '139'
-  comments: 30
-  comments_appreciated: 0
-  comments_by_author: 4
-  comments_by_reviewers: 26
-  comments_resolved: 0
-  comments_to_code: 4
-  details: Apparently, yegor256/takes#165 has been "pull-was-merged".
-  failed_builds: 0
-  files: 17
-  hoc: 111
-  issue: 165
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-09 20:04:49.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15482
-  _job: 18288332001
-  _time: 2025-10-06 17:01:32.017864960 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  comments: 15
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 14
-  comments_resolved: 0
-  comments_to_code: 2
-  details: Apparently, yegor256/takes#168 has been "pull-was-closed".
-  failed_builds: 0
-  files: 4
-  hoc: 61
-  issue: 168
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-closed
-  when: 2015-04-26 06:49:57.000000000 Z
-  where: github
-  who: 2527943
-- _id: 15483
-  _job: 18288332001
-  _time: 2025-10-06 17:01:38.355467125 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '46'
-  comments: 27
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 26
-  comments_resolved: 0
-  comments_to_code: 7
-  details: Apparently, yegor256/takes#169 has been "pull-was-closed".
-  failed_builds: 0
-  files: 2
-  hoc: 37
-  issue: 169
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-closed
-  when: 2015-04-23 19:40:16.000000000 Z
-  where: github
-  who: 6305016
-- _id: 15484
-  _job: 18288332001
-  _time: 2025-10-06 17:01:47.777826127 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '11'
-  comments: 54
-  comments_appreciated: 0
-  comments_by_author: 11
-  comments_by_reviewers: 43
-  comments_resolved: 0
-  comments_to_code: 6
-  details: Apparently, yegor256/takes#175 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 210
-  issue: 175
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-29 04:43:53.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15485
-  _job: 18288332001
-  _time: 2025-10-06 17:02:04.985350213 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '46'
-  comments: 43
-  comments_appreciated: 0
-  comments_by_author: 10
-  comments_by_reviewers: 33
-  comments_resolved: 0
-  comments_to_code: 11
-  details: Apparently, yegor256/takes#176 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 79
-  issue: 176
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-17 06:24:56.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15486
-  _job: 18288332001
-  _time: 2025-10-06 17:02:19.462570364 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '137'
-  comments: 25
-  comments_appreciated: 0
-  comments_by_author: 4
-  comments_by_reviewers: 21
-  comments_resolved: 0
-  comments_to_code: 3
-  details: Apparently, yegor256/takes#177 has been "pull-was-merged".
-  failed_builds: 0
-  files: 4
-  hoc: 70
-  issue: 177
-  repository: 28924109
-  succeeded_builds: 0
-  what: pull-was-merged
-  when: 2015-04-15 20:14:00.000000000 Z
-  where: github
-  who: 8086956
-- _id: 15487
-  _job: 18288332001
-  _time: 2025-10-06 17:03:08.300654092 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#485 has been earlier opened by @carlosmiranda.
-  issue: 485
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-12-26 13:14:25.000000000 Z
-  where: github
-  who: 1917892
-- _id: 15488
-  _job: 18288332001
-  _time: 2025-10-06 17:03:09.702384617 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#454 has been earlier opened by @hdouss.
-  issue: 454
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-12-06 17:47:46.000000000 Z
-  where: github
-  who: 2956255
-- _id: 15489
-  _job: 18288332001
-  _time: 2025-10-06 17:03:11.524124524 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#396 has been earlier opened by @hs3180.
-  issue: 396
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-29 03:50:22.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15490
-  _job: 18288332001
-  _time: 2025-10-06 17:03:11.832498854 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#395 has been earlier opened by @hs3180.
-  issue: 395
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-29 03:34:04.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15491
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.020759345 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#394 has been earlier opened by @yegor256.
-  issue: 394
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-27 01:21:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 15492
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.372232766 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#392 has been earlier opened by @hs3180.
-  issue: 392
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-24 14:41:26.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15493
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.535493883 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#391 has been earlier opened by @hs3180.
-  issue: 391
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-24 10:31:47.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15494
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.641067427 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#390 has been earlier opened by @hs3180.
-  issue: 390
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-22 01:27:00.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15495
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.715624068 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#389 has been earlier opened by @hs3180.
-  issue: 389
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-21 16:08:14.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15496
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.864274925 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#388 has been earlier opened by @hs3180.
-  issue: 388
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-21 15:58:19.000000000 Z
-  where: github
-  who: 1643451
-- _id: 15497
-  _job: 18288332001
-  _time: 2025-10-06 17:03:12.941407163 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#387 has been earlier opened by @tiaped.
-  issue: 387
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-19 20:01:47.000000000 Z
-  where: github
-  who: 262875
-- _id: 15498
-  _job: 18288332001
-  _time: 2025-10-06 17:03:13.263773539 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#384 has been earlier opened by @yegor256.
+  assigner: 526301
+  details: yegor256/takes#384 was assigned to @yegor256 by @yegor256.
   issue: 384
   repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-18 08:07:42.000000000 Z
+  what: issue-was-assigned
+  when: 2015-09-18 08:07:52.000000000 Z
   where: github
   who: 526301
-- _id: 15499
-  _job: 18288332001
-  _time: 2025-10-06 17:03:13.359425615 Z
+- _id: 15513
+  _job: 18289815325
+  _time: 2025-10-06 17:57:35.512615969 Z
   _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#383 has been earlier opened by @dmzaytsev.
-  issue: 383
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-17 17:09:57.000000000 Z
-  where: github
-  who: 9972909
-- _id: 15500
-  _job: 18288332001
-  _time: 2025-10-06 17:03:13.705998768 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  details: The issue yegor256/takes#382 has been earlier opened by @dmzaytsev.
-  issue: 382
-  repository: 28924109
-  what: issue-was-opened
-  when: 2015-09-15 17:53:17.000000000 Z
-  where: github
-  who: 9972909
-- _id: 15502
-  _job: 18288332001
-  _time: 2025-10-06 17:03:32.674261267 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  details: The missing pull yegor256/takes#183 has been opened by @super132.
-  issue: 183
+  branch: "#41"
+  details: The missing pull yegor256/takes#192 has been opened by @cyberone.
+  issue: 192
   repository: 28924109
   what: pull-was-opened
-  when: 2015-04-16 02:38:51.000000000 Z
+  when: 2015-04-20 18:39:20.000000000 Z
   where: github
-  who: 6581896
-- _id: 15503
-  _job: 18288332001
-  _time: 2025-10-06 17:03:33.768587435 Z
+  who: 904080
+- _id: 15514
+  _job: 18289815325
+  _time: 2025-10-06 17:57:36.653812105 Z
   _version: 0.16.7/0.54.0/0.15.50
-  branch: '166'
-  details: The missing pull yegor256/takes#185 has been opened by @erimerturk.
-  issue: 185
+  branch: n136
+  details: The missing pull yegor256/takes#193 has been opened by @lauresh.
+  issue: 193
   repository: 28924109
   what: pull-was-opened
-  when: 2015-04-16 06:57:39.000000000 Z
-  where: github
-  who: 416283
-- _id: 15504
-  _job: 18288332001
-  _time: 2025-10-06 17:03:34.826110309 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: ccCipher
-  details: The missing pull yegor256/takes#186 has been opened by @super132.
-  issue: 186
-  repository: 28924109
-  what: pull-was-opened
-  when: 2015-04-16 08:36:38.000000000 Z
-  where: github
-  who: 6581896
-- _id: 15505
-  _job: 18288332001
-  _time: 2025-10-06 17:03:35.716890499 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '187'
-  details: The missing pull yegor256/takes#188 has been opened by @dmzaytsev.
-  issue: 188
-  repository: 28924109
-  what: pull-was-opened
-  when: 2015-04-18 18:02:46.000000000 Z
-  where: github
-  who: 9972909
-- _id: 15506
-  _job: 18288332001
-  _time: 2025-10-06 17:03:36.680391873 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: '58'
-  details: The missing pull yegor256/takes#189 has been opened by @popprem.
-  issue: 189
-  repository: 28924109
-  what: pull-was-opened
-  when: 2015-04-18 20:22:34.000000000 Z
-  where: github
-  who: 1265978
-- _id: 15507
-  _job: 18288332001
-  _time: 2025-10-06 17:03:37.835596683 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  branch: master
-  details: The missing pull yegor256/takes#191 has been opened by @lauresh.
-  issue: 191
-  repository: 28924109
-  what: pull-was-opened
-  when: 2015-04-20 08:37:37.000000000 Z
+  when: 2015-04-20 22:16:12.000000000 Z
   where: github
   who: 6518123
-- _id: 15508
-  _job: 18288332001
-  _time: 2025-10-06 17:04:29.131589093 Z
+- _id: 15515
+  _job: 18289815325
+  _time: 2025-10-06 17:57:37.788799916 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  branch: '94'
+  details: The missing pull yegor256/takes#197 has been opened by @dmzaytsev.
+  issue: 197
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-21 14:55:13.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15516
+  _job: 18289815325
+  _time: 2025-10-06 17:57:39.005208347 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: PsLinkedinTest
+  details: The missing pull yegor256/takes#200 has been opened by @ikhvostenkov.
+  issue: 200
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-21 21:32:09.000000000 Z
+  where: github
+  who: 861305
+- _id: 15517
+  _job: 18289815325
+  _time: 2025-10-06 17:57:40.260757128 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '195'
+  details: The missing pull yegor256/takes#202 has been opened by @dmzaytsev.
+  issue: 202
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-22 06:05:11.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15518
+  _job: 18289815325
+  _time: 2025-10-06 17:57:41.114434680 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#194"
+  details: The missing pull yegor256/takes#203 has been opened by @eg04lt3r.
+  issue: 203
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-22 09:02:06.000000000 Z
+  where: github
+  who: 7552413
+- _id: 15519
+  _job: 18289815325
+  _time: 2025-10-06 17:57:42.138387421 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#184"
+  details: The missing pull yegor256/takes#204 has been opened by @cyberone.
+  issue: 204
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-22 14:46:18.000000000 Z
+  where: github
+  who: 904080
+- _id: 15520
+  _job: 18289815325
+  _time: 2025-10-06 17:57:43.001774142 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#113"
+  details: The missing pull yegor256/takes#207 has been opened by @eg04lt3r.
+  issue: 207
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-22 21:21:53.000000000 Z
+  where: github
+  who: 7552413
+- _id: 15521
+  _job: 18289815325
+  _time: 2025-10-06 17:57:43.845955052 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '206'
+  details: The missing pull yegor256/takes#208 has been opened by @dmzaytsev.
+  issue: 208
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-23 13:19:56.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15522
+  _job: 18289815325
+  _time: 2025-10-06 17:57:44.987422580 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '113'
+  details: The missing pull yegor256/takes#210 has been opened by @dmzaytsev.
+  issue: 210
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-25 07:38:04.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15523
+  _job: 18289815325
+  _time: 2025-10-06 17:57:45.854437371 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '166'
+  details: The missing pull yegor256/takes#212 has been opened by @erimerturk.
+  issue: 212
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-27 10:09:26.000000000 Z
+  where: github
+  who: 416283
+- _id: 15524
+  _job: 18289815325
+  _time: 2025-10-06 17:57:46.994848113 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#105"
+  details: The missing pull yegor256/takes#214 has been opened by @eg04lt3r.
+  issue: 214
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-27 21:30:55.000000000 Z
+  where: github
+  who: 7552413
+- _id: 15525
+  _job: 18289815325
+  _time: 2025-10-06 17:57:47.802024215 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: TkConsumesTsConsumes#107
+  details: The missing pull yegor256/takes#215 has been opened by @ikhvostenkov.
+  issue: 215
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-28 01:08:26.000000000 Z
+  where: github
+  who: 861305
+- _id: 15526
+  _job: 18289815325
+  _time: 2025-10-06 17:57:48.642973688 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '211'
+  details: The missing pull yegor256/takes#216 has been opened by @dmzaytsev.
+  issue: 216
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-28 10:29:17.000000000 Z
+  where: github
+  who: 9972909
+- _id: 15527
+  _job: 18289815325
+  _time: 2025-10-06 17:57:49.614553008 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  details: The missing pull yegor256/takes#218 has been opened by @marcuss.
+  issue: 218
+  repository: 28924109
+  what: pull-was-opened
+  when: 2015-04-29 04:13:45.000000000 Z
+  where: github
+  who: 5760337
+- _id: 15528
+  _job: 18289815325
+  _time: 2025-10-06 17:57:50.941702157 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#373 has been opened by @carlosmiranda.
+  issue: 373
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-07-27 08:44:08.000000000 Z
+  where: github
+  who: 1917892
+- _id: 15529
+  _job: 18289815325
+  _time: 2025-10-06 17:57:51.554945105 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#375 has been opened by @yegor256.
+  issue: 375
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-08-17 11:39:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 15530
+  _job: 18289815325
+  _time: 2025-10-06 17:57:51.890480010 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#376 has been opened by @yegor256.
+  issue: 376
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-08-20 13:57:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 15531
+  _job: 18289815325
+  _time: 2025-10-06 17:57:52.222084224 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#377 has been opened by @pinaf.
+  issue: 377
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-08-21 19:51:38.000000000 Z
+  where: github
+  who: 1054771
+- _id: 15532
+  _job: 18289815325
+  _time: 2025-10-06 17:57:52.803995383 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The missing issue yegor256/takes#379 has been opened by @alxn.
+  issue: 379
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-08-28 18:03:51.000000000 Z
+  where: github
+  who: 4368287
+- _id: 15534
+  _job: 18289815325
+  _time: 2025-10-06 17:59:23.791401720 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 109
+  comments_appreciated: 0
+  comments_by_author: 43
+  comments_by_reviewers: 66
+  comments_resolved: 0
+  comments_to_code: 65
+  details: Apparently, yegor256/takes#183 has been "pull-was-closed".
+  failed_builds: 0
+  files: 14
+  hoc: 864
+  issue: 183
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2015-05-02 02:47:21.000000000 Z
+  where: github
+  who: 6581896
+- _id: 15535
+  _job: 18289815325
+  _time: 2025-10-06 17:59:58.132718840 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '166'
+  comments: 40
+  comments_appreciated: 0
+  comments_by_author: 9
+  comments_by_reviewers: 31
+  comments_resolved: 0
+  comments_to_code: 14
+  details: Apparently, yegor256/takes#185 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 224
+  issue: 185
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-24 18:54:37.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15536
+  _job: 18289815325
+  _time: 2025-10-06 18:00:12.844461621 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: ccCipher
+  comments: 50
+  comments_appreciated: 0
+  comments_by_author: 14
+  comments_by_reviewers: 36
+  comments_resolved: 0
+  comments_to_code: 25
+  details: Apparently, yegor256/takes#186 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 224
+  issue: 186
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-24 19:38:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15537
+  _job: 18289815325
+  _time: 2025-10-06 18:00:28.909852240 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '187'
+  comments: 33
+  comments_appreciated: 0
+  comments_by_author: 6
+  comments_by_reviewers: 27
+  comments_resolved: 0
+  comments_to_code: 4
+  details: Apparently, yegor256/takes#188 has been "pull-was-merged".
+  failed_builds: 0
+  files: 22
+  hoc: 287
+  issue: 188
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-20 18:11:47.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15538
+  _job: 18289815325
+  _time: 2025-10-06 18:00:40.049725729 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '58'
+  comments: 45
+  comments_appreciated: 0
+  comments_by_author: 9
+  comments_by_reviewers: 36
+  comments_resolved: 0
+  comments_to_code: 7
+  details: Apparently, yegor256/takes#189 has been "pull-was-merged".
+  failed_builds: 0
+  files: 5
+  hoc: 24
+  issue: 189
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-29 21:23:01.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15539
+  _job: 18289815325
+  _time: 2025-10-06 18:00:54.860117219 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 7
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 7
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#191 has been "pull-was-closed".
+  failed_builds: 0
+  files: 13
+  hoc: 323
+  issue: 191
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2015-04-20 22:15:03.000000000 Z
+  where: github
+  who: 6518123
+- _id: 15540
+  _job: 18289815325
+  _time: 2025-10-06 18:00:58.938288038 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#41"
+  comments: 21
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 20
+  comments_resolved: 0
+  comments_to_code: 1
+  details: Apparently, yegor256/takes#192 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 160
+  issue: 192
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-22 03:53:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15541
+  _job: 18289815325
+  _time: 2025-10-06 18:01:06.881758267 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: n136
+  comments: 34
+  comments_appreciated: 0
+  comments_by_author: 3
+  comments_by_reviewers: 31
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#193 has been "pull-was-merged".
+  failed_builds: 0
+  files: 13
+  hoc: 184
+  issue: 193
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-29 20:13:40.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15542
+  _job: 18289815325
+  _time: 2025-10-06 18:01:18.934314061 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '94'
+  comments: 38
+  comments_appreciated: 0
+  comments_by_author: 8
+  comments_by_reviewers: 30
+  comments_resolved: 0
+  comments_to_code: 16
+  details: Apparently, yegor256/takes#197 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 301
+  issue: 197
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-24 18:34:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15543
+  _job: 18289815325
+  _time: 2025-10-06 18:01:31.319274375 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: PsLinkedinTest
+  comments: 81
+  comments_appreciated: 0
+  comments_by_author: 18
+  comments_by_reviewers: 63
+  comments_resolved: 0
+  comments_to_code: 36
+  details: Apparently, yegor256/takes#200 has been "pull-was-closed".
+  failed_builds: 0
+  files: 9
+  hoc: 357
+  issue: 200
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2015-06-16 21:58:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 15544
+  _job: 18289815325
+  _time: 2025-10-06 18:01:55.116235906 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '195'
+  comments: 27
+  comments_appreciated: 0
+  comments_by_author: 6
+  comments_by_reviewers: 21
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#202 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 15
+  issue: 202
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-05-09 19:32:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15545
+  _job: 18289815325
+  _time: 2025-10-06 18:02:05.034244054 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#194"
+  comments: 34
+  comments_appreciated: 0
+  comments_by_author: 7
+  comments_by_reviewers: 27
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#203 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 136
+  issue: 203
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-05-08 19:16:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15546
+  _job: 18289815325
+  _time: 2025-10-06 18:02:16.618682937 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#184"
+  comments: 20
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 19
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#204 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 32
+  issue: 204
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-24 19:20:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15547
+  _job: 18289815325
+  _time: 2025-10-06 18:02:24.552908092 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#113"
+  comments: 14
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 13
+  comments_resolved: 0
+  comments_to_code: 3
+  details: Apparently, yegor256/takes#207 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 27
+  issue: 207
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2015-04-24 08:41:32.000000000 Z
+  where: github
+  who: 7552413
+- _id: 15548
+  _job: 18289815325
+  _time: 2025-10-06 18:02:30.659240309 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '206'
+  comments: 22
+  comments_appreciated: 0
+  comments_by_author: 3
+  comments_by_reviewers: 19
+  comments_resolved: 0
+  comments_to_code: 4
+  details: Apparently, yegor256/takes#208 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 100
+  issue: 208
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-24 08:26:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15549
+  _job: 18289815325
+  _time: 2025-10-06 18:02:39.525376549 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '113'
+  comments: 42
+  comments_appreciated: 0
+  comments_by_author: 9
+  comments_by_reviewers: 33
+  comments_resolved: 0
+  comments_to_code: 4
+  details: Apparently, yegor256/takes#210 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 39
+  issue: 210
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-05-05 19:22:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15550
+  _job: 18289815325
+  _time: 2025-10-06 18:02:53.668557213 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '166'
+  comments: 33
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 31
+  comments_resolved: 0
+  comments_to_code: 8
+  details: Apparently, yegor256/takes#212 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 42
+  issue: 212
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-29 20:45:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15551
+  _job: 18289815325
+  _time: 2025-10-06 18:03:05.955372948 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#105"
+  comments: 36
+  comments_appreciated: 0
+  comments_by_author: 5
+  comments_by_reviewers: 31
+  comments_resolved: 0
+  comments_to_code: 9
+  details: Apparently, yegor256/takes#214 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 180
+  issue: 214
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-05-08 19:36:37.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15552
+  _job: 18289815325
+  _time: 2025-10-06 18:03:18.157477598 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: TkConsumesTsConsumes#107
+  comments: 36
+  comments_appreciated: 0
+  comments_by_author: 8
+  comments_by_reviewers: 28
+  comments_resolved: 0
+  comments_to_code: 9
+  details: Apparently, yegor256/takes#215 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 415
+  issue: 215
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-05-11 23:21:46.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15553
+  _job: 18289815325
+  _time: 2025-10-06 18:03:30.595190916 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '211'
+  comments: 43
+  comments_appreciated: 0
+  comments_by_author: 11
+  comments_by_reviewers: 32
+  comments_resolved: 0
+  comments_to_code: 1
+  details: Apparently, yegor256/takes#216 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 258
+  issue: 216
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-30 16:44:36.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15554
+  _job: 18289815325
+  _time: 2025-10-06 18:03:44.766162570 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: master
+  comments: 132
+  comments_appreciated: 0
+  comments_by_author: 23
+  comments_by_reviewers: 109
+  comments_resolved: 0
+  comments_to_code: 85
+  details: Apparently, yegor256/takes#218 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 180
+  issue: 218
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-05-07 18:47:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 15556
+  _job: 18289815325
+  _time: 2025-10-06 18:06:34.289985677 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#373.
+  issue: 373
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-07-27 09:09:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 15557
+  _job: 18289815325
+  _time: 2025-10-06 18:06:36.685943935 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#377.
+  issue: 377
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-12 19:23:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 15558
+  _job: 18289815325
+  _time: 2025-10-06 18:06:37.249069144 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#379.
+  issue: 379
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-08-30 19:24:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 15559
+  _job: 18289815325
+  _time: 2025-10-06 18:06:37.771138370 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#382.
+  issue: 382
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-16 14:28:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 15560
+  _job: 18289815325
+  _time: 2025-10-06 18:06:38.905420858 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#383.
+  issue: 383
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-18 13:13:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 15561
+  _job: 18289815325
+  _time: 2025-10-06 18:06:39.455304878 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#384.
+  issue: 384
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-18 08:07:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 15562
+  _job: 18289815325
+  _time: 2025-10-06 18:06:39.555567237 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#384.
+  issue: 384
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-18 08:07:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 15563
+  _job: 18289815325
+  _time: 2025-10-06 18:06:40.928421433 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#389.
+  issue: 389
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-25 15:04:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 15564
+  _job: 18289815325
+  _time: 2025-10-06 18:06:41.990640448 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#391.
+  issue: 391
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-26 21:13:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 15565
+  _job: 18289815325
+  _time: 2025-10-06 18:06:42.784666913 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#392.
+  issue: 392
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-09-26 21:12:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 15566
+  _job: 18289815325
+  _time: 2025-10-06 18:06:44.720600824 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#454.
+  issue: 454
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2015-12-07 13:01:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 15567
+  _job: 18289815325
+  _time: 2025-10-06 18:06:46.116557315 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#485.
+  issue: 485
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2016-01-04 16:22:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 15568
+  _job: 18289815325
+  _time: 2025-10-06 18:07:03.755319248 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 1100
   earliest_issue_was_found: 1
-  events_were_scanned: 55659307570
-  issues_were_scanned: 1303
-  labels_were_scanned: 0
+  events_were_scanned: 55663109384
+  issues_were_scanned: 0
+  labels_were_scanned: 1121
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1428
+  min_pull_was_found: 1429
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 1051
   what: iterate
   where: github
