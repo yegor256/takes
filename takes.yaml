@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 343.061956302
+  seconds: 292.61795425
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-06 11:02:08.447630670 Z
+  when: 2025-10-06 12:01:15.163734591 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -6507,298 +6507,6 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-10-02 19:58:48.510399346 Z
-- _id: 12692
-  _job: 18212392930
-  _time: 2025-10-03 03:57:53.552420433 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: Apparently, yegor256/takes#595 has been "issue-was-closed".
-  done: 2025-10-03 04:02:52.637063253 Z
-  issue: 595
-  repository: 28924109
-  tombstone: 2025-10-03 04:03:28.220204506 Z
-  what: issue-was-closed
-  when: 2016-02-28 10:03:49.000000000 Z
-  where: github
-  who: 6305016
-- _id: 12693
-  _job: 18212392930
-  _time: 2025-10-03 03:57:53.828144823 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: Apparently, yegor256/takes#596 has been "issue-was-closed".
-  done: 2025-10-03 04:02:52.667590907 Z
-  issue: 596
-  repository: 28924109
-  tombstone: 2025-10-03 04:03:28.236708893 Z
-  what: issue-was-closed
-  when: 2016-03-03 07:34:20.000000000 Z
-  where: github
-  who: 1618116
-- _id: 12694
-  _job: 18212392930
-  _time: 2025-10-03 03:57:54.092395194 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: Apparently, yegor256/takes#597 has been "issue-was-closed".
-  done: 2025-10-03 04:02:52.716882931 Z
-  issue: 597
-  repository: 28924109
-  tombstone: 2025-10-03 04:03:28.253057514 Z
-  what: issue-was-closed
-  when: 2016-02-29 18:33:18.000000000 Z
-  where: github
-  who: 1618116
-- _id: 12695
-  _job: 18212392930
-  _time: 2025-10-03 03:57:54.379331615 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: Apparently, yegor256/takes#598 has been "issue-was-closed".
-  done: 2025-10-03 04:02:52.761026370 Z
-  issue: 598
-  repository: 28924109
-  tombstone: 2025-10-03 04:03:28.267826857 Z
-  what: issue-was-closed
-  when: 2016-02-28 10:03:49.000000000 Z
-  where: github
-  who: 6305016
-- _id: 12698
-  _job: 41055
-  _time: 2025-10-03 04:03:31.234695136 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #441232 submitted the issue #581
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.353872741 Z
-  issue: 581
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.417292421 Z
-  what: dud-was-closed
-  when: 2016-02-07 15:26:22.000000000 Z
-  where: github
-  who: 441232
-- _id: 12699
-  _job: 41055
-  _time: 2025-10-03 04:03:31.277501605 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #11806 submitted the issue #578
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.382136985 Z
-  issue: 578
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.435041805 Z
-  what: dud-was-closed
-  when: 2016-02-06 19:50:02.000000000 Z
-  where: github
-  who: 11806
-- _id: 12700
-  _job: 41055
-  _time: 2025-10-03 04:03:31.326378674 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #10137 submitted the issue #561
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.410314402 Z
-  issue: 561
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.448647746 Z
-  what: dud-was-closed
-  when: 2016-02-03 14:25:45.000000000 Z
-  where: github
-  who: 10137
-- _id: 12701
-  _job: 41055
-  _time: 2025-10-03 04:03:31.369546029 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #5467276 submitted the issue #556
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.427481795 Z
-  issue: 556
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.461404227 Z
-  what: dud-was-closed
-  when: 2016-01-29 20:42:47.000000000 Z
-  where: github
-  who: 5467276
-- _id: 12702
-  _job: 41055
-  _time: 2025-10-03 04:03:31.422103741 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #5467276 submitted the issue #554
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.444818063 Z
-  issue: 554
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.479638146 Z
-  what: dud-was-closed
-  when: 2016-01-29 17:44:04.000000000 Z
-  where: github
-  who: 5467276
-- _id: 12703
-  _job: 41055
-  _time: 2025-10-03 04:03:31.469639708 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #485798 submitted the issue #550
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.460750038 Z
-  issue: 550
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.493811750 Z
-  what: dud-was-closed
-  when: 2016-01-26 23:19:29.000000000 Z
-  where: github
-  who: 485798
-- _id: 12704
-  _job: 41055
-  _time: 2025-10-03 04:03:31.512005079 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #7703204 submitted the issue #523
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.477586982 Z
-  issue: 523
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.508015229 Z
-  what: dud-was-closed
-  when: 2016-01-18 13:46:47.000000000 Z
-  where: github
-  who: 7703204
-- _id: 12705
-  _job: 41055
-  _time: 2025-10-03 04:03:31.562000296 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #7703204 submitted the issue #521
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.494887584 Z
-  issue: 521
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.521082268 Z
-  what: dud-was-closed
-  when: 2016-01-16 13:53:39.000000000 Z
-  where: github
-  who: 7703204
-- _id: 12706
-  _job: 41055
-  _time: 2025-10-03 04:03:31.603782398 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #7703204 submitted the issue #512
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.510804649 Z
-  issue: 512
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.540108092 Z
-  what: dud-was-closed
-  when: 2016-01-15 16:41:49.000000000 Z
-  where: github
-  who: 7703204
-- _id: 12707
-  _job: 41055
-  _time: 2025-10-03 04:03:31.655505163 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #1405237 submitted the issue #510
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.526960721 Z
-  issue: 510
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.554437246 Z
-  what: dud-was-closed
-  when: 2016-01-15 07:27:24.000000000 Z
-  where: github
-  who: 1405237
-- _id: 12708
-  _job: 41055
-  _time: 2025-10-03 04:03:31.702294545 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 33915433
-  details: 'In the repository #28924109, the user #114910 submitted the issue #504
-    which was later closed by the user #33915433 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.554604286 Z
-  issue: 504
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.568507970 Z
-  what: dud-was-closed
-  when: 2016-01-10 10:17:38.000000000 Z
-  where: github
-  who: 114910
-- _id: 12709
-  _job: 41055
-  _time: 2025-10-03 04:03:31.743828805 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 526301
-  details: 'In the repository #28924109, the user #9972909 submitted the issue #502
-    which was later closed by the user #526301 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.573971227 Z
-  issue: 502
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.581043786 Z
-  what: dud-was-closed
-  when: 2016-01-07 20:44:55.000000000 Z
-  where: github
-  who: 9972909
-- _id: 12710
-  _job: 41055
-  _time: 2025-10-03 04:03:31.795860110 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 33915433
-  details: 'In the repository #28924109, the user #24456188 submitted the issue #917
-    which was later closed by the user #33915433 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.591166697 Z
-  issue: 917
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.599068349 Z
-  what: dud-was-closed
-  when: 2018-12-26 15:26:06.000000000 Z
-  where: github
-  who: 24456188
-- _id: 12711
-  _job: 41055
-  _time: 2025-10-03 04:03:31.842438946 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 33915433
-  details: 'In the repository #28924109, the user #1964562 submitted the issue #911
-    which was later closed by the user #33915433 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.608334623 Z
-  issue: 911
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.613076567 Z
-  what: dud-was-closed
-  when: 2018-12-24 00:19:10.000000000 Z
-  where: github
-  who: 1964562
-- _id: 12712
-  _job: 41055
-  _time: 2025-10-03 04:03:31.884605197 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  closer: 33915433
-  details: 'In the repository #28924109, the user #24456188 submitted the issue #887
-    which was later closed by the user #33915433 not becoming a bug or enhancement;
-    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
-  done: 2025-10-03 04:04:17.625518741 Z
-  issue: 887
-  repository: 28924109
-  tombstone: 2025-10-03 05:01:45.627264802 Z
-  what: dud-was-closed
-  when: 2018-12-10 00:13:17.000000000 Z
-  where: github
-  who: 24456188
 - _id: 12716
   _job: 18214181598
   _time: 2025-10-03 05:56:06.194971297 Z
@@ -6926,19 +6634,6 @@
   to_master: 1
   what: git-was-pushed
   when: 2025-10-03 05:15:12.000000000 Z
-  where: github
-  who: 526301
-- _id: 12723
-  _job: 18214181598
-  _time: 2025-10-03 05:59:46.988009048 Z
-  _version: 0.16.7/0.54.0/0.15.49
-  details: The issue yegor256/takes#420 has been earlier opened by @yegor256.
-  is_human: 1
-  issue: 420
-  repository: 28924109
-  tombstone: 2025-10-03 06:00:47.758496723 Z
-  what: issue-was-opened
-  when: 2015-10-30 03:08:19.000000000 Z
   where: github
   who: 526301
 - _id: 12724
@@ -46356,9 +46051,9 @@
   when: *283
   where: github
   who: 481692
-- _id: 15303
-  _job: 41716
-  _time: 2025-10-06 10:04:21.502472823 Z
+- _id: 15305
+  _job: 41723
+  _time: 2025-10-06 11:03:46.538329736 Z
   _version: 0.16.8/0.54.0/0.15.50
   issues:
   - 1-223
@@ -46429,20 +46124,31 @@
   repository: 28924109
   what: tombstone
   where: github
-- _id: 15304
-  _job: 18278539668
-  _time: 2025-10-06 11:02:08.377612056 Z
+- _id: 15307
+  _job: 18279989910
+  _time: 2025-10-06 12:00:32.859945695 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 0
+  details: The missing issue yegor256/takes#420 has been opened by @yegor256.
+  issue: 420
+  repository: 28924109
+  what: issue-was-opened
+  when: 2015-10-30 03:08:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 15308
+  _job: 18279989910
+  _time: 2025-10-06 12:01:14.898914722 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 1299
   earliest_issue_was_found: 1
-  events_were_scanned: 55650384341
-  issues_were_scanned: 1303
-  labels_were_scanned: 0
+  events_were_scanned: 55653561937
+  issues_were_scanned: 0
+  labels_were_scanned: 1407
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1421
+  min_pull_was_found: 1423
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 1299
   what: iterate
   where: github
