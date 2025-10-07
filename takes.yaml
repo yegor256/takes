@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 805.144761213
+  seconds: 786.118804246
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-07 15:09:51.880927982 Z
+  when: 2025-10-07 16:19:14.120067952 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -53536,6 +53536,7 @@
   is_human: 0
   issue: 255
   repository: 28924109
+  review_comments: 3
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-14 17:33:27.000000000 Z
@@ -53559,6 +53560,7 @@
   is_human: 0
   issue: 261
   repository: 28924109
+  review_comments: 5
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-13 03:09:05.000000000 Z
@@ -53582,6 +53584,7 @@
   is_human: 0
   issue: 262
   repository: 28924109
+  review_comments: 30
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-27 20:58:44.000000000 Z
@@ -53605,6 +53608,7 @@
   is_human: 0
   issue: 267
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-13 05:46:49.000000000 Z
@@ -53628,6 +53632,7 @@
   is_human: 0
   issue: 269
   repository: 28924109
+  review_comments: 15
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-10-20 16:57:50.000000000 Z
@@ -53651,6 +53656,7 @@
   is_human: 0
   issue: 270
   repository: 28924109
+  review_comments: 8
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-11 18:05:42.000000000 Z
@@ -53674,6 +53680,7 @@
   is_human: 0
   issue: 279
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-11 20:20:27.000000000 Z
@@ -53697,6 +53704,7 @@
   is_human: 0
   issue: 280
   repository: 28924109
+  review_comments: 2
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-13 20:40:15.000000000 Z
@@ -53720,6 +53728,7 @@
   is_human: 0
   issue: 282
   repository: 28924109
+  review_comments: 5
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-13 03:25:16.000000000 Z
@@ -53743,6 +53752,7 @@
   is_human: 0
   issue: 283
   repository: 28924109
+  review_comments: 3
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-14 04:50:53.000000000 Z
@@ -53789,6 +53799,7 @@
   is_human: 0
   issue: 289
   repository: 28924109
+  review_comments: 10
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-14 18:03:41.000000000 Z
@@ -53812,6 +53823,7 @@
   is_human: 0
   issue: 297
   repository: 28924109
+  review_comments: 10
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-18 17:49:19.000000000 Z
@@ -53835,6 +53847,7 @@
   is_human: 0
   issue: 299
   repository: 28924109
+  review_comments: 5
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-19 19:41:22.000000000 Z
@@ -53858,25 +53871,26 @@
   is_human: 0
   issue: 300
   repository: 28924109
+  review_comments: 7
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-22 23:37:40.000000000 Z
   where: github
   who: 8086956
 - _id: 18685
-  _job: 18316828628
-  _time: 2025-10-07 15:09:49.747892100 Z
+  _job: 18318773418
+  _time: 2025-10-07 16:19:14.031604198 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 957
+  assignees_were_scanned: 1091
   earliest_issue_was_found: 1
-  events_were_scanned: 55699447889
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  events_were_scanned: 55701175306
+  issues_were_scanned: 1227
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1458
+  min_pull_was_found: 1459
   repository: 28924109
-  types_were_scanned: 735
+  types_were_scanned: 826
   what: iterate
   where: github

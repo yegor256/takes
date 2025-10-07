@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1025895">
+<fb version="0.11.0" size="1025985">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">805.144761213</seconds>
+    <seconds t="F">786.118804246</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-07T15:09:51Z</when>
+    <when t="T">2025-10-07T16:19:14Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -60283,6 +60283,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">255</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-14T17:33:27Z</when>
@@ -60308,6 +60309,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">261</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">5</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-13T03:09:05Z</when>
@@ -60333,6 +60335,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">262</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">30</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-27T20:58:44Z</when>
@@ -60358,6 +60361,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">267</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-13T05:46:49Z</when>
@@ -60383,6 +60387,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">269</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">15</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-10-20T16:57:50Z</when>
@@ -60408,6 +60413,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">270</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">8</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-11T18:05:42Z</when>
@@ -60433,6 +60439,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">279</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-11T20:20:27Z</when>
@@ -60458,6 +60465,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">280</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-13T20:40:15Z</when>
@@ -60483,6 +60491,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">282</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">5</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-13T03:25:16Z</when>
@@ -60508,6 +60517,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">283</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-14T04:50:53Z</when>
@@ -60558,6 +60568,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">289</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">10</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-14T18:03:41Z</when>
@@ -60583,6 +60594,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">297</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">10</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-18T17:49:19Z</when>
@@ -60608,6 +60620,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">299</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">5</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-19T19:41:22Z</when>
@@ -60633,6 +60646,7 @@
     <is_human t="I">0</is_human>
     <issue t="I">300</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">7</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2015-05-22T23:37:40Z</when>
@@ -60641,20 +60655,20 @@
   </f>
   <f>
     <_id t="I">18685</_id>
-    <_job t="I">18316828628</_job>
-    <_time t="T">2025-10-07T15:09:49Z</_time>
+    <_job t="I">18318773418</_job>
+    <_time t="T">2025-10-07T16:19:14Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">957</assignees_were_scanned>
+    <assignees_were_scanned t="I">1091</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55699447889</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <events_were_scanned t="I">55701175306</events_were_scanned>
+    <issues_were_scanned t="I">1227</issues_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1458</min_pull_was_found>
+    <min_pull_was_found t="I">1459</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">735</types_were_scanned>
+    <types_were_scanned t="I">826</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
