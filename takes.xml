@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="696519">
+<fb version="0.11.0" size="743943">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.812808539</seconds>
+    <seconds t="F">802.458541594</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-07T01:34:59Z</when>
+    <when t="T">2025-10-07T02:34:45Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -38098,8 +38098,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">748</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2017-09-01T19:08:57Z</when>
@@ -38122,8 +38124,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">11</files>
     <hoc t="I">134</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">752</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2017-10-14T07:33:40Z</when>
@@ -38146,8 +38150,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">453</files>
     <hoc t="I">908</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">756</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-01T22:06:59Z</when>
@@ -38170,8 +38176,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">757</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-08T19:17:10Z</when>
@@ -38194,8 +38202,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">175</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">759</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-09T11:02:16Z</when>
@@ -38218,8 +38228,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">54</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">760</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-15T14:15:58Z</when>
@@ -38242,8 +38254,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">6</files>
     <hoc t="I">411</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">761</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">7</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-24T14:29:58Z</when>
@@ -38266,6 +38280,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">8</files>
     <hoc t="I">390</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">762</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -38290,8 +38305,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">114</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">768</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-17T14:51:08Z</when>
@@ -38314,8 +38331,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">772</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-22T21:41:29Z</when>
@@ -38338,8 +38357,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">121</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">773</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-29T17:54:22Z</when>
@@ -38362,8 +38383,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">4</files>
     <hoc t="I">66</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">776</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-29T18:15:12Z</when>
@@ -38386,8 +38409,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">5</files>
     <hoc t="I">200</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">777</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-01-29T20:53:23Z</when>
@@ -38410,8 +38435,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">24</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">783</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-06T17:14:40Z</when>
@@ -38434,8 +38461,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">5</files>
     <hoc t="I">430</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">785</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-09T11:47:08Z</when>
@@ -38458,8 +38487,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">200</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">789</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-06T16:56:36Z</when>
@@ -38482,8 +38513,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">76</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">792</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">7</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-09T12:07:39Z</when>
@@ -38506,8 +38539,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">89</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">797</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-20T19:58:11Z</when>
@@ -38530,8 +38565,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">3</files>
     <hoc t="I">46</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">799</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-14T22:55:54Z</when>
@@ -38554,8 +38591,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">114</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">801</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-21T19:52:43Z</when>
@@ -38578,8 +38617,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">26</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">803</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-20T19:12:53Z</when>
@@ -38602,8 +38643,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">35</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">807</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-26T20:41:41Z</when>
@@ -38626,8 +38669,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">114</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">809</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-02-26T20:23:04Z</when>
@@ -38650,8 +38695,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">6</files>
     <hoc t="I">419</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">813</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-03-05T14:55:01Z</when>
@@ -38674,8 +38721,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">3</files>
     <hoc t="I">103</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">830</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-03-17T15:54:09Z</when>
@@ -38698,8 +38747,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">5</files>
     <hoc t="I">489</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">831</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-03-17T15:35:40Z</when>
@@ -38722,6 +38773,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">3</files>
     <hoc t="I">29</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">833</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -38746,8 +38798,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">6</files>
     <hoc t="I">497</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">836</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">11</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-24T16:56:33Z</when>
@@ -38770,6 +38824,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">13</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">840</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -38794,8 +38849,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">3</files>
     <hoc t="I">39</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">843</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-10T15:15:32Z</when>
@@ -38818,8 +38875,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">9</files>
     <hoc t="I">480</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">844</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-10T20:52:23Z</when>
@@ -38842,8 +38901,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">16</files>
     <hoc t="I">712</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">845</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-11T03:47:39Z</when>
@@ -38866,8 +38927,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">50</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">846</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">6</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-10T21:32:25Z</when>
@@ -38890,8 +38953,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">6</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">848</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-10T23:27:47Z</when>
@@ -38914,8 +38979,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">9</files>
     <hoc t="I">621</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">849</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">8</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-11T01:46:04Z</when>
@@ -38938,8 +39005,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">852</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-11T19:50:55Z</when>
@@ -38962,8 +39031,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">34</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">853</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-11T00:56:51Z</when>
@@ -38986,8 +39057,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">3</files>
     <hoc t="I">14</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">854</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-10T13:26:13Z</when>
@@ -39010,6 +39083,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">7</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">855</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -39034,8 +39108,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">25</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">857</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-14T15:41:08Z</when>
@@ -39058,8 +39134,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">6</files>
     <hoc t="I">409</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">860</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-16T18:45:56Z</when>
@@ -39082,8 +39160,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">1</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">864</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-10-24T13:41:29Z</when>
@@ -39106,8 +39186,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">121</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">867</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-11-29T01:32:50Z</when>
@@ -39130,8 +39212,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">7</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">868</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-11-18T19:00:18Z</when>
@@ -39154,8 +39238,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">127</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">870</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">6</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-11-22T23:29:11Z</when>
@@ -39178,8 +39264,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">11</files>
     <hoc t="I">210</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">873</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">10</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-12-10T00:12:54Z</when>
@@ -39202,8 +39290,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">461</files>
     <hoc t="I">1947</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">874</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">8</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-12-01T23:06:45Z</when>
@@ -39226,8 +39316,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">34</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">875</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-12-01T13:34:17Z</when>
@@ -39250,8 +39342,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">3</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">878</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-12-02T01:20:52Z</when>
@@ -39274,8 +39368,10 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">80</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">879</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
     <succeeded_builds t="I">0</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2018-12-06T13:07:04Z</when>
@@ -39283,21 +39379,2970 @@
     <who t="I">8086956</who>
   </f>
   <f>
-    <_id t="I">17509</_id>
-    <_job t="I">18299146775</_job>
-    <_time t="T">2025-10-07T01:33:03Z</_time>
+    <_id t="I">17510</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:27Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">975</assignees_were_scanned>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#984.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">984</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2019-06-01T13:10:20Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17511</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#998.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">998</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2019-11-25T13:27:15Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17512</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#999.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">999</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2019-11-25T13:27:42Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17513</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:33Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1008.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1008</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T14:56:44Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17514</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1010.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1010</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T14:57:52Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17515</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1011.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1011</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T14:58:19Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17516</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1012.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1012</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T14:58:46Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17517</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1013.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1013</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T14:59:15Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17518</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1014.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1014</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T14:59:54Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17519</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1015.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1015</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T15:00:27Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17520</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1016.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1016</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T15:00:55Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17521</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1017.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1017</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T15:01:25Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17522</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:38Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1019.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1019</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-01-13T15:02:20Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17523</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:42Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1041.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1041</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2022-08-24T03:33:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17524</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:44Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1054.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1054</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-06-29T18:07:59Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17525</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:44Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1055.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1055</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-06-29T18:08:24Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17526</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:46Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1062.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1062</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-07-28T20:28:32Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17527</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1073.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1073</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-09-11T04:12:01Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17528</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1074.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1074</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-09-11T04:12:31Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17529</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1075.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1075</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-09-11T04:12:52Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17530</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:50Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1080.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1080</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-10-16T00:48:52Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17531</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:21:52Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @0pdd to the issue yegor256/takes#1088.</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1088</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2020-10-31T15:35:11Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17533</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:23:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">440768</author>
+    <comments t="I">17</comments>
+    <details t="S">The pull request yegor256/takes#761 with 411 HoC created by @neonailol was reviewed by @g4s8 after 265h25m and 7 comments.</details>
+    <hoc t="I">411</hoc>
+    <issue t="I">761</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">7</review_comments>
+    <seconds t="I">955516</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-01-20T16:57:04Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17534</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:23:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">440768</author>
+    <comments t="I">15</comments>
+    <details t="S">The pull request yegor256/takes#768 with 114 HoC created by @neonailol was reviewed by @g4s8 after 121h53m and 1 comments.</details>
+    <hoc t="I">114</hoc>
+    <issue t="I">768</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">438794</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-01-15T18:35:34Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17535</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:23:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">13</comments>
+    <details t="S">The pull request yegor256/takes#773 with 121 HoC created by @t-izbassar was reviewed by @g4s8 after 13h46m and 2 comments.</details>
+    <hoc t="I">121</hoc>
+    <issue t="I">773</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">49609</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-01-24T11:09:48Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17536</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">11</comments>
+    <details t="S">The pull request yegor256/takes#776 with 66 HoC created by @t-izbassar was reviewed by @g4s8 after 1h49m and 0 comments.</details>
+    <hoc t="I">66</hoc>
+    <issue t="I">776</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">6541</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-01-26T16:33:06Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17537</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">11</comments>
+    <details t="S">The pull request yegor256/takes#777 with 200 HoC created by @t-izbassar was reviewed by @g4s8 after 4h35m and 2 comments.</details>
+    <hoc t="I">200</hoc>
+    <issue t="I">777</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">16514</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-01-27T14:07:38Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17538</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">440768</author>
+    <comments t="I">13</comments>
+    <details t="S">The pull request yegor256/takes#783 with 24 HoC created by @neonailol was reviewed by @g4s8 after 109h17m and 1 comments.</details>
+    <hoc t="I">24</hoc>
+    <issue t="I">783</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">393469</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-03T10:06:25Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17539</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">20</comments>
+    <details t="S">The pull request yegor256/takes#785 with 430 HoC created by @t-izbassar was reviewed by @g4s8 after 172h53m and 0 comments.</details>
+    <hoc t="I">430</hoc>
+    <issue t="I">785</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">622432</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-06T18:17:27Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17540</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">11</comments>
+    <details t="S">The pull request yegor256/takes#789 with 200 HoC created by @t-izbassar was reviewed by @g4s8 after 50h52m and 0 comments.</details>
+    <hoc t="I">200</hoc>
+    <issue t="I">789</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">183157</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-02T20:36:02Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17541</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">440768</author>
+    <comments t="I">13</comments>
+    <details t="S">The pull request yegor256/takes#792 with 76 HoC created by @neonailol was reviewed by @g4s8 after 1h4m and 2 comments.</details>
+    <hoc t="I">76</hoc>
+    <issue t="I">792</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">3863</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-04T16:24:26Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17542</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">1130598</author>
+    <comments t="I">20</comments>
+    <details t="S">The pull request yegor256/takes#797 with 89 HoC created by @msarhan was reviewed by @g4s8 after 62h14m and 1 comments.</details>
+    <hoc t="I">89</hoc>
+    <issue t="I">797</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">224080</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-12T18:06:23Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17543</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">10</comments>
+    <details t="S">The pull request yegor256/takes#799 with 46 HoC created by @t-izbassar was reviewed by @g4s8 after 22h41m and 0 comments.</details>
+    <hoc t="I">46</hoc>
+    <issue t="I">799</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">81719</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-14T10:08:48Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17544</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">47</comments>
+    <details t="S">The pull request yegor256/takes#801 with 114 HoC created by @t-izbassar was reviewed by @g4s8 after 33h7m and 0 comments.</details>
+    <hoc t="I">114</hoc>
+    <issue t="I">801</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">119265</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-16T18:11:46Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17545</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">23</comments>
+    <details t="S">The pull request yegor256/takes#803 with 26 HoC created by @t-izbassar was reviewed by @g4s8 after 8h59m and 2 comments.</details>
+    <hoc t="I">26</hoc>
+    <issue t="I">803</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">32352</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-17T06:18:48Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17546</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">19</comments>
+    <details t="S">The pull request yegor256/takes#807 with 35 HoC created by @t-izbassar was reviewed by @g4s8 after 45h59m and 3 comments.</details>
+    <hoc t="I">35</hoc>
+    <issue t="I">807</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">165589</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-24T09:08:02Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17547</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">15</comments>
+    <details t="S">The pull request yegor256/takes#809 with 114 HoC created by @t-izbassar was reviewed by @g4s8 after 13h38m and 3 comments.</details>
+    <hoc t="I">114</hoc>
+    <issue t="I">809</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">49133</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-02-24T08:46:36Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17548</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:16Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">17</comments>
+    <details t="S">The pull request yegor256/takes#813 with 419 HoC created by @t-izbassar was reviewed by @g4s8 after 63h0m and 3 comments.</details>
+    <hoc t="I">419</hoc>
+    <issue t="I">813</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">226853</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-03-03T12:01:37Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17549</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">18</comments>
+    <details t="S">The pull request yegor256/takes#830 with 103 HoC created by @t-izbassar was reviewed by @g4s8 after 4h45m and 4 comments.</details>
+    <hoc t="I">103</hoc>
+    <issue t="I">830</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <seconds t="I">17152</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-03-13T14:40:05Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17550</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:19Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">1524988</author>
+    <comments t="I">79</comments>
+    <details t="S">The pull request yegor256/takes#836 with 497 HoC created by @g4s8 was reviewed by @amihaiemil after 1h34m and 4 comments.</details>
+    <hoc t="I">497</hoc>
+    <issue t="I">836</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <seconds t="I">5652</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-04-08T18:55:38Z</when>
+    <where t="S">github</where>
+    <who t="I">6305156</who>
+  </f>
+  <f>
+    <_id t="I">17551</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:22Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">33915433</author>
+    <comments t="I">24</comments>
+    <details t="S">The pull request yegor256/takes#846 with 50 HoC created by @paulodamaso was reviewed by @g4s8 after 2h36m and 4 comments.</details>
+    <hoc t="I">50</hoc>
+    <issue t="I">846</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <seconds t="I">9400</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-09-05T05:46:59Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17552</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:24Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">33915433</author>
+    <comments t="I">19</comments>
+    <details t="S">The pull request yegor256/takes#849 with 621 HoC created by @paulodamaso was reviewed by @g4s8 after 231h50m and 6 comments.</details>
+    <hoc t="I">621</hoc>
+    <issue t="I">849</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">6</review_comments>
+    <seconds t="I">834608</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-09-21T12:18:47Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17553</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">33915433</author>
+    <comments t="I">17</comments>
+    <details t="S">The pull request yegor256/takes#857 with 25 HoC created by @paulodamaso was reviewed by @g4s8 after 28h19m and 1 comments.</details>
+    <hoc t="I">25</hoc>
+    <issue t="I">857</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">101968</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-10-09T18:24:18Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17554</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">33915433</author>
+    <comments t="I">20</comments>
+    <details t="S">The pull request yegor256/takes#860 with 409 HoC created by @paulodamaso was reviewed by @g4s8 after 39h49m and 2 comments.</details>
+    <hoc t="I">409</hoc>
+    <issue t="I">860</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">143343</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-10-13T10:34:53Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17555</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">14931449</author>
+    <comments t="I">16</comments>
+    <details t="S">The pull request yegor256/takes#867 with 121 HoC created by @olenagerasimova was reviewed by @g4s8 after 1h27m and 3 comments.</details>
+    <hoc t="I">121</hoc>
+    <issue t="I">867</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">5258</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-11-15T14:42:15Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17556</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:33Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">160975</author>
+    <comments t="I">17</comments>
+    <details t="S">The pull request yegor256/takes#870 with 127 HoC created by @victornoel was reviewed by @g4s8 after 12h59m and 3 comments.</details>
+    <hoc t="I">127</hoc>
+    <issue t="I">870</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">46768</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-11-21T08:15:42Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17557</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">160975</author>
+    <comments t="I">25</comments>
+    <details t="S">The pull request yegor256/takes#873 with 210 HoC created by @victornoel was reviewed by @g4s8 after 145h5m and 3 comments.</details>
+    <hoc t="I">210</hoc>
+    <issue t="I">873</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">522328</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-11-30T12:52:01Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17558</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">160975</author>
+    <comments t="I">23</comments>
+    <details t="S">The pull request yegor256/takes#874 with 1947 HoC created by @victornoel was reviewed by @krzyk after 16h51m and 3 comments.</details>
+    <hoc t="I">1947</hoc>
+    <issue t="I">874</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">60680</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-11-29T11:00:17Z</when>
+    <where t="S">github</where>
+    <who t="I">105730</who>
+  </f>
+  <f>
+    <_id t="I">17559</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">160975</author>
+    <comments t="I">22</comments>
+    <details t="S">The pull request yegor256/takes#875 with 34 HoC created by @victornoel was reviewed by @krzyk after 15h49m and 4 comments.</details>
+    <hoc t="I">34</hoc>
+    <issue t="I">875</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <seconds t="I">56993</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-11-29T10:52:42Z</when>
+    <where t="S">github</where>
+    <who t="I">105730</who>
+  </f>
+  <f>
+    <_id t="I">17560</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:39Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">14931449</author>
+    <comments t="I">19</comments>
+    <details t="S">The pull request yegor256/takes#879 with 80 HoC created by @olenagerasimova was reviewed by @g4s8 after 60h55m and 3 comments.</details>
+    <hoc t="I">80</hoc>
+    <issue t="I">879</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <seconds t="I">219310</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-12-04T09:36:53Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17561</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:24:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">14931449</author>
+    <comments t="I">19</comments>
+    <details t="S">The pull request yegor256/takes#879 with 80 HoC created by @olenagerasimova was reviewed by @paulodamaso after 111h36m and 1 comments.</details>
+    <hoc t="I">80</hoc>
+    <issue t="I">879</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">401817</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-12-06T12:18:40Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17562</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">24223260</author>
+    <comments t="I">8</comments>
+    <details t="S">The pull request yegor256/takes#762 with 390 HoC created by @t-izbassar was reviewed by @g4s8 after 124h0m and 5 comments.</details>
+    <hoc t="I">390</hoc>
+    <issue t="I">762</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">5</review_comments>
+    <seconds t="I">446425</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-01-15T19:17:57Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17563</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">33915433</author>
+    <comments t="I">18</comments>
+    <details t="S">The pull request yegor256/takes#855 with 7 HoC created by @paulodamaso was reviewed by @g4s8 after 37h37m and 2 comments.</details>
+    <hoc t="I">7</hoc>
+    <issue t="I">855</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">2</review_comments>
+    <seconds t="I">135430</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-09-23T06:37:54Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17564</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:15Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">33915433</author>
+    <comments t="I">18</comments>
+    <details t="S">The pull request yegor256/takes#855 with 7 HoC created by @paulodamaso was reviewed by @t-izbassar after 62h43m and 1 comments.</details>
+    <hoc t="I">7</hoc>
+    <issue t="I">855</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">225796</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2018-09-24T07:44:00Z</when>
+    <where t="S">github</where>
+    <who t="I">24223260</who>
+  </f>
+  <f>
+    <_id t="I">17565</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:16Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">881</branch>
+    <comments t="I">28</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">27</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#883 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">42</files>
+    <hoc t="I">142</hoc>
+    <issue t="I">883</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-12T12:03:57Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17566</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">876</branch>
+    <comments t="I">18</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">6</comments_by_author>
+    <comments_by_reviewers t="I">12</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">8</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#885 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">29</hoc>
+    <issue t="I">885</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">8</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-12T17:36:23Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17567</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">880-qulice</branch>
+    <comments t="I">43</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">10</comments_by_author>
+    <comments_by_reviewers t="I">33</comments_by_reviewers>
+    <comments_resolved t="I">12</comments_resolved>
+    <comments_to_code t="I">16</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#886 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">92</files>
+    <hoc t="I">486</hoc>
+    <issue t="I">886</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">16</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-12T19:50:11Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17568</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:43Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">rearrange-arc</branch>
+    <comments t="I">8</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">8</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#890 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">890</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-11T11:33:48Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17569</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:46Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">842</branch>
+    <comments t="I">10</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">10</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#891 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">40</hoc>
+    <issue t="I">891</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-12T12:39:51Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17570</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">877</branch>
+    <comments t="I">18</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">16</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">1</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#892 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">4</files>
+    <hoc t="I">86</hoc>
+    <issue t="I">892</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-14T13:16:27Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17571</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">877-surefire</branch>
+    <comments t="I">8</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">8</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#896 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">12</hoc>
+    <issue t="I">896</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-15T08:54:10Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17572</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">6</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">5</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#897 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">13</hoc>
+    <issue t="I">897</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2018-12-20T18:36:13Z</when>
+    <where t="S">github</where>
+    <who t="I">45645330</who>
+  </f>
+  <f>
+    <_id t="I">17573</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:25:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">utf8_refactoring</branch>
+    <comments t="I">82</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">5</comments_by_author>
+    <comments_by_reviewers t="I">77</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">52</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#903 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">23</files>
+    <hoc t="I">159</hoc>
+    <issue t="I">903</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">52</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-21T20:02:24Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17574</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:15Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">863</branch>
+    <comments t="I">11</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">9</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">3</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#907 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">10</files>
+    <hoc t="I">104</hoc>
+    <issue t="I">907</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-26T15:25:50Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17575</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:18Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">788</branch>
+    <comments t="I">10</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">9</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#908 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">83</hoc>
+    <issue t="I">908</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-26T01:52:09Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17576</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:22Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">882</branch>
+    <comments t="I">7</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">7</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#913 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">11</files>
+    <hoc t="I">192</hoc>
+    <issue t="I">913</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-26T16:52:11Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17577</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">847</branch>
+    <comments t="I">5</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">5</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#919 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">4</files>
+    <hoc t="I">93</hoc>
+    <issue t="I">919</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2018-12-27T01:17:53Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17578</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">pr20181228</branch>
+    <comments t="I">7</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">6</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#922 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">20</hoc>
+    <issue t="I">922</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2018-12-29T00:04:21Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17579</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">866</branch>
+    <comments t="I">21</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">20</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#930 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">7</files>
+    <hoc t="I">647</hoc>
+    <issue t="I">930</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-11T15:29:06Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17580</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">19</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#931 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">8</files>
+    <hoc t="I">41</hoc>
+    <issue t="I">931</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2019-01-04T13:43:54Z</when>
+    <where t="S">github</where>
+    <who t="I">45645330</who>
+  </f>
+  <f>
+    <_id t="I">17581</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:41Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">removing_nulls</branch>
+    <comments t="I">34</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">6</comments_by_author>
+    <comments_by_reviewers t="I">28</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">8</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#932 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">4</files>
+    <hoc t="I">38</hoc>
+    <issue t="I">932</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">8</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-16T22:26:51Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17582</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">802</branch>
+    <comments t="I">7</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">7</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#934 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">9</hoc>
+    <issue t="I">934</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-04T16:04:05Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17583</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:51Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">893</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">20</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#936 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">8</files>
+    <hoc t="I">67</hoc>
+    <issue t="I">936</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-16T16:48:16Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17584</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:26:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">925</branch>
+    <comments t="I">40</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">8</comments_by_author>
+    <comments_by_reviewers t="I">32</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#939 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">490</files>
+    <hoc t="I">984</hoc>
+    <issue t="I">939</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-11T21:42:38Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17585</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">paulodamaso-patch-1</branch>
+    <comments t="I">7</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">6</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#940 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">0</hoc>
+    <issue t="I">940</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-11T21:17:11Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17586</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">865</branch>
+    <comments t="I">49</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">13</comments_by_author>
+    <comments_by_reviewers t="I">36</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">20</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#941 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">6</files>
+    <hoc t="I">978</hoc>
+    <issue t="I">941</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">20</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-24T16:48:49Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17587</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:18Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#804</branch>
+    <comments t="I">59</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">7</comments_by_author>
+    <comments_by_reviewers t="I">52</comments_by_reviewers>
+    <comments_resolved t="I">24</comments_resolved>
+    <comments_to_code t="I">24</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#942 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">7</files>
+    <hoc t="I">519</hoc>
+    <issue t="I">942</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">24</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-19T01:06:52Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17588</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#577</branch>
+    <comments t="I">51</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">9</comments_by_author>
+    <comments_by_reviewers t="I">42</comments_by_reviewers>
+    <comments_resolved t="I">11</comments_resolved>
+    <comments_to_code t="I">23</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#947 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">211</hoc>
+    <issue t="I">947</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">23</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-20T00:01:11Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17589</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:42Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">953</branch>
+    <comments t="I">34</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">7</comments_by_author>
+    <comments_by_reviewers t="I">27</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">8</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#954 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">3</files>
+    <hoc t="I">132</hoc>
+    <issue t="I">954</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">8</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-25T19:33:17Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17590</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">5</comments_by_author>
+    <comments_by_reviewers t="I">15</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">5</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#956 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">17</hoc>
+    <issue t="I">956</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">5</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-01-26T19:09:12Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17591</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#888</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">18</comments_by_reviewers>
+    <comments_resolved t="I">3</comments_resolved>
+    <comments_to_code t="I">3</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#960 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">14</files>
+    <hoc t="I">223</hoc>
+    <issue t="I">960</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">3</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-02-21T16:57:30Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17592</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:27:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">895</branch>
+    <comments t="I">34</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">31</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">17</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#961 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">7</files>
+    <hoc t="I">253</hoc>
+    <issue t="I">961</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2020-01-28T01:07:24Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17593</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">884</branch>
+    <comments t="I">15</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">14</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#962 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">31</files>
+    <hoc t="I">1727</hoc>
+    <issue t="I">962</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2019-02-09T15:18:43Z</when>
+    <where t="S">github</where>
+    <who t="I">889052</who>
+  </f>
+  <f>
+    <_id t="I">17594</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">944</branch>
+    <comments t="I">43</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">42</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">30</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#963 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">7</files>
+    <hoc t="I">183</hoc>
+    <issue t="I">963</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2020-01-28T01:08:19Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17595</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">902</branch>
+    <comments t="I">23</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">6</comments_by_author>
+    <comments_by_reviewers t="I">17</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#964 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">16</files>
+    <hoc t="I">42</hoc>
+    <issue t="I">964</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-02-23T20:23:13Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17596</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">status-report</branch>
+    <comments t="I">19</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">17</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#966 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">17</hoc>
+    <issue t="I">966</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-02-19T13:47:34Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17597</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">943</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">4</comments_by_author>
+    <comments_by_reviewers t="I">16</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#967 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">55</hoc>
+    <issue t="I">967</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-02-28T13:38:08Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17598</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#911</branch>
+    <comments t="I">12</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">12</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#969 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">9</files>
+    <hoc t="I">26</hoc>
+    <issue t="I">969</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-02-27T17:04:02Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17599</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">406</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">19</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#970 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">38</hoc>
+    <issue t="I">970</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-02-27T18:48:13Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17600</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:45Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#952</branch>
+    <comments t="I">16</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">13</comments_by_reviewers>
+    <comments_resolved t="I">1</comments_resolved>
+    <comments_to_code t="I">1</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#971 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">12</files>
+    <hoc t="I">70</hoc>
+    <issue t="I">971</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-03-19T12:31:04Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17601</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#904</branch>
+    <comments t="I">18</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">17</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#972 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">8</files>
+    <hoc t="I">48</hoc>
+    <issue t="I">972</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-04-17T13:16:21Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17602</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">968</branch>
+    <comments t="I">19</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">19</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#973 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">5</files>
+    <hoc t="I">44</hoc>
+    <issue t="I">973</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2020-01-28T01:08:27Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17603</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:28:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">#957</branch>
+    <comments t="I">6</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">6</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#974 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">6</hoc>
+    <issue t="I">974</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-04-01T19:59:27Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17604</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">976-update-compiler-plugin</branch>
+    <comments t="I">8</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">7</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#977 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">977</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-05-01T16:45:21Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17605</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">968</branch>
+    <comments t="I">16</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">14</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#979 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">7</files>
+    <hoc t="I">208</hoc>
+    <issue t="I">979</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2019-05-23T15:55:12Z</when>
+    <where t="S">github</where>
+    <who t="I">34595022</who>
+  </f>
+  <f>
+    <_id t="I">17606</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">980</branch>
+    <comments t="I">7</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">6</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#981 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">981</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-05-30T15:57:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17607</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">968</branch>
+    <comments t="I">22</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">4</comments_by_author>
+    <comments_by_reviewers t="I">18</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">4</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#982 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">10</files>
+    <hoc t="I">354</hoc>
+    <issue t="I">982</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-06-01T13:09:55Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17608</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">Cactoos0_41</branch>
+    <comments t="I">29</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">26</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#985 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">31</files>
+    <hoc t="I">174</hoc>
+    <issue t="I">985</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-09-06T19:48:16Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17609</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:24Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">872</branch>
+    <comments t="I">29</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">4</comments_by_author>
+    <comments_by_reviewers t="I">25</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#986 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">103</files>
+    <hoc t="I">651</hoc>
+    <issue t="I">986</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-06-20T20:26:34Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17610</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">HttpStatuses</branch>
+    <comments t="I">19</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">18</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#987 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">3</files>
+    <hoc t="I">41</hoc>
+    <issue t="I">987</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-08-09T13:49:59Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17611</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">nullfree</branch>
+    <comments t="I">36</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">4</comments_by_author>
+    <comments_by_reviewers t="I">32</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">4</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#988 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">4</files>
+    <hoc t="I">35</hoc>
+    <issue t="I">988</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2020-10-16T01:06:56Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17612</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:44Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">28</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">25</comments_by_reviewers>
+    <comments_resolved t="I">3</comments_resolved>
+    <comments_to_code t="I">4</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#989 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">48</hoc>
+    <issue t="I">989</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">4</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-07-13T13:29:30Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17613</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:51Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">991</branch>
+    <comments t="I">7</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">7</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#992 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">1</hoc>
+    <issue t="I">992</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-09-06T01:19:25Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17614</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:29:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">918</branch>
+    <comments t="I">191</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">30</comments_by_author>
+    <comments_by_reviewers t="I">161</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">155</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#995 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">43</files>
+    <hoc t="I">1093</hoc>
+    <issue t="I">995</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">155</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2019-11-25T13:26:36Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">17616</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#811 has been "issue-was-closed".</details>
+    <issue t="I">811</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-13T18:23:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17617</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#812 has been "issue-was-closed".</details>
+    <issue t="I">812</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-11-22T23:29:18Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17618</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#814 has been "issue-was-closed".</details>
+    <issue t="I">814</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-01T11:33:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17619</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#815 has been "issue-was-closed".</details>
+    <issue t="I">815</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-01T13:23:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17620</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#816 has been "issue-was-closed".</details>
+    <issue t="I">816</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-01T14:30:09Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17621</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#817 has been "issue-was-closed".</details>
+    <issue t="I">817</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-01T15:35:14Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17622</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#818 has been "issue-was-closed".</details>
+    <issue t="I">818</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-01T20:53:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17623</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#819 has been "issue-was-closed".</details>
+    <issue t="I">819</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-11-29T01:32:52Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17624</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:30:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#820 has been "issue-was-closed".</details>
+    <issue t="I">820</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-11T03:47:41Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17625</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#821 has been "issue-was-closed".</details>
+    <issue t="I">821</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-19T15:37:14Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17626</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#822 has been "issue-was-closed".</details>
+    <issue t="I">822</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-08T16:19:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17627</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#823 has been "issue-was-closed".</details>
+    <issue t="I">823</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-09T13:06:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17628</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#824 has been "issue-was-closed".</details>
+    <issue t="I">824</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-09T16:30:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17629</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#825 has been "issue-was-closed".</details>
+    <issue t="I">825</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-09T17:11:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17630</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#826 has been "issue-was-closed".</details>
+    <issue t="I">826</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-17T08:52:43Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17631</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#827 has been "issue-was-closed".</details>
+    <issue t="I">827</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-12T16:29:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17632</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#828 has been "issue-was-closed".</details>
+    <issue t="I">828</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-12T19:56:38Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17633</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#829 has been "issue-was-closed".</details>
+    <issue t="I">829</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-03-13T07:34:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17634</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#832 has been "issue-was-closed".</details>
+    <issue t="I">832</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-14T15:41:15Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17635</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#834 has been "issue-was-closed".</details>
+    <issue t="I">834</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-04-02T14:39:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17636</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#835 has been "issue-was-closed".</details>
+    <issue t="I">835</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-04-13T06:38:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17637</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#837 has been "issue-was-closed".</details>
+    <issue t="I">837</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-02T11:56:18Z</when>
+    <where t="S">github</where>
+    <who t="I">105730</who>
+  </f>
+  <f>
+    <_id t="I">17638</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#838 has been "issue-was-closed".</details>
+    <issue t="I">838</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-06T15:09:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8284189</who>
+  </f>
+  <f>
+    <_id t="I">17639</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#839 has been "issue-was-closed".</details>
+    <issue t="I">839</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-05-21T17:12:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17640</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#841 has been "issue-was-closed".</details>
+    <issue t="I">841</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-17T04:39:03Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17641</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#842 has been "issue-was-closed".</details>
+    <issue t="I">842</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-12T20:49:37Z</when>
+    <where t="S">github</where>
+    <who t="I">6975441</who>
+  </f>
+  <f>
+    <_id t="I">17642</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#847 has been "issue-was-closed".</details>
+    <issue t="I">847</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-27T01:18:29Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17643</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#850 has been "issue-was-closed".</details>
+    <issue t="I">850</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-10T13:29:28Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17644</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#851 has been "issue-was-closed".</details>
+    <issue t="I">851</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-09-26T12:14:50Z</when>
+    <where t="S">github</where>
+    <who t="I">10466206</who>
+  </f>
+  <f>
+    <_id t="I">17645</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#856 has been "issue-was-closed".</details>
+    <issue t="I">856</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-02T19:41:16Z</when>
+    <where t="S">github</where>
+    <who t="I">2019896</who>
+  </f>
+  <f>
+    <_id t="I">17646</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#858 has been "issue-was-closed".</details>
+    <issue t="I">858</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-10T06:17:59Z</when>
+    <where t="S">github</where>
+    <who t="I">4052869</who>
+  </f>
+  <f>
+    <_id t="I">17647</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#859 has been "issue-was-closed".</details>
+    <issue t="I">859</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-11T19:50:59Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17648</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#861 has been "issue-was-closed".</details>
+    <issue t="I">861</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-04T11:23:33Z</when>
+    <where t="S">github</where>
+    <who t="I">1524988</who>
+  </f>
+  <f>
+    <_id t="I">17649</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#862 has been "issue-was-closed".</details>
+    <issue t="I">862</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-10-24T13:42:40Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17650</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#863 has been "issue-was-closed".</details>
+    <issue t="I">863</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-26T20:05:21Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17651</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#865 has been "issue-was-closed".</details>
+    <issue t="I">865</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-01-24T16:48:57Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17652</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#866 has been "issue-was-closed".</details>
+    <issue t="I">866</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-01-11T15:29:16Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17653</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#869 has been "issue-was-closed".</details>
+    <issue t="I">869</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-11-26T10:52:59Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17654</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#872 has been "issue-was-closed".</details>
+    <issue t="I">872</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-06-21T21:38:12Z</when>
+    <where t="S">github</where>
+    <who t="I">9504395</who>
+  </f>
+  <f>
+    <_id t="I">17655</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#876 has been "issue-was-closed".</details>
+    <issue t="I">876</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-12T20:50:09Z</when>
+    <where t="S">github</where>
+    <who t="I">160975</who>
+  </f>
+  <f>
+    <_id t="I">17656</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#877 has been "issue-was-closed".</details>
+    <issue t="I">877</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-16T19:39:40Z</when>
+    <where t="S">github</where>
+    <who t="I">105730</who>
+  </f>
+  <f>
+    <_id t="I">17657</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#880 has been "issue-was-closed".</details>
+    <issue t="I">880</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-12T19:50:21Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17658</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#881 has been "issue-was-closed".</details>
+    <issue t="I">881</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-12T12:04:00Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17659</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#882 has been "issue-was-closed".</details>
+    <issue t="I">882</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-26T16:52:15Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17660</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#887 has been "issue-was-closed".</details>
+    <issue t="I">887</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-01-19T13:13:12Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17661</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#888 has been "issue-was-closed".</details>
+    <issue t="I">888</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-02-21T16:57:43Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17662</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#889 has been "issue-was-closed".</details>
+    <issue t="I">889</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-12-21T20:02:29Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17663</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#893 has been "issue-was-closed".</details>
+    <issue t="I">893</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-01-22T16:50:36Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17664</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#895 has been "issue-was-closed".</details>
+    <issue t="I">895</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2022-08-22T06:07:36Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">17665</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#902 has been "issue-was-closed".</details>
+    <issue t="I">902</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-02-27T22:32:14Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17666</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#904 has been "issue-was-closed".</details>
+    <issue t="I">904</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2020-02-13T17:40:20Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17667</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#911 has been "issue-was-closed".</details>
+    <issue t="I">911</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2019-02-27T20:26:29Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17669</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:16Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#990 was assigned to @mreiche by @0crat.</details>
+    <issue t="I">990</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2019-07-13T12:59:51Z</when>
+    <where t="S">github</where>
+    <who t="I">572453</who>
+  </f>
+  <f>
+    <_id t="I">17670</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#991 was assigned to @piotrkot by @0crat.</details>
+    <issue t="I">991</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2019-09-05T02:54:32Z</when>
+    <where t="S">github</where>
+    <who t="I">9504395</who>
+  </f>
+  <f>
+    <_id t="I">17671</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:24Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#1025 was assigned to @fevzian by @0crat.</details>
+    <issue t="I">1025</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2020-02-19T21:19:49Z</when>
+    <where t="S">github</where>
+    <who t="I">3167940</who>
+  </f>
+  <f>
+    <_id t="I">17672</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:24Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#1027 was assigned to @paulodamaso by @0crat.</details>
+    <issue t="I">1027</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2020-02-06T15:10:34Z</when>
+    <where t="S">github</where>
+    <who t="I">33915433</who>
+  </f>
+  <f>
+    <_id t="I">17673</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#1067 was assigned to @andreoss by @0crat.</details>
+    <issue t="I">1067</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2020-10-31T15:22:43Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">17674</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1069 was assigned to @baudoliver7 by @yegor256.</details>
+    <issue t="I">1069</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2022-03-26T13:22:13Z</when>
+    <where t="S">github</where>
+    <who t="I">7813046</who>
+  </f>
+  <f>
+    <_id t="I">17675</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#1077 was assigned to @andreoss by @0crat.</details>
+    <issue t="I">1077</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2020-10-31T13:06:08Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">17676</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:32Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#1081 was assigned to @andreoss by @0crat.</details>
+    <issue t="I">1081</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2020-10-31T15:25:58Z</when>
+    <where t="S">github</where>
+    <who t="I">49783909</who>
+  </f>
+  <f>
+    <_id t="I">17677</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:31:32Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">24387511</assigner>
+    <details t="S">yegor256/takes#1083 was assigned to @yegor256 by @0crat.</details>
+    <issue t="I">1083</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2020-10-31T15:19:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">17678</_id>
+    <_job t="I">18300061766</_job>
+    <_time t="T">2025-10-07T02:34:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">1083</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
     <events_were_scanned t="I">55676286447</events_were_scanned>
-    <issues_were_scanned t="I">810</issues_were_scanned>
-    <labels_were_scanned t="I">978</labels_were_scanned>
+    <issues_were_scanned t="I">912</issues_were_scanned>
+    <labels_were_scanned t="I">1100</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">879</merges_were_scanned>
+    <merges_were_scanned t="I">995</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1442</min_pull_was_found>
+    <min_pull_was_found t="I">1444</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">625</types_were_scanned>
+    <types_were_scanned t="I">747</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
