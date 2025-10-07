@@ -2,12 +2,18 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: Pull already merged in yegor256/takes#89
+  error:
+  - Failed to open TCP connection to api.github.com:443 (execution expired)
+  - Failed to open TCP connection to api.github.com:443 (execution expired)
+  - Failed to open TCP connection to api.github.com:443 (execution expired)
+  - Failed to open TCP connection to api.github.com:443 (execution expired)
+  - 'Failed to open TCP connection to api.github.com:443 (getaddrinfo(3): Temporary
+    failure in name resolution)'
   inserted: 8
-  seconds: 722.111775113
+  seconds: 691.52819936
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-07 09:08:59.231733934 Z
+  when: 2025-10-07 10:07:59.136274087 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -49753,6 +49759,7 @@
   hoc: 19
   issue: 75
   repository: 28924109
+  review_comments: 4
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-03-27 04:45:20.000000000 Z
@@ -49775,6 +49782,7 @@
   hoc: 139
   issue: 78
   repository: 28924109
+  review_comments: 34
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-02 05:58:07.000000000 Z
@@ -49797,6 +49805,7 @@
   hoc: 7
   issue: 80
   repository: 28924109
+  review_comments: 1
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-03-31 19:53:22.000000000 Z
@@ -49819,6 +49828,7 @@
   hoc: 80
   issue: 81
   repository: 28924109
+  review_comments: 18
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-10 22:29:13.000000000 Z
@@ -49841,6 +49851,7 @@
   hoc: 0
   issue: 83
   repository: 28924109
+  review_comments: 3
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-03-30 22:49:56.000000000 Z
@@ -49863,6 +49874,7 @@
   hoc: 60
   issue: 84
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-03-27 21:19:30.000000000 Z
@@ -49885,6 +49897,7 @@
   hoc: 91
   issue: 86
   repository: 28924109
+  review_comments: 6
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-03-31 06:13:52.000000000 Z
@@ -49907,6 +49920,7 @@
   hoc: 433
   issue: 89
   repository: 28924109
+  review_comments: 39
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-03 02:57:19.000000000 Z
@@ -51144,20 +51158,92 @@
   when: 2016-01-04 16:22:55.000000000 Z
   where: github
   who: 526301
-- _id: 18535
-  _job: 18307414569
-  _time: 2025-10-07 09:08:59.128777176 Z
+- _id: 18536
+  _job: 18308918599
+  _time: 2025-10-07 10:06:49.445638927 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 387
+  assigner: 526301
+  details: yegor256/takes#403 was assigned to @yegor256 by @yegor256.
+  issue: 403
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2015-10-09 18:16:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 18537
+  _job: 18308918599
+  _time: 2025-10-07 10:06:50.419235107 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#406 was assigned to @yegor256 by @yegor256.
+  issue: 406
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2015-10-12 23:38:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 18538
+  _job: 18308918599
+  _time: 2025-10-07 10:06:52.208841124 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#414 was assigned to @yegor256 by @yegor256.
+  issue: 414
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2015-10-23 05:09:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 18539
+  _job: 18308918599
+  _time: 2025-10-07 10:06:52.557831043 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#416 was assigned to @yegor256 by @yegor256.
+  issue: 416
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2015-10-28 21:27:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 18540
+  _job: 18308918599
+  _time: 2025-10-07 10:06:54.071525858 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#420 was assigned to @yegor256 by @yegor256.
+  issue: 420
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2015-11-02 20:31:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 18541
+  _job: 18308918599
+  _time: 2025-10-07 10:06:59.412626713 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#449 was assigned to @yegor256 by @yegor256.
+  issue: 449
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2015-11-28 19:28:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 18542
+  _job: 18308918599
+  _time: 2025-10-07 10:07:58.955250416 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 492
   earliest_issue_was_found: 1
-  events_were_scanned: 55689294757
+  events_were_scanned: 55691031465
   issues_were_scanned: 394
-  labels_were_scanned: 504
+  labels_were_scanned: 686
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1452
+  min_pull_was_found: 1453
   repository: 28924109
-  types_were_scanned: 163
+  types_were_scanned: 277
   what: iterate
   where: github
