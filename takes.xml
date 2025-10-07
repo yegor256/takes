@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="921937">
+<fb version="0.11.0" size="955039">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.635290663</seconds>
+    <seconds t="F">810.153896146</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-07T07:10:23Z</when>
+    <when t="T">2025-10-07T08:09:42Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -21141,14 +21141,6 @@
     <when t="T">2021-04-26T02:07:23Z</when>
     <where t="S">github</where>
     <who t="I">49783909</who>
-  </f>
-  <f>
-    <_id t="I">16351</_id>
-    <_job t="I">41847</_job>
-    <_time t="T">2025-10-06T22:11:56Z</_time>
-    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-10-06T22:11:56Z</when>
   </f>
   <f>
     <_id t="I">16352</_id>
@@ -53249,6 +53241,7 @@
     <_time t="T">2025-10-07T07:05:02Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#166.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">166</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53263,6 +53256,7 @@
     <_time t="T">2025-10-07T07:05:03Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#167.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">167</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -53277,6 +53271,7 @@
     <_time t="T">2025-10-07T07:05:03Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#170.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">170</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53291,6 +53286,7 @@
     <_time t="T">2025-10-07T07:05:03Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#171.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">171</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53305,6 +53301,7 @@
     <_time t="T">2025-10-07T07:05:04Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#172.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">172</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53319,6 +53316,7 @@
     <_time t="T">2025-10-07T07:05:04Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#173.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">173</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53333,6 +53331,7 @@
     <_time t="T">2025-10-07T07:05:05Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#174.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">174</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53347,6 +53346,7 @@
     <_time t="T">2025-10-07T07:05:05Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#182.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">182</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53361,6 +53361,7 @@
     <_time t="T">2025-10-07T07:05:06Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#184.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">184</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53375,6 +53376,7 @@
     <_time t="T">2025-10-07T07:05:06Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#187.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">187</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53389,6 +53391,7 @@
     <_time t="T">2025-10-07T07:05:08Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#194.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">194</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53403,6 +53406,7 @@
     <_time t="T">2025-10-07T07:05:09Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#195.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">195</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53417,6 +53421,7 @@
     <_time t="T">2025-10-07T07:05:09Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#198.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">198</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53431,6 +53436,7 @@
     <_time t="T">2025-10-07T07:05:10Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#199.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">199</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53445,6 +53451,7 @@
     <_time t="T">2025-10-07T07:05:11Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#205.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">205</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53459,6 +53466,7 @@
     <_time t="T">2025-10-07T07:05:11Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#206.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">206</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53473,6 +53481,7 @@
     <_time t="T">2025-10-07T07:05:12Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#209.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">209</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53487,6 +53496,7 @@
     <_time t="T">2025-10-07T07:05:13Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#211.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">211</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53501,6 +53511,7 @@
     <_time t="T">2025-10-07T07:05:13Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#213.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">213</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53515,6 +53526,7 @@
     <_time t="T">2025-10-07T07:05:14Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#217.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">217</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53529,6 +53541,7 @@
     <_time t="T">2025-10-07T07:05:15Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#220.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">220</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53543,6 +53556,7 @@
     <_time t="T">2025-10-07T07:05:17Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#221.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">221</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53557,6 +53571,7 @@
     <_time t="T">2025-10-07T07:05:19Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#229.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">229</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53571,6 +53586,7 @@
     <_time t="T">2025-10-07T07:05:20Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#231.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">231</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53585,6 +53601,7 @@
     <_time t="T">2025-10-07T07:05:21Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#239.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">239</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53599,6 +53616,7 @@
     <_time t="T">2025-10-07T07:05:23Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#247.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">247</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53613,6 +53631,7 @@
     <_time t="T">2025-10-07T07:05:24Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#248.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">248</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53627,6 +53646,7 @@
     <_time t="T">2025-10-07T07:05:25Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#249.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">249</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53641,6 +53661,7 @@
     <_time t="T">2025-10-07T07:05:25Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#250.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">250</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53655,6 +53676,7 @@
     <_time t="T">2025-10-07T07:05:25Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#250.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">250</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -53669,6 +53691,7 @@
     <_time t="T">2025-10-07T07:05:26Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#251.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">251</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53683,6 +53706,7 @@
     <_time t="T">2025-10-07T07:05:27Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#252.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">252</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53697,6 +53721,7 @@
     <_time t="T">2025-10-07T07:05:28Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#253.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">253</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53711,6 +53736,7 @@
     <_time t="T">2025-10-07T07:05:30Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#254.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">254</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53725,6 +53751,7 @@
     <_time t="T">2025-10-07T07:05:31Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#257.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">257</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53739,6 +53766,7 @@
     <_time t="T">2025-10-07T07:05:31Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#257.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">257</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -53753,6 +53781,7 @@
     <_time t="T">2025-10-07T07:05:31Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#258.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">258</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53767,6 +53796,7 @@
     <_time t="T">2025-10-07T07:05:31Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#258.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">258</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -53781,6 +53811,7 @@
     <_time t="T">2025-10-07T07:05:32Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#259.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">259</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53795,6 +53826,7 @@
     <_time t="T">2025-10-07T07:05:33Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#259.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">259</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -53809,6 +53841,7 @@
     <_time t="T">2025-10-07T07:05:34Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#260.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">260</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53823,6 +53856,7 @@
     <_time t="T">2025-10-07T07:05:34Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#260.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">260</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -53837,6 +53871,7 @@
     <_time t="T">2025-10-07T07:05:35Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#263.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">263</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53851,6 +53886,7 @@
     <_time t="T">2025-10-07T07:05:36Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#265.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">265</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53865,6 +53901,7 @@
     <_time t="T">2025-10-07T07:05:36Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#266.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">266</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53879,6 +53916,7 @@
     <_time t="T">2025-10-07T07:05:37Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#271.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">271</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53893,6 +53931,7 @@
     <_time t="T">2025-10-07T07:05:37Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#272.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">272</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53907,6 +53946,7 @@
     <_time t="T">2025-10-07T07:05:38Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#273.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">273</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53921,6 +53961,7 @@
     <_time t="T">2025-10-07T07:05:38Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#274.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">274</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53935,6 +53976,7 @@
     <_time t="T">2025-10-07T07:05:39Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#277.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">277</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -53942,25 +53984,6 @@
     <when t="T">2015-05-10T23:22:13Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">18279</_id>
-    <_job t="I">18304609171</_job>
-    <_time t="T">2025-10-07T07:05:39Z</_time>
-    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">163</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55684293703</events_were_scanned>
-    <issues_were_scanned t="I">173</issues_were_scanned>
-    <labels_were_scanned t="I">277</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">1362</merges_were_scanned>
-    <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1449</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1339</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">18280</_id>
@@ -53971,6 +53994,7 @@
     <comments t="I">4</comments>
     <details t="S">The pull request yegor256/takes#1320 with 52 HoC created by @pejetuz was reviewed by @yegor256 after 0h21m and 1 comments.</details>
     <hoc t="I">52</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1320</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">1</review_comments>
@@ -53979,5 +54003,1955 @@
     <when t="T">2024-08-27T14:39:23Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18281</_id>
+    <_job t="I">41932</_job>
+    <_time t="T">2025-10-07T07:11:16Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-10-07T07:11:16Z</when>
+  </f>
+  <f>
+    <_id t="I">18283</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:56:16Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1365 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1365</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-12-24T00:55:05Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18284</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:56:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/hibernate-validator</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1369 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1369</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-12-13T20:50:02Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18285</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:56:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">move_rq_base_method</branch>
+    <comments t="I">5</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">2</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1370 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">12</files>
+    <hoc t="I">157</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1370</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-12-27T07:52:52Z</when>
+    <where t="S">github</where>
+    <who t="I">66062429</who>
+  </f>
+  <f>
+    <_id t="I">18286</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:56:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">move-rq-href-realizations-out-of-interface</branch>
+    <comments t="I">5</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">2</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1372 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">30</files>
+    <hoc t="I">509</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1372</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-12-27T07:52:57Z</when>
+    <where t="S">github</where>
+    <who t="I">66062429</who>
+  </f>
+  <f>
+    <_id t="I">18287</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:57:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/junit5-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1373 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1373</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-12-16T16:48:08Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18288</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:57:15Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1374 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1374</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-12-25T00:53:02Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18289</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:57:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1377 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1377</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-01-02T20:48:14Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18290</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:57:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/jersey-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1378 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1378</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-01-08T12:47:43Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18291</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:57:53Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/jersey-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1379 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1379</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-01-08T13:46:24Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18293</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#278.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">278</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-11T10:34:37Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18294</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:43Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#285.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">285</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-14T09:33:15Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18295</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:44Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#286.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">286</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-14T09:33:15Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18296</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:45Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#287.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">287</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-14T09:33:15Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18297</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:46Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#290.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">290</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-14T17:25:18Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18298</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:47Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#292.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">292</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-15T18:50:10Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18299</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:47Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#293.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">293</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-16T09:22:15Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18300</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#294.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">294</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-16T05:14:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18301</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#295.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">295</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-16T05:14:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18302</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:50Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#296.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">296</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-18T09:38:08Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18303</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:50Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#298.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">298</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-18T10:47:57Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18304</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:53Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#306.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">306</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-20T10:04:07Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18305</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#309.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">309</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-22T09:33:43Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18306</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#310.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">310</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-22T23:57:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18307</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#312.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">312</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-25T10:06:20Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18308</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#319.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">319</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-29T04:36:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18309</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T07:59:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#321.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">321</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-02T15:26:52Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18310</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#331.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">331</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-04T19:10:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18311</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#333.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">333</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-05T20:52:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18312</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#339.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">339</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-09T23:57:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18313</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#341.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">341</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-11T03:39:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18314</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#346.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">346</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-18T17:41:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18315</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#349.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">349</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-19T16:38:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18316</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#350.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">350</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-22T02:27:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18317</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#350.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">350</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-22T02:27:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18318</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#353.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">353</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-24T16:09:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18319</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#354.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">354</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-29T04:15:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18320</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#355.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">355</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-06-29T23:23:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18321</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#363.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">363</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-07-15T17:29:39Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18322</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#364.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">364</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-07-15T17:58:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18323</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#364.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">364</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-07-15T17:58:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18324</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:15Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#367.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">367</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-07-23T18:03:40Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18325</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#372.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">372</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-08-03T17:28:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18326</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:18Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#373.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">373</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-07-27T09:09:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18327</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#377.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">377</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-09-12T19:23:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18328</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#379.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">379</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-08-30T19:24:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18329</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#382.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">382</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-09-16T14:28:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18330</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:22Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#383.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">383</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-09-18T13:13:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18331</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:23Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#384.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">384</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-09-18T08:07:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18332</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:23Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#384.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">384</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-09-18T08:07:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18334</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#167 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">167</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-10T06:07:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18335</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:26Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#170 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">170</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-15T00:05:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18336</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:26Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#171 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">171</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-15T01:51:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18337</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#172 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">172</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-15T03:15:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18338</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#173 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">173</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-15T05:07:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18339</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#182 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">182</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-16T02:09:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18340</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#198 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">198</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-21T19:22:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18341</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#199 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">199</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-22T00:48:40Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18342</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:32Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#209 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">209</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-04-25T03:23:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18343</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#247 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">247</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-03T22:34:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18344</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#249 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">249</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-04T00:42:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18345</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:41Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#250 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">250</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-04T02:15:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18346</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:46Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#265 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">265</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-08T22:37:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18347</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:47Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#266 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">266</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-09T00:13:21Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18348</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:47Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#271 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">271</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-09T22:57:14Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18349</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#272 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">272</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-10T02:05:29Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18350</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#273 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">273</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-10T02:34:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18351</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:49Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#274 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">274</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-10T03:38:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18352</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:00:50Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#277 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">277</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2015-05-10T23:22:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18354</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:51Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#174 has been "issue-was-closed".</details>
+    <issue t="I">174</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-11-07T18:28:24Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18355</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:52Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#182 has been "issue-was-closed".</details>
+    <issue t="I">182</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-16T03:08:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18356</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:52Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#184 has been "issue-was-closed".</details>
+    <issue t="I">184</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-27T03:41:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18357</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:52Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#187 has been "issue-was-closed".</details>
+    <issue t="I">187</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-20T18:26:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18358</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:53Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#190 has been "issue-was-closed".</details>
+    <issue t="I">190</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-20T01:33:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18359</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:53Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#194 has been "issue-was-closed".</details>
+    <issue t="I">194</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-13T07:36:45Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">18360</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:53Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#195 has been "issue-was-closed".</details>
+    <issue t="I">195</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-13T19:55:10Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">18361</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#196 has been "issue-was-closed".</details>
+    <issue t="I">196</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-21T06:36:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18362</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#198 has been "issue-was-closed".</details>
+    <issue t="I">198</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-21T19:28:26Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18363</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:54Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#199 has been "issue-was-closed".</details>
+    <issue t="I">199</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-09-27T02:49:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18364</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#201 has been "issue-was-closed".</details>
+    <issue t="I">201</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-22T07:28:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18365</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#205 has been "issue-was-closed".</details>
+    <issue t="I">205</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T04:58:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18366</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#206 has been "issue-was-closed".</details>
+    <issue t="I">206</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-24T18:25:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18367</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#209 has been "issue-was-closed".</details>
+    <issue t="I">209</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-25T03:55:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18368</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#211 has been "issue-was-closed".</details>
+    <issue t="I">211</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-30T19:24:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18369</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#213 has been "issue-was-closed".</details>
+    <issue t="I">213</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-10-19T08:14:32Z</when>
+    <where t="S">github</where>
+    <who t="I">416283</who>
+  </f>
+  <f>
+    <_id t="I">18370</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:57Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#217 has been "issue-was-closed".</details>
+    <issue t="I">217</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T23:00:11Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18371</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#219 has been "issue-was-closed".</details>
+    <issue t="I">219</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-01T05:02:30Z</when>
+    <where t="S">github</where>
+    <who t="I">5760337</who>
+  </f>
+  <f>
+    <_id t="I">18372</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#220 has been "issue-was-closed".</details>
+    <issue t="I">220</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-30T13:26:50Z</when>
+    <where t="S">github</where>
+    <who t="I">5760337</who>
+  </f>
+  <f>
+    <_id t="I">18373</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#221 has been "issue-was-closed".</details>
+    <issue t="I">221</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-13T11:44:32Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18374</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#222 has been "issue-was-closed".</details>
+    <issue t="I">222</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-09T20:59:16Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18375</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:01:59Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#226 has been "issue-was-closed".</details>
+    <issue t="I">226</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-04-30T06:30:23Z</when>
+    <where t="S">github</where>
+    <who t="I">105730</who>
+  </f>
+  <f>
+    <_id t="I">18376</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#227 has been "issue-was-closed".</details>
+    <issue t="I">227</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T13:05:58Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18377</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#229 has been "issue-was-closed".</details>
+    <issue t="I">229</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-02T06:10:32Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18378</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#230 has been "issue-was-closed".</details>
+    <issue t="I">230</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-13T15:33:01Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18379</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#231 has been "issue-was-closed".</details>
+    <issue t="I">231</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-13T05:45:31Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18380</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#236 has been "issue-was-closed".</details>
+    <issue t="I">236</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-01T20:35:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18381</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#237 has been "issue-was-closed".</details>
+    <issue t="I">237</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-01T20:35:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18382</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#239 has been "issue-was-closed".</details>
+    <issue t="I">239</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-11T10:35:38Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18383</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#242 has been "issue-was-closed".</details>
+    <issue t="I">242</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-02T04:21:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18384</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#243 has been "issue-was-closed".</details>
+    <issue t="I">243</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-10T12:36:26Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18385</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#247 has been "issue-was-closed".</details>
+    <issue t="I">247</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-03T22:45:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18386</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#248 has been "issue-was-closed".</details>
+    <issue t="I">248</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-14T23:25:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18387</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#249 has been "issue-was-closed".</details>
+    <issue t="I">249</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-04T00:54:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18388</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#250 has been "issue-was-closed".</details>
+    <issue t="I">250</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-04T02:35:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18389</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#251 has been "issue-was-closed".</details>
+    <issue t="I">251</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-19T21:13:32Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">18390</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#252 has been "issue-was-closed".</details>
+    <issue t="I">252</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-27T21:22:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18391</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#253 has been "issue-was-closed".</details>
+    <issue t="I">253</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-04T18:11:52Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18392</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#254 has been "issue-was-closed".</details>
+    <issue t="I">254</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2016-02-04T18:33:41Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18393</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#256 has been "issue-was-closed".</details>
+    <issue t="I">256</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-07T19:00:33Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18394</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#257 has been "issue-was-closed".</details>
+    <issue t="I">257</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-03T04:59:09Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18395</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#258 has been "issue-was-closed".</details>
+    <issue t="I">258</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-12T16:43:22Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18396</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#259 has been "issue-was-closed".</details>
+    <issue t="I">259</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-20T03:42:08Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18397</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:07Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#260 has been "issue-was-closed".</details>
+    <issue t="I">260</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2016-06-14T10:35:32Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18398</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#263 has been "issue-was-closed".</details>
+    <issue t="I">263</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-17T16:12:23Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18399</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#264 has been "issue-was-closed".</details>
+    <issue t="I">264</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-26T11:09:22Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18400</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#265 has been "issue-was-closed".</details>
+    <issue t="I">265</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-08T23:02:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18401</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#266 has been "issue-was-closed".</details>
+    <issue t="I">266</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-09T00:28:39Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18402</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#268 has been "issue-was-closed".</details>
+    <issue t="I">268</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-13T13:03:53Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18403</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#271 has been "issue-was-closed".</details>
+    <issue t="I">271</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-09T23:48:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18404</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#272 has been "issue-was-closed".</details>
+    <issue t="I">272</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-10T02:16:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18405</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#273 has been "issue-was-closed".</details>
+    <issue t="I">273</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-10T03:03:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18406</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#274 has been "issue-was-closed".</details>
+    <issue t="I">274</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-10T03:48:42Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18407</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#275 has been "issue-was-closed".</details>
+    <issue t="I">275</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-10T19:37:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18408</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#276 has been "issue-was-closed".</details>
+    <issue t="I">276</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-15T11:34:45Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18409</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#277 has been "issue-was-closed".</details>
+    <issue t="I">277</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-10T23:44:01Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18410</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#278 has been "issue-was-closed".</details>
+    <issue t="I">278</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-26T15:31:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18411</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#281 has been "issue-was-closed".</details>
+    <issue t="I">281</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-01-29T18:03:05Z</when>
+    <where t="S">github</where>
+    <who t="I">9972909</who>
+  </f>
+  <f>
+    <_id t="I">18412</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#284 has been "issue-was-closed".</details>
+    <issue t="I">284</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2018-01-24T19:12:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18413</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#285 has been "issue-was-closed".</details>
+    <issue t="I">285</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-05-25T18:24:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18414</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#286 has been "issue-was-closed".</details>
+    <issue t="I">286</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-11-05T18:01:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18415</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">Apparently, yegor256/takes#287 has been "issue-was-closed".</details>
+    <issue t="I">287</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2015-06-10T17:15:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18416</_id>
+    <_job t="I">18305927456</_job>
+    <_time t="T">2025-10-07T08:02:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">277</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">55687157062</events_were_scanned>
+    <issues_were_scanned t="I">287</issues_were_scanned>
+    <labels_were_scanned t="I">387</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">144</min_issue_was_found>
+    <min_pull_was_found t="I">1450</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">0</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
