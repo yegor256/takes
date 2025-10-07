@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.781756325
+  seconds: 810.836541076
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-07 12:09:27.925627686 Z
+  when: 2025-10-07 13:19:50.009867632 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -52210,6 +52210,7 @@
   hoc: 160
   issue: 192
   repository: 28924109
+  review_comments: 1
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-22 03:53:38.000000000 Z
@@ -52232,6 +52233,7 @@
   hoc: 184
   issue: 193
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-29 20:13:40.000000000 Z
@@ -52254,6 +52256,7 @@
   hoc: 301
   issue: 197
   repository: 28924109
+  review_comments: 16
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-24 18:34:17.000000000 Z
@@ -52298,6 +52301,7 @@
   hoc: 15
   issue: 202
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-09 19:32:04.000000000 Z
@@ -52320,6 +52324,7 @@
   hoc: 136
   issue: 203
   repository: 28924109
+  review_comments: 2
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-08 19:16:14.000000000 Z
@@ -52342,6 +52347,7 @@
   hoc: 32
   issue: 204
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-24 19:20:59.000000000 Z
@@ -52386,6 +52392,7 @@
   hoc: 100
   issue: 208
   repository: 28924109
+  review_comments: 4
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-24 08:26:41.000000000 Z
@@ -52408,6 +52415,7 @@
   hoc: 39
   issue: 210
   repository: 28924109
+  review_comments: 4
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-05 19:22:30.000000000 Z
@@ -52430,6 +52438,7 @@
   hoc: 42
   issue: 212
   repository: 28924109
+  review_comments: 8
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-29 20:45:45.000000000 Z
@@ -52452,6 +52461,7 @@
   hoc: 180
   issue: 214
   repository: 28924109
+  review_comments: 9
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-08 19:36:37.000000000 Z
@@ -52474,6 +52484,7 @@
   hoc: 415
   issue: 215
   repository: 28924109
+  review_comments: 9
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-11 23:21:46.000000000 Z
@@ -52496,6 +52507,7 @@
   hoc: 258
   issue: 216
   repository: 28924109
+  review_comments: 1
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-30 16:44:36.000000000 Z
@@ -52518,6 +52530,7 @@
   hoc: 180
   issue: 218
   repository: 28924109
+  review_comments: 85
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-07 18:47:41.000000000 Z
@@ -52540,6 +52553,7 @@
   hoc: 108
   issue: 223
   repository: 28924109
+  review_comments: 3
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-04-30 05:27:57.000000000 Z
@@ -52562,6 +52576,7 @@
   hoc: 501
   issue: 225
   repository: 28924109
+  review_comments: 17
   succeeded_builds: 0
   what: pull-was-merged
   when: 2015-05-07 00:28:13.000000000 Z
@@ -53128,20 +53143,56 @@
   when: 2018-02-12 03:33:48.000000000 Z
   where: github
   who: 1917892
-- _id: 18654
-  _job: 18311783022
-  _time: 2025-10-07 12:09:17.126619020 Z
+- _id: 18655
+  _job: 18313613236
+  _time: 2025-10-07 13:18:43.703571257 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 615
+  assigner: 526301
+  details: yegor256/takes#642 was assigned to @yegor256 by @yegor256.
+  issue: 642
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2016-03-04 23:11:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 18656
+  _job: 18313613236
+  _time: 2025-10-07 13:18:44.502544128 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#643 was assigned to @yegor256 by @yegor256.
+  issue: 643
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2016-03-06 18:36:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 18657
+  _job: 18313613236
+  _time: 2025-10-07 13:18:59.367852896 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assigner: 526301
+  details: yegor256/takes#704 was assigned to @yegor256 by @yegor256.
+  issue: 704
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2016-07-26 01:45:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 18658
+  _job: 18313613236
+  _time: 2025-10-07 13:19:09.358025664 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 744
   earliest_issue_was_found: 1
-  events_were_scanned: 55694433638
+  events_were_scanned: 55696895567
   issues_were_scanned: 914
-  labels_were_scanned: 825
+  labels_were_scanned: 1004
   latest_issue_was_found: 1463
   merges_were_scanned: 225
   min_issue_was_found: 144
-  min_pull_was_found: 1455
+  min_pull_was_found: 1456
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 491
   what: iterate
   where: github
