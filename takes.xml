@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="986022">
+<fb version="0.11.0" size="987632">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
-    <error>
-      <v t="S">Failed to open TCP connection to api.github.com:443 (execution expired)</v>
-      <v t="S">Failed to open TCP connection to api.github.com:443 (execution expired)</v>
-      <v t="S">Failed to open TCP connection to api.github.com:443 (execution expired)</v>
-      <v t="S">Failed to open TCP connection to api.github.com:443 (execution expired)</v>
-      <v t="S">Failed to open TCP connection to api.github.com:443 (getaddrinfo(3): Temporary failure in name resolution)</v>
-    </error>
     <inserted t="I">8</inserted>
-    <seconds t="F">691.52819936</seconds>
+    <seconds t="F">815.372798633</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-07T10:07:59Z</when>
+    <when t="T">2025-10-07T11:09:43Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -57737,21 +57730,151 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">18542</_id>
-    <_job t="I">18308918599</_job>
-    <_time t="T">2025-10-07T10:07:58Z</_time>
+    <_id t="I">18543</_id>
+    <_job t="I">41964</_job>
+    <_time t="T">2025-10-07T10:08:52Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.50</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">9.707621550591327</cost_of_qod>
+    <ev t="I">174</ev>
+    <pv t="I">1692</pv>
+    <qod t="I">18</qod>
+    <qod_per_day t="F">8.697142857142858</qod_per_day>
+    <qod_per_sec t="F">1.0734126984126984e-05</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2025-10-07T10:08:52Z</when>
+  </f>
+  <f>
+    <_id t="I">18545</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T10:57:57Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">492</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55691031465</events_were_scanned>
-    <issues_were_scanned t="I">394</issues_were_scanned>
-    <labels_were_scanned t="I">686</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1453</min_pull_was_found>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#712.</details>
+    <issue t="I">712</issue>
+    <label t="S">bug</label>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">277</types_were_scanned>
+    <what t="S">label-was-attached</what>
+    <when t="T">2016-11-22T07:02:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18546</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T10:58:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#804.</details>
+    <issue t="I">804</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2018-02-21T19:35:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18547</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T10:58:18Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#810.</details>
+    <issue t="I">810</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2018-03-21T14:46:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18549</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T11:08:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">92</branch>
+    <comments t="I">6</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">4</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#93 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">3</hoc>
+    <issue t="I">93</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2015-03-29T22:15:51Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18550</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T11:09:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">CcBase64#19</branch>
+    <comments t="I">20</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">6</comments_by_author>
+    <comments_by_reviewers t="I">14</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">8</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#95 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">4</files>
+    <hoc t="I">286</hoc>
+    <issue t="I">95</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2015-03-30T21:12:05Z</when>
+    <where t="S">github</where>
+    <who t="I">861305</who>
+  </f>
+  <f>
+    <_id t="I">18551</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T11:09:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">CcBase64#19</branch>
+    <comments t="I">102</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">30</comments_by_author>
+    <comments_by_reviewers t="I">72</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">46</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#98 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">211</hoc>
+    <issue t="I">98</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2015-04-15T18:33:31Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18552</_id>
+    <_job t="I">18310367306</_job>
+    <_time t="T">2025-10-07T11:09:43Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">615</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">55692527662</events_were_scanned>
+    <issues_were_scanned t="I">394</issues_were_scanned>
+    <labels_were_scanned t="I">825</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">98</merges_were_scanned>
+    <min_issue_was_found t="I">144</min_issue_was_found>
+    <min_pull_was_found t="I">1454</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">387</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

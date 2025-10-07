@@ -2,18 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error:
-  - Failed to open TCP connection to api.github.com:443 (execution expired)
-  - Failed to open TCP connection to api.github.com:443 (execution expired)
-  - Failed to open TCP connection to api.github.com:443 (execution expired)
-  - Failed to open TCP connection to api.github.com:443 (execution expired)
-  - 'Failed to open TCP connection to api.github.com:443 (getaddrinfo(3): Temporary
-    failure in name resolution)'
   inserted: 8
-  seconds: 691.52819936
+  seconds: 815.372798633
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-07 10:07:59.136274087 Z
+  when: 2025-10-07 11:09:43.955855002 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -51230,20 +51223,136 @@
   when: 2015-11-28 19:28:52.000000000 Z
   where: github
   who: 526301
-- _id: 18542
-  _job: 18308918599
-  _time: 2025-10-07 10:07:58.955250416 Z
+- _id: 18543
+  _job: 41964
+  _time: 2025-10-07 10:08:52.488897565 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  ac: 24
+  cost_of_qod: 9.707621550591327
+  ev: 174
+  pv: 1692
+  qod: 18
+  qod_per_day: 8.697142857142858
+  qod_per_sec: 1.0734126984126984e-05
+  start: *3
+  what: earned-value
+  when: 2025-10-07 10:08:52.489108716 Z
+- _id: 18545
+  _job: 18310367306
+  _time: 2025-10-07 10:57:57.042738035 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 492
-  earliest_issue_was_found: 1
-  events_were_scanned: 55691031465
-  issues_were_scanned: 394
-  labels_were_scanned: 686
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 144
-  min_pull_was_found: 1453
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#712.
+  issue: 712
+  label: bug
   repository: 28924109
-  types_were_scanned: 277
+  what: label-was-attached
+  when: 2016-11-22 07:02:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 18546
+  _job: 18310367306
+  _time: 2025-10-07 10:58:17.815292869 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#804.
+  issue: 804
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2018-02-21 19:35:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 18547
+  _job: 18310367306
+  _time: 2025-10-07 10:58:18.793394451 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#810.
+  issue: 810
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2018-03-21 14:46:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 18549
+  _job: 18310367306
+  _time: 2025-10-07 11:08:56.133452929 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '92'
+  comments: 6
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#93 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 3
+  issue: 93
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-03-29 22:15:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18550
+  _job: 18310367306
+  _time: 2025-10-07 11:09:05.801938659 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: CcBase64#19
+  comments: 20
+  comments_appreciated: 0
+  comments_by_author: 6
+  comments_by_reviewers: 14
+  comments_resolved: 0
+  comments_to_code: 8
+  details: Apparently, yegor256/takes#95 has been "pull-was-closed".
+  failed_builds: 0
+  files: 4
+  hoc: 286
+  issue: 95
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2015-03-30 21:12:05.000000000 Z
+  where: github
+  who: 861305
+- _id: 18551
+  _job: 18310367306
+  _time: 2025-10-07 11:09:13.690656175 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: CcBase64#19
+  comments: 102
+  comments_appreciated: 0
+  comments_by_author: 30
+  comments_by_reviewers: 72
+  comments_resolved: 0
+  comments_to_code: 46
+  details: Apparently, yegor256/takes#98 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 211
+  issue: 98
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2015-04-15 18:33:31.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18552
+  _job: 18310367306
+  _time: 2025-10-07 11:09:43.410842220 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 615
+  earliest_issue_was_found: 1
+  events_were_scanned: 55692527662
+  issues_were_scanned: 394
+  labels_were_scanned: 825
+  latest_issue_was_found: 1463
+  merges_were_scanned: 98
+  min_issue_was_found: 144
+  min_pull_was_found: 1454
+  repository: 28924109
+  types_were_scanned: 387
   what: iterate
   where: github
