@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 786.118804246
+  seconds: 677.332113304
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-07 16:19:14.120067952 Z
+  when: 2025-10-07 17:08:12.738043444 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -48004,12 +48004,6 @@
   when: 2024-08-27 14:39:23.000000000 Z
   where: github
   who: 526301
-- _id: 18281
-  _job: 41932
-  _time: 2025-10-07 07:11:16.364062394 Z
-  _version: 0.16.8/0.54.0/0.15.50
-  what: learn-eva
-  when: 2025-10-07 07:11:16.324285569 Z
 - _id: 18283
   _job: 18305927456
   _time: 2025-10-07 07:56:16.754005430 Z
@@ -53877,20 +53871,26 @@
   when: 2015-05-22 23:37:40.000000000 Z
   where: github
   who: 8086956
-- _id: 18685
-  _job: 18318773418
-  _time: 2025-10-07 16:19:14.031604198 Z
+- _id: 18686
+  _job: 42032
+  _time: 2025-10-07 16:20:08.038427059 Z
+  _version: 0.16.8/0.54.0/0.15.50
+  what: learn-eva
+  when: 2025-10-07 16:20:07.987947558 Z
+- _id: 18687
+  _job: 18320076961
+  _time: 2025-10-07 17:06:24.253643942 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 1091
+  assignees_were_scanned: 1434
   earliest_issue_was_found: 1
-  events_were_scanned: 55701175306
-  issues_were_scanned: 1227
-  labels_were_scanned: 376
+  events_were_scanned: 55703511862
+  issues_were_scanned: 0
+  labels_were_scanned: 607
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1459
+  min_pull_was_found: 1460
   repository: 28924109
-  types_were_scanned: 826
+  types_were_scanned: 933
   what: iterate
   where: github
