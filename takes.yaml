@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 802.458541594
+  seconds: 810.709677194
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-07 02:34:45.388860166 Z
+  when: 2025-10-07 03:22:50.712091165 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -35082,6 +35082,7 @@
   details: The pull request yegor256/takes#761 with 411 HoC created by @neonailol
     was reviewed by @g4s8 after 265h25m and 7 comments.
   hoc: 411
+  is_human: 1
   issue: 761
   repository: 28924109
   review_comments: 7
@@ -35099,6 +35100,7 @@
   details: The pull request yegor256/takes#768 with 114 HoC created by @neonailol
     was reviewed by @g4s8 after 121h53m and 1 comments.
   hoc: 114
+  is_human: 1
   issue: 768
   repository: 28924109
   review_comments: 1
@@ -35116,6 +35118,7 @@
   details: The pull request yegor256/takes#773 with 121 HoC created by @t-izbassar
     was reviewed by @g4s8 after 13h46m and 2 comments.
   hoc: 121
+  is_human: 1
   issue: 773
   repository: 28924109
   review_comments: 2
@@ -35133,6 +35136,7 @@
   details: The pull request yegor256/takes#776 with 66 HoC created by @t-izbassar
     was reviewed by @g4s8 after 1h49m and 0 comments.
   hoc: 66
+  is_human: 1
   issue: 776
   repository: 28924109
   review_comments: 0
@@ -35150,6 +35154,7 @@
   details: The pull request yegor256/takes#777 with 200 HoC created by @t-izbassar
     was reviewed by @g4s8 after 4h35m and 2 comments.
   hoc: 200
+  is_human: 1
   issue: 777
   repository: 28924109
   review_comments: 2
@@ -35167,6 +35172,7 @@
   details: The pull request yegor256/takes#783 with 24 HoC created by @neonailol was
     reviewed by @g4s8 after 109h17m and 1 comments.
   hoc: 24
+  is_human: 1
   issue: 783
   repository: 28924109
   review_comments: 1
@@ -35184,6 +35190,7 @@
   details: The pull request yegor256/takes#785 with 430 HoC created by @t-izbassar
     was reviewed by @g4s8 after 172h53m and 0 comments.
   hoc: 430
+  is_human: 1
   issue: 785
   repository: 28924109
   review_comments: 0
@@ -35201,6 +35208,7 @@
   details: The pull request yegor256/takes#789 with 200 HoC created by @t-izbassar
     was reviewed by @g4s8 after 50h52m and 0 comments.
   hoc: 200
+  is_human: 1
   issue: 789
   repository: 28924109
   review_comments: 0
@@ -35218,6 +35226,7 @@
   details: The pull request yegor256/takes#792 with 76 HoC created by @neonailol was
     reviewed by @g4s8 after 1h4m and 2 comments.
   hoc: 76
+  is_human: 1
   issue: 792
   repository: 28924109
   review_comments: 2
@@ -35235,6 +35244,7 @@
   details: The pull request yegor256/takes#797 with 89 HoC created by @msarhan was
     reviewed by @g4s8 after 62h14m and 1 comments.
   hoc: 89
+  is_human: 1
   issue: 797
   repository: 28924109
   review_comments: 1
@@ -35252,6 +35262,7 @@
   details: The pull request yegor256/takes#799 with 46 HoC created by @t-izbassar
     was reviewed by @g4s8 after 22h41m and 0 comments.
   hoc: 46
+  is_human: 1
   issue: 799
   repository: 28924109
   review_comments: 0
@@ -35269,6 +35280,7 @@
   details: The pull request yegor256/takes#801 with 114 HoC created by @t-izbassar
     was reviewed by @g4s8 after 33h7m and 0 comments.
   hoc: 114
+  is_human: 1
   issue: 801
   repository: 28924109
   review_comments: 0
@@ -35286,6 +35298,7 @@
   details: The pull request yegor256/takes#803 with 26 HoC created by @t-izbassar
     was reviewed by @g4s8 after 8h59m and 2 comments.
   hoc: 26
+  is_human: 1
   issue: 803
   repository: 28924109
   review_comments: 2
@@ -35303,6 +35316,7 @@
   details: The pull request yegor256/takes#807 with 35 HoC created by @t-izbassar
     was reviewed by @g4s8 after 45h59m and 3 comments.
   hoc: 35
+  is_human: 1
   issue: 807
   repository: 28924109
   review_comments: 3
@@ -35320,6 +35334,7 @@
   details: The pull request yegor256/takes#809 with 114 HoC created by @t-izbassar
     was reviewed by @g4s8 after 13h38m and 3 comments.
   hoc: 114
+  is_human: 1
   issue: 809
   repository: 28924109
   review_comments: 3
@@ -35337,6 +35352,7 @@
   details: The pull request yegor256/takes#813 with 419 HoC created by @t-izbassar
     was reviewed by @g4s8 after 63h0m and 3 comments.
   hoc: 419
+  is_human: 1
   issue: 813
   repository: 28924109
   review_comments: 3
@@ -35354,6 +35370,7 @@
   details: The pull request yegor256/takes#830 with 103 HoC created by @t-izbassar
     was reviewed by @g4s8 after 4h45m and 4 comments.
   hoc: 103
+  is_human: 1
   issue: 830
   repository: 28924109
   review_comments: 4
@@ -35371,6 +35388,7 @@
   details: The pull request yegor256/takes#836 with 497 HoC created by @g4s8 was reviewed
     by @amihaiemil after 1h34m and 4 comments.
   hoc: 497
+  is_human: 1
   issue: 836
   repository: 28924109
   review_comments: 4
@@ -35388,6 +35406,7 @@
   details: The pull request yegor256/takes#846 with 50 HoC created by @paulodamaso
     was reviewed by @g4s8 after 2h36m and 4 comments.
   hoc: 50
+  is_human: 1
   issue: 846
   repository: 28924109
   review_comments: 4
@@ -35405,6 +35424,7 @@
   details: The pull request yegor256/takes#849 with 621 HoC created by @paulodamaso
     was reviewed by @g4s8 after 231h50m and 6 comments.
   hoc: 621
+  is_human: 1
   issue: 849
   repository: 28924109
   review_comments: 6
@@ -35422,6 +35442,7 @@
   details: The pull request yegor256/takes#857 with 25 HoC created by @paulodamaso
     was reviewed by @g4s8 after 28h19m and 1 comments.
   hoc: 25
+  is_human: 1
   issue: 857
   repository: 28924109
   review_comments: 1
@@ -35439,6 +35460,7 @@
   details: The pull request yegor256/takes#860 with 409 HoC created by @paulodamaso
     was reviewed by @g4s8 after 39h49m and 2 comments.
   hoc: 409
+  is_human: 1
   issue: 860
   repository: 28924109
   review_comments: 2
@@ -35456,6 +35478,7 @@
   details: The pull request yegor256/takes#867 with 121 HoC created by @olenagerasimova
     was reviewed by @g4s8 after 1h27m and 3 comments.
   hoc: 121
+  is_human: 1
   issue: 867
   repository: 28924109
   review_comments: 3
@@ -35473,6 +35496,7 @@
   details: The pull request yegor256/takes#870 with 127 HoC created by @victornoel
     was reviewed by @g4s8 after 12h59m and 3 comments.
   hoc: 127
+  is_human: 1
   issue: 870
   repository: 28924109
   review_comments: 3
@@ -35490,6 +35514,7 @@
   details: The pull request yegor256/takes#873 with 210 HoC created by @victornoel
     was reviewed by @g4s8 after 145h5m and 3 comments.
   hoc: 210
+  is_human: 1
   issue: 873
   repository: 28924109
   review_comments: 3
@@ -35507,6 +35532,7 @@
   details: The pull request yegor256/takes#874 with 1947 HoC created by @victornoel
     was reviewed by @krzyk after 16h51m and 3 comments.
   hoc: 1947
+  is_human: 1
   issue: 874
   repository: 28924109
   review_comments: 3
@@ -35524,6 +35550,7 @@
   details: The pull request yegor256/takes#875 with 34 HoC created by @victornoel
     was reviewed by @krzyk after 15h49m and 4 comments.
   hoc: 34
+  is_human: 1
   issue: 875
   repository: 28924109
   review_comments: 4
@@ -35541,6 +35568,7 @@
   details: The pull request yegor256/takes#879 with 80 HoC created by @olenagerasimova
     was reviewed by @g4s8 after 60h55m and 3 comments.
   hoc: 80
+  is_human: 1
   issue: 879
   repository: 28924109
   review_comments: 3
@@ -35558,6 +35586,7 @@
   details: The pull request yegor256/takes#879 with 80 HoC created by @olenagerasimova
     was reviewed by @paulodamaso after 111h36m and 1 comments.
   hoc: 80
+  is_human: 1
   issue: 879
   repository: 28924109
   review_comments: 1
@@ -35575,6 +35604,7 @@
   details: The pull request yegor256/takes#762 with 390 HoC created by @t-izbassar
     was reviewed by @g4s8 after 124h0m and 5 comments.
   hoc: 390
+  is_human: 1
   issue: 762
   repository: 28924109
   review_comments: 5
@@ -35592,6 +35622,7 @@
   details: The pull request yegor256/takes#855 with 7 HoC created by @paulodamaso
     was reviewed by @g4s8 after 37h37m and 2 comments.
   hoc: 7
+  is_human: 1
   issue: 855
   repository: 28924109
   review_comments: 2
@@ -35609,6 +35640,7 @@
   details: The pull request yegor256/takes#855 with 7 HoC created by @paulodamaso
     was reviewed by @t-izbassar after 62h43m and 1 comments.
   hoc: 7
+  is_human: 1
   issue: 855
   repository: 28924109
   review_comments: 1
@@ -35632,6 +35664,7 @@
   failed_builds: 0
   files: 42
   hoc: 142
+  is_human: 0
   issue: 883
   repository: 28924109
   review_comments: 0
@@ -35655,6 +35688,7 @@
   failed_builds: 0
   files: 2
   hoc: 29
+  is_human: 0
   issue: 885
   repository: 28924109
   review_comments: 8
@@ -35678,6 +35712,7 @@
   failed_builds: 0
   files: 92
   hoc: 486
+  is_human: 0
   issue: 886
   repository: 28924109
   review_comments: 16
@@ -35701,6 +35736,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 890
   repository: 28924109
   review_comments: 0
@@ -35724,6 +35760,7 @@
   failed_builds: 0
   files: 2
   hoc: 40
+  is_human: 0
   issue: 891
   repository: 28924109
   review_comments: 0
@@ -35747,6 +35784,7 @@
   failed_builds: 0
   files: 4
   hoc: 86
+  is_human: 0
   issue: 892
   repository: 28924109
   review_comments: 1
@@ -35770,6 +35808,7 @@
   failed_builds: 0
   files: 1
   hoc: 12
+  is_human: 0
   issue: 896
   repository: 28924109
   review_comments: 0
@@ -35793,6 +35832,7 @@
   failed_builds: 0
   files: 1
   hoc: 13
+  is_human: 1
   issue: 897
   repository: 28924109
   succeeded_builds: 0
@@ -35815,6 +35855,7 @@
   failed_builds: 0
   files: 23
   hoc: 159
+  is_human: 0
   issue: 903
   repository: 28924109
   review_comments: 52
@@ -35838,6 +35879,7 @@
   failed_builds: 0
   files: 10
   hoc: 104
+  is_human: 0
   issue: 907
   repository: 28924109
   review_comments: 3
@@ -35861,6 +35903,7 @@
   failed_builds: 0
   files: 1
   hoc: 83
+  is_human: 0
   issue: 908
   repository: 28924109
   review_comments: 0
@@ -35884,6 +35927,7 @@
   failed_builds: 0
   files: 11
   hoc: 192
+  is_human: 0
   issue: 913
   repository: 28924109
   review_comments: 0
@@ -35907,6 +35951,7 @@
   failed_builds: 0
   files: 4
   hoc: 93
+  is_human: 1
   issue: 919
   repository: 28924109
   succeeded_builds: 0
@@ -35929,6 +35974,7 @@
   failed_builds: 0
   files: 1
   hoc: 20
+  is_human: 0
   issue: 922
   repository: 28924109
   review_comments: 0
@@ -35952,6 +35998,7 @@
   failed_builds: 0
   files: 7
   hoc: 647
+  is_human: 0
   issue: 930
   repository: 28924109
   review_comments: 0
@@ -35975,6 +36022,7 @@
   failed_builds: 0
   files: 8
   hoc: 41
+  is_human: 1
   issue: 931
   repository: 28924109
   succeeded_builds: 0
@@ -35997,6 +36045,7 @@
   failed_builds: 0
   files: 4
   hoc: 38
+  is_human: 0
   issue: 932
   repository: 28924109
   review_comments: 8
@@ -36020,6 +36069,7 @@
   failed_builds: 0
   files: 1
   hoc: 9
+  is_human: 0
   issue: 934
   repository: 28924109
   review_comments: 0
@@ -36043,6 +36093,7 @@
   failed_builds: 0
   files: 8
   hoc: 67
+  is_human: 0
   issue: 936
   repository: 28924109
   review_comments: 0
@@ -36066,6 +36117,7 @@
   failed_builds: 0
   files: 490
   hoc: 984
+  is_human: 0
   issue: 939
   repository: 28924109
   review_comments: 0
@@ -36089,6 +36141,7 @@
   failed_builds: 0
   files: 1
   hoc: 0
+  is_human: 0
   issue: 940
   repository: 28924109
   review_comments: 0
@@ -36112,6 +36165,7 @@
   failed_builds: 0
   files: 6
   hoc: 978
+  is_human: 0
   issue: 941
   repository: 28924109
   review_comments: 20
@@ -36135,6 +36189,7 @@
   failed_builds: 0
   files: 7
   hoc: 519
+  is_human: 0
   issue: 942
   repository: 28924109
   review_comments: 24
@@ -36158,6 +36213,7 @@
   failed_builds: 0
   files: 1
   hoc: 211
+  is_human: 0
   issue: 947
   repository: 28924109
   review_comments: 23
@@ -36181,6 +36237,7 @@
   failed_builds: 0
   files: 3
   hoc: 132
+  is_human: 0
   issue: 954
   repository: 28924109
   review_comments: 8
@@ -36204,6 +36261,7 @@
   failed_builds: 0
   files: 1
   hoc: 17
+  is_human: 0
   issue: 956
   repository: 28924109
   review_comments: 5
@@ -36227,6 +36285,7 @@
   failed_builds: 0
   files: 14
   hoc: 223
+  is_human: 0
   issue: 960
   repository: 28924109
   review_comments: 3
@@ -36250,6 +36309,7 @@
   failed_builds: 0
   files: 7
   hoc: 253
+  is_human: 1
   issue: 961
   repository: 28924109
   succeeded_builds: 0
@@ -36272,6 +36332,7 @@
   failed_builds: 0
   files: 31
   hoc: 1727
+  is_human: 1
   issue: 962
   repository: 28924109
   succeeded_builds: 0
@@ -36294,6 +36355,7 @@
   failed_builds: 0
   files: 7
   hoc: 183
+  is_human: 1
   issue: 963
   repository: 28924109
   succeeded_builds: 0
@@ -36316,6 +36378,7 @@
   failed_builds: 0
   files: 16
   hoc: 42
+  is_human: 0
   issue: 964
   repository: 28924109
   review_comments: 0
@@ -36339,6 +36402,7 @@
   failed_builds: 0
   files: 1
   hoc: 17
+  is_human: 0
   issue: 966
   repository: 28924109
   review_comments: 0
@@ -36362,6 +36426,7 @@
   failed_builds: 0
   files: 1
   hoc: 55
+  is_human: 0
   issue: 967
   repository: 28924109
   review_comments: 0
@@ -36385,6 +36450,7 @@
   failed_builds: 0
   files: 9
   hoc: 26
+  is_human: 0
   issue: 969
   repository: 28924109
   review_comments: 0
@@ -36408,6 +36474,7 @@
   failed_builds: 0
   files: 1
   hoc: 38
+  is_human: 0
   issue: 970
   repository: 28924109
   review_comments: 0
@@ -36431,6 +36498,7 @@
   failed_builds: 0
   files: 12
   hoc: 70
+  is_human: 0
   issue: 971
   repository: 28924109
   review_comments: 1
@@ -36454,6 +36522,7 @@
   failed_builds: 0
   files: 8
   hoc: 48
+  is_human: 0
   issue: 972
   repository: 28924109
   review_comments: 0
@@ -36477,6 +36546,7 @@
   failed_builds: 0
   files: 5
   hoc: 44
+  is_human: 1
   issue: 973
   repository: 28924109
   succeeded_builds: 0
@@ -36499,6 +36569,7 @@
   failed_builds: 0
   files: 1
   hoc: 6
+  is_human: 0
   issue: 974
   repository: 28924109
   review_comments: 0
@@ -36522,6 +36593,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 977
   repository: 28924109
   review_comments: 0
@@ -36545,6 +36617,7 @@
   failed_builds: 0
   files: 7
   hoc: 208
+  is_human: 1
   issue: 979
   repository: 28924109
   succeeded_builds: 0
@@ -36567,6 +36640,7 @@
   failed_builds: 0
   files: 1
   hoc: 4
+  is_human: 0
   issue: 981
   repository: 28924109
   review_comments: 0
@@ -36590,6 +36664,7 @@
   failed_builds: 0
   files: 10
   hoc: 354
+  is_human: 0
   issue: 982
   repository: 28924109
   review_comments: 4
@@ -36613,6 +36688,7 @@
   failed_builds: 0
   files: 31
   hoc: 174
+  is_human: 0
   issue: 985
   repository: 28924109
   review_comments: 0
@@ -36636,6 +36712,7 @@
   failed_builds: 0
   files: 103
   hoc: 651
+  is_human: 0
   issue: 986
   repository: 28924109
   review_comments: 0
@@ -36659,6 +36736,7 @@
   failed_builds: 0
   files: 3
   hoc: 41
+  is_human: 0
   issue: 987
   repository: 28924109
   review_comments: 0
@@ -36682,6 +36760,7 @@
   failed_builds: 0
   files: 4
   hoc: 35
+  is_human: 1
   issue: 988
   repository: 28924109
   succeeded_builds: 0
@@ -36704,6 +36783,7 @@
   failed_builds: 0
   files: 2
   hoc: 48
+  is_human: 0
   issue: 989
   repository: 28924109
   review_comments: 4
@@ -36727,6 +36807,7 @@
   failed_builds: 0
   files: 1
   hoc: 1
+  is_human: 0
   issue: 992
   repository: 28924109
   review_comments: 0
@@ -36750,6 +36831,7 @@
   failed_builds: 0
   files: 43
   hoc: 1093
+  is_human: 0
   issue: 995
   repository: 28924109
   review_comments: 155
@@ -36763,6 +36845,7 @@
   _time: 2025-10-07 02:30:57.348515706 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#811 has been "issue-was-closed".
+  is_human: 1
   issue: 811
   repository: 28924109
   what: issue-was-closed
@@ -36774,6 +36857,7 @@
   _time: 2025-10-07 02:30:57.602510064 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#812 has been "issue-was-closed".
+  is_human: 0
   issue: 812
   repository: 28924109
   what: issue-was-closed
@@ -36785,6 +36869,7 @@
   _time: 2025-10-07 02:30:58.120690163 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#814 has been "issue-was-closed".
+  is_human: 1
   issue: 814
   repository: 28924109
   what: issue-was-closed
@@ -36796,6 +36881,7 @@
   _time: 2025-10-07 02:30:58.417689964 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#815 has been "issue-was-closed".
+  is_human: 1
   issue: 815
   repository: 28924109
   what: issue-was-closed
@@ -36807,6 +36893,7 @@
   _time: 2025-10-07 02:30:58.710856214 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#816 has been "issue-was-closed".
+  is_human: 1
   issue: 816
   repository: 28924109
   what: issue-was-closed
@@ -36818,6 +36905,7 @@
   _time: 2025-10-07 02:30:58.958545241 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#817 has been "issue-was-closed".
+  is_human: 1
   issue: 817
   repository: 28924109
   what: issue-was-closed
@@ -36829,6 +36917,7 @@
   _time: 2025-10-07 02:30:59.213959385 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#818 has been "issue-was-closed".
+  is_human: 1
   issue: 818
   repository: 28924109
   what: issue-was-closed
@@ -36840,6 +36929,7 @@
   _time: 2025-10-07 02:30:59.499065464 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#819 has been "issue-was-closed".
+  is_human: 0
   issue: 819
   repository: 28924109
   what: issue-was-closed
@@ -36851,6 +36941,7 @@
   _time: 2025-10-07 02:30:59.757018271 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#820 has been "issue-was-closed".
+  is_human: 0
   issue: 820
   repository: 28924109
   what: issue-was-closed
@@ -36862,6 +36953,7 @@
   _time: 2025-10-07 02:31:00.021630740 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#821 has been "issue-was-closed".
+  is_human: 1
   issue: 821
   repository: 28924109
   what: issue-was-closed
@@ -36873,6 +36965,7 @@
   _time: 2025-10-07 02:31:00.282183726 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#822 has been "issue-was-closed".
+  is_human: 1
   issue: 822
   repository: 28924109
   what: issue-was-closed
@@ -36884,6 +36977,7 @@
   _time: 2025-10-07 02:31:00.569961164 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#823 has been "issue-was-closed".
+  is_human: 1
   issue: 823
   repository: 28924109
   what: issue-was-closed
@@ -36895,6 +36989,7 @@
   _time: 2025-10-07 02:31:00.837272979 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#824 has been "issue-was-closed".
+  is_human: 1
   issue: 824
   repository: 28924109
   what: issue-was-closed
@@ -36906,6 +37001,7 @@
   _time: 2025-10-07 02:31:01.110182038 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#825 has been "issue-was-closed".
+  is_human: 1
   issue: 825
   repository: 28924109
   what: issue-was-closed
@@ -36917,6 +37013,7 @@
   _time: 2025-10-07 02:31:01.386244842 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#826 has been "issue-was-closed".
+  is_human: 1
   issue: 826
   repository: 28924109
   what: issue-was-closed
@@ -36928,6 +37025,7 @@
   _time: 2025-10-07 02:31:01.660291162 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#827 has been "issue-was-closed".
+  is_human: 1
   issue: 827
   repository: 28924109
   what: issue-was-closed
@@ -36939,6 +37037,7 @@
   _time: 2025-10-07 02:31:01.913557565 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#828 has been "issue-was-closed".
+  is_human: 1
   issue: 828
   repository: 28924109
   what: issue-was-closed
@@ -36950,6 +37049,7 @@
   _time: 2025-10-07 02:31:02.162806074 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#829 has been "issue-was-closed".
+  is_human: 1
   issue: 829
   repository: 28924109
   what: issue-was-closed
@@ -36961,6 +37061,7 @@
   _time: 2025-10-07 02:31:02.439868742 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#832 has been "issue-was-closed".
+  is_human: 0
   issue: 832
   repository: 28924109
   what: issue-was-closed
@@ -36972,6 +37073,7 @@
   _time: 2025-10-07 02:31:02.714178113 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#834 has been "issue-was-closed".
+  is_human: 1
   issue: 834
   repository: 28924109
   what: issue-was-closed
@@ -36983,6 +37085,7 @@
   _time: 2025-10-07 02:31:02.975877401 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#835 has been "issue-was-closed".
+  is_human: 1
   issue: 835
   repository: 28924109
   what: issue-was-closed
@@ -36994,6 +37097,7 @@
   _time: 2025-10-07 02:31:03.298184002 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#837 has been "issue-was-closed".
+  is_human: 1
   issue: 837
   repository: 28924109
   what: issue-was-closed
@@ -37005,6 +37109,7 @@
   _time: 2025-10-07 02:31:03.592518638 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#838 has been "issue-was-closed".
+  is_human: 1
   issue: 838
   repository: 28924109
   what: issue-was-closed
@@ -37016,6 +37121,7 @@
   _time: 2025-10-07 02:31:03.865839411 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#839 has been "issue-was-closed".
+  is_human: 1
   issue: 839
   repository: 28924109
   what: issue-was-closed
@@ -37027,6 +37133,7 @@
   _time: 2025-10-07 02:31:04.149462848 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#841 has been "issue-was-closed".
+  is_human: 1
   issue: 841
   repository: 28924109
   what: issue-was-closed
@@ -37038,6 +37145,7 @@
   _time: 2025-10-07 02:31:04.433130832 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#842 has been "issue-was-closed".
+  is_human: 1
   issue: 842
   repository: 28924109
   what: issue-was-closed
@@ -37049,6 +37157,7 @@
   _time: 2025-10-07 02:31:04.765826382 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#847 has been "issue-was-closed".
+  is_human: 1
   issue: 847
   repository: 28924109
   what: issue-was-closed
@@ -37060,6 +37169,7 @@
   _time: 2025-10-07 02:31:05.166526663 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#850 has been "issue-was-closed".
+  is_human: 1
   issue: 850
   repository: 28924109
   what: issue-was-closed
@@ -37071,6 +37181,7 @@
   _time: 2025-10-07 02:31:05.418359804 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#851 has been "issue-was-closed".
+  is_human: 1
   issue: 851
   repository: 28924109
   what: issue-was-closed
@@ -37082,6 +37193,7 @@
   _time: 2025-10-07 02:31:05.696514294 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#856 has been "issue-was-closed".
+  is_human: 1
   issue: 856
   repository: 28924109
   what: issue-was-closed
@@ -37093,6 +37205,7 @@
   _time: 2025-10-07 02:31:05.960179498 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#858 has been "issue-was-closed".
+  is_human: 1
   issue: 858
   repository: 28924109
   what: issue-was-closed
@@ -37104,6 +37217,7 @@
   _time: 2025-10-07 02:31:06.219632440 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#859 has been "issue-was-closed".
+  is_human: 0
   issue: 859
   repository: 28924109
   what: issue-was-closed
@@ -37115,6 +37229,7 @@
   _time: 2025-10-07 02:31:06.480205502 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#861 has been "issue-was-closed".
+  is_human: 1
   issue: 861
   repository: 28924109
   what: issue-was-closed
@@ -37126,6 +37241,7 @@
   _time: 2025-10-07 02:31:06.867682130 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#862 has been "issue-was-closed".
+  is_human: 1
   issue: 862
   repository: 28924109
   what: issue-was-closed
@@ -37137,6 +37253,7 @@
   _time: 2025-10-07 02:31:07.145016931 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#863 has been "issue-was-closed".
+  is_human: 1
   issue: 863
   repository: 28924109
   what: issue-was-closed
@@ -37148,6 +37265,7 @@
   _time: 2025-10-07 02:31:07.432026735 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#865 has been "issue-was-closed".
+  is_human: 0
   issue: 865
   repository: 28924109
   what: issue-was-closed
@@ -37159,6 +37277,7 @@
   _time: 2025-10-07 02:31:07.681310469 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#866 has been "issue-was-closed".
+  is_human: 0
   issue: 866
   repository: 28924109
   what: issue-was-closed
@@ -37170,6 +37289,7 @@
   _time: 2025-10-07 02:31:07.982958789 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#869 has been "issue-was-closed".
+  is_human: 0
   issue: 869
   repository: 28924109
   what: issue-was-closed
@@ -37181,6 +37301,7 @@
   _time: 2025-10-07 02:31:08.509875184 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#872 has been "issue-was-closed".
+  is_human: 1
   issue: 872
   repository: 28924109
   what: issue-was-closed
@@ -37192,6 +37313,7 @@
   _time: 2025-10-07 02:31:08.772958329 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#876 has been "issue-was-closed".
+  is_human: 1
   issue: 876
   repository: 28924109
   what: issue-was-closed
@@ -37203,6 +37325,7 @@
   _time: 2025-10-07 02:31:09.046132288 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#877 has been "issue-was-closed".
+  is_human: 1
   issue: 877
   repository: 28924109
   what: issue-was-closed
@@ -37214,6 +37337,7 @@
   _time: 2025-10-07 02:31:09.325064763 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#880 has been "issue-was-closed".
+  is_human: 0
   issue: 880
   repository: 28924109
   what: issue-was-closed
@@ -37225,6 +37349,7 @@
   _time: 2025-10-07 02:31:09.702192336 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#881 has been "issue-was-closed".
+  is_human: 0
   issue: 881
   repository: 28924109
   what: issue-was-closed
@@ -37236,6 +37361,7 @@
   _time: 2025-10-07 02:31:09.959700609 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#882 has been "issue-was-closed".
+  is_human: 0
   issue: 882
   repository: 28924109
   what: issue-was-closed
@@ -37247,6 +37373,7 @@
   _time: 2025-10-07 02:31:10.461828139 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#887 has been "issue-was-closed".
+  is_human: 1
   issue: 887
   repository: 28924109
   what: issue-was-closed
@@ -37258,6 +37385,7 @@
   _time: 2025-10-07 02:31:10.705193278 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#888 has been "issue-was-closed".
+  is_human: 0
   issue: 888
   repository: 28924109
   what: issue-was-closed
@@ -37269,6 +37397,7 @@
   _time: 2025-10-07 02:31:11.007192059 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#889 has been "issue-was-closed".
+  is_human: 0
   issue: 889
   repository: 28924109
   what: issue-was-closed
@@ -37280,6 +37409,7 @@
   _time: 2025-10-07 02:31:11.311239992 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#893 has been "issue-was-closed".
+  is_human: 1
   issue: 893
   repository: 28924109
   what: issue-was-closed
@@ -37291,6 +37421,7 @@
   _time: 2025-10-07 02:31:11.791343616 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#895 has been "issue-was-closed".
+  is_human: 0
   issue: 895
   repository: 28924109
   what: issue-was-closed
@@ -37302,6 +37433,7 @@
   _time: 2025-10-07 02:31:12.990250995 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#902 has been "issue-was-closed".
+  is_human: 1
   issue: 902
   repository: 28924109
   what: issue-was-closed
@@ -37313,6 +37445,7 @@
   _time: 2025-10-07 02:31:13.281780705 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#904 has been "issue-was-closed".
+  is_human: 1
   issue: 904
   repository: 28924109
   what: issue-was-closed
@@ -37324,6 +37457,7 @@
   _time: 2025-10-07 02:31:14.403841028 Z
   _version: 0.16.7/0.54.0/0.15.50
   details: Apparently, yegor256/takes#911 has been "issue-was-closed".
+  is_human: 1
   issue: 911
   repository: 28924109
   what: issue-was-closed
@@ -37336,6 +37470,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#990 was assigned to @mreiche by @0crat.
+  is_human: 1
   issue: 990
   repository: 28924109
   what: issue-was-assigned
@@ -37348,6 +37483,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#991 was assigned to @piotrkot by @0crat.
+  is_human: 1
   issue: 991
   repository: 28924109
   what: issue-was-assigned
@@ -37360,6 +37496,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#1025 was assigned to @fevzian by @0crat.
+  is_human: 1
   issue: 1025
   repository: 28924109
   what: issue-was-assigned
@@ -37372,6 +37509,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#1027 was assigned to @paulodamaso by @0crat.
+  is_human: 1
   issue: 1027
   repository: 28924109
   what: issue-was-assigned
@@ -37384,6 +37522,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#1067 was assigned to @andreoss by @0crat.
+  is_human: 1
   issue: 1067
   repository: 28924109
   what: issue-was-assigned
@@ -37396,6 +37535,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 526301
   details: yegor256/takes#1069 was assigned to @baudoliver7 by @yegor256.
+  is_human: 1
   issue: 1069
   repository: 28924109
   what: issue-was-assigned
@@ -37408,6 +37548,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#1077 was assigned to @andreoss by @0crat.
+  is_human: 1
   issue: 1077
   repository: 28924109
   what: issue-was-assigned
@@ -37420,6 +37561,7 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#1081 was assigned to @andreoss by @0crat.
+  is_human: 1
   issue: 1081
   repository: 28924109
   what: issue-was-assigned
@@ -37432,23 +37574,2489 @@
   _version: 0.16.7/0.54.0/0.15.50
   assigner: 24387511
   details: yegor256/takes#1083 was assigned to @yegor256 by @0crat.
+  is_human: 1
   issue: 1083
   repository: 28924109
   what: issue-was-assigned
   when: 2020-10-31 15:19:41.000000000 Z
   where: github
   who: 526301
-- _id: 17678
-  _job: 18300061766
-  _time: 2025-10-07 02:34:20.209311776 Z
+- _id: 17679
+  _job: 18300816363
+  _time: 2025-10-07 03:10:18.431736197 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '869'
+  comments: 18
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 16
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#996 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 13
+  issue: 996
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2019-11-26 10:52:46.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17680
+  _job: 18300816363
+  _time: 2025-10-07 03:10:29.576634646 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '998'
+  comments: 46
+  comments_appreciated: 0
+  comments_by_author: 20
+  comments_by_reviewers: 26
+  comments_resolved: 5
+  comments_to_code: 19
+  details: Apparently, yegor256/takes#1001 has been "pull-was-merged".
+  failed_builds: 0
+  files: 19
+  hoc: 255
+  issue: 1001
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-01-13 14:55:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17681
+  _job: 18300816363
+  _time: 2025-10-07 03:10:43.119283862 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: "#1002-refactor-TkSlf4j"
+  comments: 49
+  comments_appreciated: 0
+  comments_by_author: 9
+  comments_by_reviewers: 40
+  comments_resolved: 0
+  comments_to_code: 7
+  details: Apparently, yegor256/takes#1003 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 72
+  issue: 1003
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2019-12-11 01:59:54.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17682
+  _job: 18300816363
+  _time: 2025-10-07 03:10:58.095107719 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: status-report-2019-12-05
+  comments: 10
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 8
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1006 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 18
+  issue: 1006
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2019-12-05 15:23:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17683
+  _job: 18300816363
+  _time: 2025-10-07 03:11:02.510458080 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: 998-fix
+  comments: 31
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 31
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1020 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 67
+  issue: 1020
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-02-10 14:40:59.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17684
+  _job: 18300816363
+  _time: 2025-10-07 03:11:12.632145118 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1008'
+  comments: 35
+  comments_appreciated: 0
+  comments_by_author: 9
+  comments_by_reviewers: 26
+  comments_resolved: 6
+  comments_to_code: 18
+  details: Apparently, yegor256/takes#1023 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 75
+  issue: 1023
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-02-13 18:40:27.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17685
+  _job: 18300816363
+  _time: 2025-10-07 03:11:23.198704647 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1010'
+  comments: 22
+  comments_appreciated: 0
+  comments_by_author: 6
+  comments_by_reviewers: 16
+  comments_resolved: 6
+  comments_to_code: 11
+  details: Apparently, yegor256/takes#1026 has been "pull-was-merged".
+  failed_builds: 0
+  files: 16
+  hoc: 365
+  issue: 1026
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-02-11 18:12:42.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17686
+  _job: 18300816363
+  _time: 2025-10-07 03:11:30.701055563 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1027'
+  comments: 11
+  comments_appreciated: 0
+  comments_by_author: 3
+  comments_by_reviewers: 8
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1028 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1028
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-02-10 13:18:55.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17687
+  _job: 18300816363
+  _time: 2025-10-07 03:11:35.769682105 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1013'
+  comments: 10
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 10
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1030 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 74
+  issue: 1030
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-02-13 16:38:11.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17688
+  _job: 18300816363
+  _time: 2025-10-07 03:11:40.419632848 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1025'
+  comments: 8
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 7
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1033 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 8
+  issue: 1033
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-02-21 11:31:26.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17689
+  _job: 18300816363
+  _time: 2025-10-07 03:11:44.538197068 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1011'
+  comments: 23
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 19
+  comments_resolved: 0
+  comments_to_code: 7
+  details: Apparently, yegor256/takes#1034 has been "pull-was-merged".
+  failed_builds: 0
+  files: 7
+  hoc: 102
+  issue: 1034
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-03-12 19:54:23.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17690
+  _job: 18300816363
+  _time: 2025-10-07 03:11:51.932405014 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1036'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1037 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 14
+  issue: 1037
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-03-15 03:55:44.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17691
+  _job: 18300816363
+  _time: 2025-10-07 03:11:54.570118916 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1012'
+  comments: 19
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 19
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1038 has been "pull-was-merged".
+  failed_builds: 0
+  files: 26
+  hoc: 340
+  issue: 1038
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-03-18 20:35:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17692
+  _job: 18300816363
+  _time: 2025-10-07 03:12:01.302721557 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1036'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1039 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1039
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-03-15 04:58:54.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17693
+  _job: 18300816363
+  _time: 2025-10-07 03:12:03.935621057 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1036'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1040 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 10
+  issue: 1040
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-03-15 05:22:23.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17694
+  _job: 18300816363
+  _time: 2025-10-07 03:12:06.254034563 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1016'
+  comments: 12
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 12
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1042 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 100
+  issue: 1042
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-04-23 03:12:56.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17695
+  _job: 18300816363
+  _time: 2025-10-07 03:12:11.235887151 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1017'
+  comments: 8
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 8
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1043 has been "pull-was-merged".
+  failed_builds: 0
+  files: 7
+  hoc: 108
+  issue: 1043
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-04-23 03:27:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17696
+  _job: 18300816363
+  _time: 2025-10-07 03:12:15.130263608 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1015'
+  comments: 8
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 8
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1044 has been "pull-was-merged".
+  failed_builds: 0
+  files: 6
+  hoc: 141
+  issue: 1044
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-04-23 03:39:40.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17697
+  _job: 18300816363
+  _time: 2025-10-07 03:12:19.168533007 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1019'
+  comments: 14
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 14
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1045 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 38
+  issue: 1045
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-04-23 03:51:33.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17698
+  _job: 18300816363
+  _time: 2025-10-07 03:12:24.757640273 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: fix/update-readme-with-correct-link
+  comments: 7
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 7
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1046 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1046
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-07-26 19:54:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17699
+  _job: 18300816363
+  _time: 2025-10-07 03:12:28.640890298 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1014'
+  comments: 5
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1047 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 290
+  issue: 1047
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-05-01 22:09:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17700
+  _job: 18300816363
+  _time: 2025-10-07 03:12:31.985468166 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-984
+  comments: 6
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1052 has been "pull-was-merged".
+  failed_builds: 0
+  files: 28
+  hoc: 544
+  issue: 1052
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-06-29 18:07:24.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17701
+  _job: 18300816363
+  _time: 2025-10-07 03:12:35.318848441 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-994
+  comments: 13
+  comments_appreciated: 0
+  comments_by_author: 6
+  comments_by_reviewers: 7
+  comments_resolved: 2
+  comments_to_code: 4
+  details: Apparently, yegor256/takes#1053 has been "pull-was-merged".
+  failed_builds: 0
+  files: 19
+  hoc: 203
+  issue: 1053
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-07-27 22:34:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17702
+  _job: 18300816363
+  _time: 2025-10-07 03:12:40.704141783 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1055
+  comments: 7
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 5
+  comments_resolved: 1
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1056 has been "pull-was-merged".
+  failed_builds: 0
+  files: 5
+  hoc: 111
+  issue: 1056
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-07-28 20:27:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17703
+  _job: 18300816363
+  _time: 2025-10-07 03:12:44.392673827 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: bugfix_1050
+  comments: 27
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 23
+  comments_resolved: 0
+  comments_to_code: 9
+  details: Apparently, yegor256/takes#1059 has been "pull-was-closed".
+  failed_builds: 0
+  files: 2
+  hoc: 32
+  issue: 1059
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2020-10-16 01:08:08.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17704
+  _job: 18300816363
+  _time: 2025-10-07 03:12:53.155030549 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: fix-remote-port
+  comments: 26
+  comments_appreciated: 1
+  comments_by_author: 1
+  comments_by_reviewers: 25
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1061 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 10
+  issue: 1061
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-09-03 17:36:54.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17705
+  _job: 18300816363
+  _time: 2025-10-07 03:13:01.819837573 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1054'
+  comments: 21
+  comments_appreciated: 0
+  comments_by_author: 10
+  comments_by_reviewers: 11
+  comments_resolved: 2
+  comments_to_code: 14
+  details: Apparently, yegor256/takes#1063 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 309
+  issue: 1063
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-09-11 04:11:28.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17706
+  _job: 18300816363
+  _time: 2025-10-07 03:13:09.029721828 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1036'
+  comments: 11
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 9
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1064 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 12
+  issue: 1064
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-09-03 14:29:06.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17707
+  _job: 18300816363
+  _time: 2025-10-07 03:13:14.206597633 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1058'
+  comments: 7
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 7
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1065 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 69
+  issue: 1065
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-09-04 15:00:55.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17708
+  _job: 18300816363
+  _time: 2025-10-07 03:13:18.082030453 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: '1036'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1066 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1066
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-09-03 16:00:29.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17709
+  _job: 18300816363
+  _time: 2025-10-07 03:13:20.574424171 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: jump2header
+  comments: 18
+  comments_appreciated: 1
+  comments_by_author: 4
+  comments_by_reviewers: 14
+  comments_resolved: 1
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1072 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 66
+  issue: 1072
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2020-10-16 01:05:51.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17710
+  _job: 18300816363
+  _time: 2025-10-07 03:13:27.392613431 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-999
+  comments: 10
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 8
+  comments_resolved: 1
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1076 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 99
+  issue: 1076
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-10-16 00:48:09.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17711
+  _job: 18300816363
+  _time: 2025-10-07 03:13:32.396760952 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-950
+  comments: 23
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 19
+  comments_resolved: 3
+  comments_to_code: 10
+  details: Apparently, yegor256/takes#1082 has been "pull-was-merged".
+  failed_builds: 0
+  files: 5
+  hoc: 234
+  issue: 1082
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-03-21 14:29:37.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17712
+  _job: 18300816363
+  _time: 2025-10-07 03:13:40.605534387 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1081
+  comments: 5
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1084 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 206
+  issue: 1084
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-01-11 20:49:11.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17713
+  _job: 18300816363
+  _time: 2025-10-07 03:13:43.805890754 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1067
+  comments: 4
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1085 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 126
+  issue: 1085
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2020-10-31 15:34:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17714
+  _job: 18300816363
+  _time: 2025-10-07 03:13:46.902599927 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1077
+  comments: 18
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 16
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1086 has been "pull-was-merged".
+  failed_builds: 0
+  files: 163
+  hoc: 1265
+  issue: 1086
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-01-11 19:59:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17715
+  _job: 18300816363
+  _time: 2025-10-07 03:13:54.082390832 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1050
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1087 has been "pull-was-merged".
+  failed_builds: 0
+  files: 163
+  hoc: 1265
+  issue: 1087
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-01-11 19:59:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17716
+  _job: 18300816363
+  _time: 2025-10-07 03:13:56.202075420 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: remove_print
+  comments: 19
+  comments_appreciated: 0
+  comments_by_author: 7
+  comments_by_reviewers: 12
+  comments_resolved: 5
+  comments_to_code: 7
+  details: Apparently, yegor256/takes#1092 has been "pull-was-merged".
+  failed_builds: 0
+  files: 20
+  hoc: 701
+  issue: 1092
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-03-21 13:52:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17717
+  _job: 18300816363
+  _time: 2025-10-07 03:14:03.105285819 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: use_sticky_decorator
+  comments: 24
+  comments_appreciated: 2
+  comments_by_author: 13
+  comments_by_reviewers: 11
+  comments_resolved: 3
+  comments_to_code: 8
+  details: Apparently, yegor256/takes#1093 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 7
+  issue: 1093
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-01-18 07:21:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17718
+  _job: 18300816363
+  _time: 2025-10-07 03:14:11.298213185 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: improve_test_coverage
+  comments: 47
+  comments_appreciated: 0
+  comments_by_author: 11
+  comments_by_reviewers: 36
+  comments_resolved: 1
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1094 has been "pull-was-merged".
+  failed_builds: 0
+  files: 6
+  hoc: 190
+  issue: 1094
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-11-15 05:59:10.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17719
+  _job: 18300816363
+  _time: 2025-10-07 03:14:25.357954315 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: missing_doc_referenced
+  comments: 16
+  comments_appreciated: 0
+  comments_by_author: 7
+  comments_by_reviewers: 9
+  comments_resolved: 3
+  comments_to_code: 6
+  details: Apparently, yegor256/takes#1096 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 25
+  issue: 1096
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-09-15 06:33:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17720
+  _job: 18300816363
+  _time: 2025-10-07 03:14:31.299917037 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: update_jcabi_parent_version
+  comments: 14
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 10
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1097 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 48
+  issue: 1097
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-12-17 12:53:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17721
+  _job: 18300816363
+  _time: 2025-10-07 03:14:37.524988882 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: copying_bytes_in_rqmtbase
+  comments: 11
+  comments_appreciated: 0
+  comments_by_author: 3
+  comments_by_reviewers: 8
+  comments_resolved: 1
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1101 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 249
+  issue: 1101
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-09-01 17:55:16.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17722
+  _job: 18300816363
+  _time: 2025-10-07 03:14:42.087030337 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1073
+  comments: 19
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 17
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1102 has been "pull-was-merged".
+  failed_builds: 0
+  files: 7
+  hoc: 58
+  issue: 1102
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-09-01 18:07:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17723
+  _job: 18300816363
+  _time: 2025-10-07 03:14:48.802838928 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-895
+  comments: 13
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 11
+  comments_resolved: 7
+  comments_to_code: 7
+  details: Apparently, yegor256/takes#1103 has been "pull-was-merged".
+  failed_builds: 0
+  files: 60
+  hoc: 2307
+  issue: 1103
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-09-04 04:34:19.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17724
+  _job: 18300816363
+  _time: 2025-10-07 03:14:54.042294562 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: issue-1062
+  comments: 57
+  comments_appreciated: 1
+  comments_by_author: 7
+  comments_by_reviewers: 50
+  comments_resolved: 0
+  comments_to_code: 11
+  details: Apparently, yegor256/takes#1104 has been "pull-was-merged".
+  failed_builds: 0
+  files: 50
+  hoc: 360
+  issue: 1104
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-09-01 17:17:31.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17725
+  _job: 18300816363
+  _time: 2025-10-07 03:15:10.970586057 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: invalid_request_line
+  comments: 20
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 16
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1105 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 8
+  issue: 1105
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2022-02-02 09:19:36.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17726
+  _job: 18300816363
+  _time: 2025-10-07 03:15:17.945252323 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: patch-1
+  comments: 7
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 7
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1107 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1107
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-09-01 17:42:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 17727
+  _job: 18300816363
+  _time: 2025-10-07 03:15:21.549633109 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  branch: 1111_fix_app_veyor_ci
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1115 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1115
+  repository: 28924109
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2021-12-18 05:55:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 17729
+  _job: 18300816363
+  _time: 2025-10-07 03:18:41.936026197 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 105730
+  comments: 10
+  details: The pull request yegor256/takes#885 with 29 HoC created by @krzyk was reviewed
+    by @paulodamaso after 95h30m and 1 comments.
+  hoc: 29
+  issue: 885
+  repository: 28924109
+  review_comments: 1
+  seconds: 343802
+  what: code-was-reviewed
+  when: 2018-12-11 11:02:25.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17730
+  _job: 18300816363
+  _time: 2025-10-07 03:18:44.081136445 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 160975
+  comments: 27
+  details: The pull request yegor256/takes#886 with 486 HoC created by @victornoel
+    was reviewed by @paulodamaso after 50h34m and 14 comments.
+  hoc: 486
+  issue: 886
+  repository: 28924109
+  review_comments: 14
+  seconds: 182057
+  what: code-was-reviewed
+  when: 2018-12-10 17:13:39.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17731
+  _job: 18300816363
+  _time: 2025-10-07 03:18:47.329736951 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 29357595
+  comments: 17
+  details: The pull request yegor256/takes#892 with 86 HoC created by @oridan was
+    reviewed by @paulodamaso after 51h5m and 1 comments.
+  hoc: 86
+  issue: 892
+  repository: 28924109
+  review_comments: 1
+  seconds: 183942
+  what: code-was-reviewed
+  when: 2018-12-13 22:53:58.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17732
+  _job: 18300816363
+  _time: 2025-10-07 03:18:49.862365238 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 41533396
+  comments: 30
+  details: The pull request yegor256/takes#903 with 159 HoC created by @binaryigor
+    was reviewed by @paulodamaso after 18h1m and 51 comments.
+  hoc: 159
+  issue: 903
+  repository: 28924109
+  review_comments: 51
+  seconds: 64869
+  what: code-was-reviewed
+  when: 2018-12-19 13:05:07.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17733
+  _job: 18300816363
+  _time: 2025-10-07 03:18:51.938991255 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 105730
+  comments: 8
+  details: The pull request yegor256/takes#907 with 104 HoC created by @krzyk was
+    reviewed by @paulodamaso after 79h15m and 2 comments.
+  hoc: 104
+  issue: 907
+  repository: 28924109
+  review_comments: 2
+  seconds: 285344
+  what: code-was-reviewed
+  when: 2018-12-26 01:28:33.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17734
+  _job: 18300816363
+  _time: 2025-10-07 03:18:56.447689909 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 41533396
+  comments: 26
+  details: The pull request yegor256/takes#932 with 38 HoC created by @binaryigor
+    was reviewed by @fabriciofx after 19h16m and 2 comments.
+  hoc: 38
+  issue: 932
+  repository: 28924109
+  review_comments: 2
+  seconds: 69382
+  what: code-was-reviewed
+  when: 2019-01-04 18:05:52.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17735
+  _job: 18300816363
+  _time: 2025-10-07 03:18:57.392078458 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 41533396
+  comments: 26
+  details: The pull request yegor256/takes#932 with 38 HoC created by @binaryigor
+    was reviewed by @paulodamaso after 305h28m and 2 comments.
+  hoc: 38
+  issue: 932
+  repository: 28924109
+  review_comments: 2
+  seconds: 1099728
+  what: code-was-reviewed
+  when: 2019-01-16 16:18:18.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17736
+  _job: 18300816363
+  _time: 2025-10-07 03:18:58.707485711 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 45645330
+  comments: 7
+  details: The pull request yegor256/takes#934 with 9 HoC created by @marceloamadeu
+    was reviewed by @paulodamaso after 0h41m and 0 comments.
+  hoc: 9
+  issue: 934
+  repository: 28924109
+  review_comments: 0
+  seconds: 2484
+  what: code-was-reviewed
+  when: 2019-01-04 15:42:07.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17737
+  _job: 18300816363
+  _time: 2025-10-07 03:19:00.461767558 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 45645330
+  comments: 20
+  details: The pull request yegor256/takes#936 with 67 HoC created by @marceloamadeu
+    was reviewed by @fabriciofx after 179h9m and 0 comments.
+  hoc: 67
+  issue: 936
+  repository: 28924109
+  review_comments: 0
+  seconds: 644964
+  what: code-was-reviewed
+  when: 2019-01-12 03:42:09.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17738
+  _job: 18300816363
+  _time: 2025-10-07 03:19:03.857747928 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1964562
+  comments: 29
+  details: The pull request yegor256/takes#941 with 978 HoC created by @fabriciofx
+    was reviewed by @marceloamadeu after 246h56m and 4 comments.
+  hoc: 978
+  issue: 941
+  repository: 28924109
+  review_comments: 4
+  seconds: 888971
+  what: code-was-reviewed
+  when: 2019-01-22 14:25:02.000000000 Z
+  where: github
+  who: 45645330
+- _id: 17739
+  _job: 18300816363
+  _time: 2025-10-07 03:19:04.937233205 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1964562
+  comments: 29
+  details: The pull request yegor256/takes#941 with 978 HoC created by @fabriciofx
+    was reviewed by @paulodamaso after 274h4m and 6 comments.
+  hoc: 978
+  issue: 941
+  repository: 28924109
+  review_comments: 6
+  seconds: 986651
+  what: code-was-reviewed
+  when: 2019-01-23 17:33:02.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17740
+  _job: 18300816363
+  _time: 2025-10-07 03:19:06.310444308 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1206309
+  comments: 35
+  details: The pull request yegor256/takes#942 with 519 HoC created by @serranya was
+    reviewed by @fabriciofx after 1h42m and 8 comments.
+  hoc: 519
+  issue: 942
+  repository: 28924109
+  review_comments: 8
+  seconds: 6159
+  what: code-was-reviewed
+  when: 2019-01-15 23:07:08.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17741
+  _job: 18300816363
+  _time: 2025-10-07 03:19:08.474773122 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1206309
+  comments: 28
+  details: The pull request yegor256/takes#947 with 211 HoC created by @serranya was
+    reviewed by @fabriciofx after 1h24m and 2 comments.
+  hoc: 211
+  issue: 947
+  repository: 28924109
+  review_comments: 2
+  seconds: 5053
+  what: code-was-reviewed
+  when: 2019-01-16 13:15:49.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17742
+  _job: 18300816363
+  _time: 2025-10-07 03:19:09.449137079 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1206309
+  comments: 28
+  details: The pull request yegor256/takes#947 with 211 HoC created by @serranya was
+    reviewed by @paulodamaso after 25h4m and 1 comments.
+  hoc: 211
+  issue: 947
+  repository: 28924109
+  review_comments: 1
+  seconds: 90253
+  what: code-was-reviewed
+  when: 2019-01-17 12:55:49.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17743
+  _job: 18300816363
+  _time: 2025-10-07 03:19:10.927408519 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1964562
+  comments: 26
+  details: The pull request yegor256/takes#954 with 132 HoC created by @fabriciofx
+    was reviewed by @danilomo after 18h38m and 0 comments.
+  hoc: 132
+  issue: 954
+  repository: 28924109
+  review_comments: 0
+  seconds: 67126
+  what: code-was-reviewed
+  when: 2019-01-25 15:10:10.000000000 Z
+  where: github
+  who: 889052
+- _id: 17744
+  _job: 18300816363
+  _time: 2025-10-07 03:19:11.914722757 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1964562
+  comments: 26
+  details: The pull request yegor256/takes#954 with 132 HoC created by @fabriciofx
+    was reviewed by @paulodamaso after 19h36m and 3 comments.
+  hoc: 132
+  issue: 954
+  repository: 28924109
+  review_comments: 3
+  seconds: 70609
+  what: code-was-reviewed
+  when: 2019-01-25 16:08:13.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17745
+  _job: 18300816363
+  _time: 2025-10-07 03:19:13.430524399 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 33915433
+  comments: 15
+  details: The pull request yegor256/takes#956 with 17 HoC created by @paulodamaso
+    was reviewed by @fabriciofx after 0h7m and 2 comments.
+  hoc: 17
+  issue: 956
+  repository: 28924109
+  review_comments: 2
+  seconds: 473
+  what: code-was-reviewed
+  when: 2019-01-26 13:33:31.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17746
+  _job: 18300816363
+  _time: 2025-10-07 03:19:15.037035554 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1206309
+  comments: 17
+  details: The pull request yegor256/takes#960 with 223 HoC created by @serranya was
+    reviewed by @paulodamaso after 368h16m and 3 comments.
+  hoc: 223
+  issue: 960
+  repository: 28924109
+  review_comments: 3
+  seconds: 1325817
+  what: code-was-reviewed
+  when: 2019-02-20 22:18:04.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17747
+  _job: 18300816363
+  _time: 2025-10-07 03:19:21.803842970 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1206309
+  comments: 15
+  details: The pull request yegor256/takes#971 with 70 HoC created by @serranya was
+    reviewed by @paulodamaso after 387h45m and 1 comments.
+  hoc: 70
+  issue: 971
+  repository: 28924109
+  review_comments: 1
+  seconds: 1395930
+  what: code-was-reviewed
+  when: 2019-03-12 14:16:58.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17748
+  _job: 18300816363
+  _time: 2025-10-07 03:19:23.410955846 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1206309
+  comments: 18
+  details: The pull request yegor256/takes#972 with 48 HoC created by @serranya was
+    reviewed by @paulodamaso after 984h51m and 0 comments.
+  hoc: 48
+  issue: 972
+  repository: 28924109
+  review_comments: 0
+  seconds: 3545471
+  what: code-was-reviewed
+  when: 2019-04-17 12:48:04.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17749
+  _job: 18300816363
+  _time: 2025-10-07 03:19:26.979274035 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 34595022
+  comments: 18
+  details: The pull request yegor256/takes#982 with 354 HoC created by @zcrusaderz
+    was reviewed by @serranya after 93h48m and 1 comments.
+  hoc: 354
+  issue: 982
+  repository: 28924109
+  review_comments: 1
+  seconds: 337681
+  what: code-was-reviewed
+  when: 2019-05-28 06:01:44.000000000 Z
+  where: github
+  who: 1206309
+- _id: 17750
+  _job: 18300816363
+  _time: 2025-10-07 03:19:30.803360305 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 572453
+  comments: 24
+  details: The pull request yegor256/takes#989 with 48 HoC created by @mreiche was
+    reviewed by @marceloamadeu after 57h0m and 3 comments.
+  hoc: 48
+  issue: 989
+  repository: 28924109
+  review_comments: 3
+  seconds: 205220
+  what: code-was-reviewed
+  when: 2019-06-26 19:50:00.000000000 Z
+  where: github
+  who: 45645330
+- _id: 17751
+  _job: 18300816363
+  _time: 2025-10-07 03:19:33.504248805 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 36
+  details: The pull request yegor256/takes#995 with 1093 HoC created by @fevzian was
+    reviewed by @fabriciofx after 4h48m and 77 comments.
+  hoc: 1093
+  issue: 995
+  repository: 28924109
+  review_comments: 77
+  seconds: 17304
+  what: code-was-reviewed
+  when: 2019-11-15 01:03:22.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17752
+  _job: 18300816363
+  _time: 2025-10-07 03:19:35.978451511 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 18
+  details: The pull request yegor256/takes#996 with 13 HoC created by @fevzian was
+    reviewed by @fabriciofx after 143h13m and 0 comments.
+  hoc: 13
+  issue: 996
+  repository: 28924109
+  review_comments: 0
+  seconds: 515638
+  what: code-was-reviewed
+  when: 2019-11-26 01:47:49.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17753
+  _job: 18300816363
+  _time: 2025-10-07 03:19:37.630209330 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 27
+  details: The pull request yegor256/takes#1001 with 255 HoC created by @fevzian was
+    reviewed by @fabriciofx after 53h14m and 0 comments.
+  hoc: 255
+  issue: 1001
+  repository: 28924109
+  review_comments: 0
+  seconds: 191643
+  what: code-was-reviewed
+  when: 2019-12-01 22:34:32.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17754
+  _job: 18300816363
+  _time: 2025-10-07 03:19:39.367680183 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 35927798
+  comments: 42
+  details: The pull request yegor256/takes#1003 with 72 HoC created by @pal548 was
+    reviewed by @fevzian after 25h18m and 4 comments.
+  hoc: 72
+  issue: 1003
+  repository: 28924109
+  review_comments: 4
+  seconds: 91086
+  what: code-was-reviewed
+  when: 2019-12-05 14:59:36.000000000 Z
+  where: github
+  who: 3167940
+- _id: 17755
+  _job: 18300816363
+  _time: 2025-10-07 03:19:43.442915916 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 17
+  details: The pull request yegor256/takes#1023 with 75 HoC created by @fevzian was
+    reviewed by @paulodamaso after 169h54m and 3 comments.
+  hoc: 75
+  issue: 1023
+  repository: 28924109
+  review_comments: 3
+  seconds: 611642
+  what: code-was-reviewed
+  when: 2020-02-10 17:26:13.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17756
+  _job: 18300816363
+  _time: 2025-10-07 03:19:45.514019776 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 11
+  details: The pull request yegor256/takes#1026 with 365 HoC created by @fevzian was
+    reviewed by @paulodamaso after 15h54m and 6 comments.
+  hoc: 365
+  issue: 1026
+  repository: 28924109
+  review_comments: 6
+  seconds: 57257
+  what: code-was-reviewed
+  when: 2020-02-05 18:56:41.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17757
+  _job: 18300816363
+  _time: 2025-10-07 03:19:47.947130153 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 10
+  details: The pull request yegor256/takes#1030 with 74 HoC created by @fevzian was
+    reviewed by @paulodamaso after 6h48m and 0 comments.
+  hoc: 74
+  issue: 1030
+  repository: 28924109
+  review_comments: 0
+  seconds: 24498
+  what: code-was-reviewed
+  when: 2020-02-13 13:08:26.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17758
+  _job: 18300816363
+  _time: 2025-10-07 03:19:50.194294866 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 16
+  details: The pull request yegor256/takes#1034 with 102 HoC created by @fevzian was
+    reviewed by @paulodamaso after 9h30m and 4 comments.
+  hoc: 102
+  issue: 1034
+  repository: 28924109
+  review_comments: 4
+  seconds: 34231
+  what: code-was-reviewed
+  when: 2020-02-26 14:27:14.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17759
+  _job: 18300816363
+  _time: 2025-10-07 03:19:55.061227267 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 12
+  details: The pull request yegor256/takes#1042 with 100 HoC created by @fevzian was
+    reviewed by @paulodamaso after 694h25m and 0 comments.
+  hoc: 100
+  issue: 1042
+  repository: 28924109
+  review_comments: 0
+  seconds: 2499948
+  what: code-was-reviewed
+  when: 2020-04-23 02:47:57.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17760
+  _job: 18300816363
+  _time: 2025-10-07 03:19:56.539924004 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 8
+  details: The pull request yegor256/takes#1043 with 108 HoC created by @fevzian was
+    reviewed by @paulodamaso after 694h25m and 0 comments.
+  hoc: 108
+  issue: 1043
+  repository: 28924109
+  review_comments: 0
+  seconds: 2499957
+  what: code-was-reviewed
+  when: 2020-04-23 03:03:17.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17761
+  _job: 18300816363
+  _time: 2025-10-07 03:19:58.094132388 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 8
+  details: The pull request yegor256/takes#1044 with 141 HoC created by @fevzian was
+    reviewed by @paulodamaso after 694h19m and 0 comments.
+  hoc: 141
+  issue: 1044
+  repository: 28924109
+  review_comments: 0
+  seconds: 2499549
+  what: code-was-reviewed
+  when: 2020-04-23 03:08:27.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17762
+  _job: 18300816363
+  _time: 2025-10-07 03:19:59.690025994 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 3167940
+  comments: 14
+  details: The pull request yegor256/takes#1045 with 38 HoC created by @fevzian was
+    reviewed by @paulodamaso after 694h20m and 0 comments.
+  hoc: 38
+  issue: 1045
+  repository: 28924109
+  review_comments: 0
+  seconds: 2499603
+  what: code-was-reviewed
+  when: 2020-04-23 03:20:43.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17763
+  _job: 18300816363
+  _time: 2025-10-07 03:20:03.535263939 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 9
+  details: The pull request yegor256/takes#1053 with 203 HoC created by @andreoss
+    was reviewed by @paulodamaso after 137h28m and 2 comments.
+  hoc: 203
+  issue: 1053
+  repository: 28924109
+  review_comments: 2
+  seconds: 494926
+  what: code-was-reviewed
+  when: 2020-06-29 18:04:20.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17764
+  _job: 18300816363
+  _time: 2025-10-07 03:20:05.997936671 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 5
+  details: The pull request yegor256/takes#1056 with 111 HoC created by @andreoss
+    was reviewed by @paulodamaso after 626h44m and 1 comments.
+  hoc: 111
+  issue: 1056
+  repository: 28924109
+  review_comments: 1
+  seconds: 2256289
+  what: code-was-reviewed
+  when: 2020-07-26 19:31:52.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17765
+  _job: 18300816363
+  _time: 2025-10-07 03:20:08.497803684 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1964562
+  comments: 7
+  details: The pull request yegor256/takes#1063 with 309 HoC created by @fabriciofx
+    was reviewed by @paulodamaso after 399h25m and 6 comments.
+  hoc: 309
+  issue: 1063
+  repository: 28924109
+  review_comments: 6
+  seconds: 1437919
+  what: code-was-reviewed
+  when: 2020-09-09 14:33:38.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17766
+  _job: 18300816363
+  _time: 2025-10-07 03:20:10.868578148 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 1964562
+  comments: 7
+  details: The pull request yegor256/takes#1065 with 69 HoC created by @fabriciofx
+    was reviewed by @paulodamaso after 23h23m and 0 comments.
+  hoc: 69
+  issue: 1065
+  repository: 28924109
+  review_comments: 0
+  seconds: 84229
+  what: code-was-reviewed
+  when: 2020-09-04 14:41:02.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17767
+  _job: 18300816363
+  _time: 2025-10-07 03:20:13.098673070 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 8
+  details: The pull request yegor256/takes#1076 with 99 HoC created by @andreoss was
+    reviewed by @paulodamaso after 63h9m and 1 comments.
+  hoc: 99
+  issue: 1076
+  repository: 28924109
+  review_comments: 1
+  seconds: 227396
+  what: code-was-reviewed
+  when: 2020-09-19 14:16:18.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17768
+  _job: 18300816363
+  _time: 2025-10-07 03:20:14.652645208 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 13
+  details: The pull request yegor256/takes#1082 with 234 HoC created by @andreoss
+    was reviewed by @paulodamaso after 1951h53m and 1 comments.
+  hoc: 234
+  issue: 1082
+  repository: 28924109
+  review_comments: 1
+  seconds: 7026790
+  what: code-was-reviewed
+  when: 2021-01-11 20:30:59.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17769
+  _job: 18300816363
+  _time: 2025-10-07 03:20:15.372556763 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 13
+  details: The pull request yegor256/takes#1082 with 234 HoC created by @andreoss
+    was reviewed by @baudoliver7 after 2529h45m and 3 comments.
+  hoc: 234
+  issue: 1082
+  repository: 28924109
+  review_comments: 3
+  seconds: 9107146
+  what: code-was-reviewed
+  when: 2021-02-04 22:23:35.000000000 Z
+  where: github
+  who: 7813046
+- _id: 17770
+  _job: 18300816363
+  _time: 2025-10-07 03:20:20.200574512 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 7813046
+  comments: 12
+  details: The pull request yegor256/takes#1092 with 701 HoC created by @baudoliver7
+    was reviewed by @andreoss after 1h41m and 5 comments.
+  hoc: 701
+  issue: 1092
+  repository: 28924109
+  review_comments: 5
+  seconds: 6090
+  what: code-was-reviewed
+  when: 2021-02-25 16:20:15.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17771
+  _job: 18300816363
+  _time: 2025-10-07 03:20:21.835221169 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 7813046
+  comments: 16
+  details: The pull request yegor256/takes#1093 with 7 HoC created by @baudoliver7
+    was reviewed by @andreoss after 1h16m and 2 comments.
+  hoc: 7
+  issue: 1093
+  repository: 28924109
+  review_comments: 2
+  seconds: 4598
+  what: code-was-reviewed
+  when: 2021-02-28 22:35:06.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17772
+  _job: 18300816363
+  _time: 2025-10-07 03:20:23.423399910 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 7813046
+  comments: 45
+  details: The pull request yegor256/takes#1094 with 190 HoC created by @baudoliver7
+    was reviewed by @andreoss after 42h34m and 1 comments.
+  hoc: 190
+  issue: 1094
+  repository: 28924109
+  review_comments: 1
+  seconds: 153291
+  what: code-was-reviewed
+  when: 2021-03-14 01:39:36.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17773
+  _job: 18300816363
+  _time: 2025-10-07 03:20:25.045633610 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 7813046
+  comments: 10
+  details: The pull request yegor256/takes#1096 with 25 HoC created by @baudoliver7
+    was reviewed by @andreoss after 20h56m and 3 comments.
+  hoc: 25
+  issue: 1096
+  repository: 28924109
+  review_comments: 3
+  seconds: 75362
+  what: code-was-reviewed
+  when: 2021-03-26 02:49:14.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17774
+  _job: 18300816363
+  _time: 2025-10-07 03:20:27.501162910 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 7813046
+  comments: 9
+  details: The pull request yegor256/takes#1101 with 249 HoC created by @baudoliver7
+    was reviewed by @andreoss after 30h48m and 1 comments.
+  hoc: 249
+  issue: 1101
+  repository: 28924109
+  review_comments: 1
+  seconds: 110923
+  what: code-was-reviewed
+  when: 2021-04-18 21:58:22.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17775
+  _job: 18300816363
+  _time: 2025-10-07 03:20:28.996722723 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 17
+  details: The pull request yegor256/takes#1102 with 58 HoC created by @andreoss was
+    reviewed by @baudoliver7 after 29h48m and 1 comments.
+  hoc: 58
+  issue: 1102
+  repository: 28924109
+  review_comments: 1
+  seconds: 107313
+  what: code-was-reviewed
+  when: 2021-04-26 23:40:45.000000000 Z
+  where: github
+  who: 7813046
+- _id: 17776
+  _job: 18300816363
+  _time: 2025-10-07 03:20:30.643952664 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 6
+  details: The pull request yegor256/takes#1103 with 2307 HoC created by @andreoss
+    was reviewed by @baudoliver7 after 22h25m and 7 comments.
+  hoc: 2307
+  issue: 1103
+  repository: 28924109
+  review_comments: 7
+  seconds: 80757
+  what: code-was-reviewed
+  when: 2021-04-26 23:16:34.000000000 Z
+  where: github
+  who: 7813046
+- _id: 17777
+  _job: 18300816363
+  _time: 2025-10-07 03:20:32.285978817 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 49783909
+  comments: 46
+  details: The pull request yegor256/takes#1104 with 360 HoC created by @andreoss
+    was reviewed by @baudoliver7 after 21h23m and 6 comments.
+  hoc: 360
+  issue: 1104
+  repository: 28924109
+  review_comments: 6
+  seconds: 77009
+  what: code-was-reviewed
+  when: 2021-04-26 23:30:52.000000000 Z
+  where: github
+  who: 7813046
+- _id: 17778
+  _job: 18300816363
+  _time: 2025-10-07 03:21:19.124249883 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 45645330
+  comments: 17
+  details: The pull request yegor256/takes#961 with 253 HoC created by @marceloamadeu
+    was reviewed by @paulodamaso after 321h37m and 17 comments.
+  hoc: 253
+  issue: 961
+  repository: 28924109
+  review_comments: 17
+  seconds: 1157825
+  what: code-was-reviewed
+  when: 2019-02-20 22:34:09.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17779
+  _job: 18300816363
+  _time: 2025-10-07 03:21:21.683948624 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 45645330
+  comments: 13
+  details: The pull request yegor256/takes#963 with 183 HoC created by @marceloamadeu
+    was reviewed by @paulodamaso after 192h30m and 30 comments.
+  hoc: 183
+  issue: 963
+  repository: 28924109
+  review_comments: 30
+  seconds: 693021
+  what: code-was-reviewed
+  when: 2019-02-20 20:18:30.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17780
+  _job: 18300816363
+  _time: 2025-10-07 03:21:23.229832363 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 36428045
+  comments: 19
+  details: The pull request yegor256/takes#973 with 44 HoC created by @lucasmessias9898
+    was reviewed by @serranya after 795h46m and 0 comments.
+  hoc: 44
+  issue: 973
+  repository: 28924109
+  review_comments: 0
+  seconds: 2864792
+  what: code-was-reviewed
+  when: 2019-04-29 19:54:39.000000000 Z
+  where: github
+  who: 1206309
+- _id: 17781
+  _job: 18300816363
+  _time: 2025-10-07 03:21:25.746843824 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 5731084
+  comments: 32
+  details: The pull request yegor256/takes#988 with 35 HoC created by @nikialeksey
+    was reviewed by @fevzian after 7187h47m and 2 comments.
+  hoc: 35
+  issue: 988
+  repository: 28924109
+  review_comments: 2
+  seconds: 25876022
+  what: code-was-reviewed
+  when: 2020-04-11 05:56:12.000000000 Z
+  where: github
+  who: 3167940
+- _id: 17782
+  _job: 18300816363
+  _time: 2025-10-07 03:21:26.963821199 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 5731084
+  comments: 32
+  details: The pull request yegor256/takes#988 with 35 HoC created by @nikialeksey
+    was reviewed by @andreoss after 11060h55m and 0 comments.
+  hoc: 35
+  issue: 988
+  repository: 28924109
+  review_comments: 0
+  seconds: 39819310
+  what: code-was-reviewed
+  when: 2020-09-19 15:04:20.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17783
+  _job: 18300816363
+  _time: 2025-10-07 03:21:28.397536748 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 48498823
+  comments: 18
+  details: The pull request yegor256/takes#1059 with 32 HoC created by @rusefillc
+    was reviewed by @paulodamaso after 982h27m and 4 comments.
+  hoc: 32
+  issue: 1059
+  repository: 28924109
+  review_comments: 4
+  seconds: 3536828
+  what: code-was-reviewed
+  when: 2020-09-04 14:32:48.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17784
+  _job: 18300816363
+  _time: 2025-10-07 03:21:29.374965024 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 48498823
+  comments: 18
+  details: The pull request yegor256/takes#1059 with 32 HoC created by @rusefillc
+    was reviewed by @andreoss after 1291h6m and 3 comments.
+  hoc: 32
+  issue: 1059
+  repository: 28924109
+  review_comments: 3
+  seconds: 4647991
+  what: code-was-reviewed
+  when: 2020-09-17 11:12:11.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17785
+  _job: 18300816363
+  _time: 2025-10-07 03:21:30.758929314 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  author: 16056918
+  comments: 16
+  details: The pull request yegor256/takes#1072 with 66 HoC created by @strdr4605
+    was reviewed by @andreoss after 195h59m and 1 comments.
+  hoc: 66
+  issue: 1072
+  repository: 28924109
+  review_comments: 1
+  seconds: 705589
+  what: code-was-reviewed
+  when: 2020-09-17 12:33:22.000000000 Z
+  where: github
+  who: 49783909
+- _id: 17786
+  _job: 18300816363
+  _time: 2025-10-07 03:21:33.457680155 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#917 has been "issue-was-closed".
+  issue: 917
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-02-10 12:56:11.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17787
+  _job: 18300816363
+  _time: 2025-10-07 03:21:33.777639889 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#918 has been "issue-was-closed".
+  issue: 918
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-11-26 01:44:55.000000000 Z
+  where: github
+  who: 1964562
+- _id: 17788
+  _job: 18300816363
+  _time: 2025-10-07 03:21:34.515862329 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#921 has been "issue-was-closed".
+  issue: 921
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-01-02 14:36:13.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17789
+  _job: 18300816363
+  _time: 2025-10-07 03:21:35.365727101 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#925 has been "issue-was-closed".
+  issue: 925
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-01-17 16:59:29.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17790
+  _job: 18300816363
+  _time: 2025-10-07 03:21:37.060003828 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#935 has been "issue-was-closed".
+  issue: 935
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-01-16 22:27:01.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17791
+  _job: 18300816363
+  _time: 2025-10-07 03:21:37.437439489 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#938 has been "issue-was-closed".
+  issue: 938
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-01-24 16:48:59.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17792
+  _job: 18300816363
+  _time: 2025-10-07 03:21:37.959173687 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#943 has been "issue-was-closed".
+  issue: 943
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-03-03 10:12:07.000000000 Z
+  where: github
+  who: 1206309
+- _id: 17793
+  _job: 18300816363
+  _time: 2025-10-07 03:21:38.608041647 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#945 has been "issue-was-closed".
+  issue: 945
+  repository: 28924109
+  what: issue-was-closed
+  when: 2024-12-27 05:03:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 17794
+  _job: 18300816363
+  _time: 2025-10-07 03:21:39.244107311 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#948 has been "issue-was-closed".
+  issue: 948
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-22 06:07:42.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17795
+  _job: 18300816363
+  _time: 2025-10-07 03:21:40.026885411 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#950 has been "issue-was-closed".
+  issue: 950
+  repository: 28924109
+  what: issue-was-closed
+  when: 2021-03-21 14:29:47.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17796
+  _job: 18300816363
+  _time: 2025-10-07 03:21:40.366429184 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#951 has been "issue-was-closed".
+  issue: 951
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-01-25 10:50:26.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17797
+  _job: 18300816363
+  _time: 2025-10-07 03:21:40.731881972 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#952 has been "issue-was-closed".
+  issue: 952
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-03-19 15:28:21.000000000 Z
+  where: github
+  who: 1524988
+- _id: 17798
+  _job: 18300816363
+  _time: 2025-10-07 03:21:41.087289846 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#953 has been "issue-was-closed".
+  issue: 953
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-01-25 19:33:24.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17799
+  _job: 18300816363
+  _time: 2025-10-07 03:21:41.780248442 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#957 has been "issue-was-closed".
+  issue: 957
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-04-02 16:13:48.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17800
+  _job: 18300816363
+  _time: 2025-10-07 03:21:42.114938773 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#958 has been "issue-was-closed".
+  issue: 958
+  repository: 28924109
+  what: issue-was-closed
+  when: 2021-12-17 19:14:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 17801
+  _job: 18300816363
+  _time: 2025-10-07 03:21:42.454672218 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#959 has been "issue-was-closed".
+  issue: 959
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-12-05 13:27:20.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17802
+  _job: 18300816363
+  _time: 2025-10-07 03:21:43.073109853 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#968 has been "issue-was-closed".
+  issue: 968
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-06-01 13:10:01.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17803
+  _job: 18300816363
+  _time: 2025-10-07 03:21:43.420079289 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#975 has been "issue-was-closed".
+  issue: 975
+  repository: 28924109
+  what: issue-was-closed
+  when: 2021-11-14 04:51:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 17804
+  _job: 18300816363
+  _time: 2025-10-07 03:21:43.731529864 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#976 has been "issue-was-closed".
+  issue: 976
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-05-07 23:14:13.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17805
+  _job: 18300816363
+  _time: 2025-10-07 03:21:44.422149646 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#980 has been "issue-was-closed".
+  issue: 980
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-05-30 16:12:45.000000000 Z
+  where: github
+  who: 34595022
+- _id: 17806
+  _job: 18300816363
+  _time: 2025-10-07 03:21:45.015493451 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#984 has been "issue-was-closed".
+  issue: 984
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-06-29 18:07:33.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17807
+  _job: 18300816363
+  _time: 2025-10-07 03:21:45.367902939 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#990 has been "issue-was-closed".
+  issue: 990
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-07-17 12:25:58.000000000 Z
+  where: github
+  who: 572453
+- _id: 17808
+  _job: 18300816363
+  _time: 2025-10-07 03:21:45.714550009 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#991 has been "issue-was-closed".
+  issue: 991
+  repository: 28924109
+  what: issue-was-closed
+  when: 2019-09-06 05:50:48.000000000 Z
+  where: github
+  who: 9504395
+- _id: 17809
+  _job: 18300816363
+  _time: 2025-10-07 03:21:46.617609589 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#997 has been "issue-was-closed".
+  issue: 997
+  repository: 28924109
+  what: issue-was-closed
+  when: 2021-12-19 16:46:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 17810
+  _job: 18300816363
+  _time: 2025-10-07 03:21:46.978593533 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#998 has been "issue-was-closed".
+  issue: 998
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-02-10 14:41:17.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17811
+  _job: 18300816363
+  _time: 2025-10-07 03:21:47.332169758 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#999 has been "issue-was-closed".
+  issue: 999
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-10-16 00:48:23.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17812
+  _job: 18300816363
+  _time: 2025-10-07 03:21:48.147165565 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1002 has been "issue-was-closed".
+  issue: 1002
+  repository: 28924109
+  what: issue-was-closed
+  when: 2022-08-29 14:46:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 17813
+  _job: 18300816363
+  _time: 2025-10-07 03:21:49.341829911 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1008 has been "issue-was-closed".
+  issue: 1008
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-02-13 18:40:41.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17814
+  _job: 18300816363
+  _time: 2025-10-07 03:21:49.673816460 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1010 has been "issue-was-closed".
+  issue: 1010
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-02-11 18:12:56.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17815
+  _job: 18300816363
+  _time: 2025-10-07 03:21:50.040187704 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1011 has been "issue-was-closed".
+  issue: 1011
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-03-12 19:54:36.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17816
+  _job: 18300816363
+  _time: 2025-10-07 03:21:50.376663457 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1012 has been "issue-was-closed".
+  issue: 1012
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-03-18 20:36:09.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17817
+  _job: 18300816363
+  _time: 2025-10-07 03:21:50.702853367 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1013 has been "issue-was-closed".
+  issue: 1013
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-02-13 16:38:25.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17818
+  _job: 18300816363
+  _time: 2025-10-07 03:21:51.070518055 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1014 has been "issue-was-closed".
+  issue: 1014
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-05-01 22:09:48.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17819
+  _job: 18300816363
+  _time: 2025-10-07 03:21:51.496148867 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1015 has been "issue-was-closed".
+  issue: 1015
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-04-23 03:39:49.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17820
+  _job: 18300816363
+  _time: 2025-10-07 03:21:51.848729986 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1016 has been "issue-was-closed".
+  issue: 1016
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-04-23 03:13:05.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17821
+  _job: 18300816363
+  _time: 2025-10-07 03:21:52.191753670 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1017 has been "issue-was-closed".
+  issue: 1017
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-04-23 03:27:40.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17822
+  _job: 18300816363
+  _time: 2025-10-07 03:21:52.754905574 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1019 has been "issue-was-closed".
+  issue: 1019
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-04-23 03:51:43.000000000 Z
+  where: github
+  who: 24456188
+- _id: 17823
+  _job: 18300816363
+  _time: 2025-10-07 03:21:53.363627110 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  details: Apparently, yegor256/takes#1022 has been "issue-was-closed".
+  issue: 1022
+  repository: 28924109
+  what: issue-was-closed
+  when: 2020-07-26 19:37:09.000000000 Z
+  where: github
+  who: 33915433
+- _id: 17824
+  _job: 18300816363
+  _time: 2025-10-07 03:21:53.453659463 Z
   _version: 0.16.7/0.54.0/0.15.50
   assignees_were_scanned: 1083
   earliest_issue_was_found: 1
-  events_were_scanned: 55676286447
-  issues_were_scanned: 912
+  events_were_scanned: 55679200842
+  issues_were_scanned: 1022
   labels_were_scanned: 1100
   latest_issue_was_found: 1463
-  merges_were_scanned: 995
+  merges_were_scanned: 1115
   min_issue_was_found: 144
   min_pull_was_found: 1444
   repository: 28924109
