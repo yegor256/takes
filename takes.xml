@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="891048">
+<fb version="0.11.0" size="921937">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">727.149334239</seconds>
+    <seconds t="F">810.635290663</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-07T06:08:04Z</when>
+    <when t="T">2025-10-07T07:10:23Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -49869,6 +49869,7 @@
     <_time t="T">2025-10-07T05:58:24Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#71.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">71</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49883,6 +49884,7 @@
     <_time t="T">2025-10-07T05:58:25Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#74.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">74</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49897,6 +49899,7 @@
     <_time t="T">2025-10-07T05:58:26Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#76.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">76</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49911,6 +49914,7 @@
     <_time t="T">2025-10-07T05:58:26Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#79.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">79</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49925,6 +49929,7 @@
     <_time t="T">2025-10-07T05:58:27Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#82.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">82</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49939,6 +49944,7 @@
     <_time t="T">2025-10-07T05:58:27Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#85.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">85</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49953,6 +49959,7 @@
     <_time t="T">2025-10-07T05:58:28Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#87.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">87</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49967,6 +49974,7 @@
     <_time t="T">2025-10-07T05:58:29Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#92.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">92</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49981,6 +49989,7 @@
     <_time t="T">2025-10-07T05:58:30Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#94.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">94</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -49995,6 +50004,7 @@
     <_time t="T">2025-10-07T05:58:30Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#96.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">96</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50009,6 +50019,7 @@
     <_time t="T">2025-10-07T05:58:31Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#97.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">97</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50023,6 +50034,7 @@
     <_time t="T">2025-10-07T05:58:31Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#99.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">99</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50037,6 +50049,7 @@
     <_time t="T">2025-10-07T05:58:33Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#101.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">101</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50051,6 +50064,7 @@
     <_time t="T">2025-10-07T05:58:33Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#101.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">101</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -50065,6 +50079,7 @@
     <_time t="T">2025-10-07T05:58:34Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#105.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">105</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50079,6 +50094,7 @@
     <_time t="T">2025-10-07T05:58:34Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#106.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">106</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50093,6 +50109,7 @@
     <_time t="T">2025-10-07T05:58:35Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#107.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">107</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50107,6 +50124,7 @@
     <_time t="T">2025-10-07T05:58:36Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#108.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">108</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50121,6 +50139,7 @@
     <_time t="T">2025-10-07T05:58:36Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#109.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">109</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50135,6 +50154,7 @@
     <_time t="T">2025-10-07T05:58:37Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#110.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">110</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50149,6 +50169,7 @@
     <_time t="T">2025-10-07T05:58:38Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#111.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">111</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50163,6 +50184,7 @@
     <_time t="T">2025-10-07T05:58:38Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#112.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">112</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50177,6 +50199,7 @@
     <_time t="T">2025-10-07T05:58:39Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#113.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">113</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50191,6 +50214,7 @@
     <_time t="T">2025-10-07T05:58:39Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#114.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">114</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50205,6 +50229,7 @@
     <_time t="T">2025-10-07T05:58:40Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#115.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">115</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50219,6 +50244,7 @@
     <_time t="T">2025-10-07T05:58:42Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#120.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">120</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50233,6 +50259,7 @@
     <_time t="T">2025-10-07T05:58:42Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#121.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">121</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50247,6 +50274,7 @@
     <_time t="T">2025-10-07T05:58:43Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#126.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">126</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50261,6 +50289,7 @@
     <_time t="T">2025-10-07T05:58:44Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#129.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">129</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50275,6 +50304,7 @@
     <_time t="T">2025-10-07T05:58:45Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#130.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">130</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50289,6 +50319,7 @@
     <_time t="T">2025-10-07T05:58:45Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#132.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">132</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50303,6 +50334,7 @@
     <_time t="T">2025-10-07T05:58:46Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#133.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">133</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50317,6 +50349,7 @@
     <_time t="T">2025-10-07T05:58:46Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#135.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">135</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50331,6 +50364,7 @@
     <_time t="T">2025-10-07T05:58:47Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#136.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">136</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50345,6 +50379,7 @@
     <_time t="T">2025-10-07T05:58:48Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#137.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">137</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50359,6 +50394,7 @@
     <_time t="T">2025-10-07T05:58:48Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#138.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">138</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50373,6 +50409,7 @@
     <_time t="T">2025-10-07T05:58:49Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#139.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">139</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50387,6 +50424,7 @@
     <_time t="T">2025-10-07T05:58:50Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#140.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">140</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50401,6 +50439,7 @@
     <_time t="T">2025-10-07T05:58:51Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#144.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">144</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50415,6 +50454,7 @@
     <_time t="T">2025-10-07T05:58:52Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#145.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">145</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50429,6 +50469,7 @@
     <_time t="T">2025-10-07T05:58:52Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#146.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">146</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50443,6 +50484,7 @@
     <_time t="T">2025-10-07T05:58:53Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#147.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">147</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50457,6 +50499,7 @@
     <_time t="T">2025-10-07T05:58:54Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#148.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">148</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50471,6 +50514,7 @@
     <_time t="T">2025-10-07T05:58:55Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#153.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">153</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50485,6 +50529,7 @@
     <_time t="T">2025-10-07T05:58:58Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#160.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">160</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50499,6 +50544,7 @@
     <_time t="T">2025-10-07T05:58:59Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#161.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">161</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -50523,6 +50569,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1246</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -50547,6 +50594,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1247</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50572,6 +50620,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">4</files>
     <hoc t="I">8</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1248</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50597,6 +50646,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1249</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50622,6 +50672,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1250</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50647,6 +50698,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">4</files>
     <hoc t="I">8</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1251</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50672,6 +50724,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1252</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50697,6 +50750,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1253</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50722,6 +50776,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1254</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50747,6 +50802,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1255</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -50771,6 +50827,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1256</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50796,6 +50853,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1257</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50821,6 +50879,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1258</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50846,6 +50905,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1259</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50871,6 +50931,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1260</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50896,6 +50957,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1261</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50921,6 +50983,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1262</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50946,6 +51009,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1263</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50971,6 +51035,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1264</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -50996,6 +51061,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1265</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51021,6 +51087,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1266</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51046,6 +51113,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1267</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -51070,6 +51138,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1268</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51095,6 +51164,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1269</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51120,6 +51190,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1270</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51145,6 +51216,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1272</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51170,6 +51242,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1273</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51195,6 +51268,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1274</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51220,6 +51294,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1275</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -51244,6 +51319,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1276</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51269,6 +51345,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1277</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51294,6 +51371,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1278</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51319,6 +51397,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">503</files>
     <hoc t="I">1058</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1279</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51344,6 +51423,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1280</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51369,6 +51449,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">6</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1281</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51394,6 +51475,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1282</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51419,6 +51501,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1284</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51444,6 +51527,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1285</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51469,6 +51553,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1286</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51494,6 +51579,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1287</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51519,6 +51605,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1288</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51544,6 +51631,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1289</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51569,6 +51657,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">6</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1290</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51594,6 +51683,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">4</files>
     <hoc t="I">153</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1294</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">0</succeeded_builds>
@@ -51618,6 +51708,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1296</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51643,6 +51734,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1297</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51668,6 +51760,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1298</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51693,6 +51786,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">51</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1302</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51718,6 +51812,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1304</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51743,6 +51838,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1305</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -51759,6 +51855,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#79 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">79</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51773,6 +51870,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#82 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">82</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51787,6 +51885,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#85 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">85</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51801,6 +51900,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#87 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">87</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51815,6 +51915,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#96 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">96</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51829,6 +51930,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#99 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">99</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51843,6 +51945,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#101 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">101</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51857,6 +51960,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#133 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">133</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51871,6 +51975,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#144 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">144</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51885,6 +51990,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#146 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">146</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51899,6 +52005,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#147 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">147</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51913,6 +52020,7 @@
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#161 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">161</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -51921,22 +52029,1955 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">18180</_id>
-    <_job t="I">18303426092</_job>
-    <_time t="T">2025-10-07T06:06:22Z</_time>
+    <_id t="I">18181</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:56:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/net.sf.saxon-saxon-he-12.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1306 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1306</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-02T16:46:13Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18182</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1308 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1308</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-10T22:42:39Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18183</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">jakarta_namespace</branch>
+    <comments t="I">8</comments>
+    <comments_appreciated t="I">2</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">5</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1309 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">35</files>
+    <hoc t="I">540</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1309</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-08-02T04:04:09Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18184</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/major-javahamcrest-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1310 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1310</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-08-01T10:46:50Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18185</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.eclipse.parsson-jakarta.json-1.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1311 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1311</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-08-02T04:57:45Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18186</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/jersey-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1312 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">6</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1312</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-08-02T04:43:57Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18187</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:15Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/jersey-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1315 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">6</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1315</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T04:41:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18188</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.antlr-antlr4-runtime-4.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1316 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1316</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-09-19T06:47:43Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">18189</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/slf4j-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1317 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">6</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1317</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-01-12T18:48:23Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18190</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/junit5-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1318 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1318</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-25T10:03:40Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18191</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:40Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1319 has been "pull-was-closed".</details>
+    <failed_builds t="I">9</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1319</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">2</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-09-19T06:44:25Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">18192</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:43Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">XXEVulnerabilityInXSLTTransformer</branch>
+    <comments t="I">9</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">3</comments_by_author>
+    <comments_by_reviewers t="I">6</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">5</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1320 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">52</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1320</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">5</review_comments>
+    <succeeded_builds t="I">11</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-19T02:54:53Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18193</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:51Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">fix_build</branch>
+    <comments t="I">1</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">1</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1321 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">73</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1321</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">11</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-18T12:24:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18194</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:57:55Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-log-0.x</branch>
+    <comments t="I">6</comments>
+    <comments_appreciated t="I">2</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">6</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1322 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1322</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-19T09:34:52Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18195</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:00Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/commons-io-commons-io-2.x</branch>
+    <comments t="I">9</comments>
+    <comments_appreciated t="I">3</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">9</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1323 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1323</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-19T10:40:29Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18196</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1324 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1324</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-19T11:10:53Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18197</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.apache.velocity-velocity-engine-core-2.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1325 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1325</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-23T07:57:19Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18198</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1326 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">6</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1326</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-09-23T09:38:39Z</when>
+    <where t="S">github</where>
+    <who t="I">74819600</who>
+  </f>
+  <f>
+    <_id t="I">18199</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1327 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">6</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1327</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-09-23T09:53:44Z</when>
+    <where t="S">github</where>
+    <who t="I">74819600</who>
+  </f>
+  <f>
+    <_id t="I">18200</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:22Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1328 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">7</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1328</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-09-23T10:02:36Z</when>
+    <where t="S">github</where>
+    <who t="I">74819600</who>
+  </f>
+  <f>
+    <_id t="I">18201</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:24Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1329 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">24</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1329</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-09-23T10:18:32Z</when>
+    <where t="S">github</where>
+    <who t="I">74819600</who>
+  </f>
+  <f>
+    <_id t="I">18202</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">11</comments>
+    <comments_appreciated t="I">2</comments_appreciated>
+    <comments_by_author t="I">4</comments_by_author>
+    <comments_by_reviewers t="I">7</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1330 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">41</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1330</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-02T07:15:18Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18203</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/ubuntu-24.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1331 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1331</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-26T23:02:13Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18204</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:39Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1332 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1332</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-27T17:05:35Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18205</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1333 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1333</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-30T14:02:19Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18206</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:58:56Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">master</branch>
+    <comments t="I">4</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">4</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1335 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">12</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1335</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-04T02:49:22Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18207</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/junit5-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1336 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1336</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T04:39:31Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18208</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1337 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1337</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-06T14:01:16Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18209</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:18Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1338 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1338</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T04:36:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18210</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:23Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.cactoos-cactoos-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1340 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1340</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T04:36:39Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18211</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">up</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1341 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">18</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1341</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T04:36:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18212</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">up</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1342 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">18</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1342</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-10-29T04:37:03Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">18213</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.apache.velocity-velocity-engine-core-2.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1343 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1343</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">13</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T05:15:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18214</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">up</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1344 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">14</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1344</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T07:23:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18215</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">up</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1345 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1345</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T07:26:14Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18216</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:39Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1348 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1348</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T14:45:19Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18217</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:48Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1349 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1349</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-10-29T18:46:40Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18218</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T06:59:58Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1350 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1350</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-02T23:43:40Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18219</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:00:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/yegor256-copyrights-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1351 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1351</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-05T08:50:27Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18220</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:00:19Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1352 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1352</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-13T02:12:52Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18221</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:00:29Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/codecov-codecov-action-5.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1353 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1353</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-14T20:51:39Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18222</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:00:39Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-log-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1354 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1354</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-14T22:45:12Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18223</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:00:50Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.projectlombok-lombok-1.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1355 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1355</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-15T22:46:11Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18224</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:01:01Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/commons-io-commons-io-2.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1356 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1356</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-20T22:44:39Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18225</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:01:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/org.codehaus.mojo-license-maven-plugin-2.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1360 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1360</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-11-29T16:44:46Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18226</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:01:23Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1361 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1361</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-12-02T03:50:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18227</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:01:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <branch t="S">renovate/com.jcabi.incubator-xembly-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1362 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1362</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">14</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-12-02T13:46:07Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18229</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:02Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#166.</details>
+    <issue t="I">166</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-09T20:41:24Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18230</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#167.</details>
+    <issue t="I">167</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-10T06:07:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18231</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#170.</details>
+    <issue t="I">170</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-15T00:05:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18232</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#171.</details>
+    <issue t="I">171</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-15T01:51:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18233</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#172.</details>
+    <issue t="I">172</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-15T03:15:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18234</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:04Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#173.</details>
+    <issue t="I">173</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-15T05:07:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18235</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#174.</details>
+    <issue t="I">174</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-18T14:52:25Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18236</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:05Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#182.</details>
+    <issue t="I">182</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-16T02:09:01Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18237</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#184.</details>
+    <issue t="I">184</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-18T10:57:34Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18238</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:06Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#187.</details>
+    <issue t="I">187</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-18T10:57:31Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18239</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:08Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#194.</details>
+    <issue t="I">194</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-21T00:02:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18240</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#195.</details>
+    <issue t="I">195</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-21T00:02:11Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18241</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:09Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#198.</details>
+    <issue t="I">198</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-21T19:22:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18242</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:10Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#199.</details>
+    <issue t="I">199</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-22T00:48:38Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18243</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#205.</details>
+    <issue t="I">205</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-22T21:15:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18244</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:11Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#206.</details>
+    <issue t="I">206</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-22T21:17:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18245</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#209.</details>
+    <issue t="I">209</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-25T03:23:01Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18246</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#211.</details>
+    <issue t="I">211</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-27T01:24:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18247</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:13Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#213.</details>
+    <issue t="I">213</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-05T18:18:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18248</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#217.</details>
+    <issue t="I">217</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-05T18:14:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18249</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:15Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#220.</details>
+    <issue t="I">220</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-29T05:03:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18250</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#221.</details>
+    <issue t="I">221</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-29T20:40:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18251</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:19Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#229.</details>
+    <issue t="I">229</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-30T19:14:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18252</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:20Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#231.</details>
+    <issue t="I">231</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-04-30T23:45:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18253</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:21Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#239.</details>
+    <issue t="I">239</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-01T19:46:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18254</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:23Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#247.</details>
+    <issue t="I">247</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-03T22:34:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18255</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:24Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#248.</details>
+    <issue t="I">248</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-03T23:28:40Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18256</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#249.</details>
+    <issue t="I">249</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-04T00:42:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18257</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#250.</details>
+    <issue t="I">250</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-04T02:15:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18258</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:25Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#250.</details>
+    <issue t="I">250</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-04T02:15:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18259</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:26Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#251.</details>
+    <issue t="I">251</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-04T19:11:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18260</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:27Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @davvd to the issue yegor256/takes#252.</details>
+    <issue t="I">252</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-05T10:18:53Z</when>
+    <where t="S">github</where>
+    <who t="I">6305016</who>
+  </f>
+  <f>
+    <_id t="I">18261</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:28Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#253.</details>
+    <issue t="I">253</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-05T18:26:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18262</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:30Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#254.</details>
+    <issue t="I">254</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-06T07:11:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18263</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#257.</details>
+    <issue t="I">257</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:49:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18264</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#257.</details>
+    <issue t="I">257</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:49:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18265</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#258.</details>
+    <issue t="I">258</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:38:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18266</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:31Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#258.</details>
+    <issue t="I">258</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:38:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18267</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:32Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#259.</details>
+    <issue t="I">259</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:38:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18268</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:33Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#259.</details>
+    <issue t="I">259</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:38:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18269</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#260.</details>
+    <issue t="I">260</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:38:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18270</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:34Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#260.</details>
+    <issue t="I">260</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-07T17:38:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18271</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:35Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#263.</details>
+    <issue t="I">263</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-08T19:02:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18272</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#265.</details>
+    <issue t="I">265</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-08T22:37:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18273</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:36Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#266.</details>
+    <issue t="I">266</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-09T00:13:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18274</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#271.</details>
+    <issue t="I">271</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-09T22:57:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18275</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:37Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#272.</details>
+    <issue t="I">272</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-10T02:05:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18276</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:38Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#273.</details>
+    <issue t="I">273</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-10T02:34:18Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18277</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:38Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#274.</details>
+    <issue t="I">274</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-10T03:38:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18278</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:39Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#277.</details>
+    <issue t="I">277</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2015-05-10T23:22:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18279</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:05:39Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
     <assignees_were_scanned t="I">163</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55681936301</events_were_scanned>
+    <events_were_scanned t="I">55684293703</events_were_scanned>
     <issues_were_scanned t="I">173</issues_were_scanned>
-    <labels_were_scanned t="I">163</labels_were_scanned>
+    <labels_were_scanned t="I">277</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">1305</merges_were_scanned>
+    <merges_were_scanned t="I">1362</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1447</min_pull_was_found>
+    <min_pull_was_found t="I">1449</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1070</types_were_scanned>
+    <types_were_scanned t="I">1339</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">18280</_id>
+    <_job t="I">18304609171</_job>
+    <_time t="T">2025-10-07T07:09:52Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">26545482</author>
+    <comments t="I">4</comments>
+    <details t="S">The pull request yegor256/takes#1320 with 52 HoC created by @pejetuz was reviewed by @yegor256 after 0h21m and 1 comments.</details>
+    <hoc t="I">52</hoc>
+    <issue t="I">1320</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">1</review_comments>
+    <seconds t="I">1268</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2024-08-27T14:39:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
   </f>
 </fb>
