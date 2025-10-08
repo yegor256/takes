@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 702.672965894
+  seconds: 707.59545539
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-08 09:08:59.670583894 Z
+  when: 2025-10-08 10:08:31.220363822 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54062,23 +54062,6 @@
   when: 2025-10-08 08:56:34.000000000 Z
   where: github
   who: 8086956
-- _id: 18708
-  _job: 18339336356
-  _time: 2025-10-08 09:01:07.043616142 Z
-  _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 718
-  earliest_issue_was_found: 1
-  events_were_scanned: 55763996887
-  issues_were_scanned: 1227
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 144
-  min_pull_was_found: 1474
-  repository: 28924109
-  types_were_scanned: 1074
-  what: iterate
-  where: github
 - _id: 18709
   _job: 18339336356
   _time: 2025-10-08 09:07:57.019190379 Z
@@ -54088,6 +54071,7 @@
   details: The pull request yegor256/takes#1480 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 1h24m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1480
   repository: 28924109
   review_comments: 0
@@ -54096,3 +54080,40 @@
   when: 2025-10-08 08:35:24.000000000 Z
   where: github
   who: 526301
+- _id: 18710
+  _job: 18340862161
+  _time: 2025-10-08 09:56:46.400144292 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1480 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 55765260715
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1480
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2025-10-08 08:35:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 18711
+  _job: 18340862161
+  _time: 2025-10-08 10:08:02.459571601 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  assignees_were_scanned: 822
+  earliest_issue_was_found: 1
+  events_were_scanned: 55765510731
+  issues_were_scanned: 0
+  labels_were_scanned: 0
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 144
+  min_pull_was_found: 1475
+  repository: 28924109
+  types_were_scanned: 1363
+  what: iterate
+  where: github
