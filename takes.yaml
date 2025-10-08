@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 724.951663708
+  seconds: 810.505179958
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-08 07:08:51.804718052 Z
+  when: 2025-10-08 08:09:33.719300587 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54023,20 +54023,35 @@
   when: 2025-10-08 02:59:57.000000000 Z
   where: github
   who: 526301
-- _id: 18704
-  _job: 18336437205
-  _time: 2025-10-08 07:08:51.720065799 Z
+- _id: 18705
+  _job: 18337789210
+  _time: 2025-10-08 07:56:06.757043265 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 445
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The pull request yegor256/takes#1480 has been opened by @renovate[bot].
+  event_id: 55761327815
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1480
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-08 07:11:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 18706
+  _job: 18337789210
+  _time: 2025-10-08 08:09:33.352571732 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 581
   earliest_issue_was_found: 1
-  events_were_scanned: 55759012292
-  issues_were_scanned: 1227
-  labels_were_scanned: 751
+  events_were_scanned: 55761327815
+  issues_were_scanned: 0
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
   min_pull_was_found: 1473
   repository: 28924109
-  types_were_scanned: 933
+  types_were_scanned: 953
   what: iterate
   where: github
