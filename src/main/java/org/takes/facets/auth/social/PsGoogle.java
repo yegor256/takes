@@ -167,7 +167,7 @@ public final class PsGoogle implements Pass {
                 )
             );
         }
-        return PsGoogle.parse(json);
+        return parse(json);
     }
 
     /**

@@ -57,12 +57,12 @@ public final class CcStrict implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        return this.origin.encode(CcStrict.applyRules(identity));
+        return this.origin.encode(applyRules(identity));
     }
 
     @Override
     public Identity decode(final byte[] bytes) throws IOException {
-        return CcStrict.applyRules(this.origin.decode(bytes));
+        return applyRules(this.origin.decode(bytes));
     }
 
     /**

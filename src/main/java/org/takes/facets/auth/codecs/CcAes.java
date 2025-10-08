@@ -100,7 +100,7 @@ public final class CcAes implements Codec {
             codec,
             CcAes.RANDOM,
             new SecretKeySpec(
-                CcAes.withCorrectBlockSize(key.clone()), "AES"
+                withCorrectBlockSize(key.clone()), "AES"
             )
         );
     }
