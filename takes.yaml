@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 759.013392253
+  seconds: 698.589571014
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-08 02:34:04.750670666 Z
+  when: 2025-10-08 03:20:37.905978801 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -53893,20 +53893,60 @@
   _version: 0.16.8/0.54.0/0.15.50
   what: learn-eva
   when: 2025-10-08 01:32:41.834219845 Z
-- _id: 18693
-  _job: 18331756535
-  _time: 2025-10-08 02:34:04.662340099 Z
+- _id: 18694
+  _job: 18332520886
+  _time: 2025-10-08 03:09:02.393878081 Z
   _version: 0.16.7/0.54.0/0.15.50
-  assignees_were_scanned: 1005
+  comments: 1
+  commits: 1
+  details: The pull request yegor256/takes#1478 has been reviewed by @yegor256 with
+    2 HoC and 1 comments.
+  event_id: 55753905676
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1478
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2025-10-08 02:59:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 18695
+  _job: 18332520886
+  _time: 2025-10-08 03:09:03.360724540 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  comments: 2
+  commits: 1
+  details: The pull request yegor256/takes#1479 has been reviewed by @yegor256 with
+    2 HoC and 2 comments.
+  event_id: 55753904737
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1479
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2025-10-08 02:59:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 18696
+  _job: 18332520886
+  _time: 2025-10-08 03:19:17.924728686 Z
+  _version: 0.16.7/0.54.0/0.15.50
+  assignees_were_scanned: 1131
   earliest_issue_was_found: 1
-  events_were_scanned: 55751914375
-  issues_were_scanned: 0
-  labels_were_scanned: 924
+  events_were_scanned: 55754046458
+  issues_were_scanned: 1227
+  labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1469
+  min_pull_was_found: 1470
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 491
   what: iterate
   where: github

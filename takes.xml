@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1026226">
+<fb version="0.11.0" size="1026948">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">759.013392253</seconds>
+    <seconds t="F">698.589571014</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-08T02:34:04Z</when>
+    <when t="T">2025-10-08T03:20:37Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -60672,21 +60672,63 @@
     <when t="T">2025-10-08T01:32:41Z</when>
   </f>
   <f>
-    <_id t="I">18693</_id>
-    <_job t="I">18331756535</_job>
-    <_time t="T">2025-10-08T02:34:04Z</_time>
+    <_id t="I">18694</_id>
+    <_job t="I">18332520886</_job>
+    <_time t="T">2025-10-08T03:09:02Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">1005</assignees_were_scanned>
+    <comments t="I">1</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1478 has been reviewed by @yegor256 with 2 HoC and 1 comments.</details>
+    <event_id t="I">55753905676</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1478</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2025-10-08T02:59:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18695</_id>
+    <_job t="I">18332520886</_job>
+    <_time t="T">2025-10-08T03:09:03Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <comments t="I">2</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1479 has been reviewed by @yegor256 with 2 HoC and 2 comments.</details>
+    <event_id t="I">55753904737</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1479</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2025-10-08T02:59:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18696</_id>
+    <_job t="I">18332520886</_job>
+    <_time t="T">2025-10-08T03:19:17Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">1131</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55751914375</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <events_were_scanned t="I">55754046458</events_were_scanned>
+    <issues_were_scanned t="I">1227</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1469</min_pull_was_found>
+    <min_pull_was_found t="I">1470</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">387</types_were_scanned>
+    <types_were_scanned t="I">491</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
