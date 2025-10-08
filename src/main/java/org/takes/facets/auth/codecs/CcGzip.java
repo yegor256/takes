@@ -8,9 +8,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -34,7 +34,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.16
  */
-@EqualsAndHashCode
 public final class CcGzip implements Codec {
 
     /**
@@ -76,4 +75,30 @@ public final class CcGzip implements Codec {
         }
         return this.origin.decode(out.toByteArray());
     }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CcGzip ccGzip = (CcGzip) o;
+        return Objects.equals(origin, ccGzip.origin);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(origin);
+    }
+
 }

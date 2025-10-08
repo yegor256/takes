@@ -5,7 +5,8 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
+
 import org.takes.facets.auth.Identity;
 
 /**
@@ -34,7 +35,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.5
  */
-@EqualsAndHashCode
 public final class CcSafe implements Codec {
 
     /**
@@ -64,6 +64,31 @@ public final class CcSafe implements Codec {
             identity = Identity.ANONYMOUS;
         }
         return identity;
+    }
+
+    /**
+     * Check for equality.
+     *
+     * @param o The object to check
+     * @return True if equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final CcSafe ccSafe = (CcSafe) o;
+        return Objects.equals(origin, ccSafe.origin);
+    }
+
+    /**
+     * Calculate hash code.
+     *
+     * @return Hash code
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(origin);
     }
 
 }

@@ -11,7 +11,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -35,7 +34,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.5
  */
-@EqualsAndHashCode
 public final class CcCompact implements Codec {
 
     @Override

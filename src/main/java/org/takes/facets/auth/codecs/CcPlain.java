@@ -12,7 +12,6 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.bytes.UncheckedBytes;
@@ -47,7 +46,6 @@ import org.takes.facets.auth.Identity;
  *
  * @since 0.1
  */
-@EqualsAndHashCode
 public final class CcPlain implements Codec {
 
     @Override
