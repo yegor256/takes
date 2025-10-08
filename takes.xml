@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1026948">
+<fb version="0.11.0" size="1027744">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">698.589571014</seconds>
+    <seconds t="F">819.588789999</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-08T03:20:37Z</when>
+    <when t="T">2025-10-08T04:10:04Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -60714,21 +60714,68 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">18696</_id>
-    <_job t="I">18332520886</_job>
-    <_time t="T">2025-10-08T03:19:17Z</_time>
+    <_id t="I">18697</_id>
+    <_job t="I">18333264234</_job>
+    <_time t="T">2025-10-08T03:56:28Z</_time>
     <_version t="S">0.16.7/0.54.0/0.15.50</_version>
-    <assignees_were_scanned t="I">1131</assignees_were_scanned>
+    <branch t="S">renovate/crate-ci-typos-1.x</branch>
+    <comments t="I">2</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">The pull request yegor256/takes#1479 has been closed by @rultor, with 2 HoC and 2 comments.</details>
+    <event_id t="I">55754582863</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1479</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-10-08T03:27:06Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18699</_id>
+    <_job t="I">18333264234</_job>
+    <_time t="T">2025-10-08T04:04:14Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1479 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 31h51m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1479</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">114673</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-10-08T02:59:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18700</_id>
+    <_job t="I">18333264234</_job>
+    <_time t="T">2025-10-08T04:09:12Z</_time>
+    <_version t="S">0.16.7/0.54.0/0.15.50</_version>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55754046458</events_were_scanned>
-    <issues_were_scanned t="I">1227</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <events_were_scanned t="I">55755011995</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
     <min_pull_was_found t="I">1470</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">491</types_were_scanned>
+    <types_were_scanned t="I">609</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
