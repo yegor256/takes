@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1031500">
+<fb version="0.11.0" size="1031505">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">782.84684574</seconds>
+    <seconds t="F">810.551143918</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-10T16:09:20Z</when>
+    <when t="T">2025-10-10T17:09:59Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61167,18 +61167,18 @@
   </f>
   <f>
     <_id t="I">18736</_id>
-    <_job t="I">18411689412</_job>
-    <_time t="T">2025-10-10T16:08:50Z</_time>
+    <_job t="I">18413035906</_job>
+    <_time t="T">2025-10-10T17:08:28Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">926</assignees_were_scanned>
+    <assignees_were_scanned t="I">1054</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
     <events_were_scanned t="I">55883162926</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">607</labels_were_scanned>
+    <issues_were_scanned t="I">1227</issues_were_scanned>
+    <labels_were_scanned t="I">751</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">183</min_pull_was_found>
+    <min_pull_was_found t="I">185</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">735</types_were_scanned>
     <what t="S">iterate</what>
