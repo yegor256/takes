@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.462331913
+  seconds: 601.685759953
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-10 19:09:18.724361443 Z
+  when: 2025-10-10 20:05:40.605927332 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54078,14 +54078,6 @@
   when: 2025-10-08 08:35:25.000000000 Z
   where: github
   who: 526301
-- _id: 18714
-  _job: 42294
-  _time: 2025-10-08 19:07:45.000204583 Z
-  _version: 0.16.8/0.54.0/0.15.51
-  analyzers: 18
-  text: The average monthly turnover (37.0 developers) is increasing (R=0.76).
-  what: assessment
-  when: 2025-10-08 19:07:45.008828551 Z
 - _id: 18717
   _job: 18359078318
   _time: 2025-10-08 22:07:34.768154192 Z
@@ -54357,20 +54349,28 @@
   _version: 0.16.8/0.54.0/0.15.51
   what: learn-eva
   when: 2025-10-10 13:18:04.433186660 Z
-- _id: 18736
-  _job: 18415720672
-  _time: 2025-10-10 19:08:28.080301612 Z
+- _id: 18737
+  _job: 42774
+  _time: 2025-10-10 19:09:51.667570890 Z
   _version: 0.16.8/0.54.0/0.15.51
-  assignees_were_scanned: 0
+  analyzers: 18
+  text: The average monthly turnover (37.0 developers) is increasing (R=0.76).
+  what: assessment
+  when: 2025-10-10 19:09:51.676399619 Z
+- _id: 18738
+  _job: 18416965456
+  _time: 2025-10-10 20:05:40.527626470 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 55885933338
-  issues_were_scanned: 1227
-  labels_were_scanned: 1111
+  events_were_scanned: 55888498505
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 188
+  min_pull_was_found: 189
   repository: 28924109
-  types_were_scanned: 933
+  types_were_scanned: 1054
   what: iterate
   where: github
