@@ -4,11 +4,14 @@
  */
 package org.takes.facets.fork;
 
+import java.util.List;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
+import org.cactoos.list.ListOf;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -20,12 +23,6 @@ import org.cactoos.text.UncheckedText;
  *
  * @see org.takes.facets.fork.FkTypes
  * @since 0.6
- * @todo #998:30min Please use {@link org.cactoos.text.Split} instead of
- *  {@link String.split} as an elegant way.
- *  To completely leverage the {@link org.cactoos.text.Split} here, it is
- *  required for the completion of issue
- *  https://github.com/yegor256/cactoos/issues/1251 and upgrading to that
- *  version of Cactoos.
  */
 @ToString
 @EqualsAndHashCode
@@ -94,8 +91,14 @@ final class MediaType implements Comparable<MediaType> {
      * @param text The text to be split.
      * @return Two first parts of the media type.
      */
-    private static String[] split(final String text) {
-        return text.split(";", 2);
+    private static List<Text> split(final String text) {
+        return new ListOf<>(
+            new Split(
+                new TextOf(text),
+                ";",
+                2
+            )
+        );
     }
 
     /**
@@ -104,11 +107,14 @@ final class MediaType implements Comparable<MediaType> {
      * @return The priority of the media type.
      */
     private static Double priority(final String text) {
-        final String[] parts = MediaType.split(text);
+        final List<Text> parts = MediaType.split(text);
         final Double priority;
-        if (parts.length > 1) {
-            final String num =
-                MediaType.NON_DIGITS.matcher(parts[1]).replaceAll("");
+        if (parts.size() > 1) {
+            final String num = MediaType.NON_DIGITS.matcher(
+                new UncheckedText(
+                    parts.get(1)
+                ).asString()
+            ).replaceAll("");
             if (num.isEmpty()) {
                 priority = 0.0d;
             } else {
@@ -126,7 +132,9 @@ final class MediaType implements Comparable<MediaType> {
      * @return The high part of the media type.
      */
     private static String highPart(final String text) {
-        return MediaType.sectors(text)[0];
+        return new UncheckedText(
+            MediaType.sectors(text).get(0)
+        ).asString();
     }
 
     /**
@@ -135,10 +143,10 @@ final class MediaType implements Comparable<MediaType> {
      * @return The low part of the media type.
      */
     private static String lowPart(final String text) {
-        final String[] sectors = MediaType.sectors(text);
+        final List<Text> sectors = MediaType.sectors(text);
         final Text sector;
-        if (sectors.length > 1) {
-            sector = new Trimmed(new TextOf(sectors[1]));
+        if (sectors.size() > 1) {
+            sector = new Trimmed(sectors.get(1));
         } else {
             sector = new TextOf("");
         }
@@ -148,15 +156,16 @@ final class MediaType implements Comparable<MediaType> {
     /**
      * Returns the media type sectors.
      * @param text The media type text.
-     * @return String array with the sectors of the media type.
+     * @return Sectors of the media type.
      */
-    private static String[] sectors(final String text) {
-        return new UncheckedText(
-            new Lowered(MediaType.split(text)[0])
-        ).asString()
-            .split(
-                "/", 2
-            );
+    private static List<Text> sectors(final String text) {
+        return new ListOf<>(
+            new Split(
+                new UncheckedText(new Lowered(MediaType.split(text).get(0))),
+                "/",
+                2
+            )
+        );
     }
 
 }
