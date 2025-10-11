@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1031749">
+<fb version="0.11.0" size="1031743">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">639.841754729</seconds>
+    <seconds t="F">724.762228842</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-11T19:06:47Z</when>
+    <when t="T">2025-10-11T20:08:04Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61185,20 +61185,20 @@
   </f>
   <f>
     <_id t="I">18746</_id>
-    <_job t="I">18433460176</_job>
-    <_time t="T">2025-10-11T19:06:47Z</_time>
+    <_job t="I">18434033543</_job>
+    <_time t="T">2025-10-11T20:00:13Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">445</assignees_were_scanned>
+    <assignees_were_scanned t="I">581</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55920907538</events_were_scanned>
-    <issues_were_scanned t="I">1227</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <events_were_scanned t="I">55922659309</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">234</min_pull_was_found>
+    <min_pull_was_found t="I">235</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
