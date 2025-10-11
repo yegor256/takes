@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1031743">
+<fb version="0.11.0" size="1032785">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">724.762228842</seconds>
+    <seconds t="F">791.411593432</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-11T20:08:04Z</when>
+    <when t="T">2025-10-11T21:09:28Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61120,16 +61120,6 @@
     <when t="T">2025-10-09T16:57:25Z</when>
   </f>
   <f>
-    <_id t="I">18727</_id>
-    <_job t="I">42597</_job>
-    <_time t="T">2025-10-09T19:09:34Z</_time>
-    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average monthly turnover (37.0 developers) is increasing (R=0.76).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-10-09T19:09:34Z</when>
-  </f>
-  <f>
     <_id t="I">18731</_id>
     <_job t="I">18391260523</_job>
     <_time t="T">2025-10-09T22:56:47Z</_time>
@@ -61184,21 +61174,106 @@
     <when t="T">2025-10-11T16:10:49Z</when>
   </f>
   <f>
-    <_id t="I">18746</_id>
-    <_job t="I">18434033543</_job>
-    <_time t="T">2025-10-11T20:00:13Z</_time>
+    <_id t="I">18747</_id>
+    <_job t="I">42929</_job>
+    <_time t="T">2025-10-11T20:08:50Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">581</assignees_were_scanned>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average monthly turnover (37.0 developers) is increasing (R=0.76).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-10-11T20:08:50Z</when>
+  </f>
+  <f>
+    <_id t="I">18749</_id>
+    <_job t="I">18434628049</_job>
+    <_time t="T">2025-10-11T21:00:08Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <branch t="S">refactor_antipov</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1411 has been "pull-was-closed".</details>
+    <failed_builds t="I">11</failed_builds>
+    <files t="I">9</files>
+    <hoc t="I">211</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1411</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">8</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2025-10-11T20:44:09Z</when>
+    <where t="S">github</where>
+    <who t="I">152931662</who>
+  </f>
+  <f>
+    <_id t="I">18750</_id>
+    <_job t="I">18434628049</_job>
+    <_time t="T">2025-10-11T21:00:21Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <branch t="S">refactor_antipov_static_calls</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1412 has been "pull-was-closed".</details>
+    <failed_builds t="I">11</failed_builds>
+    <files t="I">12</files>
+    <hoc t="I">30</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1412</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">8</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2025-10-11T20:44:10Z</when>
+    <where t="S">github</where>
+    <who t="I">152931662</who>
+  </f>
+  <f>
+    <_id t="I">18751</_id>
+    <_job t="I">18434628049</_job>
+    <_time t="T">2025-10-11T21:00:29Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <branch t="S">fix_workflow</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1413 has been "pull-was-closed".</details>
+    <failed_builds t="I">11</failed_builds>
+    <files t="I">31</files>
+    <hoc t="I">408</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1413</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">8</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2025-10-11T20:44:10Z</when>
+    <where t="S">github</where>
+    <who t="I">152931662</who>
+  </f>
+  <f>
+    <_id t="I">18752</_id>
+    <_job t="I">18434628049</_job>
+    <_time t="T">2025-10-11T21:09:28Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <assignees_were_scanned t="I">718</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55922659309</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <events_were_scanned t="I">55923553184</events_were_scanned>
+    <issues_were_scanned t="I">1227</issues_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">235</min_pull_was_found>
+    <min_pull_was_found t="I">238</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">0</types_were_scanned>
+    <types_were_scanned t="I">163</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 724.762228842
+  seconds: 791.411593432
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-11 20:08:04.825188673 Z
+  when: 2025-10-11 21:09:28.735599497 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54319,14 +54319,6 @@
   total_reviews_submitted: 4
   what: quantity-of-deliverables
   when: 2025-10-09 16:57:25.954375772 Z
-- _id: 18727
-  _job: 42597
-  _time: 2025-10-09 19:09:34.217427834 Z
-  _version: 0.16.8/0.54.0/0.15.51
-  analyzers: 18
-  text: The average monthly turnover (37.0 developers) is increasing (R=0.76).
-  what: assessment
-  when: 2025-10-09 19:09:34.226051528 Z
 - _id: 18731
   _job: 18391260523
   _time: 2025-10-09 22:56:47.190659036 Z
@@ -54373,20 +54365,97 @@
   _version: 0.16.8/0.54.0/0.15.51
   what: learn-eva
   when: 2025-10-11 16:10:49.362470443 Z
-- _id: 18746
-  _job: 18434033543
-  _time: 2025-10-11 20:00:13.610578175 Z
+- _id: 18747
+  _job: 42929
+  _time: 2025-10-11 20:08:50.355297693 Z
   _version: 0.16.8/0.54.0/0.15.51
-  assignees_were_scanned: 581
+  analyzers: 18
+  text: The average monthly turnover (37.0 developers) is increasing (R=0.76).
+  what: assessment
+  when: 2025-10-11 20:08:50.368325604 Z
+- _id: 18749
+  _job: 18434628049
+  _time: 2025-10-11 21:00:08.678853059 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  branch: refactor_antipov
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1411 has been "pull-was-closed".
+  failed_builds: 11
+  files: 9
+  hoc: 211
+  is_human: 1
+  issue: 1411
+  repository: 28924109
+  succeeded_builds: 8
+  what: pull-was-closed
+  when: 2025-10-11 20:44:09.000000000 Z
+  where: github
+  who: 152931662
+- _id: 18750
+  _job: 18434628049
+  _time: 2025-10-11 21:00:21.171595064 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  branch: refactor_antipov_static_calls
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1412 has been "pull-was-closed".
+  failed_builds: 11
+  files: 12
+  hoc: 30
+  is_human: 1
+  issue: 1412
+  repository: 28924109
+  succeeded_builds: 8
+  what: pull-was-closed
+  when: 2025-10-11 20:44:10.000000000 Z
+  where: github
+  who: 152931662
+- _id: 18751
+  _job: 18434628049
+  _time: 2025-10-11 21:00:29.124088650 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  branch: fix_workflow
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1413 has been "pull-was-closed".
+  failed_builds: 11
+  files: 31
+  hoc: 408
+  is_human: 1
+  issue: 1413
+  repository: 28924109
+  succeeded_builds: 8
+  what: pull-was-closed
+  when: 2025-10-11 20:44:10.000000000 Z
+  where: github
+  who: 152931662
+- _id: 18752
+  _job: 18434628049
+  _time: 2025-10-11 21:09:28.651475108 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  assignees_were_scanned: 718
   earliest_issue_was_found: 1
-  events_were_scanned: 55922659309
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  events_were_scanned: 55923553184
+  issues_were_scanned: 1227
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 235
+  min_pull_was_found: 238
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 163
   what: iterate
   where: github
