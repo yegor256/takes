@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.526911368
+  seconds: 728.332762461
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-12 00:09:35.982215244 Z
+  when: 2025-10-12 01:33:46.688957254 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54458,20 +54458,45 @@
   total_stars: 859
   what: dimensions-of-terrain
   when: 2025-10-11 23:07:06.111353565 Z
-- _id: 18754
-  _job: 18436321577
-  _time: 2025-10-12 00:09:32.223807303 Z
+- _id: 18755
+  _job: 18437223417
+  _time: 2025-10-12 01:21:41.173939304 Z
   _version: 0.16.8/0.54.0/0.15.51
-  assignees_were_scanned: 1054
+  branch: master
+  details: The pull request yegor256/takes#1481 has been opened by @andrewlevada.
+  event_id: 55927805748
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1481
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-11 13:43:09.000000000 Z
+  where: github
+  who: 31159530
+- _id: 18757
+  _job: 18437223417
+  _time: 2025-10-12 01:29:03.720077389 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  details: 'We found out that the user #31159530 is known in GitHub as @andrewlevada.'
+  name: andrewlevada
+  what: who-has-name
+  when: 2025-10-12 01:29:03.849636395 Z
+  where: github
+  who: 31159530
+- _id: 18758
+  _job: 18437223417
+  _time: 2025-10-12 01:33:17.241750417 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  assignees_were_scanned: 1307
   earliest_issue_was_found: 1
-  events_were_scanned: 55927337732
-  issues_were_scanned: 0
-  labels_were_scanned: 751
+  events_were_scanned: 55930187862
+  issues_were_scanned: 1227
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 245
+  min_pull_was_found: 246
   repository: 28924109
-  types_were_scanned: 491
+  types_were_scanned: 609
   what: iterate
   where: github
