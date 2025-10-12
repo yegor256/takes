@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1033644">
+<fb version="0.11.0" size="1033648">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">728.332762461</seconds>
+    <seconds t="F">638.608945273</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-12T01:33:46Z</when>
+    <when t="T">2025-10-12T02:33:27Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61166,14 +61166,6 @@
     <when t="T">2025-10-10T22:59:37Z</when>
   </f>
   <f>
-    <_id t="I">18745</_id>
-    <_job t="I">42905</_job>
-    <_time t="T">2025-10-11T16:10:49Z</_time>
-    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-10-11T16:10:49Z</when>
-  </f>
-  <f>
     <_id t="I">18747</_id>
     <_job t="I">42929</_job>
     <_time t="T">2025-10-11T20:08:50Z</_time>
@@ -61299,6 +61291,7 @@
     <_time t="T">2025-10-12T01:29:03Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
     <details t="S">We found out that the user #31159530 is known in GitHub as @andrewlevada.</details>
+    <is_human t="I">1</is_human>
     <name t="S">andrewlevada</name>
     <what t="S">who-has-name</what>
     <when t="T">2025-10-12T01:29:03Z</when>
@@ -61306,21 +61299,29 @@
     <who t="I">31159530</who>
   </f>
   <f>
-    <_id t="I">18758</_id>
-    <_job t="I">18437223417</_job>
-    <_time t="T">2025-10-12T01:33:17Z</_time>
+    <_id t="I">18759</_id>
+    <_job t="I">42959</_job>
+    <_time t="T">2025-10-12T01:37:19Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">1307</assignees_were_scanned>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-10-12T01:37:19Z</when>
+  </f>
+  <f>
+    <_id t="I">18760</_id>
+    <_job t="I">18437853226</_job>
+    <_time t="T">2025-10-12T02:25:24Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">55930187862</events_were_scanned>
-    <issues_were_scanned t="I">1227</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <events_were_scanned t="I">55932070679</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">246</min_pull_was_found>
+    <min_pull_was_found t="I">255</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">609</types_were_scanned>
+    <types_were_scanned t="I">735</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
