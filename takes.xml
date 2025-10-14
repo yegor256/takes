@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.11.0" size="1034466">
+<fb version="0.11.0" size="1034745">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.933187007</seconds>
+    <seconds t="F">810.648155564</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-14T09:10:38Z</when>
+    <when t="T">2025-10-14T10:09:55Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61343,25 +61343,6 @@
     <when t="T">2025-10-14T03:26:44Z</when>
   </f>
   <f>
-    <_id t="I">18780</_id>
-    <_job t="I">18491100221</_job>
-    <_time t="T">2025-10-14T08:57:28Z</_time>
-    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">445</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">56022567885</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">751</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">380</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">0</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">18781</_id>
     <_job t="I">18491100221</_job>
     <_time t="T">2025-10-14T08:59:13Z</_time>
@@ -61377,12 +61358,47 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">57</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1481</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-10-14T08:49:27Z</when>
     <where t="S">github</where>
     <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18783</_id>
+    <_job t="I">18492675483</_job>
+    <_time t="T">2025-10-14T09:56:37Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <details t="S">Apparently, yegor256/takes#1018 has been "issue-was-closed".</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1018</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2025-10-14T08:49:31Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">18784</_id>
+    <_job t="I">18492675483</_job>
+    <_time t="T">2025-10-14T10:09:54Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <assignees_were_scanned t="I">581</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">56025331282</events_were_scanned>
+    <issues_were_scanned t="I">1227</issues_were_scanned>
+    <labels_were_scanned t="I">924</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">144</min_issue_was_found>
+    <min_pull_was_found t="I">381</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">120</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
