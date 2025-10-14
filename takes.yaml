@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 748.609541985
+  seconds: 810.933187007
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-14 08:08:26.073623110 Z
+  when: 2025-10-14 09:10:38.193024979 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54517,8 +54517,8 @@
   what: learn-eva
   when: 2025-10-14 03:26:44.845257588 Z
 - _id: 18780
-  _job: 18489515518
-  _time: 2025-10-14 08:07:08.834685079 Z
+  _job: 18491100221
+  _time: 2025-10-14 08:57:28.500678159 Z
   _version: 0.16.8/0.54.0/0.15.51
   assignees_were_scanned: 445
   earliest_issue_was_found: 1
@@ -54530,6 +54530,28 @@
   min_issue_was_found: 144
   min_pull_was_found: 380
   repository: 28924109
-  types_were_scanned: 1150
+  types_were_scanned: 0
   what: iterate
   where: github
+- _id: 18781
+  _job: 18491100221
+  _time: 2025-10-14 08:59:13.536159514 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  branch: master
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1481 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 57
+  issue: 1481
+  repository: 28924109
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-10-14 08:49:27.000000000 Z
+  where: github
+  who: 8086956
