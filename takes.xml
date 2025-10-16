@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1036120">
+<fb version="0.16.8" size="1036619">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">800.474226022</seconds>
+    <seconds t="F">752.951405232</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-16T18:09:32Z</when>
+    <when t="T">2025-10-16T19:08:16Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61609,21 +61609,42 @@
     <when t="T">2025-10-16T16:57:25Z</when>
   </f>
   <f>
-    <_id t="I">18810</_id>
-    <_job t="I">18570215436</_job>
-    <_time t="T">2025-10-16T18:09:31Z</_time>
+    <_id t="I">18811</_id>
+    <_job t="I">18571699704</_job>
+    <_time t="T">2025-10-16T18:55:47Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">1054</assignees_were_scanned>
+    <by_owner t="I">1</by_owner>
+    <commit t="S">14e8fe6e51825198ad5d40341a068325dd39e70e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #27550840222 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
+    <event_id t="I">5261545306</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">27550840222</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2025-10-16T18:54:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18812</_id>
+    <_job t="I">18571699704</_job>
+    <_time t="T">2025-10-16T19:07:13Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <assignees_were_scanned t="I">1307</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5259388807</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <events_were_scanned t="I">5261545306</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">494</min_pull_was_found>
+    <min_pull_was_found t="I">499</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">277</types_were_scanned>
+    <types_were_scanned t="I">387</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

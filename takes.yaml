@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 800.474226022
+  seconds: 752.951405232
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-16 18:09:32.009911287 Z
+  when: 2025-10-16 19:08:16.933100626 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54761,20 +54761,40 @@
   total_reviews_submitted: 1
   what: quantity-of-deliverables
   when: 2025-10-16 16:57:25.954375772 Z
-- _id: 18810
-  _job: 18570215436
-  _time: 2025-10-16 18:09:31.920755297 Z
+- _id: 18811
+  _job: 18571699704
+  _time: 2025-10-16 18:55:47.730487194 Z
   _version: 0.16.8/0.54.0/0.15.51
-  assignees_were_scanned: 1054
+  by_owner: 1
+  commit: 14e8fe6e51825198ad5d40341a068325dd39e70e
+  default_branch: master
+  details: 'A new Git push #27550840222 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 5261545306
+  event_type: PushEvent
+  is_human: 1
+  push_id: 27550840222
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-10-16 18:54:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 18812
+  _job: 18571699704
+  _time: 2025-10-16 19:07:13.964410532 Z
+  _version: 0.16.8/0.54.0/0.15.51
+  assignees_were_scanned: 1307
   earliest_issue_was_found: 1
-  events_were_scanned: 5259388807
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
+  events_were_scanned: 5261545306
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 494
+  min_pull_was_found: 499
   repository: 28924109
-  types_were_scanned: 277
+  types_were_scanned: 387
   what: iterate
   where: github
