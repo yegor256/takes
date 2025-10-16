@@ -1,5 +1,6 @@
 # Pure Object-Oriented Java Web Framework
 
+[![Z vitals](https://www.takes.org/takes-badge.svg)](https://www.takes.org/takes-vitals.html)
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](https://www.rultor.com/b/yegor256/takes)](https://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
