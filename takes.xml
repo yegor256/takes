@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1035241">
+<fb version="0.16.8" size="1035883">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.599496207</seconds>
+    <seconds t="F">810.607688704</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-16T15:10:02Z</when>
+    <when t="T">2025-10-16T16:09:42Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61411,30 +61411,204 @@
     <when t="T">2025-10-16T00:07:37Z</when>
   </f>
   <f>
-    <_id t="I">18803</_id>
-    <_job t="I">43562</_job>
-    <_time t="T">2025-10-16T06:12:48Z</_time>
+    <_id t="I">18805</_id>
+    <_job t="I">43636</_job>
+    <_time t="T">2025-10-16T15:11:02Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2025-10-16T06:12:48Z</when>
+    <when t="T">2025-10-16T15:11:02Z</when>
   </f>
   <f>
-    <_id t="I">18804</_id>
-    <_job t="I">18565509897</_job>
-    <_time t="T">2025-10-16T15:10:02Z</_time>
+    <_id t="I">18806</_id>
+    <_job t="I">18567199089</_job>
+    <_time t="T">2025-10-16T16:08:04Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.51</_version>
-    <assignees_were_scanned t="I">718</assignees_were_scanned>
+    <assignees_were_scanned t="I">822</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5256174933</events_were_scanned>
+    <events_were_scanned t="I">5256556624</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
     <labels_were_scanned t="I">751</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">1314</merges_were_scanned>
+    <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">489</min_pull_was_found>
+    <min_pull_was_found t="I">493</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">18807</_id>
+    <_job t="I">18567199089</_job>
+    <_time t="T">2025-10-16T16:08:04Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.51</_version>
+    <since t="T">2025-10-09T15:56:46Z</since>
+    <some_backlog_size>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">88</v>
+      <v t="I">88</v>
+    </some_backlog_size>
+    <some_build_duration>
+      <v t="I">752</v>
+      <v t="I">38</v>
+      <v t="I">920</v>
+      <v t="I">40</v>
+      <v t="I">1019</v>
+      <v t="I">38</v>
+      <v t="I">918</v>
+      <v t="I">38</v>
+      <v t="I">853</v>
+      <v t="I">47</v>
+      <v t="I">7</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">14</v>
+      <v t="I">17</v>
+      <v t="I">22</v>
+      <v t="I">30</v>
+      <v t="I">32</v>
+      <v t="I">7</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">15</v>
+      <v t="I">19</v>
+      <v t="I">69</v>
+      <v t="I">31</v>
+      <v t="I">33</v>
+      <v t="I">295</v>
+      <v t="I">280</v>
+      <v t="I">1048</v>
+      <v t="I">39</v>
+      <v t="I">1072</v>
+      <v t="I">41</v>
+      <v t="I">1008</v>
+      <v t="I">41</v>
+      <v t="I">876</v>
+      <v t="I">39</v>
+      <v t="I">898</v>
+      <v t="I">37</v>
+      <v t="I">961</v>
+      <v t="I">38</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">14</v>
+      <v t="I">21</v>
+      <v t="I">31</v>
+      <v t="I">34</v>
+      <v t="I">36</v>
+      <v t="I">80</v>
+      <v t="I">446</v>
+      <v t="I">908</v>
+      <v t="I">36</v>
+      <v t="I">0</v>
+    </some_build_duration>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+    </some_build_success_rate>
+    <some_issue_lifetime t="F">181504061.0</some_issue_lifetime>
+    <some_merged_pulls t="I">6</some_merged_pulls>
+    <some_pull_files_size>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_pull_files_size>
+    <some_pull_hoc_size>
+      <v t="I">2</v>
+      <v t="I">57</v>
+    </some_pull_hoc_size>
+    <some_pull_lifetime>
+      <v t="F">21651.0</v>
+      <v t="F">85330.0</v>
+      <v t="F">241579.0</v>
+      <v t="F">8120998.0</v>
+      <v t="F">8166585.0</v>
+      <v t="F">8167505.0</v>
+    </some_pull_lifetime>
+    <some_review_size>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_review_size>
+    <some_review_time t="I">782</some_review_time>
+    <some_reviewers_per_pull>
+      <v t="I">1</v>
+      <v t="I">0</v>
+    </some_reviewers_per_pull>
+    <some_reviews_per_pull>
+      <v t="I">1</v>
+      <v t="I">0</v>
+    </some_reviews_per_pull>
+    <some_unmerged_pulls t="I">4</some_unmerged_pulls>
+    <what t="S">quality-of-service</what>
+    <when t="T">2025-10-16T15:56:46Z</when>
   </f>
 </fb>
