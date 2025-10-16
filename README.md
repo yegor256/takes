@@ -1,12 +1,12 @@
 # Pure Object-Oriented Java Web Framework
 
-[![Z vitals](https://www.takes.org/takes-badge.svg)](https://www.takes.org/takes-vitals.html)
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](https://www.rultor.com/b/yegor256/takes)](https://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![mvn](https://github.com/yegor256/takes/actions/workflows/mvn.yml/badge.svg)](https://github.com/yegor256/takes/actions/workflows/mvn.yml)
 [![Javadoc](https://www.javadoc.io/badge/org.takes/takes.svg)](https://www.javadoc.io/doc/org.takes/takes)
+[![Z vitals](https://www.takes.org/takes-badge.svg)](https://www.takes.org/takes-vitals.html)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/takes)](https://hitsofcode.com/view/github/yegor256/takes)
