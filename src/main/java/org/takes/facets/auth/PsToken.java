@@ -101,7 +101,7 @@ public final class PsToken implements Pass {
     @Override
     public Opt<Identity> enter(final Request req) throws IOException {
         // @checkstyle ExecutableStatementCount (100 lines)
-        Opt<Identity> user = new Opt.Empty<>();
+        final Opt<Identity> user = new Opt.Empty<>();
         final UncheckedText head = new Unchecked<>(
             new FirstOf<>(
                 text -> new StartsWith(
@@ -142,7 +142,7 @@ public final class PsToken implements Pass {
                         )
                     )
                 )) {
-                    user = new Opt.Single<>(
+                    return new Opt.Single<>(
                         new Identity.Simple(
                             rdr.readObject().getString(Token.Jwt.SUBJECT)
                         )
