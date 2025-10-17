@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 835.727273689
+  seconds: 811.874823364
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-17 13:19:48.678653480 Z
+  when: 2025-10-17 14:09:46.762722422 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54836,13 +54836,13 @@
   what: earned-value
   when: 2025-10-17 10:11:28.098946878 Z
 - _id: 18824
-  _job: 18593576895
-  _time: 2025-10-17 13:18:53.050071490 Z
+  _job: 18594883800
+  _time: 2025-10-17 14:00:29.627372775 Z
   _version: 0.16.8/0.54.0/0.15.51
-  assignees_were_scanned: 778
+  assignees_were_scanned: 884
   earliest_issue_was_found: 1
-  events_were_scanned: 5279178866
-  issues_were_scanned: 1292
+  events_were_scanned: 5280820299
+  issues_were_scanned: 0
   labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
