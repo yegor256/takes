@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 720.883627727
+  seconds: 783.039994749
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-21 12:07:48.723145178 Z
+  when: 2025-10-21 13:20:46.451730369 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -24757,6 +24757,7 @@
   is_human: 0
   issue: 1247
   repository: 28924109
+  stale: issue
   what: pull-was-opened
   when: 2023-09-20 03:53:00.000000000 Z
   where: github
@@ -44890,6 +44891,7 @@
   issue: 1247
   repository: 28924109
   review_comments: 0
+  stale: issue
   succeeded_builds: 0
   what: pull-was-merged
   when: 2023-09-20 04:44:12.000000000 Z
@@ -54888,19 +54890,19 @@
   what: learn-eva
   when: 2025-10-21 11:10:31.087758954 Z
 - _id: 18852
-  _job: 18682952668
-  _time: 2025-10-21 12:07:37.692714813 Z
+  _job: 18684827029
+  _time: 2025-10-21 13:13:35.612196742 Z
   _version: 0.16.8/0.54.0/0.15.52
-  assignees_were_scanned: 718
+  assignees_were_scanned: 822
   earliest_issue_was_found: 1
-  events_were_scanned: 5355123564
-  issues_were_scanned: 0
-  labels_were_scanned: 924
+  events_were_scanned: 5356384259
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 648
+  min_pull_was_found: 649
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 491
   what: iterate
   where: github
