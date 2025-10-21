@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 749.96680452
+  seconds: 810.304122111
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-21 18:08:44.953864749 Z
+  when: 2025-10-21 19:11:19.126112236 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54904,8 +54904,10 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 0
   issue: 1313
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-10-21 17:19:49.000000000 Z
@@ -54920,6 +54922,7 @@
   details: The pull request yegor256/takes#1313 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 10690h49m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1313
   repository: 28924109
   review_comments: 0
@@ -54929,19 +54932,19 @@
   where: github
   who: 526301
 - _id: 18856
-  _job: 18692987070
-  _time: 2025-10-21 18:08:20.343409442 Z
+  _job: 18694525822
+  _time: 2025-10-21 19:10:59.220427253 Z
   _version: 0.16.8/0.54.0/0.15.52
-  assignees_were_scanned: 211
+  assignees_were_scanned: 341
   earliest_issue_was_found: 1
-  events_were_scanned: 4169021306
-  issues_were_scanned: 1292
-  labels_were_scanned: 751
+  events_were_scanned: 5365291798
+  issues_were_scanned: 0
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 659
+  min_pull_was_found: 661
   repository: 28924109
-  types_were_scanned: 1035
+  types_were_scanned: 1146
   what: iterate
   where: github
