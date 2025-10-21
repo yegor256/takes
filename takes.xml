@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1038801">
+<fb version="0.16.8" size="1039535">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">679.041540363</seconds>
+    <seconds t="F">749.96680452</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-21T17:08:19Z</when>
+    <when t="T">2025-10-21T18:08:44Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61747,21 +61747,63 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <when t="T">2025-10-21T11:10:31Z</when>
   </f>
   <f>
-    <_id t="I">18852</_id>
-    <_job t="I">18691500871</_job>
-    <_time t="T">2025-10-21T17:08:19Z</_time>
+    <_id t="I">18853</_id>
+    <_job t="I">18692987070</_job>
+    <_time t="T">2025-10-21T18:00:45Z</_time>
     <_version t="S">0.16.8/0.54.0/0.15.52</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
+    <branch t="S">renovate/jakarta.ws.rs-jakarta.ws.rs-api-4.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1313 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1313</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-10-21T17:19:49Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">18855</_id>
+    <_job t="I">18692987070</_job>
+    <_time t="T">2025-10-21T18:06:56Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.52</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1313 with 4 HoC created by @renovate[bot] was reviewed by @yegor256 after 10690h49m and 0 comments.</details>
+    <hoc t="I">4</hoc>
+    <issue t="I">1313</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">38486955</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-10-21T17:03:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18856</_id>
+    <_job t="I">18692987070</_job>
+    <_time t="T">2025-10-21T18:08:20Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.15.52</_version>
+    <assignees_were_scanned t="I">211</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5362727662</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">607</labels_were_scanned>
+    <events_were_scanned t="I">4169021306</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">751</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">658</min_pull_was_found>
+    <min_pull_was_found t="I">659</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">923</types_were_scanned>
+    <types_were_scanned t="I">1035</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

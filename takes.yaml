@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 679.041540363
+  seconds: 749.96680452
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-21 17:08:19.437011725 Z
+  when: 2025-10-21 18:08:44.953864749 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54889,20 +54889,59 @@
   _version: 0.16.8/0.54.0/0.15.52
   what: learn-eva
   when: 2025-10-21 11:10:31.087758954 Z
-- _id: 18852
-  _job: 18691500871
-  _time: 2025-10-21 17:08:19.328884983 Z
+- _id: 18853
+  _job: 18692987070
+  _time: 2025-10-21 18:00:45.709069771 Z
   _version: 0.16.8/0.54.0/0.15.52
-  assignees_were_scanned: 0
+  branch: renovate/jakarta.ws.rs-jakarta.ws.rs-api-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1313 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1313
+  repository: 28924109
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-10-21 17:19:49.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18855
+  _job: 18692987070
+  _time: 2025-10-21 18:06:56.015940642 Z
+  _version: 0.16.8/0.54.0/0.15.52
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1313 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 10690h49m and 0 comments.
+  hoc: 4
+  issue: 1313
+  repository: 28924109
+  review_comments: 0
+  seconds: 38486955
+  what: code-was-reviewed
+  when: 2025-10-21 17:03:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 18856
+  _job: 18692987070
+  _time: 2025-10-21 18:08:20.343409442 Z
+  _version: 0.16.8/0.54.0/0.15.52
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 5362727662
-  issues_were_scanned: 0
-  labels_were_scanned: 607
+  events_were_scanned: 4169021306
+  issues_were_scanned: 1292
+  labels_were_scanned: 751
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 658
+  min_pull_was_found: 659
   repository: 28924109
-  types_were_scanned: 923
+  types_were_scanned: 1035
   what: iterate
   where: github
