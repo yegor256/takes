@@ -2,11 +2,16 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - Failed to open TCP connection to api.github.com:443 (Connection refused - connect(2)
+    for "api.github.com" port 443)
+  - Failed to open TCP connection to api.github.com:443 (Connection refused - connect(2)
+    for "api.github.com" port 443)
   inserted: 8
-  seconds: 780.030010391
+  seconds: 374.110798709
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-24 12:09:31.723456006 Z
+  when: 2025-10-24 13:13:13.376816892 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -54901,18 +54906,6 @@
   when: 2025-10-21 17:03:15.000000000 Z
   where: github
   who: 526301
-- _id: 18861
-  _job: 44697
-  _time: 2025-10-22 11:10:12.561838889 Z
-  _version: 0.16.8/0.54.0/0.16.0
-  analyzers: 18
-  text: |-
-    The average number of builds per week (512.3) is increasing (R=0.12).
-    The average number of commits per week (11.8) is staying still.
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (42.0 developers) is increasing (R=0.79).
-  what: assessment
-  when: 2025-10-22 11:10:12.571032103 Z
 - _id: 18863
   _job: 18715296766
   _time: 2025-10-22 12:03:56.494465740 Z
@@ -55151,20 +55144,32 @@
   _version: 0.16.8/0.54.0/0.16.0
   what: learn-eva
   when: 2025-10-24 06:12:27.735984034 Z
-- _id: 18883
-  _job: 18778974599
-  _time: 2025-10-24 12:09:31.600916037 Z
+- _id: 18884
+  _job: 45082
+  _time: 2025-10-24 12:10:09.449545231 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 1307
+  analyzers: 18
+  text: |-
+    The average number of builds per week (499.4) is staying still.
+    The average number of commits per week (11.0) is decreasing (R=-0.10).
+    The average number of releases per month (0.0) is staying still.
+    The average monthly turnover (42.0 developers) is increasing (R=0.79).
+  what: assessment
+  when: 2025-10-24 12:10:09.457784339 Z
+- _id: 18885
+  _job: 18780657481
+  _time: 2025-10-24 13:11:27.786542224 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 5438577502
-  issues_were_scanned: 1292
-  labels_were_scanned: 751
+  events_were_scanned: 5439982317
+  issues_were_scanned: 0
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 801
+  min_pull_was_found: 803
   repository: 28924109
-  types_were_scanned: 872
+  types_were_scanned: 990
   what: iterate
   where: github

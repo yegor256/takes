@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1040909">
+<fb version="0.16.8" size="1041168">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
+    <error>
+      <v t="S">Failed to open TCP connection to api.github.com:443 (Connection refused - connect(2) for "api.github.com" port 443)</v>
+      <v t="S">Failed to open TCP connection to api.github.com:443 (Connection refused - connect(2) for "api.github.com" port 443)</v>
+    </error>
     <inserted t="I">8</inserted>
-    <seconds t="F">780.030010391</seconds>
+    <seconds t="F">374.110798709</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-24T12:09:31Z</when>
+    <when t="T">2025-10-24T13:13:13Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -61758,19 +61762,6 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">18861</_id>
-    <_job t="I">44697</_job>
-    <_time t="T">2025-10-22T11:10:12Z</_time>
-    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (512.3) is increasing (R=0.12).
-The average number of commits per week (11.8) is staying still.
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-10-22T11:10:12Z</when>
-  </f>
-  <f>
     <_id t="I">18863</_id>
     <_job t="I">18715296766</_job>
     <_time t="T">2025-10-22T12:03:56Z</_time>
@@ -62030,21 +62021,34 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <when t="T">2025-10-24T06:12:27Z</when>
   </f>
   <f>
-    <_id t="I">18883</_id>
-    <_job t="I">18778974599</_job>
-    <_time t="T">2025-10-24T12:09:31Z</_time>
+    <_id t="I">18884</_id>
+    <_job t="I">45082</_job>
+    <_time t="T">2025-10-24T12:10:09Z</_time>
     <_version t="S">0.16.8/0.54.0/0.16.0</_version>
-    <assignees_were_scanned t="I">1307</assignees_were_scanned>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (499.4) is staying still.
+The average number of commits per week (11.0) is decreasing (R=-0.10).
+The average number of releases per month (0.0) is staying still.
+The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-10-24T12:10:09Z</when>
+  </f>
+  <f>
+    <_id t="I">18885</_id>
+    <_job t="I">18780657481</_job>
+    <_time t="T">2025-10-24T13:11:27Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5438577502</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">751</labels_were_scanned>
+    <events_were_scanned t="I">5439982317</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">924</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">801</min_pull_was_found>
+    <min_pull_was_found t="I">803</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">872</types_were_scanned>
+    <types_were_scanned t="I">990</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
