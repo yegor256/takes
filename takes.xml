@@ -5,10 +5,10 @@
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.831009002</seconds>
+    <seconds t="F">742.343857177</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-24T06:09:37Z</when>
+    <when t="T">2025-10-24T07:09:26Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -62022,29 +62022,29 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <when t="T">2025-10-23T16:57:25Z</when>
   </f>
   <f>
-    <_id t="I">18880</_id>
-    <_job t="I">44948</_job>
-    <_time t="T">2025-10-23T22:10:47Z</_time>
+    <_id t="I">18882</_id>
+    <_job t="I">45021</_job>
+    <_time t="T">2025-10-24T06:12:27Z</_time>
     <_version t="S">0.16.8/0.54.0/0.16.0</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2025-10-23T22:10:47Z</when>
+    <when t="T">2025-10-24T06:12:27Z</when>
   </f>
   <f>
-    <_id t="I">18881</_id>
-    <_job t="I">18770989602</_job>
-    <_time t="T">2025-10-24T06:09:37Z</_time>
+    <_id t="I">18883</_id>
+    <_job t="I">18772144490</_job>
+    <_time t="T">2025-10-24T07:09:06Z</_time>
     <_version t="S">0.16.8/0.54.0/0.16.0</_version>
-    <assignees_were_scanned t="I">445</assignees_were_scanned>
+    <assignees_were_scanned t="I">581</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5431344607</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">751</labels_were_scanned>
+    <events_were_scanned t="I">5432258409</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">924</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">783</min_pull_was_found>
+    <min_pull_was_found t="I">785</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">220</types_were_scanned>
+    <types_were_scanned t="I">321</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
