@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 699.346207287
+  seconds: 659.746932931
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-26 17:08:11.664255501 Z
+  when: 2025-10-26 18:07:13.860437464 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55200,19 +55200,19 @@
   what: dimensions-of-terrain
   when: 2025-10-26 14:57:42.844679305 Z
 - _id: 18907
-  _job: 18820955378
-  _time: 2025-10-26 17:08:11.507699620 Z
+  _job: 18821621369
+  _time: 2025-10-26 18:06:45.410883009 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 0
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 5476486068
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  events_were_scanned: 5477125739
+  issues_were_scanned: 1292
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 934
+  min_pull_was_found: 936
   repository: 28924109
-  types_were_scanned: 1137
+  types_were_scanned: 0
   what: iterate
   where: github
