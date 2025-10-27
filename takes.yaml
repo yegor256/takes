@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 661.41124769
+  seconds: 704.924337569
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-27 05:08:59.620420013 Z
+  when: 2025-10-27 06:07:38.287296362 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55211,20 +55211,68 @@
   when: 2025-10-27 05:00:13.000000000 Z
   where: github
   who: 166734835
-- _id: 18913
-  _job: 18830313394
-  _time: 2025-10-27 05:08:59.504741127 Z
+- _id: 18914
+  _job: 18831319544
+  _time: 2025-10-27 06:06:14.532431441 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 341
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The missing pull yegor256/takes#1482 has been opened by @renovate[bot].
+  issue: 1482
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-15 09:12:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 18915
+  _job: 18831319544
+  _time: 2025-10-27 06:06:15.241702462 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The missing pull yegor256/takes#1483 has been opened by @renovate[bot].
+  issue: 1483
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-16 08:55:35.000000000 Z
+  where: github
+  who: 29139614
+- _id: 18916
+  _job: 18831319544
+  _time: 2025-10-27 06:06:15.858211857 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1484 has been opened by @renovate[bot].
+  issue: 1484
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-17 13:15:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 18917
+  _job: 18831319544
+  _time: 2025-10-27 06:06:16.399681758 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1485 has been opened by @renovate[bot].
+  issue: 1485
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-21 17:09:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 18918
+  _job: 18831319544
+  _time: 2025-10-27 06:07:09.872082208 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 445
   earliest_issue_was_found: 1
-  events_were_scanned: 5484264871
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  events_were_scanned: 5484919780
+  issues_were_scanned: 1292
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 963
+  min_pull_was_found: 964
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 163
   what: iterate
   where: github
