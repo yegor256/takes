@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1041645">
+<fb version="0.16.8" size="1041918">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">751.090140767</seconds>
+    <seconds t="F">661.41124769</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-27T04:17:53Z</when>
+    <when t="T">2025-10-27T05:08:59Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -62084,21 +62084,35 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <when t="T">2025-10-27T03:35:57Z</when>
   </f>
   <f>
-    <_id t="I">18911</_id>
-    <_job t="I">18829441957</_job>
-    <_time t="T">2025-10-27T04:17:53Z</_time>
+    <_id t="I">18912</_id>
+    <_job t="I">18830313394</_job>
+    <_time t="T">2025-10-27T05:04:46Z</_time>
     <_version t="S">0.16.8/0.54.0/0.16.0</_version>
-    <assignees_were_scanned t="I">211</assignees_were_scanned>
+    <details t="S">The issue yegor256/takes#1486 has been earlier opened by @revive-code-bot[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1486</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2025-10-27T05:00:13Z</when>
+    <where t="S">github</where>
+    <who t="I">166734835</who>
+  </f>
+  <f>
+    <_id t="I">18913</_id>
+    <_job t="I">18830313394</_job>
+    <_time t="T">2025-10-27T05:08:59Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
+    <assignees_were_scanned t="I">341</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5483716654</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <events_were_scanned t="I">5484264871</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">962</min_pull_was_found>
+    <min_pull_was_found t="I">963</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

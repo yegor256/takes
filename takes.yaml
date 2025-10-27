@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 751.090140767
+  seconds: 661.41124769
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-27 04:17:53.795129845 Z
+  when: 2025-10-27 05:08:59.620420013 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55199,20 +55199,32 @@
   _version: 0.16.8/0.54.0/0.16.0
   what: learn-eva
   when: 2025-10-27 03:35:57.607386852 Z
-- _id: 18911
-  _job: 18829441957
-  _time: 2025-10-27 04:17:53.328770379 Z
+- _id: 18912
+  _job: 18830313394
+  _time: 2025-10-27 05:04:46.344164868 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 211
+  details: The issue yegor256/takes#1486 has been earlier opened by @revive-code-bot[bot].
+  is_human: 0
+  issue: 1486
+  repository: 28924109
+  what: issue-was-opened
+  when: 2025-10-27 05:00:13.000000000 Z
+  where: github
+  who: 166734835
+- _id: 18913
+  _job: 18830313394
+  _time: 2025-10-27 05:08:59.504741127 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 341
   earliest_issue_was_found: 1
-  events_were_scanned: 5483716654
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
+  events_were_scanned: 5484264871
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 962
+  min_pull_was_found: 963
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
