@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.536858131
+  seconds: 810.519586074
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-27 07:12:55.167387400 Z
+  when: 2025-10-27 08:09:49.850188949 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55278,9 +55278,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1482
   repository: 28924109
   review: 2025-10-16 08:41:50.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-10-16 08:54:52.000000000 Z
@@ -55301,9 +55303,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1483
   repository: 28924109
   review: 2025-10-17 16:47:19.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-10-17 17:18:18.000000000 Z
@@ -55324,9 +55328,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1484
   repository: 28924109
   review: 2025-10-17 16:47:16.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-10-17 17:02:28.000000000 Z
@@ -55347,28 +55353,102 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1485
   repository: 28924109
   review: 2025-10-22 02:58:27.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-10-22 03:13:04.000000000 Z
   where: github
   who: 8086956
-- _id: 18923
-  _job: 18832523108
-  _time: 2025-10-27 07:07:07.395978437 Z
+- _id: 18924
+  _job: 18833770363
+  _time: 2025-10-27 08:05:14.196131904 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 581
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1482 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 23h29m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1482
+  repository: 28924109
+  review_comments: 0
+  seconds: 84548
+  what: code-was-reviewed
+  when: 2025-10-16 08:41:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 18925
+  _job: 18833770363
+  _time: 2025-10-27 08:05:15.640357081 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1483 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 31h51m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1483
+  repository: 28924109
+  review_comments: 0
+  seconds: 114704
+  what: code-was-reviewed
+  when: 2025-10-17 16:47:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 18926
+  _job: 18833770363
+  _time: 2025-10-27 08:05:16.781277161 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1484 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 3h32m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1484
+  repository: 28924109
+  review_comments: 0
+  seconds: 12731
+  what: code-was-reviewed
+  when: 2025-10-17 16:47:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 18927
+  _job: 18833770363
+  _time: 2025-10-27 08:05:17.980209438 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1485 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h48m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1485
+  repository: 28924109
+  review_comments: 0
+  seconds: 35316
+  what: code-was-reviewed
+  when: 2025-10-22 02:58:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 18928
+  _job: 18833770363
+  _time: 2025-10-27 08:09:49.764953536 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 718
   earliest_issue_was_found: 1
-  events_were_scanned: 5485792021
-  issues_were_scanned: 0
-  labels_were_scanned: 607
+  events_were_scanned: 5486982997
+  issues_were_scanned: 1292
+  labels_were_scanned: 645
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 966
+  min_pull_was_found: 967
   repository: 28924109
-  types_were_scanned: 277
+  types_were_scanned: 387
   what: iterate
   where: github

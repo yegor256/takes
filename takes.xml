@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1044703">
+<fb version="0.16.8" size="1046150">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.536858131</seconds>
+    <seconds t="F">810.519586074</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-10-27T07:12:55Z</when>
+    <when t="T">2025-10-27T08:09:49Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -62173,9 +62173,11 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1482</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-10-16T08:41:50Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-10-16T08:54:52Z</when>
@@ -62198,9 +62200,11 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1483</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-10-17T16:47:19Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-10-17T17:18:18Z</when>
@@ -62223,9 +62227,11 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1484</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-10-17T16:47:16Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-10-17T17:02:28Z</when>
@@ -62248,9 +62254,11 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1485</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-10-22T02:58:27Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-10-22T03:13:04Z</when>
@@ -62258,21 +62266,97 @@ The average monthly turnover (42.0 developers) is increasing (R=0.79).</text>
     <who t="I">8086956</who>
   </f>
   <f>
-    <_id t="I">18923</_id>
-    <_job t="I">18832523108</_job>
-    <_time t="T">2025-10-27T07:07:07Z</_time>
+    <_id t="I">18924</_id>
+    <_job t="I">18833770363</_job>
+    <_time t="T">2025-10-27T08:05:14Z</_time>
     <_version t="S">0.16.8/0.54.0/0.16.0</_version>
-    <assignees_were_scanned t="I">581</assignees_were_scanned>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1482 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 23h29m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1482</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">84548</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-10-16T08:41:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18925</_id>
+    <_job t="I">18833770363</_job>
+    <_time t="T">2025-10-27T08:05:15Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1483 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 31h51m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1483</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">114704</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-10-17T16:47:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18926</_id>
+    <_job t="I">18833770363</_job>
+    <_time t="T">2025-10-27T08:05:16Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1484 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 3h32m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1484</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">12731</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-10-17T16:47:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18927</_id>
+    <_job t="I">18833770363</_job>
+    <_time t="T">2025-10-27T08:05:17Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1485 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 9h48m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1485</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">35316</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-10-22T02:58:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">18928</_id>
+    <_job t="I">18833770363</_job>
+    <_time t="T">2025-10-27T08:09:49Z</_time>
+    <_version t="S">0.16.8/0.54.0/0.16.0</_version>
+    <assignees_were_scanned t="I">718</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5485792021</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">607</labels_were_scanned>
+    <events_were_scanned t="I">5486982997</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">645</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">966</min_pull_was_found>
+    <min_pull_was_found t="I">967</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">277</types_were_scanned>
+    <types_were_scanned t="I">387</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
