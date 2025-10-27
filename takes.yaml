@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 704.924337569
+  seconds: 810.536858131
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-27 06:07:38.287296362 Z
+  when: 2025-10-27 07:12:55.167387400 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55217,6 +55217,7 @@
   _version: 0.16.8/0.54.0/0.16.0
   branch: renovate/zerocracy-pages-action-0.x
   details: The missing pull yegor256/takes#1482 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1482
   repository: 28924109
   what: pull-was-opened
@@ -55229,6 +55230,7 @@
   _version: 0.16.8/0.54.0/0.16.0
   branch: renovate/zerocracy-pages-action-0.x
   details: The missing pull yegor256/takes#1483 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1483
   repository: 28924109
   what: pull-was-opened
@@ -55241,6 +55243,7 @@
   _version: 0.16.8/0.54.0/0.16.0
   branch: renovate/zerocracy-judges-action-0.x
   details: The missing pull yegor256/takes#1484 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1484
   repository: 28924109
   what: pull-was-opened
@@ -55253,26 +55256,119 @@
   _version: 0.16.8/0.54.0/0.16.0
   branch: renovate/zerocracy-judges-action-0.x
   details: The missing pull yegor256/takes#1485 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1485
   repository: 28924109
   what: pull-was-opened
   when: 2025-10-21 17:09:51.000000000 Z
   where: github
   who: 29139614
-- _id: 18918
-  _job: 18831319544
-  _time: 2025-10-27 06:07:09.872082208 Z
+- _id: 18919
+  _job: 18832523108
+  _time: 2025-10-27 07:05:08.146991074 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 445
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1482 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1482
+  repository: 28924109
+  review: 2025-10-16 08:41:50.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-10-16 08:54:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18920
+  _job: 18832523108
+  _time: 2025-10-27 07:05:41.679666596 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1483 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1483
+  repository: 28924109
+  review: 2025-10-17 16:47:19.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-10-17 17:18:18.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18921
+  _job: 18832523108
+  _time: 2025-10-27 07:05:53.765961269 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1484 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1484
+  repository: 28924109
+  review: 2025-10-17 16:47:16.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-10-17 17:02:28.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18922
+  _job: 18832523108
+  _time: 2025-10-27 07:06:14.464844422 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1485 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1485
+  repository: 28924109
+  review: 2025-10-22 02:58:27.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-10-22 03:13:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 18923
+  _job: 18832523108
+  _time: 2025-10-27 07:07:07.395978437 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 581
   earliest_issue_was_found: 1
-  events_were_scanned: 5484919780
-  issues_were_scanned: 1292
-  labels_were_scanned: 376
+  events_were_scanned: 5485792021
+  issues_were_scanned: 0
+  labels_were_scanned: 607
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 964
+  min_pull_was_found: 966
   repository: 28924109
-  types_were_scanned: 163
+  types_were_scanned: 277
   what: iterate
   where: github
