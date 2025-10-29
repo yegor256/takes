@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 795.256862823
+  seconds: 857.67910586
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-29 17:11:55.330241265 Z
+  when: 2025-10-29 18:10:52.150741194 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55435,18 +55435,6 @@
   total_stars: 861
   what: dimensions-of-terrain
   when: 2025-10-27 15:08:43.303539387 Z
-- _id: 18935
-  _job: 45708
-  _time: 2025-10-27 15:12:40.736304559 Z
-  _version: 0.16.8/0.55.0/0.16.0
-  analyzers: 18
-  text: |-
-    The average number of builds per week (499.4) is staying still.
-    The average number of commits per week (11.0) is decreasing (R=-0.10).
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (41.0 developers) is increasing (R=0.79).
-  what: assessment
-  when: 2025-10-27 15:12:40.743451456 Z
 - _id: 18943
   _job: 18880960684
   _time: 2025-10-28 15:58:17.227150568 Z
@@ -55475,12 +55463,6 @@
     The average monthly turnover (41.0 developers) is increasing (R=0.79).
   what: assessment
   when: 2025-10-28 16:11:43.150476040 Z
-- _id: 18949
-  _job: 45980
-  _time: 2025-10-29 08:11:55.600164649 Z
-  _version: 0.16.8/0.54.0/0.16.0
-  what: learn-eva
-  when: 2025-10-29 08:11:55.553828491 Z
 - _id: 18951
   _job: 18914115750
   _time: 2025-10-29 16:10:33.041091126 Z
@@ -55497,20 +55479,38 @@
   total_stars: 862
   what: dimensions-of-terrain
   when: 2025-10-29 16:10:33.046554660 Z
-- _id: 18952
-  _job: 18915889083
-  _time: 2025-10-29 17:01:44.336290227 Z
+- _id: 18953
+  _job: 46045
+  _time: 2025-10-29 17:12:26.307550411 Z
+  _version: 0.16.8/0.55.0/0.16.0
+  analyzers: 18
+  text: |-
+    The average number of builds per week (499.4) is staying still.
+    The average number of commits per week (11.0) is decreasing (R=-0.10).
+    The average number of releases per month (0.0) is staying still.
+    The average monthly turnover (41.0 developers) is increasing (R=0.79).
+  what: assessment
+  when: 2025-10-29 17:12:26.316220056 Z
+- _id: 18954
+  _job: 46045
+  _time: 2025-10-29 17:12:51.093019255 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 1054
+  what: learn-eva
+  when: 2025-10-29 17:12:51.015192476 Z
+- _id: 18955
+  _job: 18917428125
+  _time: 2025-10-29 18:09:56.966605323 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 1307
   earliest_issue_was_found: 1
-  events_were_scanned: 5561158896
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
+  events_were_scanned: 5562647892
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
   min_pull_was_found: 1076
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 163
   what: iterate
   where: github
