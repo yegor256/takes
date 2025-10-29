@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.219626169
+  seconds: 735.402957815
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-28 23:10:04.075556951 Z
+  when: 2025-10-29 00:08:42.009300863 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55447,12 +55447,6 @@
     The average monthly turnover (41.0 developers) is increasing (R=0.79).
   what: assessment
   when: 2025-10-27 15:12:40.743451456 Z
-- _id: 18941
-  _job: 45858
-  _time: 2025-10-28 14:13:53.659902381 Z
-  _version: 0.16.8/0.54.0/0.16.0
-  what: learn-eva
-  when: 2025-10-28 14:13:53.609497588 Z
 - _id: 18943
   _job: 18880960684
   _time: 2025-10-28 15:58:17.227150568 Z
@@ -55481,20 +55475,26 @@
     The average monthly turnover (41.0 developers) is increasing (R=0.79).
   what: assessment
   when: 2025-10-28 16:11:43.150476040 Z
-- _id: 18946
-  _job: 18891541282
-  _time: 2025-10-28 23:08:50.910618983 Z
+- _id: 18947
+  _job: 45921
+  _time: 2025-10-28 23:13:50.423551944 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 211
+  what: learn-eva
+  when: 2025-10-28 23:13:50.347449646 Z
+- _id: 18948
+  _job: 18892599717
+  _time: 2025-10-29 00:08:33.481906420 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  assignees_were_scanned: 341
   earliest_issue_was_found: 1
-  events_were_scanned: 5539637924
-  issues_were_scanned: 0
-  labels_were_scanned: 1111
+  events_were_scanned: 5540637579
+  issues_were_scanned: 1292
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1042
+  min_pull_was_found: 1043
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
