@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 805.911911026
+  seconds: 810.696062761
   version: 0.54.0
   what: judges-summary
-  when: 2025-10-30 15:10:04.217438114 Z
+  when: 2025-10-30 16:10:46.947406053 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55106,7 +55106,7 @@
   - 1
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2025-10-23 15:56:46.730909345 Z
+  when: &86 2025-10-23 15:56:46.730909345 Z
 - _id: 18878
   _job: 18755904036
   _time: 2025-10-23 17:06:38.991516472 Z
@@ -55498,19 +55498,158 @@
   what: learn-eva
   when: 2025-10-30 10:13:44.107253064 Z
 - _id: 18959
-  _job: 18944959748
-  _time: 2025-10-30 15:08:35.969905664 Z
+  _job: 18946856516
+  _time: 2025-10-30 16:00:58.225001830 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 808
+  assignees_were_scanned: 916
   earliest_issue_was_found: 1
-  events_were_scanned: 5586401894
-  issues_were_scanned: 1292
-  labels_were_scanned: 376
+  events_were_scanned: 5588124713
+  issues_were_scanned: 0
+  labels_were_scanned: 607
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1115
+  min_pull_was_found: 1119
   repository: 28924109
   types_were_scanned: 933
   what: iterate
   where: github
+- _id: 18960
+  _job: 18946856516
+  _time: 2025-10-30 16:01:39.853281786 Z
+  _version: 0.16.8/0.54.0/0.16.0
+  since: *86
+  some_backlog_size:
+  - 88
+  - 88
+  - 88
+  - 89
+  - 89
+  - 89
+  - 89
+  some_build_duration:
+  - 40
+  - 1041
+  - 43
+  - 924
+  - 36
+  - 863
+  - 41
+  - 905
+  - 40
+  - 915
+  - 44
+  - 906
+  - 45
+  - 893
+  - 44
+  - 960
+  - 41
+  - 916
+  - 33
+  - 892
+  - 35
+  - 857
+  - 41
+  - 1000
+  - 36
+  - 938
+  - 34
+  - 920
+  - 36
+  - 1001
+  - 42
+  - 943
+  - 50
+  - 944
+  - 38
+  - 809
+  - 38
+  - 902
+  - 36
+  - 934
+  - 38
+  - 989
+  - 34
+  - 959
+  - 39
+  - 947
+  - 34
+  - 1081
+  - 37
+  - 886
+  - 44
+  - 955
+  - 43
+  - 938
+  - 42
+  - 56
+  - 1002
+  - 902
+  - 55
+  - 0
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  some_merged_pulls: 0
+  some_unmerged_pulls: 0
+  what: quality-of-service
+  when: 2025-10-30 15:56:46.730909345 Z
