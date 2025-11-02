@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 737.341034337
+  seconds: 694.409033479
   version: 0.54.0
   what: judges-summary
-  when: 2025-11-02 00:08:18.358319788 Z
+  when: 2025-11-02 01:33:45.260612781 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55699,19 +55699,19 @@
   what: learn-eva
   when: 2025-11-01 23:12:00.717505238 Z
 - _id: 18989
-  _job: 19004456157
-  _time: 2025-11-02 00:08:18.257692635 Z
+  _job: 19005375719
+  _time: 2025-11-02 01:33:45.172884569 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 341
+  assignees_were_scanned: 445
   earliest_issue_was_found: 1
-  events_were_scanned: 5637838600
-  issues_were_scanned: 1292
-  labels_were_scanned: 924
+  events_were_scanned: 5638286163
+  issues_were_scanned: 0
+  labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1182
+  min_pull_was_found: 1183
   repository: 28924109
-  types_were_scanned: 163
+  types_were_scanned: 277
   what: iterate
   where: github
