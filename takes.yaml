@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: Connection reset by peer - SSL_connect
   inserted: 8
-  seconds: 669.528367751
+  seconds: 376.416462469
   version: 0.54.0
   what: judges-summary
-  when: 2025-11-02 10:07:03.769028839 Z
+  when: 2025-11-02 11:02:18.108422459 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55699,19 +55700,19 @@
   what: learn-eva
   when: 2025-11-02 08:09:04.005658415 Z
 - _id: 18991
-  _job: 19010608099
-  _time: 2025-11-02 10:07:03.227043104 Z
+  _job: 19011241906
+  _time: 2025-11-02 11:01:39.495153530 Z
   _version: 0.16.8/0.54.0/0.16.0
-  assignees_were_scanned: 0
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 5642658534
-  issues_were_scanned: 0
-  labels_were_scanned: 376
+  events_were_scanned: 5643305556
+  issues_were_scanned: 1292
+  labels_were_scanned: 607
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1191
+  min_pull_was_found: 1192
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
