@@ -80,7 +80,7 @@
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
       <scope>test</scope>
-      <version>3.1.11</version>
+      <version>4.0.0</version>
       <optional>true</optional>
     </dependency>
     <dependency>
