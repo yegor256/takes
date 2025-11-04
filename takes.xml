@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1048872">
+<fb version="0.16.8" size="1048898">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">761.248792976</seconds>
+    <seconds t="F">811.34994684</seconds>
     <version t="S">0.54.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-04T06:09:03Z</when>
+    <when t="T">2025-11-04T07:11:43Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -124,6 +124,7 @@
       [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
       but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 16) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 0.25) (let comments_max 8) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 8) (let hoc_needed 16) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))</code_review_was_rewarded>
     <days_of_running_balance t="I">56</days_of_running_balance>
+    <days_of_running_score t="I">56</days_of_running_score>
     <days_to_reward t="I">14</days_to_reward>
     <dud_was_punished t="S">(award (explain 'When an issue is submitted but then rejected by the team, the reporter receives a penalty') (aka (let fee -16) (give fee 'as a basis') 'deduct ${fee} points'))</dud_was_punished>
     <enhancement_suggestion_was_rewarded t="S">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter receives a bonus') (aka (let bonus 12) (give bonus 'as a basis') 'award ${bonus} points'))</enhancement_suggestion_was_rewarded>
@@ -62645,20 +62646,20 @@ The average monthly turnover (41.0 developers) is increasing (R=0.80).</text>
   </f>
   <f>
     <_id t="I">19000</_id>
-    <_job t="I">19059275137</_job>
-    <_time t="T">2025-11-04T06:07:13Z</_time>
+    <_job t="I">19060433640</_job>
+    <_time t="T">2025-11-04T07:11:43Z</_time>
     <_version t="S">0.16.8/0.54.0/0.16.0</_version>
-    <assignees_were_scanned t="I">1307</assignees_were_scanned>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5683801567</events_were_scanned>
+    <events_were_scanned t="I">5684696894</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <labels_were_scanned t="I">1025</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
     <min_pull_was_found t="I">1213</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
