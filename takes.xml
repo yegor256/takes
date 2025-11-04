@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1049230">
+<fb version="0.16.8" size="1049226">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">756.440630325</seconds>
+    <seconds t="F">786.05550942</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-04T20:08:39Z</when>
+    <when t="T">2025-11-04T21:09:10Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -62658,29 +62658,29 @@ The average monthly turnover (41.0 developers) is increasing (R=0.80).</text>
     <when t="T">2025-11-04T10:09:04Z</when>
   </f>
   <f>
-    <_id t="I">19005</_id>
-    <_job t="I">47261</_job>
-    <_time t="T">2025-11-04T11:11:59Z</_time>
-    <_version t="S">0.16.8/0.55.0/0.16.0</_version>
+    <_id t="I">19007</_id>
+    <_job t="I">47343</_job>
+    <_time t="T">2025-11-04T20:09:36Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2025-11-04T11:11:59Z</when>
+    <when t="T">2025-11-04T20:09:36Z</when>
   </f>
   <f>
-    <_id t="I">19006</_id>
-    <_job t="I">19081114602</_job>
-    <_time t="T">2025-11-04T20:08:39Z</_time>
+    <_id t="I">19008</_id>
+    <_job t="I">19082550625</_job>
+    <_time t="T">2025-11-04T21:08:25Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">341</assignees_were_scanned>
+    <assignees_were_scanned t="I">444</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5429430848</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">376</labels_were_scanned>
+    <events_were_scanned t="I">5430019412</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">607</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1228</min_pull_was_found>
+    <min_pull_was_found t="I">1229</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">0</types_were_scanned>
+    <types_were_scanned t="I">163</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
