@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1049989">
+<fb version="0.16.8" size="1049987">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.208550998</seconds>
+    <seconds t="F">810.469967826</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-06T13:20:43Z</when>
+    <when t="T">2025-11-06T14:10:36Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -62719,18 +62719,18 @@ The average monthly turnover (41.0 developers) is increasing (R=0.80).</text>
   </f>
   <f>
     <_id t="I">19025</_id>
-    <_job t="I">19136627507</_job>
-    <_time t="T">2025-11-06T13:19:08Z</_time>
+    <_job t="I">19138014874</_job>
+    <_time t="T">2025-11-06T14:10:00Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">820</assignees_were_scanned>
+    <assignees_were_scanned t="I">924</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5751315430</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">607</labels_were_scanned>
+    <events_were_scanned t="I">5753148706</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">751</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1261</min_pull_was_found>
+    <min_pull_was_found t="I">1262</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">387</types_were_scanned>
     <what t="S">iterate</what>
