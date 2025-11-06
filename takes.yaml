@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.829323006
+  seconds: 810.297515491
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-06 18:09:48.343715577 Z
+  when: 2025-11-06 19:11:58.692562926 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55962,19 +55962,19 @@
   what: quantity-of-deliverables
   when: 2025-11-06 16:57:25.954375772 Z
 - _id: 19031
-  _job: 19144976885
-  _time: 2025-11-06 17:59:29.100695793 Z
+  _job: 19146597272
+  _time: 2025-11-06 19:11:00.492748076 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 1050
+  assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 5759395574
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  events_were_scanned: 5760768960
+  issues_were_scanned: 1292
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
   min_pull_was_found: 1264
   repository: 28924109
-  types_were_scanned: 491
+  types_were_scanned: 609
   what: iterate
   where: github
