@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.716301903
+  seconds: 852.520354202
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-06 11:09:58.423995080 Z
+  when: 2025-11-06 12:10:48.773595823 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55688,18 +55688,6 @@
   total_stars: 865
   what: dimensions-of-terrain
   when: 2025-11-03 09:01:54.799889582 Z
-- _id: 19001
-  _job: 47245
-  _time: 2025-11-04 09:13:39.186188615 Z
-  _version: 0.16.8/0.55.0/0.16.0
-  analyzers: 18
-  text: |-
-    The average number of builds per week (469.7) is decreasing (R=-0.33).
-    The average number of commits per week (9.2) is decreasing (R=-0.35).
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (41.0 developers) is increasing (R=0.80).
-  what: assessment
-  when: 2025-11-04 09:13:39.195178729 Z
 - _id: 19003
   _job: 19064722584
   _time: 2025-11-04 10:09:04.869556428 Z
@@ -55750,13 +55738,55 @@
   _version: 0.16.8/0.55.0/0.16.1
   what: learn-eva
   when: 2025-11-06 06:10:36.177303178 Z
-- _id: 19020
-  _job: 19133316299
-  _time: 2025-11-06 11:02:37.801254783 Z
+- _id: 19021
+  _job: 47596
+  _time: 2025-11-06 11:12:13.359000301 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  analyzers: 18
+  text: |-
+    The average number of builds per week (469.7) is decreasing (R=-0.33).
+    The average number of commits per week (9.2) is decreasing (R=-0.35).
+    The average number of releases per month (0.0) is staying still.
+    The average monthly turnover (41.0 developers) is increasing (R=0.80).
+  what: assessment
+  when: 2025-11-06 11:12:13.367565167 Z
+- _id: 19022
+  _job: 47596
+  _time: 2025-11-06 11:12:37.916975690 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  ac: 24
+  cost_of_qod: 0.5951265039611651
+  ev: 24
+  pv: 3894
+  qod: 42
+  qod_per_day: 130.63197142857143
+  qod_per_sec: 9.815848325253064e-06
+  start: *3
+  what: earned-value
+  when: 2025-11-06 11:12:37.917205253 Z
+- _id: 19024
+  _job: 19134808060
+  _time: 2025-11-06 12:08:58.195901346 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  total_active_contributors: 4
+  total_commits: 3557
+  total_contributors: 82
+  total_files: 534
+  total_forks: 212
+  total_issues: 740
+  total_pulls: 751
+  total_releases: 155
+  total_repositories: 1
+  total_stars: 866
+  what: dimensions-of-terrain
+  when: 2025-11-06 12:08:58.203884559 Z
+- _id: 19025
+  _job: 19134808060
+  _time: 2025-11-06 12:09:51.928077052 Z
   _version: 0.16.8/0.55.0/0.16.1
   assignees_were_scanned: 713
   earliest_issue_was_found: 1
-  events_were_scanned: 5748302985
+  events_were_scanned: 5749911333
   issues_were_scanned: 1292
   labels_were_scanned: 376
   latest_issue_was_found: 1463
@@ -55764,6 +55794,6 @@
   min_issue_was_found: 144
   min_pull_was_found: 1260
   repository: 28924109
-  types_were_scanned: 163
+  types_were_scanned: 277
   what: iterate
   where: github
