@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.631592599
+  seconds: 754.187169576
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-07 12:09:59.434156900 Z
+  when: 2025-11-07 13:18:44.498980340 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55704,18 +55704,6 @@
   total_stars: 865
   what: dimensions-of-terrain
   when: 2025-11-04 10:09:04.875486528 Z
-- _id: 19011
-  _job: 47428
-  _time: 2025-11-05 10:10:25.423751589 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  analyzers: 18
-  text: |-
-    The average number of builds per week (469.7) is decreasing (R=-0.33).
-    The average number of commits per week (9.2) is decreasing (R=-0.35).
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (41.0 developers) is increasing (R=0.80).
-  what: assessment
-  when: 2025-11-05 10:10:25.430888398 Z
 - _id: 19013
   _job: 19099666963
   _time: 2025-11-05 11:10:13.820782143 Z
@@ -55961,20 +55949,48 @@
   _version: 0.16.8/0.55.0/0.16.1
   what: learn-eva
   when: 2025-11-07 07:10:43.756178026 Z
-- _id: 19035
-  _job: 19167603845
-  _time: 2025-11-07 12:09:29.697843824 Z
+- _id: 19036
+  _job: 47765
+  _time: 2025-11-07 12:10:49.806593921 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 522
+  analyzers: 18
+  text: |-
+    The average number of builds per week (459.1) is decreasing (R=-0.37).
+    The average number of commits per week (8.6) is decreasing (R=-0.37).
+    The average number of releases per month (0.0) is staying still.
+    The average monthly turnover (41.0 developers) is increasing (R=0.80).
+  what: assessment
+  when: 2025-11-07 12:10:49.814967915 Z
+- _id: 19038
+  _job: 19169249276
+  _time: 2025-11-07 13:08:35.173945965 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  total_active_contributors: 4
+  total_commits: 3557
+  total_contributors: 82
+  total_files: 534
+  total_forks: 212
+  total_issues: 740
+  total_pulls: 751
+  total_releases: 155
+  total_repositories: 1
+  total_stars: 866
+  what: dimensions-of-terrain
+  when: 2025-11-07 13:08:35.181556236 Z
+- _id: 19039
+  _job: 19169249276
+  _time: 2025-11-07 13:18:21.148974683 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 666
   earliest_issue_was_found: 1
-  events_were_scanned: 5778710788
-  issues_were_scanned: 1292
-  labels_were_scanned: 924
+  events_were_scanned: 5780001334
+  issues_were_scanned: 0
+  labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1280
+  min_pull_was_found: 1281
   repository: 28924109
-  types_were_scanned: 933
+  types_were_scanned: 1054
   what: iterate
   where: github
