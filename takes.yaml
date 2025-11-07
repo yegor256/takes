@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 702.959397779
+  seconds: 810.258492116
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-07 07:09:51.716480974 Z
+  when: 2025-11-07 08:10:00.507026867 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55955,25 +55955,25 @@
   total_reviews_submitted: 7
   what: quantity-of-deliverables
   when: 2025-11-06 16:57:25.954375772 Z
-- _id: 19032
-  _job: 47679
-  _time: 2025-11-06 23:10:40.631485382 Z
+- _id: 19034
+  _job: 47730
+  _time: 2025-11-07 07:10:43.805787072 Z
   _version: 0.16.8/0.55.0/0.16.1
   what: learn-eva
-  when: 2025-11-06 23:10:40.586011517 Z
-- _id: 19033
-  _job: 19160749529
-  _time: 2025-11-07 07:09:51.632868517 Z
+  when: 2025-11-07 07:10:43.756178026 Z
+- _id: 19035
+  _job: 19161905388
+  _time: 2025-11-07 08:08:18.996044868 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 1303
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 5772479299
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
+  events_were_scanned: 5773524686
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1275
+  min_pull_was_found: 1276
   repository: 28924109
   types_were_scanned: 609
   what: iterate
