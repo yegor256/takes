@@ -2,14 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/1472/reviews?per_page=100:
-    504 - We couldn''t respond to your request in time. Sorry about that. Please try
-    resubmitting your request and contact us if the problem persists.'
   inserted: 8
-  seconds: 523.679336755
+  seconds: 646.562634651
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-08 21:04:44.766500180 Z
+  when: 2025-11-08 22:06:38.281515437 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55997,19 +55994,19 @@
   what: learn-eva
   when: 2025-11-08 19:10:35.877857599 Z
 - _id: 19051
-  _job: 19198494474
-  _time: 2025-11-08 21:01:24.169961279 Z
+  _job: 19199121716
+  _time: 2025-11-08 22:05:45.386621765 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 713
+  assignees_were_scanned: 820
   earliest_issue_was_found: 1
-  events_were_scanned: 5805857528
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
+  events_were_scanned: 5806415723
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
-  min_pull_was_found: 1316
+  min_pull_was_found: 1317
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 491
   what: iterate
   where: github
