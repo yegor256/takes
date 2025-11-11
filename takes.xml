@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1052005">
+<fb version="0.16.8" size="1052006">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">813.582168949</seconds>
+    <seconds t="F">810.415141277</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-11T14:09:36Z</when>
+    <when t="T">2025-11-11T15:09:29Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -62915,19 +62915,6 @@
     <when t="T">2025-11-08T13:16:16Z</when>
   </f>
   <f>
-    <_id t="I">19056</_id>
-    <_job t="I">48135</_job>
-    <_time t="T">2025-11-09T13:18:09Z</_time>
-    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (459.1) is decreasing (R=-0.37).
-The average number of commits per week (8.6) is decreasing (R=-0.37).
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (41.0 developers) is increasing (R=0.80).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-11-09T13:18:09Z</when>
-  </f>
-  <f>
     <_id t="I">19058</_id>
     <_job t="I">19209478225</_job>
     <_time t="T">2025-11-09T13:56:23Z</_time>
@@ -62985,25 +62972,6 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-11T06:11:04Z</when>
   </f>
   <f>
-    <_id t="I">19072</_id>
-    <_job t="I">19267842803</_job>
-    <_time t="T">2025-11-11T14:09:28Z</_time>
-    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">924</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5866603668</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">144</min_issue_was_found>
-    <min_pull_was_found t="I">1383</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">491</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">19073</_id>
     <_job t="I">19267842803</_job>
     <_time t="T">2025-11-11T14:09:29Z</_time>
@@ -63014,5 +62982,37 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <total_stars t="I">866</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2025-11-11T14:09:29Z</when>
+  </f>
+  <f>
+    <_id t="I">19074</_id>
+    <_job t="I">48625</_job>
+    <_time t="T">2025-11-11T14:10:15Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (459.1) is decreasing (R=-0.37).
+The average number of commits per week (8.6) is decreasing (R=-0.37).
+The average number of releases per month (0.0) is staying still.
+The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-11-11T14:10:15Z</when>
+  </f>
+  <f>
+    <_id t="I">19075</_id>
+    <_job t="I">19269482823</_job>
+    <_time t="T">2025-11-11T15:09:29Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <assignees_were_scanned t="I">1013</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">5867897298</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">144</min_issue_was_found>
+    <min_pull_was_found t="I">1384</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">609</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
