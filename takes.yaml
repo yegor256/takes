@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.415141277
+  seconds: 810.284192804
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-11 15:09:29.521652601 Z
+  when: 2025-11-11 16:09:33.011542069 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56007,18 +56007,18 @@
   total_stars: 866
   what: dimensions-of-terrain
   when: 2025-11-10 14:05:49.400567487 Z
-- _id: 19071
-  _job: 48529
-  _time: 2025-11-11 06:11:04.948134492 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  what: learn-eva
-  when: 2025-11-11 06:11:04.899721443 Z
 - _id: 19073
   _job: 19267842803
   _time: 2025-11-11 14:09:29.114691219 Z
   _version: 0.16.8/0.55.0/0.16.1
+  total_active_contributors: 3
   total_commits: 3561
+  total_contributors: 82
+  total_files: 534
   total_forks: 212
+  total_issues: 740
+  total_pulls: 755
+  total_releases: 155
   total_repositories: 1
   total_stars: 866
   what: dimensions-of-terrain
@@ -56035,15 +56035,21 @@
     The average monthly turnover (47.0 developers) is increasing (R=0.83).
   what: assessment
   when: 2025-11-11 14:10:15.919970202 Z
-- _id: 19075
-  _job: 19269482823
-  _time: 2025-11-11 15:09:29.406621428 Z
+- _id: 19076
+  _job: 48637
+  _time: 2025-11-11 15:11:01.216241994 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  what: learn-eva
+  when: 2025-11-11 15:11:01.166360740 Z
+- _id: 19077
+  _job: 19271144381
+  _time: 2025-11-11 15:57:00.495178918 Z
   _version: 0.16.8/0.55.0/0.16.1
   assignees_were_scanned: 1013
   earliest_issue_was_found: 1
-  events_were_scanned: 5867897298
+  events_were_scanned: 5869567343
   issues_were_scanned: 0
-  labels_were_scanned: 1111
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 144
