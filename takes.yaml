@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.340291288
+  seconds: 811.103105379
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-13 01:35:34.504958306 Z
+  when: 2025-11-14 07:11:51.901797448 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -55916,7 +55916,7 @@
   - 1
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2025-11-06 15:56:46.730909345 Z
+  when: &90 2025-11-06 15:56:46.730909345 Z
 - _id: 19030
   _job: 19143423451
   _time: 2025-11-06 17:12:36.283554292 Z
@@ -55930,7 +55930,7 @@
   total_releases_published: 0
   total_reviews_submitted: 7
   what: quantity-of-deliverables
-  when: 2025-11-06 16:57:25.954375772 Z
+  when: &91 2025-11-06 16:57:25.954375772 Z
 - _id: 19038
   _job: 19169249276
   _time: 2025-11-07 13:08:35.173945965 Z
@@ -56051,20 +56051,208 @@
   total_stars: 866
   what: dimensions-of-terrain
   when: 2025-11-12 15:04:47.515095793 Z
-- _id: 19086
-  _job: 48824
-  _time: 2025-11-12 16:13:03.313196922 Z
+- _id: 19088
+  _job: 48898
+  _time: 2025-11-13 01:37:26.891441597 Z
   _version: 0.16.8/0.55.0/0.16.1
   what: learn-eva
-  when: 2025-11-12 16:13:03.262851586 Z
-- _id: 19087
-  _job: 19317321539
-  _time: 2025-11-13 01:27:02.993973871 Z
+  when: 2025-11-13 01:37:26.845350609 Z
+- _id: 19090
+  _job: 19356894937
+  _time: 2025-11-14 06:58:33.941363733 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 713
+  since: *90
+  some_backlog_size:
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  some_build_duration:
+  - 891
+  - 36
+  - 1007
+  - 42
+  - 982
+  - 38
+  - 921
+  - 51
+  - 900
+  - 48
+  - 912
+  - 92
+  - 904
+  - 45
+  - 996
+  - 36
+  - 943
+  - 70
+  - 937
+  - 58
+  - 929
+  - 46
+  - 903
+  - 37
+  - 932
+  - 40
+  - 892
+  - 37
+  - 906
+  - 40
+  - 8
+  - 9
+  - 10
+  - 10
+  - 11
+  - 11
+  - 17
+  - 24
+  - 34
+  - 36
+  - 255
+  - 981
+  - 36
+  - 979
+  - 42
+  - 821
+  - 841
+  - 1012
+  - 843
+  - 916
+  - 862
+  - 915
+  - 913
+  - 857
+  - 919
+  - 887
+  - 898
+  - 906
+  - 899
+  - 925
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_merged_pulls: 4
+  some_pull_files_size:
+  - 1
+  - 1
+  - 2
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 4
+  - 2
+  some_pull_lifetime:
+  - 15780.0
+  - 2833.0
+  - 20958.0
+  - 13516.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 803
+  - 850
+  - 827
+  - 799
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 1
+  - 1
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 1
+  - 1
+  some_unmerged_pulls: 0
+  what: quality-of-service
+  when: 2025-11-13 15:56:46.730909345 Z
+- _id: 19091
+  _job: 19356894937
+  _time: 2025-11-14 07:01:08.322503252 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  since: *91
+  total_builds_ran: 512
+  total_commits_pushed: 4
+  total_hoc_committed: 10
+  total_issues_created: 9
+  total_pulls_submitted: 8
+  total_releases_published: 0
+  total_reviews_submitted: 4
+  what: quantity-of-deliverables
+  when: 2025-11-13 16:57:25.954375772 Z
+- _id: 19092
+  _job: 19356894937
+  _time: 2025-11-14 07:02:07.276476739 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 820
   earliest_issue_was_found: 1
-  events_were_scanned: 5910831122
-  issues_were_scanned: 1292
+  events_were_scanned: 5943744499
+  issues_were_scanned: 0
   labels_were_scanned: 607
   latest_issue_was_found: 1463
   merges_were_scanned: 0
@@ -56074,3 +56262,9 @@
   types_were_scanned: 1054
   what: iterate
   where: github
+- _id: 19093
+  _job: 19356894937
+  _time: 2025-11-14 07:11:51.780156838 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  what: dimensions-of-terrain
+  when: 2025-11-14 07:11:51.790644560 Z
