@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.49587963
+  seconds: 810.669470377
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-17 15:10:08.520459147 Z
+  when: 2025-11-17 16:10:24.749689608 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56221,18 +56221,6 @@
   _version: 0.16.8/0.55.0/0.16.1
   what: dimensions-of-terrain
   when: 2025-11-14 14:09:29.527785880 Z
-- _id: 19094
-  _job: 49176
-  _time: 2025-11-14 14:10:00.736645045 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  analyzers: 18
-  text: |-
-    The average number of builds per week (459.1) is decreasing (R=-0.37).
-    The average number of commits per week (8.6) is decreasing (R=-0.37).
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (47.0 developers) is increasing (R=0.83).
-  what: assessment
-  when: 2025-11-14 14:10:00.746471041 Z
 - _id: 19097
   _job: 19406674508
   _time: 2025-11-16 14:09:44.132411378 Z
@@ -56297,20 +56285,32 @@
   total_stars: 866
   what: dimensions-of-terrain
   when: 2025-11-17 15:00:59.337656767 Z
-- _id: 19105
-  _job: 19433901047
-  _time: 2025-11-17 15:02:57.706163799 Z
+- _id: 19106
+  _job: 49464
+  _time: 2025-11-17 15:10:52.193492432 Z
+  _version: 0.16.8/0.57.1/0.16.1
+  analyzers: 18
+  text: |-
+    The average number of builds per week (467.0) is decreasing (R=-0.21).
+    The average number of commits per week (8.0) is decreasing (R=-0.40).
+    The average number of releases per month (0.0) is staying still.
+    The average monthly turnover (47.0 developers) is increasing (R=0.83).
+  what: assessment
+  when: 2025-11-17 15:10:52.202051686 Z
+- _id: 19107
+  _job: 19435806466
+  _time: 2025-11-17 16:04:33.971402133 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 211
+  assignees_were_scanned: 341
   earliest_issue_was_found: 1
-  events_were_scanned: 6016710489
-  issues_were_scanned: 0
-  labels_were_scanned: 607
+  events_were_scanned: 6018417412
+  issues_were_scanned: 1292
+  labels_were_scanned: 751
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 533
-  min_pull_was_found: 1444
+  min_pull_was_found: 1445
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
