@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.982835975
+  seconds: 810.534104815
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-18 15:10:29.034410775 Z
+  when: 2025-11-18 16:10:26.451850578 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56237,18 +56237,6 @@
   total_stars: 866
   what: dimensions-of-terrain
   when: 2025-11-16 14:09:44.138513217 Z
-- _id: 19098
-  _job: 49304
-  _time: 2025-11-16 14:12:05.208424863 Z
-  _version: 0.16.8/0.57.1/0.16.1
-  analyzers: 18
-  text: |-
-    The average number of builds per week (467.0) is decreasing (R=-0.21).
-    The average number of commits per week (8.0) is decreasing (R=-0.40).
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (47.0 developers) is increasing (R=0.83).
-  what: assessment
-  when: 2025-11-16 14:12:05.215879418 Z
 - _id: 19099
   _job: 49304
   _time: 2025-11-16 14:12:29.589125895 Z
@@ -56297,26 +56285,38 @@
   _version: 0.16.8/0.57.1/0.16.1
   what: learn-eva
   when: 2025-11-18 10:10:05.521584589 Z
-- _id: 19113
-  _job: 19470483232
-  _time: 2025-11-18 15:10:28.813630186 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 0
-  earliest_issue_was_found: 1
-  events_were_scanned: 6048493316
-  issues_were_scanned: 1292
-  labels_were_scanned: 1050
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 533
-  min_pull_was_found: 1466
-  repository: 28924109
-  types_were_scanned: 491
-  what: iterate
-  where: github
 - _id: 19114
   _job: 19470483232
   _time: 2025-11-18 15:10:28.945981205 Z
   _version: 0.16.8/0.55.0/0.16.1
   what: dimensions-of-terrain
   when: 2025-11-18 15:10:28.953794584 Z
+- _id: 19115
+  _job: 49650
+  _time: 2025-11-18 15:11:26.939183009 Z
+  _version: 0.16.8/0.57.1/0.16.1
+  analyzers: 18
+  text: |-
+    The average number of builds per week (467.0) is decreasing (R=-0.21).
+    The average number of commits per week (8.0) is decreasing (R=-0.40).
+    The average number of releases per month (0.0) is staying still.
+    The average monthly turnover (47.0 developers) is increasing (R=0.83).
+  what: assessment
+  when: 2025-11-18 15:11:26.947488138 Z
+- _id: 19116
+  _job: 19472399010
+  _time: 2025-11-18 16:10:26.333901778 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 140
+  earliest_issue_was_found: 1
+  events_were_scanned: 6050162599
+  issues_were_scanned: 1292
+  labels_were_scanned: 1435
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 533
+  min_pull_was_found: 1467
+  repository: 28924109
+  types_were_scanned: 609
+  what: iterate
+  where: github
