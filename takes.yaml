@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.534104815
+  seconds: 810.544954355
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-18 16:10:26.451850578 Z
+  when: 2025-11-18 17:12:25.764047529 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56289,6 +56289,16 @@
   _job: 19470483232
   _time: 2025-11-18 15:10:28.945981205 Z
   _version: 0.16.8/0.55.0/0.16.1
+  total_active_contributors: 2
+  total_commits: 3562
+  total_contributors: 82
+  total_files: 534
+  total_forks: 211
+  total_issues: 740
+  total_pulls: 756
+  total_releases: 155
+  total_repositories: 1
+  total_stars: 866
   what: dimensions-of-terrain
   when: 2025-11-18 15:10:28.953794584 Z
 - _id: 19115
@@ -56304,19 +56314,19 @@
   what: assessment
   when: 2025-11-18 15:11:26.947488138 Z
 - _id: 19116
-  _job: 19472399010
-  _time: 2025-11-18 16:10:26.333901778 Z
+  _job: 19474311963
+  _time: 2025-11-18 17:11:16.483185919 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 140
+  assignees_were_scanned: 291
   earliest_issue_was_found: 1
-  events_were_scanned: 6050162599
-  issues_were_scanned: 1292
-  labels_were_scanned: 1435
+  events_were_scanned: 6051846832
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 533
-  min_pull_was_found: 1467
+  min_pull_was_found: 1468
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
