@@ -2,13 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/930: 422 - The request
-    could not be processed because too many files changed // See: https://docs.github.com/rest/pulls/pulls#get-a-pull-request'
   inserted: 8
-  seconds: 533.416870849
+  seconds: 810.345812659
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-19 21:05:27.526956270 Z
+  when: 2025-11-19 22:09:36.402768174 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56332,19 +56330,19 @@
   what: learn-eva
   when: 2025-11-19 19:10:40.341014239 Z
 - _id: 19128
-  _job: 19516130429
-  _time: 2025-11-19 21:00:13.572537621 Z
+  _job: 19517660663
+  _time: 2025-11-19 22:03:22.904914088 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 578
+  assignees_were_scanned: 713
   earliest_issue_was_found: 1
-  events_were_scanned: 6090146927
-  issues_were_scanned: 0
-  labels_were_scanned: 607
+  events_were_scanned: 6091476622
+  issues_were_scanned: 1292
+  labels_were_scanned: 751
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 533
-  min_pull_was_found: 84
+  min_pull_was_found: 86
   repository: 28924109
-  types_were_scanned: 835
+  types_were_scanned: 946
   what: iterate
   where: github
