@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1054583">
+<fb version="0.16.8" size="1054800">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
+    <error t="S">GET https://api.github.com/repos/yegor256/takes/pulls/930: 422 - The request could not be processed because too many files changed // See: https://docs.github.com/rest/pulls/pulls#get-a-pull-request</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">802.429231359</seconds>
+    <seconds t="F">533.416870849</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-19T20:09:15Z</when>
+    <when t="T">2025-11-19T21:05:27Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63320,20 +63321,20 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
   </f>
   <f>
     <_id t="I">19128</_id>
-    <_job t="I">19514524443</_job>
-    <_time t="T">2025-11-19T20:09:15Z</_time>
+    <_job t="I">19516130429</_job>
+    <_time t="T">2025-11-19T21:00:13Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">444</assignees_were_scanned>
+    <assignees_were_scanned t="I">578</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6088693362</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">376</labels_were_scanned>
+    <events_were_scanned t="I">6090146927</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">607</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">533</min_issue_was_found>
-    <min_pull_was_found t="I">83</min_pull_was_found>
+    <min_pull_was_found t="I">84</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">742</types_were_scanned>
+    <types_were_scanned t="I">835</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
