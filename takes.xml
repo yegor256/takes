@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1054338">
+<fb version="0.16.8" size="1054580">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.232696216</seconds>
+    <seconds t="F">810.387701631</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-19T15:10:42Z</when>
+    <when t="T">2025-11-19T16:11:11Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63249,19 +63249,6 @@
     <when t="T">2025-11-17T15:00:59Z</when>
   </f>
   <f>
-    <_id t="I">19106</_id>
-    <_job t="I">49464</_job>
-    <_time t="T">2025-11-17T15:10:52Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (467.0) is decreasing (R=-0.21).
-The average number of commits per week (8.0) is decreasing (R=-0.40).
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-11-17T15:10:52Z</when>
-  </f>
-  <f>
     <_id t="I">19114</_id>
     <_job t="I">19470483232</_job>
     <_time t="T">2025-11-18T15:10:28Z</_time>
@@ -63301,22 +63288,53 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-19T11:10:27Z</when>
   </f>
   <f>
-    <_id t="I">19122</_id>
-    <_job t="I">19505666966</_job>
-    <_time t="T">2025-11-19T15:08:21Z</_time>
+    <_id t="I">19123</_id>
+    <_job t="I">49855</_job>
+    <_time t="T">2025-11-19T15:15:11Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (467.0) is decreasing (R=-0.21).
+The average number of commits per week (8.0) is decreasing (R=-0.40).
+The average number of releases per month (0.0) is staying still.
+The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-11-19T15:15:11Z</when>
+  </f>
+  <f>
+    <_id t="I">19124</_id>
+    <_job t="I">19507615738</_job>
+    <_time t="T">2025-11-19T16:10:04Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6080078504</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">607</labels_were_scanned>
+    <events_were_scanned t="I">6082091754</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">751</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">533</min_issue_was_found>
-    <min_pull_was_found t="I">0</min_pull_was_found>
+    <min_pull_was_found t="I">75</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">277</types_were_scanned>
+    <types_were_scanned t="I">387</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19125</_id>
+    <_job t="I">19507615738</_job>
+    <_time t="T">2025-11-19T16:10:04Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <total_active_contributors t="I">2</total_active_contributors>
+    <total_commits t="I">3562</total_commits>
+    <total_contributors t="I">82</total_contributors>
+    <total_files t="I">534</total_files>
+    <total_forks t="I">211</total_forks>
+    <total_issues t="I">740</total_issues>
+    <total_pulls t="I">756</total_pulls>
+    <total_releases t="I">155</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">866</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2025-11-19T16:10:04Z</when>
   </f>
 </fb>
