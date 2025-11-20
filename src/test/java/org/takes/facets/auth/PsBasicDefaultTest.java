@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -37,6 +18,7 @@ final class PsBasicDefaultTest {
     @Test
     void acceptsCorrectLoginPasswordPair() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must authenticate user with correct login/password and return URN",
             new PsBasic.Default(
                 new String[]{
                     "bob qwe%20r%20ty%3A%2B urn:foo:robert",
@@ -56,6 +38,7 @@ final class PsBasicDefaultTest {
     @Test
     void supportsBothKindsOfSpace() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support URL-encoded spaces in passwords",
             new PsBasic.Default(
                 new String[]{
                     "yvonne hey%20you urn:foo:z",
@@ -69,6 +52,7 @@ final class PsBasicDefaultTest {
             new IsEqual<>(true)
         );
         MatcherAssert.assertThat(
+            "PsBasic.Default must support plus-encoded spaces in passwords",
             new PsBasic.Default(
                 new String[]{
                     "zak hey+me urn:foo:z",
@@ -86,6 +70,7 @@ final class PsBasicDefaultTest {
     @Test
     void supportsUsersWithSpacesInTheirNames() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support users with spaces in their names",
             new PsBasic.Default(
                 new String[]{
                     "abraham+lincoln qwer urn:foo:z",
@@ -104,6 +89,7 @@ final class PsBasicDefaultTest {
     void supportsUrlencodedUrns() throws Exception {
         final String urn = "urn:a100%25:one-two+";
         MatcherAssert.assertThat(
+            "PsBasic.Default must support URL-encoded URNs and decode them correctly",
             new PsBasic.Default(
                 new String[]{
                     String.format(
@@ -125,6 +111,7 @@ final class PsBasicDefaultTest {
     @Test
     void rejectsIncorrectPassword() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must reject authentication with incorrect password",
             new PsBasic.Default(
                 new String[]{
                     "charlie qwerty urn:foo:charlie",
@@ -140,6 +127,7 @@ final class PsBasicDefaultTest {
     @Test
     void rejectsIncorrectLogin() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must reject authentication with incorrect login",
             new PsBasic.Default(
                 new String[]{
                     "eddie qwerty urn:foo:eddie",

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.misc;
 
@@ -28,7 +9,15 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Expiration date in GMT.
+ * Interface for HTTP expiration date formatting and management.
+ *
+ * <p>This interface provides functionality to format expiration dates
+ * for HTTP headers, particularly for cache control and cookie expiration.
+ * All dates are formatted in GMT timezone according to HTTP specifications.
+ * The interface includes several implementations for common expiration
+ * scenarios including never expiring, already expired, and timed expiration.
+ *
+ * <p>All implementations must be immutable and thread-safe.
  *
  * @since 2.0
  */
@@ -36,12 +25,16 @@ public interface Expires {
 
     /**
      * String representation of expiration time.
-     * @return Representation of expirate time.
+     * @return Representation of expiration time.
      */
     String print();
 
     /**
-     * Never expires.
+     * Implementation that represents content that never expires.
+     *
+     * <p>This implementation creates an expiration date set to epoch (0L)
+     * which effectively means the content never expires according to HTTP
+     * caching semantics.
      *
      * @since 2.0
      */
@@ -66,7 +59,11 @@ public interface Expires {
     }
 
     /**
-     * Already expired. Returns "0" according to RFC7234.
+     * Implementation that represents already expired content.
+     *
+     * <p>This implementation returns "Expires=0" which indicates that
+     * the content has already expired according to RFC 7234. This is
+     * useful for immediate cache invalidation.
      *
      * @since 2.0
      */
@@ -78,7 +75,11 @@ public interface Expires {
     }
 
     /**
-     * Expires in one hour of the given time.
+     * Implementation that represents content expiring in one hour.
+     *
+     * <p>This implementation wraps another Expires instance and represents
+     * content that expires one hour from the given base time. It delegates
+     * to the wrapped instance for the actual expiration formatting.
      *
      * @since 2.0
      */
@@ -104,7 +105,13 @@ public interface Expires {
     }
 
     /**
-     * Expiration date in GMT.
+     * Implementation that formats specific expiration dates in GMT.
+     *
+     * <p>This implementation formats expiration dates using configurable
+     * date format patterns, locales, and specific expiration times.
+     * It uses SimpleDateFormat with GMT timezone for HTTP-compliant
+     * date formatting. The formatting is thread-safe using ThreadLocal
+     * to avoid SimpleDateFormat concurrency issues.
      *
      * @since 2.0
      */

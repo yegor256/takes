@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -28,13 +9,64 @@ import java.net.URL;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Scalar;
+import org.takes.Take;
 import org.takes.rs.RsHtml;
 
 /**
- * HTML take.
+ * Take that returns HTML responses with appropriate Content-Type headers.
  *
- * <p>This take returns an HTML response by wrapping the provided
- * content into {@link org.takes.rs.RsHtml}.
+ * <p>This {@link Take} implementation creates HTTP responses containing
+ * HTML content with appropriate Content-Type headers. It serves as a
+ * convenient wrapper around {@link org.takes.rs.RsHtml} for web endpoints
+ * that need to return HTML documents, web pages, or HTML fragments for
+ * dynamic web applications.
+ *
+ * <p>Example usage:
+ * <pre>{@code
+ * // Static HTML page
+ * new TkHtml("&lt;html>&lt;body>&lt;h1>Welcome&lt;/h1>&lt;/body>&lt;/html>");
+ *
+ * // Dynamic HTML from template
+ * new TkHtml(() -> renderTemplate("page.html", data));
+ *
+ * // HTML from external resource
+ * new TkHtml(getClass().getResource("/templates/index.html"));
+ *
+ * // HTML from input stream
+ * new TkHtml(new FileInputStream("page.html"));
+ * }</pre>
+ *
+ * <p>The take supports multiple HTML content sources:
+ * <ul>
+ *   <li>Static HTML strings for fixed web pages</li>
+ *   <li>Dynamic content through {@link Scalar} suppliers for templates</li>
+ *   <li>Binary HTML data as byte arrays</li>
+ *   <li>External HTML resources via URLs</li>
+ *   <li>Streaming HTML content from InputStreams</li>
+ * </ul>
+ *
+ * <p>Common use cases include:
+ * <ul>
+ *   <li>Web page endpoints serving complete HTML documents</li>
+ *   <li>API endpoints returning HTML fragments for AJAX requests</li>
+ *   <li>Template-based pages with dynamic content injection</li>
+ *   <li>Error pages with custom HTML styling</li>
+ *   <li>Admin interfaces and dashboards</li>
+ *   <li>Form pages for user input and interaction</li>
+ *   <li>Static HTML content serving (about pages, help docs)</li>
+ *   <li>Widget endpoints returning HTML components</li>
+ * </ul>
+ *
+ * <p>The response includes standard HTTP headers with Content-Type set to
+ * "text/html; charset=UTF-8" for proper HTML rendering in web browsers.
+ * The Content-Length header is automatically calculated based on the HTML
+ * content size, ensuring proper HTTP protocol compliance.
+ *
+ * <p>All constructors create immutable instances that can be safely shared
+ * between threads. For dynamic HTML content that may change based on request
+ * parameters or application state, use the {@link Scalar} constructor which
+ * evaluates the content on each request, allowing for template rendering
+ * and real-time content generation.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -46,7 +78,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
-     * @param body Text
+     * @param body HTML content to return in response
      */
     public TkHtml(final String body) {
         super(
@@ -56,7 +88,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
-     * @param body Text
+     * @param body Scalar supplier of HTML content for dynamic pages
      * @since 1.4
      */
     public TkHtml(final Scalar<String> body) {
@@ -67,7 +99,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
-     * @param body Body with HTML
+     * @param body Binary HTML content to return
      */
     public TkHtml(final byte[] body) {
         super(
@@ -77,7 +109,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
-     * @param url URL with content
+     * @param url URL pointing to HTML content to serve
      */
     public TkHtml(final URL url) {
         super(
@@ -87,7 +119,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
-     * @param body Content
+     * @param body Input stream containing HTML content
      */
     public TkHtml(final InputStream body) {
         super(

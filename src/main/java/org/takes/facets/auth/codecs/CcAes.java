@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
@@ -41,13 +22,33 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * AES codec which supports 128 bits key.
+ * AES codec that provides symmetric encryption using 128-bit keys with CBC mode.
  *
- * <p>It's recommended to use it in conjunction with {@link CcSigned} codec,
- * which can be applied
+ * <p>This codec decorator encrypts identity data using the Advanced Encryption
+ * Standard (AES) algorithm with Cipher Block Chaining (CBC) mode and PKCS5
+ * padding. It generates a random initialization vector (IV) for each encryption
+ * operation, ensuring that identical plaintexts produce different ciphertexts.
+ *
+ * <p>The encrypted format is: [16-byte IV][encrypted_data] where the IV is
+ * prepended to allow for proper decryption. The key must be exactly 16 bytes
+ * (128 bits) long.
+ *
+ * <p>It's recommended to use it in conjunction with {@link CcSigned} codec
+ * for authentication, which can be applied
  * <a href="https://crypto.stackexchange.com/a/205">before or after</a>
- * encryption.
+ * encryption to provide both confidentiality and authenticity.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final String key = "1234567890123456"; // 16 bytes
+ * final Codec codec = new CcAes(new CcPlain(), key);
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encrypted = codec.encode(identity);
+ * final Identity decrypted = codec.decode(encrypted);
+ * }</pre>
+ *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.13.8
  */
 @EqualsAndHashCode
@@ -213,7 +214,7 @@ public final class CcAes implements Codec {
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
      *
-     * @param mode Either Cipher.ENRYPT_MODE or Cipher.DECRYPT_MODE
+     * @param mode Either Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
      * @param spec Param spec (IV)
      * @return The cipher
      * @throws IOException For any unexpected exceptions

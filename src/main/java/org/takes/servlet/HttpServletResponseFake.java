@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.servlet;
 
@@ -49,7 +30,31 @@ import org.takes.rs.RsWithStatus;
 import org.takes.rs.RsWithoutHeader;
 
 /**
- * Fake HttpServletResponse (for unit tests).
+ * Fake HttpServletResponse implementation for testing.
+ *
+ * <p>This class provides a test double for {@link HttpServletResponse} that
+ * wraps a Takes {@link Response} object. It's designed for unit testing
+ * scenarios where you need to simulate servlet container response handling
+ * without running an actual servlet container.
+ *
+ * <p>The implementation uses an {@link AtomicReference} to hold the response,
+ * allowing it to be modified through servlet API calls (adding headers,
+ * setting status, adding cookies, etc.) while maintaining thread safety.
+ * These modifications create new decorated Takes response objects rather
+ * than mutating state directly.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Wraps Takes {@link Response} to provide servlet {@link HttpServletResponse} API</li>
+ *   <li>Supports adding headers, cookies, and setting HTTP status codes</li>
+ *   <li>Provides access to response body through {@link ServletOutputStream}</li>
+ *   <li>Thread-safe response modification using atomic references</li>
+ *   <li>Minimal implementation focused on testing needs</li>
+ * </ul>
+ *
+ * <p>Many methods throw {@link UnsupportedOperationException} as they
+ * represent servlet container features not commonly needed in unit tests
+ * (character encoding, buffering, locale handling, etc.).
  *
  * @since 1.14
  */
@@ -175,9 +180,9 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Encode a URL.
-     * @deprecated It not should be used
      * @param url URL to be encoded
      * @return The encoded URL
+     * @deprecated It should not be used
      */
     @Deprecated
     public String encodeUrl(final String url) {
@@ -186,9 +191,9 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Encode a redirect URL.
-     * @deprecated It not should be used
      * @param url URL to be encoded
      * @return The encoded redirect URL
+     * @deprecated It should not be used
      */
     @Deprecated
     public String encodeRedirectUrl(final String url) {
@@ -235,15 +240,15 @@ public final class HttpServletResponseFake implements HttpServletResponse {
         final String location,
         final int scode,
         final boolean clearbuff
-    ) throws IOException {
+    ) {
         throw new UnsupportedOperationException("#sendRedirect()");
     }
 
     /**
      * Set the response code status and reason.
-     * @deprecated It not should be used
      * @param code The status code
      * @param reason The reason originates this code
+     * @deprecated It should not be used
      */
     @Deprecated
     public void setStatus(final int code, final String reason) {
@@ -317,7 +322,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     @Override
     public boolean isCommitted() {
-        throw new UnsupportedOperationException("#isCommited()");
+        throw new UnsupportedOperationException("#isCommitted()");
     }
 
     @Override

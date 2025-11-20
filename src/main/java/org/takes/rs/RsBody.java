@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -33,9 +14,26 @@ import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.cactoos.Input;
+import org.cactoos.io.InputOf;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.ScalarOf;
 
 /**
- * The body of a response used by {@link RsWithBody}.
+ * Interface for response body content used by {@link RsWithBody}.
+ *
+ * <p>This interface provides abstraction over different types of response
+ * body sources including URLs, byte arrays, input streams, and temporary files.
+ * Each implementation handles content length calculation and stream provision
+ * according to its specific source type. The interface extends Input to
+ * provide Cactoos integration.
+ *
+ * <p>Implementations include:
+ * <ul>
+ * <li>Url - content from URL sources</li>
+ * <li>ByteArray - content from byte arrays</li>
+ * <li>Stream - content from input streams</li>
+ * <li>TempFile - content stored in temporary files for large data</li>
+ * </ul>
  *
  * @since 0.32
  */
@@ -66,24 +64,24 @@ interface RsBody extends Input {
         /**
          * The {@link java.net.URL} of the content.
          */
-        private final java.net.URL url;
+        private final java.net.URL source;
 
         /**
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
          * @param content The {@link java.net.URL} of the content.
          */
         Url(final java.net.URL content) {
-            this.url = content;
+            this.source = content;
         }
 
         @Override
         public InputStream stream() throws IOException {
-            return this.url.openStream();
+            return this.source.openStream();
         }
 
         @Override
         public int length() throws IOException {
-            try (InputStream input = this.url.openStream()) {
+            try (InputStream input = this.source.openStream()) {
                 return input.available();
             }
         }
@@ -128,7 +126,7 @@ interface RsBody extends Input {
         /**
          * The content of the body in an InputStream.
          */
-        private final InputStream stream;
+        private final InputStream input;
 
         /**
          * The length of the stream.
@@ -140,14 +138,14 @@ interface RsBody extends Input {
          * @param input The content of the body as stream.
          */
         Stream(final InputStream input) {
-            this.stream = input;
+            this.input = input;
             this.length = new AtomicInteger(-1);
         }
 
         @Override
         public InputStream stream() throws IOException {
             this.estimate();
-            return this.stream;
+            return this.input;
         }
 
         @Override
@@ -162,7 +160,7 @@ interface RsBody extends Input {
          */
         private void estimate() throws IOException {
             if (this.length.get() == -1) {
-                this.length.compareAndSet(-1, this.stream.available());
+                this.length.compareAndSet(-1, this.input.available());
             }
         }
     }
@@ -210,7 +208,11 @@ interface RsBody extends Input {
 
         @Override
         public InputStream stream() throws IOException {
-            return Files.newInputStream(this.file().toPath());
+            return new IoChecked<>(
+                new ScalarOf<>(
+                    () -> new InputOf(this.file()).stream()
+                )
+            ).value();
         }
 
         @Override

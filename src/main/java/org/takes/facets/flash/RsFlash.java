@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.flash;
 
@@ -36,26 +17,19 @@ import org.takes.misc.Expires;
 import org.takes.rs.RsWrap;
 
 /**
- * Forwarding response.
+ * A response decorator that adds flash messages to HTTP responses via cookies.
  *
- * <p>This class helps you to automate the flash message mechanism, by
- * adding flash messages to your responses.
+ * <p>This class implements the flash message mechanism by adding Set-Cookie headers
+ * containing temporary messages that persist between HTTP requests. The flash concept,
+ * borrowed from Ruby on Rails, enables passing temporary variables between requests,
+ * which is particularly useful for redirect scenarios.
  *
- * <p>The flash concept is taken from Ruby on Rails, it is actually the ability
- * to pass temporary variables between requests which is particularly helpful
- * especially in case of a redirect.
+ * <p>Flash messages are ideal for displaying success or error notifications after
+ * form submissions or other user actions. The mechanism uses cookies to maintain
+ * state temporarily, making it unsuitable for stateless components like RESTful
+ * services.
  *
- * <p>The flash message mechanism is meant to be used in case you have a
- * dynamic content to render in which you want to add success or error
- * messages. The typical use case is when you have a form that the user can
- * submit and you want to be able to indicate whether the request was
- * successful or not.
- *
- * <p>The flash mechanism is a stateful mechanism based on a cookie so it is
- * not meant to be used to implement stateless components such as a RESTful
- * service.
- *
- * <p>Here is a simple example that shows how to properly use it:
+ * <p>Basic usage example:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
@@ -64,11 +38,8 @@ import org.takes.rs.RsWrap;
  *   }
  * }</pre>
  *
- * <p>This decorator will add the
- * required "Set-Cookie" header to the response. This is all it is doing.
- * The response is added to the cookie in URL-encoded format, together
- * with the logging level. Flash messages could be of different severity,
- * we're using Java logging levels for that, for example:
+ * <p>The decorator adds a Set-Cookie header with the message in URL-encoded format,
+ * combined with a logging level for severity indication:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
@@ -82,16 +53,14 @@ import org.takes.rs.RsWrap;
  *   }
  * }</pre>
  *
- * <p>This is how the HTTP response will look like (simplified):
+ * <p>The resulting HTTP response will contain:
  *
  * <pre> HTTP/1.1 303 See Other
  * Set-Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
- * <p>Here, the name of the cookie is {@code RsFlash}. You can change this
- * default name using a constructor of {@link org.takes.facets.flash.RsFlash}.
- *
- * <p>To clean up the cookie in the following requests, you will need to
- * decorate your {@code Take} with {@link TkFlash}.
+ * <p>The default cookie name is {@code RsFlash}, but it can be customized using
+ * appropriate constructors. To clean up cookies after consumption, decorate your
+ * {@code Take} with {@link TkFlash}.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -325,14 +294,13 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Make a response.
-     * @param msg Message
-     * @param level Level
-     * @param cookie Cookie name
-     * @param expires Date of the cookie
-     * @return Response
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     *  supported
+     * Creates a response with flash message cookie.
+     * @param msg The flash message text
+     * @param level The logging level for message severity
+     * @param cookie The cookie name to use
+     * @param expires The cookie expiration date
+     * @return A response with the Set-Cookie header containing the flash message
+     * @throws UnsupportedEncodingException If URL encoding fails
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static Response make(final CharSequence msg, final Level level,

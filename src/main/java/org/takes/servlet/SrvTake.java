@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.servlet;
 
@@ -36,7 +17,39 @@ import org.takes.HttpException;
 import org.takes.Take;
 
 /**
- * Servlet for take.
+ * Servlet adapter for Takes framework.
+ *
+ * <p>This servlet allows Takes applications to run inside any servlet
+ * container (Tomcat, Jetty, etc.) by bridging between the servlet API
+ * and Takes' {@link Take} interface. It acts as an entry point that
+ * receives servlet requests and delegates them to a Takes application
+ * for processing.
+ *
+ * <p>The servlet is configured through the standard servlet initialization
+ * parameter "take" which should specify the fully qualified class name
+ * of the {@link Take} implementation to use. The Take class must have
+ * either a no-argument constructor or a constructor that accepts a
+ * {@link ServletContext}.
+ *
+ * <p>Configuration example in web.xml:
+ * <pre>{@code
+ * &lt;servlet>
+ *   &lt;servlet-name>app&lt;/servlet-name>
+ *   &lt;servlet-class>org.takes.servlet.SrvTake&lt;/servlet-class>
+ *   &lt;init-param>
+ *     &lt;param-name>take&lt;/param-name>
+ *     &lt;param-value>com.example.MyTake&lt;/param-value>
+ *   &lt;/init-param>
+ * &lt;/servlet>
+ * }</pre>
+ *
+ * <p>The servlet handles the complete request/response lifecycle:
+ * <ul>
+ *   <li>Converts {@link HttpServletRequest} to Takes {@link org.takes.Request}</li>
+ *   <li>Processes the request through the configured {@link Take}</li>
+ *   <li>Converts Takes {@link org.takes.Response} back to {@link HttpServletResponse}</li>
+ *   <li>Handles exceptions and maps them to appropriate HTTP status codes</li>
+ * </ul>
  *
  * @since 2.0
  * @todo #953:30min Integration with Servlets Session API,
@@ -51,16 +64,16 @@ public final class SrvTake extends HttpServlet {
     private static final long serialVersionUID = -8119918127398448635L;
 
     /**
-     * Take, initialize in {@link #init()}.
+     * Take, initialized in {@link #init()}.
      */
-    private final AtomicReference<Take> tke;
+    private final AtomicReference<Take> that;
 
     /**
      * Ctor.
      */
     public SrvTake() {
         super();
-        this.tke = new AtomicReference<>();
+        this.that = new AtomicReference<>();
     }
 
     @Override
@@ -118,7 +131,7 @@ public final class SrvTake extends HttpServlet {
                 err
             );
         }
-        if (!this.tke.compareAndSet(null, take)) {
+        if (!this.that.compareAndSet(null, take)) {
             throw new IllegalStateException(
                 "Take is already constructed"
             );
@@ -132,7 +145,7 @@ public final class SrvTake extends HttpServlet {
         final HttpServletResponse resp
     ) throws IOException {
         try {
-            new ResponseOf(this.tke.get().act(new RqFrom(req)))
+            new ResponseOf(this.that.get().act(new RqFrom(req)))
                 .applyTo(resp);
         } catch (final HttpException err) {
             resp.sendError(err.code(), err.getMessage());

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
@@ -31,7 +12,24 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * Base64 codec.
+ * Base64 codec that encodes identity data using standard Base64 encoding.
+ *
+ * <p>This codec decorator applies Base64 encoding to make binary data
+ * safe for transmission over text-based protocols. It wraps another codec
+ * and converts its binary output to Base64-encoded strings, which can be
+ * safely transmitted via HTTP headers, URLs, or stored in text formats.
+ *
+ * <p>During decoding, it validates that all input characters are legal
+ * Base64 characters before attempting to decode, throwing a
+ * {@link DecodingException} if illegal characters are found.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcBase64(new CcCompact());
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // Base64-encoded
+ * final Identity decoded = codec.decode(encoded); // validated and decoded
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -86,9 +84,9 @@ public final class CcBase64 implements Codec {
      */
     private static byte[] checkIllegalCharacters(final byte[] bytes) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        for (final byte byt: bytes) {
-            if (BASE64CHARS.indexOf(byt) < 0) {
-                out.write(byt);
+        for (final byte the: bytes) {
+            if (CcBase64.BASE64CHARS.indexOf(the) < 0) {
+                out.write(the);
             }
         }
         return out.toByteArray();

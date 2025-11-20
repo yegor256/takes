@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
@@ -39,6 +20,7 @@ final class CcHexTest {
     void encodes() throws IOException {
         final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
+            "Hex encoded identity must match expected format",
             new String(new CcHex(new CcPlain()).encode(identity)),
             Matchers.equalTo("75726E25-33417465-73742533-4133")
         );
@@ -50,6 +32,7 @@ final class CcHexTest {
         final Identity identity = new Identity.Simple(urn);
         final Codec codec = new CcHex(new CcPlain());
         MatcherAssert.assertThat(
+            "Round-trip encoding must preserve original identity URN",
             codec.decode(codec.encode(identity)).urn(),
             Matchers.equalTo(urn)
         );
@@ -58,6 +41,7 @@ final class CcHexTest {
     @Test
     void decodes() throws IOException {
         MatcherAssert.assertThat(
+            "Hex decoding must produce correct identity URN",
             new CcHex(new CcPlain()).decode(
                 "75726E25-33417465-73742533-4141".getBytes()
             ).urn(),
@@ -68,12 +52,14 @@ final class CcHexTest {
     @Test
     void decodesInvalidData() throws IOException {
         MatcherAssert.assertThat(
+            "Invalid hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
                 " % tjw".getBytes()
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
         MatcherAssert.assertThat(
+            "Malformed hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
                 "75-72-6E-253".getBytes()
             ),

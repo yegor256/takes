@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -43,6 +24,7 @@ final class TkTextTest {
     void createsTextResponse() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from string",
             new RsPrint(new TkText(body).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -61,6 +43,7 @@ final class TkTextTest {
     void createsTextResponseFromScalar() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from scalar supplier",
             new RsPrint(new TkText(() -> body).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -79,6 +62,7 @@ final class TkTextTest {
     void createsTextResponseFromByteArray() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from byte array",
             new RsPrint(new TkText(body.getBytes()).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -97,6 +81,7 @@ final class TkTextTest {
     void createsTextResponseFromInputStream() throws Exception {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
+            "TkText must create proper text response from input stream",
             new RsPrint(new TkText(new InputStreamOf(body)).act(new RqFake())),
             new IsText(
                 new Joined(
@@ -116,10 +101,12 @@ final class TkTextTest {
         final String body = "hello, dude!";
         final Take take = new TkText(body);
         MatcherAssert.assertThat(
+            "First response must contain the expected body text",
             new RsPrint(take.act(new RqFake())),
             new HasString(body)
         );
         MatcherAssert.assertThat(
+            "Second response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),
             new HasString(body)
         );

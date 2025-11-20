@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
@@ -42,7 +23,25 @@ import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
- * Plain codec.
+ * Plain text codec that encodes identity objects into URL-encoded string format.
+ *
+ * <p>This codec provides a human-readable text representation of identity
+ * objects. It encodes the URN and properties as a semicolon-separated string
+ * where the URN comes first, followed by key=value pairs for each property.
+ * All values are URL-encoded to handle special characters safely.
+ *
+ * <p>The format is: {@code urn;key1=value1;key2=value2;...} where both
+ * the URN and property values are URL-encoded using the default charset.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcPlain();
+ * final Map<String, String> props = Map.of("name", "John Doe");
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity);
+ * // Result: "urn%3Auser%3Ajohn;name=John+Doe"
+ * final Identity decoded = codec.decode(encoded);
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *

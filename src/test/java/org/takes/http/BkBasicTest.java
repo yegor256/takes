@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -30,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -40,13 +22,13 @@ import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.misc.Href;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqPrint;
@@ -88,12 +70,14 @@ import org.takes.tk.TkText;
         final String hello = "Hello World";
         new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
+            "Socket output must contain the response text",
             baos.toString(),
             Matchers.containsString(hello)
         );
     }
 
     @Test
+    @Tag("deep")
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
         new FtRemote(
             new TkFork(
@@ -109,6 +93,7 @@ import org.takes.tk.TkText;
     }
 
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void addressesInHeadersAddedWithoutSlashes() throws Exception {
         final Socket socket = BkBasicTest.createMockSocket();
         final AtomicReference<Request> ref = new AtomicReference<>();
@@ -124,6 +109,7 @@ import org.takes.tk.TkText;
         final Request request = ref.get();
         final RqHeaders.Smart smart = new RqHeaders.Smart(request);
         MatcherAssert.assertThat(
+            "X-Takes-LocalAddress header must not contain slashes",
             smart.single(
                 "X-Takes-LocalAddress",
                 ""
@@ -133,6 +119,7 @@ import org.takes.tk.TkText;
             )
         );
         MatcherAssert.assertThat(
+            "X-Takes-RemoteAddress header must not contain slashes",
             smart.single(
                 "X-Takes-RemoteAddress",
                 ""
@@ -142,25 +129,29 @@ import org.takes.tk.TkText;
             )
         );
         MatcherAssert.assertThat(
+            "Local socket address must be present",
             new RqSocket(request).getLocalAddress(),
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            "Local socket port must be zero for mock socket",
             new RqSocket(request).getLocalPort(),
             Matchers.equalTo(0)
         );
         MatcherAssert.assertThat(
+            "Remote socket address must be present",
             new RqSocket(request).getRemoteAddress(),
             Matchers.notNullValue()
         );
         MatcherAssert.assertThat(
+            "Remote socket port must be zero for mock socket",
             new RqSocket(request).getRemotePort(),
             Matchers.equalTo(0)
         );
     }
 
     @Test
-    @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
+    @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.CloseResource"})
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -208,6 +199,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Two responses must be sent in one connection",
             output.toString(),
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
@@ -223,6 +215,7 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String text = "Say hello!";
@@ -266,6 +259,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Response must contain 411 status for missing Content-Length",
             output.toString(),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
@@ -278,6 +272,7 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -323,6 +318,7 @@ import org.takes.tk.TkText;
             }
         }
         MatcherAssert.assertThat(
+            "Response must contain text for closed connection request",
             output.toString(),
             Matchers.containsString(text)
         );
@@ -331,62 +327,33 @@ import org.takes.tk.TkText;
     /**
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
      * invalid URI.
-     * @todo #1058:30min This test address the bug reported by issue #1058.
-     *  The problem is {@link Href#createUri} method is recursive and
-     *  isn't working properly (the index doesn't match with the correct
-     *  position). But even fixing it, this leave a other question: should or
-     *  not Takes send a 400 Bad Request response? By the HTTP protocol, the
-     *  answer is yes. So, you should: 1) fix the recursive call in
-     *  {@link Href#createUri} 2) change {@link BkBasic#print} to return a
-     *  400 Bad Request response and finally 3) unignore this test (that should
-     *  pass).
+     */
+    @Test
+    void returnsABadRequestToAMissingPath() {
+        new Assertion<>(
+            "Must return bad request to an invalid request URI",
+            () -> this.responseForPath("GET", "\\"),
+            new HasString("400 Bad Request")
+        ).affirm();
+    }
+
+    /**
+     * BkBasic can return HTTP status 400 (Bad Request) when a request has an
+     * unencodable URI.
+     * todo: #1058:30min This test address the combination of bugs reported by
+     *  issue #1058 and #1441.
+     *  The problem is {@link BkBasic#accept} method that create
+     *  {@link org.takes.rq.RqLive} (can throw a {@link org.takes.HttpException},
+     *  while initializing) before execution control achieve try/catch
+     *  block in {@link BkBasic#print} with forming a proper error response on
+     *  {@link org.takes.HttpException}
      */
     @Disabled
     @Test
-    void returnsABadRequestToAnInvalidRequestUri() {
-        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+    void returnsABadRequestToAControlCharInPath() {
         new Assertion<>(
             "Must return bad request to an invalid request URI",
-            () -> {
-                try (ServerSocket server = new ServerSocket(0)) {
-                    new Thread(
-                        () -> {
-                            try {
-                                new BkBasic(
-                                    new TkFork(
-                                        new FkRegex("/", new TkText("hello"))
-                                    )
-                                ).accept(
-                                    server.accept()
-                                );
-                            } catch (final IOException exception) {
-                                throw new IllegalStateException(exception);
-                            }
-                        }
-                    ).start();
-                    try (
-                        Socket socket = new Socket(
-                            server.getInetAddress(),
-                            server.getLocalPort()
-                        )
-                    ) {
-                        socket.getOutputStream().write(
-                            new RqPrint(
-                                new RqFake("GET", "\\")
-                            ).asString().getBytes()
-                        );
-                        final InputStream input = socket.getInputStream();
-                        final byte[] buffer = new byte[4096];
-                        for (
-                            int count = input.read(buffer); count != -1;
-                            count = input.read(buffer)
-                        ) {
-                            output.write(buffer, 0, count);
-                        }
-                    }
-                }
-                return output.toString();
-            },
+            () -> this.responseForPath("GET", "/\n"),
             new HasString("400 Bad Request")
         ).affirm();
     }
@@ -397,6 +364,7 @@ import org.takes.tk.TkText;
      * @return Prepared Socket mock
      * @throws Exception If some problem inside
      */
+    @SuppressWarnings("PMD.CloseResource")
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
@@ -412,5 +380,51 @@ import org.takes.tk.TkText;
                 ).asBytes()
             )
         );
+    }
+
+    /**
+     * Starts a new clean server with only root path and tries to send a
+     * request.
+     *
+     * @param method HTTP method to be called
+     * @param path Endpoint to be called
+     * @return Server textual response
+     * @throws Exception If some problem inside
+     */
+    private String responseForPath(final String method, final String path)
+        throws Exception {
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try (ServerSocket server = new ServerSocket(0)) {
+            new Thread(
+                () -> {
+                    try {
+                        new BkBasic(
+                            new TkFork(
+                                new FkRegex("/", new TkText("hello"))
+                            )
+                        ).accept(server.accept());
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            ).start();
+            try (
+                Socket socket = new Socket(server.getInetAddress(), server.getLocalPort());
+                OutputStream socketOutBuffer = socket.getOutputStream();
+                InputStream sockerInStream = socket.getInputStream()
+            ) {
+                socketOutBuffer.write(
+                    new RqPrint(new RqFake(method, path)).asString().getBytes()
+                );
+                final byte[] buffer = new byte[4096];
+                for (
+                    int count = sockerInStream.read(buffer); count != -1;
+                    count = sockerInStream.read(buffer)
+                ) {
+                    output.write(buffer, 0, count);
+                }
+            }
+        }
+        return output.toString();
     }
 }

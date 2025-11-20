@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -30,7 +11,53 @@ import org.takes.Response;
 import org.takes.Take;
 
 /**
- * Wrap of take.
+ * Base decorator class for wrapping Take implementations.
+ *
+ * <p>This abstract base class provides a foundation for creating
+ * {@link Take} decorators that add functionality to existing takes
+ * through composition. It implements the Decorator pattern, allowing
+ * new behaviors to be added to takes without modifying their code.
+ *
+ * <p>TkWrap serves as the base class for many decorators in the
+ * Takes framework, providing a consistent way to wrap and extend
+ * take functionality. Decorators can intercept requests before
+ * forwarding them, modify responses after processing, or add
+ * cross-cutting concerns like logging, caching, or security.
+ *
+ * <p>Example usage for creating custom decorators:
+ * <pre>{@code
+ * // Custom decorator that adds a header to all responses
+ * public class TkWithCustomHeader extends TkWrap {
+ *     public TkWithCustomHeader(Take take, String header) {
+ *         super(req -> new RsWithHeader(take.act(req), header));
+ *     }
+ * }
+ *
+ * // Custom decorator that logs all requests
+ * public class TkLogged extends TkWrap {
+ *     public TkLogged(Take take) {
+ *         super(req -> {
+ *             System.out.println("Request: " + req);
+ *             return take.act(req);
+ *         });
+ *     }
+ * }
+ * }</pre>
+ *
+ * <p>Common decorator patterns built on TkWrap:
+ * <ul>
+ *   <li>Request modification (headers, body transformation)</li>
+ *   <li>Response enhancement (compression, headers, caching)</li>
+ *   <li>Cross-cutting concerns (logging, metrics, security)</li>
+ *   <li>Error handling and retry logic</li>
+ *   <li>Content negotiation and format conversion</li>
+ *   <li>Performance optimization (caching, pooling)</li>
+ * </ul>
+ *
+ * <p>The class maintains a reference to the wrapped take and delegates
+ * all request processing to it. Subclasses can override the act method
+ * to add pre-processing or post-processing logic, or use constructor
+ * injection to provide modified take behavior.
  *
  * <p>The class is immutable and thread-safe.
  *

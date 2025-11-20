@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fork;
 
@@ -54,18 +35,24 @@ final class FkHitRefreshTest {
             () -> done.set(true),
             new TkEmpty()
         );
-        TimeUnit.SECONDS.sleep(2L);
+        TimeUnit.MILLISECONDS.sleep(10L);
         FileUtils.touch(temp.resolve("hey.txt").toFile());
         MatcherAssert.assertThat(
+            "FkHitRefresh must match request when hit refresh header is present",
             fork.route(req).has(),
             Matchers.is(true)
         );
-        MatcherAssert.assertThat(done.get(), Matchers.is(true));
+        MatcherAssert.assertThat(
+            "Hit refresh task must have been executed",
+            done.get(),
+            Matchers.is(true)
+        );
     }
 
     @Test
     void ignoresWhenNoHeader(@TempDir final File temp) throws Exception {
         MatcherAssert.assertThat(
+            "FkHitRefresh must not match request when hit refresh header is missing",
             new FkHitRefresh(
                 temp, "", new TkEmpty()
             ).route(new RqFake()).has(),

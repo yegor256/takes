@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.flash;
 
@@ -33,19 +14,22 @@ import org.takes.facets.cookies.RqCookies;
 import org.takes.facets.cookies.RsWithCookie;
 
 /**
- * Take that understands Flash cookie and converts it into a HTTP header.
+ * A take decorator that handles flash cookie cleanup by expiring consumed cookies.
  *
- * <p>This decorator helps your "take" to automate flash messages and
- * destroy cookies on their way back,
- * from the browser to the server. This is what a browser will send back:
+ * <p>This decorator automatically manages the flash message lifecycle by detecting
+ * flash cookies in incoming requests and expiring them in the response. When a
+ * flash cookie is present, it adds a Set-Cookie header with an expired date to
+ * remove the cookie from the browser, preventing the flash message from being
+ * displayed multiple times.
+ *
+ * <p>For example, when a browser sends:
  *
  * <pre> GET / HTTP/1.1
  * Host: www.example.com
  * Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
- * <p>This decorator adds "Set-Cookie" with an empty
- * value to the response. That's all it's doing. All you need to do
- * is to decorate your existing "take", for example:
+ * <p>This decorator adds a Set-Cookie header with an expired date to the response,
+ * effectively deleting the cookie. Use it to decorate your existing take:
  *
  * <pre> new FtBasic(
  *   new TkFlash(TkFork(new FkRegex("/", "hello, world!"))), 8080
@@ -71,17 +55,17 @@ public final class TkFlash implements Take {
     private final String cookie;
 
     /**
-     * Ctor.
-     * @param take Original take
+     * Constructor with default cookie name.
+     * @param take The original take to decorate
      */
     public TkFlash(final Take take) {
         this(take, RsFlash.class.getSimpleName());
     }
 
     /**
-     * Ctor.
-     * @param take Original take
-     * @param name Cookie name
+     * Constructor with custom cookie name.
+     * @param take The original take to decorate
+     * @param name The name of the flash cookie to handle
      */
     public TkFlash(final Take take, final String name) {
         this.origin = take;

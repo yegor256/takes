@@ -1,50 +1,47 @@
 # Pure Object-Oriented Java Web Framework
 
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
-[![DevOps By Rultor.com](http://www.rultor.com/b/yegor256/takes)](http://www.rultor.com/p/yegor256/takes)
+[![DevOps By Rultor.com](https://www.rultor.com/b/yegor256/takes)](https://www.rultor.com/p/yegor256/takes)
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![mvn](https://github.com/yegor256/takes/actions/workflows/mvn.yml/badge.svg)](https://github.com/yegor256/takes/actions/workflows/mvn.yml)
-[![Javadoc](http://www.javadoc.io/badge/org.takes/takes.svg)](http://www.javadoc.io/doc/org.takes/takes)
-[![codebeat badge](https://codebeat.co/badges/5721bba4-59cd-44ea-a60f-6043734187f7)](https://codebeat.co/projects/github-com-yegor256-takes)
+[![Javadoc](https://www.javadoc.io/badge/org.takes/takes.svg)](https://www.javadoc.io/doc/org.takes/takes)
+[![Z vitals](https://www.takes.org/takes-badge.svg)](https://www.takes.org/takes-vitals.html)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/takes/blob/master/LICENSE.txt)
 [![Test Coverage](https://img.shields.io/codecov/c/github/yegor256/takes.svg)](https://codecov.io/github/yegor256/takes?branch=master)
 [![Hits-of-Code](https://hitsofcode.com/github/yegor256/takes)](https://hitsofcode.com/view/github/yegor256/takes)
-[![SonarQube](https://img.shields.io/badge/sonar-ok-green.svg)](https://sonarcloud.io/dashboard?id=org.takes%3Atakes)
-[![Maintainability](https://api.codeclimate.com/v1/badges/dca23c1154539343737a/maintainability)](https://codeclimate.com/github/yegor256/takes/maintainability)
 [![Maven Central](https://img.shields.io/maven-central/v/org.takes/takes.svg)](https://maven-badges.herokuapp.com/maven-central/org.takes/takes)
-[![PDD status](http://www.0pdd.com/svg?name=yegor256/takes)](http://www.0pdd.com/p?name=yegor256/takes)
+[![PDD status](https://www.0pdd.com/svg?name=yegor256/takes)](https://www.0pdd.com/p?name=yegor256/takes)
 
 **Takes** is a [true object-oriented][oop]
 and [immutable][immutable]
-Java8 web development framework. Its key benefits, comparing to all others,
-include these
-four fundamental principles:
+Java 8 web development framework. Its key benefits, compared to all others,
+include these four fundamental principles:
 
 1. Not a single `null`
-([why NULL is bad?][null])
+([why is NULL bad?][null])
 2. Not a single `public` `static` method
-([why they are bad?][utility])
+([why are they bad?][utility])
 3. Not a single mutable class
-([why they are bad?][immutable])
+([why are they bad?][immutable])
 4. Not a single `instanceof` keyword, type casting, or reflection
 ([why?][casting])
 
 Of course, there are no configuration files.
-Besides that, these are more traditional features, out of the box:
+Besides that, these are the more traditional features, out of the box:
 
 * Hit-refresh debugging
 * [XML+XSLT](http://www.yegor256.com/2014/06/25/xml-and-xslt-in-browser.html)
 * [JSON](http://en.wikipedia.org/wiki/JSON)
 * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
-* Templates, incl. [Apache Velocity](http://velocity.apache.org/)
+* Templates, including [Apache Velocity](http://velocity.apache.org/)
 
-This is what is not supported and won't be supported:
+This is what is not supported and will not be supported:
 
 * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
 These two web systems use Takes, and they are open source:
-[wring.io](http://www.wring.io) ([sources](https://github.com/yegor256/wring)),
+[rultor.com](http://www.rultor.com) ([sources](https://github.com/yegor256/rultor)),
 [jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
 
 Watch these videos to learn more:
@@ -52,7 +49,7 @@ Watch these videos to learn more:
 [Takes, Java Web Framework, Intro](https://www.youtube.com/watch?v=nheD2LNYrpk).
 This
 [blog post](http://www.yegor256.com/2015/03/22/takes-1.24.6-web-framework.html)
-may help you too.
+may help you as well.
 
 ## Contents
 
@@ -117,23 +114,24 @@ Now, run it like this:
 java -Dfile.encoding=UTF-8 -cp takes-1.24.6-jar-with-dependencies.jar:. App
 ```
 
-Should work :)
+It should work!
 
-This code starts a new HTTP server on port 8080 and renders a plain-text page on
+This code starts a new HTTP server on port 8080 and renders a plain-text page for
 all requests at the root URI.
 
-**Important**: Pay attention that UTF-8 encoding is set on the command line.
-The entire framework relies on your default Java encoding, which is not
-necessarily UTF-8 by default. To be sure, always set it on the command line
-with `file.encoding` Java argument. We decided not to hard-code "UTF-8" in
-our code mostly because this would be against the entire idea of
-Java localization,
-according to which a user always should have a choice of encoding and language
-selection. We're using `Charset.defaultCharset()` everywhere in the code.
+> [!CAUTION]
+> Pay attention that UTF-8 encoding is set on the command line.
+> The entire framework relies on your default Java encoding, which is not
+> necessarily UTF-8 by default. To be sure, always set it on the command line
+> with `file.encoding` Java argument. We decided not to hard-code "UTF-8" in
+> our code mostly because this would be against the entire idea of
+> Java localization,
+> according to which a user always should have a choice of encoding and language
+> selection. We're using `Charset.defaultCharset()` everywhere in the code.
 
 ## Build and Run With Maven
 
-If you're using Maven, this is how your `pom.xml` should look like:
+If you're using Maven, this is how your `pom.xml` should look:
 
 ```xml
 <project>
@@ -176,7 +174,7 @@ If you're using Maven, this is how your `pom.xml` should look like:
 </project>
 ```
 
-With this configuration you can run it from command line:
+With this configuration you can run it from the command line:
 
 ```bash
 mvn clean integration-test -Phit-refresh -Dport=8080
@@ -184,9 +182,9 @@ mvn clean integration-test -Phit-refresh -Dport=8080
 
 Maven will start the server and you can see it at `http://localhost:8080`.
 
-## Using in servlet app
+## Using in a Servlet App
 
-Create a take with constructor accepting `ServletContext`:
+Create a Take with constructor accepting `ServletContext`:
 
 ```java
 package com.myapp;
@@ -222,7 +220,7 @@ take class as servlet `init-param`:
 
 ## Build and Run With Gradle
 
-If you're using Gradle, this is how your `build.gradle` should look like:
+If you're using Gradle, this is how your `build.gradle` should look:
 
 ```groovy
 plugins {
@@ -233,12 +231,12 @@ repositories {
   mavenCentral()
 }
 dependencies {
-  compile group: 'org.takes', name: 'takes', version: '1.11.3'
+  implementation group: 'org.takes', name: 'takes', version: '1.24.6'
 }
 mainClassName='foo.App' //your main class
 ```
 
-With this configuration you can run it from command line:
+With this configuration you can run it from the command line:
 
 ```bash
 gradle run -Phit-refresh -Dport=8080
@@ -246,7 +244,7 @@ gradle run -Phit-refresh -Dport=8080
 
 ## Unit Testing
 
-This is how you can unit test the app, using JUnit 4.x and
+This is how you can unit-test the app, using JUnit 4.x and
 [Hamcrest](http://hamcrest.org):
 
 ```java
@@ -257,7 +255,7 @@ public final class AppTest {
       new RsPrint(
         new App().act(new RqFake("GET", "/"))
       ).printBody(),
-      Matchers.equalsTo("hello, world!")
+      Matchers.equalTo("hello, world!")
     );
   }
 }
@@ -298,8 +296,8 @@ public final class AppITCase {
 }
 ```
 
-More complex integration testing examples you can find in one
-of the open source projects that are using Take, for example:
+More complex integration testing examples can be found in one
+of the open source projects that use Takes, for example:
 [rultor.com][rultor-code].
 
 ## A Bigger Example
@@ -320,7 +318,7 @@ public final class App {
 }
 ```
 
-The `FtBasic` is accepting new incoming sockets on port 8080,
+The `FtBasic` accepts new incoming sockets on port 8080,
 parses them according to HTTP 1.1 specification and creates instances
 of class `Request`. Then, it gives requests to the instance of `TkFork`
 (`tk` stands for "take") and expects it to return an instance of `Take` back.
@@ -337,9 +335,9 @@ public final class TkIndex implements Take {
 }
 ```
 
-It is immutable and must implement a single method `act()`, which is returning
-an instance of `Response`. So far so good, but this class doesn't have an access
-to an HTTP request. Here is how we solve this:
+It is immutable and must implement a single method `act()`, which returns
+an instance of `Response`. So far so good, but this class does not have access
+to the HTTP request. Here is how to solve this:
 
 ```java
 new TkFork(
@@ -360,7 +358,7 @@ new TkFork(
 )
 ```
 
-We're using `TkRegex` instead of `Take`, in order to deal with
+We are using `TkRegex` instead of `Take`, in order to work with
 `RqRegex` instead of a more generic `Request`. `RqRegex` gives an instance
 of `Matcher` used by `FkRegex` for pattern matching.
 
@@ -385,31 +383,31 @@ public final class App {
 }
 ```
 
-## Front interface
+## Front Interface
 
-Essential part of [Bigger Example](#a-bigger-example) is
+An essential part of the [Bigger Example](#a-bigger-example) is the
 [Front](src/main/java/org/takes/http/Front.java) interface.
-It's encapsulates server's [back-end](src/main/java/org/takes/http/Back.java)
-and used to start an instance, which will accept requests and return results.
-`FtBasic`, which is a basic front, implements that interface - you've
-seen it's usage in above mentioned example.
+It encapsulates server's [back-end](src/main/java/org/takes/http/Back.java)
+and is used to start an instance, which will accept requests and return results.
+`FtBasic`, which is a basic front, implements that interface - you have
+seen its usage in the above-mentioned example.
 
 There are other useful implementations of this interface:
 
 * The [FtRemote](src/main/java/org/takes/http/FtRemote.java)
-class allows you to provide script, that will be executed against
-given front. You can see how it's used in
+class allows you to provide a script that will be executed against
+a given front. You can see how it's used in
 [integration tests](#integration-testing).
 * The [FtCli](src/main/java/org/takes/http/FtCli.java) class
-allows you to start your application with command line arguments. More details
+allows you to start your application with command-line arguments. More details
 in [Command Line Arguments](#command-line-arguments).
 * The [FtSecure](src/main/java/org/takes/http/FtSecure.java) class allows
 you to start your application with SSL. More details in
 [SSL Configuration](#ssl-configuration).
 
-## Back interface
+## Back Interface
 
-[Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
+The [Back](src/main/java/org/takes/http/Back.java) interface is the back-end that
 is responsible for IO operations on TCP network level. There are various useful
 implementations of that interface:
 
@@ -418,7 +416,7 @@ implementation of the `Back` interface. It is responsible for accepting the
 request from `Socket`, converting the socket's input to the
 [Request](src/main/java/org/takes/Request.java), dispatching it to the
 provided [Take](src/main/java/org/takes/Take.java) instance, getting
-the result and printing it to the socket's output until all the request is
+the result and printing it to the socket's output until the request is
 fulfilled.
 * The [BkParallel](src/main/java/org/takes/http/BkParallel.java) class is
 a decorator of the `Back` interface, that is responsible for running the
@@ -426,14 +424,14 @@ back-end in parallel threads. You can specify the number of threads or try
 to use the default number, which depends on available processors number in JVM.
 * The [BkSafe](src/main/java/org/takes/http/BkSafe.java) class is a decorator
 of the `Back` interface, that is responsible for running the back-end in a
-safe mode. That means that it will ignore exception thrown from original `Back`.
+safe mode. That means that it will ignore exceptions thrown from the original `Back`.
 * The [BkTimeable](src/main/java/org/takes/http/BkTimeable.java) class is a
 decorator of the `Back` interface, that is responsible for running the back-end
-for specified maximum lifetime in milliseconds. It is constantly checking if
-the thread with original `back` exceeds provided limit and if so - it's
+for a specified maximum lifetime in milliseconds. It is constantly checking if
+the thread with the original `back` exceeds the provided limit and if so - it
 interrupts the thread of that `back`.
 * The [BkWrap](src/main/java/org/takes/http/BkWrap.java) class is a convenient
-wrap over the original `Back` instance. It's just delegates the `accept`
+wrap over the original `Back` instance. It just delegates the `accept`
 to that `Back` and might be useful if you want to add your own decorators of the
 `Back` interface. This class is used in `BkParallel` and `BkSafe` as
 a parent class.
@@ -442,9 +440,9 @@ a parent class.
 
 Now let's see how we can render something more complex than a plain text.
 First, XML+XSLT is a recommended mechanism of HTML rendering.
-Even though it may be
-too complex, give it a try, you won't regret. Here is how we render a simple XML
-page that is transformed to HTML5 on-fly (more about `RsXembly` read below):
+Even though it may seem complex, give it a try; you will not regret it.
+Here is how we render a simple XML page that is transformed
+to HTML5 on the fly (more about `RsXembly` below):
 
 ```java
 public final class TkAccount implements Take {
@@ -468,7 +466,7 @@ public final class TkAccount implements Take {
 }
 ```
 
-This is how that `User` class may look like:
+This is how that `User` class may look:
 
 ```java
 public final class User implements XeSource {
@@ -483,7 +481,7 @@ public final class User implements XeSource {
 }
 ```
 
-Here is how `RsLogin` may look like:
+Here is how `RsLogin` may look:
 
 ```java
 public final class RsLogin extends RsWrap {
@@ -499,14 +497,14 @@ public final class RsLogin extends RsWrap {
 
 ## Velocity Templates
 
-Let's say, you want to use [Velocity](http://velocity.apache.org/):
+Let's say you want to use [Velocity](http://velocity.apache.org/):
 
 ```java
 public final class TkHelloWorld implements Take {
   @Override
   public Response act(final Request req) {
     return new RsVelocity(
-      "hi, ${user.name}! You've got ${user.balance}",
+      "Hi, ${user.name}! You've got ${user.balance}",
       new RsVelocity.Pair("user", new User())
     );
   }
@@ -544,16 +542,16 @@ classes for that:
 ```java
 new TkFork(
   new FkRegex("/css/.+", new TkWithType(new TkClasspath(), "text/css")),
-  new FkRegex("/data/.+", new TkFiles(new File("/usr/local/data"))
+  new FkRegex("/data/.+", new TkFiles(new File("/usr/local/data")))
 )
 ```
 
-Class `TkClasspath` take static part of the request URI and finds
-a resource with this name in classpath.
+The `TkClasspath` class takes the static part of the request URI and finds
+a resource with this name in the classpath.
 
-`TkFiles` just looks by file name in the directory configured.
+`TkFiles` looks for files by name in the configured directory.
 
-`TkWithType` sets content type of all responses coming out of
+`TkWithType` sets the content type of all responses coming out of
 the decorated take.
 
 ## Hit Refresh Debugging
@@ -574,7 +572,7 @@ new TkFork(
           "./src/main/resources/foo/scss/**", // what sources to watch
           "mvn sass:compile", // what to run when sources are modified
           new TkFiles("./target/css")
-        )
+        ),
         new FkFixed(new TkClasspath())
       ),
       "text/css"
@@ -583,13 +581,13 @@ new TkFork(
 )
 ```
 
-This `FkHitRefresh` fork is a decorator of take. Once it sees
+This `FkHitRefresh` fork is a decorator of Take. Once it sees
 `X-Take-Refresh` header in the request, it realizes that the server
 is running in
 "hit-refresh" mode and passes the request to the encapsulated take. Before it
-passes the request it tries to understand whether any of the resources
-are older than compiled files. If they are older, it tries
-to run compilation tool to build them again.
+passes the request, it tries to understand whether any of the resources
+are older than the compiled files. If they are older, it tries
+to run the compilation tool to build them again.
 
 ## Request Methods (POST, PUT, HEAD, etc.)
 
@@ -618,7 +616,7 @@ URI uri = href.uri();
 Iterable<String> values = href.param("key");
 ```
 
-For a more complex parsing try to use Apache Http Client or something
+For a more complex parsing try to use Apache HTTP Client or something
 similar.
 
 ## Form Processing
@@ -637,7 +635,7 @@ public final class TkSavePhoto implements Take {
 
 ## Exception Handling
 
-By default, `TkFork` lets all exceptions bubble up. If one of your take
+By default, `TkFork` lets all exceptions bubble up. If one of your Takes
 crashes, a user will see a default error page. Here is how you can configure
 this behavior:
 
@@ -651,13 +649,13 @@ public final class App {
           new FkRegex("/", new TkIndex())
         ),
         new FbChain(
-          new FbStatus(404, new RsText("sorry, page is absent")),
-          new FbStatus(405, new RsText("this method is not allowed here")),
+          new FbStatus(404, new RsText("Sorry, page is absent")),
+          new FbStatus(405, new RsText("This method is not allowed here")),
           new Fallback() {
             @Override
             public Iterator<Response> route(final RqFallback req) {
               return Collections.<Response>singleton(
-                new RsHTML("oops, something went terribly wrong!")
+                new RsHTML("Oops, something went terribly wrong!")
               ).iterator();
             }
           }
@@ -670,7 +668,7 @@ public final class App {
 ```
 
 `TkFallback` decorates an instance of Take and catches all exceptions any of
-its take may throw. Once it's thrown, an instance of `FbChain` will
+its Takes may throw. Once it is thrown, an instance of `FbChain` will
 find the most suitable fallback and will fetch a response from there.
 
 ## Redirects
@@ -686,13 +684,13 @@ public final class TkPostMessage implements Take {
     final String body = new RqPrint(req).printBody();
     if (body.isEmpty()) {
       throw new RsForward(
-        new RsFlash("message can't be empty")
+        new RsFlash("Message can't be empty")
       );
     }
     // save the message to the database
     return new RsForward(
       new RsFlash(
-        "thanks, the message was posted"
+        "Thanks, the message was posted"
       ),
       "/"
     );
@@ -748,7 +746,7 @@ public final class User implements XeSource, RsJSON.Source {
 
 ## RsXembly
 
-Here is how you generate an XML page using [Xembly](http://www.xembly.org):
+Here is how to generate an XML page using [Xembly](http://www.xembly.org):
 
 ```java
 Response response = new RsXembly(
@@ -801,7 +799,7 @@ Response response = new RsXembly(
 )
 ```
 
-This is how this `XeFoo` class would look like:
+This is how this `XeFoo` class would look:
 
 ```java
 public final class XeFoo extends XeWrap {
@@ -851,7 +849,7 @@ public final class TkIndex implements Take {
 ```
 
 An HTTP response will contain this header, which will place
-a `auth` cookie into the user's browser:
+an `auth` cookie into the user's browser:
 
 ```text
 HTTP/1.1 200 OK
@@ -879,13 +877,13 @@ If you want to compress all your responses with GZIP, wrap your take in
 new TkGzip(take)
 ```
 
-Now, each request that contains `Accept-Encoding` request header with `gzip`
+Now, each request that contains the `Accept-Encoding` request header with `gzip`
 compression method inside will receive a GZIP-compressed response. Also,
 you can compress an individual response, using `RsGzip` decorator.
 
 ## Content Negotiation
 
-Say, you want to return different content based on `Accept` header
+Say you want to return different content based on the `Accept` header
 of the request (a.k.a.
 [content negotiation](http://en.wikipedia.org/wiki/Content_negotiation)):
 
@@ -895,8 +893,8 @@ public final class TkIndex implements Take {
   public Response act(final Request req) {
     return new RsFork(
       req,
-      new FkTypes("text/*", new RsText("it's a text"))
-      new FkTypes("application/json", new RsJSON("{\"a\":1}"))
+      new FkTypes("text/*", new RsText("it's a text")),
+      new FkTypes("application/json", new RsJSON("{\"a\":1}")),
       new FkTypes("image/png", /* something else */)
     );
   }
@@ -905,7 +903,7 @@ public final class TkIndex implements Take {
 
 ## SSL Configuration
 
-First of all, setup your keystore settings, for example
+First of all, set up your keystore settings, for example:
 
 ```java
 final String file = this.getClass().getResource("/org/takes/http/keystore").getFile();
@@ -916,8 +914,8 @@ System.setProperty("javax.net.ssl.trustStore", file);
 System.setProperty("javax.net.ssl.trustStorePassword", password);
 ```
 
-Then simple create exemplar of class
-[`FtSecure`](src/main/java/org/takes/http/FtSecure.java) with socket factory
+Then simply create an instance of the
+[`FtSecure`](src/main/java/org/takes/http/FtSecure.java) class with socket factory
 
 ```java
 final ServerSocket skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
@@ -936,7 +934,7 @@ Here is an example of login via
 ```java
 new TkAuth(
   new TkFork(
-    new FkRegex("/", new TkHTML("hello, check <a href='/acc'>account</a>")),
+    new FkRegex("/", new TkHTML("Hello, check <a href='/acc'>account</a>")),
     new FkRegex("/acc", new TkSecure(new TkAccount()))
   ),
   new PsChain(
@@ -957,8 +955,8 @@ new TkAuth(
 )
 ```
 
-Then, you need to show a login link to the user, which he or she
-can click and get to the Facebook OAuth authentication page. Here is how
+Then, you need to show a login link to the user, which the user
+can click to get to the Facebook OAuth authentication page. Here is how
 you do this with XeResponse:
 
 ```java
@@ -972,7 +970,7 @@ new RsXembly(
 )
 ```
 
-The link will be add to the XML page like this:
+The link will be added to the XML page like this:
 
 ```xml
 <page>
@@ -985,16 +983,16 @@ The link will be add to the XML page like this:
 Similar mechanism can be used for `PsGithub`,
 `PsGoogle`, `PsLinkedin`, `PsTwitter`, etc.
 
-This is how you get currently logged in user:
+This is how to get the currently logged-in user:
 
 ```java
 public final class TkAccount implements Take {
   @Override
   public Response act(final Request req) {
     final Identity identity = new RqAuth(req).identity();
-    if (this.identity.equals(Identity.ANONYMOUS)) {
+    if (identity.equals(Identity.ANONYMOUS)) {
       // returns "urn:facebook:1234567" for a user logged in via Facebook
-      this.identity().urn();
+      identity.urn();
     }
   }
 }
@@ -1005,10 +1003,10 @@ More about it in this blog post:
 
 ## Command Line Arguments
 
-There is a convenient class `FtCLI` that parses command line arguments and
+There is a convenient `FtCLI` class that parses command-line arguments and
 starts the necessary `Front` accordingly.
 
-There are a few command line arguments that should be passed to
+There are a few command-line arguments that should be passed to
 `FtCLI` constructor:
 
 ```text
@@ -1034,7 +1032,7 @@ public final class App {
 }
 ```
 
-Then, run it like this:
+Then run it like this:
 
 ```bash
 java -cp take.jar App.class --port=8080 --hit-refresh
@@ -1042,7 +1040,7 @@ java -cp take.jar App.class --port=8080 --hit-refresh
 
 You should see "hello, world!" at `http://localhost:8080`.
 
-Parameter `--port` also accepts file name, instead of a number. If the file
+Parameter `--port` also accepts a file name, instead of a number. If the file
 exists, `FtCLI` will try to read its content and use it as
 port number. If the file is absent, `FtCLI` will allocate a new random
 port number, use it to start a server, and save it to the file.
@@ -1063,7 +1061,7 @@ new TkSlf4j(
 ## Directory Layout
 
 You are free to use any build tool, but we recommend Maven.
-This is how your project directory layout may/should look like:
+This is how your project directory layout may/should look:
 
 ```text
 src/
@@ -1078,21 +1076,14 @@ src/
       xsl/
       js/
       css/
-      robot.txt
-      log4j.properties
-  test/
-    java/
-      foo/
-        AppTest.java
-    resources/
-      log4j.properties
+      robots.txt
 pom.xml
 LICENSE.txt
 ```
 
-## Optional dependencies
+## Optional Dependencies
 
-If you're using Maven and include Takes as a dependency in your own project,
+If you are using Maven and include Takes as a dependency in your own project,
 you can choose which of the optional dependencies to include in your project.
 The list of all of the optional dependencies can be seen in the
 Takes project `pom.xml`.
@@ -1108,7 +1099,7 @@ the `restfb` API in your project:
 </dependency>
 ```
 
-For Gradle, you should add the dependencies as usual:
+For Gradle, add the dependencies as usual:
 
 ```groovy
 dependencies {
@@ -1117,13 +1108,13 @@ dependencies {
 }
 ```
 
-## Backward compatibility
+## Backward Compatibility
 
-Version 2.0 is not backward compatible with previous versions.
+Version 2.0 is not backward-compatible with previous versions.
 
-## Version pattern for RESTful API
+## Version Pattern for RESTful API
 
-The URL should NOT contain the versions, but the type requested.
+The URL should NOT contain the version, but the type requested.
 
 For example:
 
@@ -1139,7 +1130,7 @@ Content-Type: application/org.takes.architect-v1+xml
 </architect>
 ```
 
-Then clients aware of newer version of this service can call:
+Then clients aware of a newer version of this service can call:
 
 ```text
 ===>
@@ -1159,20 +1150,20 @@ Content-Type: application/org.takes.architect-v2+xml
 [This article][rest-types]
 explains why it's done this way.
 
-## How to contribute
+## How to Contribute
 
-Fork repository, make changes, send us a pull request. We will review
+Fork the repository, make changes, and send us a pull request. We will review
 your changes and apply them to the `master` branch shortly, provided
 they don't violate our quality standards. To avoid frustration, before
-sending us your pull request please run full Maven build:
+sending us your pull request, please run the full Maven build:
 
 ```bash
 mvn clean install -Pqulice
 ```
 
-To avoid build errors use maven 3.2+.
+To avoid build errors, use Maven 3.2+.
 
-Pay attention that our `pom.xml` inherits a lot of configuration
+Note that our `pom.xml` inherits a lot of configuration
 from [jcabi-parent](http://parent.jcabi.com).
 [This article](http://www.yegor256.com/2015/02/05/jcabi-parent-maven-pom.html)
 explains why it's done this way.

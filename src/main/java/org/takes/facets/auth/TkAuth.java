@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -32,7 +13,9 @@ import org.takes.misc.Opt;
 import org.takes.rq.RqWithoutHeader;
 
 /**
- * Authenticating take.
+ * Take that adds authentication capabilities to another take.
+ * This decorator wraps an existing take and ensures that requests
+ * are authenticated before being processed by the underlying take.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -43,17 +26,17 @@ import org.takes.rq.RqWithoutHeader;
 public final class TkAuth implements Take {
 
     /**
-     * Original take.
+     * Original take to be wrapped with authentication.
      */
     private final Take origin;
 
     /**
-     * Pass.
+     * Pass used for authentication.
      */
     private final Pass pass;
 
     /**
-     * Header to set in case of authentication.
+     * Name of the header to set when authentication is successful.
      */
     private final String header;
 
@@ -91,11 +74,11 @@ public final class TkAuth implements Take {
     }
 
     /**
-     * Make take.
-     * @param req Request
-     * @param identity Identity
-     * @return Take
-     * @throws Exception If fails
+     * Process the request with the authenticated identity.
+     * @param req Request to process
+     * @param identity Authenticated identity
+     * @return Response from the wrapped take
+     * @throws Exception If processing fails
      */
     private Response act(final Request req, final Identity identity)
         throws Exception {

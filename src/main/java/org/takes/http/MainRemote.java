@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -29,17 +10,23 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
+import org.cactoos.io.InputOf;
 import org.cactoos.number.NumberOf;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 
 /**
- * Front remote control.
+ * Main method remote control.
+ *
+ * <p>This class allows you to start an application with a {@code main()}
+ * method in a separate thread, execute a script against it while it's running,
+ * and then shut it down. This is particularly useful for integration testing
+ * of applications that expose an HTTP interface through their main method.
+ * The class automatically manages port allocation and cleanup.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -146,7 +133,7 @@ public final class MainRemote {
             TimeUnit.MILLISECONDS.sleep(1L);
         }
         final int port;
-        try (InputStream input = Files.newInputStream(file.toPath())) {
+        try (InputStream input = new InputOf(file).stream()) {
             final byte[] buf = new byte[10];
             while (true) {
                 if (input.read(buf) > 0) {

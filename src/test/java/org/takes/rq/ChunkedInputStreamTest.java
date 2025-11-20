@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -53,7 +34,7 @@ final class ChunkedInputStreamTest {
     void readsOneChunk() throws IOException {
         final String data = "1234567890abcdef";
         final String length = Integer.toHexString(data.length());
-        final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -64,15 +45,24 @@ final class ChunkedInputStreamTest {
                 ).toString(),
                 StandardCharsets.UTF_8
             )
-        );
-        final byte[] buf = new byte[data.length()];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(data.length())
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
-        stream.close();
+        )) {
+            final byte[] buf = new byte[data.length()];
+            MatcherAssert.assertThat(
+                "Number of bytes read must equal the data length",
+                stream.read(buf),
+                Matchers.equalTo(data.length())
+            );
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes())
+            );
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
     }
 
     @Test
@@ -82,7 +72,7 @@ final class ChunkedInputStreamTest {
         final String third = "oriented framework";
         final String data = first + second + third;
         final Integer length = data.length();
-        final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -97,15 +87,24 @@ final class ChunkedInputStreamTest {
                 ).toString(),
                 StandardCharsets.UTF_8
             )
-        );
-        final byte[] buf = new byte[length];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(length)
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
-        stream.close();
+        )) {
+            final byte[] buf = new byte[length];
+            MatcherAssert.assertThat(
+                "Number of bytes read must equal the total length of all chunks",
+                stream.read(buf),
+                Matchers.equalTo(length)
+            );
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes())
+            );
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
     }
 
     @Test
@@ -113,7 +112,7 @@ final class ChunkedInputStreamTest {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());
-        final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -124,22 +123,31 @@ final class ChunkedInputStreamTest {
                 ).toString(),
                 StandardCharsets.UTF_8
             )
-        );
-        final byte[] buf = new byte[data.length()];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(data.length())
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
-        stream.close();
+        )) {
+            final byte[] buf = new byte[data.length()];
+            MatcherAssert.assertThat(
+                "Number of bytes read must equal the data length",
+                stream.read(buf),
+                Matchers.equalTo(data.length())
+            );
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes())
+            );
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
     }
 
     @Test
     void readsWithLenGreaterThanTotalSize() throws IOException {
         final String data = "Hello, World!";
         final String length = Integer.toHexString(data.length());
-        final InputStream stream = new ChunkedInputStream(
+        try (InputStream stream = new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
                     ChunkedInputStreamTest.CRLF,
@@ -150,17 +158,23 @@ final class ChunkedInputStreamTest {
                 ).toString(),
                 StandardCharsets.UTF_8
             )
-        );
-        final byte[] buf = new byte[data.length() + 10];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(data.length())
-        );
-        MatcherAssert.assertThat(
-            buf,
-            Matchers.equalTo((data + new String(new byte[10])).getBytes())
-        );
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
-        stream.close();
+        )) {
+            final byte[] buf = new byte[data.length() + 10];
+            MatcherAssert.assertThat(
+                "Number of bytes read must equal the data length",
+                stream.read(buf),
+                Matchers.equalTo(data.length())
+            );
+            MatcherAssert.assertThat(
+                "Buffer must contain data followed by zero-filled padding",
+                buf,
+                Matchers.equalTo((data + new String(new byte[10])).getBytes())
+            );
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
     }
 }

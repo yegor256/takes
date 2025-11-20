@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.misc;
 
@@ -40,6 +21,7 @@ final class HrefTest {
     void buildsUri() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
+            "URI must be built correctly with added, removed and replaced parameters",
             new Href("http://example.com?%D0%B0=8&b=9")
                 .with("д", "hello")
                 .without("b")
@@ -53,6 +35,7 @@ final class HrefTest {
     void buildsUriFromEmpty() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
+            "URI must be built correctly from empty base with path and empty parameter",
             new Href().path("boom-4").with("д", "").toString(),
             Matchers.equalTo("/boom-4?%D0%B4")
         );
@@ -62,13 +45,14 @@ final class HrefTest {
     void buildsUriWithoutParams() {
         final String uri = "http://a.example.com";
         MatcherAssert.assertThat(
+            "URI without parameters must include trailing slash",
             new Href(uri).toString(),
             Matchers.equalTo("http://a.example.com/")
         );
     }
 
     @Test
-    void extractsParamtetersFromQuery() {
+    void extractsParametersFromQuery() {
         final String uri = "http://a.example.com?param1=hello&param2=world&param3=hello%20world";
         MatcherAssert.assertThat(
             "Can't get first parameter.",
@@ -91,10 +75,12 @@ final class HrefTest {
     void addsPath() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
+            "Path segments must be URL-encoded when added",
             new Href("http://example.com").path("д").path("d").toString(),
             Matchers.equalTo("http://example.com/%D0%B4/d")
         );
         MatcherAssert.assertThat(
+            "Path segments must be URL-encoded when base has trailing slash",
             new Href("http://example.com/").path("а").path("f").toString(),
             Matchers.equalTo("http://example.com/%D0%B0/f")
         );
@@ -104,10 +90,12 @@ final class HrefTest {
     void acceptsEncodedQuery() {
         final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
         MatcherAssert.assertThat(
+            "Encoded query parameters must be preserved",
             new Href(url).toString(),
             Matchers.equalTo(url)
         );
         MatcherAssert.assertThat(
+            "Encoded parameter values must be decoded when retrieved",
             new Href(url).param("file").iterator().next(),
             Matchers.equalTo("[]().txt")
         );
@@ -116,6 +104,7 @@ final class HrefTest {
     @Test
     void acceptsNonProperlyEncodedUrl() {
         MatcherAssert.assertThat(
+            "Non-properly encoded URL characters must be encoded",
             new Href("http://www.netbout.com/[foo/bar]/read?file=%5B%5D%28%29.txt").toString(),
             Matchers.equalTo("http://www.netbout.com/%5Bfoo/bar%5D/read?file=%5B%5D%28%29.txt")
         );
@@ -124,6 +113,7 @@ final class HrefTest {
     @Test
     void buildsUriWithFragmentAndParams() {
         MatcherAssert.assertThat(
+            "URI with fragment and parameters must be preserved",
             new Href("http://example.com/%D0%B0/?a=1#hello").toString(),
             Matchers.equalTo("http://example.com/%D0%B0/?a=1#hello")
         );
@@ -132,6 +122,7 @@ final class HrefTest {
     @Test
     void buildsUriWithFragmentAndNoParams() {
         MatcherAssert.assertThat(
+            "URI with fragment but no parameters must be preserved",
             new Href("http://example.com/#hello").toString(),
             Matchers.equalTo("http://example.com/#hello")
         );

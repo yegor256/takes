@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.forward;
 
@@ -35,12 +16,14 @@ import org.takes.Take;
 import org.takes.rs.RsSimple;
 
 /**
- * Redirect on exception.
+ * A take decorator that handles RsForward exceptions by converting them to responses.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This decorator catches {@link RsForward} exceptions thrown by wrapped takes
+ * and converts them into proper HTTP redirect responses. It enables the use of
+ * exception-based flow control for redirects, making error handling and navigation
+ * logic more convenient. The class is immutable and thread-safe.
  *
  * @since 0.1
- * @see org.takes.facets.forward.TkForward
  */
 @ToString(of = "origin")
 @EqualsAndHashCode
@@ -52,8 +35,8 @@ public final class TkForward implements Take {
     private final Take origin;
 
     /**
-     * Ctor.
-     * @param take Original
+     * Constructor that wraps a take to handle RsForward exceptions.
+     * @param take The original take to wrap
      */
     public TkForward(final Take take) {
         this.origin = take;
@@ -71,7 +54,7 @@ public final class TkForward implements Take {
     }
 
     /**
-     * Safe response.
+     * A safe response wrapper that handles RsForward exceptions during response processing.
      * @since 0.1
      */
     @ToString(of = { "origin", "saved" })
@@ -87,8 +70,8 @@ public final class TkForward implements Take {
         private final List<Response> saved;
 
         /**
-         * Ctor.
-         * @param res Original response
+         * Constructor for safe response wrapper.
+         * @param res The original response to wrap safely
          */
         private Safe(final Response res) {
             this.origin = res;
@@ -106,10 +89,11 @@ public final class TkForward implements Take {
         }
 
         /**
-         * Load it.
-         * @return Response
-         * @throws IOException If fails
+         * Loads the response, handling any RsForward exceptions that occur.
+         * @return The loaded response
+         * @throws IOException If response loading fails
          */
+        @SuppressWarnings("PMD.CloseResource")
         private Response load() throws IOException {
             if (this.saved.isEmpty()) {
                 Iterable<String> head;

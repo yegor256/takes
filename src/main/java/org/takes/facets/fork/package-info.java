@@ -1,29 +1,27 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 /**
- * Fork.
+ * Request routing and dispatching framework.
+ *
+ * <p>This package provides a powerful routing system based on the Fork pattern,
+ * which allows dispatching HTTP requests to different Takes based on various
+ * criteria. The TkFork class accepts multiple Fork implementations, each
+ * checking if it can handle the request and providing the appropriate Take.
+ * This enables flexible request routing based on paths, methods, headers,
+ * parameters, and custom conditions.
+ *
+ * <p>Key components include:
+ * <ul>
+ * <li>Core classes: TkFork for request dispatching, Fork interface for routing rules</li>
+ * <li>Path-based routing: FkRegex for regex patterns, FkFixed for exact paths</li>
+ * <li>Method-based routing: FkMethods for HTTP method filtering</li>
+ * <li>Content routing: FkTypes for content-type based routing, FkEncoding for encodings</li>
+ * <li>Parameter routing: FkParams for query parameters, FkAuthenticated for auth status</li>
+ * <li>Utility forks: FkChain for sequential checking, FkWrap for decorating</li>
+ * </ul>
  *
  * @since 0.4
  */

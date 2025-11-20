@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.misc;
 
@@ -39,18 +20,34 @@ import java.util.regex.Pattern;
 import org.cactoos.text.FormattedText;
 
 /**
- * HTTP URI/HREF.
+ * HTTP URI/HREF builder and parser with query parameter manipulation.
+ *
+ * <p>This class provides comprehensive functionality for building, parsing,
+ * and manipulating HTTP URIs and HREFs. It supports automatic URL encoding/decoding,
+ * query parameter management, path construction, and fragment handling.
+ * The implementation handles malformed URIs by automatically encoding problematic
+ * characters and provides a fluent interface for URI construction.
+ *
+ * <p>Key features:
+ * <ul>
+ * <li>Automatic URL encoding and decoding</li>
+ * <li>Query parameter addition, removal, and retrieval</li>
+ * <li>Path appending with proper encoding</li>
+ * <li>Fragment support</li>
+ * <li>Verbose error messages for missing parameters</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.7
  */
-@SuppressWarnings
-    (
-        {
-            "PMD.TooManyMethods",
-            "PMD.OnlyOneConstructorShouldDoInitialization"
-        }
-    )
+@SuppressWarnings(
+    {
+        "PMD.TooManyMethods",
+        "PMD.OnlyOneConstructorShouldDoInitialization",
+        "PMD.GodClass"
+    }
+)
 public final class Href implements CharSequence {
 
     /**
@@ -129,28 +126,8 @@ public final class Href implements CharSequence {
     @Override
     public String toString() {
         final StringBuilder text = new StringBuilder(this.bare());
-        if (!this.params.isEmpty()) {
-            boolean first = true;
-            for (final Map.Entry<String, List<String>> ent
-                : this.params.entrySet()) {
-                for (final String value : ent.getValue()) {
-                    if (first) {
-                        text.append('?');
-                        first = false;
-                    } else {
-                        text.append('&');
-                    }
-                    text.append(Href.encode(ent.getKey()));
-                    if (!value.isEmpty()) {
-                        text.append('=').append(Href.encode(value));
-                    }
-                }
-            }
-        }
-        if (this.fragment.has()) {
-            text.append('#');
-            text.append(this.fragment.get());
-        }
+        this.appendParams(text);
+        this.appendFragment(text);
         return text.toString();
     }
 
@@ -255,6 +232,56 @@ public final class Href implements CharSequence {
     }
 
     /**
+     * Append parameters to StringBuilder.
+     * @param text StringBuilder to append to
+     */
+    private void appendParams(final StringBuilder text) {
+        if (!this.params.isEmpty()) {
+            boolean first = true;
+            for (final Map.Entry<String, List<String>> ent
+                : this.params.entrySet()) {
+                first = Href.appendParam(text, ent, first);
+            }
+        }
+    }
+
+    /**
+     * Append single parameter to StringBuilder.
+     * @param text StringBuilder to append to
+     * @param ent Parameter entry
+     * @param first Whether this is the first parameter
+     * @return Whether next parameter will be first
+     */
+    private static boolean appendParam(final StringBuilder text,
+        final Map.Entry<String, List<String>> ent, final boolean first) {
+        boolean result = first;
+        for (final String value : ent.getValue()) {
+            if (result) {
+                text.append('?');
+                result = false;
+            } else {
+                text.append('&');
+            }
+            text.append(Href.encode(ent.getKey()));
+            if (!value.isEmpty()) {
+                text.append('=').append(Href.encode(value));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Append fragment to StringBuilder.
+     * @param text StringBuilder to append to
+     */
+    private void appendFragment(final StringBuilder text) {
+        if (this.fragment.has()) {
+            text.append('#');
+            text.append(this.fragment.get());
+        }
+    }
+
+    /**
      * Encode into URL.
      * @param txt Text
      * @return Encoded
@@ -303,23 +330,33 @@ public final class Href implements CharSequence {
      *  encoded properly.
      */
     private static URI createUri(final String txt) {
-        URI result;
-        try {
-            result = new URI(txt);
-        } catch (final URISyntaxException ex) {
-            final int index = ex.getIndex();
-            if (index == -1) {
-                throw new IllegalArgumentException(ex.getMessage(), ex);
+        final StringBuilder value = new StringBuilder(txt);
+        while (true) {
+            try {
+                return new URI(value.toString());
+            } catch (final URISyntaxException ex) {
+                final int index = ex.getIndex();
+                if (index < 0 || index >= value.length()) {
+                    throw new IllegalArgumentException(ex.getMessage(), ex);
+                } else if (ex.getReason().contains("authority")) {
+                    final StringBuilder message = new StringBuilder();
+                    message
+                        .append("Illegal URI: ")
+                        .append(txt)
+                        .append(". Parsing breaks on index ")
+                        .append(index - (value.length() - txt.length()));
+                    throw new IllegalArgumentException(
+                        message.toString(),
+                        ex
+                    );
+                }
+                value.replace(
+                    index,
+                    index + 1,
+                    Href.encode(value.substring(index, index + 1))
+                );
             }
-            final StringBuilder value = new StringBuilder(txt);
-            value.replace(
-                index,
-                index + 1,
-                Href.encode(value.substring(index, index + 1))
-            );
-            result = Href.createUri(value.toString());
         }
-        return result;
     }
 
     /**

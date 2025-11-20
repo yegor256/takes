@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.servlet;
 
@@ -42,7 +23,25 @@ import org.takes.Response;
 import org.takes.misc.Equality;
 
 /**
- * Takes response as servlet response.
+ * Takes Response to HttpServletResponse adapter.
+ *
+ * <p>This class bridges between Takes framework {@link Response} objects
+ * and servlet container {@link HttpServletResponse} objects. It's used
+ * internally by {@link SrvTake} to convert Takes responses into servlet
+ * responses that can be sent to clients by the servlet container.
+ *
+ * <p>The adapter extracts HTTP information from the Takes response and
+ * applies it to the servlet response, including:
+ * <ul>
+ *   <li>HTTP status code from the response status line</li>
+ *   <li>HTTP headers (excluding cookies which are handled separately)</li>
+ *   <li>Set-Cookie headers converted to servlet Cookie objects</li>
+ *   <li>Response body content streamed to the servlet output stream</li>
+ * </ul>
+ *
+ * <p>The implementation handles the complete response conversion process,
+ * ensuring that all Takes response data is properly transferred to the
+ * servlet response for delivery to the client.
  *
  * @since 2.0
  */

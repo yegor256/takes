@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -30,24 +11,22 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 
 /**
- * Request decorator that limits its body, according to
- * the Content-Length header in its head.
+ * Request decorator that limits body reading based on Content-Length header.
  *
- * <p>This decorator may help when you're planning to read
- * the body of the request using its read() and available() methods,
- * but you're not sure that available() is always saying the truth. In
- * most cases, the browser will not close the request and will always
- * return positive number in available() method. Thus, you won't be
- * able to reach the end of the stream ever. The browser wants you
- * to respect the "Content-Length" header and read as many bytes
- * as it requests. To solve that, just wrap your request into this
- * decorator.
+ * <p>This decorator examines the Content-Length header and wraps the request
+ * body with a CapInputStream that enforces the specified byte limit. This
+ * prevents reading beyond the declared content length and handles cases where
+ * the underlying stream doesn't properly indicate end-of-stream.
+ *
+ * <p>This is particularly useful when working with HTTP clients that keep
+ * connections open and don't close the request stream, requiring applications
+ * to respect the Content-Length header to determine when the request body ends.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.15
  * @see org.takes.rq.RqMultipart
  * @see org.takes.rq.RqPrint
+ * @since 0.15
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqLengthAware extends RqWrap {
@@ -80,8 +59,8 @@ public final class RqLengthAware extends RqWrap {
                 result = new CapInputStream(req.body(), Long.parseLong(value));
             } catch (final NumberFormatException ex) {
                 final String msg = "Invalid %s header: %s";
-                final String formated = String.format(msg, RqLengthAware.CONTENT_LENGTH, value);
-                throw new IOException(formated, ex);
+                final String formatted = String.format(msg, RqLengthAware.CONTENT_LENGTH, value);
+                throw new IOException(formatted, ex);
             }
         } else {
             result = req.body();

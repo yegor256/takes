@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -31,7 +12,9 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 /**
- * JSON Token.
+ * JSON Token interface for creating and encoding authentication tokens.
+ * This interface defines the contract for token generation, supporting
+ * JSON Web Token (JWT) and JSON Object Signing and Encryption (JOSE) standards.
  *
  * <p>
  * All implementations of this interface must be immutable and thread-safe.
@@ -41,33 +24,35 @@ import java.util.TimeZone;
 public interface Token {
 
     /**
-     * JSON output.
+     * Get the token as a JSON object.
      *
-     * @return The Token in JSON notation.
+     * @return The token in JSON notation
      */
     JsonObject json();
 
     /**
-     * Base64 encoded JSON output.
+     * Get the Base64-encoded representation of the token.
      *
-     * @return The Token in JSON notation, Base64-encoded.
+     * @return The token in JSON notation, Base64-encoded
      */
     byte[] encoded();
 
     /**
-     * JSON Object Signing and Encryption Header.
+     * JSON Object Signing and Encryption (JOSE) header implementation.
+     * This class creates the standard JOSE header containing algorithm
+     * and token type information for JWT signing.
      * @since 1.4
      */
     final class Jose implements Token {
         /**
          * The header short for algorithm.
          */
-        public static final String ALGORITHM = "alg";
+        public static final String ALGORITHM = "algo";
 
         /**
          * The header short for token type.
          */
-        public static final String TYP = "typ";
+        public static final String TYPE = "type";
 
         /**
          * JOSE object.
@@ -80,8 +65,8 @@ public interface Token {
          */
         public Jose(final int bitlength) {
             this.joseo = Json.createObjectBuilder()
-                .add(Jose.ALGORITHM, String.format("HS%s", bitlength))
-                .add(Jose.TYP, "JWT")
+                .add(Token.Jose.ALGORITHM, String.format("HS%s", bitlength))
+                .add(Token.Jose.TYPE, "JWT")
                 .build();
         }
 
@@ -99,28 +84,27 @@ public interface Token {
     }
 
     /**
-     * JSON Web Token.
+     * JSON Web Token (JWT) payload implementation.
+     * This class creates JWT payloads containing subject, issued time,
+     * and expiration information for secure token-based authentication.
      * @since 1.4
      */
-    @SuppressWarnings
-        (
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-        )
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     final class Jwt implements Token {
         /**
          * The header short for subject.
          */
-        public static final String SUBJECT = "sub";
+        public static final String SUBJECT = "subj";
 
         /**
          * The header short for issuing time.
          */
-        public static final String ISSUED = "iat";
+        public static final String ISSUED = "date";
 
         /**
          * The header short for expiration.
          */
-        public static final String EXPIRATION = "exp";
+        public static final String EXPIRATION = "expr";
 
         /**
          * The header short for expiration.
@@ -152,9 +136,9 @@ public interface Token {
             this.exp = Calendar.getInstance(TimeZone.getTimeZone("Z"));
             this.exp.setTimeInMillis(this.now.getTimeInMillis() + (age * 1000));
             this.jwto = Json.createObjectBuilder()
-                .add(Jwt.ISSUED, String.format(Jwt.ISOFORMAT, this.now))
-                .add(Jwt.EXPIRATION, String.format(Jwt.ISOFORMAT, this.exp))
-                .add(Jwt.SUBJECT, idt.urn())
+                .add(Token.Jwt.ISSUED, String.format(Token.Jwt.ISOFORMAT, this.now))
+                .add(Token.Jwt.EXPIRATION, String.format(Token.Jwt.ISOFORMAT, this.exp))
+                .add(Token.Jwt.SUBJECT, idt.urn())
                 .build();
         }
 

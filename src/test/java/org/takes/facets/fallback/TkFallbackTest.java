@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fallback;
 
@@ -43,6 +24,7 @@ final class TkFallbackTest {
     void fallsBack() throws Exception {
         final String err = "message";
         MatcherAssert.assertThat(
+            "Fallback must return response body containing the error message",
             new RsBodyPrint(
                 new TkFallback(
                     new TkFailure(err),
@@ -58,6 +40,7 @@ final class TkFallbackTest {
     @Test
     void fallsBackInsideResponse() throws Exception {
         MatcherAssert.assertThat(
+            "Fallback must catch exception from response and return fixed fallback text",
             new RsBodyPrint(
                 new TkFallback(
                     req -> new ResponseOf(
@@ -85,10 +68,15 @@ final class TkFallbackTest {
                 new TkFailure(),
                 new FbChain()
             ).act(new RqFake());
-            MatcherAssert.assertThat("Must throw exception", false);
+            MatcherAssert.assertThat(
+                "Must throw exception when no fallback handles the error",
+                false,
+                Matchers.is(true)
+            );
             //@checkstyle IllegalCatch (1 line)
         } catch (final Exception exception) {
             MatcherAssert.assertThat(
+                "Exception message must contain fallback information",
                 exception.getMessage(),
                 Matchers.containsString("fallback ")
             );

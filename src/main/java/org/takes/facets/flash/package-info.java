@@ -1,52 +1,30 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 /**
- * Flash messages.
+ * Flash message implementation for temporary cross-request communication.
  *
- * <p>Flash messages is a useful technique that allows us to send short
- * texts from one web page to another without any persistence on the server.
- * Here is how it works. A web page performs some operation, for example
- * making a post to a discussion thread. Then, the page returns a HTTP response
- * with a redirection status 303. The response contains a "Set-Cookie" HTTP
- * header with a flash message "thanks for the post".
+ * <p>Flash messages provide a technique for sending short texts from one web
+ * page to another without requiring server-side persistence. The mechanism
+ * works as follows: a web page performs an operation (such as posting to a
+ * discussion thread) and returns an HTTP response with redirection status 303.
+ * The response contains a Set-Cookie header with a flash message like
+ * "thanks for the post".
  *
- * <p>The browser preserves the cookie
- * and redirects to the page with the discussion thread. The browser makes
- * a new HTTP request, to render the content of the discussion thread. This
- * HTTP GET request contains a "Cookie" HTTP header with that message
- * "thanks for the post". The server adds this message to the HTML page,
- * informing the user about the action just completed, and returns a HTTP
- * response. This response contains a "Set-Cookie" HTTP header with an empty
- * value, which is a signal for the browser to remove the cookie.
+ * <p>The browser preserves the cookie and redirects to the target page. When
+ * the browser makes the new HTTP request to render the discussion thread content,
+ * it includes the flash message in the Cookie header. The server extracts this
+ * message, adds it to the HTML page to inform the user about the completed action,
+ * and returns an HTTP response containing a Set-Cookie header with an expired
+ * value to remove the cookie.
  *
- * <p>The browser won't send the flash message twice, because it is deleted
- * after the first time it was rendered in HTML by the server. The deletion
- * is controlled by the server, when it returns an HTTP response with
- * "Set-Cookie" header with an empty value.
+ * <p>This ensures flash messages are displayed only once, as they are deleted
+ * after first use. The server controls deletion by returning a Set-Cookie
+ * header with an expired date.
  *
- * <p>Classes in this package helps to automate this mechanism. First,
+ * <p>Classes in this package help to automate this mechanism. First,
  * you add flash messages to your responses using
  * {@link org.takes.facets.flash.RsFlash}:
  *

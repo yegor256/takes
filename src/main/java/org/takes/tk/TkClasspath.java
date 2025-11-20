@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -36,21 +17,58 @@ import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
 
 /**
- * Take reading resources from classpath.
+ * Take that serves static resources from Java classpath.
  *
- * <p>This "take" is trying to find the requested resource in
- * classpath and return it as an HTTP response with binary body, for example:
+ * <p>This {@link Take} implementation serves static resources bundled within
+ * JAR files or available on the Java classpath. It provides a convenient way
+ * to serve packaged resources such as web assets, configuration files, or
+ * templates that are included as part of the application deployment.
  *
- * <pre> new TkClasspath("/my");</pre>
+ * <p>The take resolves resource paths by combining a configured prefix
+ * with the path component of the request URL. Resources are loaded using
+ * the standard Java resource loading mechanism through {@code getResourceAsStream()}.
  *
- * <p>This object will take query part of the arrived HTTP
- * {@link org.takes.Request} and concatenate it with the {@code "/my"} prefix.
- * For example, a request comes it and its query equals to
- * {@code "/css/style.css?eot"}. {@link TkClasspath}
- * will try to find a resource {@code "/my/css/style.css"} in classpath.
+ * <p>Example usage:
+ * <pre>{@code
+ * // Serve resources from /static classpath location
+ * new TkClasspath("/static");
  *
- * <p>If such a resource is not found, {@link org.takes.HttpException}
- * will be thrown.
+ * // Request: GET /css/style.css
+ * // Resolves to: /static/css/style.css on classpath
+ *
+ * // Serve from package structure
+ * new TkClasspath(MyClass.class);
+ * // Uses package path: /com/example/mypackage/
+ * }</pre>
+ *
+ * <p>Common use cases include:
+ * <ul>
+ *   <li>Serving bundled web assets (CSS, JavaScript, images)</li>
+ *   <li>Template and configuration file serving</li>
+ *   <li>Embedded documentation and help files</li>
+ *   <li>Default resource fallbacks in web applications</li>
+ *   <li>Plugin resource serving from JAR files</li>
+ *   <li>Development and testing resource access</li>
+ *   <li>Microservice resource bundling</li>
+ * </ul>
+ *
+ * <p>Advantages over filesystem serving:
+ * <ul>
+ *   <li>Resources are packaged within application JAR files</li>
+ *   <li>No external file dependencies or directory structures</li>
+ *   <li>Resources are available regardless of working directory</li>
+ *   <li>Supports serving from multiple JAR files in classpath</li>
+ *   <li>Ideal for containerized and cloud deployments</li>
+ * </ul>
+ *
+ * <p>The response includes appropriate HTTP headers with Content-Length
+ * calculated from resource size. Binary resources are served efficiently
+ * using stream-based responses to minimize memory usage.
+ *
+ * <p>If a requested resource is not found on the classpath, an
+ * {@link org.takes.HttpException} with HTTP 404 status is thrown,
+ * providing clear error information including the resource path that
+ * was attempted.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -62,6 +80,7 @@ public final class TkClasspath extends TkWrap {
 
     /**
      * Ctor.
+     * Creates a classpath take with empty prefix (root of classpath).
      */
     public TkClasspath() {
         this("");
@@ -69,7 +88,7 @@ public final class TkClasspath extends TkWrap {
 
     /**
      * Ctor.
-     * @param base Base class
+     * @param base Base class whose package will be used as resource prefix
      */
     public TkClasspath(final Class<?> base) {
         this(
@@ -81,7 +100,7 @@ public final class TkClasspath extends TkWrap {
 
     /**
      * Ctor.
-     * @param prefix Prefix
+     * @param prefix Classpath prefix for resource resolution
      */
     public TkClasspath(final String prefix) {
         super(

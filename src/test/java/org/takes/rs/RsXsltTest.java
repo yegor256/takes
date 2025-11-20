@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -74,6 +55,7 @@ final class RsXsltTest {
             "</x:div><x:p>\u0443</x:p></x:html></template></stylesheet>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must convert XML to HTML with correct UTF-8 encoding",
             IOUtils.toString(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml)),
@@ -100,6 +82,7 @@ final class RsXsltTest {
             "Hey, <value-of select='/p/name'/>!</template></stylesheet>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must convert XML to plain text with expected content",
             new RsPrint(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml)),
@@ -129,6 +112,7 @@ final class RsXsltTest {
             new InputStreamOf(xml)
         );
         MatcherAssert.assertThat(
+            "RsXslt must transform XML and close decorated response input stream",
             new RsPrint(
                 new RsXslt(
                     new RsText(stream),
@@ -138,6 +122,7 @@ final class RsXsltTest {
             new EndsWith("Hello, World!")
         );
         MatcherAssert.assertThat(
+            "Decorated response input stream must be closed after XSLT transformation",
             stream.isClosed(),
             Matchers.is(true)
         );
@@ -146,6 +131,7 @@ final class RsXsltTest {
     @Test
     void resolvesInClasspath() {
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT in classpath with query parameters",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -164,6 +150,7 @@ final class RsXsltTest {
             new EndsWith("Hello, Bobby!")
         );
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT in classpath without query parameters",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -182,6 +169,7 @@ final class RsXsltTest {
             new EndsWith("Hello, Dan!")
         );
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT with includes in classpath",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -210,6 +198,7 @@ final class RsXsltTest {
             " type='text/xsl'?><page sla='0.324'/>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must load external XSLT imports and produce correct XHTML",
             IOUtils.toString(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml))
@@ -224,10 +213,9 @@ final class RsXsltTest {
 
     /**
      * Checking XXE vulnerability for XSLT transformer in response class {@link RsXslt}.
-     * @throws IOException
      */
     @Test
-    void getRuntime() throws IOException {
+    void getRuntime() {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",

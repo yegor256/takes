@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.cookies;
 
@@ -39,38 +20,46 @@ import org.takes.rq.RqHeaders;
 import org.takes.rq.RqWrap;
 
 /**
- * HTTP cookies parsing.
+ * An interface for parsing and accessing HTTP cookies from requests.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>This interface provides methods to extract cookie values and names from
+ * HTTP requests. It parses the Cookie header and makes individual cookies
+ * accessible by name. All implementations of this interface must be immutable
+ * and thread-safe.
+ *
  * @since 0.14
  */
 public interface RqCookies extends Request {
     /**
-     * Get single cookie.
-     * @param name Cookie name
-     * @return List of values (can be empty)
-     * @throws IOException If fails
+     * Retrieves the value of a single cookie by name.
+     * @param name The cookie name to look for
+     * @return An iterable of cookie values (can be empty if not found)
+     * @throws IOException If cookie parsing fails
      */
     Iterable<String> cookie(CharSequence name) throws IOException;
 
     /**
-     * Get all cookie names.
-     * @return All names
-     * @throws IOException If fails
+     * Retrieves all cookie names present in the request.
+     * @return An iterable of all cookie names
+     * @throws IOException If cookie parsing fails
      */
     Iterable<String> names() throws IOException;
 
     /**
-     * Request decorator, for HTTP cookies parsing.
+     * A request decorator that implements HTTP cookie parsing functionality.
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>This class decorates HTTP requests to provide cookie parsing capabilities.
+     * It extracts cookies from the Cookie header, normalizes cookie names to
+     * lowercase, and provides access to individual cookie values and names.
+     * The class is immutable and thread-safe.
+     *
      * @since 0.14
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqCookies {
         /**
-         * Ctor.
-         * @param req Original request
+         * Constructor that decorates the given request with cookie parsing.
+         * @param req The original HTTP request to decorate
          */
         public Base(final Request req) {
             super(req);
@@ -113,9 +102,9 @@ public interface RqCookies extends Request {
         }
 
         /**
-         * Parse them all in a map.
-         * @return Map of them
-         * @throws IOException If fails
+         * Parses all cookies into a map of name-value pairs.
+         * @return A map containing all cookies with lowercased names as keys
+         * @throws IOException If cookie parsing fails
          */
         private Map<String, String> map() throws IOException {
             final Map<String, String> map = new HashMap<>(0);

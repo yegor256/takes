@@ -1,32 +1,32 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
 import lombok.EqualsAndHashCode;
 
 /**
- * Safe back-end.
+ * Safe back-end decorator.
+ *
+ * <p>This decorator wraps another {@link Back} implementation and ensures
+ * that any exceptions thrown during socket processing are silently caught
+ * and ignored. This is particularly useful in production environments where
+ * you want to prevent a single faulty request from crashing the entire
+ * server or disrupting other concurrent requests.
+ *
+ * <p>The decorator catches all {@link Throwable} instances, including both
+ * checked and unchecked exceptions, as well as errors. This provides maximum
+ * protection at the cost of potentially hiding important error information.
+ * Use this decorator when server stability is more important than debugging
+ * individual request failures.
+ *
+ * <p>Common use cases:
+ * <ul>
+ *   <li>Production servers that must stay running despite client errors</li>
+ *   <li>Load testing scenarios where individual failures are expected</li>
+ *   <li>Wrapper around other back-ends that might throw unexpected exceptions</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
  *
