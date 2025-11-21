@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1055868">
+<fb version="0.16.8" size="1055870">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">776.03260861</seconds>
+    <seconds t="F">810.308155291</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-21T17:09:31Z</when>
+    <when t="T">2025-11-21T18:09:52Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63267,19 +63267,6 @@
     <when t="T">2025-11-18T15:10:28Z</when>
   </f>
   <f>
-    <_id t="I">19123</_id>
-    <_job t="I">49855</_job>
-    <_time t="T">2025-11-19T15:15:11Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (467.0) is decreasing (R=-0.21).
-The average number of commits per week (8.0) is decreasing (R=-0.40).
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-11-19T15:15:11Z</when>
-  </f>
-  <f>
     <_id t="I">19125</_id>
     <_job t="I">19507615738</_job>
     <_time t="T">2025-11-19T16:10:04Z</_time>
@@ -63522,21 +63509,34 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-21T17:02:14Z</when>
   </f>
   <f>
-    <_id t="I">19146</_id>
-    <_job t="I">19577574625</_job>
-    <_time t="T">2025-11-21T17:09:31Z</_time>
+    <_id t="I">19147</_id>
+    <_job t="I">50205</_job>
+    <_time t="T">2025-11-21T17:10:04Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (451.7) is decreasing (R=-0.35).
+The average number of commits per week (7.2) is decreasing (R=-0.46).
+The average number of releases per month (0.0) is staying still.
+The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-11-21T17:10:04Z</when>
+  </f>
+  <f>
+    <_id t="I">19148</_id>
+    <_job t="I">19579053527</_job>
+    <_time t="T">2025-11-21T18:00:37Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">1050</assignees_were_scanned>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6145553541</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <events_were_scanned t="I">6146966964</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">177</min_pull_was_found>
+    <min_pull_was_found t="I">178</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">826</types_were_scanned>
+    <types_were_scanned t="I">933</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
