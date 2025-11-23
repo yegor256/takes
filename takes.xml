@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1062121">
+<fb version="0.16.8" size="1065470">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">814.735951247</seconds>
+    <seconds t="F">810.304387668</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-23T14:09:37Z</when>
+    <when t="T">2025-11-23T15:09:32Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63802,6 +63802,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1488</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-01T03:24:43Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-23T12:21:13Z</when>
@@ -63827,6 +63828,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1489</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-01T03:24:39Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-23T12:21:06Z</when>
@@ -63834,21 +63836,233 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">19178</_id>
-    <_job t="I">19612206782</_job>
-    <_time t="T">2025-11-23T14:09:37Z</_time>
+    <_id t="I">19179</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:01:13Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">578</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5806991310</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">607</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">1489</merges_were_scanned>
-    <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">200</min_pull_was_found>
+    <details t="S">We found out that the user #87902365 is known in GitHub as @eshabakhov.</details>
+    <name t="S">eshabakhov</name>
+    <what t="S">who-has-name</what>
+    <when t="T">2025-11-23T15:01:13Z</when>
+    <where t="S">github</where>
+    <who t="I">87902365</who>
+  </f>
+  <f>
+    <_id t="I">19180</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:01:54Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1490 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1490</issue>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">943</types_were_scanned>
+    <review t="T">2025-11-04T16:33:06Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-04T17:03:45Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19181</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:02:10Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/jamesives-github-pages-deploy-action-4.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1491 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1491</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-04T16:33:02Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-04T16:47:20Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19182</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:02:33Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/major-jersey-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1492 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">6</hoc>
+    <issue t="I">1492</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-05T08:38:36Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-05T08:52:45Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19183</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:02:44Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/hibernate-validator</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1493 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1493</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-08T02:43:03Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-08T02:56:22Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19184</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:03:08Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/commons-io-commons-io-2.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1494 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1494</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-08T08:32:58Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-08T08:46:45Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19185</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:03:57Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1495 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1495</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-10T08:43:55Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-10T08:58:05Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19186</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:04:22Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1496 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1496</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-10T16:49:19Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-10T17:02:42Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19187</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:06:13Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <branch t="S">renovate/davidanson-markdownlint-cli2-action-21.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1497 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1497</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-17T02:51:54Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-17T03:06:24Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19188</_id>
+    <_job t="I">19612933124</_job>
+    <_time t="T">2025-11-23T15:08:14Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <assignees_were_scanned t="I">713</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">5807582453</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">751</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1060</min_issue_was_found>
+    <min_pull_was_found t="I">202</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1058</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

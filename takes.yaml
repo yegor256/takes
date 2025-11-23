@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 814.735951247
+  seconds: 810.304387668
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-23 14:09:37.621090899 Z
+  when: 2025-11-23 15:09:32.418698351 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56766,6 +56766,7 @@
   issue: 1488
   repository: 28924109
   review: 2025-11-01 03:24:43.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-23 12:21:13.000000000 Z
@@ -56789,25 +56790,220 @@
   issue: 1489
   repository: 28924109
   review: 2025-11-01 03:24:39.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-23 12:21:06.000000000 Z
   where: github
   who: 526301
-- _id: 19178
-  _job: 19612206782
-  _time: 2025-11-23 14:09:37.446196470 Z
+- _id: 19179
+  _job: 19612933124
+  _time: 2025-11-23 15:01:13.583934282 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 578
-  earliest_issue_was_found: 1
-  events_were_scanned: 5806991310
-  issues_were_scanned: 0
-  labels_were_scanned: 607
-  latest_issue_was_found: 1463
-  merges_were_scanned: 1489
-  min_issue_was_found: 1060
-  min_pull_was_found: 200
+  details: 'We found out that the user #87902365 is known in GitHub as @eshabakhov.'
+  name: eshabakhov
+  what: who-has-name
+  when: 2025-11-23 15:01:13.782435989 Z
+  where: github
+  who: 87902365
+- _id: 19180
+  _job: 19612933124
+  _time: 2025-11-23 15:01:54.757397974 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1490 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1490
   repository: 28924109
-  types_were_scanned: 943
+  review: 2025-11-04 16:33:06.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-04 17:03:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19181
+  _job: 19612933124
+  _time: 2025-11-23 15:02:10.986414855 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1491 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1491
+  repository: 28924109
+  review: 2025-11-04 16:33:02.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-04 16:47:20.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19182
+  _job: 19612933124
+  _time: 2025-11-23 15:02:33.199967360 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/major-jersey-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1492 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  issue: 1492
+  repository: 28924109
+  review: 2025-11-05 08:38:36.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-05 08:52:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19183
+  _job: 19612933124
+  _time: 2025-11-23 15:02:44.585802241 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/hibernate-validator
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1493 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1493
+  repository: 28924109
+  review: 2025-11-08 02:43:03.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-08 02:56:22.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19184
+  _job: 19612933124
+  _time: 2025-11-23 15:03:08.558932177 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1494 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1494
+  repository: 28924109
+  review: 2025-11-08 08:32:58.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-08 08:46:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19185
+  _job: 19612933124
+  _time: 2025-11-23 15:03:57.775434790 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1495 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1495
+  repository: 28924109
+  review: 2025-11-10 08:43:55.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-10 08:58:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19186
+  _job: 19612933124
+  _time: 2025-11-23 15:04:22.508377153 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1496 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1496
+  repository: 28924109
+  review: 2025-11-10 16:49:19.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-10 17:02:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19187
+  _job: 19612933124
+  _time: 2025-11-23 15:06:13.710394447 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/davidanson-markdownlint-cli2-action-21.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1497 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1497
+  repository: 28924109
+  review: 2025-11-17 02:51:54.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-17 03:06:24.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19188
+  _job: 19612933124
+  _time: 2025-11-23 15:08:14.811089986 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 713
+  earliest_issue_was_found: 1
+  events_were_scanned: 5807582453
+  issues_were_scanned: 0
+  labels_were_scanned: 751
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1060
+  min_pull_was_found: 202
+  repository: 28924109
+  types_were_scanned: 1058
   what: iterate
   where: github
