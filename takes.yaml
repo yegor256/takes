@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.420309973
+  seconds: 814.735951247
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-23 13:16:28.756962302 Z
+  when: 2025-11-23 14:09:37.621090899 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56569,17 +56569,242 @@
   when: 2025-11-23 12:23:59.000000000 Z
   where: github
   who: 526301
-- _id: 19158
-  _job: 19611559134
-  _time: 2025-11-23 13:16:28.596964345 Z
+- _id: 19159
+  _job: 19612206782
+  _time: 2025-11-23 13:57:57.075016723 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 444
+  branch: tkhtmltest-refactor
+  details: The missing pull yegor256/takes#1487 has been opened by @eshabakhov.
+  issue: 1487
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-30 18:16:15.000000000 Z
+  where: github
+  who: 87902365
+- _id: 19160
+  _job: 19612206782
+  _time: 2025-11-23 13:57:58.250483112 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1488 has been opened by @renovate[bot].
+  issue: 1488
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-31 15:10:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19161
+  _job: 19612206782
+  _time: 2025-11-23 13:57:59.044030902 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/junit-framework-monorepo
+  details: The missing pull yegor256/takes#1489 has been opened by @renovate[bot].
+  issue: 1489
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-10-31 18:11:47.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19162
+  _job: 19612206782
+  _time: 2025-11-23 13:57:59.862043994 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1490 has been opened by @renovate[bot].
+  issue: 1490
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-04 15:12:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19163
+  _job: 19612206782
+  _time: 2025-11-23 13:58:00.681737881 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  details: The missing pull yegor256/takes#1491 has been opened by @renovate[bot].
+  issue: 1491
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-04 16:16:49.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19164
+  _job: 19612206782
+  _time: 2025-11-23 13:58:01.487193875 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/major-jersey-monorepo
+  details: The missing pull yegor256/takes#1492 has been opened by @renovate[bot].
+  issue: 1492
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-04 16:48:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19165
+  _job: 19612206782
+  _time: 2025-11-23 13:58:02.381366214 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/hibernate-validator
+  details: The missing pull yegor256/takes#1493 has been opened by @renovate[bot].
+  issue: 1493
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-07 23:11:06.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19166
+  _job: 19612206782
+  _time: 2025-11-23 13:58:03.227633210 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/commons-io-commons-io-2.x
+  details: The missing pull yegor256/takes#1494 has been opened by @renovate[bot].
+  issue: 1494
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-08 02:57:27.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19167
+  _job: 19612206782
+  _time: 2025-11-23 13:58:04.050601659 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The missing pull yegor256/takes#1495 has been opened by @renovate[bot].
+  issue: 1495
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-10 08:10:52.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19168
+  _job: 19612206782
+  _time: 2025-11-23 13:58:04.874627173 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  details: The missing pull yegor256/takes#1496 has been opened by @renovate[bot].
+  issue: 1496
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-10 12:39:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19169
+  _job: 19612206782
+  _time: 2025-11-23 13:58:05.725370121 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/davidanson-markdownlint-cli2-action-21.x
+  details: The missing pull yegor256/takes#1497 has been opened by @renovate[bot].
+  issue: 1497
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-17 00:49:34.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19170
+  _job: 19612206782
+  _time: 2025-11-23 13:58:06.572529579 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: 1436-fix-assertions
+  details: The missing pull yegor256/takes#1498 has been opened by @kartofanych.
+  issue: 1498
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-20 11:41:17.000000000 Z
+  where: github
+  who: 66062429
+- _id: 19171
+  _job: 19612206782
+  _time: 2025-11-23 13:58:07.409870644 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/actions-checkout-6.x
+  details: The missing pull yegor256/takes#1499 has been opened by @renovate[bot].
+  issue: 1499
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-20 16:57:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19172
+  _job: 19612206782
+  _time: 2025-11-23 13:58:08.444117820 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/com.jcabi-jcabi-http-2.x
+  details: The missing pull yegor256/takes#1500 has been opened by @renovate[bot].
+  issue: 1500
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-23 12:10:17.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19174
+  _job: 19612206782
+  _time: 2025-11-23 14:07:56.678751833 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  details: Apparently, yegor256/takes#1501 has been "issue-was-closed".
+  issue: 1501
+  repository: 28924109
+  what: issue-was-closed
+  when: 2025-11-23 12:41:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 19176
+  _job: 19612206782
+  _time: 2025-11-23 14:09:07.367566078 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/crate-ci-typos-1.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1488 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1488
+  repository: 28924109
+  review: 2025-11-01 03:24:43.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-23 12:21:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 19177
+  _job: 19612206782
+  _time: 2025-11-23 14:09:24.996461865 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  branch: renovate/junit-framework-monorepo
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1489 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1489
+  repository: 28924109
+  review: 2025-11-01 03:24:39.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-23 12:21:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 19178
+  _job: 19612206782
+  _time: 2025-11-23 14:09:37.446196470 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 578
   earliest_issue_was_found: 1
-  events_were_scanned: 4857541608
-  issues_were_scanned: 1292
-  labels_were_scanned: 376
+  events_were_scanned: 5806991310
+  issues_were_scanned: 0
+  labels_were_scanned: 607
   latest_issue_was_found: 1463
-  merges_were_scanned: 0
+  merges_were_scanned: 1489
   min_issue_was_found: 1060
   min_pull_was_found: 200
   repository: 28924109
