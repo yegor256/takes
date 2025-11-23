@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.319946244
+  seconds: 685.019596314
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-23 16:09:54.966255134 Z
+  when: 2025-11-23 17:07:29.662043254 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56531,12 +56531,6 @@
     The average monthly turnover (47.0 developers) is increasing (R=0.83).
   what: assessment
   when: 2025-11-23 08:09:56.448620664 Z
-- _id: 19153
-  _job: 50318
-  _time: 2025-11-23 08:10:19.694320049 Z
-  _version: 0.16.8/0.57.1/0.16.1
-  what: learn-eva
-  when: 2025-11-23 08:10:19.660468837 Z
 - _id: 19155
   _job: 19611559134
   _time: 2025-11-23 13:03:01.785444449 Z
@@ -56843,6 +56837,7 @@
   issue: 1490
   repository: 28924109
   review: 2025-11-04 16:33:06.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-04 17:03:45.000000000 Z
@@ -56867,6 +56862,7 @@
   issue: 1491
   repository: 28924109
   review: 2025-11-04 16:33:02.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-04 16:47:20.000000000 Z
@@ -56891,6 +56887,7 @@
   issue: 1492
   repository: 28924109
   review: 2025-11-05 08:38:36.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-05 08:52:45.000000000 Z
@@ -56915,6 +56912,7 @@
   issue: 1493
   repository: 28924109
   review: 2025-11-08 02:43:03.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-08 02:56:22.000000000 Z
@@ -56939,6 +56937,7 @@
   issue: 1494
   repository: 28924109
   review: 2025-11-08 08:32:58.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-08 08:46:45.000000000 Z
@@ -56963,6 +56962,7 @@
   issue: 1495
   repository: 28924109
   review: 2025-11-10 08:43:55.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-10 08:58:05.000000000 Z
@@ -56987,6 +56987,7 @@
   issue: 1496
   repository: 28924109
   review: 2025-11-10 16:49:19.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-10 17:02:42.000000000 Z
@@ -57011,6 +57012,7 @@
   issue: 1497
   repository: 28924109
   review: 2025-11-17 02:51:54.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-17 03:06:24.000000000 Z
@@ -57196,20 +57198,26 @@
   when: 2025-11-17 02:51:54.000000000 Z
   where: github
   who: 526301
-- _id: 19199
-  _job: 19613657348
-  _time: 2025-11-23 16:09:54.857335439 Z
+- _id: 19200
+  _job: 50353
+  _time: 2025-11-23 16:10:41.946657842 Z
+  _version: 0.16.8/0.57.1/0.16.1
+  what: learn-eva
+  when: 2025-11-23 16:10:41.906600940 Z
+- _id: 19201
+  _job: 19614371838
+  _time: 2025-11-23 17:05:45.062253213 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 713
+  assignees_were_scanned: 820
   earliest_issue_was_found: 1
-  events_were_scanned: 5808077284
-  issues_were_scanned: 1292
-  labels_were_scanned: 924
+  events_were_scanned: 5808785184
+  issues_were_scanned: 0
+  labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 203
+  min_pull_was_found: 204
   repository: 28924109
-  types_were_scanned: 1111
+  types_were_scanned: 1438
   what: iterate
   where: github

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1069080">
+<fb version="0.16.8" size="1069126">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.319946244</seconds>
+    <seconds t="F">685.019596314</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-23T16:09:54Z</when>
+    <when t="T">2025-11-23T17:07:29Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63532,14 +63532,6 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-23T08:09:56Z</when>
   </f>
   <f>
-    <_id t="I">19153</_id>
-    <_job t="I">50318</_job>
-    <_time t="T">2025-11-23T08:10:19Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-11-23T08:10:19Z</when>
-  </f>
-  <f>
     <_id t="I">19155</_id>
     <_job t="I">19611559134</_job>
     <_time t="T">2025-11-23T13:03:01Z</_time>
@@ -63885,6 +63877,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1490</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-04T16:33:06Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-04T17:03:45Z</when>
@@ -63911,6 +63904,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1491</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-04T16:33:02Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-04T16:47:20Z</when>
@@ -63937,6 +63931,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1492</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-05T08:38:36Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-05T08:52:45Z</when>
@@ -63963,6 +63958,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1493</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-08T02:43:03Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-08T02:56:22Z</when>
@@ -63989,6 +63985,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1494</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-08T08:32:58Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-08T08:46:45Z</when>
@@ -64015,6 +64012,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1495</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-10T08:43:55Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-10T08:58:05Z</when>
@@ -64041,6 +64039,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1496</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-10T16:49:19Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-10T17:02:42Z</when>
@@ -64067,6 +64066,7 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <issue t="I">1497</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-17T02:51:54Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-17T03:06:24Z</when>
@@ -64264,21 +64264,29 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">19199</_id>
-    <_job t="I">19613657348</_job>
-    <_time t="T">2025-11-23T16:09:54Z</_time>
+    <_id t="I">19200</_id>
+    <_job t="I">50353</_job>
+    <_time t="T">2025-11-23T16:10:41Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-11-23T16:10:41Z</when>
+  </f>
+  <f>
+    <_id t="I">19201</_id>
+    <_job t="I">19614371838</_job>
+    <_time t="T">2025-11-23T17:05:45Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">713</assignees_were_scanned>
+    <assignees_were_scanned t="I">820</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5808077284</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <events_were_scanned t="I">5808785184</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">203</min_pull_was_found>
+    <min_pull_was_found t="I">204</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1111</types_were_scanned>
+    <types_were_scanned t="I">1438</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
