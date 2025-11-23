@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1056108">
+<fb version="0.16.8" size="1056876">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.694104817</seconds>
+    <seconds t="F">810.420309973</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-23T12:09:20Z</when>
+    <when t="T">2025-11-23T13:16:28Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63540,21 +63540,56 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-23T08:10:19Z</when>
   </f>
   <f>
-    <_id t="I">19154</_id>
-    <_job t="I">19610753967</_job>
-    <_time t="T">2025-11-23T12:09:00Z</_time>
+    <_id t="I">19155</_id>
+    <_job t="I">19611559134</_job>
+    <_time t="T">2025-11-23T13:03:01Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">341</assignees_were_scanned>
+    <by_owner t="I">1</by_owner>
+    <commit t="S">3fc973a66617d248b1fbe50bf652e234764a8202</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #28470846043 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
+    <event_id t="I">6176723981</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">28470846043</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2025-11-23T12:26:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19157</_id>
+    <_job t="I">19611559134</_job>
+    <_time t="T">2025-11-23T13:13:45Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <details t="S">The issue yegor256/takes#1501 has been earlier opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1501</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2025-11-23T12:23:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19158</_id>
+    <_job t="I">19611559134</_job>
+    <_time t="T">2025-11-23T13:16:28Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <assignees_were_scanned t="I">444</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6175837397</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <events_were_scanned t="I">4857541608</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">197</min_pull_was_found>
+    <min_pull_was_found t="I">200</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">918</types_were_scanned>
+    <types_were_scanned t="I">943</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

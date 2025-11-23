@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.694104817
+  seconds: 810.420309973
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-23 12:09:20.819630332 Z
+  when: 2025-11-23 13:16:28.756962302 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56537,20 +56537,52 @@
   _version: 0.16.8/0.57.1/0.16.1
   what: learn-eva
   when: 2025-11-23 08:10:19.660468837 Z
-- _id: 19154
-  _job: 19610753967
-  _time: 2025-11-23 12:09:00.830901805 Z
+- _id: 19155
+  _job: 19611559134
+  _time: 2025-11-23 13:03:01.785444449 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 341
+  by_owner: 1
+  commit: 3fc973a66617d248b1fbe50bf652e234764a8202
+  default_branch: master
+  details: 'A new Git push #28470846043 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 6176723981
+  event_type: PushEvent
+  is_human: 1
+  push_id: 28470846043
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-11-23 12:26:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 19157
+  _job: 19611559134
+  _time: 2025-11-23 13:13:45.151124418 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  details: The issue yegor256/takes#1501 has been earlier opened by @yegor256.
+  is_human: 1
+  issue: 1501
+  repository: 28924109
+  what: issue-was-opened
+  when: 2025-11-23 12:23:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 19158
+  _job: 19611559134
+  _time: 2025-11-23 13:16:28.596964345 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 444
   earliest_issue_was_found: 1
-  events_were_scanned: 6175837397
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  events_were_scanned: 4857541608
+  issues_were_scanned: 1292
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 197
+  min_pull_was_found: 200
   repository: 28924109
-  types_were_scanned: 918
+  types_were_scanned: 943
   what: iterate
   where: github
