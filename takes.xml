@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1069478">
+<fb version="0.16.8" size="1069602">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
+    <error t="S">GET https://api.github.com/repos/yegor256/takes/pulls/1241/reviews?per_page=100: 502 - Server Error</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">601.013202754</seconds>
+    <seconds t="F">540.755518809</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-23T22:05:58Z</when>
+    <when t="T">2025-11-23T23:05:10Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -64298,20 +64299,20 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
   </f>
   <f>
     <_id t="I">19203</_id>
-    <_job t="I">19617842579</_job>
-    <_time t="T">2025-11-23T22:05:58Z</_time>
+    <_job t="I">19618542076</_job>
+    <_time t="T">2025-11-23T23:05:10Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
+    <assignees_were_scanned t="I">211</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5812575803</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <events_were_scanned t="I">5813151166</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">214</min_pull_was_found>
+    <min_pull_was_found t="I">215</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">387</types_were_scanned>
+    <types_were_scanned t="I">491</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
