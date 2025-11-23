@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.304387668
+  seconds: 810.319946244
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-23 15:09:32.418698351 Z
+  when: 2025-11-23 16:09:54.966255134 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56575,6 +56575,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: tkhtmltest-refactor
   details: The missing pull yegor256/takes#1487 has been opened by @eshabakhov.
+  is_human: 1
   issue: 1487
   repository: 28924109
   what: pull-was-opened
@@ -56587,6 +56588,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/crate-ci-typos-1.x
   details: The missing pull yegor256/takes#1488 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1488
   repository: 28924109
   what: pull-was-opened
@@ -56599,6 +56601,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/junit-framework-monorepo
   details: The missing pull yegor256/takes#1489 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1489
   repository: 28924109
   what: pull-was-opened
@@ -56611,6 +56614,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/zerocracy-judges-action-0.x
   details: The missing pull yegor256/takes#1490 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1490
   repository: 28924109
   what: pull-was-opened
@@ -56623,6 +56627,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/jamesives-github-pages-deploy-action-4.x
   details: The missing pull yegor256/takes#1491 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1491
   repository: 28924109
   what: pull-was-opened
@@ -56635,6 +56640,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/major-jersey-monorepo
   details: The missing pull yegor256/takes#1492 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1492
   repository: 28924109
   what: pull-was-opened
@@ -56647,6 +56653,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/hibernate-validator
   details: The missing pull yegor256/takes#1493 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1493
   repository: 28924109
   what: pull-was-opened
@@ -56659,6 +56666,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/commons-io-commons-io-2.x
   details: The missing pull yegor256/takes#1494 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1494
   repository: 28924109
   what: pull-was-opened
@@ -56671,6 +56679,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/zerocracy-pages-action-0.x
   details: The missing pull yegor256/takes#1495 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1495
   repository: 28924109
   what: pull-was-opened
@@ -56683,6 +56692,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
   details: The missing pull yegor256/takes#1496 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1496
   repository: 28924109
   what: pull-was-opened
@@ -56695,6 +56705,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/davidanson-markdownlint-cli2-action-21.x
   details: The missing pull yegor256/takes#1497 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1497
   repository: 28924109
   what: pull-was-opened
@@ -56707,6 +56718,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: 1436-fix-assertions
   details: The missing pull yegor256/takes#1498 has been opened by @kartofanych.
+  is_human: 1
   issue: 1498
   repository: 28924109
   what: pull-was-opened
@@ -56719,6 +56731,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/actions-checkout-6.x
   details: The missing pull yegor256/takes#1499 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1499
   repository: 28924109
   what: pull-was-opened
@@ -56731,6 +56744,7 @@
   _version: 0.16.8/0.55.0/0.16.1
   branch: renovate/com.jcabi-jcabi-http-2.x
   details: The missing pull yegor256/takes#1500 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1500
   repository: 28924109
   what: pull-was-opened
@@ -56742,6 +56756,7 @@
   _time: 2025-11-23 14:07:56.678751833 Z
   _version: 0.16.8/0.55.0/0.16.1
   details: Apparently, yegor256/takes#1501 has been "issue-was-closed".
+  is_human: 1
   issue: 1501
   repository: 28924109
   what: issue-was-closed
@@ -56763,6 +56778,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1488
   repository: 28924109
   review: 2025-11-01 03:24:43.000000000 Z
@@ -56787,6 +56803,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1489
   repository: 28924109
   review: 2025-11-01 03:24:39.000000000 Z
@@ -56801,6 +56818,7 @@
   _time: 2025-11-23 15:01:13.583934282 Z
   _version: 0.16.8/0.55.0/0.16.1
   details: 'We found out that the user #87902365 is known in GitHub as @eshabakhov.'
+  is_human: 1
   name: eshabakhov
   what: who-has-name
   when: 2025-11-23 15:01:13.782435989 Z
@@ -56821,6 +56839,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1490
   repository: 28924109
   review: 2025-11-04 16:33:06.000000000 Z
@@ -56844,6 +56863,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1491
   repository: 28924109
   review: 2025-11-04 16:33:02.000000000 Z
@@ -56867,6 +56887,7 @@
   failed_builds: 0
   files: 2
   hoc: 6
+  is_human: 0
   issue: 1492
   repository: 28924109
   review: 2025-11-05 08:38:36.000000000 Z
@@ -56890,6 +56911,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1493
   repository: 28924109
   review: 2025-11-08 02:43:03.000000000 Z
@@ -56913,6 +56935,7 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 0
   issue: 1494
   repository: 28924109
   review: 2025-11-08 08:32:58.000000000 Z
@@ -56936,6 +56959,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1495
   repository: 28924109
   review: 2025-11-10 08:43:55.000000000 Z
@@ -56959,6 +56983,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1496
   repository: 28924109
   review: 2025-11-10 16:49:19.000000000 Z
@@ -56982,6 +57007,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1497
   repository: 28924109
   review: 2025-11-17 02:51:54.000000000 Z
@@ -56990,20 +57016,200 @@
   when: 2025-11-17 03:06:24.000000000 Z
   where: github
   who: 8086956
-- _id: 19188
-  _job: 19612933124
-  _time: 2025-11-23 15:08:14.811089986 Z
+- _id: 19189
+  _job: 19613657348
+  _time: 2025-11-23 16:07:37.601695176 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1488 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 12h13m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1488
+  repository: 28924109
+  review_comments: 0
+  seconds: 44027
+  what: code-was-reviewed
+  when: 2025-11-01 03:24:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 19190
+  _job: 19613657348
+  _time: 2025-11-23 16:07:39.616322506 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1489 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h12m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1489
+  repository: 28924109
+  review_comments: 0
+  seconds: 33172
+  what: code-was-reviewed
+  when: 2025-11-01 03:24:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 19191
+  _job: 19613657348
+  _time: 2025-11-23 16:07:41.780884993 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1490 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 1h20m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1490
+  repository: 28924109
+  review_comments: 0
+  seconds: 4854
+  what: code-was-reviewed
+  when: 2025-11-04 16:33:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 19192
+  _job: 19613657348
+  _time: 2025-11-23 16:07:43.338054912 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1491 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 0h16m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1491
+  repository: 28924109
+  review_comments: 0
+  seconds: 973
+  what: code-was-reviewed
+  when: 2025-11-04 16:33:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 19193
+  _job: 19613657348
+  _time: 2025-11-23 16:07:44.927051035 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1492 with 6 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 15h50m and 0 comments.
+  hoc: 6
+  is_human: 1
+  issue: 1492
+  repository: 28924109
+  review_comments: 0
+  seconds: 57026
+  what: code-was-reviewed
+  when: 2025-11-05 08:38:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 19194
+  _job: 19613657348
+  _time: 2025-11-23 16:07:46.497126760 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1493 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 3h31m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1493
+  repository: 28924109
+  review_comments: 0
+  seconds: 12717
+  what: code-was-reviewed
+  when: 2025-11-08 02:43:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 19195
+  _job: 19613657348
+  _time: 2025-11-23 16:07:48.005819431 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1494 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 5h35m and 0 comments.
+  hoc: 4
+  is_human: 1
+  issue: 1494
+  repository: 28924109
+  review_comments: 0
+  seconds: 20131
+  what: code-was-reviewed
+  when: 2025-11-08 08:32:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 19196
+  _job: 19613657348
+  _time: 2025-11-23 16:07:49.516345694 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1495 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 0h33m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1495
+  repository: 28924109
+  review_comments: 0
+  seconds: 1984
+  what: code-was-reviewed
+  when: 2025-11-10 08:43:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 19197
+  _job: 19613657348
+  _time: 2025-11-23 16:07:51.356443177 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1496 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h9m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1496
+  repository: 28924109
+  review_comments: 0
+  seconds: 14977
+  what: code-was-reviewed
+  when: 2025-11-10 16:49:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 19198
+  _job: 19613657348
+  _time: 2025-11-23 16:07:52.914946241 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1497 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 2h2m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1497
+  repository: 28924109
+  review_comments: 0
+  seconds: 7340
+  what: code-was-reviewed
+  when: 2025-11-17 02:51:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 19199
+  _job: 19613657348
+  _time: 2025-11-23 16:09:54.857335439 Z
   _version: 0.16.8/0.55.0/0.16.1
   assignees_were_scanned: 713
   earliest_issue_was_found: 1
-  events_were_scanned: 5807582453
-  issues_were_scanned: 0
-  labels_were_scanned: 751
+  events_were_scanned: 5808077284
+  issues_were_scanned: 1292
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 202
+  min_pull_was_found: 203
   repository: 28924109
-  types_were_scanned: 1058
+  types_were_scanned: 1111
   what: iterate
   where: github
