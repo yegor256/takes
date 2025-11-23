@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1056026">
+<fb version="0.16.8" size="1056112">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.254081732</seconds>
+    <seconds t="F">587.912454352</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-23T08:09:33Z</when>
+    <when t="T">2025-11-23T09:06:00Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63454,19 +63454,6 @@
     <when t="T">2025-11-20T15:56:46Z</when>
   </f>
   <f>
-    <_id t="I">19135</_id>
-    <_job t="I">50059</_job>
-    <_time t="T">2025-11-20T16:11:29Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (467.0) is decreasing (R=-0.21).
-The average number of commits per week (8.0) is decreasing (R=-0.40).
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-11-20T16:11:29Z</when>
-  </f>
-  <f>
     <_id t="I">19137</_id>
     <_job t="I">19544798865</_job>
     <_time t="T">2025-11-20T17:09:40Z</_time>
@@ -63514,38 +63501,61 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-21T17:10:04Z</when>
   </f>
   <f>
-    <_id t="I">19149</_id>
-    <_job t="I">50241</_job>
-    <_time t="T">2025-11-22T00:10:46Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-11-22T00:10:46Z</when>
-  </f>
-  <f>
-    <_id t="I">19150</_id>
-    <_job t="I">19608086359</_job>
-    <_time t="T">2025-11-23T07:58:13Z</_time>
-    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">1050</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6156635966</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">751</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">189</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">469</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">19151</_id>
     <_job t="I">19608086359</_job>
     <_time t="T">2025-11-23T08:09:33Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <total_active_contributors t="I">2</total_active_contributors>
+    <total_commits t="I">3562</total_commits>
+    <total_contributors t="I">82</total_contributors>
+    <total_files t="I">534</total_files>
+    <total_forks t="I">211</total_forks>
+    <total_issues t="I">740</total_issues>
+    <total_pulls t="I">758</total_pulls>
+    <total_releases t="I">155</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">866</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2025-11-23T08:09:33Z</when>
+  </f>
+  <f>
+    <_id t="I">19152</_id>
+    <_job t="I">50318</_job>
+    <_time t="T">2025-11-23T08:09:56Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (451.7) is decreasing (R=-0.35).
+The average number of commits per week (7.2) is decreasing (R=-0.46).
+The average number of releases per month (0.0) is staying still.
+The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-11-23T08:09:56Z</when>
+  </f>
+  <f>
+    <_id t="I">19153</_id>
+    <_job t="I">50318</_job>
+    <_time t="T">2025-11-23T08:10:19Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-11-23T08:10:19Z</when>
+  </f>
+  <f>
+    <_id t="I">19154</_id>
+    <_job t="I">19608746649</_job>
+    <_time t="T">2025-11-23T09:05:59Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">6173953793</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">924</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1060</min_issue_was_found>
+    <min_pull_was_found t="I">191</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">595</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
