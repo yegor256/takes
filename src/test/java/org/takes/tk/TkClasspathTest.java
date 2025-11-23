@@ -73,5 +73,3 @@ final class TkClasspathTest {
         }
     }
 }
-
-
