@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1069126">
+<fb version="0.16.8" size="1069474">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">685.019596314</seconds>
+    <seconds t="F">810.425374624</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-23T17:07:29Z</when>
+    <when t="T">2025-11-23T18:10:20Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -64272,21 +64272,45 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-23T16:10:41Z</when>
   </f>
   <f>
-    <_id t="I">19201</_id>
-    <_job t="I">19614371838</_job>
-    <_time t="T">2025-11-23T17:05:45Z</_time>
+    <_id t="I">19202</_id>
+    <_job t="I">19615080799</_job>
+    <_time t="T">2025-11-23T18:10:12Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
-    <assignees_were_scanned t="I">820</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5808785184</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">204</min_pull_was_found>
+    <branch t="S">1436-fix-assertions</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1498 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">531</files>
+    <hoc t="I">17952</hoc>
+    <issue t="I">1498</issue>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1438</types_were_scanned>
+    <succeeded_builds t="I">0</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2025-11-23T17:09:22Z</when>
+    <where t="S">github</where>
+    <who t="I">66062429</who>
+  </f>
+  <f>
+    <_id t="I">19203</_id>
+    <_job t="I">19615080799</_job>
+    <_time t="T">2025-11-23T18:10:20Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <assignees_were_scanned t="I">924</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">5810509802</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">1500</merges_were_scanned>
+    <min_issue_was_found t="I">1060</min_issue_was_found>
+    <min_pull_was_found t="I">207</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>

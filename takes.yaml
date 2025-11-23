@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 685.019596314
+  seconds: 810.425374624
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-23 17:07:29.662043254 Z
+  when: 2025-11-23 18:10:20.862188924 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57204,20 +57204,42 @@
   _version: 0.16.8/0.57.1/0.16.1
   what: learn-eva
   when: 2025-11-23 16:10:41.906600940 Z
-- _id: 19201
-  _job: 19614371838
-  _time: 2025-11-23 17:05:45.062253213 Z
+- _id: 19202
+  _job: 19615080799
+  _time: 2025-11-23 18:10:12.175098689 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 820
-  earliest_issue_was_found: 1
-  events_were_scanned: 5808785184
-  issues_were_scanned: 0
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1060
-  min_pull_was_found: 204
+  branch: 1436-fix-assertions
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1498 has been "pull-was-closed".
+  failed_builds: 0
+  files: 531
+  hoc: 17952
+  issue: 1498
   repository: 28924109
-  types_were_scanned: 1438
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2025-11-23 17:09:22.000000000 Z
+  where: github
+  who: 66062429
+- _id: 19203
+  _job: 19615080799
+  _time: 2025-11-23 18:10:20.703642158 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  assignees_were_scanned: 924
+  earliest_issue_was_found: 1
+  events_were_scanned: 5810509802
+  issues_were_scanned: 0
+  labels_were_scanned: 0
+  latest_issue_was_found: 1463
+  merges_were_scanned: 1500
+  min_issue_was_found: 1060
+  min_pull_was_found: 207
+  repository: 28924109
+  types_were_scanned: 0
   what: iterate
   where: github
