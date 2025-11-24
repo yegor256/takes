@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.459202048
+  seconds: 810.640708619
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-24 05:12:36.171382055 Z
+  when: 2025-11-24 06:09:45.447440506 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57227,19 +57227,39 @@
   _version: 0.16.8/0.57.1/0.16.1
   what: learn-eva
   when: 2025-11-24 00:11:21.685173474 Z
-- _id: 19205
-  _job: 19623823536
-  _time: 2025-11-24 05:12:36.079881960 Z
+- _id: 19206
+  _job: 19624788481
+  _time: 2025-11-24 05:56:18.581870214 Z
+  _version: 0.16.8/0.55.0/0.16.1
+  by_owner: 1
+  commit: bfe58fec4f0c5c1f06d32987968808ae54e5d5bd
+  default_branch: master
+  details: 'A new Git push #28483791706 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 6189654269
+  event_type: PushEvent
+  is_human: 1
+  push_id: 28483791706
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-11-24 05:48:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 19207
+  _job: 19624788481
+  _time: 2025-11-24 05:59:48.766335726 Z
   _version: 0.16.8/0.55.0/0.16.1
   assignees_were_scanned: 820
   earliest_issue_was_found: 1
-  events_were_scanned: 5817142971
-  issues_were_scanned: 993
+  events_were_scanned: 5819155120
+  issues_were_scanned: 0
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 232
+  min_pull_was_found: 233
   repository: 28924109
   types_were_scanned: 1054
   what: iterate

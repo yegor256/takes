@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1069483">
+<fb version="0.16.8" size="1069986">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.459202048</seconds>
+    <seconds t="F">810.640708619</seconds>
     <version t="S">0.55.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-24T05:12:36Z</when>
+    <when t="T">2025-11-24T06:09:45Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -64297,19 +64297,40 @@ The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
     <when t="T">2025-11-24T00:11:21Z</when>
   </f>
   <f>
-    <_id t="I">19205</_id>
-    <_job t="I">19623823536</_job>
-    <_time t="T">2025-11-24T05:12:36Z</_time>
+    <_id t="I">19206</_id>
+    <_job t="I">19624788481</_job>
+    <_time t="T">2025-11-24T05:56:18Z</_time>
+    <_version t="S">0.16.8/0.55.0/0.16.1</_version>
+    <by_owner t="I">1</by_owner>
+    <commit t="S">bfe58fec4f0c5c1f06d32987968808ae54e5d5bd</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #28483791706 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
+    <event_id t="I">6189654269</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">28483791706</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2025-11-24T05:48:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19207</_id>
+    <_job t="I">19624788481</_job>
+    <_time t="T">2025-11-24T05:59:48Z</_time>
     <_version t="S">0.16.8/0.55.0/0.16.1</_version>
     <assignees_were_scanned t="I">820</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5817142971</events_were_scanned>
-    <issues_were_scanned t="I">993</issues_were_scanned>
+    <events_were_scanned t="I">5819155120</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
     <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">232</min_pull_was_found>
+    <min_pull_was_found t="I">233</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">1054</types_were_scanned>
     <what t="S">iterate</what>
