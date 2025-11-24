@@ -2,13 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/takes/issues/944/events?per_page=100:
-    500 - '
   inserted: 8
-  seconds: 810.591148205
+  seconds: 810.194725877
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-24 18:09:36.180553791 Z
+  when: 2025-11-24 19:11:51.395500766 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57259,26 +57257,26 @@
     The average monthly turnover (44.0 developers) is increasing (R=0.61).
   what: assessment
   when: 2025-11-24 09:11:53.507421473 Z
-- _id: 19211
-  _job: 50451
-  _time: 2025-11-24 09:12:21.797505941 Z
+- _id: 19213
+  _job: 50504
+  _time: 2025-11-24 18:10:36.152845300 Z
   _version: 0.16.8/0.57.1/0.16.1
   what: learn-eva
-  when: 2025-11-24 09:12:21.719642962 Z
-- _id: 19212
-  _job: 19644046838
-  _time: 2025-11-24 18:00:37.146300893 Z
+  when: 2025-11-24 18:10:36.071120509 Z
+- _id: 19214
+  _job: 19645768766
+  _time: 2025-11-24 19:11:33.551204507 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 943
+  assignees_were_scanned: 1070
   earliest_issue_was_found: 1
-  events_were_scanned: 6206823202
-  issues_were_scanned: 1292
+  events_were_scanned: 6208246483
+  issues_were_scanned: 0
   labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 255
+  min_pull_was_found: 261
   repository: 28924109
-  types_were_scanned: 1145
+  types_were_scanned: 0
   what: iterate
   where: github
