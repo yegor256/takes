@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+---
+# yamllint disable rule:line-length
+name: zerocracy
+'on':
+  schedule:
+    - cron: '51 * * * *'
+concurrency:
+  group: zerocracy
+  cancel-in-progress: false
+jobs:
+  zerocracy:
+    if: github.repository_owner == 'yegor256'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: zerocracy/judges-action@0.16.1
+        with:
+          token: ${{ secrets.ZEROCRACY_TOKEN }}
+          repositories: yegor256/takes
+          factbase: takes.fb
+      - uses: zerocracy/pages-action@0.5.3
+        with:
+          factbase: takes.fb
+      - uses: JamesIves/github-pages-deploy-action@v4.7.4
+        with:
+          folder: pages
+          clean: false

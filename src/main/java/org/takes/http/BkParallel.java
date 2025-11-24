@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -31,10 +12,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 import lombok.EqualsAndHashCode;
 
 /**
- * Parallel back-end.
+ * Parallel back-end decorator.
  *
- * <p>
- * The class is immutable and thread-safe.
+ * <p>This decorator wraps another {@link Back} implementation and processes
+ * socket connections in parallel using a thread pool. Instead of processing
+ * requests sequentially, each incoming socket connection is submitted to an
+ * {@link ExecutorService} for concurrent processing. This significantly
+ * improves server throughput and response times under high load.
+ *
+ * <p>By default, it creates a thread pool with 4 times the number of
+ * available processors (using bit shift for efficiency). This heuristic
+ * provides good performance for I/O-bound HTTP request processing.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Executes each socket connection in a separate thread</li>
+ *   <li>Uses custom thread factory with meaningful thread names</li>
+ *   <li>Configurable thread pool size</li>
+ *   <li>Wraps exceptions as {@link IllegalStateException}</li>
+ * </ul>
+ *
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */

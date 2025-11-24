@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.servlet;
 
@@ -55,7 +36,29 @@ import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
 /**
- * Fake HttpServletRequest (for unit tests).
+ * Fake HttpServletRequest implementation for testing.
+ *
+ * <p>This class provides a test double for {@link HttpServletRequest} that
+ * wraps a Takes {@link Request} object. It's designed primarily for unit
+ * testing scenarios where you need to simulate servlet container behavior
+ * without running an actual servlet container.
+ *
+ * <p>The implementation extracts HTTP information from the Takes request
+ * and presents it through the standard servlet API. This allows testing
+ * of servlet-based code using Takes' lightweight request representations.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Converts Takes {@link Request} to servlet {@link HttpServletRequest}</li>
+ *   <li>Supports standard HTTP methods, headers, and URL parameters</li>
+ *   <li>Provides minimal implementation suitable for most testing scenarios</li>
+ *   <li>Throws {@link UnsupportedOperationException} for advanced servlet features</li>
+ *   <li>Thread-safe and immutable where possible</li>
+ * </ul>
+ *
+ * <p>Many methods throw {@link UnsupportedOperationException} as they
+ * represent servlet container features that are not relevant for basic
+ * HTTP request testing (sessions, dispatching, async processing, etc.).
  *
  * @since 1.15
  */
@@ -346,9 +349,9 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     /**
      * Checks whether the requested session ID came in as part of the request
      * URL.
-     * @deprecated Use isRequestedSessionIdFromURL() instead.
      * @return True, if the requested session ID came in as part of the request
      *  URL.
+     * @deprecated Use isRequestedSessionIdFromURL() instead.
      */
     @Deprecated
     public boolean isRequestedSessionIdFromUrl() {
@@ -501,8 +504,8 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     /**
      * Gets the real path corresponding to the given virtual path.
      * @param path The path.
-     * @deprecated Use ServletContext.getRealPath(java.lang.String) instead.
      * @return The real path, or null if the translation cannot be performed.
+     * @deprecated Use ServletContext.getRealPath(java.lang.String) instead.
      */
     @Deprecated
     public String getRealPath(final String path) {
@@ -520,7 +523,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public AsyncContext startAsync() throws IllegalStateException {
+    public AsyncContext startAsync() {
         throw new UnsupportedOperationException("#startAsync()");
     }
 
@@ -528,7 +531,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     public AsyncContext startAsync(
         final ServletRequest req,
         final ServletResponse resp
-    ) throws IllegalStateException {
+    ) {
         throw new UnsupportedOperationException("#startAsync(req, resp)");
     }
 

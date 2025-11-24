@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.ret;
 
@@ -36,9 +17,13 @@ import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsRedirect;
 
 /**
- * Take that understands Return cookie. If Return cookie
- * is set, sends redirect response to stored location.
- * Otherwise delegates to original Take.
+ * A take decorator that handles return location cookies for navigation.
+ *
+ * <p>This decorator checks for return location cookies in incoming requests.
+ * If a return cookie is present, it redirects the user to the stored location
+ * and clears the cookie. If no return cookie exists, it delegates to the
+ * original take for normal processing. This enables "return to previous page"
+ * functionality in web applications. The class is immutable and thread-safe.
  *
  * @since 0.20
  */
@@ -57,17 +42,17 @@ public final class TkReturn implements Take {
     private final String cookie;
 
     /**
-     * Ctor.
-     * @param take Original take
+     * Constructor with default cookie name.
+     * @param take The original take to decorate
      */
     public TkReturn(final Take take) {
         this(take, RsReturn.class.getSimpleName());
     }
 
     /**
-     * Ctor.
-     * @param take Original take
-     * @param name Cookie name
+     * Constructor with custom cookie name.
+     * @param take The original take to decorate
+     * @param name The name of the return location cookie
      */
     public TkReturn(final Take take, final String name) {
         this.origin = take;

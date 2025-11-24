@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -30,7 +11,12 @@ import lombok.EqualsAndHashCode;
 import org.takes.Response;
 
 /**
- * HTTP status of the Response.
+ * Interface for extracting HTTP status codes from responses.
+ *
+ * <p>This interface provides functionality to parse and extract HTTP
+ * status codes from response status lines. It includes validation
+ * of status line format and proper parsing of the three-digit status
+ * code according to HTTP specifications.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
  *
@@ -46,7 +32,12 @@ public interface RsStatus extends Response {
     int status() throws IOException;
 
     /**
-     * Request decorator, for HTTP URI query parsing.
+     * Response decorator for HTTP status code parsing and extraction.
+     *
+     * <p>This implementation parses the HTTP status line using regex
+     * pattern matching to extract the three-digit status code. It validates
+     * the status line format and throws appropriate exceptions for malformed
+     * status lines.
      *
      * <p>The class is immutable and thread-safe.
      *
@@ -85,4 +76,3 @@ public interface RsStatus extends Response {
         }
     }
 }
-

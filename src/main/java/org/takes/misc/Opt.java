@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 package org.takes.misc;
@@ -27,10 +8,17 @@ package org.takes.misc;
 import lombok.EqualsAndHashCode;
 
 /**
- * Replacement a nullable T reference with a non-null value.
+ * Optional value container that eliminates null reference usage.
+ *
+ * <p>This interface provides a null-safe way to handle optional values,
+ * similar to Java's Optional but designed specifically for the Takes framework.
+ * It offers two implementations: Single for containing a value, and Empty
+ * for representing the absence of a value. This approach helps prevent
+ * NullPointerException and makes null-checking explicit.
  *
  * <p>All implementations of this interface must be immutable and thread-safe.
- * @param <T> Type of item
+ *
+ * @param <T> Type of optional item
  * @since 0.14
  */
 public interface Opt<T> {
@@ -47,11 +35,16 @@ public interface Opt<T> {
     boolean has();
 
     /**
-     * Holder for a single element only.
+     * Implementation that contains a single non-null value.
+     *
+     * <p>This implementation always returns true for has() and provides
+     * the contained value via get(). It represents the presence of a value
+     * in the optional container and ensures the value is never null.
      *
      * <p>The class is immutable and thread-safe.
+     *
+     * @param <T> Type of contained item
      * @since 0.14
-     * @param <T> Type of item
      */
     @EqualsAndHashCode
     final class Single<T> implements Opt<T> {
@@ -80,10 +73,16 @@ public interface Opt<T> {
     }
 
     /**
-     * Empty instance.
+     * Implementation that represents the absence of a value.
+     *
+     * <p>This implementation always returns false for has() and throws
+     * UnsupportedOperationException when get() is called. It represents
+     * the absence of a value in the optional container and should be
+     * checked with has() before attempting to retrieve a value.
      *
      * <p>The class is immutable and thread-safe.
-     * @param <T> Type of item
+     *
+     * @param <T> Type of absent item
      * @since 0.14
      */
     final class Empty<T> implements Opt<T> {

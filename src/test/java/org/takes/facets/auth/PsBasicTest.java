@@ -1,29 +1,11 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
 import jakarta.xml.bind.DatatypeConverter;
+import java.io.IOException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -61,13 +43,8 @@ final class PsBasicTest {
      */
     private static final String VALID_CODE = "?valid_code=%s";
 
-    /**
-     * Size for random symbol generator.
-     */
-    private static final int TEN = 10;
-
     @Test
-    void handleConnectionWithValidCredential() throws Exception {
+    void handleConnectionWithValidCredential() throws IOException {
         final String user = "john";
         final Opt<Identity> identity = new PsBasic(
             "RealmA",
@@ -78,14 +55,19 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                        RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 PsBasicTest.header(user, "pass")
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected user URN for valid credentials",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -108,14 +90,19 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                        RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 PsBasicTest.header(user, password)
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected user URN for default entry",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -134,7 +121,7 @@ final class PsBasicTest {
                         RqMethod.GET,
                         String.format(
                             "?invalid_code=%s",
-                            RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                            RandomStringUtils.randomAlphanumeric(10)
                         )
                     ),
                     PsBasicTest.header("username", "wrong")
@@ -144,11 +131,12 @@ final class PsBasicTest {
             forward = ex;
         }
         MatcherAssert.assertThat(
+            "Invalid credentials must return 401 Unauthorized with WWW-Authenticate header",
             new RsHeadPrint(forward).asString(),
             Matchers.allOf(
                 Matchers.containsString("HTTP/1.1 401 Unauthorized"),
                 Matchers.containsString(
-                    "WWW-Authenticate: Basic ream=\"RealmB\""
+                    "WWW-Authenticate: Basic realm=\"RealmB\""
                 )
             )
         );
@@ -166,7 +154,7 @@ final class PsBasicTest {
                     RqMethod.GET,
                     String.format(
                         "?multiple_code=%s",
-                        RandomStringUtils.randomAlphanumeric(PsBasicTest.TEN)
+                        RandomStringUtils.randomAlphanumeric(10)
                     )
                 ),
                 PsBasicTest.header(user, "changeit"),
@@ -177,8 +165,13 @@ final class PsBasicTest {
                 "X-Powered-By:Java/1.7"
             )
         );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
         MatcherAssert.assertThat(
+            "Identity must be present for valid credentials",
+            identity.has(),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "Identity URN must match expected user URN with multiple headers",
             identity.get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
@@ -189,6 +182,7 @@ final class PsBasicTest {
         Assertions.assertThrows(
             HttpException.class,
             () -> MatcherAssert.assertThat(
+                "Invalid headers must not provide identity",
                 new PsBasic(
                     "RealmD",
                     new PsBasic.Fake(true)

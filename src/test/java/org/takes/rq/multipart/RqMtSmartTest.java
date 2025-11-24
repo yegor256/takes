@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq.multipart;
 
@@ -85,6 +66,7 @@ final class RqMtSmartTest {
     );
 
     @Test
+    @Tag("deep")
     void returnsCorrectPartLength() throws Exception {
         final String post = "POST /post?u=3 HTTP/1.1";
         final int length = 5000;
@@ -114,6 +96,7 @@ final class RqMtSmartTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Part body must have the correct available byte count",
                 regsmart.single(part).body().available(),
                 Matchers.equalTo(length)
             );
@@ -124,6 +107,7 @@ final class RqMtSmartTest {
     }
 
     @Test
+    @Tag("deep")
     void identifiesBoundary() throws Exception {
         final int length = 9000;
         final String part = "foo-1";
@@ -153,6 +137,7 @@ final class RqMtSmartTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart with custom boundary must have correct part length",
                 regsmart.single(part).body().available(),
                 Matchers.equalTo(length)
             );
@@ -163,6 +148,7 @@ final class RqMtSmartTest {
     }
 
     @Test
+    @Tag("deep")
     void consumesHttpRequest() throws Exception {
         final String part = "f-1";
         final Take take = req -> new RsText(
@@ -209,23 +195,23 @@ final class RqMtSmartTest {
         final int length = 100_000_000;
         final String part = "test";
         final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
-        final BufferedWriter bwr = Files.newBufferedWriter(file.toPath());
-        bwr.write(
-            new Joined(
-                RqMtSmartTest.CRLF,
-                RqMtSmartTest.BODY_ELEMENT,
-                String.format(RqMtSmartTest.CONTENT, part),
-                "",
-                ""
-            ).toString()
-        );
-        for (int ind = 0; ind < length; ++ind) {
-            bwr.write("X");
+        try (BufferedWriter bwr = Files.newBufferedWriter(file.toPath())) {
+            bwr.write(
+                new Joined(
+                    RqMtSmartTest.CRLF,
+                    RqMtSmartTest.BODY_ELEMENT,
+                    String.format(RqMtSmartTest.CONTENT, part),
+                    "",
+                    ""
+                ).toString()
+            );
+            for (int ind = 0; ind < length; ++ind) {
+                bwr.write("X");
+            }
+            bwr.write(RqMtSmartTest.CRLF);
+            bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
+            bwr.write(RqMtSmartTest.CRLF);
         }
-        bwr.write(RqMtSmartTest.CRLF);
-        bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
-        bwr.write(RqMtSmartTest.CRLF);
-        bwr.close();
         final String post = "POST /post?u=4 HTTP/1.1";
         final long start = System.currentTimeMillis();
         final Request req = new RqFake(
@@ -242,10 +228,12 @@ final class RqMtSmartTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Large multipart request must have correct part length",
                 smart.single(part).body().available(),
                 Matchers.equalTo(length)
             );
             MatcherAssert.assertThat(
+                "Large multipart processing must complete within time limit",
                 System.currentTimeMillis() - start,
                 Matchers.lessThan(20_000L)
             );
@@ -256,11 +244,11 @@ final class RqMtSmartTest {
     }
 
     @Test
+    @Tag("deep")
     void notDistortContent(@TempDir final Path temp) throws Exception {
         final int length = 1_000_000;
         final String part = "test1";
         final Path file = temp.resolve("notDistortContent.tmp");
-        final BufferedWriter bwr = Files.newBufferedWriter(file);
         final String head =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -269,11 +257,7 @@ final class RqMtSmartTest {
                 "",
                 ""
             ).asString();
-        bwr.write(head);
-        final int byt = 0x7f;
-        for (int idx = 0; idx < length; ++idx) {
-            bwr.write(idx % byt);
-        }
+        final int the = 0x7f;
         final String foot =
             new Joined(
                 RqMtSmartTest.CRLF,
@@ -281,13 +265,18 @@ final class RqMtSmartTest {
                 "--zzz1--",
                 ""
             ).asString();
-        bwr.write(foot);
-        bwr.close();
+        try (BufferedWriter bwr = Files.newBufferedWriter(file)) {
+            bwr.write(head);
+            for (int idx = 0; idx < length; ++idx) {
+                bwr.write(idx % the);
+            }
+            bwr.write(foot);
+        }
         final String post = "POST /post?u=5 HTTP/1.1";
         final Request req = new RqFake(
             Arrays.asList(
                 post,
-                "Host: exampl.com",
+                "Host: example.com",
                 RqMtSmartTest.contentLengthHeader(
                     head.getBytes().length + length + foot.getBytes().length
                 ),
@@ -295,11 +284,11 @@ final class RqMtSmartTest {
             ),
             new TempInputStream(Files.newInputStream(file), file.toFile())
         );
-        final InputStream stream = new RqMtSmart(
+        try (InputStream stream = new RqMtSmart(
             new RqMtBase(req)
-        ).single(part).body();
-        try {
+        ).single(part).body()) {
             MatcherAssert.assertThat(
+                "Stream should have expected bytes available",
                 stream.available(),
                 Matchers.equalTo(length)
             );
@@ -307,12 +296,11 @@ final class RqMtSmartTest {
                 MatcherAssert.assertThat(
                     String.format("byte %d not matched", idx),
                     stream.read(),
-                    Matchers.equalTo(idx % byt)
+                    Matchers.equalTo(idx % the)
                 );
             }
         } finally {
             req.body().close();
-            stream.close();
         }
     }
 

@@ -1,32 +1,35 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.servlet;
 
 import jakarta.servlet.ServletConnection;
 
 /**
- * Fake ServletConnection (for unit tests).
+ * Fake ServletConnection implementation for testing.
+ *
+ * <p>This class provides a test double for {@link ServletConnection} that
+ * allows testing of servlet-based code without requiring a real servlet
+ * container. It provides configurable connection properties including
+ * connection ID, protocol, and security status.
+ *
+ * <p>The implementation is minimal and focused on testing needs, providing
+ * basic connection metadata that can be customized through constructor
+ * parameters. It defaults to a localhost HTTP/1.0 non-secure connection
+ * when no parameters are provided.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Configurable connection ID, protocol, and security flag</li>
+ *   <li>Default configuration for simple testing scenarios</li>
+ *   <li>Immutable once constructed</li>
+ *   <li>Returns empty string for protocol connection ID (not commonly used)</li>
+ * </ul>
+ *
+ * <p>This is primarily used in conjunction with {@link HttpServletRequestFake}
+ * and {@link HttpServletResponseFake} to provide a complete fake servlet
+ * environment for unit testing.
  *
  * @since 2.0
  */
