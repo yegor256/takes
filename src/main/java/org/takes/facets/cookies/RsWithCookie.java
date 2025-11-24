@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.cookies;
 
@@ -32,15 +13,17 @@ import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWrap;
 
 /**
- * Response decorator, with an additional cookie.
+ * A response decorator that adds HTTP cookies to responses.
  *
- * The decorator validates cookie name according
- * to <a href="http://tools.ietf.org/html/rfc2616#section-2.2">RFC 2616</a>
- * and cookie value according
- * to <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>
+ * <p>This decorator validates cookie names according to
+ * <a href="http://tools.ietf.org/html/rfc2616#section-2.2">RFC 2616</a>
+ * and cookie values according to
+ * <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>.
+ * It adds a Set-Cookie header to responses with the specified cookie name,
+ * value, and optional attributes.
  *
- * <p>Use this decorator in order to return a response with a "Set-Cookie"
- * header inside, for example:
+ * <p>Use this decorator to return a response with a "Set-Cookie"
+ * header, for example:
  *
  * <pre> return new RsWithCookie(
  *   new RsText("hello, world!"),
@@ -80,10 +63,10 @@ public final class RsWithCookie extends RsWrap {
     private static final CharSequence SET_COOKIE = "Set-Cookie";
 
     /**
-     * Ctor.
-     * @param name Cookie name
-     * @param value Value of it
-     * @param attrs Optional attributes, for example "Path=/"
+     * Constructor with cookie name, value, and optional attributes.
+     * @param name The cookie name
+     * @param value The cookie value
+     * @param attrs Optional cookie attributes such as "Path=/" or "Secure"
      */
     public RsWithCookie(final CharSequence name, final CharSequence value,
         final CharSequence... attrs) {
@@ -91,11 +74,11 @@ public final class RsWithCookie extends RsWrap {
     }
 
     /**
-     * Ctor.
-     * @param res Original response
-     * @param name Cookie name
-     * @param value Value of it
-     * @param attrs Optional attributes, for example "Path=/"
+     * Constructor that decorates an existing response with a cookie.
+     * @param res The original response to decorate
+     * @param name The cookie name
+     * @param value The cookie value
+     * @param attrs Optional cookie attributes such as "Path=/" or "Secure"
      * @checkstyle ParameterNumberCheck (10 lines)
      */
     public RsWithCookie(final Response res, final CharSequence name,
@@ -114,11 +97,11 @@ public final class RsWithCookie extends RsWrap {
     }
 
     /**
-     * Build cookie string.
-     * @param name Cookie name
-     * @param value Value of it
-     * @param attrs Optional attributes, for example "Path=/"
-     * @return Text
+     * Builds the cookie string for the Set-Cookie header.
+     * @param name The cookie name
+     * @param value The cookie value
+     * @param attrs Optional cookie attributes such as "Path=/" or "Secure"
+     * @return The formatted cookie string
      */
     private static String make(final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
@@ -132,9 +115,10 @@ public final class RsWithCookie extends RsWrap {
     }
 
     /**
-     * Checks value according RFC 6265 section 4.1.1.
-     * @param value Cookie value
-     * @return Cookie value
+     * Validates cookie value according to RFC 6265 section 4.1.1.
+     * @param value The cookie value to validate
+     * @return The validated cookie value
+     * @throws IllegalArgumentException If value contains invalid characters
      */
     private static CharSequence validValue(final CharSequence value) {
         if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
@@ -149,9 +133,10 @@ public final class RsWithCookie extends RsWrap {
     }
 
     /**
-     * Checks name according RFC 2616, section 2.2.
-     * @param name Cookie name;
-     * @return Cookie name
+     * Validates cookie name according to RFC 2616, section 2.2.
+     * @param name The cookie name to validate
+     * @return The validated cookie name
+     * @throws IllegalArgumentException If name contains invalid characters
      */
     private static CharSequence validName(final CharSequence name) {
         if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {

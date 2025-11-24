@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
@@ -28,6 +9,7 @@ import java.io.IOException;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
@@ -78,6 +60,7 @@ final class PsGithubTest {
     private static final String OCTOCAT = "octocat";
 
     @Test
+    @Tag("deep")
     void failsOnNoAccessToken() {
         Assertions.assertThrows(
             AssertionError.class,
@@ -86,6 +69,7 @@ final class PsGithubTest {
     }
 
     @Test
+    @Tag("deep")
     void canLogin() throws Exception {
         this.performLogin(
             PsGithubTest.directiveWithoutAccessToken()
@@ -131,14 +115,17 @@ final class PsGithubTest {
                     home.toString()
                 ).enter(new RqFake("GET", "?code=code")).get();
                 MatcherAssert.assertThat(
+                    "GitHub identity URN must match expected format with user ID",
                     identity.urn(),
                     Matchers.equalTo("urn:github:1")
                 );
                 MatcherAssert.assertThat(
+                    "GitHub identity properties must contain correct login username",
                     identity.properties().get(PsGithubTest.LOGIN),
                     Matchers.equalTo(PsGithubTest.OCTOCAT)
                 );
                 MatcherAssert.assertThat(
+                    "GitHub identity properties must contain correct avatar URL",
                     identity.properties().get("avatar"),
                     Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
                 );
@@ -166,6 +153,7 @@ final class PsGithubTest {
     private static void assertParam(final Request req,
         final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
+            "GitHub OAuth request parameter must match expected value",
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -32,6 +13,10 @@ import org.takes.Take;
 
 /**
  * Basic front.
+ *
+ * <p>This front accepts incoming HTTP connections on a server socket
+ * and dispatches them to a back-end for processing. It runs a loop
+ * that continuously accepts connections until the exit condition is met.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -72,22 +57,22 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param that Back
      * @param port Port
      * @throws IOException If fails
      */
-    public FtBasic(final Back bck, final int port) throws IOException {
-        this(bck, new ServerSocket(port));
+    public FtBasic(final Back that, final int port) throws IOException {
+        this(that, new ServerSocket(port));
     }
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param that Back
      * @param skt Server socket
      * @since 0.22
      */
-    public FtBasic(final Back bck, final ServerSocket skt) {
-        this.back = bck;
+    public FtBasic(final Back that, final ServerSocket skt) {
+        this.back = that;
         this.socket = skt;
     }
 

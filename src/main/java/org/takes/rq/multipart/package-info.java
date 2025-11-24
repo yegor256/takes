@@ -1,29 +1,25 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 /**
- * Implementations of the interface {@link org.takes.rq.RqMultipart}.
+ * Multipart request handling implementations.
+ *
+ * <p>This package contains implementations of the {@link org.takes.rq.RqMultipart}
+ * interface for handling multipart/form-data HTTP requests. Multipart requests
+ * are commonly used for file uploads and form submissions containing both text
+ * fields and binary data. The classes in this package provide functionality
+ * to parse multipart request bodies, extract individual parts, and access
+ * their headers and content.
+ *
+ * <p>Key components include:
+ * <ul>
+ * <li>RqMtBase: Base implementation for parsing multipart requests</li>
+ * <li>RqMtFake: Test implementation for creating fake multipart requests</li>
+ * <li>RqMtSmart: Decorator with additional convenience methods</li>
+ * <li>RqPart interface: Represents individual parts within a multipart request</li>
+ * </ul>
  *
  * @since 0.33
  */

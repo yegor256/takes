@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq.multipart;
 
@@ -148,12 +129,14 @@ final class RqMtFakeTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart request must have correct Content-Disposition header for named part",
                 new RqHeaders.Base(
                     multi.part(part).iterator().next()
                 ).header("Content-Disposition"),
                 Matchers.hasItem("form-data; name=\"t4\"")
             );
             MatcherAssert.assertThat(
+                "Multipart request body must contain expected address content",
                 new RqPrint(
                     new RqHeaders.Base(
                         multi.part(part).iterator().next()
@@ -203,6 +186,7 @@ final class RqMtFakeTest {
         multi.part(content).iterator().next().body().read();
         multi.body().close();
         MatcherAssert.assertThat(
+            "Part with name should not be null",
             multi.part(name).iterator().next(),
             Matchers.notNullValue()
         );
@@ -211,11 +195,13 @@ final class RqMtFakeTest {
             Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
+                "Exception must be ClosedChannelException for name part",
                 ex,
                 new IsInstanceOf(ClosedChannelException.class)
             );
         }
         MatcherAssert.assertThat(
+            "Part with content should not be null",
             multi.part(content).iterator().next(),
             Matchers.notNullValue()
         );
@@ -224,6 +210,7 @@ final class RqMtFakeTest {
             Assertions.fail(exmessage);
         } catch (final IOException ex) {
             MatcherAssert.assertThat(
+                "Exception must be ClosedChannelException for content part",
                 ex,
                 new IsInstanceOf(ClosedChannelException.class)
             );
@@ -258,11 +245,13 @@ final class RqMtFakeTest {
         final RqMtBase multi = new RqMtBase(request);
         multi.body().close();
         MatcherAssert.assertThat(
+            "Foo part should not be null",
             multi.part(foo).iterator().next(),
             Matchers.notNullValue()
         );
         multi.part(foo).iterator().next().body().close();
         MatcherAssert.assertThat(
+            "Bar part should not be null",
             multi.part(bar).iterator().next(),
             Matchers.notNullValue()
         );
@@ -293,6 +282,7 @@ final class RqMtFakeTest {
             )
         );
         MatcherAssert.assertThat(
+            "Fake part should not exist",
             multi.part("fake").iterator().hasNext(),
             Matchers.is(false)
         );
@@ -324,6 +314,7 @@ final class RqMtFakeTest {
         );
         try {
             MatcherAssert.assertThat(
+                "Multipart names should match expected set",
                 multi.names(),
                 Matchers.equalTo(
                     new HashSet<>(Arrays.asList("address", "data"))
