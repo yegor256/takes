@@ -2,14 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/1087/reviews?per_page=100:
-    504 - We couldn''t respond to your request in time. Sorry about that. Please try
-    resubmitting your request and contact us if the problem persists.'
   inserted: 8
-  seconds: 545.330985547
+  seconds: 699.74437516
   version: 0.55.0
   what: judges-summary
-  when: 2025-11-24 07:07:15.114389584 Z
+  when: 2025-11-24 08:07:46.165037601 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57251,19 +57248,19 @@
   where: github
   who: 526301
 - _id: 19207
-  _job: 19625956663
-  _time: 2025-11-24 07:04:00.660558204 Z
+  _job: 19627161406
+  _time: 2025-11-24 08:06:23.631897047 Z
   _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 924
+  assignees_were_scanned: 1050
   earliest_issue_was_found: 1
-  events_were_scanned: 5820389444
-  issues_were_scanned: 1292
-  labels_were_scanned: 0
+  events_were_scanned: 5821007438
+  issues_were_scanned: 0
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 234
+  min_pull_was_found: 235
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
