@@ -5,7 +5,7 @@
 name: zerocracy
 'on':
   schedule:
-    - cron: '51 * * * *'
+    - cron: '51 3 * * *'
 concurrency:
   group: zerocracy
   cancel-in-progress: false
@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v5
-      - uses: zerocracy/judges-action@0.16.1
+      - uses: zerocracy/judges-action@0.16.2
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           repositories: yegor256/takes
