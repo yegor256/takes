@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 793.064378754
-  version: 0.55.0
+  seconds: 811.391212869
+  version: 0.57.2
   what: judges-summary
-  when: 2025-11-25 06:09:29.790863217 Z
+  when: 2025-11-26 04:14:31.613346151 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57263,20 +57263,78 @@
   _version: 0.16.8/0.57.1/0.16.1
   what: learn-eva
   when: 2025-11-25 02:40:54.198508054 Z
-- _id: 19216
-  _job: 19659798291
-  _time: 2025-11-25 06:09:29.242404355 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  assignees_were_scanned: 1050
+- _id: 19217
+  _job: 19692040000
+  _time: 2025-11-26 04:01:05.452327139 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  by_owner: 1
+  commit: 20386448dd8360690546bc2a907f42b838b86415
+  default_branch: master
+  details: 'A new Git push #28515742062 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 6221767400
+  event_type: PushEvent
+  push_id: 28515742062
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-11-25 06:38:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 19219
+  _job: 19692040000
+  _time: 2025-11-26 04:02:40.512491942 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  branch: renovate/actions-checkout-6.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1499 has been "pull-was-merged".
+  failed_builds: 0
+  files: 14
+  hoc: 28
+  issue: 1499
+  repository: 28924109
+  review: 2025-11-25 08:39:05.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-25 08:52:09.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19221
+  _job: 19692040000
+  _time: 2025-11-26 04:04:16.879767547 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  total_active_contributors: 3
+  total_commits: 3571
+  total_contributors: 82
+  total_files: 534
+  total_forks: 211
+  total_issues: 741
+  total_pulls: 764
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 867
+  what: dimensions-of-terrain
+  when: 2025-11-26 04:04:16.885064536 Z
+- _id: 19222
+  _job: 19692040000
+  _time: 2025-11-26 04:07:54.699698810 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 6220246233
-  issues_were_scanned: 1292
-  labels_were_scanned: 751
+  events_were_scanned: 4906220349
+  issues_were_scanned: 0
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 289
+  min_pull_was_found: 297
   repository: 28924109
-  types_were_scanned: 1131
+  types_were_scanned: 0
   what: iterate
   where: github
