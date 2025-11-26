@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           repositories: yegor256/takes
           factbase: takes.fb
-      - uses: zerocracy/pages-action@0.6.0
+      - uses: zerocracy/pages-action@0.6.1
         with:
           factbase: takes.fb
       - uses: JamesIves/github-pages-deploy-action@v4.7.4
