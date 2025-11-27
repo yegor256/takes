@@ -6,16 +6,17 @@
 package org.takes.servlet;
 
 import java.io.IOException;
-import java.util.Locale;
-import org.cactoos.list.ListOf;
-import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.StringContains;
-import org.hamcrest.core.StringStartsWith;
-import org.junit.jupiter.api.Disabled;
+import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
+import org.takes.Request;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqMethod;
 import org.takes.rq.RqPrint;
+import org.takes.rq.RqWithBody;
+import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithoutHeader;
 
 /**
  * Test case for {@link  RqFrom}.
@@ -25,153 +26,123 @@ import org.takes.rq.RqPrint;
 final class RqFromTest {
 
     /**
-     * Takes default local address.
+     * Host header name.
      */
-    private static final String LOCAL_ADDRESS =
-        "X-Takes-LocalAddress: 127.0.0.1";
+    private static final String HEADER_HOST = "Host";
 
     /**
-     * Takes default remote address.
+     * Default local IP address.
      */
-    private static final String REMOTE_ADDRESS =
-        "X-Takes-RemoteAddress: 127.0.0.1";
-
-    /**
-     * End Of Line for HTTP protocol.
-     */
-    private static final String EOL = "\r\n";
-
-    /**
-     * Default GET method.
-     */
-    private static final String GET_METHOD = "GET /";
+    private static final String LOOPBACK = "127.0.0.1";
 
     @Test
     void defaultMethodForAFakeRequestIsGet() throws IOException {
+        final Request rebuilt = RqFromTest.rebuild(new RqFake());
         MatcherAssert.assertThat(
             "Can't add a method to a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake()
-                    )
-                )
-            ).printHead(),
-            new StringStartsWith(RqFromTest.GET_METHOD)
+            new RqMethod.Base(rebuilt).method(),
+            new IsEqual<>(RqMethod.GET)
         );
     }
 
     @Test
     void containsMethodAndHeader() throws Exception {
-        final String method = "GET /a-test";
-        final String header = "foo: bar";
+        final Request rebuilt = RqFromTest.rebuild(
+            new RqWithHeader(
+                new RqWithoutHeader(
+                    new RqFake("GET", "/a-test HTTP/1.1"),
+                    RqFromTest.HEADER_HOST
+                ),
+                "Foo",
+                "bar"
+            )
+        );
+        final RqHeaders.Smart headers = new RqHeaders.Smart(rebuilt);
         MatcherAssert.assertThat(
             "Can't add a header to a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(
-                                method,
-                                header
-                            ),
-                            ""
-                        )
-                    )
-                )
-            ).printHead(),
-            new StringStartsWith(
-                new Joined(
-                    RqFromTest.EOL,
-                    method,
-                    "Host: localhost",
-                    header,
-                    RqFromTest.LOCAL_ADDRESS,
-                    RqFromTest.REMOTE_ADDRESS
-                ).asString()
-            )
+            headers.single("Foo"),
+            new IsEqual<>("bar")
+        );
+        MatcherAssert.assertThat(
+            "Can't add a host header to a servlet request",
+            headers.single(RqFromTest.HEADER_HOST),
+            new IsEqual<>("localhost")
+        );
+        MatcherAssert.assertThat(
+            "Can't add a local address header to a servlet request",
+            headers.single("X-Takes-LocalAddress"),
+            new IsEqual<>(RqFromTest.LOOPBACK)
+        );
+        MatcherAssert.assertThat(
+            "Can't add a remote address header to a servlet request",
+            headers.single("X-Takes-RemoteAddress"),
+            new IsEqual<>(RqFromTest.LOOPBACK)
         );
     }
 
     @Test
     void containsHostHeaderInHeader() throws Exception {
-        final String method = "GET /one-more-test";
-        final String header = "Host: www.thesite.com";
+        final String host = "www.thesite.com";
+        final Request rebuilt = RqFromTest.rebuild(
+            new RqWithHeader(
+                new RqWithoutHeader(
+                    new RqFake("GET", "/one-more-test HTTP/1.1"),
+                    RqFromTest.HEADER_HOST
+                ),
+                RqFromTest.HEADER_HOST,
+                host
+            )
+        );
         MatcherAssert.assertThat(
             "Can't set a host in a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(
-                                method,
-                                header
-                            ),
-                            ""
-                        )
-                    )
-                )
-            ).printHead().toLowerCase(Locale.ENGLISH),
-            new StringStartsWith(
-                new Joined(
-                    RqFromTest.EOL,
-                    method,
-                    header,
-                    RqFromTest.LOCAL_ADDRESS,
-                    RqFromTest.REMOTE_ADDRESS
-                ).asString().toLowerCase(Locale.ENGLISH)
-            )
+            new RqHeaders.Smart(rebuilt).single(RqFromTest.HEADER_HOST),
+            new IsEqual<>(host)
         );
     }
 
     @Test
     void containsHostAndPortInHeader() throws Exception {
-        final String method = "GET /b-test";
-        final String header = "Host: 192.168.0.1:12345";
+        final String host = "192.168.0.1:12345";
+        final Request rebuilt = RqFromTest.rebuild(
+            new RqWithHeader(
+                new RqWithoutHeader(
+                    new RqFake("GET", "/b-test HTTP/1.1"),
+                    RqFromTest.HEADER_HOST
+                ),
+                RqFromTest.HEADER_HOST,
+                host
+            )
+        );
         MatcherAssert.assertThat(
             "Can't set a host and port in a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(
-                                method,
-                                header
-                            ),
-                            ""
-                        )
-                    )
-                )
-            ).printHead().toLowerCase(Locale.ENGLISH),
-            new StringStartsWith(
-                new Joined(
-                    RqFromTest.EOL,
-                    method,
-                    header,
-                    RqFromTest.LOCAL_ADDRESS,
-                    RqFromTest.REMOTE_ADDRESS
-                ).asString().toLowerCase(Locale.ENGLISH)
-            )
+            new RqHeaders.Smart(rebuilt).single(RqFromTest.HEADER_HOST),
+            new IsEqual<>(host)
         );
     }
 
     @Test
-    @Disabled
     void containsContentInRequestBody() throws IOException {
         final String content = "My name is neo!";
         MatcherAssert.assertThat(
             "Can't add a body to servlet request",
             new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(RqFromTest.EOL),
-                            content
-                        )
+                RqFromTest.rebuild(
+                    new RqWithBody(
+                        new RqFake("POST", "/with-body HTTP/1.1"),
+                        content
                     )
                 )
             ).printBody(),
-            new StringContains(content)
+            new IsEqual<>(content)
         );
+    }
+
+    /**
+     * Builds a request from servlet fake to keep setup in one place.
+     * @param request Original request
+     * @return Reconstructed request
+     */
+    private static Request rebuild(final Request request) {
+        return new RqFrom(new HttpServletRequestFake(request));
     }
 }
