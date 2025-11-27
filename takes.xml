@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.16.8" size="1071337">
+<fb version="0.17.0" size="1074898">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">811.391212869</seconds>
+    <seconds t="F">810.871480052</seconds>
     <version t="S">0.57.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-26T04:14:31Z</when>
+    <when t="T">2025-11-27T04:12:36Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -63506,19 +63506,6 @@
     <when t="T">2025-11-23T08:09:33Z</when>
   </f>
   <f>
-    <_id t="I">19152</_id>
-    <_job t="I">50318</_job>
-    <_time t="T">2025-11-23T08:09:56Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (451.7) is decreasing (R=-0.35).
-The average number of commits per week (7.2) is decreasing (R=-0.46).
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (47.0 developers) is increasing (R=0.83).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-11-23T08:09:56Z</when>
-  </f>
-  <f>
     <_id t="I">19155</_id>
     <_job t="I">19611559134</_job>
     <_time t="T">2025-11-23T13:03:01Z</_time>
@@ -64328,14 +64315,6 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <when t="T">2025-11-24T09:11:53Z</when>
   </f>
   <f>
-    <_id t="I">19215</_id>
-    <_job t="I">50543</_job>
-    <_time t="T">2025-11-25T02:40:54Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-11-25T02:40:54Z</when>
-  </f>
-  <f>
     <_id t="I">19217</_id>
     <_job t="I">19692040000</_job>
     <_time t="T">2025-11-26T04:01:05Z</_time>
@@ -64374,6 +64353,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <issue t="I">1499</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-25T08:39:05Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-25T08:52:09Z</when>
@@ -64399,22 +64379,226 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <when t="T">2025-11-26T04:04:16Z</when>
   </f>
   <f>
-    <_id t="I">19222</_id>
-    <_job t="I">19692040000</_job>
-    <_time t="T">2025-11-26T04:07:54Z</_time>
+    <_id t="I">19223</_id>
+    <_job t="I">50719</_job>
+    <_time t="T">2025-11-26T04:15:06Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (451.7) is decreasing (R=-0.35).
+The average number of commits per week (7.2) is decreasing (R=-0.46).
+The average number of releases per month (0.0) is staying still.
+The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-11-26T04:15:06Z</when>
+  </f>
+  <f>
+    <_id t="I">19224</_id>
+    <_job t="I">50719</_job>
+    <_time t="T">2025-11-26T04:15:32Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-11-26T04:15:32Z</when>
+  </f>
+  <f>
+    <_id t="I">19225</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T03:59:09Z</_time>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <branch t="S">renovate/crate-ci-typos-1.x</branch>
+    <details t="S">The pull request yegor256/takes#1508 has been opened by @renovate[bot].</details>
+    <event_id t="I">4942602228</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <issue t="I">1508</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-27T03:39:40Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19226</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T03:59:10Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <comments t="I">3</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1507 has been reviewed by @yegor256 with 2 HoC and 3 comments.</details>
+    <event_id t="I">4942347994</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1507</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2025-11-27T03:13:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19227</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T03:59:11Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <details t="S">The pull request yegor256/takes#1507 has been opened by @renovate[bot].</details>
+    <event_id t="I">4936808632</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <issue t="I">1507</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-26T19:35:26Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19229</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:00:55Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1507 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1507</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-27T03:13:08Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-27T03:38:47Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19231</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:04:13Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">up</branch>
+    <details t="S">The missing pull yegor256/takes#1502 has been opened by @github-actions[bot].</details>
+    <issue t="I">1502</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-23T12:40:56Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">19232</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:04:14Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">1436-fix</branch>
+    <details t="S">The missing pull yegor256/takes#1503 has been opened by @kartofanych.</details>
+    <issue t="I">1503</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-23T17:11:12Z</when>
+    <where t="S">github</where>
+    <who t="I">66062429</who>
+  </f>
+  <f>
+    <_id t="I">19233</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:04:16Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">#1357-update</branch>
+    <details t="S">The missing pull yegor256/takes#1504 has been opened by @kartofanych.</details>
+    <issue t="I">1504</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-24T10:01:05Z</when>
+    <where t="S">github</where>
+    <who t="I">66062429</who>
+  </f>
+  <f>
+    <_id t="I">19234</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:04:17Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1505 has been opened by @renovate[bot].</details>
+    <issue t="I">1505</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-25T06:12:31Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19235</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:04:18Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1506 has been opened by @renovate[bot].</details>
+    <issue t="I">1506</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-11-25T08:52:35Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19236</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:04:54Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <assignees_were_scanned t="I">0</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">4906220349</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <events_were_scanned t="I">5860334715</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">297</min_pull_was_found>
+    <min_pull_was_found t="I">299</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">0</types_were_scanned>
+    <types_were_scanned t="I">163</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19237</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:11:50Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1499 with 28 HoC created by @renovate[bot] was reviewed by @yegor256 after 111h41m and 0 comments.</details>
+    <hoc t="I">28</hoc>
+    <issue t="I">1499</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">402083</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-11-25T08:39:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19238</_id>
+    <_job t="I">19724724847</_job>
+    <_time t="T">2025-11-27T04:11:52Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1507 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 7h37m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1507</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">27462</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-11-27T03:13:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
   </f>
 </fb>
