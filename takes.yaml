@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.871480052
+  seconds: 816.703219265
   version: 0.57.2
   what: judges-summary
-  when: 2025-11-27 04:12:36.998649915 Z
+  when: 2025-11-28 04:12:49.467496954 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -56460,7 +56460,7 @@
   some_reviews_per_pull: 1
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2025-11-20 15:56:46.730909345 Z
+  when: &95 2025-11-20 15:56:46.730909345 Z
 - _id: 19137
   _job: 19544798865
   _time: 2025-11-20 17:09:40.615555436 Z
@@ -56474,7 +56474,7 @@
   total_releases_published: 0
   total_reviews_submitted: 1
   what: quantity-of-deliverables
-  when: 2025-11-20 16:57:25.954375772 Z
+  when: &94 2025-11-20 16:57:25.954375772 Z
 - _id: 19145
   _job: 19577574625
   _time: 2025-11-21 17:02:14.536166466 Z
@@ -57316,12 +57316,6 @@
     The average monthly turnover (44.0 developers) is increasing (R=0.61).
   what: assessment
   when: 2025-11-26 04:15:06.102184753 Z
-- _id: 19224
-  _job: 50719
-  _time: 2025-11-26 04:15:32.661600517 Z
-  _version: 0.16.8/0.57.1/0.16.2
-  what: learn-eva
-  when: 2025-11-26 04:15:32.621039976 Z
 - _id: 19225
   _job: 19724724847
   _time: 2025-11-27 03:59:09.550064377 Z
@@ -57387,6 +57381,7 @@
   issue: 1507
   repository: 28924109
   review: 2025-11-27 03:13:08.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-27 03:38:47.000000000 Z
@@ -57452,23 +57447,6 @@
   when: 2025-11-25 08:52:35.000000000 Z
   where: github
   who: 29139614
-- _id: 19236
-  _job: 19724724847
-  _time: 2025-11-27 04:04:54.083644731 Z
-  _version: 0.16.8/0.57.2/0.16.2
-  assignees_were_scanned: 0
-  earliest_issue_was_found: 1
-  events_were_scanned: 5860334715
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1060
-  min_pull_was_found: 299
-  repository: 28924109
-  types_were_scanned: 163
-  what: iterate
-  where: github
 - _id: 19237
   _job: 19724724847
   _time: 2025-11-27 04:11:50.806935278 Z
@@ -57503,3 +57481,328 @@
   when: 2025-11-27 03:13:08.000000000 Z
   where: github
   who: 526301
+- _id: 19239
+  _job: 50872
+  _time: 2025-11-27 04:13:31.148054704 Z
+  _version: 0.16.8/0.57.1/0.16.2
+  ac: 24
+  cost_of_qod: 6.054851130903724
+  ev: 351
+  pv: 32502
+  qod: 58
+  qod_per_day: 75.8184025974026
+  qod_per_sec: 9.610335895256406e-06
+  start: *3
+  what: earned-value
+  when: 2025-11-27 04:13:31.148295133 Z
+- _id: 19240
+  _job: 50872
+  _time: 2025-11-27 04:13:36.171707684 Z
+  _version: 0.16.8/0.57.1/0.16.2
+  what: learn-eva
+  when: 2025-11-27 04:13:36.134729321 Z
+- _id: 19242
+  _job: 19753658799
+  _time: 2025-11-28 03:59:29.776846294 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  since: *94
+  total_builds_ran: 439
+  total_commits_pushed: 9
+  total_hoc_committed: 49
+  total_issues_created: 7
+  total_pulls_submitted: 5
+  total_releases_published: 1
+  total_reviews_submitted: 4
+  what: quantity-of-deliverables
+  when: 2025-11-27 16:57:25.954375772 Z
+- _id: 19244
+  _job: 19753658799
+  _time: 2025-11-28 04:01:24.605311621 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1505 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1505
+  repository: 28924109
+  succeeded_builds: 15
+  what: pull-was-closed
+  when: 2025-11-25 06:39:09.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19245
+  _job: 19753658799
+  _time: 2025-11-28 04:01:32.983311356 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1506 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1506
+  repository: 28924109
+  review: 2025-11-25 16:52:16.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-25 17:08:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19246
+  _job: 19753658799
+  _time: 2025-11-28 04:01:48.793875585 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1508 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1508
+  repository: 28924109
+  review: 2025-11-27 08:48:54.000000000 Z
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-11-27 09:11:58.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19247
+  _job: 19753658799
+  _time: 2025-11-28 04:02:06.072447352 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  details: The issue yegor256/takes#1509 has been earlier opened by @revive-code-bot[bot].
+  issue: 1509
+  repository: 28924109
+  what: issue-was-opened
+  when: 2025-11-27 04:59:58.000000000 Z
+  where: github
+  who: 166734835
+- _id: 19249
+  _job: 19753658799
+  _time: 2025-11-28 04:02:40.617324471 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  total_active_contributors: 3
+  total_commits: 3573
+  total_contributors: 82
+  total_files: 534
+  total_forks: 211
+  total_issues: 742
+  total_pulls: 766
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 867
+  what: dimensions-of-terrain
+  when: 2025-11-28 04:02:40.629523051 Z
+- _id: 19250
+  _job: 19753658799
+  _time: 2025-11-28 04:04:51.849539077 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  assignees_were_scanned: 211
+  earliest_issue_was_found: 1
+  events_were_scanned: 5875282410
+  issues_were_scanned: 0
+  labels_were_scanned: 0
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1060
+  min_pull_was_found: 300
+  repository: 28924109
+  types_were_scanned: 277
+  what: iterate
+  where: github
+- _id: 19251
+  _job: 19753658799
+  _time: 2025-11-28 04:10:38.904825633 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1506 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h59m and 0 comments.
+  hoc: 2
+  issue: 1506
+  repository: 28924109
+  review_comments: 0
+  seconds: 28781
+  what: code-was-reviewed
+  when: 2025-11-25 16:52:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 19252
+  _job: 19753658799
+  _time: 2025-11-28 04:10:40.392239529 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1508 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 5h9m and 0 comments.
+  hoc: 2
+  issue: 1508
+  repository: 28924109
+  review_comments: 0
+  seconds: 18554
+  what: code-was-reviewed
+  when: 2025-11-27 08:48:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 19253
+  _job: 19753658799
+  _time: 2025-11-28 04:11:45.376058118 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  since: *95
+  some_build_duration:
+  - 8
+  - 8
+  - 9
+  - 11
+  - 11
+  - 12
+  - 13
+  - 23
+  - 32
+  - 33
+  - 907
+  - 39
+  - 8
+  - 9
+  - 9
+  - 11
+  - 14
+  - 16
+  - 16
+  - 29
+  - 32
+  - 34
+  - 352
+  - 7
+  - 8
+  - 8
+  - 9
+  - 11
+  - 11
+  - 15
+  - 29
+  - 31
+  - 34
+  - 61
+  - 7
+  - 8
+  - 10
+  - 12
+  - 13
+  - 13
+  - 19
+  - 34
+  - 34
+  - 35
+  - 265
+  - 253
+  - 906
+  - 41
+  - 7
+  - 8
+  - 8
+  - 11
+  - 11
+  - 12
+  - 13
+  - 23
+  - 32
+  - 37
+  - 63
+  - 259
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_merged_pulls: 8
+  some_pull_files_size:
+  - 1
+  - 1
+  - 1
+  - 14
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 2
+  - 28
+  - 2
+  - 2
+  some_unmerged_pulls: 2
+  what: quality-of-service
+  when: 2025-11-27 15:56:46.730909345 Z

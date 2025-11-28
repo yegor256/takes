@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1074898">
+<fb version="0.17.0" size="1078199">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.871480052</seconds>
+    <seconds t="F">816.703219265</seconds>
     <version t="S">0.57.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-27T04:12:36Z</when>
+    <when t="T">2025-11-28T04:12:49Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -64392,14 +64392,6 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <when t="T">2025-11-26T04:15:06Z</when>
   </f>
   <f>
-    <_id t="I">19224</_id>
-    <_job t="I">50719</_job>
-    <_time t="T">2025-11-26T04:15:32Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-11-26T04:15:32Z</when>
-  </f>
-  <f>
     <_id t="I">19225</_id>
     <_job t="I">19724724847</_job>
     <_time t="T">2025-11-27T03:59:09Z</_time>
@@ -64470,6 +64462,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <issue t="I">1507</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-27T03:13:08Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-27T03:38:47Z</when>
@@ -64547,25 +64540,6 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">19236</_id>
-    <_job t="I">19724724847</_job>
-    <_time t="T">2025-11-27T04:04:54Z</_time>
-    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5860334715</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">299</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">163</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">19237</_id>
     <_job t="I">19724724847</_job>
     <_time t="T">2025-11-27T04:11:50Z</_time>
@@ -64600,5 +64574,356 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <when t="T">2025-11-27T03:13:08Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19239</_id>
+    <_job t="I">50872</_job>
+    <_time t="T">2025-11-27T04:13:31Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">6.054851130903724</cost_of_qod>
+    <ev t="I">351</ev>
+    <pv t="I">32502</pv>
+    <qod t="I">58</qod>
+    <qod_per_day t="F">75.8184025974026</qod_per_day>
+    <qod_per_sec t="F">9.610335895256406e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2025-11-27T04:13:31Z</when>
+  </f>
+  <f>
+    <_id t="I">19240</_id>
+    <_job t="I">50872</_job>
+    <_time t="T">2025-11-27T04:13:36Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-11-27T04:13:36Z</when>
+  </f>
+  <f>
+    <_id t="I">19242</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T03:59:29Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <since t="T">2025-11-20T16:57:25Z</since>
+    <total_builds_ran t="I">439</total_builds_ran>
+    <total_commits_pushed t="I">9</total_commits_pushed>
+    <total_hoc_committed t="I">49</total_hoc_committed>
+    <total_issues_created t="I">7</total_issues_created>
+    <total_pulls_submitted t="I">5</total_pulls_submitted>
+    <total_releases_published t="I">1</total_releases_published>
+    <total_reviews_submitted t="I">4</total_reviews_submitted>
+    <what t="S">quantity-of-deliverables</what>
+    <when t="T">2025-11-27T16:57:25Z</when>
+  </f>
+  <f>
+    <_id t="I">19244</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:01:24Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1505 has been "pull-was-closed".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1505</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2025-11-25T06:39:09Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19245</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:01:32Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1506 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1506</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-25T16:52:16Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-25T17:08:38Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19246</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:01:48Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <branch t="S">renovate/crate-ci-typos-1.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1508 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1508</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-27T08:48:54Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-27T09:11:58Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19247</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:02:06Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <details t="S">The issue yegor256/takes#1509 has been earlier opened by @revive-code-bot[bot].</details>
+    <issue t="I">1509</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2025-11-27T04:59:58Z</when>
+    <where t="S">github</where>
+    <who t="I">166734835</who>
+  </f>
+  <f>
+    <_id t="I">19249</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:02:40Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <total_active_contributors t="I">3</total_active_contributors>
+    <total_commits t="I">3573</total_commits>
+    <total_contributors t="I">82</total_contributors>
+    <total_files t="I">534</total_files>
+    <total_forks t="I">211</total_forks>
+    <total_issues t="I">742</total_issues>
+    <total_pulls t="I">766</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">867</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2025-11-28T04:02:40Z</when>
+  </f>
+  <f>
+    <_id t="I">19250</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:04:51Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <assignees_were_scanned t="I">211</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">5875282410</events_were_scanned>
+    <issues_were_scanned t="I">0</issues_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1060</min_issue_was_found>
+    <min_pull_was_found t="I">300</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">277</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19251</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:10:38Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1506 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 7h59m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1506</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">28781</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-11-25T16:52:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19252</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:10:40Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1508 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 5h9m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1508</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">18554</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-11-27T08:48:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19253</_id>
+    <_job t="I">19753658799</_job>
+    <_time t="T">2025-11-28T04:11:45Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <since t="T">2025-11-20T15:56:46Z</since>
+    <some_build_duration>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">13</v>
+      <v t="I">23</v>
+      <v t="I">32</v>
+      <v t="I">33</v>
+      <v t="I">907</v>
+      <v t="I">39</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">14</v>
+      <v t="I">16</v>
+      <v t="I">16</v>
+      <v t="I">29</v>
+      <v t="I">32</v>
+      <v t="I">34</v>
+      <v t="I">352</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">15</v>
+      <v t="I">29</v>
+      <v t="I">31</v>
+      <v t="I">34</v>
+      <v t="I">61</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">12</v>
+      <v t="I">13</v>
+      <v t="I">13</v>
+      <v t="I">19</v>
+      <v t="I">34</v>
+      <v t="I">34</v>
+      <v t="I">35</v>
+      <v t="I">265</v>
+      <v t="I">253</v>
+      <v t="I">906</v>
+      <v t="I">41</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">13</v>
+      <v t="I">23</v>
+      <v t="I">32</v>
+      <v t="I">37</v>
+      <v t="I">63</v>
+      <v t="I">259</v>
+    </some_build_duration>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_build_success_rate>
+    <some_merged_pulls t="I">8</some_merged_pulls>
+    <some_pull_files_size>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">14</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_pull_files_size>
+    <some_pull_hoc_size>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">28</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+    </some_pull_hoc_size>
+    <some_unmerged_pulls t="I">2</some_unmerged_pulls>
+    <what t="S">quality-of-service</what>
+    <when t="T">2025-11-27T15:56:46Z</when>
   </f>
 </fb>
