@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1078199">
+<fb version="0.17.0" size="1078523">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">816.703219265</seconds>
+    <seconds t="F">682.726918834</seconds>
     <version t="S">0.57.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-11-28T04:12:49Z</when>
+    <when t="T">2025-11-29T04:09:52Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -64302,19 +64302,6 @@
     <when t="T">2025-11-24T09:02:53Z</when>
   </f>
   <f>
-    <_id t="I">19210</_id>
-    <_job t="I">50451</_job>
-    <_time t="T">2025-11-24T09:11:53Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.1</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (451.7) is decreasing (R=-0.35).
-The average number of commits per week (7.2) is decreasing (R=-0.46).
-The average number of releases per month (0.0) is staying still.
-The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-11-24T09:11:53Z</when>
-  </f>
-  <f>
     <_id t="I">19217</_id>
     <_job t="I">19692040000</_job>
     <_time t="T">2025-11-26T04:01:05Z</_time>
@@ -64325,6 +64312,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <details t="S">A new Git push #28515742062 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
     <event_id t="I">6221767400</event_id>
     <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
     <push_id t="I">28515742062</push_id>
     <ref t="S">refs/heads/master</ref>
     <repository t="I">28924109</repository>
@@ -64350,6 +64338,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">14</files>
     <hoc t="I">28</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1499</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-25T08:39:05Z</review>
@@ -64400,6 +64389,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <details t="S">The pull request yegor256/takes#1508 has been opened by @renovate[bot].</details>
     <event_id t="I">4942602228</event_id>
     <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
     <issue t="I">1508</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64419,6 +64409,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <event_type t="S">PullRequestReviewEvent</event_type>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1507</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -64436,6 +64427,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <details t="S">The pull request yegor256/takes#1507 has been opened by @renovate[bot].</details>
     <event_id t="I">4936808632</event_id>
     <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
     <issue t="I">1507</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64459,6 +64451,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1507</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-27T03:13:08Z</review>
@@ -64476,6 +64469,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <branch t="S">up</branch>
     <details t="S">The missing pull yegor256/takes#1502 has been opened by @github-actions[bot].</details>
+    <is_human t="I">0</is_human>
     <issue t="I">1502</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64490,6 +64484,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <branch t="S">1436-fix</branch>
     <details t="S">The missing pull yegor256/takes#1503 has been opened by @kartofanych.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1503</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64504,6 +64499,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <branch t="S">#1357-update</branch>
     <details t="S">The missing pull yegor256/takes#1504 has been opened by @kartofanych.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1504</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64518,6 +64514,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
     <details t="S">The missing pull yegor256/takes#1505 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
     <issue t="I">1505</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64532,6 +64529,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
     <details t="S">The missing pull yegor256/takes#1506 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
     <issue t="I">1506</issue>
     <repository t="I">28924109</repository>
     <what t="S">pull-was-opened</what>
@@ -64548,6 +64546,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1499 with 28 HoC created by @renovate[bot] was reviewed by @yegor256 after 111h41m and 0 comments.</details>
     <hoc t="I">28</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1499</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -64566,6 +64565,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1507 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 7h37m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1507</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -64590,14 +64590,6 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <start t="T">2025-09-17T09:00:17Z</start>
     <what t="S">earned-value</what>
     <when t="T">2025-11-27T04:13:31Z</when>
-  </f>
-  <f>
-    <_id t="I">19240</_id>
-    <_job t="I">50872</_job>
-    <_time t="T">2025-11-27T04:13:36Z</_time>
-    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-11-27T04:13:36Z</when>
   </f>
   <f>
     <_id t="I">19242</_id>
@@ -64631,6 +64623,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1505</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">15</succeeded_builds>
@@ -64655,9 +64648,11 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1506</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-25T16:52:16Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-25T17:08:38Z</when>
@@ -64680,9 +64675,11 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1508</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-27T08:48:54Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-11-27T09:11:58Z</when>
@@ -64695,6 +64692,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_time t="T">2025-11-28T04:02:06Z</_time>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <details t="S">The issue yegor256/takes#1509 has been earlier opened by @revive-code-bot[bot].</details>
+    <is_human t="I">0</is_human>
     <issue t="I">1509</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-opened</what>
@@ -64721,25 +64719,6 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <when t="T">2025-11-28T04:02:40Z</when>
   </f>
   <f>
-    <_id t="I">19250</_id>
-    <_job t="I">19753658799</_job>
-    <_time t="T">2025-11-28T04:04:51Z</_time>
-    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
-    <assignees_were_scanned t="I">211</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">5875282410</events_were_scanned>
-    <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1060</min_issue_was_found>
-    <min_pull_was_found t="I">300</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">277</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">19251</_id>
     <_job t="I">19753658799</_job>
     <_time t="T">2025-11-28T04:10:38Z</_time>
@@ -64748,6 +64727,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1506 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 7h59m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1506</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -64766,6 +64746,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1508 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 5h9m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1508</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -64781,6 +64762,15 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
     <_time t="T">2025-11-28T04:11:45Z</_time>
     <_version t="S">0.16.8/0.57.2/0.16.2</_version>
     <since t="T">2025-11-20T15:56:46Z</since>
+    <some_backlog_size>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">90</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">90</v>
+    </some_backlog_size>
     <some_build_duration>
       <v t="I">8</v>
       <v t="I">8</v>
@@ -64905,6 +64895,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
       <v t="I">1</v>
       <v t="I">1</v>
     </some_build_success_rate>
+    <some_issue_lifetime t="F">1073.0</some_issue_lifetime>
     <some_merged_pulls t="I">8</some_merged_pulls>
     <some_pull_files_size>
       <v t="I">1</v>
@@ -64922,8 +64913,90 @@ The average monthly turnover (44.0 developers) is increasing (R=0.61).</text>
       <v t="I">2</v>
       <v t="I">2</v>
     </some_pull_hoc_size>
+    <some_pull_lifetime>
+      <v t="F">19938.0</v>
+      <v t="F">29001.0</v>
+      <v t="F">29763.0</v>
+      <v t="F">1598.0</v>
+      <v t="F">402867.0</v>
+      <v t="F">278885.0</v>
+      <v t="F">1966159.0</v>
+      <v t="F">1977017.0</v>
+    </some_pull_lifetime>
+    <some_review_size>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_review_size>
+    <some_review_time>
+      <v t="I">1384</v>
+      <v t="I">1538</v>
+      <v t="I">982</v>
+      <v t="I">783</v>
+      <v t="I">1932987</v>
+      <v t="I">1932990</v>
+    </some_review_time>
+    <some_reviewers_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_reviewers_per_pull>
+    <some_reviews_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_reviews_per_pull>
     <some_unmerged_pulls t="I">2</some_unmerged_pulls>
     <what t="S">quality-of-service</what>
     <when t="T">2025-11-27T15:56:46Z</when>
+  </f>
+  <f>
+    <_id t="I">19254</_id>
+    <_job t="I">51011</_job>
+    <_time t="T">2025-11-28T04:13:11Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (450.4) is decreasing (R=-0.31).
+The average number of commits per week (7.4) is decreasing (R=-0.36).
+The average number of releases per month (0.4) is increasing (R=0.52).
+The average monthly turnover (44.0 developers) is increasing (R=0.60).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-11-28T04:13:11Z</when>
+  </f>
+  <f>
+    <_id t="I">19255</_id>
+    <_job t="I">51011</_job>
+    <_time t="T">2025-11-28T04:13:35Z</_time>
+    <_version t="S">0.16.8/0.57.1/0.16.2</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-11-28T04:13:35Z</when>
+  </f>
+  <f>
+    <_id t="I">19256</_id>
+    <_job t="I">19778634792</_job>
+    <_time t="T">2025-11-29T04:02:42Z</_time>
+    <_version t="S">0.16.8/0.57.2/0.16.2</_version>
+    <assignees_were_scanned t="I">341</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">5876451982</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1060</min_issue_was_found>
+    <min_pull_was_found t="I">301</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">387</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>

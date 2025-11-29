@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 816.703219265
+  seconds: 682.726918834
   version: 0.57.2
   what: judges-summary
-  when: 2025-11-28 04:12:49.467496954 Z
+  when: 2025-11-29 04:09:52.316301299 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57233,18 +57233,6 @@
   total_stars: 866
   what: dimensions-of-terrain
   when: 2025-11-24 09:02:53.601399212 Z
-- _id: 19210
-  _job: 50451
-  _time: 2025-11-24 09:11:53.499205147 Z
-  _version: 0.16.8/0.57.1/0.16.1
-  analyzers: 18
-  text: |-
-    The average number of builds per week (451.7) is decreasing (R=-0.35).
-    The average number of commits per week (7.2) is decreasing (R=-0.46).
-    The average number of releases per month (0.0) is staying still.
-    The average monthly turnover (44.0 developers) is increasing (R=0.61).
-  what: assessment
-  when: 2025-11-24 09:11:53.507421473 Z
 - _id: 19217
   _job: 19692040000
   _time: 2025-11-26 04:01:05.452327139 Z
@@ -57256,6 +57244,7 @@
     (default branch is "master"), not associated with any pull request.'
   event_id: 6221767400
   event_type: PushEvent
+  is_human: 1
   push_id: 28515742062
   ref: refs/heads/master
   repository: 28924109
@@ -57279,6 +57268,7 @@
   failed_builds: 0
   files: 14
   hoc: 28
+  is_human: 0
   issue: 1499
   repository: 28924109
   review: 2025-11-25 08:39:05.000000000 Z
@@ -57324,6 +57314,7 @@
   details: The pull request yegor256/takes#1508 has been opened by @renovate[bot].
   event_id: 4942602228
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1508
   repository: 28924109
   what: pull-was-opened
@@ -57342,6 +57333,7 @@
   event_type: PullRequestReviewEvent
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1507
   repository: 28924109
   review_comments: 0
@@ -57357,6 +57349,7 @@
   details: The pull request yegor256/takes#1507 has been opened by @renovate[bot].
   event_id: 4936808632
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1507
   repository: 28924109
   what: pull-was-opened
@@ -57378,6 +57371,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1507
   repository: 28924109
   review: 2025-11-27 03:13:08.000000000 Z
@@ -57393,6 +57387,7 @@
   _version: 0.16.8/0.57.2/0.16.2
   branch: up
   details: The missing pull yegor256/takes#1502 has been opened by @github-actions[bot].
+  is_human: 0
   issue: 1502
   repository: 28924109
   what: pull-was-opened
@@ -57405,6 +57400,7 @@
   _version: 0.16.8/0.57.2/0.16.2
   branch: 1436-fix
   details: The missing pull yegor256/takes#1503 has been opened by @kartofanych.
+  is_human: 1
   issue: 1503
   repository: 28924109
   what: pull-was-opened
@@ -57417,6 +57413,7 @@
   _version: 0.16.8/0.57.2/0.16.2
   branch: "#1357-update"
   details: The missing pull yegor256/takes#1504 has been opened by @kartofanych.
+  is_human: 1
   issue: 1504
   repository: 28924109
   what: pull-was-opened
@@ -57429,6 +57426,7 @@
   _version: 0.16.8/0.57.2/0.16.2
   branch: renovate/zerocracy-judges-action-0.x
   details: The missing pull yegor256/takes#1505 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1505
   repository: 28924109
   what: pull-was-opened
@@ -57441,6 +57439,7 @@
   _version: 0.16.8/0.57.2/0.16.2
   branch: renovate/zerocracy-pages-action-0.x
   details: The missing pull yegor256/takes#1506 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1506
   repository: 28924109
   what: pull-was-opened
@@ -57456,6 +57455,7 @@
   details: The pull request yegor256/takes#1499 with 28 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 111h41m and 0 comments.
   hoc: 28
+  is_human: 1
   issue: 1499
   repository: 28924109
   review_comments: 0
@@ -57473,6 +57473,7 @@
   details: The pull request yegor256/takes#1507 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 7h37m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1507
   repository: 28924109
   review_comments: 0
@@ -57495,12 +57496,6 @@
   start: *3
   what: earned-value
   when: 2025-11-27 04:13:31.148295133 Z
-- _id: 19240
-  _job: 50872
-  _time: 2025-11-27 04:13:36.171707684 Z
-  _version: 0.16.8/0.57.1/0.16.2
-  what: learn-eva
-  when: 2025-11-27 04:13:36.134729321 Z
 - _id: 19242
   _job: 19753658799
   _time: 2025-11-28 03:59:29.776846294 Z
@@ -57530,6 +57525,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1505
   repository: 28924109
   succeeded_builds: 15
@@ -57552,9 +57548,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1506
   repository: 28924109
   review: 2025-11-25 16:52:16.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-25 17:08:38.000000000 Z
@@ -57575,9 +57573,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1508
   repository: 28924109
   review: 2025-11-27 08:48:54.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   what: pull-was-merged
   when: 2025-11-27 09:11:58.000000000 Z
@@ -57588,6 +57588,7 @@
   _time: 2025-11-28 04:02:06.072447352 Z
   _version: 0.16.8/0.57.2/0.16.2
   details: The issue yegor256/takes#1509 has been earlier opened by @revive-code-bot[bot].
+  is_human: 0
   issue: 1509
   repository: 28924109
   what: issue-was-opened
@@ -57610,23 +57611,6 @@
   total_stars: 867
   what: dimensions-of-terrain
   when: 2025-11-28 04:02:40.629523051 Z
-- _id: 19250
-  _job: 19753658799
-  _time: 2025-11-28 04:04:51.849539077 Z
-  _version: 0.16.8/0.57.2/0.16.2
-  assignees_were_scanned: 211
-  earliest_issue_was_found: 1
-  events_were_scanned: 5875282410
-  issues_were_scanned: 0
-  labels_were_scanned: 0
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1060
-  min_pull_was_found: 300
-  repository: 28924109
-  types_were_scanned: 277
-  what: iterate
-  where: github
 - _id: 19251
   _job: 19753658799
   _time: 2025-11-28 04:10:38.904825633 Z
@@ -57636,6 +57620,7 @@
   details: The pull request yegor256/takes#1506 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 7h59m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1506
   repository: 28924109
   review_comments: 0
@@ -57653,6 +57638,7 @@
   details: The pull request yegor256/takes#1508 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 5h9m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1508
   repository: 28924109
   review_comments: 0
@@ -57666,6 +57652,14 @@
   _time: 2025-11-28 04:11:45.376058118 Z
   _version: 0.16.8/0.57.2/0.16.2
   since: *95
+  some_backlog_size:
+  - 89
+  - 89
+  - 90
+  - 89
+  - 89
+  - 89
+  - 90
   some_build_duration:
   - 8
   - 8
@@ -57788,6 +57782,7 @@
   - 1
   - 1
   - 1
+  some_issue_lifetime: 1073.0
   some_merged_pulls: 8
   some_pull_files_size:
   - 1
@@ -57803,6 +57798,78 @@
   - 28
   - 2
   - 2
+  some_pull_lifetime:
+  - 19938.0
+  - 29001.0
+  - 29763.0
+  - 1598.0
+  - 402867.0
+  - 278885.0
+  - 1966159.0
+  - 1977017.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 1384
+  - 1538
+  - 982
+  - 783
+  - 1932987
+  - 1932990
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   some_unmerged_pulls: 2
   what: quality-of-service
   when: 2025-11-27 15:56:46.730909345 Z
+- _id: 19254
+  _job: 51011
+  _time: 2025-11-28 04:13:11.947095514 Z
+  _version: 0.16.8/0.57.1/0.16.2
+  analyzers: 18
+  text: |-
+    The average number of builds per week (450.4) is decreasing (R=-0.31).
+    The average number of commits per week (7.4) is decreasing (R=-0.36).
+    The average number of releases per month (0.4) is increasing (R=0.52).
+    The average monthly turnover (44.0 developers) is increasing (R=0.60).
+  what: assessment
+  when: 2025-11-28 04:13:11.955344087 Z
+- _id: 19255
+  _job: 51011
+  _time: 2025-11-28 04:13:35.276825807 Z
+  _version: 0.16.8/0.57.1/0.16.2
+  what: learn-eva
+  when: 2025-11-28 04:13:35.199683282 Z
+- _id: 19256
+  _job: 19778634792
+  _time: 2025-11-29 04:02:42.431333485 Z
+  _version: 0.16.8/0.57.2/0.16.2
+  assignees_were_scanned: 341
+  earliest_issue_was_found: 1
+  events_were_scanned: 5876451982
+  issues_were_scanned: 1292
+  labels_were_scanned: 376
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1060
+  min_pull_was_found: 301
+  repository: 28924109
+  types_were_scanned: 387
+  what: iterate
+  where: github
