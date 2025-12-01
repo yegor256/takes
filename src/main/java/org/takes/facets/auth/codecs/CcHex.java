@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
@@ -29,7 +10,24 @@ import lombok.EqualsAndHashCode;
 import org.takes.facets.auth.Identity;
 
 /**
- * Hex codec.
+ * Hexadecimal codec that encodes identity data as hexadecimal strings
+ * with optional hyphen separators for improved readability.
+ *
+ * <p>This codec decorator converts binary data to hexadecimal representation
+ * using uppercase letters (A-F) for digits 10-15. It automatically inserts
+ * hyphens every 4 bytes (8 hex characters) to improve readability of long
+ * hex strings, similar to UUID formatting.
+ *
+ * <p>The format produces strings like: {@code 48656C6C-6F20576F-726C6421}
+ * where hyphens separate every 4 bytes of the original data.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcHex(new CcPlain());
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // hex-encoded with hyphens
+ * final Identity decoded = codec.decode(encoded); // hyphen-aware decoding
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -94,6 +92,7 @@ public final class CcHex implements Codec {
     }
 
     @Override
+    @SuppressWarnings("PMD.AvoidAccessToStaticMembersViaThis")
     public Identity decode(final byte[] bytes) throws IOException {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         int idx = 0;

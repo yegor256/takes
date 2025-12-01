@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -34,6 +15,12 @@ import org.takes.Take;
 
 /**
  * Front remote control.
+ *
+ * <p>This front allows remote control of an HTTP server, primarily used
+ * for testing purposes. It can start a server on a random or specified port,
+ * execute a script against the running server, and then shut it down.
+ * This is particularly useful for integration testing where you need to
+ * start a real HTTP server, run tests against it, and clean up afterward.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -69,21 +56,21 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param that Back
      * @throws IOException If fails
      */
-    public FtRemote(final Back bck) throws IOException {
-        this(bck, FtRemote.random());
+    public FtRemote(final Back that) throws IOException {
+        this(that, FtRemote.random());
     }
 
     /**
      * Ctor.
-     * @param bck Back
+     * @param that Back
      * @param skt Server socket to use
      * @since 0.22
      */
-    public FtRemote(final Back bck, final ServerSocket skt) {
-        this(new FtBasic(bck, skt), skt, false);
+    public FtRemote(final Back that, final ServerSocket skt) {
+        this(new FtBasic(that, skt), skt, false);
     }
 
     /**
@@ -182,14 +169,37 @@ public final class FtRemote implements Front {
     }
 
     /**
-     * Script to execute.
+     * Script to execute against a running server.
+     *
+     * <p>This interface represents a test script or client code that will
+     * be executed against a running HTTP server. The {@link FtRemote#exec(Script)}
+     * method starts the server, runs the script with the server's URI, and
+     * then shuts down the server automatically.
+     *
+     * <p>This is particularly useful for integration testing where you need
+     * to test HTTP endpoints with real network communication. The script
+     * can make HTTP requests, verify responses, and perform any other
+     * operations against the live server.
+     *
      * @since 0.1
      */
     public interface Script {
         /**
-         * Execute it against this URI.
-         * @param home URI of the running front
-         * @throws Exception If fails
+         * Execute the script against the running server.
+         *
+         * <p>This method is called by {@link FtRemote} after the server
+         * has started and is ready to accept connections. The provided URI
+         * contains the complete base URL (including protocol, host, and port)
+         * where the server can be reached.
+         *
+         * <p>Example usage:
+         * <pre>
+         * script.exec(URI.create("http://localhost:8080"));
+         * // Make HTTP requests to http://localhost:8080/...
+         * </pre>
+         *
+         * @param home Base URI of the running server (e.g., http://localhost:8080)
+         * @throws Exception If the script execution fails
          */
         void exec(URI home) throws Exception;
     }

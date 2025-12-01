@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.cookies;
 
@@ -34,12 +15,12 @@ import org.takes.rs.RsWithoutHeader;
 import org.takes.tk.TkWrap;
 
 /**
- * Set-Cookie headers will be joined.
+ * A take decorator that joins multiple Set-Cookie headers into a single header.
  *
- * <p>This may be useful for some browsers. When you drop a few cookies,
- * the RFC-6265 requires them to be joined in one Set-Cookie header. However,
- * most browsers don't support that. They want to see separate
- * headers. This class may be useful, but in some very specific cases.</p>
+ * <p>This decorator combines multiple Set-Cookie headers into one comma-separated
+ * header as specified in RFC 6265. However, this approach may not be compatible
+ * with all browsers, as most expect separate Set-Cookie headers for each cookie.
+ * This class should be used only in specific cases where joined cookies are required.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -57,8 +38,8 @@ public final class TkJoinedCookies extends TkWrap {
     );
 
     /**
-     * Ctor.
-     * @param take The take to wrap
+     * Constructor that wraps a take to join Set-Cookie headers.
+     * @param take The take to wrap with cookie joining functionality
      * @checkstyle AnonInnerLengthCheck (100 lines)
      */
     public TkJoinedCookies(final Take take) {
@@ -68,10 +49,10 @@ public final class TkJoinedCookies extends TkWrap {
     }
 
     /**
-     * Join them.
-     * @param response The response
-     * @return New response
-     * @throws Exception If fails
+     * Joins multiple Set-Cookie headers into a single comma-separated header.
+     * @param response The response containing Set-Cookie headers
+     * @return A new response with joined Set-Cookie headers
+     * @throws Exception If response processing fails
      */
     private static Response join(final Response response) throws Exception {
         final StringBuilder cookies = new StringBuilder();

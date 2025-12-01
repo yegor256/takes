@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
@@ -29,6 +10,7 @@ import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Take;
@@ -129,6 +111,7 @@ final class PsGoogleTest {
     private static final String APP = "app";
 
     @Test
+    @Tag("deep")
     void logsIn() throws Exception {
         final String octocat = "octocat";
         final String urn = "urn:google:1";
@@ -139,12 +122,14 @@ final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
                             PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
                         new RqHref.Base(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
@@ -180,14 +165,17 @@ final class PsGoogleTest {
                     new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
                 ).get();
                 MatcherAssert.assertThat(
+                    "Google identity URN must match expected format",
                     identity.urn(),
                     Matchers.equalTo(urn)
                 );
                 MatcherAssert.assertThat(
+                    "Google identity properties must contain correct display name",
                     identity.properties().get(PsGoogleTest.NAME),
                     Matchers.equalTo(octocat)
                 );
                 MatcherAssert.assertThat(
+                    "Google identity properties must contain correct avatar picture URL",
                     identity.properties().get(PsGoogleTest.PICTURE),
                     Matchers.equalTo(PsGoogleTest.AVATAR)
                 );
@@ -196,6 +184,7 @@ final class PsGoogleTest {
     }
 
     @Test
+    @Tag("deep")
     void badGoogleResponse() {
         final Take take = new TkFork(
             this.requestToken(),
@@ -204,12 +193,14 @@ final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
                             PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
                         new RqHref.Base(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
@@ -237,6 +228,7 @@ final class PsGoogleTest {
     }
 
     @Test
+    @Tag("deep")
     void noDisplayNameResponse() throws Exception {
         final String urn = "urn:google:2";
         final Take take = new TkFork(
@@ -246,12 +238,14 @@ final class PsGoogleTest {
                 // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
                             PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
                         new RqHref.Base(req).href()
                             .param(PsGoogleTest.ACCESS_TOKEN)
                             .iterator().next(),
@@ -286,14 +280,17 @@ final class PsGoogleTest {
                     new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
                 ).get();
                 MatcherAssert.assertThat(
+                    "Google identity URN must match expected format",
                     identity.urn(),
                     Matchers.equalTo(urn)
                 );
                 MatcherAssert.assertThat(
+                    "Google identity name property must match expected value",
                     identity.properties().get(PsGoogleTest.NAME),
                     Matchers.equalTo("unknown")
                 );
                 MatcherAssert.assertThat(
+                    "Google identity properties must contain correct avatar picture URL",
                     identity.properties().get(PsGoogleTest.PICTURE),
                     Matchers.equalTo(PsGoogleTest.AVATAR)
                 );
@@ -311,6 +308,7 @@ final class PsGoogleTest {
             // @checkstyle AnonInnerLengthCheck (1 line)
             (Take) req -> {
                 MatcherAssert.assertThat(
+                    "Google OAuth token request must be POST to correct endpoint",
                     new RqPrint(req).printHead(),
                     Matchers.containsString("POST /o/oauth2/token")
                 );
@@ -366,6 +364,7 @@ final class PsGoogleTest {
         final CharSequence param, final String value
     ) throws IOException {
         MatcherAssert.assertThat(
+            "Google OAuth request parameter must match expected value",
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );

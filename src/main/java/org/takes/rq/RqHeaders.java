@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -44,10 +25,14 @@ import org.takes.Request;
 import org.takes.misc.VerboseList;
 
 /**
- * HTTP headers parsing.
+ * Interface for HTTP header parsing and access.
  *
- * <p>All implementations of this interface must be immutable and
- * thread-safe.</p>
+ * <p>This interface provides methods to parse and retrieve HTTP headers
+ * from requests. It supports case-insensitive header name lookup and
+ * handles multiple values for the same header name. The interface includes
+ * both basic parsing functionality and enhanced smart decorator capabilities.
+ *
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -226,7 +211,7 @@ public interface RqHeaders extends Request {
         }
 
         /**
-         * Get single header or throw HTTP exception.
+         * Get single header or throw an HTTP exception.
          * @param name Name of header
          * @return Value of it
          * @throws IOException If fails

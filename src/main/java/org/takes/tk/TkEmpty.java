@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -30,9 +11,37 @@ import org.takes.Take;
 import org.takes.rs.RsEmpty;
 
 /**
- * Empty take.
+ * Take that returns an empty HTTP response with no body content.
  *
- * <p>This "take" always returns an instance of {@link RsEmpty}.
+ * <p>This {@link Take} implementation always returns an empty HTTP response
+ * with status 200 OK and no body content. It is useful for endpoints that
+ * need to respond successfully but do not need to return any data, such as
+ * health checks, pings, or acknowledgment endpoints.
+ *
+ * <p>The response includes standard HTTP headers but no body content.
+ * This is equivalent to returning HTTP 200 OK with Content-Length: 0.
+ *
+ * <p>Example usage:
+ * <pre>{@code
+ * // Health check endpoint
+ * new TkFork(
+ *     new FkRegex("/health", new TkEmpty())
+ * );
+ *
+ * // Ping endpoint
+ * new TkFork(
+ *     new FkRegex("/ping", new TkEmpty())
+ * );
+ * }</pre>
+ *
+ * <p>Common use cases:
+ * <ul>
+ *   <li>Health check endpoints that just need to return 200 OK</li>
+ *   <li>Ping endpoints for service availability testing</li>
+ *   <li>Acknowledgment responses after processing POST requests</li>
+ *   <li>Placeholder responses during development</li>
+ *   <li>Default handlers for unimplemented endpoints</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
  *

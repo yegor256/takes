@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -47,23 +28,25 @@ import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
 /**
- * Response that converts XML into HTML using attached XSL stylesheet.
+ * Response decorator that transforms XML to HTML using XSL stylesheets.
  *
- * <p>The encapsulated response must produce an XML document with
- * an attached XSL stylesheet, for example:
+ * <p>This decorator processes XML responses that contain XSL stylesheet
+ * processing instructions and transforms them into HTML or other formats.
+ * The stylesheet location is resolved using a configurable URIResolver,
+ * with classpath resolution as the default. Transformer factories are
+ * cached for performance.
  *
+ * <p>Expected XML format:
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page/&gt;
  * </pre>
  *
- * <p>{@link org.takes.rs.RsXslt} will try to find that {@code /xsl/home.xsl}
- * resource in classpath. If it's not found a runtime exception will thrown.
+ * <p>The stylesheet {@code /xsl/home.xsl} will be resolved on the classpath.
+ * If not found, a runtime exception is thrown.
  *
- * <p>The best way to use this decorator is in combination with
- * {@link org.takes.rs.xe.RsXembly}, for example:
- *
- * <pre> new RsXSLT(
+ * <p>Example usage with RsXembly:
+ * <pre>new RsXslt(
  *   new RsXembly(
  *     new XeStylesheet("/xsl/home.xsl"),
  *     new XeAppend(
@@ -75,14 +58,13 @@ import org.takes.Response;
  *   )
  * )</pre>
  *
- * <p><strong>Note:</strong> It is highly recommended to use
- * Saxon as a default XSL transformer. All others, including Apache
- * Xalan, won't work correctly in most cases.</p>
+ * <p><strong>Note:</strong> Saxon is recommended as the XSL transformer
+ * for best compatibility and performance.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
  * @see org.takes.rs.xe.RsXembly
+ * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -140,7 +122,8 @@ public final class RsXslt extends RsWrap {
                             true
                         );
                         return 0;
-                    }).value();
+                    }
+                ).value();
                 return fct;
             }
         );
@@ -212,16 +195,14 @@ public final class RsXslt extends RsWrap {
     private static byte[] consume(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] buf = new byte[4096];
-        try {
+        try (InputStream stream = input) {
             while (true) {
-                final int bytes = input.read(buf);
+                final int bytes = stream.read(buf);
                 if (bytes < 0) {
                     break;
                 }
                 baos.write(buf, 0, bytes);
             }
-        } finally {
-            input.close();
         }
         return baos.toByteArray();
     }

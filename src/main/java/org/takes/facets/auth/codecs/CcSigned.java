@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2024 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2025 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
@@ -32,7 +13,28 @@ import javax.crypto.Mac;
 import org.takes.facets.auth.Identity;
 
 /**
- * MAC codec which sign identity with provided algorithm and key.
+ * MAC (Message Authentication Code) codec that signs identity data with
+ * a provided algorithm and secret key to ensure integrity and authenticity.
+ *
+ * <p>This codec decorator adds cryptographic signatures to identity data
+ * using HMAC or other MAC algorithms. During encoding, it appends a MAC
+ * signature to the encoded data. During decoding, it verifies the signature
+ * before returning the decoded identity, throwing an IOException if the
+ * signature is invalid.
+ *
+ * <p>The resulting format is: [encoded_data][mac_signature] where the
+ * MAC signature length depends on the algorithm used (e.g., 32 bytes for
+ * HMAC-SHA256).
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Key key = new SecretKeySpec("secret".getBytes(), "HmacSHA256");
+ * final Codec codec = new CcSigned(new CcPlain(), "HmacSHA256", key);
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity); // signed data
+ * final Identity decoded = codec.decode(encoded); // verified
+ * }</pre>
+ *
  * @since 1.11.1
  */
 public final class CcSigned implements Codec {
