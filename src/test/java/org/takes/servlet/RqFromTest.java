@@ -25,16 +25,20 @@
 package org.takes.servlet;
 
 import java.io.IOException;
-import java.util.Locale;
+import java.net.InetAddress;
 import org.cactoos.list.ListOf;
-import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.StringContains;
-import org.hamcrest.core.StringStartsWith;
-import org.junit.jupiter.api.Disabled;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.takes.Request;
+import org.takes.facets.hamcrest.HmHeader;
+import org.takes.facets.hamcrest.HmRqTextBody;
 import org.takes.rq.RqFake;
-import org.takes.rq.RqPrint;
+import org.takes.rq.RqMethod;
+import org.takes.rq.RqRequestLine;
+import org.takes.rq.RqWithBody;
+import org.takes.rq.RqWithHeader;
+import org.takes.rq.RqWithoutHeader;
 
 /**
  * Test case for {@link  RqFrom}.
@@ -44,153 +48,140 @@ import org.takes.rq.RqPrint;
 final class RqFromTest {
 
     /**
-     * Takes default local address.
+     * Host header name.
      */
-    private static final String LOCAL_ADDRESS =
-        "X-Takes-LocalAddress: 127.0.0.1";
+    private static final String HOST = "Host";
 
     /**
-     * Takes default remote address.
+     * Default localhost IP address.
      */
-    private static final String REMOTE_ADDRESS =
-        "X-Takes-RemoteAddress: 127.0.0.1";
-
-    /**
-     * End Of Line for HTTP protocol.
-     */
-    private static final String EOL = "\r\n";
-
-    /**
-     * Default GET method.
-     */
-    private static final String GET_METHOD = "GET /";
+    private static final String LOCALHOST =
+        InetAddress.getLoopbackAddress().getHostAddress();
 
     @Test
-    void defaultMethodForAFakeResquestIsGet() throws IOException {
+    void defaultMethodForAFakeRequestIsGet() throws IOException {
+        final Request request = RqFromTest.requestFrom(new RqFake());
         MatcherAssert.assertThat(
-            "Can't add a method to a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake()
-                    )
-                )
-            ).printHead(),
-            new StringStartsWith(RqFromTest.GET_METHOD)
+            "Default method should be GET",
+            new RqMethod.Base(request).method(),
+            Matchers.equalTo(RqMethod.GET)
         );
     }
 
     @Test
     void containsMethodAndHeader() throws Exception {
-        final String method = "GET /a-test";
-        final String header = "foo: bar";
+        final String uri = "/a-test";
+        final String header = "foo";
+        final String value = "bar";
+        final Request original = new RqWithHeader(
+            new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
+            header,
+            value
+        );
+        final Request request = RqFromTest.requestFrom(original);
         MatcherAssert.assertThat(
-            "Can't add a header to a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(
-                                method,
-                                header
-                            ),
-                            ""
-                        )
-                    )
-                )
-            ).printHead(),
-            new StringStartsWith(
-                new Joined(
-                    RqFromTest.EOL,
-                    method,
-                    "Host: localhost",
-                    header,
-                    RqFromTest.LOCAL_ADDRESS,
-                    RqFromTest.REMOTE_ADDRESS
-                ).asString()
-            )
+            "Method should be preserved",
+            new RqMethod.Base(request).method(),
+            Matchers.equalTo(RqMethod.GET)
+        );
+        MatcherAssert.assertThat(
+            "URI should be preserved",
+            new RqRequestLine.Base(request).uri(),
+            Matchers.equalTo(uri)
+        );
+        MatcherAssert.assertThat(
+            "Custom header should be preserved",
+            request,
+            new HmHeader<>(header, value)
+        );
+        MatcherAssert.assertThat(
+            "Local address header should be added",
+            request,
+            new HmHeader<>("X-Takes-LocalAddress", RqFromTest.LOCALHOST)
+        );
+        MatcherAssert.assertThat(
+            "Remote address header should be added",
+            request,
+            new HmHeader<>("X-Takes-RemoteAddress", RqFromTest.LOCALHOST)
         );
     }
 
     @Test
     void containsHostHeaderInHeader() throws Exception {
-        final String method = "GET /one-more-test";
-        final String header = "Host: www.thesite.com";
+        final String uri = "/one-more-test";
+        final String host = "www.thesite.com";
+        final Request original = new RqWithHeader(
+            new RqWithoutHeader(
+                new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
+                RqFromTest.HOST
+            ),
+            RqFromTest.HOST,
+            host
+        );
+        final Request request = RqFromTest.requestFrom(original);
         MatcherAssert.assertThat(
-            "Can't set a host in a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(
-                                method,
-                                header
-                            ),
-                            ""
-                        )
-                    )
-                )
-            ).printHead().toLowerCase(Locale.ENGLISH),
-            new StringStartsWith(
-                new Joined(
-                    RqFromTest.EOL,
-                    method,
-                    header,
-                    RqFromTest.LOCAL_ADDRESS,
-                    RqFromTest.REMOTE_ADDRESS
-                ).asString().toLowerCase(Locale.ENGLISH)
-            )
+            "Host header should be preserved",
+            request,
+            new HmHeader<>(RqFromTest.HOST, host)
+        );
+        MatcherAssert.assertThat(
+            "Method should be preserved",
+            new RqMethod.Base(request).method(),
+            Matchers.equalTo(RqMethod.GET)
+        );
+        MatcherAssert.assertThat(
+            "URI should be preserved",
+            new RqRequestLine.Base(request).uri(),
+            Matchers.equalTo(uri)
         );
     }
 
     @Test
     void containsHostAndPortInHeader() throws Exception {
-        final String method = "GET /b-test";
-        final String header = "Host: 192.168.0.1:12345";
+        final String uri = "/b-test";
+        final String host = "192.168.0.1:12345";
+        final Request original = new RqWithHeader(
+            new RqWithoutHeader(
+                new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
+                RqFromTest.HOST
+            ),
+            RqFromTest.HOST,
+            host
+        );
+        final Request request = RqFromTest.requestFrom(original);
         MatcherAssert.assertThat(
-            "Can't set a host and port in a servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(
-                                method,
-                                header
-                            ),
-                            ""
-                        )
-                    )
-                )
-            ).printHead().toLowerCase(Locale.ENGLISH),
-            new StringStartsWith(
-                new Joined(
-                    RqFromTest.EOL,
-                    method,
-                    header,
-                    RqFromTest.LOCAL_ADDRESS,
-                    RqFromTest.REMOTE_ADDRESS
-                ).asString().toLowerCase(Locale.ENGLISH)
-            )
+            "Host header with port should be preserved",
+            request,
+            new HmHeader<>(RqFromTest.HOST, host)
+        );
+        MatcherAssert.assertThat(
+            "URI should be preserved",
+            new RqRequestLine.Base(request).uri(),
+            Matchers.equalTo(uri)
         );
     }
 
     @Test
-    @Disabled
-    void containsContentInRequestBody() throws IOException {
+    void containsContentInRequestBody() {
         final String content = "My name is neo!";
+        final Request original = new RqWithBody(
+            new RqFake(
+                new ListOf<>("GET / HTTP/1.1"),
+                ""
+            ),
+            content
+        );
+        final Request request = RqFromTest.requestFrom(original);
         MatcherAssert.assertThat(
-            "Can't add a body to servlet request",
-            new RqPrint(
-                new RqFrom(
-                    new HttpServletRequestFake(
-                        new RqFake(
-                            new ListOf<>(RqFromTest.EOL),
-                            content
-                        )
-                    )
-                )
-            ).printBody(),
-            new StringContains(content)
+            "Body content should be preserved",
+            request,
+            new HmRqTextBody(content)
+        );
+    }
+
+    private static Request requestFrom(final Request original) {
+        return new RqFrom(
+            new HttpServletRequestFake(original)
         );
     }
 }
