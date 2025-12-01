@@ -28,12 +28,17 @@ final class RqFromTest {
     /**
      * Host header name.
      */
-    private static final String HEADER_HOST = "Host";
+    private static final String HOST = "Host";
 
     /**
      * Default local IP address.
      */
-    private static final String LOOPBACK = "127.0.0.1";
+    private static final String LOCAL_ADDRESS = "127.0.0.1";
+
+    /**
+     * Default remote IP address.
+     */
+    private static final String REMOTE_ADDRESS = "127.0.0.1";
 
     @Test
     void defaultMethodForAFakeRequestIsGet() throws IOException {
@@ -51,7 +56,7 @@ final class RqFromTest {
             new RqWithHeader(
                 new RqWithoutHeader(
                     new RqFake("GET", "/a-test HTTP/1.1"),
-                    RqFromTest.HEADER_HOST
+                    RqFromTest.HOST
                 ),
                 "Foo",
                 "bar"
@@ -65,18 +70,18 @@ final class RqFromTest {
         );
         MatcherAssert.assertThat(
             "Can't add a host header to a servlet request",
-            headers.single(RqFromTest.HEADER_HOST),
+            headers.single(RqFromTest.HOST),
             new IsEqual<>("localhost")
         );
         MatcherAssert.assertThat(
             "Can't add a local address header to a servlet request",
             headers.single("X-Takes-LocalAddress"),
-            new IsEqual<>(RqFromTest.LOOPBACK)
+            new IsEqual<>(RqFromTest.LOCAL_ADDRESS)
         );
         MatcherAssert.assertThat(
             "Can't add a remote address header to a servlet request",
             headers.single("X-Takes-RemoteAddress"),
-            new IsEqual<>(RqFromTest.LOOPBACK)
+            new IsEqual<>(RqFromTest.REMOTE_ADDRESS)
         );
     }
 
@@ -87,15 +92,15 @@ final class RqFromTest {
             new RqWithHeader(
                 new RqWithoutHeader(
                     new RqFake("GET", "/one-more-test HTTP/1.1"),
-                    RqFromTest.HEADER_HOST
+                    RqFromTest.HOST
                 ),
-                RqFromTest.HEADER_HOST,
+                RqFromTest.HOST,
                 host
             )
         );
         MatcherAssert.assertThat(
             "Can't set a host in a servlet request",
-            new RqHeaders.Smart(rebuilt).single(RqFromTest.HEADER_HOST),
+            new RqHeaders.Smart(rebuilt).single(RqFromTest.HOST),
             new IsEqual<>(host)
         );
     }
@@ -107,15 +112,15 @@ final class RqFromTest {
             new RqWithHeader(
                 new RqWithoutHeader(
                     new RqFake("GET", "/b-test HTTP/1.1"),
-                    RqFromTest.HEADER_HOST
+                    RqFromTest.HOST
                 ),
-                RqFromTest.HEADER_HOST,
+                RqFromTest.HOST,
                 host
             )
         );
         MatcherAssert.assertThat(
             "Can't set a host and port in a servlet request",
-            new RqHeaders.Smart(rebuilt).single(RqFromTest.HEADER_HOST),
+            new RqHeaders.Smart(rebuilt).single(RqFromTest.HOST),
             new IsEqual<>(host)
         );
     }
