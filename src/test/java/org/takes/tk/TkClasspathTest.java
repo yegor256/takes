@@ -4,12 +4,15 @@
  */
 package org.takes.tk;
 
+import java.net.HttpURLConnection;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqMethod;
 import org.takes.rs.RsHeadPrint;
 
 /**
@@ -25,7 +28,7 @@ final class TkClasspathTest {
             new RsHeadPrint(
                 new TkClasspath().act(
                     new RqFake(
-                        "GET", "/org/takes/Take.class?a", ""
+                        RqMethod.GET, "/org/takes/Take.class?a", ""
                     )
                 )
             ),
@@ -35,11 +38,16 @@ final class TkClasspathTest {
 
     @Test
     void throwsWhenResourceNotFound() {
-        Assertions.assertThrows(
+        final HttpException exception = Assertions.assertThrows(
             HttpException.class,
             () -> new TkClasspath().act(
-                new RqFake("PUT", "/something-else", "")
+                new RqFake(RqMethod.PUT, "/something-else", "")
             )
+        );
+        MatcherAssert.assertThat(
+            "Exception should have HTTP_NOT_FOUND status code",
+            exception.code(),
+            Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
         );
     }
 }
