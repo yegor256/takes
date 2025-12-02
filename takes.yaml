@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 811.069341473
+  seconds: 656.302186072
   version: 0.57.2
   what: judges-summary
-  when: 2025-12-01 04:29:52.911975551 Z
+  when: 2025-12-02 04:14:34.399490214 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57826,18 +57826,6 @@
   some_unmerged_pulls: 2
   what: quality-of-service
   when: 2025-11-27 15:56:46.730909345 Z
-- _id: 19254
-  _job: 51011
-  _time: 2025-11-28 04:13:11.947095514 Z
-  _version: 0.16.8/0.57.1/0.16.2
-  analyzers: 18
-  text: |-
-    The average number of builds per week (450.4) is decreasing (R=-0.31).
-    The average number of commits per week (7.4) is decreasing (R=-0.36).
-    The average number of releases per month (0.4) is increasing (R=0.52).
-    The average monthly turnover (44.0 developers) is increasing (R=0.60).
-  what: assessment
-  when: 2025-11-28 04:13:11.955344087 Z
 - _id: 19259
   _job: 19793582382
   _time: 2025-11-30 04:10:12.411436721 Z
@@ -57866,12 +57854,6 @@
     The average monthly turnover (44.0 developers) is increasing (R=0.60).
   what: assessment
   when: 2025-11-30 04:21:21.465159913 Z
-- _id: 19262
-  _job: 51313
-  _time: 2025-11-30 04:21:45.541660635 Z
-  _version: 0.16.8/0.57.1/0.16.2
-  what: learn-eva
-  when: 2025-11-30 04:21:45.492165609 Z
 - _id: 19264
   _job: 19811037951
   _time: 2025-12-01 04:19:12.201132809 Z
@@ -57888,20 +57870,134 @@
   total_stars: 867
   what: dimensions-of-terrain
   when: 2025-12-01 04:19:12.208387616 Z
-- _id: 19265
-  _job: 19811037951
-  _time: 2025-12-01 04:22:05.391830410 Z
-  _version: 0.16.8/0.57.2/0.16.2
-  assignees_were_scanned: 578
+- _id: 19266
+  _job: 51414
+  _time: 2025-12-01 04:30:18.716220630 Z
+  _version: 0.16.8/0.57.1/0.16.2
+  analyzers: 18
+  text: |-
+    The average number of builds per week (450.4) is decreasing (R=-0.31).
+    The average number of commits per week (7.4) is decreasing (R=-0.36).
+    The average number of releases per month (0.4) is increasing (R=0.52).
+    The average monthly turnover (44.0 developers) is increasing (R=0.60).
+  what: assessment
+  when: 2025-12-01 04:30:18.723638280 Z
+- _id: 19267
+  _job: 51414
+  _time: 2025-12-01 04:30:42.766795353 Z
+  _version: 0.16.8/0.57.1/0.16.2
+  what: learn-eva
+  when: 2025-12-01 04:30:42.692770177 Z
+- _id: 19269
+  _job: 19846648934
+  _time: 2025-12-02 04:04:48.734234801 Z
+  _version: 0.17.0/0.57.2/0.16.3
+  details: Apparently, yegor256/takes#1436 has been "issue-was-closed".
+  is_human: 0
+  issue: 1436
+  repository: 28924109
+  what: issue-was-closed
+  when: 2025-12-01 16:06:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19270
+  _job: 19846648934
+  _time: 2025-12-02 04:04:49.293459813 Z
+  _version: 0.17.0/0.57.2/0.16.3
+  details: Apparently, yegor256/takes#1437 has been "issue-was-closed".
+  is_human: 0
+  issue: 1437
+  repository: 28924109
+  what: issue-was-closed
+  when: 2025-12-01 16:52:53.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19272
+  _job: 19846648934
+  _time: 2025-12-02 04:05:16.096482225 Z
+  _version: 0.17.0/0.57.2/0.16.3
+  branch: up
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1502 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 12
+  is_human: 0
+  issue: 1502
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-01 17:09:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19273
+  _job: 19846648934
+  _time: 2025-12-02 04:05:27.990851158 Z
+  _version: 0.17.0/0.57.2/0.16.3
+  branch: 1436-fix
+  comments: 6
+  comments_appreciated: 1
+  comments_by_author: 2
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1503 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 15
+  is_human: 0
+  issue: 1503
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-01 16:06:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19274
+  _job: 19846648934
+  _time: 2025-12-02 04:05:35.435562046 Z
+  _version: 0.17.0/0.57.2/0.16.3
+  branch: "#1357-update"
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1504 has been "pull-was-closed".
+  failed_builds: 6
+  files: 1
+  hoc: 192
+  is_human: 1
+  issue: 1504
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2025-12-01 15:28:26.000000000 Z
+  where: github
+  who: 66062429
+- _id: 19275
+  _job: 19846648934
+  _time: 2025-12-02 04:08:25.765882416 Z
+  _version: 0.17.0/0.57.2/0.16.3
+  assignees_were_scanned: 713
   earliest_issue_was_found: 1
-  events_were_scanned: 5887021948
-  issues_were_scanned: 1292
-  labels_were_scanned: 751
+  events_were_scanned: 5973786223
+  issues_were_scanned: 0
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1060
-  min_pull_was_found: 304
+  min_pull_was_found: 305
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
