@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.883385657
+  seconds: 578.384034795
   version: 0.57.3
   what: judges-summary
-  when: 2025-12-06 04:11:35.725557715 Z
+  when: 2025-12-07 04:16:43.720622060 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -58019,6 +58019,194 @@
   _time: 2025-12-05 04:17:07.407023174 Z
   _version: 0.17.0/0.57.2/0.16.3
   since: *97
+  some_backlog_size:
+  - 90
+  - 90
+  - 90
+  - 90
+  - 88
+  - 88
+  - 88
+  some_build_duration:
+  - 8
+  - 9
+  - 10
+  - 10
+  - 11
+  - 13
+  - 16
+  - 30
+  - 734
+  - 39
+  - 8
+  - 8
+  - 9
+  - 11
+  - 11
+  - 11
+  - 14
+  - 27
+  - 26
+  - 30
+  - 271
+  - 8
+  - 8
+  - 10
+  - 10
+  - 12
+  - 15
+  - 15
+  - 25
+  - 30
+  - 35
+  - 75
+  - 306
+  - 899
+  - 38
+  - 8
+  - 8
+  - 9
+  - 10
+  - 10
+  - 14
+  - 15
+  - 25
+  - 32
+  - 31
+  - 322
+  - 8
+  - 10
+  - 10
+  - 11
+  - 11
+  - 12
+  - 13
+  - 23
+  - 24
+  - 31
+  - 76
+  - 261
+  - 749
+  - 38
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_issue_lifetime:
+  - 11228475.0
+  - 11226199.0
+  some_merged_pulls: 8
+  some_pull_files_size:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 233
+  - 2
+  - 2
+  - 15
+  - 12
+  some_pull_lifetime:
+  - 50667.0
+  - 10824.0
+  - 3809.0
+  - 10422.0
+  - 558784.0
+  - 624441.0
+  - 687338.0
+  - 707287.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 925
+  - 791
+  - 849
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  some_unmerged_pulls: 1
   what: quality-of-service
   when: 2025-12-04 15:56:46.730909345 Z
 - _id: 19290
@@ -58033,26 +58221,42 @@
     The average monthly turnover (39.0 developers) is increasing (R=0.38).
   what: assessment
   when: 2025-12-05 04:17:35.225092476 Z
-- _id: 19291
-  _job: 52021
-  _time: 2025-12-05 04:17:59.516217114 Z
-  _version: 0.17.0/0.57.3/0.16.3
-  what: learn-eva
-  when: 2025-12-05 04:17:59.449176598 Z
-- _id: 19292
-  _job: 19982667210
-  _time: 2025-12-06 04:02:34.078200007 Z
+- _id: 19293
+  _job: 52270
+  _time: 2025-12-06 04:12:26.424265025 Z
   _version: 0.17.0/0.57.3/0.16.5
-  assignees_were_scanned: 1301
+  what: learn-eva
+  when: 2025-12-06 04:12:26.362257640 Z
+- _id: 19295
+  _job: 19998734673
+  _time: 2025-12-07 04:08:12.426406619 Z
+  _version: 0.17.0/0.57.3/0.16.6
+  total_active_contributors: 5
+  total_commits: 3587
+  total_contributors: 84
+  total_files: 534
+  total_forks: 211
+  total_issues: 742
+  total_pulls: 773
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 867
+  what: dimensions-of-terrain
+  when: 2025-12-07 04:08:12.439456057 Z
+- _id: 19296
+  _job: 19998734673
+  _time: 2025-12-07 04:09:12.784384326 Z
+  _version: 0.17.0/0.57.3/0.16.6
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 6051846832
-  issues_were_scanned: 0
-  labels_were_scanned: 607
+  events_were_scanned: 6064896800
+  issues_were_scanned: 1292
+  labels_were_scanned: 751
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1068
-  min_pull_was_found: 315
+  min_issue_was_found: 1091
+  min_pull_was_found: 316
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
