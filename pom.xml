@@ -295,7 +295,7 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-text</artifactId>
       <scope>test</scope>
-      <version>1.14.0</version>
+      <version>1.15.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
