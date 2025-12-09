@@ -28,8 +28,8 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from string",
-                new RsPrint(new TkHtml(body).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(body).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -39,8 +39,8 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from scalar supplier",
-                new RsPrint(new TkHtml(() -> body).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(() -> body).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -50,8 +50,8 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             "TkHtml must create valid HTTP response from empty byte array",
-                new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -61,8 +61,8 @@ final class TkHtmlTest {
         final String body = "<html>hello, world!</html>";
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from input stream",
-                new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -73,13 +73,13 @@ final class TkHtmlTest {
         final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
             "First HTML response must contain the expected body text",
-                new RsPrint(take.act(new RqFake())),
-                new HasString(body)
+            new RsPrint(take.act(new RqFake())),
+            new HasString(body)
         );
         MatcherAssert.assertThat(
             "Second HTML response must also contain the expected body text",
-                new RsPrint(take.act(new RqFake())),
-                new HasString(body)
+            new RsPrint(take.act(new RqFake())),
+            new HasString(body)
         );
     }
 
@@ -89,9 +89,10 @@ final class TkHtmlTest {
         final String body = "<html><body>Hello World</body></html>";
         MatcherAssert.assertThat(
             "HTML response must start with <html> tag",
-                new RsPrint(new TkHtml(body).act(new RqFake()))
-                    .printBody().trim().startsWith("<html>"),
-                Matchers.is(true)
+            new RsPrint(
+                new TkHtml(body).act(new RqFake())
+            ).printBody().trim().startsWith("<html>"),
+            Matchers.is(true)
         );
     }
 
@@ -101,9 +102,10 @@ final class TkHtmlTest {
         final String body = "<html><body>Hello World</body></html>";
         MatcherAssert.assertThat(
             "HTML response must end with </html> tag",
-                new RsPrint(new TkHtml(body).act(new RqFake()))
-                    .printBody().trim().endsWith("</html>"),
-                Matchers.is(true)
+            new RsPrint(
+                new TkHtml(body).act(new RqFake())
+            ).printBody().trim().endsWith("</html>"),
+            Matchers.is(true)
         );
     }
 
@@ -113,8 +115,8 @@ final class TkHtmlTest {
         final String body = "<html><head><title>Test</title></head><body>Content</body></html>";
         MatcherAssert.assertThat(
             "TkHtml must accept complete HTML document structure",
-                new RsPrint(new TkHtml(body).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(body).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -128,7 +130,7 @@ final class TkHtmlTest {
             response.indexOf("<html>") < response.indexOf("<body>")
                 && response.indexOf("<body>") < response.indexOf("</body>")
                 && response.indexOf("</body>") < response.indexOf("</html>"),
-                Matchers.is(true)
+            Matchers.is(true)
         );
     }
 

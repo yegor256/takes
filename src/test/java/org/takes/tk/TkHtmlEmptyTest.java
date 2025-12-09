@@ -42,8 +42,8 @@ final class TkHtmlEmptyTest {
         final String body = "";
         MatcherAssert.assertThat(
             "TkHtml must create valid HTTP response from empty string",
-                new RsPrint(new TkHtml(body).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(body).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -53,13 +53,11 @@ final class TkHtmlEmptyTest {
         final String body = null;
         Assertions.assertThrows(
             IllegalStateException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    "Must reject null scalar body",
-                        new RsPrint(new TkHtml(() -> body).act(new RqFake())),
-                        this.textMatcher(body)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                "Must reject null scalar body",
+                new RsPrint(new TkHtml(() -> body).act(new RqFake())),
+                this.textMatcher(body)
+            )
         );
     }
 
@@ -69,8 +67,8 @@ final class TkHtmlEmptyTest {
         final String body = "";
         MatcherAssert.assertThat(
             "TkHtml must create valid HTTP response from empty scalar",
-                new RsPrint(new TkHtml(() -> body).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(() -> body).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -80,13 +78,11 @@ final class TkHtmlEmptyTest {
         final String body = null;
         Assertions.assertThrows(
             NullPointerException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    "Must reject null byte array body",
-                        new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
-                        this.textMatcher(body)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                "Must reject null byte array body",
+                new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
+                this.textMatcher(body)
+            )
         );
     }
 
@@ -96,8 +92,8 @@ final class TkHtmlEmptyTest {
         final String body = "";
         MatcherAssert.assertThat(
             "TkHtml must handle empty byte arrays correctly",
-                new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
@@ -107,13 +103,11 @@ final class TkHtmlEmptyTest {
         final String body = null;
         Assertions.assertThrows(
             NullPointerException.class,
-            () -> {
-                MatcherAssert.assertThat(
-                    "Must reject null input stream body",
-                        new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
-                        this.textMatcher(body)
-                );
-            }
+            () -> MatcherAssert.assertThat(
+                "Must reject null input stream body",
+                new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
+                this.textMatcher(body)
+            )
         );
     }
 
@@ -123,8 +117,8 @@ final class TkHtmlEmptyTest {
         final String body = "";
         MatcherAssert.assertThat(
             "TkHtml must create valid HTTP response from empty input stream",
-                new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
-                this.textMatcher(body)
+            new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
+            this.textMatcher(body)
         );
     }
 
