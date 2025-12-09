@@ -24,7 +24,7 @@ jobs:
       - uses: zerocracy/pages-action@0.6.3
         with:
           factbase: takes.fb
-      - uses: JamesIves/github-pages-deploy-action@v4.7.4
+      - uses: JamesIves/github-pages-deploy-action@v4.7.5
         with:
           folder: pages
           clean: false
