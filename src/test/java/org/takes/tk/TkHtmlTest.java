@@ -4,28 +4,45 @@
  */
 package org.takes.tk;
 
+import java.io.InputStream;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.llorllale.cactoos.matchers.HasString;
 import org.llorllale.cactoos.matchers.IsText;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsBodyPrint;
 import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkHtml}.
  * @since 0.10
  */
+@SuppressWarnings("PMD.TooManyMethods")
 final class TkHtmlTest {
 
-    @Test
-    @DisplayName("Create proper HTML response with valid HTML content from string")
-    void createsTextResponseFromInputString() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    /**
+     * Input Bodies for testing.
+     * @return The testing data
+     */
+    static Iterable<Arguments> cases() {
+        return new IterableOf<>(
+            Arguments.arguments("<html>hello, world!</html>"),
+            Arguments.arguments("")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromInputString(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from string",
             new RsPrint(new TkHtml(body).act(new RqFake())),
@@ -33,10 +50,9 @@ final class TkHtmlTest {
         );
     }
 
-    @Test
-    @DisplayName("Create proper HTML response from scalar supplier with valid content")
-    void createsTextResponseFromScalar() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromScalar(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from scalar supplier",
             new RsPrint(new TkHtml(() -> body).act(new RqFake())),
@@ -44,21 +60,19 @@ final class TkHtmlTest {
         );
     }
 
-    @Test
-    @DisplayName("Create proper HTML response from byte array with valid content")
-    void createsTextResponseFromByteArray() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromByteArray(final String body) throws Exception {
         MatcherAssert.assertThat(
-            "TkHtml must create valid HTTP response from empty byte array",
+            "TkHtml must create valid HTTP response from byte array",
             new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
             this.textMatcher(body)
         );
     }
 
-    @Test
-    @DisplayName("Create proper HTML response from input stream with valid content")
-    void createsTextResponseFromInputStream() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromInputStream(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from input stream",
             new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
@@ -67,7 +81,6 @@ final class TkHtmlTest {
     }
 
     @Test
-    @DisplayName("Produce consistent responses when same instance is used multiple times")
     void printsResourceMultipleTimes() throws Exception {
         final String body = "<html>hello, dude!</html>";
         final Take take = new TkHtml(body);
@@ -84,54 +97,80 @@ final class TkHtmlTest {
     }
 
     @Test
-    @DisplayName("Text HTML body starts with <html> tag")
-    void textResponseHtmlStartsWithHtmlTag() throws Exception {
+    void startsTextResponseWithHtmlTag() throws Exception {
         final String body = "<html><body>Hello World</body></html>";
         MatcherAssert.assertThat(
             "HTML response must start with <html> tag",
-            new RsPrint(
+            new RsBodyPrint(
                 new TkHtml(body).act(new RqFake())
-            ).printBody().trim().startsWith("<html>"),
-            Matchers.is(true)
+            ).asString(),
+            Matchers.startsWith("<html>")
         );
     }
 
     @Test
-    @DisplayName("Text HTML body ends with </html> tag")
-    void textResponseHtmlEndsWithHtmlTag() throws Exception {
+    void endsTextResponseWithHtmlTag() throws Exception {
         final String body = "<html><body>Hello World</body></html>";
         MatcherAssert.assertThat(
             "HTML response must end with </html> tag",
-            new RsPrint(
+            new RsBodyPrint(
                 new TkHtml(body).act(new RqFake())
-            ).printBody().trim().endsWith("</html>"),
-            Matchers.is(true)
+            ).asString(),
+            Matchers.endsWith("</html>")
         );
     }
 
     @Test
-    @DisplayName("Complete text HTML document with head and body")
-    void acceptsCompleteHtmlDocument() throws Exception {
-        final String body = "<html><head><title>Test</title></head><body>Content</body></html>";
-        MatcherAssert.assertThat(
-            "TkHtml must accept complete HTML document structure",
-            new RsPrint(new TkHtml(body).act(new RqFake())),
-            this.textMatcher(body)
+    void failsOnNullInputString() {
+        final String body = null;
+        Assertions.assertThrows(
+            IllegalStateException.class,
+            () -> MatcherAssert.assertThat(
+                "Must reject null input string body",
+                new RsPrint(new TkHtml(body).act(new RqFake())),
+                this.textMatcher("Nothing to print")
+            )
         );
     }
 
     @Test
-    @DisplayName("Text HTML structure with proper nesting")
-    void validatesHtmlStructureWithNesting() throws Exception {
-        final String body = "<html><body><div><p>Nested content</p></div></body></html>";
-        final String response = new RsPrint(new TkHtml(body).act(new RqFake())).printBody();
-        MatcherAssert.assertThat(
-            "HTML response must start with <html> tag",
-            response.indexOf("<html>") < response.indexOf("<body>")
-                && response.indexOf("<body>") < response.indexOf("</body>")
-                && response.indexOf("</body>") < response.indexOf("</html>"),
-            Matchers.is(true)
+    void failsOnNullInputScalar() {
+        final String body = null;
+        Assertions.assertThrows(
+            IllegalStateException.class,
+            () -> MatcherAssert.assertThat(
+                "Must reject null input scalar body",
+                new RsPrint(new TkHtml(body).act(new RqFake())),
+                this.textMatcher("Unreachable text")
+            )
         );
+    }
+
+    @Test
+    void failsOnNullInputByteArray() {
+        final byte[] body = null;
+        Assertions.assertThrows(
+            NullPointerException.class,
+            () -> MatcherAssert.assertThat(
+                "Must reject null input byte array body",
+                new RsPrint(new TkHtml(body).act(new RqFake())),
+                this.textMatcher("What should I print?")
+            )
+        );
+    }
+
+    @Test
+    void failsOnNullInputStream() throws Exception {
+        try (InputStream body = null) {
+            Assertions.assertThrows(
+                RuntimeException.class,
+                () -> MatcherAssert.assertThat(
+                    "Must reject null input stream body",
+                    new RsPrint(new TkHtml(body).act(new RqFake())),
+                    this.textMatcher("Write your own version")
+                )
+            );
+        }
     }
 
     /**
