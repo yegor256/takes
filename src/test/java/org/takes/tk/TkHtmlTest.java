@@ -97,8 +97,8 @@ final class TkHtmlTest {
     }
 
     @Test
-    void startsTextResponseWithHtmlTag() throws Exception {
-        final String body = "<html><body>Hello World</body></html>";
+    void startsTextResponseBodyWithHtmlTag() throws Exception {
+        final String body = "<html><body>Hello buddy!</body></html>";
         MatcherAssert.assertThat(
             "HTML response must start with <html> tag",
             new RsBodyPrint(
@@ -109,8 +109,8 @@ final class TkHtmlTest {
     }
 
     @Test
-    void endsTextResponseWithHtmlTag() throws Exception {
-        final String body = "<html><body>Hello World</body></html>";
+    void endsTextResponseBodyWithHtmlTag() throws Exception {
+        final String body = "<html><body>Hello comrade!/body></html>";
         MatcherAssert.assertThat(
             "HTML response must end with </html> tag",
             new RsBodyPrint(
