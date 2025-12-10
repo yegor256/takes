@@ -18,7 +18,7 @@ jobs:
           sed -E -i "s/takes-[0-9][^-]+/takes-${latest}/g" README.md && \
           sed -E -i "s/takes\/[0-9][^\/]+/takes\/${latest}/g" README.md && \
           sed -E -i "s/org.takes:takes:.+/org.takes:takes::${latest}/g" README.md
-      - uses: peter-evans/create-pull-request@v7
+      - uses: peter-evans/create-pull-request@v8
         with:
           sign-commits: true
           commit-message: 'new version in README'
