@@ -64,7 +64,7 @@ final class TkHtmlTest {
     @MethodSource("cases")
     void createsTextResponseFromByteArray(final String body) throws Exception {
         MatcherAssert.assertThat(
-            "TkHtml must create valid HTTP response from byte array",
+            "TkHtml must create proper HTTP response from byte array",
             new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
             this.textMatcher(body)
         );
