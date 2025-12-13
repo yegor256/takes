@@ -5,13 +5,20 @@
 package org.takes.tk;
 
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.llorllale.cactoos.matchers.HasString;
 import org.llorllale.cactoos.matchers.IsText;
 import org.takes.Take;
 import org.takes.rq.RqFake;
+import org.takes.rs.RsBodyPrint;
 import org.takes.rs.RsPrint;
 
 /**
@@ -20,79 +27,54 @@ import org.takes.rs.RsPrint;
  */
 final class TkHtmlTest {
 
-    @Test
-    void createsTextResponse() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    /**
+     * Input Bodies for testing.
+     * @return The testing data
+     */
+    static Iterable<Arguments> cases() {
+        return new IterableOf<>(
+            Arguments.arguments("<html>hello, world!</html>"),
+            Arguments.arguments("")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromInputString(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from string",
             new RsPrint(new TkHtml(body).act(new RqFake())),
-            new IsText(
-                new Joined(
-                    "\r\n",
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/html",
-                    "",
-                    body
-                )
-            )
+            this.textMatcher(body)
         );
     }
 
-    @Test
-    void createsTextResponseFromScalar() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromScalar(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from scalar supplier",
             new RsPrint(new TkHtml(() -> body).act(new RqFake())),
-            new IsText(
-                new Joined(
-                    "\r\n",
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/html",
-                    "",
-                    body
-                )
-            )
+            this.textMatcher(body)
         );
     }
 
-    @Test
-    void createsTextResponseFromByteArray() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromByteArray(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from byte array",
             new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
-            new IsText(
-                new Joined(
-                    "\r\n",
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/html",
-                    "",
-                    body
-                )
-            )
+            this.textMatcher(body)
         );
     }
 
-    @Test
-    void createsTextResponseFromInputStream() throws Exception {
-        final String body = "<html>hello, world!</html>";
+    @ParameterizedTest
+    @MethodSource("cases")
+    void createsTextResponseFromInputStream(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from input stream",
             new RsPrint(new TkHtml(new InputStreamOf(body)).act(new RqFake())),
-            new IsText(
-                new Joined(
-                    "\r\n",
-                    "HTTP/1.1 200 OK",
-                    String.format("Content-Length: %s", body.length()),
-                    "Content-Type: text/html",
-                    "",
-                    body
-                )
-            )
+            this.textMatcher(body)
         );
     }
 
@@ -112,4 +94,55 @@ final class TkHtmlTest {
         );
     }
 
+    @Test
+    void startsTextResponseBodyWithHtmlTag() throws Exception {
+        MatcherAssert.assertThat(
+            "HTML response must start with <html> tag",
+            new RsBodyPrint(
+                new TkHtml("<html><body>Hello buddy!</body></html>").act(new RqFake())
+            ).asString(),
+            Matchers.startsWith("<html>")
+        );
+    }
+
+    @Test
+    void endsTextResponseBodyWithHtmlTag() throws Exception {
+        MatcherAssert.assertThat(
+            "HTML response must end with </html> tag",
+            new RsBodyPrint(
+                new TkHtml("<html><body>Hello comrade!/body></html>").act(new RqFake())
+            ).asString(),
+            Matchers.endsWith("</html>")
+        );
+    }
+
+    @Test
+    void failsOnNullInputScalar() {
+        Assertions.assertThrows(
+            IllegalStateException.class,
+            () -> MatcherAssert.assertThat(
+                "Must reject null input scalar body",
+                new RsPrint(new TkHtml(() -> null).act(new RqFake())),
+                this.textMatcher("Unreachable text")
+            )
+        );
+    }
+
+    /**
+     * Creates text matcher for HTML response.
+     * @param body Response body
+     * @return Text matcher
+     */
+    private IsText textMatcher(final String body) {
+        return new IsText(
+            new Joined(
+                "\r\n",
+                "HTTP/1.1 200 OK",
+                String.format("Content-Length: %s", body.getBytes().length),
+                "Content-Type: text/html",
+                "",
+                body
+            )
+        );
+    }
 }
