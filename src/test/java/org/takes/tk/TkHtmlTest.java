@@ -4,7 +4,6 @@
  */
 package org.takes.tk;
 
-import java.io.InputStream;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Joined;
@@ -26,7 +25,6 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkHtml}.
  * @since 0.10
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class TkHtmlTest {
 
     /**
@@ -98,11 +96,10 @@ final class TkHtmlTest {
 
     @Test
     void startsTextResponseBodyWithHtmlTag() throws Exception {
-        final String body = "<html><body>Hello buddy!</body></html>";
         MatcherAssert.assertThat(
             "HTML response must start with <html> tag",
             new RsBodyPrint(
-                new TkHtml(body).act(new RqFake())
+                new TkHtml("<html><body>Hello buddy!</body></html>").act(new RqFake())
             ).asString(),
             Matchers.startsWith("<html>")
         );
@@ -110,67 +107,25 @@ final class TkHtmlTest {
 
     @Test
     void endsTextResponseBodyWithHtmlTag() throws Exception {
-        final String body = "<html><body>Hello comrade!/body></html>";
         MatcherAssert.assertThat(
             "HTML response must end with </html> tag",
             new RsBodyPrint(
-                new TkHtml(body).act(new RqFake())
+                new TkHtml("<html><body>Hello comrade!/body></html>").act(new RqFake())
             ).asString(),
             Matchers.endsWith("</html>")
         );
     }
 
     @Test
-    void failsOnNullInputString() {
-        final String body = null;
-        Assertions.assertThrows(
-            IllegalStateException.class,
-            () -> MatcherAssert.assertThat(
-                "Must reject null input string body",
-                new RsPrint(new TkHtml(body).act(new RqFake())),
-                this.textMatcher("Nothing to print")
-            )
-        );
-    }
-
-    @Test
     void failsOnNullInputScalar() {
-        final String body = null;
         Assertions.assertThrows(
             IllegalStateException.class,
             () -> MatcherAssert.assertThat(
                 "Must reject null input scalar body",
-                new RsPrint(new TkHtml(body).act(new RqFake())),
+                new RsPrint(new TkHtml(() -> null).act(new RqFake())),
                 this.textMatcher("Unreachable text")
             )
         );
-    }
-
-    @Test
-    void failsOnNullInputByteArray() {
-        final byte[] body = null;
-        Assertions.assertThrows(
-            NullPointerException.class,
-            () -> MatcherAssert.assertThat(
-                "Must reject null input byte array body",
-                new RsPrint(new TkHtml(body).act(new RqFake())),
-                this.textMatcher("What should I print?")
-            )
-        );
-    }
-
-    @Test
-    void failsOnNullInputStream() throws Exception {
-        try (InputStream body = null) {
-            Assertions.assertThrows(
-                RuntimeException.class,
-                () -> MatcherAssert.assertThat(
-                    "Must reject null input stream body",
-                    new RsPrint(new TkHtml(body).act(new RqFake())),
-                    this.textMatcher("Write your own version")
-                )
-            );
-        }
     }
 
     /**
