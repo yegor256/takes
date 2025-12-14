@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 520.793969259
+  seconds: 815.503920034
   version: 0.58.1
   what: judges-summary
-  when: 2025-12-13 04:10:14.124403545 Z
+  when: 2025-12-14 04:23:01.853594609 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -58559,26 +58559,100 @@
     The average monthly turnover (44.0 developers) is increasing (R=0.31).
   what: assessment
   when: 2025-12-12 04:18:39.556715740 Z
-- _id: 19325
-  _job: 53289
-  _time: 2025-12-12 04:19:03.751930054 Z
-  _version: 0.17.1/0.58.1/0.17.3!0.17.4
+- _id: 19327
+  _job: 53473
+  _time: 2025-12-13 04:10:58.431788726 Z
+  _version: 0.17.1/0.58.1/0.17.6
   what: learn-eva
-  when: 2025-12-12 04:19:03.672060049 Z
-- _id: 19326
-  _job: 20186484129
-  _time: 2025-12-13 04:03:31.148180269 Z
+  when: 2025-12-13 04:10:58.350296229 Z
+- _id: 19329
+  _job: 20202439635
+  _time: 2025-12-14 04:10:33.407014544 Z
   _version: 0.19.2/0.58.1/0.17.6
-  assignees_were_scanned: 820
+  branch: tkhtmltest-refactor
+  comments: 13
+  comments_appreciated: 1
+  comments_by_author: 6
+  comments_by_reviewers: 7
+  comments_resolved: 1
+  comments_to_code: 5
+  details: Apparently, yegor256/takes#1487 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 137
+  issue: 1487
+  repository: 28924109
+  review: 2025-10-31 18:21:03.000000000 Z
+  succeeded_builds: 15
+  suggestions: 4
+  what: pull-was-merged
+  when: 2025-12-13 22:59:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19331
+  _job: 20202439635
+  _time: 2025-12-14 04:11:42.073533084 Z
+  _version: 0.19.2/0.58.1/0.17.6
+  total_active_contributors: 6
+  total_commits: 3614
+  total_contributors: 85
+  total_files: 534
+  total_forks: 211
+  total_issues: 742
+  total_pulls: 787
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 868
+  what: dimensions-of-terrain
+  when: 2025-12-14 04:11:42.084942422 Z
+- _id: 19332
+  _job: 20202439635
+  _time: 2025-12-14 04:13:14.092823534 Z
+  _version: 0.19.2/0.58.1/0.17.6
+  assignees_were_scanned: 924
   earliest_issue_was_found: 1
-  events_were_scanned: 5279337926
+  events_were_scanned: 6203514160
   issues_were_scanned: 1292
-  labels_were_scanned: 751
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1121
-  min_pull_was_found: 328
+  min_issue_was_found: 1133
+  min_pull_was_found: 329
   repository: 28924109
-  types_were_scanned: 735
+  types_were_scanned: 826
   what: iterate
   where: github
+- _id: 19333
+  _job: 20202439635
+  _time: 2025-12-14 04:20:18.841612925 Z
+  _version: 0.19.2/0.58.1/0.17.6
+  author: 87902365
+  comments: 8
+  details: The pull request yegor256/takes#1487 with 137 HoC created by @eshabakhov
+    was reviewed by @sopronyr after 24h4m and 1 comments.
+  hoc: 137
+  issue: 1487
+  repository: 28924109
+  review_comments: 1
+  seconds: 86688
+  what: code-was-reviewed
+  when: 2025-10-31 18:21:03.000000000 Z
+  where: github
+  who: 204511582
+- _id: 19334
+  _job: 20202439635
+  _time: 2025-12-14 04:20:20.071978716 Z
+  _version: 0.19.2/0.58.1/0.17.6
+  author: 87902365
+  comments: 8
+  details: The pull request yegor256/takes#1487 with 137 HoC created by @eshabakhov
+    was reviewed by @yegor256 after 935h28m and 1 comments.
+  hoc: 137
+  issue: 1487
+  repository: 28924109
+  review_comments: 1
+  seconds: 3367703
+  what: code-was-reviewed
+  when: 2025-12-08 17:44:38.000000000 Z
+  where: github
+  who: 526301
