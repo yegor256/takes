@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1087558">
+<fb version="0.17.0" size="1088654">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">597.987779316</seconds>
+    <seconds t="F">812.733828494</seconds>
     <version t="S">0.58.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-12-18T04:16:14Z</when>
+    <when t="T">2025-12-19T04:21:10Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -65902,14 +65902,6 @@ The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
     <when t="T">2025-12-17T04:19:26Z</when>
   </f>
   <f>
-    <_id t="I">19351</_id>
-    <_job t="I">54173</_job>
-    <_time t="T">2025-12-17T04:19:50Z</_time>
-    <_version t="S">0.17.1/0.58.1/0.17.6</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-12-17T04:19:50Z</when>
-  </f>
-  <f>
     <_id t="I">19352</_id>
     <_job t="I">54173</_job>
     <_time t="T">2025-12-17T04:19:51Z</_time>
@@ -65924,25 +65916,6 @@ The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
     <start t="T">2025-09-17T09:00:17Z</start>
     <what t="S">earned-value</what>
     <when t="T">2025-12-17T04:19:51Z</when>
-  </f>
-  <f>
-    <_id t="I">19353</_id>
-    <_job t="I">20325660885</_job>
-    <_time t="T">2025-12-18T04:06:58Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.6</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6216847393</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1150</min_issue_was_found>
-    <min_pull_was_found t="I">337</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">19354</_id>
@@ -65961,5 +65934,248 @@ The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
     <total_stars t="I">868</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2025-12-18T04:07:24Z</when>
+  </f>
+  <f>
+    <_id t="I">19355</_id>
+    <_job t="I">54333</_job>
+    <_time t="T">2025-12-18T04:16:58Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.6</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-12-18T04:16:58Z</when>
+  </f>
+  <f>
+    <_id t="I">19357</_id>
+    <_job t="I">20359470362</_job>
+    <_time t="T">2025-12-19T04:07:59Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <since t="T">2025-12-11T16:57:25Z</since>
+    <total_builds_ran t="I">175</total_builds_ran>
+    <total_commits_pushed t="I">12</total_commits_pushed>
+    <total_hoc_committed t="I">218</total_hoc_committed>
+    <total_issues_created t="I">6</total_issues_created>
+    <total_pulls_submitted t="I">6</total_pulls_submitted>
+    <total_releases_published t="I">0</total_releases_published>
+    <total_reviews_submitted t="I">3</total_reviews_submitted>
+    <what t="S">quantity-of-deliverables</what>
+    <when t="T">2025-12-18T16:57:25Z</when>
+  </f>
+  <f>
+    <_id t="I">19358</_id>
+    <_job t="I">20359470362</_job>
+    <_time t="T">2025-12-19T04:08:51Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">5387438692</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1207</min_issue_was_found>
+    <min_pull_was_found t="I">338</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19359</_id>
+    <_job t="I">20359470362</_job>
+    <_time t="T">2025-12-19T04:09:35Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <total_active_contributors t="I">6</total_active_contributors>
+    <total_commits t="I">3616</total_commits>
+    <total_contributors t="I">85</total_contributors>
+    <total_files t="I">534</total_files>
+    <total_forks t="I">211</total_forks>
+    <total_issues t="I">742</total_issues>
+    <total_pulls t="I">789</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">868</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2025-12-19T04:09:35Z</when>
+  </f>
+  <f>
+    <_id t="I">19360</_id>
+    <_job t="I">20359470362</_job>
+    <_time t="T">2025-12-19T04:19:20Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <since t="T">2025-12-11T15:56:46Z</since>
+    <some_build_duration>
+      <v t="I">7</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">15</v>
+      <v t="I">923</v>
+      <v t="I">39</v>
+      <v t="I">802</v>
+      <v t="I">43</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">12</v>
+      <v t="I">14</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">15</v>
+      <v t="I">28</v>
+      <v t="I">30</v>
+      <v t="I">31</v>
+      <v t="I">32</v>
+      <v t="I">26</v>
+      <v t="I">33</v>
+      <v t="I">159</v>
+      <v t="I">286</v>
+      <v t="I">693</v>
+      <v t="I">36</v>
+      <v t="I">912</v>
+      <v t="I">41</v>
+      <v t="I">698</v>
+      <v t="I">42</v>
+      <v t="I">7</v>
+      <v t="I">7</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">16</v>
+      <v t="I">27</v>
+      <v t="I">31</v>
+      <v t="I">34</v>
+      <v t="I">262</v>
+      <v t="I">7</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">16</v>
+      <v t="I">24</v>
+      <v t="I">25</v>
+      <v t="I">30</v>
+      <v t="I">68</v>
+      <v t="I">482</v>
+    </some_build_duration>
+    <some_build_mttr>
+      <v t="I">7</v>
+      <v t="I">120</v>
+    </some_build_mttr>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_build_success_rate>
+    <some_merged_pulls t="I">8</some_merged_pulls>
+    <some_pull_lifetime>
+      <v t="F">27878.0</v>
+      <v t="F">38057.0</v>
+      <v t="F">63970.0</v>
+      <v t="F">28377.0</v>
+      <v t="F">36763.0</v>
+      <v t="F">183208.0</v>
+      <v t="F">3818594.0</v>
+      <v t="F">27672408.0</v>
+    </some_pull_lifetime>
+    <some_review_size>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">5</v>
+    </some_review_size>
+    <some_review_time>
+      <v t="I">931</v>
+      <v t="I">1785</v>
+      <v t="I">162620</v>
+      <v t="I">3731905</v>
+    </some_review_time>
+    <some_reviewers_per_pull>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">3</v>
+    </some_reviewers_per_pull>
+    <some_reviews_per_pull>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">5</v>
+    </some_reviews_per_pull>
+    <some_unmerged_pulls t="I">1</some_unmerged_pulls>
+    <what t="S">quality-of-service</what>
+    <when t="T">2025-12-18T15:56:46Z</when>
   </f>
 </fb>
