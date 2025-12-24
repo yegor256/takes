@@ -160,4 +160,21 @@ import org.takes.HttpException;
             )
         );
     }
+
+    @Test
+    void spaceTruncation() throws IOException {
+        MatcherAssert.assertThat(
+            "Currently URI parsing truncates at space character",
+            new RqRequestLine.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /?u=Hello World",
+                        "Host: www.example.com"
+                    ),
+                    ""
+                )
+            ).uri(),
+            Matchers.equalTo("/?u=Hello")
+        );
+    }
 }

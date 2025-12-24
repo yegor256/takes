@@ -17,7 +17,7 @@ import org.takes.HttpException;
  * Test case for {@link RqHref.Base}.
  * @since 0.1
  */
-final class RqHrefTest {
+@SuppressWarnings("PMD.TooManyMethods") final class RqHrefTest {
 
     @Test
     void parsesHttpQuery() throws IOException {
@@ -188,6 +188,23 @@ final class RqHrefTest {
                 )
             ).single("absent", "def-5"),
             Matchers.startsWith("def-")
+        );
+    }
+
+    @Test
+    void spaceTruncation() throws IOException {
+        MatcherAssert.assertThat(
+            "Currently URI with space gets truncated at the space character",
+            new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /?u=Hello World",
+                        "Host: www.example.com"
+                    ),
+                    ""
+                )
+            ).href().toString(),
+            Matchers.not(Matchers.containsString("Hello World"))
         );
     }
 }
