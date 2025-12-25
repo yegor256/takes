@@ -10,6 +10,7 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
@@ -161,10 +162,16 @@ import org.takes.HttpException;
         );
     }
 
+    /**
+     * Space truncation.
+     * todo: #1440 There is a space truncation in request. The string is being truncated after
+     * the space because the URI is not properly encoded.
+     */
+    @Disabled
     @Test
-    void spaceTruncation() throws IOException {
+    void noSpaceTruncationInUri() throws IOException {
         MatcherAssert.assertThat(
-            "Currently URI parsing truncates at space character",
+            "URI parsing does not truncate at the space character and correctly encoded",
             new RqRequestLine.Base(
                 new RqFake(
                     Arrays.asList(
@@ -174,7 +181,7 @@ import org.takes.HttpException;
                     ""
                 )
             ).uri(),
-            Matchers.equalTo("/?u=Hello")
+            Matchers.equalTo("/?u=Hello%20World")
         );
     }
 }
