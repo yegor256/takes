@@ -194,8 +194,11 @@ import org.takes.HttpException;
 
     /**
      * Space truncation.
-     * todo: #1440 There is a space truncation in request. The string is being truncated after
-     * the space because the URI is not properly encoded.
+     * todo: #1440 This test doesn't work because there is a space truncation in request.
+     * The string is being truncated after the space because the URI is not properly encoded.
+     * Let's make it work by doing URI encoding, because URL encoding converts characters into
+     * a format that can be transmitted over the Internet. URL encoding replaces unsafe ASCII
+     * characters with a "%" followed by two hexadecimal digits.
      */
     @Disabled
     @Test
