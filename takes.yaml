@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 514.459420737
+  seconds: 495.628696762
   version: 0.58.1
   what: judges-summary
-  when: 2025-12-27 04:14:42.227875925 Z
+  when: 2025-12-28 04:23:13.122491621 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -59199,29 +59199,6 @@
     The average monthly turnover (45.0 developers) is increasing (R=0.31).
   what: assessment
   when: 2025-12-26 04:18:17.449657742 Z
-- _id: 19387
-  _job: 55351
-  _time: 2025-12-26 04:18:45.811148476 Z
-  _version: 0.19.2/0.58.1/0.17.7!0.17.8
-  what: learn-eva
-  when: 2025-12-26 04:18:45.734872429 Z
-- _id: 19388
-  _job: 20534072906
-  _time: 2025-12-27 04:06:42.753402680 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 6286728281
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1303
-  min_pull_was_found: 358
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19389
   _job: 20534072906
   _time: 2025-12-27 04:07:01.244870364 Z
@@ -59238,3 +59215,275 @@
   total_stars: 868
   what: dimensions-of-terrain
   when: 2025-12-27 04:07:01.255271134 Z
+- _id: 19390
+  _job: 55452
+  _time: 2025-12-27 04:15:26.307089101 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.8
+  what: learn-eva
+  when: 2025-12-27 04:15:26.231735731 Z
+- _id: 19392
+  _job: 20548688045
+  _time: 2025-12-28 04:15:30.996153845 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  details: The issue yegor256/takes#1537 has been earlier opened by @revive-code-bot[bot].
+  is_human: 0
+  issue: 1537
+  repository: 28924109
+  what: issue-was-opened
+  when: 2025-12-27 04:59:55.000000000 Z
+  where: github
+  who: 166734835
+- _id: 19393
+  _job: 20548688045
+  _time: 2025-12-28 04:15:32.221067029 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 6308540159
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1307
+  min_pull_was_found: 365
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19394
+  _job: 20548688045
+  _time: 2025-12-28 04:15:49.309161984 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  total_active_contributors: 7
+  total_commits: 3620
+  total_contributors: 86
+  total_files: 534
+  total_forks: 212
+  total_issues: 743
+  total_pulls: 793
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 868
+  what: dimensions-of-terrain
+  when: 2025-12-28 04:15:49.320111564 Z
+- _id: 19395
+  _job: 20548688045
+  _time: 2025-12-28 04:16:25.772857020 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The missing pull yegor256/takes#1510 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1510
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-11-30 14:13:47.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19396
+  _job: 20548688045
+  _time: 2025-12-28 04:16:26.456339939 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: "#1437-fix"
+  details: The missing pull yegor256/takes#1511 has been opened by @kartofanych.
+  is_human: 1
+  issue: 1511
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-01 15:49:24.000000000 Z
+  where: github
+  who: 66062429
+- _id: 19397
+  _job: 20548688045
+  _time: 2025-12-28 04:16:27.000805490 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  details: The missing pull yegor256/takes#1512 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1512
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-02 13:46:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19398
+  _job: 20548688045
+  _time: 2025-12-28 04:16:27.644397578 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The missing pull yegor256/takes#1513 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1513
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-03 13:30:17.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19399
+  _job: 20548688045
+  _time: 2025-12-28 04:16:28.307582816 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1514 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1514
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-05 17:02:11.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19400
+  _job: 20548688045
+  _time: 2025-12-28 04:16:28.862771572 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  details: The missing pull yegor256/takes#1515 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1515
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-05 17:02:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19401
+  _job: 20548688045
+  _time: 2025-12-28 04:16:29.431558997 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1516 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1516
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-06 08:51:38.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19402
+  _job: 20548688045
+  _time: 2025-12-28 04:16:29.988206745 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/org.apache.commons-commons-text-1.x
+  details: The missing pull yegor256/takes#1517 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1517
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-08 04:20:58.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19403
+  _job: 20548688045
+  _time: 2025-12-28 04:16:30.536941670 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1518 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1518
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-08 04:21:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19404
+  _job: 20548688045
+  _time: 2025-12-28 04:16:31.085670834 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1519 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1519
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-08 14:46:24.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19405
+  _job: 20548688045
+  _time: 2025-12-28 04:16:31.605157186 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1520 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1520
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-09 04:18:03.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19406
+  _job: 20548688045
+  _time: 2025-12-28 04:16:32.223045657 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1521 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1521
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-09 08:58:58.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19407
+  _job: 20548688045
+  _time: 2025-12-28 04:16:32.906950051 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/davidanson-markdownlint-cli2-action-22.x
+  details: The missing pull yegor256/takes#1522 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1522
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-09 08:59:02.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19408
+  _job: 20548688045
+  _time: 2025-12-28 04:16:33.572195578 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  details: The missing pull yegor256/takes#1523 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1523
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-09 17:24:02.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19409
+  _job: 20548688045
+  _time: 2025-12-28 04:16:34.208896413 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/mockito-monorepo
+  details: The missing pull yegor256/takes#1524 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1524
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-10 03:09:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19410
+  _job: 20548688045
+  _time: 2025-12-28 04:16:34.766022372 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/peter-evans-create-pull-request-8.x
+  details: The missing pull yegor256/takes#1525 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1525
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-10 03:09:19.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19411
+  _job: 20548688045
+  _time: 2025-12-28 04:16:35.329024602 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  details: The missing pull yegor256/takes#1526 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1526
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-10 04:16:34.000000000 Z
+  where: github
+  who: 29139614
