@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1096608">
+<fb version="0.17.0" size="1111726">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">495.628696762</seconds>
+    <seconds t="F">706.976783354</seconds>
     <version t="S">0.58.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-12-28T04:23:13Z</when>
+    <when t="T">2025-12-29T04:27:55Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -66207,19 +66207,6 @@
     <when t="T">2025-12-24T04:09:34Z</when>
   </f>
   <f>
-    <_id t="I">19377</_id>
-    <_job t="I">55096</_job>
-    <_time t="T">2025-12-24T04:20:35Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (406.9) is decreasing (R=-0.59).
-The average number of commits per week (8.5) is staying still.
-The average number of releases per month (0.3) is decreasing (R=0.23).
-The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-12-24T04:20:35Z</when>
-  </f>
-  <f>
     <_id t="I">19380</_id>
     <_job t="I">20498717525</_job>
     <_time t="T">2025-12-25T04:10:26Z</_time>
@@ -66458,14 +66445,6 @@ The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
     <when t="T">2025-12-27T04:07:01Z</when>
   </f>
   <f>
-    <_id t="I">19390</_id>
-    <_job t="I">55452</_job>
-    <_time t="T">2025-12-27T04:15:26Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-12-27T04:15:26Z</when>
-  </f>
-  <f>
     <_id t="I">19392</_id>
     <_job t="I">20548688045</_job>
     <_time t="T">2025-12-28T04:15:30Z</_time>
@@ -66478,25 +66457,6 @@ The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
     <when t="T">2025-12-27T04:59:55Z</when>
     <where t="S">github</where>
     <who t="I">166734835</who>
-  </f>
-  <f>
-    <_id t="I">19393</_id>
-    <_job t="I">20548688045</_job>
-    <_time t="T">2025-12-28T04:15:32Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6308540159</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1307</min_issue_was_found>
-    <min_pull_was_found t="I">365</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">19394</_id>
@@ -66770,5 +66730,945 @@ The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
     <when t="T">2025-12-10T04:16:34Z</when>
     <where t="S">github</where>
     <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19412</_id>
+    <_job t="I">55540</_job>
+    <_time t="T">2025-12-28T04:23:34Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (389.6) is decreasing (R=-0.66).
+The average number of commits per week (8.1) is decreasing (R=-0.10).
+The average number of releases per month (0.3) is decreasing (R=0.17).
+The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-12-28T04:23:34Z</when>
+  </f>
+  <f>
+    <_id t="I">19413</_id>
+    <_job t="I">55540</_job>
+    <_time t="T">2025-12-28T04:24:01Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-12-28T04:24:01Z</when>
+  </f>
+  <f>
+    <_id t="I">19414</_id>
+    <_job t="I">55540</_job>
+    <_time t="T">2025-12-28T04:24:02Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">0.9393183335299753</cost_of_qod>
+    <ev t="I">77</ev>
+    <pv t="I">2283</pv>
+    <qod t="I">82</qod>
+    <qod_per_day t="F">23.879394957983184</qod_per_day>
+    <qod_per_sec t="F">9.43207035574456e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2025-12-28T04:24:02Z</when>
+  </f>
+  <f>
+    <_id t="I">19416</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:16:43Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1510 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1510</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-11-30T16:53:20Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-11-30T17:07:29Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19417</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:17:02Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">#1437-fix</branch>
+    <comments t="I">5</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">2</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1511 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">233</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1511</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-01T16:52:53Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19418</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:17:14Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1512 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1512</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-02T16:33:14Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-02T16:46:25Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19419</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:17:28Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1513 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1513</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-04T03:19:18Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-04T03:34:44Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19420</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:17:41Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1514 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1514</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-06T02:50:24Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-06T03:36:41Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19421</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:17:49Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1515 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1515</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-06T02:50:22Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-06T03:08:42Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19422</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:18:02Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1516 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1516</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-06T16:50:59Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-06T17:05:05Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19423</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:18:15Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/org.apache.commons-commons-text-1.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1517 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1517</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-08T08:43:17Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-08T09:11:04Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19424</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:18:23Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1518 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1518</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-08T08:43:15Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-08T08:57:07Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19425</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:18:36Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1519 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1519</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-08T16:39:50Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-08T16:53:30Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19426</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:18:50Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1520 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1520</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-09T08:45:00Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-09T08:58:02Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19427</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:19:03Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1521 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1521</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-09T16:51:16Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-09T17:23:42Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19428</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:19:16Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/jamesives-github-pages-deploy-action-4.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1523 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1523</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-10T02:56:02Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-10T03:09:04Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19429</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:19:29Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1524 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1524</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-10T08:52:24Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-12T06:02:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19430</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:19:36Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/peter-evans-create-pull-request-8.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1525 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1525</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-10T08:52:20Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-10T10:20:04Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19431</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:19:43Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/jamesives-github-pages-deploy-action-4.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1526 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1526</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-10T08:52:17Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-10T09:23:52Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19432</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:19:58Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">6332474659</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1357</min_issue_was_found>
+    <min_pull_was_found t="I">366</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19433</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:16Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <total_active_contributors t="I">7</total_active_contributors>
+    <total_commits t="I">3620</total_commits>
+    <total_contributors t="I">86</total_contributors>
+    <total_files t="I">534</total_files>
+    <total_forks t="I">212</total_forks>
+    <total_issues t="I">743</total_issues>
+    <total_pulls t="I">793</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">868</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2025-12-29T04:20:16Z</when>
+  </f>
+  <f>
+    <_id t="I">19434</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:48Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1527 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1527</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-11T19:49:21Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19435</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:49Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/actions-cache-5.x</branch>
+    <details t="S">The missing pull yegor256/takes#1528 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1528</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-11T22:09:18Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19436</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:49Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/com.qulice-qulice-maven-plugin-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1529 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1529</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-12T10:02:15Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19437</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:50Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1530 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1530</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-12T16:59:50Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19438</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:50Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/com.restfb-restfb-3.x</branch>
+    <details t="S">The missing pull yegor256/takes#1531 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1531</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-15T17:33:18Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19439</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:51Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1532 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1532</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-18T06:14:42Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19440</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:52Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/com.qulice-qulice-maven-plugin-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1533 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1533</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-22T20:51:34Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19441</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:52Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/com.qulice-qulice-maven-plugin-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1534 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1534</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-24T17:52:32Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19442</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:53Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1535 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1535</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-24T17:52:35Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">19443</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:20:54Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">1440</branch>
+    <details t="S">The missing pull yegor256/takes#1536 has been opened by @vladigeras.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1536</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2025-12-24T19:46:37Z</when>
+    <where t="S">github</where>
+    <who t="I">22403368</who>
+  </f>
+  <f>
+    <_id t="I">19444</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:28Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1510 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 2h39m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1510</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">9573</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-11-30T16:53:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19445</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:29Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1512 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 2h47m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1512</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">10033</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-02T16:33:14Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19446</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:30Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1513 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 13h49m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1513</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">49741</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-04T03:19:18Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19447</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:31Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1514 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 9h48m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1514</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">35293</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-06T02:50:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19448</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:32Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1515 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 9h48m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1515</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">35287</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-06T02:50:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19449</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:33Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1516 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 7h59m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1516</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">28761</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-06T16:50:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19450</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:34Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1517 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 4h22m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1517</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">15739</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-08T08:43:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19451</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:35Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1518 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 4h22m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1518</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">15734</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-08T08:43:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19452</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:36Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1519 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 1h53m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1519</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">6806</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-08T16:39:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19453</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:37Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1520 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 4h26m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1520</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">16017</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-09T08:45:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19454</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:38Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1521 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 7h52m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1521</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">28338</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-09T16:51:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19455</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:39Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1523 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 9h32m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1523</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">34320</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-10T02:56:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19456</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:39Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1524 with 4 HoC created by @renovate[bot] was reviewed by @yegor256 after 5h43m and 0 comments.</details>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1524</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">20588</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-10T08:52:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19457</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:40Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1525 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 5h43m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1525</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">20581</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-10T08:52:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19458</_id>
+    <_job t="I">20564665368</_job>
+    <_time t="T">2025-12-29T04:25:41Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1526 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 4h35m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1526</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">16543</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-10T08:52:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
   </f>
 </fb>

@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 495.628696762
+  seconds: 706.976783354
   version: 0.58.1
   what: judges-summary
-  when: 2025-12-28 04:23:13.122491621 Z
+  when: 2025-12-29 04:27:55.932063645 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -58984,18 +58984,6 @@
   total_stars: 868
   what: dimensions-of-terrain
   when: 2025-12-24 04:09:34.756541839 Z
-- _id: 19377
-  _job: 55096
-  _time: 2025-12-24 04:20:35.025464583 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  analyzers: 18
-  text: |-
-    The average number of builds per week (406.9) is decreasing (R=-0.59).
-    The average number of commits per week (8.5) is staying still.
-    The average number of releases per month (0.3) is decreasing (R=0.23).
-    The average monthly turnover (45.0 developers) is increasing (R=0.31).
-  what: assessment
-  when: 2025-12-24 04:20:35.046144787 Z
 - _id: 19380
   _job: 20498717525
   _time: 2025-12-25 04:10:26.442457086 Z
@@ -59215,12 +59203,6 @@
   total_stars: 868
   what: dimensions-of-terrain
   when: 2025-12-27 04:07:01.255271134 Z
-- _id: 19390
-  _job: 55452
-  _time: 2025-12-27 04:15:26.307089101 Z
-  _version: 0.19.2/0.58.1/0.17.7!0.17.8
-  what: learn-eva
-  when: 2025-12-27 04:15:26.231735731 Z
 - _id: 19392
   _job: 20548688045
   _time: 2025-12-28 04:15:30.996153845 Z
@@ -59233,23 +59215,6 @@
   when: 2025-12-27 04:59:55.000000000 Z
   where: github
   who: 166734835
-- _id: 19393
-  _job: 20548688045
-  _time: 2025-12-28 04:15:32.221067029 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 6308540159
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1307
-  min_pull_was_found: 365
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19394
   _job: 20548688045
   _time: 2025-12-28 04:15:49.309161984 Z
@@ -59487,3 +59452,867 @@
   when: 2025-12-10 04:16:34.000000000 Z
   where: github
   who: 29139614
+- _id: 19412
+  _job: 55540
+  _time: 2025-12-28 04:23:34.150758552 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.8
+  analyzers: 18
+  text: |-
+    The average number of builds per week (389.6) is decreasing (R=-0.66).
+    The average number of commits per week (8.1) is decreasing (R=-0.10).
+    The average number of releases per month (0.3) is decreasing (R=0.17).
+    The average monthly turnover (44.0 developers) is increasing (R=0.31).
+  what: assessment
+  when: 2025-12-28 04:23:34.173398387 Z
+- _id: 19413
+  _job: 55540
+  _time: 2025-12-28 04:24:01.819501569 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.8
+  what: learn-eva
+  when: 2025-12-28 04:24:01.745621345 Z
+- _id: 19414
+  _job: 55540
+  _time: 2025-12-28 04:24:02.040199359 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.8
+  ac: 24
+  cost_of_qod: 0.9393183335299753
+  ev: 77
+  pv: 2283
+  qod: 82
+  qod_per_day: 23.879394957983184
+  qod_per_sec: 9.43207035574456e-06
+  start: *3
+  what: earned-value
+  when: 2025-12-28 04:24:02.040390064 Z
+- _id: 19416
+  _job: 20564665368
+  _time: 2025-12-29 04:16:43.644630709 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1510 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1510
+  repository: 28924109
+  review: 2025-11-30 16:53:20.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-11-30 17:07:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19417
+  _job: 20564665368
+  _time: 2025-12-29 04:17:02.341598735 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: "#1437-fix"
+  comments: 5
+  comments_appreciated: 1
+  comments_by_author: 2
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1511 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 233
+  is_human: 0
+  issue: 1511
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-01 16:52:53.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19418
+  _job: 20564665368
+  _time: 2025-12-29 04:17:14.975117616 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1512 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1512
+  repository: 28924109
+  review: 2025-12-02 16:33:14.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-02 16:46:25.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19419
+  _job: 20564665368
+  _time: 2025-12-29 04:17:28.170620980 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1513 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1513
+  repository: 28924109
+  review: 2025-12-04 03:19:18.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-04 03:34:44.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19420
+  _job: 20564665368
+  _time: 2025-12-29 04:17:41.922204653 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1514 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1514
+  repository: 28924109
+  review: 2025-12-06 02:50:24.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-06 03:36:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19421
+  _job: 20564665368
+  _time: 2025-12-29 04:17:49.188221518 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1515 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1515
+  repository: 28924109
+  review: 2025-12-06 02:50:22.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-06 03:08:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19422
+  _job: 20564665368
+  _time: 2025-12-29 04:18:02.304964762 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1516 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1516
+  repository: 28924109
+  review: 2025-12-06 16:50:59.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-06 17:05:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19423
+  _job: 20564665368
+  _time: 2025-12-29 04:18:15.879320814 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/org.apache.commons-commons-text-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1517 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1517
+  repository: 28924109
+  review: 2025-12-08 08:43:17.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-08 09:11:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19424
+  _job: 20564665368
+  _time: 2025-12-29 04:18:23.206646732 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1518 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1518
+  repository: 28924109
+  review: 2025-12-08 08:43:15.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-08 08:57:07.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19425
+  _job: 20564665368
+  _time: 2025-12-29 04:18:36.606357691 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1519 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1519
+  repository: 28924109
+  review: 2025-12-08 16:39:50.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-08 16:53:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19426
+  _job: 20564665368
+  _time: 2025-12-29 04:18:50.114260969 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1520 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1520
+  repository: 28924109
+  review: 2025-12-09 08:45:00.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-09 08:58:02.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19427
+  _job: 20564665368
+  _time: 2025-12-29 04:19:03.038450214 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1521 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1521
+  repository: 28924109
+  review: 2025-12-09 16:51:16.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-09 17:23:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19428
+  _job: 20564665368
+  _time: 2025-12-29 04:19:16.190569091 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1523 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1523
+  repository: 28924109
+  review: 2025-12-10 02:56:02.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-10 03:09:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19429
+  _job: 20564665368
+  _time: 2025-12-29 04:19:29.375063686 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/mockito-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1524 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 1524
+  repository: 28924109
+  review: 2025-12-10 08:52:24.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-12 06:02:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 19430
+  _job: 20564665368
+  _time: 2025-12-29 04:19:36.797459417 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/peter-evans-create-pull-request-8.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1525 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1525
+  repository: 28924109
+  review: 2025-12-10 08:52:20.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-10 10:20:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19431
+  _job: 20564665368
+  _time: 2025-12-29 04:19:43.701839765 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1526 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1526
+  repository: 28924109
+  review: 2025-12-10 08:52:17.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-10 09:23:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19432
+  _job: 20564665368
+  _time: 2025-12-29 04:19:58.673789225 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 6332474659
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1357
+  min_pull_was_found: 366
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19433
+  _job: 20564665368
+  _time: 2025-12-29 04:20:16.389592106 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  total_active_contributors: 7
+  total_commits: 3620
+  total_contributors: 86
+  total_files: 534
+  total_forks: 212
+  total_issues: 743
+  total_pulls: 793
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 868
+  what: dimensions-of-terrain
+  when: 2025-12-29 04:20:16.405686968 Z
+- _id: 19434
+  _job: 20564665368
+  _time: 2025-12-29 04:20:48.693337181 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1527 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1527
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-11 19:49:21.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19435
+  _job: 20564665368
+  _time: 2025-12-29 04:20:49.192718215 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/actions-cache-5.x
+  details: The missing pull yegor256/takes#1528 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1528
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-11 22:09:18.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19436
+  _job: 20564665368
+  _time: 2025-12-29 04:20:49.788805364 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  details: The missing pull yegor256/takes#1529 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1529
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-12 10:02:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19437
+  _job: 20564665368
+  _time: 2025-12-29 04:20:50.372660085 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1530 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1530
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-12 16:59:50.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19438
+  _job: 20564665368
+  _time: 2025-12-29 04:20:50.902352791 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/com.restfb-restfb-3.x
+  details: The missing pull yegor256/takes#1531 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1531
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-15 17:33:18.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19439
+  _job: 20564665368
+  _time: 2025-12-29 04:20:51.572741633 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1532 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1532
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-18 06:14:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19440
+  _job: 20564665368
+  _time: 2025-12-29 04:20:52.188038459 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  details: The missing pull yegor256/takes#1533 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1533
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-22 20:51:34.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19441
+  _job: 20564665368
+  _time: 2025-12-29 04:20:52.811900422 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  details: The missing pull yegor256/takes#1534 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1534
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-24 17:52:32.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19442
+  _job: 20564665368
+  _time: 2025-12-29 04:20:53.348339662 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1535 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1535
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-24 17:52:35.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19443
+  _job: 20564665368
+  _time: 2025-12-29 04:20:54.018110347 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  branch: '1440'
+  details: The missing pull yegor256/takes#1536 has been opened by @vladigeras.
+  is_human: 1
+  issue: 1536
+  repository: 28924109
+  what: pull-was-opened
+  when: 2025-12-24 19:46:37.000000000 Z
+  where: github
+  who: 22403368
+- _id: 19444
+  _job: 20564665368
+  _time: 2025-12-29 04:25:28.064243232 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1510 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 2h39m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1510
+  repository: 28924109
+  review_comments: 0
+  seconds: 9573
+  what: code-was-reviewed
+  when: 2025-11-30 16:53:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 19445
+  _job: 20564665368
+  _time: 2025-12-29 04:25:29.695317588 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1512 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 2h47m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1512
+  repository: 28924109
+  review_comments: 0
+  seconds: 10033
+  what: code-was-reviewed
+  when: 2025-12-02 16:33:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 19446
+  _job: 20564665368
+  _time: 2025-12-29 04:25:30.615703202 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1513 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 13h49m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1513
+  repository: 28924109
+  review_comments: 0
+  seconds: 49741
+  what: code-was-reviewed
+  when: 2025-12-04 03:19:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 19447
+  _job: 20564665368
+  _time: 2025-12-29 04:25:31.477972501 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1514 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h48m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1514
+  repository: 28924109
+  review_comments: 0
+  seconds: 35293
+  what: code-was-reviewed
+  when: 2025-12-06 02:50:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 19448
+  _job: 20564665368
+  _time: 2025-12-29 04:25:32.454359998 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1515 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h48m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1515
+  repository: 28924109
+  review_comments: 0
+  seconds: 35287
+  what: code-was-reviewed
+  when: 2025-12-06 02:50:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 19449
+  _job: 20564665368
+  _time: 2025-12-29 04:25:33.568220315 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1516 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h59m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1516
+  repository: 28924109
+  review_comments: 0
+  seconds: 28761
+  what: code-was-reviewed
+  when: 2025-12-06 16:50:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 19450
+  _job: 20564665368
+  _time: 2025-12-29 04:25:34.427875774 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1517 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h22m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1517
+  repository: 28924109
+  review_comments: 0
+  seconds: 15739
+  what: code-was-reviewed
+  when: 2025-12-08 08:43:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 19451
+  _job: 20564665368
+  _time: 2025-12-29 04:25:35.407413903 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1518 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h22m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1518
+  repository: 28924109
+  review_comments: 0
+  seconds: 15734
+  what: code-was-reviewed
+  when: 2025-12-08 08:43:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 19452
+  _job: 20564665368
+  _time: 2025-12-29 04:25:36.251163499 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1519 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 1h53m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1519
+  repository: 28924109
+  review_comments: 0
+  seconds: 6806
+  what: code-was-reviewed
+  when: 2025-12-08 16:39:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 19453
+  _job: 20564665368
+  _time: 2025-12-29 04:25:37.238651608 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1520 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h26m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1520
+  repository: 28924109
+  review_comments: 0
+  seconds: 16017
+  what: code-was-reviewed
+  when: 2025-12-09 08:45:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 19454
+  _job: 20564665368
+  _time: 2025-12-29 04:25:38.227342151 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1521 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h52m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1521
+  repository: 28924109
+  review_comments: 0
+  seconds: 28338
+  what: code-was-reviewed
+  when: 2025-12-09 16:51:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 19455
+  _job: 20564665368
+  _time: 2025-12-29 04:25:39.103829833 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1523 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h32m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1523
+  repository: 28924109
+  review_comments: 0
+  seconds: 34320
+  what: code-was-reviewed
+  when: 2025-12-10 02:56:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 19456
+  _job: 20564665368
+  _time: 2025-12-29 04:25:39.977017462 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1524 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 5h43m and 0 comments.
+  hoc: 4
+  is_human: 1
+  issue: 1524
+  repository: 28924109
+  review_comments: 0
+  seconds: 20588
+  what: code-was-reviewed
+  when: 2025-12-10 08:52:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 19457
+  _job: 20564665368
+  _time: 2025-12-29 04:25:40.849996718 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1525 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 5h43m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1525
+  repository: 28924109
+  review_comments: 0
+  seconds: 20581
+  what: code-was-reviewed
+  when: 2025-12-10 08:52:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 19458
+  _job: 20564665368
+  _time: 2025-12-29 04:25:41.699041309 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1526 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h35m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1526
+  repository: 28924109
+  review_comments: 0
+  seconds: 16543
+  what: code-was-reviewed
+  when: 2025-12-10 08:52:17.000000000 Z
+  where: github
+  who: 526301
