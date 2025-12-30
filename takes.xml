@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1111726">
+<fb version="0.17.0" size="1115720">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">706.976783354</seconds>
+    <seconds t="F">859.755531673</seconds>
     <version t="S">0.58.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2025-12-29T04:27:55Z</when>
+    <when t="T">2025-12-30T04:24:59Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -66414,19 +66414,6 @@
     <when t="T">2025-12-25T15:56:46Z</when>
   </f>
   <f>
-    <_id t="I">19386</_id>
-    <_job t="I">55351</_job>
-    <_time t="T">2025-12-26T04:18:17Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (389.6) is decreasing (R=-0.66).
-The average number of commits per week (8.1) is decreasing (R=-0.10).
-The average number of releases per month (0.3) is decreasing (R=0.17).
-The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
-    <what t="S">assessment</what>
-    <when t="T">2025-12-26T04:18:17Z</when>
-  </f>
-  <f>
     <_id t="I">19389</_id>
     <_job t="I">20534072906</_job>
     <_time t="T">2025-12-27T04:07:01Z</_time>
@@ -66745,14 +66732,6 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <when t="T">2025-12-28T04:23:34Z</when>
   </f>
   <f>
-    <_id t="I">19413</_id>
-    <_job t="I">55540</_job>
-    <_time t="T">2025-12-28T04:24:01Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2025-12-28T04:24:01Z</when>
-  </f>
-  <f>
     <_id t="I">19414</_id>
     <_job t="I">55540</_job>
     <_time t="T">2025-12-28T04:24:02Z</_time>
@@ -66788,6 +66767,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1510</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-11-30T16:53:20Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66814,6 +66794,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <is_human t="I">0</is_human>
     <issue t="I">1511</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66841,6 +66822,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1512</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-02T16:33:14Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66868,6 +66850,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1513</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-04T03:19:18Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66895,6 +66878,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1514</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-06T02:50:24Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66922,6 +66906,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1515</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-06T02:50:22Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66949,6 +66934,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1516</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-06T16:50:59Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -66976,6 +66962,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1517</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-08T08:43:17Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67003,6 +66990,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1518</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-08T08:43:15Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67030,6 +67018,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1519</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-08T16:39:50Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67057,6 +67046,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1520</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-09T08:45:00Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67084,6 +67074,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1521</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-09T16:51:16Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67111,6 +67102,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1523</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-10T02:56:02Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67138,6 +67130,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1524</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-10T08:52:24Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67165,6 +67158,7 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1525</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-10T08:52:20Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -67192,31 +67186,13 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <issue t="I">1526</issue>
     <repository t="I">28924109</repository>
     <review t="T">2025-12-10T08:52:17Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
     <when t="T">2025-12-10T09:23:52Z</when>
     <where t="S">github</where>
     <who t="I">8086956</who>
-  </f>
-  <f>
-    <_id t="I">19432</_id>
-    <_job t="I">20564665368</_job>
-    <_time t="T">2025-12-29T04:19:58Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">6332474659</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1357</min_issue_was_found>
-    <min_pull_was_found t="I">366</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">19433</_id>
@@ -67668,6 +67644,290 @@ The average monthly turnover (44.0 developers) is increasing (R=0.31).</text>
     <seconds t="I">16543</seconds>
     <what t="S">code-was-reviewed</what>
     <when t="T">2025-12-10T08:52:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19459</_id>
+    <_job t="I">55671</_job>
+    <_time t="T">2025-12-29T04:28:18Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (389.6) is decreasing (R=-0.66).
+The average number of commits per week (8.1) is decreasing (R=-0.10).
+The average number of releases per month (0.3) is decreasing (R=0.17).
+The average monthly turnover (45.0 developers) is increasing (R=0.31).</text>
+    <what t="S">assessment</what>
+    <when t="T">2025-12-29T04:28:18Z</when>
+  </f>
+  <f>
+    <_id t="I">19460</_id>
+    <_job t="I">55671</_job>
+    <_time t="T">2025-12-29T04:28:43Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7!0.17.8</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2025-12-29T04:28:43Z</when>
+  </f>
+  <f>
+    <_id t="I">19462</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:11:35Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1527 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1527</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-12T06:02:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19463</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:11:54Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/actions-cache-5.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1528 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1528</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-12T06:02:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19464</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:12:05Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/com.qulice-qulice-maven-plugin-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1529 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1529</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-13T03:18:39Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-13T03:48:25Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19465</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:12:17Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1530 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1530</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-13T03:18:36Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-13T03:34:07Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19466</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:12:39Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1532 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1532</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-18T13:59:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19467</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:12:50Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">renovate/com.qulice-qulice-maven-plugin-0.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1533 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1533</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2025-12-23T03:16:36Z</review>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-23T03:31:40Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19468</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:13:14Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <branch t="S">1440</branch>
+    <comments t="I">13</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">5</comments_by_author>
+    <comments_by_reviewers t="I">8</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1536 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">56</hoc>
+    <issue t="I">1536</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2025-12-25T10:52:18Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">19469</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:13:42Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">6354438077</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1358</min_issue_was_found>
+    <min_pull_was_found t="I">374</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19470</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:14:22Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <details t="S">We found out that the user #22403368 is known in GitHub as @vladigeras.</details>
+    <name t="S">vladigeras</name>
+    <what t="S">who-has-name</what>
+    <when t="T">2025-12-30T04:14:22Z</when>
+    <where t="S">github</where>
+    <who t="I">22403368</who>
+  </f>
+  <f>
+    <_id t="I">19471</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:22:05Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1529 with 4 HoC created by @renovate[bot] was reviewed by @yegor256 after 17h16m and 0 comments.</details>
+    <hoc t="I">4</hoc>
+    <issue t="I">1529</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">62184</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-13T03:18:39Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19472</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:22:07Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1530 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 10h18m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1530</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">37127</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-13T03:18:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19473</_id>
+    <_job t="I">20588632923</_job>
+    <_time t="T">2025-12-30T04:22:10Z</_time>
+    <_version t="S">0.19.2/0.58.1/0.17.7</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1533 with 4 HoC created by @renovate[bot] was reviewed by @yegor256 after 6h25m and 0 comments.</details>
+    <hoc t="I">4</hoc>
+    <issue t="I">1533</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">23102</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2025-12-23T03:16:36Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
