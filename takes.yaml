@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 859.755531673
+  seconds: 534.191505609
   version: 0.58.1
   what: judges-summary
-  when: 2025-12-30 04:24:59.660243775 Z
+  when: 2025-12-31 04:19:12.276037021 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -60309,12 +60309,6 @@
     The average monthly turnover (45.0 developers) is increasing (R=0.31).
   what: assessment
   when: 2025-12-29 04:28:18.090575569 Z
-- _id: 19460
-  _job: 55671
-  _time: 2025-12-29 04:28:43.309024418 Z
-  _version: 0.19.2/0.58.1/0.17.7!0.17.8
-  what: learn-eva
-  when: 2025-12-29 04:28:43.230593378 Z
 - _id: 19462
   _job: 20588632923
   _time: 2025-12-30 04:11:35.912289543 Z
@@ -60330,8 +60324,10 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1527
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -60353,8 +60349,10 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 1
   issue: 1528
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -60376,9 +60374,11 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 0
   issue: 1529
   repository: 28924109
   review: 2025-12-13 03:18:39.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -60400,9 +60400,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1530
   repository: 28924109
   review: 2025-12-13 03:18:36.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -60424,8 +60426,10 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1532
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -60447,9 +60451,11 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 0
   issue: 1533
   repository: 28924109
   review: 2025-12-23 03:16:36.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -60471,36 +60477,22 @@
   failed_builds: 0
   files: 2
   hoc: 56
+  is_human: 0
   issue: 1536
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
   when: 2025-12-25 10:52:18.000000000 Z
   where: github
   who: 8086956
-- _id: 19469
-  _job: 20588632923
-  _time: 2025-12-30 04:13:42.623111382 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 6354438077
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1358
-  min_pull_was_found: 374
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19470
   _job: 20588632923
   _time: 2025-12-30 04:14:22.286922412 Z
   _version: 0.19.2/0.58.1/0.17.7
   details: 'We found out that the user #22403368 is known in GitHub as @vladigeras.'
+  is_human: 1
   name: vladigeras
   what: who-has-name
   when: 2025-12-30 04:14:22.507672294 Z
@@ -60515,6 +60507,7 @@
   details: The pull request yegor256/takes#1529 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 17h16m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1529
   repository: 28924109
   review_comments: 0
@@ -60532,6 +60525,7 @@
   details: The pull request yegor256/takes#1530 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 10h18m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1530
   repository: 28924109
   review_comments: 0
@@ -60549,6 +60543,7 @@
   details: The pull request yegor256/takes#1533 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 6h25m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1533
   repository: 28924109
   review_comments: 0
@@ -60557,3 +60552,42 @@
   when: 2025-12-23 03:16:36.000000000 Z
   where: github
   who: 526301
+- _id: 19474
+  _job: 55765
+  _time: 2025-12-30 04:25:48.272247954 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.8
+  what: learn-eva
+  when: 2025-12-30 04:25:48.194551194 Z
+- _id: 19475
+  _job: 20611802508
+  _time: 2025-12-31 04:10:59.655968404 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 6362823025
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1366
+  min_pull_was_found: 378
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19476
+  _job: 20611802508
+  _time: 2025-12-31 04:11:20.068491858 Z
+  _version: 0.19.2/0.58.1/0.17.7
+  total_active_contributors: 5
+  total_commits: 3621
+  total_contributors: 86
+  total_files: 534
+  total_forks: 212
+  total_issues: 743
+  total_pulls: 794
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 868
+  what: dimensions-of-terrain
+  when: 2025-12-31 04:11:20.079253441 Z
