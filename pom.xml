@@ -164,7 +164,7 @@
     <dependency>
       <groupId>com.restfb</groupId>
       <artifactId>restfb</artifactId>
-      <version>2.27.1</version>
+      <version>3.24.0</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
