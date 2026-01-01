@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 534.191505609
+  seconds: 770.212792258
   version: 0.58.1
   what: judges-summary
-  when: 2025-12-31 04:19:12.276037021 Z
+  when: 2026-01-01 04:28:29.841279701 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -59440,18 +59440,6 @@
   when: 2025-12-10 04:16:34.000000000 Z
   where: github
   who: 29139614
-- _id: 19412
-  _job: 55540
-  _time: 2025-12-28 04:23:34.150758552 Z
-  _version: 0.19.2/0.58.1/0.17.7!0.17.8
-  analyzers: 18
-  text: |-
-    The average number of builds per week (389.6) is decreasing (R=-0.66).
-    The average number of commits per week (8.1) is decreasing (R=-0.10).
-    The average number of releases per month (0.3) is decreasing (R=0.17).
-    The average monthly turnover (44.0 developers) is increasing (R=0.31).
-  what: assessment
-  when: 2025-12-28 04:23:34.173398387 Z
 - _id: 19414
   _job: 55540
   _time: 2025-12-28 04:24:02.040199359 Z
@@ -60552,29 +60540,6 @@
   when: 2025-12-23 03:16:36.000000000 Z
   where: github
   who: 526301
-- _id: 19474
-  _job: 55765
-  _time: 2025-12-30 04:25:48.272247954 Z
-  _version: 0.19.2/0.58.1/0.17.7!0.17.8
-  what: learn-eva
-  when: 2025-12-30 04:25:48.194551194 Z
-- _id: 19475
-  _job: 20611802508
-  _time: 2025-12-31 04:10:59.655968404 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 6362823025
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1366
-  min_pull_was_found: 378
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19476
   _job: 20611802508
   _time: 2025-12-31 04:11:20.068491858 Z
@@ -60591,3 +60556,140 @@
   total_stars: 868
   what: dimensions-of-terrain
   when: 2025-12-31 04:11:20.079253441 Z
+- _id: 19477
+  _job: 55842
+  _time: 2025-12-31 04:19:34.095612137 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.9
+  analyzers: 18
+  text: |-
+    The average number of builds per week (389.6) is decreasing (R=-0.66).
+    The average number of commits per week (8.1) is decreasing (R=-0.10).
+    The average number of releases per month (0.3) is decreasing (R=0.17).
+    The average monthly turnover (45.0 developers) is increasing (R=0.31).
+  what: assessment
+  when: 2025-12-31 04:19:34.113173849 Z
+- _id: 19478
+  _job: 55842
+  _time: 2025-12-31 04:19:58.283203197 Z
+  _version: 0.19.2/0.58.1/0.17.7!0.17.9
+  what: learn-eva
+  when: 2025-12-31 04:19:58.203871826 Z
+- _id: 19480
+  _job: 20632394203
+  _time: 2026-01-01 04:16:30.152865072 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1534 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 1
+  issue: 1534
+  repository: 28924109
+  review: 2025-12-25 03:15:02.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-31 14:02:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 19481
+  _job: 20632394203
+  _time: 2026-01-01 04:16:46.997843175 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1535 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1535
+  repository: 28924109
+  review: 2025-12-25 03:14:59.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-31 14:02:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 19482
+  _job: 20632394203
+  _time: 2026-01-01 04:17:01.562181183 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 6393482477
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1371
+  min_pull_was_found: 380
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19483
+  _job: 20632394203
+  _time: 2026-01-01 04:17:45.632647401 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  total_active_contributors: 5
+  total_commits: 3625
+  total_contributors: 86
+  total_files: 534
+  total_forks: 212
+  total_issues: 743
+  total_pulls: 795
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 868
+  what: dimensions-of-terrain
+  when: 2026-01-01 04:17:45.655613758 Z
+- _id: 19484
+  _job: 20632394203
+  _time: 2026-01-01 04:25:43.177844478 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1534 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h22m and 0 comments.
+  hoc: 4
+  is_human: 1
+  issue: 1534
+  repository: 28924109
+  review_comments: 0
+  seconds: 33750
+  what: code-was-reviewed
+  when: 2025-12-25 03:15:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 19485
+  _job: 20632394203
+  _time: 2026-01-01 04:25:43.360807314 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1535 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h22m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1535
+  repository: 28924109
+  review_comments: 0
+  seconds: 33744
+  what: code-was-reviewed
+  when: 2025-12-25 03:14:59.000000000 Z
+  where: github
+  who: 526301
