@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/1158/reviews?per_page=100:
+    504 - We couldn''t respond to your request in time. Sorry about that. Please try
+    resubmitting your request and contact us if the problem persists.'
   inserted: 8
-  seconds: 531.292975623
+  seconds: 362.685371906
   version: 0.58.1
   what: judges-summary
-  when: 2026-01-07 04:19:51.792964866 Z
+  when: 2026-01-08 04:16:46.557431956 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -60882,18 +60885,6 @@
   total_stars: 868
   what: dimensions-of-terrain
   when: 2026-01-04 04:17:25.531175837 Z
-- _id: 19500
-  _job: 56353
-  _time: 2026-01-04 04:26:15.394174057 Z
-  _version: 0.19.2/0.58.1/0.17.9
-  analyzers: 18
-  text: |-
-    The average number of builds per week (370.4) is decreasing (R=-0.73).
-    The average number of commits per week (7.9) is decreasing (R=-0.14).
-    The average number of releases per month (0.3) is decreasing (R=0.12).
-    The average monthly turnover (40.0 developers) is increasing (R=0.14).
-  what: assessment
-  when: 2026-01-04 04:26:15.412034508 Z
 - _id: 19503
   _job: 20704924865
   _time: 2026-01-05 04:19:03.742984148 Z
@@ -60922,29 +60913,6 @@
     The average monthly turnover (40.0 developers) is increasing (R=0.14).
   what: assessment
   when: 2026-01-05 04:27:15.625422536 Z
-- _id: 19507
-  _job: 56586
-  _time: 2026-01-06 04:20:00.702050590 Z
-  _version: 0.19.2/0.58.1/0.17.9
-  what: learn-eva
-  when: 2026-01-06 04:20:00.639337143 Z
-- _id: 19508
-  _job: 20770308085
-  _time: 2026-01-07 04:11:25.672682683 Z
-  _version: 0.19.2/0.58.1/0.17.9
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 7217027045
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1408
-  min_pull_was_found: 398
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19509
   _job: 20770308085
   _time: 2026-01-07 04:11:45.909848310 Z
@@ -60961,3 +60929,38 @@
   total_stars: 868
   what: dimensions-of-terrain
   when: 2026-01-07 04:11:45.922193691 Z
+- _id: 19510
+  _job: 56689
+  _time: 2026-01-07 04:20:13.812970966 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  analyzers: 18
+  text: |-
+    The average number of builds per week (370.4) is decreasing (R=-0.73).
+    The average number of commits per week (7.9) is decreasing (R=-0.14).
+    The average number of releases per month (0.3) is decreasing (R=0.12).
+    The average monthly turnover (40.0 developers) is increasing (R=0.14).
+  what: assessment
+  when: 2026-01-07 04:20:13.831173255 Z
+- _id: 19511
+  _job: 56689
+  _time: 2026-01-07 04:20:38.903419072 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  what: learn-eva
+  when: 2026-01-07 04:20:38.829408234 Z
+- _id: 19512
+  _job: 20805184040
+  _time: 2026-01-08 04:11:12.804820858 Z
+  _version: 0.19.2/0.58.1/0.17.9
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 7277440165
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1409
+  min_pull_was_found: 404
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
