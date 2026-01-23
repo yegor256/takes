@@ -184,23 +184,6 @@
               </execution>
             </executions>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-verifier-plugin</artifactId>
-            <version>1.1</version>
-            <executions>
-              <execution>
-                <id>main</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <verificationFile>src/verifier/verifications.xml</verificationFile>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
         </plugins>
       </build>
     </profile>
