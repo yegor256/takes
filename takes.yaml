@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 559.82594362
-  version: 0.58.1
+  seconds: 587.047161057
+  version: 0.59.0
   what: judges-summary
-  when: 2026-01-23 04:22:00.550327941 Z
+  when: 2026-01-27 04:25:00.188935330 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -61207,7 +61207,7 @@
   some_merged_pulls: 0
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2026-01-17 04:16:24.000000000 Z
+  when: &111 2026-01-17 04:16:24.000000000 Z
 - _id: 19548
   _job: 21105823570
   _time: 2026-01-18 04:13:30.311284978 Z
@@ -61221,7 +61221,7 @@
   total_releases_published: 0
   total_reviews_submitted: 0
   what: quantity-of-deliverables
-  when: 2026-01-18 04:13:30.000000000 Z
+  when: &110 2026-01-18 04:13:30.000000000 Z
 - _id: 19550
   _job: 21105823570
   _time: 2026-01-18 04:14:18.716784437 Z
@@ -61324,26 +61324,236 @@
     The average monthly turnover (45.0 developers) is staying still.
   what: assessment
   when: 2026-01-22 04:26:38.280253078 Z
-- _id: 19567
-  _job: 58411
-  _time: 2026-01-22 04:27:03.059243781 Z
+- _id: 19569
+  _job: 58582
+  _time: 2026-01-23 04:22:43.815873527 Z
   _version: 0.19.3/0.59.0/0.17.9
   what: learn-eva
-  when: 2026-01-22 04:27:02.982377848 Z
-- _id: 19568
-  _job: 21274286860
-  _time: 2026-01-23 04:13:09.603412241 Z
-  _version: 0.19.2/0.58.1/0.17.9
+  when: 2026-01-23 04:22:43.739223389 Z
+- _id: 19570
+  _job: 21384278597
+  _time: 2026-01-27 04:15:14.779896887 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  by_owner: 1
+  commit: 0bcab81566a16c047afc03e61f5654afc69c1050
+  default_branch: master
+  details: 'A new Git push #30124471530 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 7829550368
+  event_type: PushEvent
+  is_human: 1
+  push_id: 30124471530
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-01-26 14:10:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 19571
+  _job: 21384278597
+  _time: 2026-01-27 04:15:15.130045508 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  by_owner: 1
+  commit: 253b3204cfa63a1582b05e526d374e44615d4a38
+  default_branch: master
+  details: 'A new Git push #30036748250 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 7741335190
+  event_type: PushEvent
+  is_human: 1
+  push_id: 30036748250
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-01-23 06:41:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 19573
+  _job: 21384278597
+  _time: 2026-01-27 04:15:18.012068558 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  since: *110
+  total_builds_ran: 73
+  total_commits_pushed: 2
+  total_hoc_committed: 62
+  total_issues_created: 0
+  total_pulls_submitted: 0
+  total_releases_published: 0
+  total_reviews_submitted: 0
+  what: quantity-of-deliverables
+  when: 2026-01-27 04:15:18.000000000 Z
+- _id: 19574
+  _job: 21384278597
+  _time: 2026-01-27 04:15:50.183816201 Z
+  _version: 0.19.3/0.59.0/0.17.10
   assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 6961792386
+  events_were_scanned: 7031225852
   issues_were_scanned: 1292
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1463
-  min_pull_was_found: 451
+  min_issue_was_found: 1486
+  min_pull_was_found: 452
   repository: 28924109
   types_were_scanned: 1130
   what: iterate
   where: github
+- _id: 19575
+  _job: 21384278597
+  _time: 2026-01-27 04:16:07.960261866 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  total_active_contributors: 2
+  total_commits: 3628
+  total_contributors: 86
+  total_files: 532
+  total_forks: 213
+  total_issues: 743
+  total_pulls: 797
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 869
+  what: dimensions-of-terrain
+  when: 2026-01-27 04:16:07.969670208 Z
+- _id: 19576
+  _job: 21384278597
+  _time: 2026-01-27 04:22:26.822009361 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  since: *111
+  some_backlog_size:
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  some_build_duration:
+  - 833
+  - 35
+  - 8
+  - 9
+  - 9
+  - 10
+  - 12
+  - 14
+  - 20
+  - 24
+  - 27
+  - 30
+  - 179
+  - 692
+  - 41
+  - 713
+  - 37
+  - 657
+  - 37
+  - 8
+  - 8
+  - 9
+  - 9
+  - 10
+  - 11
+  - 13
+  - 26
+  - 27
+  - 35
+  - 35
+  - 74
+  - 271
+  - 64
+  - 57
+  - 65
+  - 8
+  - 10
+  - 10
+  - 10
+  - 11
+  - 12
+  - 14
+  - 27
+  - 28
+  - 33
+  - 39
+  - 68
+  - 335
+  - 8
+  - 8
+  - 8
+  - 9
+  - 11
+  - 12
+  - 19
+  - 28
+  - 38
+  - 39
+  - 266
+  - 0
+  some_build_mttr: 230816
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  some_merged_pulls: 0
+  some_unmerged_pulls: 0
+  what: quality-of-service
+  when: 2026-01-27 04:22:26.000000000 Z
