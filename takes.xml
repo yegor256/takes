@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1125855">
+<fb version="0.17.0" size="1126359">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">720.038791973</seconds>
+    <seconds t="F">525.226450656</seconds>
     <version t="S">0.59.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-01-28T04:25:54Z</when>
+    <when t="T">2026-01-29T04:31:11Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -68738,19 +68738,6 @@
     <when t="T">2026-01-22T04:16:56Z</when>
   </f>
   <f>
-    <_id t="I">19566</_id>
-    <_job t="I">58411</_job>
-    <_time t="T">2026-01-22T04:26:38Z</_time>
-    <_version t="S">0.19.3/0.59.0/0.17.9</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (330.6) is decreasing (R=-0.82).
-The average number of commits per week (7.0) is decreasing (R=-0.31).
-The average number of releases per month (0.3) is staying still.
-The average monthly turnover (45.0 developers) is staying still.</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-01-22T04:26:38Z</when>
-  </f>
-  <f>
     <_id t="I">19570</_id>
     <_job t="I">21384278597</_job>
     <_time t="T">2026-01-27T04:15:14Z</_time>
@@ -68985,30 +68972,77 @@ The average monthly turnover (45.0 developers) is staying still.</text>
     <when t="T">2026-01-27T04:25:22Z</when>
   </f>
   <f>
-    <_id t="I">19578</_id>
-    <_job t="I">58858</_job>
-    <_time t="T">2026-01-27T04:25:46Z</_time>
+    <_id t="I">19580</_id>
+    <_job t="I">58994</_job>
+    <_time t="T">2026-01-28T04:26:21Z</_time>
     <_version t="S">0.19.3/0.59.0/0.17.10</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-01-27T04:25:46Z</when>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (315.4) is decreasing (R=-0.84).
+The average number of commits per week (6.7) is decreasing (R=-0.35).
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (45.0 developers) is staying still.</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-01-28T04:26:21Z</when>
   </f>
   <f>
-    <_id t="I">19579</_id>
-    <_job t="I">21424694032</_job>
-    <_time t="T">2026-01-28T04:14:31Z</_time>
+    <_id t="I">19581</_id>
+    <_job t="I">58994</_job>
+    <_time t="T">2026-01-28T04:26:49Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-01-28T04:26:49Z</when>
+  </f>
+  <f>
+    <_id t="I">19582</_id>
+    <_job t="I">58994</_job>
+    <_time t="T">2026-01-28T04:26:49Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">0.6419697192832363</cost_of_qod>
+    <ev t="I">66</ev>
+    <pv t="I">1861</pv>
+    <qod t="I">104</qod>
+    <qod_per_day t="F">21.83635631459688</qod_per_day>
+    <qod_per_sec t="F">9.141834260703989e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2026-01-28T04:26:49Z</when>
+  </f>
+  <f>
+    <_id t="I">19583</_id>
+    <_job t="I">21465530120</_job>
+    <_time t="T">2026-01-29T04:22:53Z</_time>
     <_version t="S">0.19.3/0.59.0/0.17.10</_version>
     <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">7047203182</events_were_scanned>
+    <events_were_scanned t="I">7889255084</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
     <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1501</min_issue_was_found>
-    <min_pull_was_found t="I">457</min_pull_was_found>
+    <min_issue_was_found t="I">1509</min_issue_was_found>
+    <min_pull_was_found t="I">459</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">1130</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19584</_id>
+    <_job t="I">21465530120</_job>
+    <_time t="T">2026-01-29T04:23:13Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <total_active_contributors t="I">1</total_active_contributors>
+    <total_commits t="I">3628</total_commits>
+    <total_contributors t="I">86</total_contributors>
+    <total_files t="I">532</total_files>
+    <total_forks t="I">213</total_forks>
+    <total_issues t="I">743</total_issues>
+    <total_pulls t="I">797</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">869</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-01-29T04:23:13Z</when>
   </f>
 </fb>
