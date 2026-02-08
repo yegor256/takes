@@ -5,8 +5,6 @@ version = 1
 [[annotations]]
 path = [
     ".DS_Store",
-    ".gitattributes",
-    ".gitignore",
     ".pdd",
     "**.json",
     "**.md",

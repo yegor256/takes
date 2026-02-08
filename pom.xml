@@ -341,6 +341,47 @@
     </testResources>
     <plugins>
       <plugin>
+        <groupId>org.revapi</groupId>
+        <artifactId>revapi-maven-plugin</artifactId>
+        <version>0.15.1</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.revapi</groupId>
+            <artifactId>revapi-java</artifactId>
+            <version>0.28.4</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <analysisConfiguration>
+            <revapi.differences>
+              <differences>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.varargOverloadsOnlyDifferInVarargParameter</code>
+                  <old>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(java.lang.String[])</old>
+                  <new>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(java.lang.String[])</new>
+                  <justification>Pre-existing API pattern for convenient construction</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.varargOverloadsOnlyDifferInVarargParameter</code>
+                  <old>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(org.xembly.Directive[])</old>
+                  <new>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(org.xembly.Directive[])</new>
+                  <justification>Pre-existing API pattern for convenient construction</justification>
+                </item>
+              </differences>
+            </revapi.differences>
+          </analysisConfiguration>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
