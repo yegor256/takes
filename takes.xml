@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1130785">
+<fb version="0.17.0" size="1131533">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">657.249352778</seconds>
+    <seconds t="F">557.911861475</seconds>
     <version t="S">0.59.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-02-11T04:50:24Z</when>
+    <when t="T">2026-02-13T04:42:31Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -69527,30 +69527,69 @@ The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <when t="T">2026-02-10T04:53:45Z</when>
   </f>
   <f>
-    <_id t="I">19633</_id>
-    <_job t="I">60824</_job>
-    <_time t="T">2026-02-10T04:54:10Z</_time>
+    <_id t="I">19635</_id>
+    <_job t="I">60935</_job>
+    <_time t="T">2026-02-11T04:51:17Z</_time>
     <_version t="S">0.19.4/0.59.0/0.17.10</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2026-02-10T04:54:10Z</when>
+    <when t="T">2026-02-11T04:51:16Z</when>
   </f>
   <f>
-    <_id t="I">19634</_id>
-    <_job t="I">21892929870</_job>
-    <_time t="T">2026-02-11T04:39:56Z</_time>
+    <_id t="I">19636</_id>
+    <_job t="I">21974748982</_job>
+    <_time t="T">2026-02-13T04:33:15Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <by_owner t="I">1</by_owner>
+    <commit t="S">8fecca2f0ec70f98cc603e9f5e573ac00cac9b24</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #30674718428 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
+    <event_id t="I">8379743840</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">30674718428</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2026-02-12T11:25:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19637</_id>
+    <_job t="I">21974748982</_job>
+    <_time t="T">2026-02-13T04:33:38Z</_time>
     <_version t="S">0.19.3/0.59.0/0.17.10</_version>
     <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">7380496247</events_were_scanned>
+    <events_were_scanned t="I">7450811370</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
     <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">479</min_pull_was_found>
+    <min_pull_was_found t="I">483</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">1130</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19638</_id>
+    <_job t="I">21974748982</_job>
+    <_time t="T">2026-02-13T04:33:56Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <total_active_contributors t="I">1</total_active_contributors>
+    <total_commits t="I">3631</total_commits>
+    <total_contributors t="I">86</total_contributors>
+    <total_files t="I">532</total_files>
+    <total_forks t="I">213</total_forks>
+    <total_issues t="I">743</total_issues>
+    <total_pulls t="I">797</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">870</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-02-13T04:33:56Z</when>
   </f>
 </fb>

@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 657.249352778
+  seconds: 557.911861475
   version: 0.59.0
   what: judges-summary
-  when: 2026-02-11 04:50:24.863536336 Z
+  when: 2026-02-13 04:42:31.252839890 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -62039,26 +62039,62 @@
     The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
   what: assessment
   when: 2026-02-10 04:53:45.286450838 Z
-- _id: 19633
-  _job: 60824
-  _time: 2026-02-10 04:54:10.896957110 Z
+- _id: 19635
+  _job: 60935
+  _time: 2026-02-11 04:51:17.054899113 Z
   _version: 0.19.4/0.59.0/0.17.10
   what: learn-eva
-  when: 2026-02-10 04:54:10.819370737 Z
-- _id: 19634
-  _job: 21892929870
-  _time: 2026-02-11 04:39:56.187642567 Z
+  when: 2026-02-11 04:51:16.982787197 Z
+- _id: 19636
+  _job: 21974748982
+  _time: 2026-02-13 04:33:15.235801367 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  by_owner: 1
+  commit: 8fecca2f0ec70f98cc603e9f5e573ac00cac9b24
+  default_branch: master
+  details: 'A new Git push #30674718428 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 8379743840
+  event_type: PushEvent
+  is_human: 1
+  push_id: 30674718428
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-02-12 11:25:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 19637
+  _job: 21974748982
+  _time: 2026-02-13 04:33:38.475645851 Z
   _version: 0.19.3/0.59.0/0.17.10
   assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 7380496247
+  events_were_scanned: 7450811370
   issues_were_scanned: 1292
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1537
-  min_pull_was_found: 479
+  min_pull_was_found: 483
   repository: 28924109
   types_were_scanned: 1130
   what: iterate
   where: github
+- _id: 19638
+  _job: 21974748982
+  _time: 2026-02-13 04:33:56.618971351 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  total_active_contributors: 1
+  total_commits: 3631
+  total_contributors: 86
+  total_files: 532
+  total_forks: 213
+  total_issues: 743
+  total_pulls: 797
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 870
+  what: dimensions-of-terrain
+  when: 2026-02-13 04:33:56.631563643 Z
