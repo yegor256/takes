@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.55798966
+  seconds: 612.128898766
   version: 0.59.0
   what: judges-summary
-  when: 2026-02-18 04:46:59.206468711 Z
+  when: 2026-02-19 04:42:17.318603879 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -62067,18 +62067,6 @@
   total_stars: 871
   what: dimensions-of-terrain
   when: 2026-02-15 04:35:08.755976635 Z
-- _id: 19645
-  _job: 61305
-  _time: 2026-02-15 04:47:02.614764626 Z
-  _version: 0.19.4/0.59.0/0.17.10
-  analyzers: 18
-  text: |-
-    The average number of builds per week (294.6) is decreasing (R=-0.85).
-    The average number of commits per week (6.1) is decreasing (R=-0.42).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
-  what: assessment
-  when: 2026-02-15 04:47:02.639416727 Z
 - _id: 19648
   _job: 22050266505
   _time: 2026-02-16 04:37:22.653167809 Z
@@ -62107,12 +62095,6 @@
     The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
   what: assessment
   when: 2026-02-16 04:47:30.583483862 Z
-- _id: 19652
-  _job: 61615
-  _time: 2026-02-17 04:46:57.081603695 Z
-  _version: 0.19.4/0.59.0/0.17.10!0.17.11
-  what: learn-eva
-  when: 2026-02-17 04:46:57.007140675 Z
 - _id: 19653
   _job: 61615
   _time: 2026-02-17 04:46:57.315047236 Z
@@ -62141,23 +62123,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2026-02-18 04:33:33.000000000 Z
-- _id: 19656
-  _job: 22126633758
-  _time: 2026-02-18 04:34:22.615070706 Z
-  _version: 0.19.3/0.59.0/0.17.10
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 7598132262
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 493
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19657
   _job: 22126633758
   _time: 2026-02-18 04:35:15.979593727 Z
@@ -62179,5 +62144,197 @@
   _time: 2026-02-18 04:45:26.740079745 Z
   _version: 0.19.3/0.59.0/0.17.10
   since: *117
+  some_backlog_size:
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  some_build_duration:
+  - 378
+  - 405
+  - 413
+  - 422
+  - 423
+  - 469
+  - 470
+  - 476
+  - 490
+  - 503
+  - 508
+  - 514
+  - 532
+  - 541
+  - 537
+  - 547
+  - 558
+  - 554
+  - 558
+  - 556
+  - 561
+  - 568
+  - 575
+  - 565
+  - 570
+  - 586
+  - 592
+  - 611
+  - 618
+  - 614
+  - 634
+  - 652
+  - 652
+  - 669
+  - 707
+  - 739
+  - 1421
+  - 1500
+  - 640
+  - 39
+  - 836
+  - 38
+  - 843
+  - 34
+  - 712
+  - 32
+  - 7
+  - 9
+  - 9
+  - 9
+  - 11
+  - 13
+  - 13
+  - 27
+  - 32
+  - 35
+  - 316
+  - 941
+  - 35
+  - 906
+  some_build_mttr: 844
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_merged_pulls: 0
+  some_unmerged_pulls: 0
   what: quality-of-service
   when: 2026-02-18 04:45:26.000000000 Z
+- _id: 19659
+  _job: 61832
+  _time: 2026-02-18 04:47:25.012767601 Z
+  _version: 0.19.4/0.59.0/0.17.10!0.17.11
+  analyzers: 18
+  text: |-
+    The average number of builds per week (286.7) is decreasing (R=-0.84).
+    The average number of commits per week (5.9) is decreasing (R=-0.45).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
+  what: assessment
+  when: 2026-02-18 04:47:25.030673866 Z
+- _id: 19660
+  _job: 61832
+  _time: 2026-02-18 04:47:54.796538834 Z
+  _version: 0.19.4/0.59.0/0.17.10!0.17.11
+  what: learn-eva
+  when: 2026-02-18 04:47:54.718967535 Z
+- _id: 19662
+  _job: 22168591967
+  _time: 2026-02-19 04:32:30.209275139 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  branch: renovate/com.jcabi-jcabi-http-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1500 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1500
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-18 14:58:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 19663
+  _job: 22168591967
+  _time: 2026-02-19 04:32:43.118802011 Z
+  _version: 0.19.3/0.59.0/0.17.10
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 7630983830
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 494
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github

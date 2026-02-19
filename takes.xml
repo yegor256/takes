@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1132928">
+<fb version="0.17.0" size="1133696">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.55798966</seconds>
+    <seconds t="F">612.128898766</seconds>
     <version t="S">0.59.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-02-18T04:46:59Z</when>
+    <when t="T">2026-02-19T04:42:17Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -69558,19 +69558,6 @@
     <when t="T">2026-02-15T04:35:08Z</when>
   </f>
   <f>
-    <_id t="I">19645</_id>
-    <_job t="I">61305</_job>
-    <_time t="T">2026-02-15T04:47:02Z</_time>
-    <_version t="S">0.19.4/0.59.0/0.17.10</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (294.6) is decreasing (R=-0.85).
-The average number of commits per week (6.1) is decreasing (R=-0.42).
-The average number of releases per month (0.2) is staying still.
-The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-02-15T04:47:02Z</when>
-  </f>
-  <f>
     <_id t="I">19648</_id>
     <_job t="I">22050266505</_job>
     <_time t="T">2026-02-16T04:37:22Z</_time>
@@ -69600,14 +69587,6 @@ The average number of releases per month (0.2) is staying still.
 The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <what t="S">assessment</what>
     <when t="T">2026-02-16T04:47:30Z</when>
-  </f>
-  <f>
-    <_id t="I">19652</_id>
-    <_job t="I">61615</_job>
-    <_time t="T">2026-02-17T04:46:57Z</_time>
-    <_version t="S">0.19.4/0.59.0/0.17.10!0.17.11</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-02-17T04:46:57Z</when>
   </f>
   <f>
     <_id t="I">19653</_id>
@@ -69642,25 +69621,6 @@ The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <when t="T">2026-02-18T04:33:33Z</when>
   </f>
   <f>
-    <_id t="I">19656</_id>
-    <_job t="I">22126633758</_job>
-    <_time t="T">2026-02-18T04:34:22Z</_time>
-    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">7598132262</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">493</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">19657</_id>
     <_job t="I">22126633758</_job>
     <_time t="T">2026-02-18T04:35:15Z</_time>
@@ -69684,7 +69644,209 @@ The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <_time t="T">2026-02-18T04:45:26Z</_time>
     <_version t="S">0.19.3/0.59.0/0.17.10</_version>
     <since t="T">2026-02-10T04:49:58Z</since>
+    <some_backlog_size>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+      <v t="I">89</v>
+    </some_backlog_size>
+    <some_build_duration>
+      <v t="I">378</v>
+      <v t="I">405</v>
+      <v t="I">413</v>
+      <v t="I">422</v>
+      <v t="I">423</v>
+      <v t="I">469</v>
+      <v t="I">470</v>
+      <v t="I">476</v>
+      <v t="I">490</v>
+      <v t="I">503</v>
+      <v t="I">508</v>
+      <v t="I">514</v>
+      <v t="I">532</v>
+      <v t="I">541</v>
+      <v t="I">537</v>
+      <v t="I">547</v>
+      <v t="I">558</v>
+      <v t="I">554</v>
+      <v t="I">558</v>
+      <v t="I">556</v>
+      <v t="I">561</v>
+      <v t="I">568</v>
+      <v t="I">575</v>
+      <v t="I">565</v>
+      <v t="I">570</v>
+      <v t="I">586</v>
+      <v t="I">592</v>
+      <v t="I">611</v>
+      <v t="I">618</v>
+      <v t="I">614</v>
+      <v t="I">634</v>
+      <v t="I">652</v>
+      <v t="I">652</v>
+      <v t="I">669</v>
+      <v t="I">707</v>
+      <v t="I">739</v>
+      <v t="I">1421</v>
+      <v t="I">1500</v>
+      <v t="I">640</v>
+      <v t="I">39</v>
+      <v t="I">836</v>
+      <v t="I">38</v>
+      <v t="I">843</v>
+      <v t="I">34</v>
+      <v t="I">712</v>
+      <v t="I">32</v>
+      <v t="I">7</v>
+      <v t="I">9</v>
+      <v t="I">9</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">13</v>
+      <v t="I">13</v>
+      <v t="I">27</v>
+      <v t="I">32</v>
+      <v t="I">35</v>
+      <v t="I">316</v>
+      <v t="I">941</v>
+      <v t="I">35</v>
+      <v t="I">906</v>
+    </some_build_duration>
+    <some_build_mttr t="I">844</some_build_mttr>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_build_success_rate>
+    <some_merged_pulls t="I">0</some_merged_pulls>
+    <some_unmerged_pulls t="I">0</some_unmerged_pulls>
     <what t="S">quality-of-service</what>
     <when t="T">2026-02-18T04:45:26Z</when>
+  </f>
+  <f>
+    <_id t="I">19659</_id>
+    <_job t="I">61832</_job>
+    <_time t="T">2026-02-18T04:47:25Z</_time>
+    <_version t="S">0.19.4/0.59.0/0.17.10!0.17.11</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (286.7) is decreasing (R=-0.84).
+The average number of commits per week (5.9) is decreasing (R=-0.45).
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-02-18T04:47:25Z</when>
+  </f>
+  <f>
+    <_id t="I">19660</_id>
+    <_job t="I">61832</_job>
+    <_time t="T">2026-02-18T04:47:54Z</_time>
+    <_version t="S">0.19.4/0.59.0/0.17.10!0.17.11</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-02-18T04:47:54Z</when>
+  </f>
+  <f>
+    <_id t="I">19662</_id>
+    <_job t="I">22168591967</_job>
+    <_time t="T">2026-02-19T04:32:30Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-http-2.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1500 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1500</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-02-18T14:58:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19663</_id>
+    <_job t="I">22168591967</_job>
+    <_time t="T">2026-02-19T04:32:43Z</_time>
+    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">7630983830</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1537</min_issue_was_found>
+    <min_pull_was_found t="I">494</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
