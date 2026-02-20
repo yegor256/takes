@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.17.0" size="1133696">
+<fb version="0.19.6" size="1134338">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">612.128898766</seconds>
-    <version t="S">0.59.0</version>
+    <seconds t="F">331.045750279</seconds>
+    <version t="S">0.60.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-02-19T04:42:17Z</when>
+    <when t="T">2026-02-20T04:34:06Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -69797,14 +69797,6 @@ The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <when t="T">2026-02-18T04:47:25Z</when>
   </f>
   <f>
-    <_id t="I">19660</_id>
-    <_job t="I">61832</_job>
-    <_time t="T">2026-02-18T04:47:54Z</_time>
-    <_version t="S">0.19.4/0.59.0/0.17.10!0.17.11</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-02-18T04:47:54Z</when>
-  </f>
-  <f>
     <_id t="I">19662</_id>
     <_job t="I">22168591967</_job>
     <_time t="T">2026-02-19T04:32:30Z</_time>
@@ -69823,6 +69815,7 @@ The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <is_human t="I">1</is_human>
     <issue t="I">1500</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">15</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -69831,22 +69824,74 @@ The average monthly turnover (45.0 developers) is decreasing (R=-0.29).</text>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">19663</_id>
-    <_job t="I">22168591967</_job>
-    <_time t="T">2026-02-19T04:32:43Z</_time>
-    <_version t="S">0.19.3/0.59.0/0.17.10</_version>
+    <_id t="I">19664</_id>
+    <_job t="I">62055</_job>
+    <_time t="T">2026-02-19T04:43:03Z</_time>
+    <_version t="S">0.19.4/0.59.0/0.17.10!0.17.11</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-02-19T04:43:03Z</when>
+  </f>
+  <f>
+    <_id t="I">19666</_id>
+    <_job t="I">22211282232</_job>
+    <_time t="T">2026-02-20T04:29:16Z</_time>
+    <_version t="S">0.19.6/0.60.0/0.17.11</_version>
+    <branch t="S">renovate/jakarta.xml.bind-jakarta.xml.bind-api-4.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1465 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1465</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">15</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-02-19T05:52:21Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19667</_id>
+    <_job t="I">22211282232</_job>
+    <_time t="T">2026-02-20T04:29:34Z</_time>
+    <_version t="S">0.19.6/0.60.0/0.17.11</_version>
     <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">7630983830</events_were_scanned>
+    <events_were_scanned t="I">7666449690</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
     <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">494</min_pull_was_found>
+    <min_pull_was_found t="I">499</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">1130</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19668</_id>
+    <_job t="I">22211282232</_job>
+    <_time t="T">2026-02-20T04:30:22Z</_time>
+    <_version t="S">0.19.6/0.60.0/0.17.11</_version>
+    <total_active_contributors t="I">2</total_active_contributors>
+    <total_commits t="I">3651</total_commits>
+    <total_contributors t="I">86</total_contributors>
+    <total_files t="I">532</total_files>
+    <total_forks t="I">213</total_forks>
+    <total_issues t="I">743</total_issues>
+    <total_pulls t="I">805</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">871</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-02-20T04:30:22Z</when>
   </f>
 </fb>

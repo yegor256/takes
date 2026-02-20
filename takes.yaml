@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 612.128898766
-  version: 0.59.0
+  seconds: 331.045750279
+  version: 0.60.0
   what: judges-summary
-  when: 2026-02-19 04:42:17.318603879 Z
+  when: 2026-02-20 04:34:06.452452483 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -62291,12 +62291,6 @@
     The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
   what: assessment
   when: 2026-02-18 04:47:25.030673866 Z
-- _id: 19660
-  _job: 61832
-  _time: 2026-02-18 04:47:54.796538834 Z
-  _version: 0.19.4/0.59.0/0.17.10!0.17.11
-  what: learn-eva
-  when: 2026-02-18 04:47:54.718967535 Z
 - _id: 19662
   _job: 22168591967
   _time: 2026-02-19 04:32:30.209275139 Z
@@ -62315,26 +62309,73 @@
   is_human: 1
   issue: 1500
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
   when: 2026-02-18 14:58:03.000000000 Z
   where: github
   who: 526301
-- _id: 19663
-  _job: 22168591967
-  _time: 2026-02-19 04:32:43.118802011 Z
-  _version: 0.19.3/0.59.0/0.17.10
+- _id: 19664
+  _job: 62055
+  _time: 2026-02-19 04:43:03.579788075 Z
+  _version: 0.19.4/0.59.0/0.17.10!0.17.11
+  what: learn-eva
+  when: 2026-02-19 04:43:03.490664802 Z
+- _id: 19666
+  _job: 22211282232
+  _time: 2026-02-20 04:29:16.331512788 Z
+  _version: 0.19.6/0.60.0/0.17.11
+  branch: renovate/jakarta.xml.bind-jakarta.xml.bind-api-4.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1465 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 1465
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-19 05:52:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 19667
+  _job: 22211282232
+  _time: 2026-02-20 04:29:34.838330902 Z
+  _version: 0.19.6/0.60.0/0.17.11
   assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 7630983830
+  events_were_scanned: 7666449690
   issues_were_scanned: 1292
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1537
-  min_pull_was_found: 494
+  min_pull_was_found: 499
   repository: 28924109
   types_were_scanned: 1130
   what: iterate
   where: github
+- _id: 19668
+  _job: 22211282232
+  _time: 2026-02-20 04:30:22.240888396 Z
+  _version: 0.19.6/0.60.0/0.17.11
+  total_active_contributors: 2
+  total_commits: 3651
+  total_contributors: 86
+  total_files: 532
+  total_forks: 213
+  total_issues: 743
+  total_pulls: 805
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 871
+  what: dimensions-of-terrain
+  when: 2026-02-20 04:30:22.250631828 Z
