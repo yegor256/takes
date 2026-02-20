@@ -131,15 +131,20 @@ public final class RsXembly extends RsWrap {
         return new ByteArrayInputStream(baos.toByteArray());
     }
 
-    /**
-     * Create empty DOM Document.
-     * @return Document
-     */
-    private static Document emptyDocument() {
+       private static Document emptyDocument() {
         try {
-            return DocumentBuilderFactory.newInstance()
-                .newDocumentBuilder()
-                .newDocument();
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            
+            // Disable external entity processing to prevent XXE attacks
+            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+            factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+            
+            // For enhanced security, also consider:
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            factory.setXIncludeAware(false);
+            factory.setExpandEntityReferences(false);
+            
+            return factory.newDocumentBuilder().newDocument();
         } catch (final ParserConfigurationException ex) {
             throw new IllegalStateException(
                 "Could not instantiate DocumentBuilderFactory and build empty Document",
