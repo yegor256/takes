@@ -31,6 +31,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import org.takes.Request;
+import org.takes.misc.Opt;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
@@ -221,9 +222,12 @@ public final class HttpServletRequestFake implements HttpServletRequest {
                 ex
             );
         }
-        String host = uri.getHost();
-        if (host == null || host.isEmpty()) {
+        Opt<String> optHost = new Opt.Single<>(uri.getHost());
+        String host;
+        if (!optHost.has() || optHost.get().isEmpty()) {
             host = "localhost";
+        } else {
+            host = optHost.get();
         }
         return host;
     }
