@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 331.045750279
+  seconds: 260.970182797
   version: 0.60.0
   what: judges-summary
-  when: 2026-02-20 04:34:06.452452483 Z
+  when: 2026-02-21 04:26:15.492938531 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -62083,18 +62083,6 @@
   total_stars: 871
   what: dimensions-of-terrain
   when: 2026-02-16 04:37:22.668397346 Z
-- _id: 19649
-  _job: 61435
-  _time: 2026-02-16 04:47:30.562767554 Z
-  _version: 0.19.4/0.59.0/0.17.10
-  analyzers: 18
-  text: |-
-    The average number of builds per week (294.6) is decreasing (R=-0.85).
-    The average number of commits per week (6.1) is decreasing (R=-0.42).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
-  what: assessment
-  when: 2026-02-16 04:47:30.583483862 Z
 - _id: 19653
   _job: 61615
   _time: 2026-02-17 04:46:57.315047236 Z
@@ -62316,12 +62304,6 @@
   when: 2026-02-18 14:58:03.000000000 Z
   where: github
   who: 526301
-- _id: 19664
-  _job: 62055
-  _time: 2026-02-19 04:43:03.579788075 Z
-  _version: 0.19.4/0.59.0/0.17.10!0.17.11
-  what: learn-eva
-  when: 2026-02-19 04:43:03.490664802 Z
 - _id: 19666
   _job: 22211282232
   _time: 2026-02-20 04:29:16.331512788 Z
@@ -62340,29 +62322,13 @@
   is_human: 1
   issue: 1465
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
   when: 2026-02-19 05:52:21.000000000 Z
   where: github
   who: 526301
-- _id: 19667
-  _job: 22211282232
-  _time: 2026-02-20 04:29:34.838330902 Z
-  _version: 0.19.6/0.60.0/0.17.11
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 7666449690
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 499
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19668
   _job: 22211282232
   _time: 2026-02-20 04:30:22.240888396 Z
@@ -62379,3 +62345,38 @@
   total_stars: 871
   what: dimensions-of-terrain
   when: 2026-02-20 04:30:22.250631828 Z
+- _id: 19669
+  _job: 62259
+  _time: 2026-02-20 04:34:32.377474644 Z
+  _version: 0.19.7/0.60.0/0.17.11!0.17.12
+  analyzers: 18
+  text: |-
+    The average number of builds per week (286.7) is decreasing (R=-0.84).
+    The average number of commits per week (5.9) is decreasing (R=-0.45).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
+  what: assessment
+  when: 2026-02-20 04:34:32.394784761 Z
+- _id: 19670
+  _job: 62259
+  _time: 2026-02-20 04:34:56.301891526 Z
+  _version: 0.19.7/0.60.0/0.17.11!0.17.12
+  what: learn-eva
+  when: 2026-02-20 04:34:56.238631021 Z
+- _id: 19671
+  _job: 22250208198
+  _time: 2026-02-21 04:22:26.303438297 Z
+  _version: 0.19.6/0.60.0/0.17.11
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 8623182667
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 500
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
