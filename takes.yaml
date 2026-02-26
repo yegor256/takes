@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 263.842206886
+  seconds: 256.614564694
   version: 0.60.0
   what: judges-summary
-  when: 2026-02-25 04:36:50.150149487 Z
+  when: 2026-02-26 04:34:05.958140360 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -62110,7 +62110,7 @@
   total_releases_published: 0
   total_reviews_submitted: 0
   what: quantity-of-deliverables
-  when: 2026-02-18 04:33:33.000000000 Z
+  when: &118 2026-02-18 04:33:33.000000000 Z
 - _id: 19657
   _job: 22126633758
   _time: 2026-02-18 04:35:15.979593727 Z
@@ -62266,7 +62266,7 @@
   some_merged_pulls: 0
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2026-02-18 04:45:26.000000000 Z
+  when: &119 2026-02-18 04:45:26.000000000 Z
 - _id: 19662
   _job: 22168591967
   _time: 2026-02-19 04:32:30.209275139 Z
@@ -62349,18 +62349,6 @@
   total_stars: 871
   what: dimensions-of-terrain
   when: 2026-02-22 04:31:55.815105563 Z
-- _id: 19675
-  _job: 62540
-  _time: 2026-02-22 04:35:30.215481542 Z
-  _version: 0.19.7/0.60.0/0.17.11!0.17.12
-  analyzers: 18
-  text: |-
-    The average number of builds per week (286.7) is decreasing (R=-0.84).
-    The average number of commits per week (5.9) is decreasing (R=-0.45).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
-  what: assessment
-  when: 2026-02-22 04:35:30.232571949 Z
 - _id: 19678
   _job: 22293043797
   _time: 2026-02-23 04:36:04.707375835 Z
@@ -62389,29 +62377,6 @@
     The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
   what: assessment
   when: 2026-02-23 04:39:32.750303974 Z
-- _id: 19682
-  _job: 62812
-  _time: 2026-02-24 04:36:29.015287246 Z
-  _version: 0.19.7/0.60.0/0.17.11!0.17.12
-  what: learn-eva
-  when: 2026-02-24 04:36:28.945925758 Z
-- _id: 19683
-  _job: 22382273755
-  _time: 2026-02-25 04:32:50.858905599 Z
-  _version: 0.19.6/0.60.0/0.17.11
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 8735920716
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 513
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19684
   _job: 22382273755
   _time: 2026-02-25 04:33:16.048374445 Z
@@ -62428,3 +62393,279 @@
   total_stars: 870
   what: dimensions-of-terrain
   when: 2026-02-25 04:33:16.062726471 Z
+- _id: 19685
+  _job: 62965
+  _time: 2026-02-25 04:37:13.155271195 Z
+  _version: 0.19.7/0.60.0/0.17.11!0.17.12
+  analyzers: 18
+  text: |-
+    The average number of builds per week (286.7) is decreasing (R=-0.84).
+    The average number of commits per week (5.9) is decreasing (R=-0.45).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (45.0 developers) is decreasing (R=-0.29).
+  what: assessment
+  when: 2026-02-25 04:37:13.172978048 Z
+- _id: 19686
+  _job: 62965
+  _time: 2026-02-25 04:37:39.356343328 Z
+  _version: 0.19.7/0.60.0/0.17.11!0.17.12
+  what: learn-eva
+  when: 2026-02-25 04:37:39.292005447 Z
+- _id: 19687
+  _job: 22427867596
+  _time: 2026-02-26 04:29:50.990688583 Z
+  _version: 0.19.8/0.60.0/0.17.13
+  by_owner: 1
+  commit: bcaf1ab637b65ae31234e75622a4e515cbffb889
+  default_branch: master
+  details: 'A new Git push #31078969707 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 8784273355
+  event_type: PushEvent
+  is_human: 1
+  push_id: 31078969707
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-02-25 10:00:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 19689
+  _job: 22427867596
+  _time: 2026-02-26 04:29:51.519876873 Z
+  _version: 0.19.8/0.60.0/0.17.13
+  since: *118
+  total_builds_ran: 166
+  total_commits_pushed: 16
+  total_hoc_committed: 60
+  total_issues_created: 9
+  total_pulls_submitted: 9
+  total_releases_published: 0
+  total_reviews_submitted: 0
+  what: quantity-of-deliverables
+  when: 2026-02-26 04:29:51.000000000 Z
+- _id: 19690
+  _job: 22427867596
+  _time: 2026-02-26 04:30:20.217872196 Z
+  _version: 0.19.8/0.60.0/0.17.13
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 8784829571
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 514
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19691
+  _job: 22427867596
+  _time: 2026-02-26 04:31:14.100791927 Z
+  _version: 0.19.8/0.60.0/0.17.13
+  since: *119
+  some_backlog_size:
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  - 89
+  some_build_duration:
+  - 9
+  - 9
+  - 10
+  - 11
+  - 11
+  - 13
+  - 16
+  - 16
+  - 28
+  - 31
+  - 47
+  - 324
+  - 456
+  - 37
+  - 357
+  - 38
+  - 7
+  - 7
+  - 7
+  - 9
+  - 9
+  - 10
+  - 15
+  - 21
+  - 32
+  - 31
+  - 309
+  - 336
+  - 36
+  - 323
+  - 38
+  - 355
+  - 35
+  - 359
+  - 39
+  - 7
+  - 10
+  - 10
+  - 10
+  - 12
+  - 14
+  - 16
+  - 27
+  - 30
+  - 31
+  - 314
+  - 8
+  - 9
+  - 9
+  - 9
+  - 10
+  - 13
+  - 27
+  - 30
+  - 41
+  - 51
+  - 54
+  - 73
+  - 345
+  - 0
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 0
+  some_merged_pulls: 11
+  some_pull_files_size:
+  - 1
+  - 1
+  - 1
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 2
+  - 6
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 4
+  some_pull_lifetime:
+  - 504763.0
+  - 3381.0
+  - 3392.0
+  - 44107.0
+  - 44117.0
+  - 53628.0
+  - 3849171.0
+  - 3925816.0
+  - 4219202.0
+  - 7526866.0
+  - 12186752.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time: 4141223
+  some_reviewers_per_pull:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+  - 0
+  - 0
+  some_reviews_per_pull:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+  - 0
+  - 0
+  some_unmerged_pulls: 1
+  what: quality-of-service
+  when: 2026-02-26 04:31:14.000000000 Z
