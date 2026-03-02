@@ -282,13 +282,13 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
-      <version>5.22.0</version>
+      <version>5.21.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>5.22.0</version>
+      <version>5.21.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -340,6 +340,24 @@
       </testResource>
     </testResources>
     <plugins>
+      <plugin>
+        <groupId>org.eolang</groupId>
+        <artifactId>hone-maven-plugin</artifactId>
+        <version>0.23.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>pull</goal>
+              <goal>optimize</goal>
+            </goals>
+            <configuration>
+              <rules>streams/*</rules>
+              <skipWithoutDocker>true</skipWithoutDocker>
+              <skipOnWindows>true</skipOnWindows>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.revapi</groupId>
         <artifactId>revapi-maven-plugin</artifactId>
@@ -493,7 +511,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.5.5</version>
+            <version>3.5.4</version>
             <configuration>
               <groups>org.takes.misc.PerformanceTests</groups>
             </configuration>
