@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 544.838338119
+  seconds: 741.714740651
   version: 0.60.1
   what: judges-summary
-  when: 2026-03-26 04:50:32.720879723 Z
+  when: 2026-03-27 04:54:20.337361570 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -63313,18 +63313,6 @@
   total_stars: 872
   what: dimensions-of-terrain
   when: 2026-03-23 04:39:35.801204935 Z
-- _id: 19779
-  _job: 65597
-  _time: 2026-03-23 04:49:57.704103792 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  analyzers: 18
-  text: |-
-    The average number of builds per week (254.6) is decreasing (R=-0.84).
-    The average number of commits per week (5.8) is decreasing (R=-0.36).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (49.0 developers) is decreasing (R=-0.49).
-  what: assessment
-  when: 2026-03-23 04:49:57.723147026 Z
 - _id: 19784
   _job: 23525018204
   _time: 2026-03-25 04:33:53.620030792 Z
@@ -63353,29 +63341,6 @@
     The average monthly turnover (49.0 developers) is decreasing (R=-0.49).
   what: assessment
   when: 2026-03-25 04:45:25.770105167 Z
-- _id: 19786
-  _job: 65784
-  _time: 2026-03-25 04:45:51.137622137 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  what: learn-eva
-  when: 2026-03-25 04:45:51.113210499 Z
-- _id: 19787
-  _job: 23577831941
-  _time: 2026-03-26 04:41:50.899852669 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 8735920716
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 563
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19788
   _job: 23577831941
   _time: 2026-03-26 04:42:07.298455105 Z
@@ -63392,3 +63357,78 @@
   total_stars: 872
   what: dimensions-of-terrain
   when: 2026-03-26 04:42:07.307314075 Z
+- _id: 19789
+  _job: 65871
+  _time: 2026-03-26 04:50:53.821216753 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  analyzers: 18
+  text: |-
+    The average number of builds per week (254.6) is decreasing (R=-0.84).
+    The average number of commits per week (5.8) is decreasing (R=-0.36).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (49.0 developers) is decreasing (R=-0.49).
+  what: assessment
+  when: 2026-03-26 04:50:53.840361927 Z
+- _id: 19790
+  _job: 65871
+  _time: 2026-03-26 04:51:19.383823828 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  what: learn-eva
+  when: 2026-03-26 04:51:19.358210718 Z
+- _id: 19792
+  _job: 23631487209
+  _time: 2026-03-27 04:42:28.258178624 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  branch: renovate/davidanson-markdownlint-cli2-action-22.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1522 has been "pull-was-closed".
+  failed_builds: 1
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1522
+  repository: 28924109
+  succeeded_builds: 14
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-03-26 09:44:45.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19793
+  _job: 23631487209
+  _time: 2026-03-27 04:42:43.533677865 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 8775711233
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 564
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19794
+  _job: 23631487209
+  _time: 2026-03-27 04:43:13.440162408 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  total_active_contributors: 2
+  total_commits: 3662
+  total_contributors: 84
+  total_files: 532
+  total_forks: 212
+  total_issues: 745
+  total_pulls: 814
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 872
+  what: dimensions-of-terrain
+  when: 2026-03-27 04:43:13.464511976 Z
