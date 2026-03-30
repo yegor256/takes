@@ -91,6 +91,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.44</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
@@ -456,6 +457,13 @@
           <source>${jdk.version}</source>
           <target>${jdk.version}</target>
           <useIncrementalCompilation>false</useIncrementalCompilation>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.44</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>
