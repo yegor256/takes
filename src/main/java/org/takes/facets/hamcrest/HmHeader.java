@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -99,12 +98,12 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
             final Collection<String> values = new ArrayList<>(0);
             while (headers.hasNext()) {
                 final String[] parts = HmHeader.split(headers.next());
-                final UncheckedText first = new UncheckedText(
-                    new Trimmed(new TextOf(parts[0]))
-                );
-                if (this.header.matches(first.asString())) {
-                    final Text second = new Trimmed(new TextOf(parts[1]));
-                    values.add(new UncheckedText(second).asString());
+                if (this.header.matches(
+                    new UncheckedText(new Trimmed(new TextOf(parts[0]))).asString()
+                )) {
+                    values.add(
+                        new UncheckedText(new Trimmed(new TextOf(parts[1]))).asString()
+                    );
                 }
             }
             final boolean result = this.value.matches(values);

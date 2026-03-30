@@ -27,7 +27,6 @@ import org.takes.Request;
  *
  * @since 0.29.1
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public interface RqRequestLine extends Request {
 
     /**
@@ -202,7 +201,7 @@ public interface RqRequestLine extends Request {
          */
         private static String validated(final String line)
             throws HttpException {
-            if (!PATTERN.matcher(line).matches()) {
+            if (!RqRequestLine.Base.PATTERN.matcher(line).matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(

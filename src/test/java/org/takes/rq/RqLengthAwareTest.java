@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -66,7 +67,7 @@ final class RqLengthAwareTest {
                 Arrays.asList(
                     "GET /test1",
                     "Host: b.example.com",
-                    contentLengthHeader(data.getBytes().length)
+                    contentLengthHeader(data.getBytes(StandardCharsets.UTF_8).length)
                 ),
                 data
             )
@@ -74,7 +75,7 @@ final class RqLengthAwareTest {
             MatcherAssert.assertThat(
                 "First byte read must match first byte of data",
                 stream.read(),
-                Matchers.equalTo((int) data.getBytes()[0])
+                Matchers.equalTo((int) data.getBytes(StandardCharsets.UTF_8)[0])
             );
             MatcherAssert.assertThat(
                 "Available bytes must decrease after reading one byte",
@@ -86,7 +87,7 @@ final class RqLengthAwareTest {
 
     @Test
     void noContentLength() throws IOException {
-        final byte[] bytes = "test".getBytes();
+        final byte[] bytes = "test".getBytes(StandardCharsets.UTF_8);
         final InputStream data = new FilterInputStream(new ByteArrayInputStream(bytes)) {
             @Override
             public int available() {
@@ -121,7 +122,7 @@ final class RqLengthAwareTest {
                     "GET /test2",
                     "Host: c.example.com",
                     "Content-type: text/csv",
-                    contentLengthHeader(data.getBytes().length)
+                    contentLengthHeader(data.getBytes(StandardCharsets.UTF_8).length)
                 ),
                 data
             )
@@ -135,7 +136,7 @@ final class RqLengthAwareTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",
@@ -154,7 +155,7 @@ final class RqLengthAwareTest {
                 Arrays.asList(
                     "GET /test3",
                     "Host: d.example.com",
-                    contentLengthHeader(data.getBytes().length)
+                    contentLengthHeader(data.getBytes(StandardCharsets.UTF_8).length)
                 ),
                 data
             )
@@ -168,7 +169,7 @@ final class RqLengthAwareTest {
             MatcherAssert.assertThat(
                 "Partial buffer content must match first bytes of data",
                 buf,
-                Matchers.equalTo(data.substring(0, len).getBytes())
+                Matchers.equalTo(data.substring(0, len).getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Available bytes must decrease by number of bytes read",

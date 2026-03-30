@@ -5,6 +5,7 @@
 package org.takes.rq.form;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -35,7 +36,7 @@ final class RqFormBaseTest {
                         "Host: www.example.com",
                         String.format(
                             RqFormBaseTest.HEADER,
-                            body.getBytes().length
+                            body.getBytes(StandardCharsets.UTF_8).length
                         )
                     ),
                     body

@@ -38,13 +38,7 @@ import org.cactoos.scalar.ScalarOf;
  * @since 0.32
  */
 interface RsBody extends Input {
-    /**
-     * Gives an {@code InputStream} corresponding to the content of
-     * the body.
-     * @return The content of the body.
-     * @throws IOException in case the content of the body could not
-     *  be provided.
-     */
+    @Override
     InputStream stream() throws IOException;
 
     /**

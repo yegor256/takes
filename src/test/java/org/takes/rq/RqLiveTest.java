@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -98,7 +99,7 @@ final class RqLiveTest {
             IOException.class,
             () -> new RqLive(
                 new ByteArrayInputStream(
-                    "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes()
+                    "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes(StandardCharsets.UTF_8)
                 )
             )
         );
@@ -110,7 +111,7 @@ final class RqLiveTest {
             IOException.class,
             () -> new RqLive(
                 new ByteArrayInputStream(
-                    "GET /test HTTP/1.1\rHost: localhost".getBytes()
+                    "GET /test HTTP/1.1\rHost: localhost".getBytes(StandardCharsets.UTF_8)
                 )
             )
         );

@@ -4,6 +4,7 @@
  */
 package org.takes.facets.auth.codecs;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.SecureRandomSpi;
 import java.util.Arrays;
@@ -114,7 +115,7 @@ final class CcAesTest {
             DecodingException.class,
             () -> new CcAes(
                 new CcPlain(), "0123456701234567"
-            ).decode("broken input".getBytes())
+            ).decode("broken input".getBytes(StandardCharsets.UTF_8))
         );
     }
 

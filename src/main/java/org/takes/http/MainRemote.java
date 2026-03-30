@@ -78,15 +78,17 @@ public final class MainRemote {
                 )
             );
         }
-        final Method method = this.app.getDeclaredMethod(
-            "main", String[].class
-        );
         final String[] passed = new String[1 + this.args.length];
         passed[0] = String.format("--port=%s", file.getAbsoluteFile());
         for (int idx = 0; idx < this.args.length; ++idx) {
             passed[idx + 1] = this.args[idx];
         }
-        final Thread thread = new Thread(new MainMethod(method, passed));
+        final Thread thread = new Thread(
+            new MainMethod(
+                this.app.getDeclaredMethod("main", String[].class),
+                passed
+            )
+        );
         thread.start();
         try {
             script.exec(
@@ -151,6 +153,7 @@ public final class MainRemote {
      * Script to execute.
      * @since 0.23
      */
+    @FunctionalInterface
     public interface Script {
         /**
          * Execute it against this URI.

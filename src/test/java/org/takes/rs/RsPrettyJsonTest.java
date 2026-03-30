@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
@@ -47,7 +48,7 @@ final class RsPrettyJsonTest {
     @Test
     void reportsCorrectContentLength() throws Exception {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try (Writer w = new OutputStreamWriter(baos)) {
+        try (Writer w = new OutputStreamWriter(baos, StandardCharsets.UTF_8)) {
             w.write(
                 new RsBodyPrint(
                     new RsWithBody(

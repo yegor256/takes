@@ -183,6 +183,7 @@ public final class FtRemote implements Front {
      *
      * @since 0.1
      */
+    @FunctionalInterface
     public interface Script {
         /**
          * Execute the script against the running server.

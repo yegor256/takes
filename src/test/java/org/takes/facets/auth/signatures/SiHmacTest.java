@@ -5,6 +5,7 @@
 package org.takes.facets.auth.signatures;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -29,7 +30,7 @@ final class SiHmacTest {
             "Must have proper signature",
             new String(
                 new SiHmac("key", SiHmac.HMAC256).sign(
-                    "The quick brown fox jumps over the lazy dog".getBytes()
+                    "The quick brown fox jumps over the lazy dog".getBytes(StandardCharsets.UTF_8)
                 )
             ),
             new IsEqual<>(

@@ -7,6 +7,7 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ final class CapInputStreamTest {
         MatcherAssert.assertThat(
             "Available bytes must equal the specified capacity limit",
             (long) new CapInputStream(
-                new ByteArrayInputStream("test".getBytes()),
+                new ByteArrayInputStream("test".getBytes(StandardCharsets.UTF_8)),
                 length
             ).available(),
             Matchers.equalTo(length)

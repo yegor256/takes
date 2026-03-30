@@ -4,6 +4,7 @@
  */
 package org.takes.tk;
 
+import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -63,7 +64,7 @@ final class TkTextTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             "TkText must create proper text response from byte array",
-            new RsPrint(new TkText(body.getBytes()).act(new RqFake())),
+            new RsPrint(new TkText(body.getBytes(StandardCharsets.UTF_8)).act(new RqFake())),
             new IsText(
                 new Joined(
                     "\r\n",

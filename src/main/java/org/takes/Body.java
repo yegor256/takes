@@ -12,6 +12,7 @@ import java.io.InputStream;
  *
  * @since 2.0
  */
+@FunctionalInterface
 public interface Body {
     /**
      * Body.

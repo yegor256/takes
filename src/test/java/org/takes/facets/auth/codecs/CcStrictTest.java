@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -30,7 +31,9 @@ final class CcStrictTest {
     void blocksInvalidUrn() {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes())
+            () -> new CcStrict(new CcPlain()).decode(
+                "u%3Atest%3A9".getBytes(StandardCharsets.UTF_8)
+            )
         );
     }
 

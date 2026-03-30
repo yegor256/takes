@@ -28,7 +28,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FtSecure}.
  * @since 0.25
  */
-@SuppressWarnings("PMD.TooManyMethods") final class FtSecureTest {
+final class FtSecureTest {
 
     @Test
     @Tag("deep")
@@ -105,14 +105,20 @@ import org.takes.tk.TkFixed;
      * @return Secure Front
      * @throws IOException If some problem inside
      */
-    @SuppressWarnings("PMD.CloseResource")
     private static FtRemote secure(final Take take) throws IOException {
-        final ServerSocket skt = SSLServerSocketFactory.getDefault()
-            .createServerSocket(0);
-        return new FtRemote(
-            new FtSecure(new BkBasic(take), skt),
-            skt,
-            true
-        );
+        ServerSocket skt = null;
+        try {
+            skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
+            return new FtRemote(
+                new FtSecure(new BkBasic(take), skt),
+                skt,
+                true
+            );
+        } catch (final IOException ex) {
+            if (skt != null) {
+                skt.close();
+            }
+            throw ex;
+        }
     }
 }

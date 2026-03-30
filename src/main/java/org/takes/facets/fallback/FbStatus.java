@@ -38,7 +38,7 @@ public final class FbStatus extends FbWrap {
      * @since 0.16.10
      */
     public FbStatus(final int code) {
-        this(new Filtered<>(value -> code == value.intValue(), code));
+        this(new Filtered<>(value -> code == value, code));
     }
 
     /**
@@ -94,7 +94,7 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Fallback fallback) {
         this(
-            new Filtered<>(status -> code == status.intValue(), code),
+            new Filtered<>(status -> code == status, code),
             fallback
         );
     }
@@ -106,7 +106,7 @@ public final class FbStatus extends FbWrap {
      */
     public FbStatus(final int code, final Scalar<Fallback> fallback) {
         this(
-            new Filtered<>(status -> code == status.intValue(), code),
+            new Filtered<>(status -> code == status, code),
             fallback
         );
     }
@@ -128,12 +128,6 @@ public final class FbStatus extends FbWrap {
      * @param check Check
      * @param fallback Fallback
      */
-    @SuppressWarnings(
-        {
-            "PMD.CallSuperInConstructor",
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-        }
-    )
     public FbStatus(final Iterable<Integer> check,
         final Scalar<Fallback> fallback) {
         super(

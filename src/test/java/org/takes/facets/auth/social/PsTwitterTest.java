@@ -7,6 +7,7 @@ package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
 import jakarta.json.Json;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.math.RandomUtils;
@@ -38,7 +39,7 @@ final class PsTwitterTest {
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
                     RandomStringUtils.randomAlphanumeric(10)
-                ).getBytes()
+                ).getBytes(StandardCharsets.UTF_8)
             ),
             new FakeRequest(
                 200,
@@ -50,7 +51,7 @@ final class PsTwitterTest {
                     .add("profile_image_url", picture)
                     .build()
                     .toString()
-                    .getBytes()
+                    .getBytes(StandardCharsets.UTF_8)
             ),
             RandomStringUtils.randomAlphanumeric(10),
             RandomStringUtils.randomAlphanumeric(10)

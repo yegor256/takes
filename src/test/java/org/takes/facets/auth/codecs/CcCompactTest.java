@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
@@ -39,14 +40,14 @@ final class CcCompactTest {
         MatcherAssert.assertThat(
             "Invalid compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
-                " % tjw".getBytes()
+                " % tjw".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
         MatcherAssert.assertThat(
             "Malformed compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
-                "75726E253".getBytes()
+                "75726E253".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );

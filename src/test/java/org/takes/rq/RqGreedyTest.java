@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -31,11 +32,11 @@ final class RqGreedyTest {
             new RqWithHeader(
                 new RqLive(
                     new ByteArrayInputStream(
-                        body.getBytes()
+                        body.getBytes(StandardCharsets.UTF_8)
                     )
                 ),
                 "Content-Length",
-                String.valueOf(body.getBytes().length)
+                String.valueOf(body.getBytes(StandardCharsets.UTF_8).length)
             )
         );
         MatcherAssert.assertThat(

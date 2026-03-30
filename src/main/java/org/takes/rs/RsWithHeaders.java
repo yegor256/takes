@@ -65,7 +65,6 @@ public final class RsWithHeaders extends RsWrap {
      * @return Head with additional headers
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Iterable<String> extend(final Response res,
         final Iterable<? extends CharSequence> headers) throws IOException {
         Response resp = res;

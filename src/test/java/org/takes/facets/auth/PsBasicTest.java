@@ -6,6 +6,7 @@ package org.takes.facets.auth;
 
 import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -274,7 +275,7 @@ final class PsBasicTest {
     private static String header(final String user, final String pass) {
         final String auth = String.format("%s:%s", user, pass);
         final String encoded = DatatypeConverter.printBase64Binary(
-            auth.getBytes()
+            auth.getBytes(StandardCharsets.UTF_8)
         );
         return String.format(PsBasicTest.AUTH_BASIC, encoded);
     }

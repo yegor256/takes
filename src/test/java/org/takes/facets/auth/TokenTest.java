@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import jakarta.json.JsonObject;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
@@ -38,7 +39,7 @@ final class TokenTest {
             code,
             new IsEqual<>(
                 Base64.getEncoder().encode(
-                    "{\"algo\":\"HS256\",\"type\":\"JWT\"}".getBytes()
+                    "{\"algo\":\"HS256\",\"type\":\"JWT\"}".getBytes(StandardCharsets.UTF_8)
                 )
             )
         );
@@ -81,7 +82,7 @@ final class TokenTest {
             "JWT encoded payload must match Base64 encoded JSON representation",
             code,
             Matchers.equalTo(
-                Base64.getEncoder().encode(jose.toString().getBytes())
+                Base64.getEncoder().encode(jose.toString().getBytes(StandardCharsets.UTF_8))
             )
         );
     }

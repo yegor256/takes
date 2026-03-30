@@ -32,7 +32,6 @@ import org.takes.rs.RsJson;
  * <p>The class is immutable and thread-safe.
  * @since 0.16.3
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class PsGoogleTest {
 
     /**

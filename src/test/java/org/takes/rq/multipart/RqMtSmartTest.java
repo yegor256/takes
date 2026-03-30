@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -278,7 +279,8 @@ final class RqMtSmartTest {
                 post,
                 "Host: example.com",
                 RqMtSmartTest.contentLengthHeader(
-                    head.getBytes().length + length + foot.getBytes().length
+                    head.getBytes(StandardCharsets.UTF_8).length
+                        + length + foot.getBytes(StandardCharsets.UTF_8).length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),

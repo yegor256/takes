@@ -38,7 +38,6 @@ import org.takes.tk.TkText;
  * Test case for {@link FtBasic}.
  * @since 0.1
  */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
 final class FtBasicTest {
 
     /**
@@ -111,7 +110,7 @@ final class FtBasicTest {
             home -> new JdkRequest(home)
                 .method("POST")
                 .header("Content-Length", "4")
-                .fetch(new ByteArrayInputStream("ddgg".getBytes()))
+                .fetch(new ByteArrayInputStream("ddgg".getBytes(StandardCharsets.UTF_8)))
                 .as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .assertBody(Matchers.containsString("second: dd"))

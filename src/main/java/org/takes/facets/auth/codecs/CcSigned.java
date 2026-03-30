@@ -101,8 +101,7 @@ public final class CcSigned implements Codec {
             0,
             signature.length
         );
-        final byte[] actual = mac.doFinal(encoded);
-        if (!Arrays.equals(actual, signature)) {
+        if (!Arrays.equals(mac.doFinal(encoded), signature)) {
             throw new IOException("Bad signature");
         }
         return this.cdc.decode(encoded);

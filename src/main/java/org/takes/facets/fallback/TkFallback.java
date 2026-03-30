@@ -34,7 +34,6 @@ import org.takes.tk.TkWrap;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.AvoidCatchingThrowable")
 public final class TkFallback extends TkWrap {
 
     /**
@@ -78,6 +77,7 @@ public final class TkFallback extends TkWrap {
                 );
             }
             res = TkFallback.wrap(fbres.get(), fbk, req);
+        // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
             final Opt<Response> fbres = fbk.route(
                 TkFallback.fallback(
@@ -130,7 +130,6 @@ public final class TkFallback extends TkWrap {
      */
     @SuppressWarnings({
         "PMD.AvoidCatchingGenericException",
-        "PMD.CyclomaticComplexity",
         "PMD.CognitiveComplexity"
     })
     private static Response wrap(final Response res, final Fallback fbk,
@@ -149,6 +148,7 @@ public final class TkFallback extends TkWrap {
                     } catch (final Exception exx) {
                         throw (IOException) new IOException(exx).initCause(ex);
                     }
+                // @checkstyle IllegalCatchCheck (1 line)
                 } catch (final Throwable ex) {
                     try {
                         head = fbk.route(
@@ -176,6 +176,7 @@ public final class TkFallback extends TkWrap {
                     } catch (final Exception exx) {
                         throw (IOException) new IOException(exx).initCause(ex);
                     }
+                // @checkstyle IllegalCatchCheck (1 line)
                 } catch (final Throwable ex) {
                     try {
                         body = fbk.route(
@@ -230,7 +231,7 @@ public final class TkFallback extends TkWrap {
      * @return Error message
      */
     private static String msg(final Throwable exp) {
-        final StringBuilder txt = new StringBuilder(0);
+        final StringBuilder txt = new StringBuilder(6);
         final String localized = exp.getLocalizedMessage();
         if (localized == null) {
             txt.append("NULL");
@@ -239,8 +240,7 @@ public final class TkFallback extends TkWrap {
         }
         final Throwable cause = exp.getCause();
         if (cause != null) {
-            txt.append("; ");
-            txt.append(TkFallback.msg(cause));
+            txt.append("; ").append(TkFallback.msg(cause));
         }
         return txt.toString();
     }

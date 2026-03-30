@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,10 @@ final class AppTest {
     @Test
     void justWorks(@TempDir final Path temp) throws Exception {
         final File dir = temp.toFile();
-        Files.write(new File(dir, "hello.txt").toPath(), "hello, world!".getBytes());
+        Files.write(
+            new File(dir, "hello.txt").toPath(),
+            "hello, world!".getBytes(StandardCharsets.UTF_8)
+        );
         new FtRemote(new App(dir)).exec(
             new FtRemote.Script() {
                 @Override

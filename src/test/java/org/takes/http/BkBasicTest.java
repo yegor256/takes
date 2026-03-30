@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.cactoos.bytes.BytesOf;
@@ -42,11 +43,7 @@ import org.takes.tk.TkText;
  * @since 0.15.2
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.ExcessiveImports",
-        "PMD.TooManyMethods"
-    }) final class BkBasicTest {
+final class BkBasicTest {
 
     /**
      * Carriage return constant.
@@ -71,7 +68,7 @@ import org.takes.tk.TkText;
         new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
             "Socket output must contain the response text",
-            baos.toString(),
+            baos.toString(StandardCharsets.UTF_8),
             Matchers.containsString(hello)
         );
     }
@@ -185,7 +182,7 @@ import org.takes.tk.TkText;
                         "Content-Length: 12",
                         "",
                         "Hello Second"
-                    ).asString().getBytes()
+                    ).asString().getBytes(StandardCharsets.UTF_8)
                 );
                 final InputStream input = socket.getInputStream();
                 final byte[] buffer = new byte[4096];
@@ -200,7 +197,7 @@ import org.takes.tk.TkText;
         }
         MatcherAssert.assertThat(
             "Two responses must be sent in one connection",
-            output.toString(),
+            output.toString(StandardCharsets.UTF_8),
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
             )
@@ -260,7 +257,7 @@ import org.takes.tk.TkText;
         }
         MatcherAssert.assertThat(
             "Response must contain 411 status for missing Content-Length",
-            output.toString(),
+            output.toString(StandardCharsets.UTF_8),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
     }
@@ -319,7 +316,7 @@ import org.takes.tk.TkText;
         }
         MatcherAssert.assertThat(
             "Response must contain text for closed connection request",
-            output.toString(),
+            output.toString(StandardCharsets.UTF_8),
             Matchers.containsString(text)
         );
     }
@@ -364,7 +361,6 @@ import org.takes.tk.TkText;
      * @return Prepared Socket mock
      * @throws Exception If some problem inside
      */
-    @SuppressWarnings("PMD.CloseResource")
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
@@ -414,7 +410,8 @@ import org.takes.tk.TkText;
                 InputStream sockerInStream = socket.getInputStream()
             ) {
                 socketOutBuffer.write(
-                    new RqPrint(new RqFake(method, path)).asString().getBytes()
+                    new RqPrint(new RqFake(method, path))
+                        .asString().getBytes(StandardCharsets.UTF_8)
                 );
                 final byte[] buffer = new byte[4096];
                 for (
@@ -425,6 +422,6 @@ import org.takes.tk.TkText;
                 }
             }
         }
-        return output.toString();
+        return output.toString(StandardCharsets.UTF_8);
     }
 }

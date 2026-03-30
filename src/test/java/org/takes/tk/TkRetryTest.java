@@ -81,7 +81,7 @@ final class TkRetryTest {
                     final long spent = System.nanoTime() - start;
                     MatcherAssert.assertThat(
                         "TkRetry must spend at least minimum expected time when all retries fail",
-                        (long) (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
+                        (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
                         Matchers.lessThanOrEqualTo(spent)
                     );
                     throw exception;
@@ -107,7 +107,7 @@ final class TkRetryTest {
         final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
             "TkRetry must spend at least minimum expected time before success",
-            (long) (delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
+            (delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
             Matchers.lessThanOrEqualTo(spent)
         );
         MatcherAssert.assertThat(

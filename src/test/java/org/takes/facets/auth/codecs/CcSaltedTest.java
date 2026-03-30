@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -22,14 +23,14 @@ final class CcSaltedTest {
         MatcherAssert.assertThat(
             "Invalid salted data must decode to anonymous identity",
             new CcSafe(new CcSalted(new CcPlain())).decode(
-                " % tjw".getBytes()
+                " % tjw".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
         MatcherAssert.assertThat(
             "Malformed salted data must decode to anonymous identity",
             new CcSafe(new CcSalted(new CcPlain())).decode(
-                "75726E253".getBytes()
+                "75726E253".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
@@ -49,7 +50,7 @@ final class CcSaltedTest {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(
-                "\u0010\u0000\u0000\u0000".getBytes()
+                "\u0010\u0000\u0000\u0000".getBytes(StandardCharsets.UTF_8)
             )
         );
     }
@@ -59,7 +60,7 @@ final class CcSaltedTest {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(
-                "\u1111\u0000\u0000\u0000".getBytes()
+                "\u1111\u0000\u0000\u0000".getBytes(StandardCharsets.UTF_8)
             )
         );
     }

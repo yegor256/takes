@@ -115,12 +115,6 @@ public final class XeWhen extends XeWrap {
      * @param negative Xembly source when condition is negative
      * @since 1.5
      */
-    @SuppressWarnings(
-        {
-            "PMD.CallSuperInConstructor",
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-        }
-    )
     public XeWhen(final Scalar<Boolean> condition,
         final Scalar<XeSource> positive,
         final Scalar<XeSource> negative) {

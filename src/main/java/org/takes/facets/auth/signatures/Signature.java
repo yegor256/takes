@@ -15,6 +15,7 @@ import java.io.IOException;
  *
  * @since 1.4
  */
+@FunctionalInterface
 public interface Signature {
 
     /**

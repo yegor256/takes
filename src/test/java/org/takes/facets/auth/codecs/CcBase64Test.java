@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
@@ -40,7 +41,7 @@ final class CcBase64Test {
             "Base64 decoding must restore original URN",
             new CcBase64(new CcPlain()).decode(
                 "dXJuJTNBdGVzdCUzQXRlc3Q="
-                    .getBytes()
+                    .getBytes(StandardCharsets.UTF_8)
             ).urn(),
             Matchers.equalTo("urn:test:test")
         );
@@ -85,7 +86,7 @@ final class CcBase64Test {
     void decodesNonBaseSixtyFourAlphabetSymbols() throws IOException {
         try {
             new CcStrict(new CcBase64(new CcPlain())).decode(
-                " ^^^".getBytes()
+                " ^^^".getBytes(StandardCharsets.UTF_8)
             );
         } catch (final DecodingException ex) {
             MatcherAssert.assertThat(

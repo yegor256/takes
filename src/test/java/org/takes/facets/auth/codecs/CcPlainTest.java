@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
@@ -37,7 +38,7 @@ final class CcPlainTest {
         MatcherAssert.assertThat(
             "Plain decoding must produce correct identity URN",
             new CcPlain().decode(
-                "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes()
+                "urn%3Atest%3A9;name=Jeff+Lebowski".getBytes(StandardCharsets.UTF_8)
             ).urn(),
             Matchers.equalTo("urn:test:9")
         );
@@ -48,7 +49,7 @@ final class CcPlainTest {
         MatcherAssert.assertThat(
             "Invalid plain data must decode to anonymous identity",
             new CcSafe(new CcPlain()).decode(
-                " % tjw".getBytes()
+                " % tjw".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );

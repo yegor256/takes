@@ -6,6 +6,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,12 @@ final class CcXorTest {
             new Codec() {
                 @Override
                 public byte[] encode(final Identity identity) {
-                    return identity.urn().getBytes();
+                    return identity.urn().getBytes(StandardCharsets.UTF_8);
                 }
 
                 @Override
                 public Identity decode(final byte[] bytes) {
-                    return new Identity.Simple(new String(bytes));
+                    return new Identity.Simple(new String(bytes, StandardCharsets.UTF_8));
                 }
             },
             "secret"

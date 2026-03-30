@@ -98,8 +98,7 @@ public final class TkSmartRedirect extends TkWrap {
                 loc.append(uri.getQuery());
             }
             if (uri.getFragment() != null) {
-                loc.append('#');
-                loc.append(uri.getFragment());
+                loc.append('#').append(uri.getFragment());
             }
             return loc.toString();
         }

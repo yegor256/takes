@@ -124,9 +124,8 @@ public final class PsGithub implements Pass {
      * @see <a href="https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param/">Deprecating auth through query param</a>
      */
     private Identity fetch(final String token) throws IOException {
-        final String uri = new Href(this.api).path("user").toString();
         return PsGithub.parse(
-            new JdkRequest(uri)
+            new JdkRequest(new Href(this.api).path("user").toString())
                 .header("accept", "application/json")
                 .header("Authorization", String.format("token %s", token))
                 .fetch().as(RestResponse.class)
@@ -146,10 +145,11 @@ public final class PsGithub implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        final String uri = new Href(this.github)
-            .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
-            .toString();
-        return new JdkRequest(uri)
+        return new JdkRequest(
+            new Href(this.github)
+                .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
+                .toString()
+        )
             .method("POST")
             .header("Accept", "application/xml")
             .body()

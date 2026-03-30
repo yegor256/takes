@@ -27,7 +27,6 @@ final class RqMethodTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     void supportsAllStandardMethods() throws IOException {
         for (final String method
             : Arrays.asList(

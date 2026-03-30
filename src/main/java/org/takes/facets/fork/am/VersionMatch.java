@@ -9,6 +9,7 @@ package org.takes.facets.fork.am;
  *
  * @since 1.7.2
  */
+@FunctionalInterface
 public interface VersionMatch {
 
     /**

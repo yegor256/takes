@@ -81,13 +81,7 @@ public final class PsByFlag implements Pass {
             .param(this.flag).iterator();
         Opt<Identity> user = new Opt.Empty<>();
         if (flg.hasNext()) {
-            final String value = flg.next();
-            for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
-                if (ent.getKey().matcher(value).matches()) {
-                    user = ent.getValue().enter(req);
-                    break;
-                }
-            }
+            user = PsByFlag.find(flg.next(), this.passes, req);
         }
         return user;
     }
@@ -96,6 +90,29 @@ public final class PsByFlag implements Pass {
     public Response exit(final Response response,
         final Identity identity) {
         return response;
+    }
+
+    /**
+     * Find matching pass for the given value.
+     * @param value Flag value
+     * @param passes Available passes
+     * @param req Request
+     * @return Identity if found
+     * @throws Exception If fails
+     */
+    private static Opt<Identity> find(
+        final String value,
+        final Map<Pattern, Pass> passes,
+        final Request req
+    ) throws Exception {
+        Opt<Identity> user = new Opt.Empty<>();
+        for (final Map.Entry<Pattern, Pass> ent : passes.entrySet()) {
+            if (ent.getKey().matcher(value).matches()) {
+                user = ent.getValue().enter(req);
+                break;
+            }
+        }
+        return user;
     }
 
     /**

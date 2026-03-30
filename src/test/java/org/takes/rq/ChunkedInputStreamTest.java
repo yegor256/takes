@@ -55,7 +55,7 @@ final class ChunkedInputStreamTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",
@@ -97,7 +97,7 @@ final class ChunkedInputStreamTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",
@@ -133,7 +133,7 @@ final class ChunkedInputStreamTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",
@@ -168,7 +168,10 @@ final class ChunkedInputStreamTest {
             MatcherAssert.assertThat(
                 "Buffer must contain data followed by zero-filled padding",
                 buf,
-                Matchers.equalTo((data + new String(new byte[10])).getBytes())
+                Matchers.equalTo(
+                    (data + new String(new byte[10], StandardCharsets.UTF_8))
+                        .getBytes(StandardCharsets.UTF_8)
+                )
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",

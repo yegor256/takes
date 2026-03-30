@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -63,7 +64,7 @@ final class RqChunkTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",
@@ -109,7 +110,7 @@ final class RqChunkTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",
@@ -149,7 +150,7 @@ final class RqChunkTest {
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
-                Matchers.equalTo(data.getBytes())
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
             );
             MatcherAssert.assertThat(
                 "Stream must have no bytes available after reading all data",

@@ -15,12 +15,13 @@ import org.xembly.Directive;
  *
  * @since 0.1
  */
+@FunctionalInterface
 public interface XeSource {
 
     /**
      * Empty.
      */
-    XeSource EMPTY = () -> Collections.emptyList();
+    XeSource EMPTY = Collections::emptyList;
 
     /**
      * Get Xembly directives.

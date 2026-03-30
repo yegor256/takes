@@ -40,7 +40,6 @@ import lombok.EqualsAndHashCode;
  * @since 0.14.2
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.DoNotUseThreads")
 public final class BkTimeable extends Thread implements Back {
     /**
      * Original back.

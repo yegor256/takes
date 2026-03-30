@@ -31,12 +31,6 @@ public final class FbChain extends FbWrap {
      * Ctor.
      * @param fallbacks Fallbacks
      */
-    @SuppressWarnings(
-        {
-            "PMD.CallSuperInConstructor",
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors"
-        }
-    )
     public FbChain(final Iterable<Fallback> fallbacks) {
         super(
             req -> {

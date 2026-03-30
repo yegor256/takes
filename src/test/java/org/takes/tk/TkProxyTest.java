@@ -38,7 +38,6 @@ import org.takes.rs.RsText;
  * Test case for {@link TkProxy}.
  * @since 0.25
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class TkProxyTest {
 
     /**
@@ -278,6 +277,7 @@ final class TkProxyTest {
      *
      * @since 1.24.4
      */
+    @FunctionalInterface
     interface Factory {
         Request create(Request req);
     }

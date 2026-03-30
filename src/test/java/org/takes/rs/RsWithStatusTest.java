@@ -5,14 +5,12 @@
 package org.takes.rs;
 
 import java.net.HttpURLConnection;
-import org.cactoos.Scalar;
 import org.cactoos.text.Joined;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
 import org.llorllale.cactoos.matchers.HasValue;
 import org.llorllale.cactoos.matchers.IsText;
-import org.takes.Response;
 
 /**
  * Test case for {@link RsWithStatus}.
@@ -44,30 +42,18 @@ final class RsWithStatusTest {
         ).affirm();
     }
 
-    /**
-     * RsWithStatus can add status multiple times.
-     */
-    @SuppressWarnings(
-        {
-            "PMD.JUnitTestContainsTooManyAsserts",
-            "PMD.ProhibitPlainJunitAssertionsRule"
-        }
-    )
     @Test
     void addsStatusMultipleTimes() {
-        final Response response = new RsWithStatus(
+        new Assertion<>(
+            "Response with status wrapped twice must have single status line",
             new RsWithStatus(
-                new RsEmpty(),
-                HttpURLConnection.HTTP_NOT_FOUND
-            ),
-            HttpURLConnection.HTTP_SEE_OTHER
-        );
-        final Assertion<Scalar<Iterable<?>>> assertion = new Assertion<>(
-            "Head with one line",
-            response::head,
+                new RsWithStatus(
+                    new RsEmpty(),
+                    HttpURLConnection.HTTP_NOT_FOUND
+                ),
+                HttpURLConnection.HTTP_SEE_OTHER
+            )::head,
             new HasValue<>(new HasSize(1))
-        );
-        assertion.affirm();
-        assertion.affirm();
+        ).affirm();
     }
 }

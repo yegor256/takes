@@ -6,6 +6,7 @@ package org.takes.rq.multipart;
 
 import java.io.IOException;
 import java.nio.channels.ClosedChannelException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.cactoos.list.ListOf;
@@ -26,7 +27,6 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMtFake}.
  * @since 0.33
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.
@@ -109,7 +109,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP,
@@ -160,7 +160,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP, "name=\"name\""
@@ -225,7 +225,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP, "name=\"foo\""
@@ -266,7 +266,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP, "name=\"t5\""
@@ -297,7 +297,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP, "name=\"address\""

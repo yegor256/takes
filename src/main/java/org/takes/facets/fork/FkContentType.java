@@ -70,7 +70,6 @@ public final class FkContentType implements Fork {
      * @return Media type
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static MediaTypes getType(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
         final Iterable<String> headers = new RqHeaders.Base(req)

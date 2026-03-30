@@ -37,7 +37,6 @@ import org.takes.misc.VerboseList;
  *
  * @since 0.1
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public interface RsHeaders extends Response {
 
     /**
@@ -124,7 +123,6 @@ public interface RsHeaders extends Response {
          * @return Map of them
          * @throws IOException If fails
          */
-        @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
         private Map<String, List<String>> map() throws IOException {
             final Iterator<String> head = this.head().iterator();
             if (!head.hasNext()) {

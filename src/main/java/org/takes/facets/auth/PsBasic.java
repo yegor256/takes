@@ -41,7 +41,6 @@ import org.takes.rs.RsWithHeader;
  *  some places that use it and can be replaced with better code constructs.
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 
     /**
@@ -127,6 +126,7 @@ public final class PsBasic implements Pass {
      *
      * @since 0.20
      */
+    @FunctionalInterface
     public interface Entry {
         /**
          * Check if the user credentials are valid.

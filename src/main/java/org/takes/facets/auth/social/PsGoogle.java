@@ -150,12 +150,13 @@ public final class PsGoogle implements Pass {
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        final String uri = new Href(this.gapi).path("plus").path("v1")
-            .path("people")
-            .path("me")
-            .with(PsGoogle.ACCESS_TOKEN, token)
-            .toString();
-        final JsonObject json = new JdkRequest(uri).fetch()
+        final JsonObject json = new JdkRequest(
+            new Href(this.gapi).path("plus").path("v1")
+                .path("people")
+                .path("me")
+                .with(PsGoogle.ACCESS_TOKEN, token)
+                .toString()
+        ).fetch()
             .as(JsonResponse.class).json()
             .readObject();
         if (json.containsKey(PsGoogle.ERROR)) {

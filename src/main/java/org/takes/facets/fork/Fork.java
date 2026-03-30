@@ -15,6 +15,7 @@ import org.takes.misc.Opt;
  *
  * @since 0.4
  */
+@FunctionalInterface
 public interface Fork {
 
     /**

@@ -50,7 +50,6 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.DataClass")
 public final class BkBasic implements Back {
 
     /**
@@ -86,7 +85,6 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
@@ -117,7 +115,6 @@ public final class BkBasic implements Back {
      * @param output Output
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidCatchingThrowable")
     private void print(final Request req, final OutputStream output)
         throws IOException {
         Response handled;
@@ -130,7 +127,7 @@ public final class BkBasic implements Back {
                 ex,
                 HttpURLConnection.HTTP_BAD_REQUEST
             );
-        // @checkstyle IllegalCatchCheck (10 lines)
+        // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
             handled = BkBasic.failure(
                 ex,

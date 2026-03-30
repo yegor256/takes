@@ -54,7 +54,6 @@ public final class FkAgent implements Fork {
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Opt<Response> route(final Request req) throws Exception {
         final List<String> tokens = FkAgent.tokens(req);
         Opt<Response> resp = new Opt.Empty<>();
@@ -78,7 +77,7 @@ public final class FkAgent implements Fork {
         final Iterable<String> headers =
             new RqHeaders.Base(req).header("User-Agent");
         for (final String header : headers) {
-            final Matcher matcher = PATTERN.matcher(header);
+            final Matcher matcher = FkAgent.PATTERN.matcher(header);
             if (matcher.matches()) {
                 tokens.add(matcher.group());
             }

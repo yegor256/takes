@@ -44,7 +44,6 @@ import org.cactoos.text.FormattedText;
 @SuppressWarnings(
     {
         "PMD.TooManyMethods",
-        "PMD.OnlyOneConstructorShouldDoInitialization",
         "PMD.GodClass"
     }
 )
@@ -339,7 +338,7 @@ public final class Href implements CharSequence {
                 if (index < 0 || index >= value.length()) {
                     throw new IllegalArgumentException(ex.getMessage(), ex);
                 } else if (ex.getReason().contains("authority")) {
-                    final StringBuilder message = new StringBuilder();
+                    final StringBuilder message = new StringBuilder(64);
                     message
                         .append("Illegal URI: ")
                         .append(txt)
@@ -364,7 +363,6 @@ public final class Href implements CharSequence {
      * @param query The query to parse.
      * @return A map containing all the query arguments and their values.
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedMap<String, List<String>> asMap(final String query) {
         final SortedMap<String, List<String>> params = new TreeMap<>();
         if (query != null) {

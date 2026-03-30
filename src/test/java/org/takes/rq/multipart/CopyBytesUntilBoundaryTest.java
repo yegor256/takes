@@ -26,13 +26,12 @@ final class CopyBytesUntilBoundaryTest {
 
     @Test
     @Disabled
-    @SuppressWarnings("PMD.CloseResource")
     void copiesLastRepeatedBytes() throws IOException {
         try (
             InputStream input = new ClosedInputStream();
-            ReadableByteChannel src = Channels.newChannel(input)
+            ReadableByteChannel src = Channels.newChannel(input);
+            WritableByteChannel target = Channels.newChannel(new ByteArrayOutputStream())
         ) {
-            final WritableByteChannel target = Channels.newChannel(new ByteArrayOutputStream());
             final ByteBuffer buffer = ByteBuffer.allocate(5);
             buffer.put(new byte[] {0, 0, 0, 13, 13});
             buffer.position(3);
