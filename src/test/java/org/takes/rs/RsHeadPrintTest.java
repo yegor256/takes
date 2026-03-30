@@ -7,7 +7,6 @@ package org.takes.rs;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsText;
 import org.llorllale.cactoos.matchers.Throws;
 
@@ -44,7 +43,7 @@ final class RsHeadPrintTest {
 
     @Test
     void simpleWithDash() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "must write head with dashes",
             new RsHeadPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")

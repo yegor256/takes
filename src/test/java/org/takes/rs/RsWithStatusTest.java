@@ -6,8 +6,8 @@ package org.takes.rs;
 
 import java.net.HttpURLConnection;
 import org.cactoos.text.Joined;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasSize;
 import org.llorllale.cactoos.matchers.HasValue;
 import org.llorllale.cactoos.matchers.IsText;
@@ -22,7 +22,7 @@ final class RsWithStatusTest {
 
     @Test
     void addsStatus() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response must contain not found status",
             new RsPrint(
                 new RsWithStatus(
@@ -39,12 +39,12 @@ final class RsWithStatusTest {
                     ""
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
     void addsStatusMultipleTimes() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with status wrapped twice must have single status line",
             new RsWithStatus(
                 new RsWithStatus(
@@ -54,6 +54,6 @@ final class RsWithStatusTest {
                 HttpURLConnection.HTTP_SEE_OTHER
             )::head,
             new HasValue<>(new HasSize(1))
-        ).affirm();
+        );
     }
 }

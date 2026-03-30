@@ -7,7 +7,6 @@ package org.takes.rq;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 
 /**
@@ -32,7 +31,7 @@ final class RqWithHeaderTest {
 
     @Test
     void evaluateTrueEqualityTest() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new RqWithHeader(
                 new RqFake(),
@@ -44,6 +43,6 @@ final class RqWithHeaderTest {
                     "X-Custom-Header", "Custom-Value"
                 )
             )
-        ).affirm();
+        );
     }
 }

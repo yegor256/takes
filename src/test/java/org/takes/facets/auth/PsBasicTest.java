@@ -13,7 +13,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.HttpException;
 import org.takes.Take;
@@ -220,7 +219,7 @@ final class PsBasicTest {
                 new PsBasic.Default("mike secret11 urn:users:michael")
             )
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "PsBasic should authenticate mike",
             new RsPrint(
                 take.act(
@@ -231,7 +230,7 @@ final class PsBasicTest {
                 )
             ),
             new HasString("HTTP/1.1 200 OK")
-        ).affirm();
+        );
     }
 
     @Test
@@ -247,13 +246,13 @@ final class PsBasicTest {
                 )
             )
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with 401 Unauthorized status",
             new RsPrint(
                 take.act(new RqFake())
             ),
             new HasString("HTTP/1.1 401 Unauthorized\r\n")
-        ).affirm();
+        );
     }
 
     /**

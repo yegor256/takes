@@ -12,10 +12,10 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import org.apache.commons.io.input.ClosedInputStream;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test for {@link CopyBytesUntilBoundary}.
@@ -44,11 +44,11 @@ final class CopyBytesUntilBoundaryTest {
                 buffer
             ).copy();
             final byte[] barray = buffer.array();
-            new Assertion<>(
+            MatcherAssert.assertThat(
                 "Buffer must copy last repeated bytes",
                 new byte[] {barray[0], barray[1]},
                 new IsEqual<>(new byte[] {13, 13})
-            ).affirm();
+            );
         }
     }
 }

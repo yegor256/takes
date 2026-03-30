@@ -9,7 +9,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.EndsWith;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
@@ -22,7 +21,7 @@ final class RqFakeTest {
 
     @Test
     void conformsToEquality() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new RqFake(
                 "GET",
@@ -34,7 +33,7 @@ final class RqFakeTest {
                     "https://localhost:8080"
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test

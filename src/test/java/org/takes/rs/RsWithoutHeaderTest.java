@@ -5,8 +5,8 @@
 package org.takes.rs;
 
 import org.cactoos.text.Joined;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.IsText;
 
 /**
@@ -17,7 +17,7 @@ final class RsWithoutHeaderTest {
 
     @Test
     void addsHeadersToResponse() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response without 'Host' header",
             new RsPrint(
                 new RsWithoutHeader(
@@ -33,7 +33,7 @@ final class RsWithoutHeaderTest {
                     ""
                 )
             )
-        ).affirm();
+        );
     }
 
 }

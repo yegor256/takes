@@ -25,8 +25,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
@@ -326,12 +324,12 @@ final class BkBasicTest {
      * invalid URI.
      */
     @Test
-    void returnsABadRequestToAMissingPath() {
-        new Assertion<>(
+    void returnsABadRequestToAMissingPath() throws Exception {
+        MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            () -> this.responseForPath("GET", "\\"),
-            new HasString("400 Bad Request")
-        ).affirm();
+            this.responseForPath("GET", "\\"),
+            Matchers.containsString("400 Bad Request")
+        );
     }
 
     /**
@@ -347,12 +345,12 @@ final class BkBasicTest {
      */
     @Disabled
     @Test
-    void returnsABadRequestToAControlCharInPath() {
-        new Assertion<>(
+    void returnsABadRequestToAControlCharInPath() throws Exception {
+        MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            () -> this.responseForPath("GET", "/\n"),
-            new HasString("400 Bad Request")
-        ).affirm();
+            this.responseForPath("GET", "/\n"),
+            Matchers.containsString("400 Bad Request")
+        );
     }
 
     /**

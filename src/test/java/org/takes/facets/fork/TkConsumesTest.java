@@ -10,7 +10,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.HttpException;
 import org.takes.Response;
@@ -88,10 +87,10 @@ final class TkConsumesTest {
     void equalsAndHashCodeEqualTest() {
         final Take take = new TkText("text");
         final String type = "Content-Type: text/plain";
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new TkConsumes(take, type),
             new IsEqual<>(new TkConsumes(take, type))
-        ).affirm();
+        );
     }
 }

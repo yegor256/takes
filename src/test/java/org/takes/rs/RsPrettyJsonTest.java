@@ -14,7 +14,6 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsPrettyJson}.
@@ -76,7 +75,7 @@ final class RsPrettyJsonTest {
     @Test
     void mustEvaluateTrueEquality() {
         final String body = "{\"person\":{\"name\":\"John\"}}";
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new RsPrettyJson(
                 new RsWithBody(body)
@@ -86,6 +85,6 @@ final class RsPrettyJsonTest {
                     new RsWithBody(body)
                 )
             )
-        ).affirm();
+        );
     }
 }

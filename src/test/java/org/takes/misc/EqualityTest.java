@@ -6,8 +6,8 @@ package org.takes.misc;
 
 import org.cactoos.text.Lowered;
 import org.cactoos.text.TextOf;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasValue;
 
 /**
@@ -19,25 +19,25 @@ final class EqualityTest {
 
     @Test
     void mustEvaluateTrueEqualityOfTexts() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality for Texts",
             new Equality<>(
                 new Lowered(new TextOf("Hello")),
                 new TextOf("hello")
             ),
             new HasValue<>(true)
-        ).affirm();
+        );
     }
 
     @Test
     void mustEvaluateFalseEqualityOfTexts() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate false equality for Texts",
             new Equality<>(
                 new TextOf("John"),
                 new TextOf("Robert")
             ),
             new HasValue<>(false)
-        ).affirm();
+        );
     }
 }

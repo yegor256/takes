@@ -13,7 +13,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -101,19 +100,19 @@ final class CcBase64Test {
 
     @Test
     void mustEvaluateTrueEquality() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate equality of CcBase64 objects",
             new CcBase64(new CcPlain()),
             new IsEqual<>(new CcBase64(new CcPlain()))
-        ).affirm();
+        );
     }
 
     @Test
     void mustEvaluateIdenticalHashCodes() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate identical hash codes",
             new CcBase64(new CcPlain()).hashCode(),
             new IsEqual<>(new CcBase64(new CcPlain()).hashCode())
-        ).affirm();
+        );
     }
 }

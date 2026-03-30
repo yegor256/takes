@@ -10,7 +10,6 @@ import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.takes.Request;
 
@@ -53,7 +52,7 @@ final class RqWithHeadersTest {
             new RqFake(),
             "jsessionid", "abcdefghigklmnop"
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new RqWithHeaders(
                 request,
@@ -65,6 +64,6 @@ final class RqWithHeadersTest {
                     "clusterNode: 5"
                 )
             )
-        ).affirm();
+        );
     }
 }

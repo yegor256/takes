@@ -8,7 +8,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -118,11 +117,11 @@ final class FkContentTypeTest {
     void mustEvaluateEqualsTest() {
         final Take take = req -> new RsEmpty();
         final String type = "text/xml";
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new FkContentType(type, take),
             new IsEqual<>(new FkContentType(type, take))
-        ).affirm();
+        );
     }
 
     /**

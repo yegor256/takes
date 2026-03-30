@@ -11,7 +11,6 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.object.HasToString;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link RsPrint}.
@@ -53,7 +52,7 @@ final class RsPrintTest {
 
     @Test
     void simpleWithDash() throws Exception {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "must write head with dashes",
             new RsPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")

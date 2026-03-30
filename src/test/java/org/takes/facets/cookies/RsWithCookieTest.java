@@ -5,10 +5,10 @@
 package org.takes.facets.cookies;
 
 import org.cactoos.text.Joined;
+import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
-import org.llorllale.cactoos.matchers.Throws;
 import org.takes.rs.RsPrint;
 
 /**
@@ -24,7 +24,7 @@ final class RsWithCookieTest {
 
     @Test
     void addsCookieToResponse() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response should contain \"Set-Cookie\" header",
             new RsPrint(
                 new RsWithCookie(
@@ -40,12 +40,12 @@ final class RsWithCookieTest {
                     ""
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
     void addsMultipleCookies() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response should contain \"Set-Cookie\" headers",
             new RsPrint(
                 new RsWithCookie(
@@ -65,30 +65,32 @@ final class RsWithCookieTest {
                     ""
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
     void rejectsInvalidName() {
-        new Assertion<>(
+        final IllegalArgumentException thrown = Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> new RsWithCookie("f oo", "works")
+        );
+        MatcherAssert.assertThat(
             "RsWithCookie should reject invalid cookie name",
-            () -> new RsWithCookie("f oo", "works"),
-            new Throws<>(
-                "Cookie name \"f oo\" contains invalid characters",
-                IllegalArgumentException.class
-            )
-        ).affirm();
+            thrown.getMessage(),
+            new org.hamcrest.core.StringContains("Cookie name \"f oo\" contains invalid characters")
+        );
     }
 
     @Test
     void rejectsInvalidValue() {
-        new Assertion<>(
+        final IllegalArgumentException thrown = Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> new RsWithCookie("cookiename", "wo\"rks")
+        );
+        MatcherAssert.assertThat(
             "RsWithCookie should reject invalid cookie value",
-            () -> new RsWithCookie("cookiename", "wo\"rks"),
-            new Throws<>(
-                "Cookie value \"wo\"rks\" contains invalid characters",
-                IllegalArgumentException.class
-            )
-        ).affirm();
+            thrown.getMessage(),
+            new org.hamcrest.core.StringContains("Cookie value \"wo\"rks\" contains invalid characters")
+        );
     }
 }
