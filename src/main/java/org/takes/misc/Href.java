@@ -44,8 +44,7 @@ import org.cactoos.text.FormattedText;
 @SuppressWarnings(
     {
         "PMD.TooManyMethods",
-        "PMD.GodClass",
-        "PMD.UseStringBufferLength"
+        "PMD.GodClass"
     }
 )
 public final class Href implements CharSequence {
@@ -110,7 +109,10 @@ public final class Href implements CharSequence {
 
     @Override
     public int length() {
-        return this.toString().length();
+        final StringBuilder text = new StringBuilder(this.bare());
+        this.appendParams(text);
+        this.appendFragment(text);
+        return text.length();
     }
 
     @Override
