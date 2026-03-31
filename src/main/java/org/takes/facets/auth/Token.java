@@ -7,9 +7,10 @@ package org.takes.facets.auth;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import java.nio.charset.Charset;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 /**
  * JSON Token interface for creating and encoding authentication tokens.
@@ -89,12 +90,7 @@ public interface Token {
      * and expiration information for secure token-based authentication.
      * @since 1.4
      */
-    @SuppressWarnings(
-        {
-            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
-            "PMD.ReplaceJavaUtilCalendar"
-        }
-    )
+    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     final class Jwt implements Token {
         /**
          * The header short for subject.
@@ -112,9 +108,11 @@ public interface Token {
         public static final String EXPIRATION = "expr";
 
         /**
-         * The header short for expiration.
+         * ISO date format for JWT timestamps.
          */
-        private static final String ISOFORMAT = "%tFT%<tRZ";
+        private static final DateTimeFormatter ISOFORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm'Z'")
+                .withZone(ZoneOffset.UTC);
 
         /**
          * JWT object.
@@ -122,27 +120,16 @@ public interface Token {
         private final JsonObject jwto;
 
         /**
-         * Time of lifespan start.
-         */
-        private final Calendar now;
-
-        /**
-         * Time of lifespan end.
-         */
-        private final Calendar exp;
-
-        /**
          * JSON Web Token.
          * @param idt Identity
          * @param age Lifetime of token.
          */
         public Jwt(final Identity idt, final long age) {
-            this.now = Calendar.getInstance(TimeZone.getTimeZone("Z"));
-            this.exp = Calendar.getInstance(TimeZone.getTimeZone("Z"));
-            this.exp.setTimeInMillis(this.now.getTimeInMillis() + (age * 1000));
+            final Instant now = Instant.now();
+            final Instant exp = now.plusSeconds(age);
             this.jwto = Json.createObjectBuilder()
-                .add(Token.Jwt.ISSUED, String.format(Token.Jwt.ISOFORMAT, this.now))
-                .add(Token.Jwt.EXPIRATION, String.format(Token.Jwt.ISOFORMAT, this.exp))
+                .add(Token.Jwt.ISSUED, Token.Jwt.ISOFORMAT.format(now))
+                .add(Token.Jwt.EXPIRATION, Token.Jwt.ISOFORMAT.format(exp))
                 .add(Token.Jwt.SUBJECT, idt.urn())
                 .build();
         }
