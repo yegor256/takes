@@ -116,6 +116,7 @@ public interface Expires {
      *
      * @since 2.0
      */
+    @SuppressWarnings("PMD.ReplaceJavaUtilDate")
     final class Date implements Expires {
 
         /**

@@ -115,6 +115,7 @@ public final class BkBasic implements Back {
      * @param output Output
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private void print(final Request req, final OutputStream output)
         throws IOException {
         Response handled;

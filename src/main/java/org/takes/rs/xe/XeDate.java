@@ -50,6 +50,7 @@ public final class XeDate extends XeWrap {
      * Ctor.
      * @param attr Attribute name
      */
+    @SuppressWarnings("PMD.ReplaceJavaUtilDate")
     public XeDate(final CharSequence attr) {
         super(
             () -> {

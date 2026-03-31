@@ -41,8 +41,9 @@ final class CcSaltedTest {
         final Identity identity = new Identity.Simple(
             new String(new char[10_000])
         );
-        final byte[] bytes = new CcSalted(new CcPlain()).encode(identity);
-        new CcSalted(new CcPlain()).decode(bytes);
+        new CcSalted(new CcPlain()).decode(
+            new CcSalted(new CcPlain()).encode(identity)
+        );
     }
 
     @Test

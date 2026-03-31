@@ -90,7 +90,9 @@ final class RsWithCookieTest {
         MatcherAssert.assertThat(
             "RsWithCookie should reject invalid cookie value",
             thrown.getMessage(),
-            new org.hamcrest.core.StringContains("Cookie value \"wo\"rks\" contains invalid characters")
+            new org.hamcrest.core.StringContains(
+                "Cookie value \"wo\"rks\" contains invalid characters"
+            )
         );
     }
 }

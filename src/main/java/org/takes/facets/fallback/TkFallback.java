@@ -55,6 +55,7 @@ public final class TkFallback extends TkWrap {
      * @return Response
      * @throws Exception If fails
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response route(final Take take, final Fallback fbk,
         final Request req) throws Exception {
         final long start = System.currentTimeMillis();

@@ -39,6 +39,7 @@ import org.takes.tk.TkText;
  * Test case for {@link BkBasic}.
  *
  * @since 0.15.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  */
 final class BkBasicTest {

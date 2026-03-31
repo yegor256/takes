@@ -125,7 +125,7 @@ interface RsBody extends Input {
         /**
          * The length of the stream.
          */
-        private final AtomicInteger length;
+        private final AtomicInteger len;
 
         /**
          * Constructs an {@code Stream} with the specified {@link InputStream}.
@@ -133,7 +133,7 @@ interface RsBody extends Input {
          */
         Stream(final InputStream input) {
             this.input = input;
-            this.length = new AtomicInteger(-1);
+            this.len = new AtomicInteger(-1);
         }
 
         @Override
@@ -145,7 +145,7 @@ interface RsBody extends Input {
         @Override
         public int length() throws IOException {
             this.estimate();
-            return this.length.get();
+            return this.len.get();
         }
 
         /**
@@ -153,8 +153,8 @@ interface RsBody extends Input {
          * @throws IOException in case the length could not be estimated.
          */
         private void estimate() throws IOException {
-            if (this.length.get() == -1) {
-                this.length.compareAndSet(-1, this.input.available());
+            if (this.len.get() == -1) {
+                this.len.compareAndSet(-1, this.input.available());
             }
         }
     }
@@ -175,7 +175,7 @@ interface RsBody extends Input {
         /**
          * The temporary file that contains the content of the body.
          */
-        private final File file;
+        private final File tmp;
 
         /**
          * The underlying body.
@@ -189,7 +189,7 @@ interface RsBody extends Input {
         @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
         TempFile(final RsBody content) {
             this.body = content;
-            this.file = new File(
+            this.tmp = new File(
                 System.getProperty("java.io.tmpdir"),
                 String.format(
                     "%s-%s.tmp",
@@ -197,7 +197,7 @@ interface RsBody extends Input {
                     UUID.randomUUID().toString()
                 )
             );
-            this.file.deleteOnExit();
+            this.tmp.deleteOnExit();
         }
 
         @Override
@@ -222,19 +222,20 @@ interface RsBody extends Input {
          * @throws IOException In case the content of the underlying
          *  {@code Body} could not be stored into the file.
          */
+        @SuppressWarnings("PMD.AvoidSynchronizedStatement")
         private File file() throws IOException {
-            synchronized (this.file) {
-                if (!this.file.exists()) {
-                    this.file.deleteOnExit();
+            synchronized (this.tmp) {
+                if (!this.tmp.exists()) {
+                    this.tmp.deleteOnExit();
                     try (InputStream content = this.body.stream()) {
                         Files.copy(
                             content,
-                            Paths.get(this.file.getAbsolutePath()),
+                            Paths.get(this.tmp.getAbsolutePath()),
                             StandardCopyOption.REPLACE_EXISTING
                         );
                     }
                 }
-                return this.file;
+                return this.tmp;
             }
         }
     }

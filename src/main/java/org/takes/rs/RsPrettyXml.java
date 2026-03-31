@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
@@ -119,6 +118,7 @@ public final class RsPrettyXml implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.AvoidSynchronizedStatement")
     private Response make() throws IOException {
         synchronized (this.lock) {
             if (this.transformed.isEmpty()) {
@@ -217,8 +217,7 @@ public final class RsPrettyXml implements Response {
             DocumentBuilderFactory.newInstance();
         try {
             factory.setFeature(RsPrettyXml.LOAD_EXTERNAL_DTD, false);
-            final DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(body).getDoctype();
+            return factory.newDocumentBuilder().parse(body).getDoctype();
         } catch (final ParserConfigurationException | SAXException ex) {
             throw new IOException(ex);
         }

@@ -30,6 +30,7 @@ import org.takes.misc.Href;
  *
  * @since 0.9
  */
+@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface RqHref extends Request {
 
     /**

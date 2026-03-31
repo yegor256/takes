@@ -6,7 +6,6 @@ package org.takes.rs;
 
 import jakarta.json.Json;
 import jakarta.json.JsonException;
-import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import jakarta.json.JsonWriter;
 import jakarta.json.stream.JsonGenerator;
@@ -90,15 +89,12 @@ public final class RsPrettyJson implements Response {
      */
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
-        try (JsonReader rdr = Json.createReader(body)) {
-            final JsonObject obj = rdr.readObject();
-            try (JsonWriter wrt = Json.createWriterFactory(
+        try (JsonReader rdr = Json.createReader(body);
+            JsonWriter wrt = Json.createWriterFactory(
                 Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
-            )
-                .createWriter(res)
-            ) {
-                wrt.writeObject(obj);
-            }
+            ).createWriter(res)
+        ) {
+            wrt.writeObject(rdr.readObject());
         } catch (final JsonException ex) {
             throw new IOException(ex);
         }

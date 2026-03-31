@@ -22,6 +22,7 @@ import org.takes.Response;
  *
  * @since 1.22
  */
+@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface RsStatus extends Response {
 
     /**

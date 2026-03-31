@@ -39,6 +39,7 @@ public final class BkSafe extends BkWrap {
      * Ctor.
      * @param back Original back
      */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public BkSafe(final Back back) {
         super(socket -> {
             try {

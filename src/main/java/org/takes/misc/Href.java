@@ -44,7 +44,8 @@ import org.cactoos.text.FormattedText;
 @SuppressWarnings(
     {
         "PMD.TooManyMethods",
-        "PMD.GodClass"
+        "PMD.GodClass",
+        "PMD.UseStringBufferLength"
     }
 )
 public final class Href implements CharSequence {

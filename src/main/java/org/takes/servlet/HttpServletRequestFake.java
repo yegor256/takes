@@ -64,7 +64,8 @@ import org.takes.rq.RqMethod;
  */
 @SuppressWarnings({
     "PMD.TooManyMethods",
-    "PMD.ExcessivePublicCount"
+    "PMD.ExcessivePublicCount",
+    "PMD.CouplingBetweenObjects"
 })
 public final class HttpServletRequestFake implements HttpServletRequest {
     /**

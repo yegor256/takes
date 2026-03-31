@@ -111,13 +111,13 @@ public final class RsXembly extends RsWrap {
      */
     private static InputStream render(final Node dom,
         final XeSource src) throws IOException {
-        final Node copy = cloneNode(dom);
         final ByteArrayOutputStream baos =
             new ByteArrayOutputStream();
-        final Node node = new Xembler(src.toXembly()).applyQuietly(copy);
         try {
             TransformerFactory.newInstance().newTransformer().transform(
-                new DOMSource(node),
+                new DOMSource(
+                    new Xembler(src.toXembly()).applyQuietly(cloneNode(dom))
+                ),
                 new StreamResult(
                     new WriterTo(baos)
                 )

@@ -89,7 +89,12 @@ public interface Token {
      * and expiration information for secure token-based authentication.
      * @since 1.4
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
+    @SuppressWarnings(
+        {
+            "PMD.ConstructorOnlyInitializesOrCallOtherConstructors",
+            "PMD.ReplaceJavaUtilCalendar"
+        }
+    )
     final class Jwt implements Token {
         /**
          * The header short for subject.
