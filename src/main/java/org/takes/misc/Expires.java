@@ -4,9 +4,10 @@
  */
 package org.takes.misc;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Interface for HTTP expiration date formatting and management.
@@ -110,24 +111,22 @@ public interface Expires {
      *
      * <p>This implementation formats expiration dates using configurable
      * date format patterns, locales, and specific expiration times.
-     * It uses SimpleDateFormat with GMT timezone for HTTP-compliant
-     * date formatting. The formatting is thread-safe using ThreadLocal
-     * to avoid SimpleDateFormat concurrency issues.
+     * It uses DateTimeFormatter with GMT timezone for HTTP-compliant
+     * date formatting. DateTimeFormatter is thread-safe by design.
      *
      * @since 2.0
      */
-    @SuppressWarnings("PMD.ReplaceJavaUtilDate")
     final class Date implements Expires {
 
         /**
-         * DateFormat for expiration.
+         * DateTimeFormatter for expiration.
          */
-        private final ThreadLocal<SimpleDateFormat> format;
+        private final DateTimeFormatter format;
 
         /**
-         * Expires date.
+         * Expires instant.
          */
-        private final java.util.Date expires;
+        private final Instant expires;
 
         /**
          * Ctor.
@@ -156,28 +155,25 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final long expiration) {
-            this(ptn, locale, new java.util.Date(expiration));
+            this(ptn, locale, Instant.ofEpochMilli(expiration));
         }
 
         /**
          * Ctor.
          * @param ptn Date format pattern
          * @param locale Locale
-         * @param expires Date when expires
+         * @param expires Instant when expires
          */
         public Date(final String ptn, final Locale locale,
-            final java.util.Date expires) {
-            this.format = ThreadLocal.withInitial(
-                () -> new SimpleDateFormat(ptn, locale)
-            );
-            this.expires = new java.util.Date(expires.getTime());
+            final Instant expires) {
+            this.format = DateTimeFormatter.ofPattern(ptn, locale)
+                .withZone(ZoneId.of("GMT"));
+            this.expires = expires;
         }
 
         @Override
         public String print() {
-            final SimpleDateFormat fmt = this.format.get();
-            fmt.setTimeZone(TimeZone.getTimeZone("GMT"));
-            return fmt.format(this.expires);
+            return this.format.format(this.expires);
         }
     }
 }
