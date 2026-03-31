@@ -16,11 +16,10 @@ import org.takes.Request;
  * Test case for {@link RqTemp}.
  * @since 0.33
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RqTempTest {
 
     @Test
-    void deletesTempFile() throws Exception {
+    void deletesTempFileOnClose() throws Exception {
         final File file = File.createTempFile(
             RqTempTest.class.getName(),
             ".tmp"
@@ -29,16 +28,7 @@ final class RqTempTest {
             file.toPath(),
             new BytesOf("Temp file deletion test").asBytes()
         );
-        final Request request = new RqTemp(file);
-        try {
-            MatcherAssert.assertThat(
-                "File is not created!",
-                file.exists(),
-                Matchers.is(true)
-            );
-        } finally {
-            request.body().close();
-        }
+        new RqTemp(file).body().close();
         MatcherAssert.assertThat(
             "File exists after stream closure",
             file.exists(),

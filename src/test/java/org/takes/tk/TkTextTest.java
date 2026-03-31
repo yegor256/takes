@@ -19,7 +19,6 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkText}.
  * @since 0.4
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkTextTest {
 
     @Test
@@ -99,14 +98,20 @@ final class TkTextTest {
     }
 
     @Test
-    void printsResourceMultipleTimes() throws Exception {
+    void printsResourceOnFirstRequest() throws Exception {
         final String body = "hello, dude!";
-        final Take take = new TkText(body);
         MatcherAssert.assertThat(
             "First response must contain the expected body text",
-            new RsPrint(take.act(new RqFake())),
+            new RsPrint(new TkText(body).act(new RqFake())),
             new HasString(body)
         );
+    }
+
+    @Test
+    void printsResourceOnSecondRequest() throws Exception {
+        final String body = "hello, dude!";
+        final Take take = new TkText(body);
+        take.act(new RqFake());
         MatcherAssert.assertThat(
             "Second response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),

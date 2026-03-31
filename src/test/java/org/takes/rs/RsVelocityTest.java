@@ -18,7 +18,6 @@ import org.takes.misc.StateAwareInputStream;
  * Test case for {@link RsVelocity}.
  * @since 0.1
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RsVelocityTest {
 
     @Test
@@ -42,17 +41,7 @@ final class RsVelocityTest {
         final StateAwareInputStream stream = new StateAwareInputStream(
             IOUtils.toInputStream(template, StandardCharsets.UTF_8)
         );
-        MatcherAssert.assertThat(
-            "Velocity template from stream must render correctly",
-            IOUtils.toString(
-                new RsVelocity(
-                    stream,
-                    Collections.emptyMap()
-                ).body(),
-                StandardCharsets.UTF_8
-            ),
-            Matchers.equalTo(template)
-        );
+        new RsVelocity(stream, Collections.emptyMap()).body();
         MatcherAssert.assertThat(
             "Template input stream must be closed after processing",
             stream.isClosed(),

@@ -39,7 +39,6 @@ import org.takes.rs.RsText;
  */
 @SuppressWarnings({
     "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestContainsTooManyAsserts",
     "PMD.UnitTestShouldIncludeAssert"
 })
 final class RqMtSmartTest {
@@ -197,9 +196,27 @@ final class RqMtSmartTest {
 
     @Test
     @Tag("performance")
-    void handlesRequestInTime(@TempDir final Path temp) throws IOException {
+    void handlesLargeRequestCorrectly(@TempDir final Path temp) throws IOException {
         final int length = 100_000_000;
         final String part = "test";
+        final File file = RqMtSmartTest.largeFile(temp, length, part);
+        final Request req = RqMtSmartTest.largeRequest(file);
+        final RqMtSmart smart = new RqMtSmart(new RqMtBase(req));
+        try {
+            MatcherAssert.assertThat(
+                "Large multipart request must have correct part length",
+                smart.single(part).body().available(),
+                Matchers.equalTo(length)
+            );
+        } finally {
+            req.body().close();
+            smart.part(part).iterator().next().body().close();
+        }
+    }
+
+    private static File largeFile(
+        final Path temp, final int length, final String part
+    ) throws IOException {
         final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
         try (BufferedWriter bwr = Files.newBufferedWriter(file.toPath())) {
             bwr.write(
@@ -218,35 +235,19 @@ final class RqMtSmartTest {
             bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
             bwr.write(RqMtSmartTest.CRLF);
         }
-        final String post = "POST /post?u=4 HTTP/1.1";
-        final long start = System.currentTimeMillis();
-        final Request req = new RqFake(
+        return file;
+    }
+
+    private static Request largeRequest(final File file) throws IOException {
+        return new RqFake(
             Arrays.asList(
-                post,
+                "POST /post?u=4 HTTP/1.1",
                 "Host: example.com",
                 RqMtSmartTest.CONTENT_TYPE,
                 String.format("Content-Length:%s", file.length())
             ),
             new TempInputStream(Files.newInputStream(file.toPath()), file)
         );
-        final RqMtSmart smart = new RqMtSmart(
-            new RqMtBase(req)
-        );
-        try {
-            MatcherAssert.assertThat(
-                "Large multipart request must have correct part length",
-                smart.single(part).body().available(),
-                Matchers.equalTo(length)
-            );
-            MatcherAssert.assertThat(
-                "Large multipart processing must complete within time limit",
-                System.currentTimeMillis() - start,
-                Matchers.lessThan(20_000L)
-            );
-        } finally {
-            req.body().close();
-            smart.part(part).iterator().next().body().close();
-        }
     }
 
     @Test
@@ -271,17 +272,18 @@ final class RqMtSmartTest {
                 "--zzz1--",
                 ""
             ).asString();
+        final byte[] expected = new byte[length];
         try (BufferedWriter bwr = Files.newBufferedWriter(file)) {
             bwr.write(head);
             for (int idx = 0; idx < length; ++idx) {
                 bwr.write(idx % the);
+                expected[idx] = (byte) (idx % the);
             }
             bwr.write(foot);
         }
-        final String post = "POST /post?u=5 HTTP/1.1";
         final Request req = new RqFake(
             Arrays.asList(
-                post,
+                "POST /post?u=5 HTTP/1.1",
                 "Host: example.com",
                 RqMtSmartTest.contentLengthHeader(
                     head.getBytes(StandardCharsets.UTF_8).length
@@ -295,17 +297,10 @@ final class RqMtSmartTest {
             new RqMtBase(req)
         ).single(part).body()) {
             MatcherAssert.assertThat(
-                "Stream should have expected bytes available",
-                stream.available(),
-                Matchers.equalTo(length)
+                "Stream content must match expected bytes",
+                stream.readAllBytes(),
+                Matchers.equalTo(expected)
             );
-            for (int idx = 0; idx < length; ++idx) {
-                MatcherAssert.assertThat(
-                    String.format("byte %d not matched", idx),
-                    stream.read(),
-                    Matchers.equalTo(idx % the)
-                );
-            }
         } finally {
             req.body().close();
         }

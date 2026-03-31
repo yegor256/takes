@@ -15,7 +15,6 @@ import org.llorllale.cactoos.matchers.IsText;
  * Test case for {@link RsWithType}.
  * @since 0.16.9
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RsWithTypeTest {
 
     /**
@@ -131,6 +130,10 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithHtmlAndCharset() {
         MatcherAssert.assertThat(
             "Html decorator must include charset when specified",
             new RsPrint(
@@ -177,6 +180,10 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithJsonAndCharset() {
         MatcherAssert.assertThat(
             "Json decorator must include charset when specified",
             new RsPrint(
@@ -222,6 +229,10 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithXmlAndCharset() {
         MatcherAssert.assertThat(
             "Xml decorator must include charset when specified",
             new RsPrint(
@@ -267,6 +278,10 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithTextAndCharset() {
         MatcherAssert.assertThat(
             "Text decorator must include charset when specified",
             new RsPrint(

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link XeWhen}.
  * @since 0.13
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class XeWhenTest {
 
     @Test
@@ -65,7 +64,7 @@ final class XeWhenTest {
     }
 
     @Test
-    void buildsXmlResponseFromNegativeCondition() throws Exception {
+    void buildsXmlResponseFromNegativeConditionWithNegativeSource() throws Exception {
         MatcherAssert.assertThat(
             "XeWhen with negative condition must show negative content",
             IOUtils.toString(
@@ -85,6 +84,10 @@ final class XeWhenTest {
                 "/negative/memory"
             )
         );
+    }
+
+    @Test
+    void buildsEmptyWhenNegativeConditionWithoutNegativeSource() throws Exception {
         MatcherAssert.assertThat(
             "Must be empty when negative condition without negative source",
             new TextOf(

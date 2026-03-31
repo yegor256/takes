@@ -12,22 +12,22 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link OptionsTest}.
  * @since 0.9
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class OptionsTest {
 
     @Test
-    void understandsCommandLineArgs() {
-        final Options opts = new Options(
-            "--hit-refresh --threads=2".split(" ")
-        );
+    void understandsHitRefreshArg() {
         MatcherAssert.assertThat(
             "Hit refresh option should be enabled",
-            opts.hitRefresh(),
+            new Options("--hit-refresh --threads=2".split(" ")).hitRefresh(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void understandsThreadsArg() {
         MatcherAssert.assertThat(
             "Thread count should be set to 2",
-            opts.threads(),
+            new Options("--hit-refresh --threads=2".split(" ")).threads(),
             Matchers.is(2)
         );
     }
