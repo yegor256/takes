@@ -33,8 +33,8 @@ final class AppITCase {
                 .fetch()
                 .as(XmlResponse.class)
                 .xml()
-                .xpath("//xhtml:html"),
-            Matchers.hasSize(1)
+                .xpath("//xhtml:html/xhtml:head/xhtml:title/text()"),
+            Matchers.not(Matchers.empty())
         );
     }
 }

@@ -70,7 +70,7 @@ final class AppTest {
                 .fetch()
                 .as(XmlResponse.class)
                 .xml()
-                .xpath("//xhtml:li[.='hello.txt: 13']");
+                .xpath("//xhtml:li[.='hello.txt: 13']/text()");
         }
 
         /**
