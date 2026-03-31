@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 2.0
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class ServletConnectionFakeTest {
     @Test
     void connectionIdEmptyCtor() {

@@ -20,6 +20,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcAes}.
  * @since 0.13.8
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class CcAesTest {
     @Test
     void encryptIdentity() throws Exception {

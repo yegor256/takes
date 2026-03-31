@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.15
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsBodyUrlTest {
 
     @Test

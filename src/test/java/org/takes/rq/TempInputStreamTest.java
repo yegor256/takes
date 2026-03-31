@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link TempInputStream}.
  * @since 0.31
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class TempInputStreamTest {
 
     @Test

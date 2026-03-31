@@ -25,6 +25,7 @@ import org.takes.tk.TkText;
  * Test case for {@link TkConsumes}.
  * @since 1.0
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkConsumesTest {
 
     /**

@@ -27,6 +27,11 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMtFake}.
  * @since 0.33
  */
+@SuppressWarnings({
+    "PMD.UnnecessaryLocalRule",
+    "PMD.UnitTestContainsTooManyAsserts",
+    "PMD.UnitTestShouldIncludeAssert"
+})
 final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.

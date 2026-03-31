@@ -18,6 +18,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkAuthenticated}.
  * @since 0.9
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkAuthenticatedTest {
 
     @Test

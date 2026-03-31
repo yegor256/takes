@@ -28,6 +28,7 @@ import org.takes.rs.xe.XeStylesheet;
  * Test case for {@link XeFlash}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class XeFlashTest {
 
     @Test

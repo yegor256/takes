@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link FbSlf4j}.
  * @since 0.25
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FbSlf4jTest {
 
     @Test

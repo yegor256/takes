@@ -17,6 +17,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcPlain}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcPlainTest {
 
     @Test

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 0.1
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class RqChunkTest {
 
     /**

@@ -16,6 +16,7 @@ import org.takes.Request;
  * Test case for {@link RqTemp}.
  * @since 0.33
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RqTempTest {
 
     @Test

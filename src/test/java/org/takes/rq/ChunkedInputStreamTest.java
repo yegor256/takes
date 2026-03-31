@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 0.31.2
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class ChunkedInputStreamTest {
 
     /**

@@ -87,6 +87,7 @@ public final class RsPrettyJson implements Response {
      * @return New properly formatted body
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
         try (JsonReader rdr = Json.createReader(body);

@@ -98,6 +98,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Opt<Identity> enter(final Request req) throws IOException {
         // @checkstyle ExecutableStatementCount (100 lines)
         Opt<Identity> user = new Opt.Empty<>();
@@ -154,6 +155,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Response exit(final Response res,
         final Identity idt) throws Exception {
         final byte[] jwtheader = new Token.Jose(

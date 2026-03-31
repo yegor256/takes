@@ -21,6 +21,7 @@ import org.takes.Response;
  * Test case for {@link RsGzip}.
  * @since 0.10
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class RsGzipTest {
 
     @Test

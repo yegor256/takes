@@ -16,6 +16,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkRegex}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkRegexTest {
 
     /**

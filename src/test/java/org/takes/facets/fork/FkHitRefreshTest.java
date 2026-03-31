@@ -22,6 +22,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkHitRefresh}.
  * @since 0.9
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class FkHitRefreshTest {
 
     @Test

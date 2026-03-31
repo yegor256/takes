@@ -17,6 +17,7 @@ import org.takes.Request;
  * Test case for {@link RqFake}.
  * @since 0.24
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class RqFakeTest {
 
     @Test

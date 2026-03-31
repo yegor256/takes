@@ -17,6 +17,7 @@ import org.takes.rq.RqForm;
  * Test case for {@link RqFormFake}.
  * @since 0.33
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RqFormFakeTest {
 
     /**

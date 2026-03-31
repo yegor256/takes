@@ -19,6 +19,7 @@ import org.takes.Response;
  * Test case for {@link RsPrettyXml}.
  * @since 1.0
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsPrettyXmlTest {
 
     @Test

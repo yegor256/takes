@@ -17,6 +17,7 @@ import org.takes.Request;
  * Test case for {@link RqGreedy}.
  * @since 0.16
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RqGreedyTest {
 
     @Test

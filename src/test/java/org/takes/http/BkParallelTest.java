@@ -23,6 +23,7 @@ import org.takes.tk.TkEmpty;
  * @since 0.15.2
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class BkParallelTest {
     @Test
     void requestsAreParallel() throws Exception {

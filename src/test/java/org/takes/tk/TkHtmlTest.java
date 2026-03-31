@@ -26,6 +26,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkHtml}.
  * @since 0.10
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkHtmlTest {
 
     /**

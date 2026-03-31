@@ -42,6 +42,11 @@ import org.takes.tk.TkText;
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  */
+@SuppressWarnings({
+    "PMD.UnnecessaryLocalRule",
+    "PMD.UnitTestContainsTooManyAsserts",
+    "PMD.UnitTestShouldIncludeAssert"
+})
 final class BkBasicTest {
 
     /**

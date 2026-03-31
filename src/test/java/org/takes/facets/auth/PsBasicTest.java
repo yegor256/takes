@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.HttpException;
-import org.takes.Take;
 import org.takes.facets.forward.RsForward;
 import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
@@ -31,6 +30,7 @@ import org.takes.tk.TkText;
  * Test of {@link PsBasic}.
  * @since 0.20
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class PsBasicTest {
 
     /**
@@ -210,19 +210,18 @@ final class PsBasicTest {
 
     @Test
     void authenticatesUser() throws Exception {
-        final Take take = new TkAuth(
-            new TkSecure(
-                new TkText("secured")
-            ),
-            new PsBasic(
-                "myrealm",
-                new PsBasic.Default("mike secret11 urn:users:michael")
-            )
-        );
         MatcherAssert.assertThat(
             "PsBasic should authenticate mike",
             new RsPrint(
-                take.act(
+                new TkAuth(
+                    new TkSecure(
+                        new TkText("secured")
+                    ),
+                    new PsBasic(
+                        "myrealm",
+                        new PsBasic.Default("mike secret11 urn:users:michael")
+                    )
+                ).act(
                     new RqWithHeader(
                         new RqFake(),
                         PsBasicTest.header("mike", "secret11")
@@ -235,21 +234,20 @@ final class PsBasicTest {
 
     @Test
     void requestAuthentication() throws Exception {
-        final Take take = new TkForward(
-            new TkAuth(
-                new TkSecure(
-                    new TkText("secured area...")
-                ),
-                new PsBasic(
-                    "the realm 5",
-                    new PsBasic.Default("bob pwd88 urn:users:bob")
-                )
-            )
-        );
         MatcherAssert.assertThat(
             "Response with 401 Unauthorized status",
             new RsPrint(
-                take.act(new RqFake())
+                new TkForward(
+                    new TkAuth(
+                        new TkSecure(
+                            new TkText("secured area...")
+                        ),
+                        new PsBasic(
+                            "the realm 5",
+                            new PsBasic.Default("bob pwd88 urn:users:bob")
+                        )
+                    )
+                ).act(new RqFake())
             ),
             new HasString("HTTP/1.1 401 Unauthorized\r\n")
         );
@@ -272,10 +270,12 @@ final class PsBasicTest {
      * @return Header string.
      */
     private static String header(final String user, final String pass) {
-        final String auth = String.format("%s:%s", user, pass);
-        final String encoded = DatatypeConverter.printBase64Binary(
-            auth.getBytes(StandardCharsets.UTF_8)
+        return String.format(
+            PsBasicTest.AUTH_BASIC,
+            DatatypeConverter.printBase64Binary(
+                String.format("%s:%s", user, pass)
+                    .getBytes(StandardCharsets.UTF_8)
+            )
         );
-        return String.format(PsBasicTest.AUTH_BASIC, encoded);
     }
 }

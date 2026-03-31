@@ -16,6 +16,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link MainRemote}.
  * @since 0.23
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
 final class MainRemoteTest {
 
     @Test

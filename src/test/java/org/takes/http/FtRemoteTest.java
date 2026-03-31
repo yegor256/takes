@@ -28,6 +28,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FtRemote}.
  * @since 0.21
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
 final class FtRemoteTest {
 
     @Test

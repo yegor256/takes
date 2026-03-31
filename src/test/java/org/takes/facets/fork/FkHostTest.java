@@ -22,6 +22,7 @@ import org.takes.tk.TkText;
  * Test case for {@link FkHost}.
  * @since 0.32
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class FkHostTest {
 
     @Test

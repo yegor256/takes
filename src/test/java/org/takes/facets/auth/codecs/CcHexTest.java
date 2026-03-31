@@ -15,6 +15,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcHex}.
  * @since 0.1
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class CcHexTest {
 
     @Test

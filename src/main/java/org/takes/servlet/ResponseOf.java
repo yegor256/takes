@@ -104,6 +104,7 @@ final class ResponseOf {
      * @param sresp Response
      * @param header Header
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static void applyHeader(final HttpServletResponse sresp,
         final String header) {
         final Iterator<Text> split = new Split(header, ":").iterator();

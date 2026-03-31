@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.19
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CopyBytesUntilBoundaryTest {
 
     @Test

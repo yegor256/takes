@@ -23,6 +23,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkMethods}.
  * @since 0.17
  */
+@SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
 final class TkMethodsTest {
     @Test
     void callsActOnProperMethods() throws Exception {

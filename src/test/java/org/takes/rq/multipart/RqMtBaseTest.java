@@ -22,6 +22,7 @@ import org.takes.rq.RqWithHeaders;
  * @since 0.33
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqMtBaseTest {
 
     /**

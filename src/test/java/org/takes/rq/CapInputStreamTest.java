@@ -18,6 +18,7 @@ import org.mockito.Mockito;
  *
  * @since 0.16
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CapInputStreamTest {
 
     @Test

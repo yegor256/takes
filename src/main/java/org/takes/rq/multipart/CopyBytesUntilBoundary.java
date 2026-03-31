@@ -61,7 +61,9 @@ public final class CopyBytesUntilBoundary {
      * @throws IOException If problems found in
      * @checkstyle ExecutableStatementCountCheck (500 lines)
      */
-    @SuppressWarnings("PMD.CognitiveComplexity")
+    @SuppressWarnings(
+        {"PMD.CognitiveComplexity", "PMD.UnnecessaryLocalRule"}
+    )
     public void copy() throws IOException {
         int match = 0;
         boolean cont = true;

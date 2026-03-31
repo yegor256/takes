@@ -16,6 +16,7 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link FkEncoding}.
  * @since 0.10
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkEncodingTest {
 
     @Test

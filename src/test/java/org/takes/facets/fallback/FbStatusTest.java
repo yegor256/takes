@@ -22,6 +22,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FbStatus}.
  * @since 0.16.10
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class FbStatusTest {
 
     @Test

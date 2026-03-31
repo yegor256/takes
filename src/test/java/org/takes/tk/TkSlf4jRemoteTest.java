@@ -18,6 +18,7 @@ import org.takes.http.FtRemote;
  * with {@link FtRemote} and {@link TkEmpty}.
  * @since 0.11.2
  */
+@SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
 final class TkSlf4jRemoteTest {
 
     @Test

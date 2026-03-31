@@ -37,6 +37,11 @@ import org.takes.rs.RsText;
  * Test case for {@link RqMtSmart}.
  * @since 0.33
  */
+@SuppressWarnings({
+    "PMD.UnnecessaryLocalRule",
+    "PMD.UnitTestContainsTooManyAsserts",
+    "PMD.UnitTestShouldIncludeAssert"
+})
 final class RqMtSmartTest {
     /**
      * Body element.

@@ -16,6 +16,7 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkTypes}.
  * @since 0.9
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkTypesTest {
 
     @Test

@@ -24,7 +24,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
  *
  * @since 0.32
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule",
+    "PMD.UnitTestContainsTooManyAsserts"
+})
 @ExtendWith(MockitoExtension.class)
 final class VerboseListTest {
 

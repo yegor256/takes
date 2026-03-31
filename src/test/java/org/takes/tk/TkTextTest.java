@@ -19,6 +19,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkText}.
  * @since 0.4
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkTextTest {
 
     @Test

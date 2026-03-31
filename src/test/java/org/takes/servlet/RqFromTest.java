@@ -26,6 +26,7 @@ import org.takes.rq.RqWithoutHeader;
  *
  * @since 1.15
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class RqFromTest {
 
     /**

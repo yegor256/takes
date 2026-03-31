@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
  * Unit tests for {@link org.takes.facets.auth.PsBasic.Default}.
  * @since 0.22
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class PsBasicDefaultTest {
 
     @Test

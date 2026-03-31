@@ -28,6 +28,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FtSecure}.
  * @since 0.25
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
 final class FtSecureTest {
 
     @Test

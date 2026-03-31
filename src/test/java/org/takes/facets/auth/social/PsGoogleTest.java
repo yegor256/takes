@@ -32,6 +32,7 @@ import org.takes.rs.RsJson;
  * <p>The class is immutable and thread-safe.
  * @since 0.16.3
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
 final class PsGoogleTest {
 
     /**

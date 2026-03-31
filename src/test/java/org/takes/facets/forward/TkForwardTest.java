@@ -18,6 +18,7 @@ import org.takes.rs.RsPrint;
  * @since 0.2
  * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkForwardTest {
 
     @Test

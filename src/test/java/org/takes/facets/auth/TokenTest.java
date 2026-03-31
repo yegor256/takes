@@ -20,23 +20,22 @@ import org.takes.facets.auth.Token.Jose;
  * Test case for {@link Token}.
  * @since 1.5
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TokenTest {
     @Test
     void joseAlgorithm() {
-        final JsonObject jose = new Token.Jose(256).json();
         MatcherAssert.assertThat(
             "JOSE algorithm must be HS256 for 256-bit keys",
-            jose.getString(Jose.ALGORITHM),
+            new Token.Jose(256).json().getString(Jose.ALGORITHM),
             Matchers.equalTo("HS256")
         );
     }
 
     @Test
     void joseEncoded() {
-        final byte[] code = new Token.Jose(256).encoded();
         MatcherAssert.assertThat(
             "JOSE encoded header must match expected Base64 JWT header",
-            code,
+            new Token.Jose(256).encoded(),
             new IsEqual<>(
                 Base64.getEncoder().encode(
                     "{\"algo\":\"HS256\",\"type\":\"JWT\"}".getBytes(StandardCharsets.UTF_8)
@@ -72,17 +71,13 @@ final class TokenTest {
     @Test
     void jwtEncoded() {
         final Identity user = new Identity.Simple("test");
-        final byte[] code = new Token.Jwt(
-            user, 3600L
-        ).encoded();
-        final JsonObject jose = new Token.Jwt(
-            user, 3600L
-        ).json();
         MatcherAssert.assertThat(
             "JWT encoded payload must match Base64 encoded JSON representation",
-            code,
+            new Token.Jwt(user, 3600L).encoded(),
             Matchers.equalTo(
-                Base64.getEncoder().encode(jose.toString().getBytes(StandardCharsets.UTF_8))
+                Base64.getEncoder().encode(
+                    new Token.Jwt(user, 3600L).json().toString().getBytes(StandardCharsets.UTF_8)
+                )
             )
         );
     }

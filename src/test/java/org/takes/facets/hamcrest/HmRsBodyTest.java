@@ -20,6 +20,7 @@ import org.takes.rq.RqFake;
  *
  * @since 2.0
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class HmRsBodyTest {
 
     @Test

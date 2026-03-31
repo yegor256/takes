@@ -19,6 +19,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcBase64}.
  * @since 0.13
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class CcBase64Test {
 
     @Test

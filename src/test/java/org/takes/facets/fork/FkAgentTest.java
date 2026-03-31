@@ -17,6 +17,7 @@ import org.takes.tk.TkEmpty;
  * @since 1.7.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkAgentTest {
 
     @Test

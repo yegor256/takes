@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link OptionsTest}.
  * @since 0.9
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class OptionsTest {
 
     @Test

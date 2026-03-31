@@ -25,6 +25,7 @@ import org.takes.rs.RsText;
  *
  * @since 0.28.3
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class TkRetryTest {
 
     /**

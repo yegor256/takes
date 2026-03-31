@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link MediaType}.
  * @since 0.6
  */
+@SuppressWarnings({"PMD.UnitTestContainsTooManyAsserts", "PMD.UnitTestShouldIncludeAssert"})
 final class MediaTypeTest {
 
     @Test

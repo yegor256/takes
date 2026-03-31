@@ -20,18 +20,18 @@ import org.takes.rs.RsEmpty;
  * Test case for {@link TkSecure}.
  * @since 0.11
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkSecureTest {
 
     @Test
     void failsOnAnonymous() {
         final Take secure = new TkSecure(request -> new RsEmpty());
-        final RsForward exception = Assertions.assertThrows(
-            RsForward.class,
-            () -> secure.act(new RqFake())
-        );
         Assertions.assertEquals(
             HttpURLConnection.HTTP_UNAUTHORIZED,
-            exception.code(),
+            Assertions.assertThrows(
+                RsForward.class,
+                () -> secure.act(new RqFake())
+            ).code(),
             "Anonymous access must result in HTTP 401 Unauthorized"
         );
     }

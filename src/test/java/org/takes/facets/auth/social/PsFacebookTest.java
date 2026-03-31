@@ -24,6 +24,7 @@ import org.takes.rq.RqFake;
  * Test case for {@link PsFacebook}.
  * @since 0.15
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class PsFacebookTest {
 
     @Test
