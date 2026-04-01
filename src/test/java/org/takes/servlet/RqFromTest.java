@@ -95,16 +95,6 @@ final class RqFromTest {
         );
     }
 
-    private static Request requestWithHeader() {
-        return RqFromTest.requestFrom(
-            new RqWithHeader(
-                new RqFake(RqMethod.GET, "/a-test HTTP/1.1"),
-                "foo",
-                "bar"
-            )
-        );
-    }
-
     @Test
     void preservesHostHeader() throws Exception {
         MatcherAssert.assertThat(
@@ -134,19 +124,6 @@ final class RqFromTest {
                 RqFromTest.requestWithHost(uri, "www.thesite.com")
             ).uri(),
             Matchers.equalTo(uri)
-        );
-    }
-
-    private static Request requestWithHost(final String uri, final String host) {
-        return RqFromTest.requestFrom(
-            new RqWithHeader(
-                new RqWithoutHeader(
-                    new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
-                    RqFromTest.HOST
-                ),
-                RqFromTest.HOST,
-                host
-            )
         );
     }
 
@@ -186,6 +163,29 @@ final class RqFromTest {
             "Body content should be preserved",
             request,
             new HmRqTextBody(content)
+        );
+    }
+
+    private static Request requestWithHeader() {
+        return RqFromTest.requestFrom(
+            new RqWithHeader(
+                new RqFake(RqMethod.GET, "/a-test HTTP/1.1"),
+                "foo",
+                "bar"
+            )
+        );
+    }
+
+    private static Request requestWithHost(final String uri, final String host) {
+        return RqFromTest.requestFrom(
+            new RqWithHeader(
+                new RqWithoutHeader(
+                    new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
+                    RqFromTest.HOST
+                ),
+                RqFromTest.HOST,
+                host
+            )
         );
     }
 

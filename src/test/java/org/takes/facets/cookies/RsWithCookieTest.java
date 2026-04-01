@@ -15,7 +15,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link RsWithCookie}.
  * @since 0.9.6
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RsWithCookieTest {
 
     /**

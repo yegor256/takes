@@ -18,7 +18,10 @@ import org.junit.jupiter.api.Test;
  *
  * @since 0.31.2
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule"
+})
 final class ChunkedInputStreamTest {
 
     @Test

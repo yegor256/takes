@@ -370,6 +370,13 @@
                   <new>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(org.xembly.Directive[])</new>
                   <justification>Pre-existing API pattern for convenient construction</justification>
                 </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.misc.Expires.Date::&lt;init&gt;(java.lang.String, java.util.Locale, ===java.util.Date===)</old>
+                  <new>parameter void org.takes.misc.Expires.Date::&lt;init&gt;(java.lang.String, java.util.Locale, ===java.time.Instant===)</new>
+                  <justification>Migrating from legacy java.util.Date to java.time.Instant</justification>
+                </item>
               </differences>
             </revapi.differences>
           </analysisConfiguration>

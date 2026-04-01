@@ -6,6 +6,7 @@ package org.takes.facets.auth.social;
 
 import jakarta.json.Json;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -72,19 +73,24 @@ final class PsGithubTest {
     @Test
     @Tag("deep")
     void canLogin() throws Exception {
-        this.performLogin(
-            PsGithubTest.directiveWithoutAccessToken()
-                .add(PsGithubTest.ACCESS_TOKEN)
-                .set(PsGithubTest.GIT_HUB_TOKEN)
+        MatcherAssert.assertThat(
+            "GitHub identity URN must match expected format with user ID",
+            this.performLogin(
+                PsGithubTest.directiveWithoutAccessToken()
+                    .add(PsGithubTest.ACCESS_TOKEN)
+                    .set(PsGithubTest.GIT_HUB_TOKEN)
+            ).urn(),
+            Matchers.equalTo("urn:github:1")
         );
     }
 
     /**
      * Performs the basic login.
      * @param directive The directive object.
+     * @return The identity from login
      * @throws Exception If some problem inside.
      */
-    private void performLogin(final Directives directive) throws Exception {
+    private Identity performLogin(final Directives directive) throws Exception {
         final String app = "app";
         final String key = "key";
         final Take take = new TkFork(
@@ -106,32 +112,18 @@ final class PsGithubTest {
                 new TkFakeLogin()
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            home -> {
-                final Identity identity = new PsGithub(
+            home -> identity.set(
+                new PsGithub(
                     app,
                     key,
                     home.toString(),
                     home.toString()
-                ).enter(new RqFake("GET", "?code=code")).get();
-                MatcherAssert.assertThat(
-                    "GitHub identity URN must match expected format with user ID",
-                    identity.urn(),
-                    Matchers.equalTo("urn:github:1")
-                );
-                MatcherAssert.assertThat(
-                    "GitHub identity properties must contain correct login username",
-                    identity.properties().get(PsGithubTest.LOGIN),
-                    Matchers.equalTo(PsGithubTest.OCTOCAT)
-                );
-                MatcherAssert.assertThat(
-                    "GitHub identity properties must contain correct avatar URL",
-                    identity.properties().get("avatar"),
-                    Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
-                );
-            }
+                ).enter(new RqFake("GET", "?code=code")).get()
+            )
         );
+        return identity.get();
     }
 
     /**

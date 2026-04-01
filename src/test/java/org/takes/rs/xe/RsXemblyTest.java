@@ -19,7 +19,6 @@ import org.xembly.Directives;
  * Test case for {@link RsXembly}.
  * @since 0.1
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsXemblyTest {
 
     @Test

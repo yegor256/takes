@@ -10,7 +10,6 @@ import jakarta.json.Json;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;

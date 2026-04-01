@@ -15,6 +15,7 @@ import org.llorllale.cactoos.matchers.IsText;
  * Test case for {@link RsWithType}.
  * @since 0.16.9
  */
+@SuppressWarnings("PMD.TooManyMethods")
 final class RsWithTypeTest {
 
     /**

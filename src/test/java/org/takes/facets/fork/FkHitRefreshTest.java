@@ -13,7 +13,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.tk.TkEmpty;
@@ -49,6 +48,17 @@ final class FkHitRefreshTest {
         );
     }
 
+    @Test
+    void ignoresWhenNoHeader(@TempDir final File temp) throws Exception {
+        MatcherAssert.assertThat(
+            "FkHitRefresh must not match request when hit refresh header is missing",
+            new FkHitRefresh(
+                temp, "", new TkEmpty()
+            ).route(new RqFake()).has(),
+            Matchers.is(false)
+        );
+    }
+
     private static Fork refreshFork(
         final Path temp,
         final AtomicBoolean done
@@ -61,17 +71,6 @@ final class FkHitRefreshTest {
         TimeUnit.MILLISECONDS.sleep(10L);
         FileUtils.touch(temp.resolve("hey.txt").toFile());
         return fork;
-    }
-
-    @Test
-    void ignoresWhenNoHeader(@TempDir final File temp) throws Exception {
-        MatcherAssert.assertThat(
-            "FkHitRefresh must not match request when hit refresh header is missing",
-            new FkHitRefresh(
-                temp, "", new TkEmpty()
-            ).route(new RqFake()).has(),
-            Matchers.is(false)
-        );
     }
 
 }

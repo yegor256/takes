@@ -79,21 +79,28 @@ final class BkBasicTest {
     @Test
     @Tag("deep")
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
+        final AtomicReference<Integer> status = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkRegex("/path/a", new TkText("a")),
                 new FkRegex("/path/b", new TkText("b"))
             )
         ).exec(
-            home -> new JdkRequest(String.format("%s/path/c", home))
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_NOT_FOUND)
+            home -> status.set(
+                new JdkRequest(String.format("%s/path/c", home))
+                    .fetch()
+                    .as(RestResponse.class)
+                    .status()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Request to unregistered path must return HTTP 404 Not Found",
+            status.get(),
+            Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
         );
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
     void localAddressHeaderHasNoSlashes() throws Exception {
         final RqHeaders.Smart smart = new RqHeaders.Smart(
             BkBasicTest.capturedRequest()
@@ -106,7 +113,6 @@ final class BkBasicTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
     void remoteAddressHeaderHasNoSlashes() throws Exception {
         final RqHeaders.Smart smart = new RqHeaders.Smart(
             BkBasicTest.capturedRequest()
@@ -119,7 +125,6 @@ final class BkBasicTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
     void localSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
             "Local socket address must be present",
@@ -129,7 +134,6 @@ final class BkBasicTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
     void localSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
             "Local socket port must be zero for mock socket",
@@ -139,7 +143,6 @@ final class BkBasicTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
     void remoteSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
             "Remote socket address must be present",
@@ -149,7 +152,6 @@ final class BkBasicTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
     void remoteSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
             "Remote socket port must be zero for mock socket",
@@ -384,18 +386,19 @@ final class BkBasicTest {
     }
 
     private static Request capturedRequest() throws Exception {
-        final Socket socket = BkBasicTest.createMockSocket();
-        final AtomicReference<Request> ref = new AtomicReference<>();
-        new BkBasic(
-            req -> {
-                ref.set(req);
-                return new ResponseOf(
-                    () -> Collections.singletonList("HTTP/1.1 200 OK"),
-                    req::body
-                );
-            }
-        ).accept(socket);
-        return ref.get();
+        try (Socket socket = BkBasicTest.createMockSocket()) {
+            final AtomicReference<Request> ref = new AtomicReference<>();
+            new BkBasic(
+                req -> {
+                    ref.set(req);
+                    return new ResponseOf(
+                        () -> Collections.singletonList("HTTP/1.1 200 OK"),
+                        req::body
+                    );
+                }
+            ).accept(socket);
+            return ref.get();
+        }
     }
 
     /**

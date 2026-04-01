@@ -19,7 +19,10 @@ import org.junit.jupiter.api.Test;
  *
  * @since 0.1
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule"
+})
 final class RqLengthAwareTest {
 
     @Test
@@ -104,7 +107,7 @@ final class RqLengthAwareTest {
             )
         ).body()) {
             final byte[] result = new byte[bytes.length];
-            for (int idx = 0; idx < bytes.length; idx++) {
+            for (int idx = 0; idx < bytes.length; idx = idx + 1) {
                 result[idx] = (byte) stream.read();
             }
             MatcherAssert.assertThat(

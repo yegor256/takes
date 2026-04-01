@@ -126,10 +126,9 @@ public interface Token {
          */
         public Jwt(final Identity idt, final long age) {
             final Instant now = Instant.now();
-            final Instant exp = now.plusSeconds(age);
             this.jwto = Json.createObjectBuilder()
                 .add(Token.Jwt.ISSUED, Token.Jwt.ISOFORMAT.format(now))
-                .add(Token.Jwt.EXPIRATION, Token.Jwt.ISOFORMAT.format(exp))
+                .add(Token.Jwt.EXPIRATION, Token.Jwt.ISOFORMAT.format(now.plusSeconds(age)))
                 .add(Token.Jwt.SUBJECT, idt.urn())
                 .build();
         }

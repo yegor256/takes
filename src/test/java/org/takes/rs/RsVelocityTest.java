@@ -37,9 +37,8 @@ final class RsVelocityTest {
 
     @Test
     void closesTemplateInputStream() throws IOException {
-        final String template = "hello, world!";
         final StateAwareInputStream stream = new StateAwareInputStream(
-            IOUtils.toInputStream(template, StandardCharsets.UTF_8)
+            IOUtils.toInputStream("hello, world!", StandardCharsets.UTF_8)
         );
         new RsVelocity(stream, Collections.emptyMap()).body();
         MatcherAssert.assertThat(

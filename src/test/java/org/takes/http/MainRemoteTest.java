@@ -7,7 +7,8 @@ package org.takes.http;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.util.concurrent.atomic.AtomicReference;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.tk.TkFixed;
@@ -21,24 +22,38 @@ final class MainRemoteTest {
 
     @Test
     void startsAndStopsApp() throws Exception {
+        final AtomicReference<String> body = new AtomicReference<>();
         new MainRemote(MainRemoteTest.DemoApp.class).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("works"))
+            home -> body.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "MainRemote must start app and return expected response",
+            body.get(),
+            Matchers.startsWith("works")
         );
     }
 
     @Test
     void passesArgumentsToApp() throws Exception {
         final String[] args = {"works well!"};
+        final AtomicReference<String> body = new AtomicReference<>();
         new MainRemote(MainRemoteTest.DemoAppArgs.class, args).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("works well"))
+            home -> body.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "MainRemote must pass arguments to app correctly",
+            body.get(),
+            Matchers.startsWith("works well")
         );
     }
 

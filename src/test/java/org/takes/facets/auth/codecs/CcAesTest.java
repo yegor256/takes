@@ -23,6 +23,9 @@ import org.takes.facets.auth.Identity;
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcAesTest {
 
+    /**
+     * Test AES key for encryption tests.
+     */
     private static final byte[] TEST_KEY = {
         (byte) -25, (byte) 62, (byte) 118, (byte) 92,
         (byte) -35, (byte) -24, (byte) 92, (byte) 48,
@@ -30,6 +33,9 @@ final class CcAesTest {
         (byte) -110, (byte) -54, (byte) 43, (byte) -1,
     };
 
+    /**
+     * Test random bytes for IV in encryption tests.
+     */
     private static final byte[] TEST_RANDOM = {
         (byte) 63, (byte) -27, (byte) -43, (byte) -52,
         (byte) -70, (byte) -44, (byte) 86, (byte) -43,
@@ -63,14 +69,6 @@ final class CcAesTest {
                 }
             )
         );
-    }
-
-    private static byte[] encrypt() throws Exception {
-        return new CcAes(
-            new CcTest(),
-            new CcAesTest.FkRandom(CcAesTest.TEST_RANDOM),
-            new SecretKeySpec(CcAesTest.TEST_KEY, "AES")
-        ).encode(new Identity.Simple("urg:github:0000"));
     }
 
     @Test
@@ -129,6 +127,14 @@ final class CcAesTest {
                 new CcPlain(), "0123456701234567"
             ).decode("broken input".getBytes(StandardCharsets.UTF_8))
         );
+    }
+
+    private static byte[] encrypt() throws Exception {
+        return new CcAes(
+            new CcTest(),
+            new CcAesTest.FkRandom(CcAesTest.TEST_RANDOM),
+            new SecretKeySpec(CcAesTest.TEST_KEY, "AES")
+        ).encode(new Identity.Simple("urg:github:0000"));
     }
 
     /**

@@ -19,7 +19,6 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcBase64}.
  * @since 0.13
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcBase64Test {
 
     @Test
@@ -70,19 +69,6 @@ final class CcBase64Test {
         );
     }
 
-    @SuppressWarnings("unchecked")
-    private static Identity roundTrip(final String urn) throws IOException {
-        final Codec codec = new CcBase64(new CcPlain());
-        return codec.decode(
-            codec.encode(
-                new Identity.Simple(
-                    urn,
-                    new MapOf<>(new MapEntry<>("userName", "user"))
-                )
-            )
-        );
-    }
-
     @Test
     void encodesEmptyByteArray() throws IOException {
         MatcherAssert.assertThat(
@@ -128,6 +114,19 @@ final class CcBase64Test {
             "Must evaluate identical hash codes",
             new CcBase64(new CcPlain()).hashCode(),
             new IsEqual<>(new CcBase64(new CcPlain()).hashCode())
+        );
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Identity roundTrip(final String urn) throws IOException {
+        final Codec codec = new CcBase64(new CcPlain());
+        return codec.decode(
+            codec.encode(
+                new Identity.Simple(
+                    urn,
+                    new MapOf<>(new MapEntry<>("userName", "user"))
+                )
+            )
         );
     }
 }

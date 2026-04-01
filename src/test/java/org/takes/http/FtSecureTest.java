@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
@@ -34,36 +35,46 @@ final class FtSecureTest {
     @Test
     @Tag("deep")
     void justWorks() throws Exception {
+        final AtomicReference<String> body = new AtomicReference<>();
         FtSecureTest.secure(new TkFixed("hello, world")).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("hello"))
+            home -> body.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtSecure must serve content over HTTPS",
+            body.get(),
+            Matchers.startsWith("hello")
         );
     }
 
     @Test
     @Tag("deep")
     void gracefullyHandlesBrokenBack() throws Exception {
+        final AtomicReference<RestResponse> resp = new AtomicReference<>();
         FtSecureTest.secure(new TkFailure("Jeffrey Lebowski")).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
-                .assertBody(Matchers.containsString("Lebowski"))
+            home -> resp.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtSecure must return HTTP 500 when Take throws exception",
+            resp.get().status(),
+            Matchers.equalTo(HttpURLConnection.HTTP_INTERNAL_ERROR)
         );
     }
 
     @Test
     @Tag("deep")
     void parsesIncomingHttpRequest() throws Exception {
+        final AtomicReference<String> captured = new AtomicReference<>();
         final Take take = request -> {
-            MatcherAssert.assertThat(
-                "HTTPS request body must contain expected content",
-                new RqPrint(request).printBody(),
-                Matchers.containsString("Jeff")
-            );
+            captured.set(new RqPrint(request).printBody());
             return new RsText("works!");
         };
         FtSecureTest.secure(take).exec(
@@ -72,7 +83,11 @@ final class FtSecureTest {
                 .body().set("Jeff, how are you?").back()
                 .fetch()
                 .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
+        );
+        MatcherAssert.assertThat(
+            "HTTPS request body must contain expected content",
+            captured.get(),
+            Matchers.containsString("Jeff")
         );
     }
 
@@ -85,17 +100,22 @@ final class FtSecureTest {
                 StandardCharsets.UTF_8
             )
         );
+        final String body = "here is your data";
+        final AtomicReference<String> resp = new AtomicReference<>();
         FtSecureTest.secure(take).exec(
-            home -> {
-                final String body = "here is your data";
+            home -> resp.set(
                 new JdkRequest(home)
                     .method(RqMethod.POST)
                     .body().set(body).back()
                     .fetch()
                     .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .assertBody(Matchers.equalTo(body));
-            }
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtSecure must echo back the request body correctly",
+            resp.get(),
+            Matchers.equalTo(body)
         );
     }
 

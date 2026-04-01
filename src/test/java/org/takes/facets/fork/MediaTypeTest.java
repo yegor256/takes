@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link MediaType}.
  * @since 0.6
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class MediaTypeTest {
 
     @Test

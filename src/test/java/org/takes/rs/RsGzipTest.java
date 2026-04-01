@@ -68,6 +68,22 @@ final class RsGzipTest {
         );
     }
 
+    @Test
+    void reportsCorrectContentLength() throws IOException {
+        final String text = "some text to encode";
+        final Response response = new RsGzip(new RsText(text));
+        MatcherAssert.assertThat(
+            "Gzip response must report correct compressed content length",
+            new RsHeadPrint(response).asString(),
+            Matchers.containsString(
+                String.format(
+                    "Content-Length: %d",
+                    new RsBodyPrint(response).asString().length()
+                )
+            )
+        );
+    }
+
     private static BufferedImage decompressImage(
         final int width, final int height
     ) throws IOException {
@@ -83,22 +99,6 @@ final class RsGzipTest {
                         new RsWithBody(baos.toByteArray())
                     )
                 ).body()
-            )
-        );
-    }
-
-    @Test
-    void reportsCorrectContentLength() throws IOException {
-        final String text = "some text to encode";
-        final Response response = new RsGzip(new RsText(text));
-        MatcherAssert.assertThat(
-            "Gzip response must report correct compressed content length",
-            new RsHeadPrint(response).asString(),
-            Matchers.containsString(
-                String.format(
-                    "Content-Length: %d",
-                    new RsBodyPrint(response).asString().length()
-                )
             )
         );
     }

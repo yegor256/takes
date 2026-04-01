@@ -10,7 +10,6 @@ import org.cactoos.bytes.BytesOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.takes.Request;
 
 /**
  * Test case for {@link RqTemp}.

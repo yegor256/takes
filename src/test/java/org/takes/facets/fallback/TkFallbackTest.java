@@ -19,7 +19,7 @@ import org.takes.tk.TkFailure;
  * Test case for {@link TkFallback}.
  * @since 0.9.6
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkFallbackTest {
 
     @Test
@@ -63,7 +63,6 @@ final class TkFallbackTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     void fallsBackWithProperMessage() {
         MatcherAssert.assertThat(
             "Exception message must contain fallback information",

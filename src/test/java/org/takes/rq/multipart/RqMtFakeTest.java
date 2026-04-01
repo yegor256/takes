@@ -27,7 +27,11 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMtFake}.
  * @since 0.33
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule",
+    "PMD.UnitTestContainsTooManyAsserts"
+})
 final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.
@@ -142,34 +146,6 @@ final class RqMtFakeTest {
         }
     }
 
-    private static RqMultipart multipart(
-        final String body, final String part
-    ) throws Exception {
-        return new RqMtFake(
-            new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP,
-                    new FormattedText("name=\"%s\"", part).asString()
-                ).asString()
-            ),
-            new RqWithHeaders(
-                new RqFake("", "", ""),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, 0
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP,
-                    "name=\"data\"; filename=\"a.rar\""
-                ).asString()
-            )
-        );
-    }
-
     @Test
     void closesNamePartAfterBodyClose() throws Exception {
         final RqMtBase multi = RqMtFakeTest.closableMulti();
@@ -200,35 +176,6 @@ final class RqMtFakeTest {
         );
     }
 
-    private static RqMtBase closableMulti() throws Exception {
-        final String body = "RqMtFakeTest.closesAllParts";
-        return new RqMtBase(
-            new RqMtFake(
-                new RqFake(),
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_LENGTH,
-                        body.getBytes(StandardCharsets.UTF_8).length
-                    ).asString(),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_DISP, "name=\"name\""
-                    ).asString()
-                ),
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_LENGTH, 0
-                    ).asString(),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_DISP,
-                        "name=\"content\"; filename=\"a.bin\""
-                    ).asString()
-                )
-            )
-        );
-    }
-
     @Test
     void closesExplicitlyFooPart() throws Exception {
         final RqMtBase multi = RqMtFakeTest.fooBarMulti();
@@ -250,33 +197,6 @@ final class RqMtFakeTest {
             "Bar part should not be null after explicit close",
             multi.part("bar").iterator().next(),
             Matchers.notNullValue()
-        );
-    }
-
-    private static RqMtBase fooBarMulti() throws Exception {
-        final String body = "RqMtFakeTest.closesExplicitlyAllParts";
-        return new RqMtBase(
-            new RqMtFake(
-                new RqFake(),
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_LENGTH,
-                        body.getBytes(StandardCharsets.UTF_8).length
-                    ).asString(),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_DISP, "name=\"foo\""
-                    ).asString()
-                ),
-                new RqWithHeaders(
-                    new RqFake("", "", body),
-                    new FormattedText(RqMtFakeTest.CONTENT_LENGTH, 0).asString(),
-                    new FormattedText(
-                        RqMtFakeTest.CONTENT_DISP,
-                        "name=\"bar\"; filename=\"a.bin\""
-                    ).asString()
-                )
-            )
         );
     }
 
@@ -362,6 +282,90 @@ final class RqMtFakeTest {
                     new RqFake("", "", "field2Value"),
                     new FormattedText(
                         RqMtFakeTest.CONTENT_DISP, "name=\"field2\""
+                    ).asString()
+                )
+            )
+        );
+    }
+
+    private static RqMultipart multipart(
+        final String body, final String part
+    ) throws Exception {
+        return new RqMtFake(
+            new RqFake(),
+            new RqWithHeaders(
+                new RqFake("", "", body),
+                new FormattedText(
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
+                ).asString(),
+                new FormattedText(
+                    RqMtFakeTest.CONTENT_DISP,
+                    new FormattedText("name=\"%s\"", part).asString()
+                ).asString()
+            ),
+            new RqWithHeaders(
+                new RqFake("", "", ""),
+                new FormattedText(
+                    RqMtFakeTest.CONTENT_LENGTH, 0
+                ).asString(),
+                new FormattedText(
+                    RqMtFakeTest.CONTENT_DISP,
+                    "name=\"data\"; filename=\"a.rar\""
+                ).asString()
+            )
+        );
+    }
+
+    private static RqMtBase closableMulti() throws Exception {
+        final String body = "RqMtFakeTest.closesAllParts";
+        return new RqMtBase(
+            new RqMtFake(
+                new RqFake(),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_LENGTH,
+                        body.getBytes(StandardCharsets.UTF_8).length
+                    ).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"name\""
+                    ).asString()
+                ),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_LENGTH, 0
+                    ).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP,
+                        "name=\"content\"; filename=\"a.bin\""
+                    ).asString()
+                )
+            )
+        );
+    }
+
+    private static RqMtBase fooBarMulti() throws Exception {
+        final String body = "RqMtFakeTest.closesExplicitlyAllParts";
+        return new RqMtBase(
+            new RqMtFake(
+                new RqFake(),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_LENGTH,
+                        body.getBytes(StandardCharsets.UTF_8).length
+                    ).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"foo\""
+                    ).asString()
+                ),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(RqMtFakeTest.CONTENT_LENGTH, 0).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP,
+                        "name=\"bar\"; filename=\"a.bin\""
                     ).asString()
                 )
             )

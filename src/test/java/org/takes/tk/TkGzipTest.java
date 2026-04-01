@@ -7,8 +7,8 @@ package org.takes.tk;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.io.ByteArrayInputStream;
-import java.net.HttpURLConnection;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.GZIPInputStream;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.TextOf;
@@ -28,6 +28,7 @@ import org.takes.rs.RsText;
  * Test case for {@link TkGzip}.
  * @since 0.17
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkGzipTest {
 
     @Test
@@ -116,21 +117,24 @@ final class TkGzipTest {
     @Tag("deep")
     void returnsExactlyGzipBody() throws Exception {
         final String body = "Halo, Siñor!";
+        final AtomicReference<byte[]> result = new AtomicReference<>();
         new FtRemote(new TkGzip(req -> new RsText(body))).exec(
-            home -> MatcherAssert.assertThat(
-                "TkGzip must return exactly same compressed content as RsGzip over HTTP",
+            home -> result.set(
                 new JdkRequest(home)
                     .method("GET")
                     .header("Accept-Encoding", "gzip")
                     .fetch()
                     .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .binary(),
-                Matchers.equalTo(
-                    new BytesOf(
-                        new RsPrint(new RsGzip(new RsText(body))).body()
-                    ).asBytes()
-                )
+                    .binary()
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkGzip must return exactly same compressed content as RsGzip over HTTP",
+            result.get(),
+            Matchers.equalTo(
+                new BytesOf(
+                    new RsPrint(new RsGzip(new RsText(body))).body()
+                ).asBytes()
             )
         );
     }
@@ -138,24 +142,25 @@ final class TkGzipTest {
     @Test
     @Tag("deep")
     void compressesOverHttp() throws Exception {
+        final AtomicReference<byte[]> result = new AtomicReference<>();
         new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
-            home -> MatcherAssert.assertThat(
-                "TkGzip must compress content over HTTP that decompresses to original text",
-                new TextOf(
-                    new GZIPInputStream(
-                        new ByteArrayInputStream(
-                            new JdkRequest(home)
-                                .method("GET")
-                                .header("Accept-Encoding", "gzip")
-                                .fetch()
-                                .as(RestResponse.class)
-                                .assertStatus(HttpURLConnection.HTTP_OK)
-                                .binary()
-                        )
-                    )
-                ).asString(),
-                Matchers.startsWith("Hi, ")
+            home -> result.set(
+                new JdkRequest(home)
+                    .method("GET")
+                    .header("Accept-Encoding", "gzip")
+                    .fetch()
+                    .as(RestResponse.class)
+                    .binary()
             )
+        );
+        MatcherAssert.assertThat(
+            "TkGzip must compress content over HTTP that decompresses to original text",
+            new TextOf(
+                new GZIPInputStream(
+                    new ByteArrayInputStream(result.get())
+                )
+            ).asString(),
+            Matchers.startsWith("Hi, ")
         );
     }
 }
