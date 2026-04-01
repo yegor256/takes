@@ -18,7 +18,7 @@ import org.takes.HttpException;
  * Test case for {@link RqRequestLine.Base}.
  * @since 0.29.1
  */
-@SuppressWarnings("PMD.TooManyMethods") final class RqRequestLineTest {
+final class RqRequestLineTest {
 
     @Test
     void failsOnAbsentRequestLine() {

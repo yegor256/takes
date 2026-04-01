@@ -46,34 +46,43 @@ final class RsXemblyTest {
     }
 
     @Test
-    void modifiesXmlResponse() throws Exception {
-        final Document dom = DocumentBuilderFactory.newInstance()
-            .newDocumentBuilder()
-            .newDocument();
-        final String root = "world";
-        dom.appendChild(dom.createElement(root));
-        final String query = "/world/hi";
+    void modifiesXmlResponseWithDirectives() throws Exception {
         MatcherAssert.assertThat(
             "XML response from DOM must contain expected XPath",
             IOUtils.toString(
                 new RsXembly(
-                    dom,
+                    RsXemblyTest.worldDom(),
                     new XeDirectives(
-                        new Directives()
-                            .xpath("/world")
-                            .add("hi")
+                        new Directives().xpath("/world").add("hi")
                     )
                 ).body(),
                 StandardCharsets.UTF_8
             ),
-            XhtmlMatchers.hasXPath(query)
+            XhtmlMatchers.hasXPath("/world/hi")
         );
+    }
+
+    @Test
+    void doesNotModifyOriginalDom() throws Exception {
+        final Document dom = RsXemblyTest.worldDom();
+        new RsXembly(
+            dom,
+            new XeDirectives(
+                new Directives().xpath("/world").add("hi")
+            )
+        ).body();
         MatcherAssert.assertThat(
             "Original DOM must not be modified",
             dom,
-            Matchers.not(
-                XhtmlMatchers.hasXPath(query)
-            )
+            Matchers.not(XhtmlMatchers.hasXPath("/world/hi"))
         );
+    }
+
+    private static Document worldDom() throws Exception {
+        final Document dom = DocumentBuilderFactory.newInstance()
+            .newDocumentBuilder()
+            .newDocument();
+        dom.appendChild(dom.createElement("world"));
+        return dom;
     }
 }

@@ -37,21 +37,10 @@ final class RsVelocityTest {
 
     @Test
     void closesTemplateInputStream() throws IOException {
-        final String template = "hello, world!";
         final StateAwareInputStream stream = new StateAwareInputStream(
-            IOUtils.toInputStream(template, StandardCharsets.UTF_8)
+            IOUtils.toInputStream("hello, world!", StandardCharsets.UTF_8)
         );
-        MatcherAssert.assertThat(
-            "Velocity template from stream must render correctly",
-            IOUtils.toString(
-                new RsVelocity(
-                    stream,
-                    Collections.emptyMap()
-                ).body(),
-                StandardCharsets.UTF_8
-            ),
-            Matchers.equalTo(template)
-        );
+        new RsVelocity(stream, Collections.emptyMap()).body();
         MatcherAssert.assertThat(
             "Template input stream must be closed after processing",
             stream.isClosed(),

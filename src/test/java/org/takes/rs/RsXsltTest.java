@@ -26,6 +26,7 @@ import org.takes.misc.StateAwareInputStream;
  * Test case for {@link RsXslt}.
  * @since 0.1
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsXsltTest {
 
     /**
@@ -94,7 +95,7 @@ final class RsXsltTest {
     }
 
     @Test
-    void closesDecoratedResponseInputStream() {
+    void closesDecoratedResponseInputStream() throws IOException {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
@@ -111,16 +112,12 @@ final class RsXsltTest {
         final StateAwareInputStream stream = new StateAwareInputStream(
             new InputStreamOf(xml)
         );
-        MatcherAssert.assertThat(
-            "RsXslt must transform XML and close decorated response input stream",
-            new RsPrint(
-                new RsXslt(
-                    new RsText(stream),
-                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
-                )
-            ),
-            new EndsWith("Hello, World!")
-        );
+        new RsPrint(
+            new RsXslt(
+                new RsText(stream),
+                (href, base) -> new StreamSource(new InputStreamOf(xsl))
+            )
+        ).print();
         MatcherAssert.assertThat(
             "Decorated response input stream must be closed after XSLT transformation",
             stream.isClosed(),
@@ -129,7 +126,7 @@ final class RsXsltTest {
     }
 
     @Test
-    void resolvesInClasspath() {
+    void resolvesInClasspathWithQueryParameters() {
         MatcherAssert.assertThat(
             "RsXslt must resolve XSLT in classpath with query parameters",
             new RsPrint(
@@ -149,6 +146,10 @@ final class RsXsltTest {
             ),
             new EndsWith("Hello, Bobby!")
         );
+    }
+
+    @Test
+    void resolvesInClasspathWithoutQueryParameters() {
         MatcherAssert.assertThat(
             "RsXslt must resolve XSLT in classpath without query parameters",
             new RsPrint(
@@ -168,6 +169,10 @@ final class RsXsltTest {
             ),
             new EndsWith("Hello, Dan!")
         );
+    }
+
+    @Test
+    void resolvesInClasspathWithIncludes() {
         MatcherAssert.assertThat(
             "RsXslt must resolve XSLT with includes in classpath",
             new RsPrint(

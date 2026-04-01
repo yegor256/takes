@@ -75,9 +75,8 @@ public final class FkMethods implements Fork {
 
     @Override
     public Opt<Response> route(final Request req) throws Exception {
-        final String mtd = new RqMethod.Base(req).method();
         final Opt<Response> resp;
-        if (this.methods.contains(mtd)) {
+        if (this.methods.contains(new RqMethod.Base(req).method())) {
             resp = new Opt.Single<>(this.take.act(req));
         } else {
             resp = new Opt.Empty<>();

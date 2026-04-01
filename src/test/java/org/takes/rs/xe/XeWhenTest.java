@@ -11,7 +11,6 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test case for {@link XeWhen}.
@@ -65,7 +64,7 @@ final class XeWhenTest {
     }
 
     @Test
-    void buildsXmlResponseFromNegativeCondition() throws Exception {
+    void buildsXmlResponseFromNegativeConditionWithNegativeSource() throws Exception {
         MatcherAssert.assertThat(
             "XeWhen with negative condition must show negative content",
             IOUtils.toString(
@@ -85,7 +84,11 @@ final class XeWhenTest {
                 "/negative/memory"
             )
         );
-        new Assertion<>(
+    }
+
+    @Test
+    void buildsEmptyWhenNegativeConditionWithoutNegativeSource() throws Exception {
+        MatcherAssert.assertThat(
             "Must be empty when negative condition without negative source",
             new TextOf(
                 new RsXembly(
@@ -101,7 +104,7 @@ final class XeWhenTest {
             XhtmlMatchers.hasXPaths(
                 "/negative"
             )
-        ).affirm();
+        );
     }
 
 }

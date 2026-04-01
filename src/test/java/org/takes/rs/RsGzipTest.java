@@ -21,21 +21,27 @@ import org.takes.Response;
  * Test case for {@link RsGzip}.
  * @since 0.10
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsGzipTest {
 
     @Test
-    void makesCompressedResponse() throws IOException {
-        final String text = "some unicode text: \u20ac\n\t";
-        final Response response = new RsGzip(new RsText(text));
+    void addsGzipContentEncodingHeader() throws IOException {
         MatcherAssert.assertThat(
             "Gzip response must contain Content-Encoding header",
-            new RsHeadPrint(response).asString(),
+            new RsHeadPrint(
+                new RsGzip(new RsText("some unicode text: \u20ac\n\t"))
+            ).asString(),
             Matchers.containsString("Content-Encoding: gzip")
         );
+    }
+
+    @Test
+    void decompressesToOriginalText() throws IOException {
+        final String text = "some unicode text: \u20ac\n\t";
         MatcherAssert.assertThat(
             "Decompressed gzip content must match original text",
             IOUtils.toString(
-                new GZIPInputStream(response.body()),
+                new GZIPInputStream(new RsGzip(new RsText(text)).body()),
                 StandardCharsets.UTF_8
             ),
             Matchers.equalTo(text)
@@ -43,31 +49,21 @@ final class RsGzipTest {
     }
 
     @Test
-    void makesCompressedPngImage() throws IOException {
+    void compressesPngImageWidth() throws IOException {
         final int width = 42;
-        final int height = 256;
-        final RenderedImage image = new BufferedImage(
-            width, height, BufferedImage.TYPE_INT_ARGB
-        );
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", baos);
-        final BufferedImage reverse = ImageIO.read(
-            new GZIPInputStream(
-                new RsPrint(
-                    new RsGzip(
-                        new RsWithBody(baos.toByteArray())
-                    )
-                ).body()
-            )
-        );
         MatcherAssert.assertThat(
             "Decompressed image width must match original",
-            reverse.getWidth(),
+            RsGzipTest.decompressImage(width, 256).getWidth(),
             Matchers.equalTo(width)
         );
+    }
+
+    @Test
+    void compressesPngImageHeight() throws IOException {
+        final int height = 256;
         MatcherAssert.assertThat(
             "Decompressed image height must match original",
-            reverse.getHeight(),
+            RsGzipTest.decompressImage(42, height).getHeight(),
             Matchers.equalTo(height)
         );
     }
@@ -84,6 +80,25 @@ final class RsGzipTest {
                     "Content-Length: %d",
                     new RsBodyPrint(response).asString().length()
                 )
+            )
+        );
+    }
+
+    private static BufferedImage decompressImage(
+        final int width, final int height
+    ) throws IOException {
+        final RenderedImage image = new BufferedImage(
+            width, height, BufferedImage.TYPE_INT_ARGB
+        );
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", baos);
+        return ImageIO.read(
+            new GZIPInputStream(
+                new RsPrint(
+                    new RsGzip(
+                        new RsWithBody(baos.toByteArray())
+                    )
+                ).body()
             )
         );
     }

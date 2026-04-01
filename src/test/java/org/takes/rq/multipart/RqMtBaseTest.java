@@ -5,6 +5,7 @@
 package org.takes.rq.multipart;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -21,6 +22,7 @@ import org.takes.rq.RqWithHeaders;
  * @since 0.33
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqMtBaseTest {
 
     /**
@@ -65,7 +67,7 @@ final class RqMtBaseTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 RqMtBaseTest.contentLengthHeader(
-                    (long) body.getBytes().length
+                    (long) body.getBytes(StandardCharsets.UTF_8).length
                 ),
                 RqMtBaseTest.contentDispositionHeader(
                     String.format(RqMtBaseTest.FORM_DATA, part)

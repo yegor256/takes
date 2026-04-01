@@ -27,6 +27,7 @@ import org.takes.rs.RsText;
  *
  * @since 1.16
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class SrvTakeTest {
     /**
      * Message returned if servlet Takes is executed correctly.

@@ -17,6 +17,7 @@ import org.takes.Take;
  *
  * @since 0.4
  */
+@FunctionalInterface
 public interface TkRegex {
 
     /**

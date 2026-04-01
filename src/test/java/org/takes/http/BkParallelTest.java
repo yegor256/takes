@@ -23,22 +23,41 @@ import org.takes.tk.TkEmpty;
  * @since 0.15.2
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
-@SuppressWarnings({
-    "PMD.CyclomaticComplexity",
-    "PMD.AvoidInstantiatingObjectsInLoops",
-    "PMD.StdCyclomaticComplexity",
-    "PMD.ModifiedCyclomaticComplexity"
-})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class BkParallelTest {
     @Test
-    void requestsAreParallel() throws Exception {
+    void allRequestsStart() throws Exception {
+        final CountDownLatch started = new CountDownLatch(3);
+        final CountDownLatch completed = new CountDownLatch(3);
+        BkParallelTest.runParallelRequests(started, completed);
+        MatcherAssert.assertThat(
+            "All requests must have started",
+            started.getCount(),
+            Matchers.equalTo(0L)
+        );
+    }
+
+    @Test
+    void allRequestsComplete() throws Exception {
+        final CountDownLatch started = new CountDownLatch(3);
+        final CountDownLatch completed = new CountDownLatch(3);
+        BkParallelTest.runParallelRequests(started, completed);
+        MatcherAssert.assertThat(
+            "All requests must have completed",
+            completed.getCount(),
+            Matchers.equalTo(0L)
+        );
+    }
+
+    private static void runParallelRequests(
+        final CountDownLatch started,
+        final CountDownLatch completed
+    ) throws Exception {
         try (ServerSocket socket = new ServerSocket(0)) {
             final String uri = String.format(
                 "http://localhost:%d", socket.getLocalPort()
             );
             final int count = 3;
-            final CountDownLatch started = new CountDownLatch(count);
-            final CountDownLatch completed = new CountDownLatch(count);
             final Take take = req -> {
                 started.countDown();
                 try {
@@ -51,7 +70,6 @@ final class BkParallelTest {
             };
             final Exit exit = () -> completed.getCount() == 0;
             new Thread(
-                // @checkstyle AnonInnerLengthCheck (23 lines)
                 () -> {
                     try {
                         new FtBasic(
@@ -81,16 +99,6 @@ final class BkParallelTest {
                 ).start();
             }
             completed.await(1L, TimeUnit.MINUTES);
-            MatcherAssert.assertThat(
-                "All requests must have started",
-                started.getCount(),
-                Matchers.equalTo(0L)
-            );
-            MatcherAssert.assertThat(
-                "All requests must have completed",
-                completed.getCount(),
-                Matchers.equalTo(0L)
-            );
         }
     }
 }

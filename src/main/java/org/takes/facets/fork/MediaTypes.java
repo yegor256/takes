@@ -111,7 +111,6 @@ final class MediaTypes {
      * @param text Text to parse
      * @return List of media types
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<>();
         final Iterable<Text> parts = new Split(

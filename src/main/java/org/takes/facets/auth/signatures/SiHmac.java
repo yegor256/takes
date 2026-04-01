@@ -5,10 +5,9 @@
 package org.takes.facets.auth.signatures;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Formatter;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
@@ -55,7 +54,7 @@ public final class SiHmac implements Signature {
      * @param key The encryption key as a string
      */
     public SiHmac(final String key) {
-        this(key.getBytes(Charset.defaultCharset()), SiHmac.HMAC256);
+        this(key.getBytes(StandardCharsets.UTF_8), SiHmac.HMAC256);
     }
 
     /**
@@ -65,7 +64,7 @@ public final class SiHmac implements Signature {
      * @param bits The signature bit length (256, 384, or 512)
      */
     public SiHmac(final String key, final int bits) {
-        this(key.getBytes(Charset.defaultCharset()), bits);
+        this(key.getBytes(StandardCharsets.UTF_8), bits);
     }
 
     /**
@@ -117,12 +116,14 @@ public final class SiHmac implements Signature {
      * @throws IOException If encryption fails
      */
     private byte[] encrypt(final byte[] bytes) throws IOException {
-        try (Formatter formatter = new Formatter()) {
-            for (final byte the : this.create().doFinal(bytes)) {
-                formatter.format("%02x", the);
-            }
-            return formatter.toString().getBytes(Charset.defaultCharset());
+        final byte[] result = this.create().doFinal(bytes);
+        final char[] hex = new char[result.length * 2];
+        for (int idx = 0; idx < result.length; idx = idx + 1) {
+            final int val = result[idx] & 0xff;
+            hex[idx * 2] = Character.forDigit(val >>> 4, 16);
+            hex[idx * 2 + 1] = Character.forDigit(val & 0x0f, 16);
         }
+        return new String(hex).getBytes(StandardCharsets.UTF_8);
     }
 
     /**
@@ -135,11 +136,8 @@ public final class SiHmac implements Signature {
         throws IOException {
         final String algo = String.format("HmacSHA%s", this.bits);
         try {
-            final SecretKeySpec secret = new SecretKeySpec(
-                this.key, algo
-            );
             final Mac mac = Mac.getInstance(algo);
-            mac.init(secret);
+            mac.init(new SecretKeySpec(this.key, algo));
             return mac;
         } catch (final NoSuchAlgorithmException | InvalidKeyException ex) {
             throw new IOException(ex);

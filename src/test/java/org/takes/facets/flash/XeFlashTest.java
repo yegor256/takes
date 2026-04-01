@@ -14,7 +14,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
@@ -31,23 +30,7 @@ import org.takes.rs.xe.XeStylesheet;
 final class XeFlashTest {
 
     @Test
-    void acceptsRsFlashCookie() throws IOException {
-        final Pattern pattern = Pattern.compile(
-            "^Set-Cookie: RsFlash=(.*?);Path.*"
-        );
-        final Iterator<String> itr = new RsFlash("hello").head().iterator();
-        final List<String> cookies = new ArrayList<>(0);
-        while (itr.hasNext()) {
-            final Matcher matcher = pattern.matcher(itr.next());
-            if (matcher.find()) {
-                cookies.add(matcher.group(1));
-            }
-        }
-        MatcherAssert.assertThat(
-            "Exactly one RsFlash cookie must be set",
-            cookies,
-            Matchers.hasSize(1)
-        );
+    void generatesXmlFromRsFlashCookie() throws IOException {
         MatcherAssert.assertThat(
             "XeFlash must generate XML with message and level elements",
             IOUtils.toString(
@@ -58,7 +41,7 @@ final class XeFlashTest {
                             new RqWithHeader(
                                 new RqFake(),
                                 "Cookie",
-                                "RsFlash=".concat(cookies.get(0))
+                                "RsFlash=".concat(XeFlashTest.cookie())
                             )
                         )
                     )
@@ -100,5 +83,20 @@ final class XeFlashTest {
                 "/xhtml:html/xhtml:p[@class='flash flash-INFO']"
             )
         );
+    }
+
+    private static String cookie() throws IOException {
+        final Pattern pattern = Pattern.compile(
+            "^Set-Cookie: RsFlash=(.*?);Path.*"
+        );
+        final Iterator<String> itr = new RsFlash("hello").head().iterator();
+        final List<String> cookies = new ArrayList<>(0);
+        while (itr.hasNext()) {
+            final Matcher matcher = pattern.matcher(itr.next());
+            if (matcher.find()) {
+                cookies.add(matcher.group(1));
+            }
+        }
+        return cookies.get(0);
     }
 }

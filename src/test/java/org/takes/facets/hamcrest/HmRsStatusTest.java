@@ -19,12 +19,16 @@ import org.takes.tk.TkHtml;
 final class HmRsStatusTest {
 
     @Test
-    void testsStatusOk() throws Exception {
+    void testsHtmlStatusOk() throws Exception {
         MatcherAssert.assertThat(
             "HTML response must have HTTP OK status",
             new TkHtml("<html></html>").act(new RqFake()),
             new HmRsStatus(HttpURLConnection.HTTP_OK)
         );
+    }
+
+    @Test
+    void testsEmptyStatusNoContent() throws Exception {
         MatcherAssert.assertThat(
             "Empty response must have HTTP No Content status",
             new TkEmpty().act(new RqFake()),

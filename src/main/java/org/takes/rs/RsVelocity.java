@@ -132,6 +132,7 @@ public final class RsVelocity extends RsWrap {
      * @return Page body
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static InputStream render(final String folder,
         final InputStream template,
         final Map<String, Object> params) throws IOException {

@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import org.cactoos.Text;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Sub;
@@ -166,19 +165,18 @@ final class ChunkedInputStream extends InputStream {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final String data = baos.toString(Charset.defaultCharset().name());
         final int separator = data.indexOf(';');
-        final Text number = new Trimmed(
-            new Unchecked<>(
-                new Ternary<>(
-                    separator > 0,
-                    new Sub(data, 0, separator),
-                    new TextOf(data)
-                )
-            ).value()
-        );
         try {
             return Integer.parseInt(
                 new UncheckedText(
-                    number
+                    new Trimmed(
+                        new Unchecked<>(
+                            new Ternary<>(
+                                separator > 0,
+                                new Sub(data, 0, separator),
+                                new TextOf(data)
+                            )
+                        ).value()
+                    )
                 ).asString(),
                 16
             );

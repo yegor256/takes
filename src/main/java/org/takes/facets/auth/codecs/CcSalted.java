@@ -77,17 +77,16 @@ public final class CcSalted implements Codec {
      * @param text Original text to salt
      * @return Salted string
      */
-    @SuppressWarnings("PMD.AvoidArrayLoops")
     private static byte[] salt(final byte[] text) {
         final byte size = (byte) CcSalted.RND.nextInt(CcSalted.RND_MAX_SIZE);
-        final byte[] output = new byte[text.length + (int) size + 2];
+        final byte[] output = new byte[text.length + size + 2];
         output[0] = size;
         byte sum = (byte) 0;
-        for (int idx = 0; idx < (int) size; ++idx) {
+        for (int idx = 0; idx < size; ++idx) {
             output[idx + 1] = (byte) CcSalted.RND.nextInt();
             sum += output[idx + 1];
         }
-        System.arraycopy(text, 0, output, (int) size + 1, text.length);
+        System.arraycopy(text, 0, output, size + 1, text.length);
         output[output.length - 1] = sum;
         return output;
     }
@@ -97,7 +96,6 @@ public final class CcSalted implements Codec {
      * @param text Salted text
      * @return Original text
      */
-    @SuppressWarnings("PMD.CyclomaticComplexity")
     private static byte[] unsalt(final byte[] text) {
         if (text.length == 0) {
             throw new DecodingException("empty input");

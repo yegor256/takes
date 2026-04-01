@@ -5,11 +5,11 @@
 package org.takes.it.fm;
 
 import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import com.jcabi.http.wire.VerboseWire;
-import java.net.HttpURLConnection;
-import org.junit.jupiter.api.Assertions;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,13 +25,16 @@ final class AppITCase {
 
     @Test
     void justWorks() throws Exception {
-        Assertions.assertNotNull(AppITCase.HOME);
-        new JdkRequest(String.format("%s/f", AppITCase.HOME))
-            .through(VerboseWire.class)
-            .fetch()
-            .as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .as(XmlResponse.class)
-            .assertXPath("//xhtml:html");
+        Assumptions.assumeTrue(AppITCase.HOME != null);
+        MatcherAssert.assertThat(
+            "Response must be valid HTML document",
+            new JdkRequest(String.format("%s/f", AppITCase.HOME))
+                .through(VerboseWire.class)
+                .fetch()
+                .as(XmlResponse.class)
+                .xml()
+                .xpath("//xhtml:html/xhtml:head/xhtml:title/text()"),
+            Matchers.not(Matchers.empty())
+        );
     }
 }

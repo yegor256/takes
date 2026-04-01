@@ -4,6 +4,7 @@
  */
 package org.takes.facets.auth.codecs;
 
+import java.nio.charset.StandardCharsets;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -14,11 +15,11 @@ import org.takes.facets.auth.Identity;
 final class CcTest implements Codec {
     @Override
     public Identity decode(final byte[] bytes) {
-        return new Identity.Simple(new String(bytes));
+        return new Identity.Simple(new String(bytes, StandardCharsets.UTF_8));
     }
 
     @Override
     public byte[] encode(final Identity identity) {
-        return identity.urn().getBytes();
+        return identity.urn().getBytes(StandardCharsets.UTF_8);
     }
 }

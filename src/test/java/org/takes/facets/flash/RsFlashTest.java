@@ -9,8 +9,9 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 import org.cactoos.text.FormattedText;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.misc.Expires;
 import org.takes.rs.RsPrint;
@@ -24,7 +25,7 @@ final class RsFlashTest {
     @Test
     void addsCookieToResponse() throws IOException {
         final String msg = "hey, how are you?";
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response must contain a flash cookie",
             new RsPrint(
                 new RsFlash(msg)
@@ -39,28 +40,28 @@ final class RsFlashTest {
                     Level.INFO.getName()
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
     void addsCookieWithSpecifiedExpiresToResponse() throws IOException {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response must contain a flash cookie with an expiration date.",
             new RsPrint(
                 new RsFlash("i'm good, thanks", new Expires.Date(0L))
             ),
             new HasString("Expires=Thu, 01 Jan 1970 00:00:00 GMT")
-        ).affirm();
+        );
     }
 
     @Test
-    void printsItselfFromThrowable() {
-        new Assertion<>(
+    void printsItselfFromThrowable() throws Exception {
+        MatcherAssert.assertThat(
             "RsFlash should print a message from Throwable",
-            () -> new RsFlash(
+            new RsFlash(
                 new IOException("and you?")
             ).toString(),
-            new HasString("text=SEVERE/and you?")
-        ).affirm();
+            Matchers.containsString("text=SEVERE/and you?")
+        );
     }
 }

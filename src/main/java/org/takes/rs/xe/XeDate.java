@@ -4,11 +4,9 @@
  */
 package org.takes.rs.xe;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import lombok.EqualsAndHashCode;
 import org.xembly.Directives;
 
@@ -52,15 +50,12 @@ public final class XeDate extends XeWrap {
      */
     public XeDate(final CharSequence attr) {
         super(
-            () -> {
-                final DateFormat fmt = new SimpleDateFormat(
-                    "yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH
-                );
-                fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
-                return new Directives().attr(
-                    attr.toString(), fmt.format(new Date())
-                );
-            }
+            () -> new Directives().attr(
+                attr.toString(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                    .withZone(ZoneOffset.UTC)
+                    .format(Instant.now())
+            )
         );
     }
 

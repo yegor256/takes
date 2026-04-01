@@ -13,9 +13,9 @@ import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Take;
@@ -28,6 +28,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FtRemote}.
  * @since 0.21
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FtRemoteTest {
 
     @Test
@@ -35,16 +36,19 @@ final class FtRemoteTest {
     void simplyWorks() throws Exception {
         final byte[] data = new byte[4];
         data[0] = (byte) 0xff;
+        final AtomicReference<byte[]> result = new AtomicReference<>();
         new FtRemote(new TkFixed(new RsText(data))).exec(
-            home -> MatcherAssert.assertThat(
-                "FtRemote must serve binary data correctly over HTTP",
+            home -> result.set(
                 new JdkRequest(home)
                     .fetch()
                     .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .binary(),
-                Matchers.equalTo(data)
+                    .binary()
             )
+        );
+        MatcherAssert.assertThat(
+            "FtRemote must serve binary data correctly over HTTP",
+            result.get(),
+            Matchers.equalTo(data)
         );
     }
 
@@ -90,16 +94,22 @@ final class FtRemoteTest {
     @Test
     @Tag("deep")
     void returnsAnEmptyResponseBody() throws Exception {
+        final AtomicReference<RestResponse> resp = new AtomicReference<>();
         new FtRemote(
             new TkEmpty()
         ).exec(
-            home -> new JdkRequest(home)
-                .method("POST")
-                .body().set("returnsAnEmptyResponseBody").back()
-                .fetch()
-                .as(RestResponse.class)
-                .assertBody(new IsEqual<>(""))
-                .assertStatus(HttpURLConnection.HTTP_NO_CONTENT)
+            home -> resp.set(
+                new JdkRequest(home)
+                    .method("POST")
+                    .body().set("returnsAnEmptyResponseBody").back()
+                    .fetch()
+                    .as(RestResponse.class)
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkEmpty must return HTTP 204 with empty body",
+            resp.get().status(),
+            Matchers.equalTo(HttpURLConnection.HTTP_NO_CONTENT)
         );
     }
 }

@@ -77,7 +77,6 @@ public final class SrvTake extends HttpServlet {
     }
 
     @Override
-    @SuppressWarnings("PMD.CyclomaticComplexity")
     public void init() throws ServletException {
         super.init();
         final String cname = this.getServletConfig()

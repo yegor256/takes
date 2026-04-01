@@ -77,6 +77,7 @@ public final class FtBasic implements Front {
     }
 
     @Override
+    @SuppressWarnings("PMD.UseTryWithResources")
     public void start(final Exit exit) throws IOException {
         this.socket.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
         try {

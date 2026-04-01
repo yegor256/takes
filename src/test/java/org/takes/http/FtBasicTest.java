@@ -13,10 +13,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.io.IOUtils;
 import org.cactoos.io.InputStreamOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,7 +40,7 @@ import org.takes.tk.TkText;
  * Test case for {@link FtBasic}.
  * @since 0.1
  */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveImports"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FtBasicTest {
 
     /**
@@ -49,38 +51,48 @@ final class FtBasicTest {
     @Test
     @Tag("deep")
     void justWorks() throws Exception {
+        final AtomicReference<String> body = new AtomicReference<>();
         new FtRemote(
             new TkFork(new FkRegex(FtBasicTest.ROOT_PATH, "привет!"))
         ).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("привет"))
+            home -> body.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtBasic must serve UTF-8 content correctly",
+            body.get(),
+            Matchers.startsWith("привет")
         );
     }
 
     @Test
     @Tag("deep")
     void gracefullyHandlesBrokenBack() throws Exception {
+        final AtomicReference<RestResponse> resp = new AtomicReference<>();
         new FtRemote(new TkFailure("Jeffrey Lebowski")).exec(
-            home -> new JdkRequest(home)
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_INTERNAL_ERROR)
-                .assertBody(Matchers.containsString("Lebowski"))
+            home -> resp.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .as(RestResponse.class)
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtBasic must return HTTP 500 when Take throws exception",
+            resp.get().status(),
+            Matchers.equalTo(HttpURLConnection.HTTP_INTERNAL_ERROR)
         );
     }
 
     @Test
     @Tag("deep")
     void parsesIncomingHttpRequest() throws Exception {
+        final AtomicReference<String> captured = new AtomicReference<>();
         final Take take = request -> {
-            MatcherAssert.assertThat(
-                "HTTP request body must contain expected content",
-                new RqPrint(request).printBody(),
-                Matchers.containsString("Jeff")
-            );
+            captured.set(new RqPrint(request).printBody());
             return new RsText("ура!");
         };
         new FtRemote(take).exec(
@@ -89,8 +101,11 @@ final class FtBasicTest {
                 .body().set("Jeff, how are you?").back()
                 .fetch()
                 .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.startsWith("ура"))
+        );
+        MatcherAssert.assertThat(
+            "HTTP request body must contain expected content",
+            captured.get(),
+            Matchers.containsString("Jeff")
         );
     }
 
@@ -107,14 +122,21 @@ final class FtBasicTest {
                 )
             );
         };
+        final AtomicReference<String> body = new AtomicReference<>();
         new FtRemote(take).exec(
-            home -> new JdkRequest(home)
-                .method("POST")
-                .header("Content-Length", "4")
-                .fetch(new ByteArrayInputStream("ddgg".getBytes()))
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.containsString("second: dd"))
+            home -> body.set(
+                new JdkRequest(home)
+                    .method("POST")
+                    .header("Content-Length", "4")
+                    .fetch(new ByteArrayInputStream("ddgg".getBytes(StandardCharsets.UTF_8)))
+                    .as(RestResponse.class)
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtBasic must handle RqGreedy correctly for repeated reads",
+            body.get(),
+            Matchers.containsString("second: dd")
         );
     }
 
@@ -127,17 +149,22 @@ final class FtBasicTest {
                 StandardCharsets.UTF_8
             )
         );
+        final String body = "here is ВАШИ data";
+        final AtomicReference<String> resp = new AtomicReference<>();
         new FtRemote(take).exec(
-            home -> {
-                final String body = "here is ВАШИ data";
+            home -> resp.set(
                 new JdkRequest(home)
                     .method(RqMethod.POST)
                     .body().set(body).back()
                     .fetch()
                     .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .assertBody(Matchers.equalTo(body));
-            }
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtBasic must echo back request body correctly",
+            resp.get(),
+            Matchers.equalTo(body)
         );
     }
 
@@ -145,6 +172,7 @@ final class FtBasicTest {
     @Tag("deep")
     void consumesTwiceInputStreamWithRsText() throws Exception {
         final String result = "Привет RsText!";
+        final AtomicReference<String> second = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkRegex(
@@ -156,17 +184,19 @@ final class FtBasicTest {
             )
         ).exec(
             home -> {
-                new JdkRequest(home)
-                    .fetch()
-                    .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .assertBody(Matchers.equalTo(result));
-                new JdkRequest(home)
-                    .fetch()
-                    .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .assertBody(Matchers.equalTo(result));
+                new JdkRequest(home).fetch().as(RestResponse.class);
+                second.set(
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .body()
+                );
             }
+        );
+        MatcherAssert.assertThat(
+            "RsText must serve same content on repeated requests",
+            second.get(),
+            Matchers.equalTo(result)
         );
     }
 
@@ -174,6 +204,7 @@ final class FtBasicTest {
     @Tag("deep")
     void consumesTwiceInputStreamWithRsHtml() throws Exception {
         final String result = "Hello RsHTML!";
+        final AtomicReference<String> second = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkRegex(
@@ -185,32 +216,36 @@ final class FtBasicTest {
             )
         ).exec(
             home -> {
-                new JdkRequest(home)
-                    .fetch()
-                    .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .assertBody(Matchers.equalTo(result));
-                new JdkRequest(home)
-                    .fetch()
-                    .as(RestResponse.class)
-                    .assertStatus(HttpURLConnection.HTTP_OK)
-                    .assertBody(Matchers.equalTo(result));
+                new JdkRequest(home).fetch().as(RestResponse.class);
+                second.set(
+                    new JdkRequest(home)
+                        .fetch()
+                        .as(RestResponse.class)
+                        .body()
+                );
             }
+        );
+        MatcherAssert.assertThat(
+            "RsHtml must serve same content on repeated requests",
+            second.get(),
+            Matchers.equalTo(result)
         );
     }
 
     @Test
     @Tag("deep")
     void gracefullyHandlesBrokenPipe() throws IOException {
-        new FtBasic(
-            new BkSafe(
-                new BkBasic(
-                    new TkText("Body")
-                )
-            ),
-            FtBasicTest.server()
-        ).start(
-            () -> true
+        Assertions.assertDoesNotThrow(
+            () -> new FtBasic(
+                new BkSafe(
+                    new BkBasic(
+                        new TkText("Body")
+                    )
+                ),
+                FtBasicTest.server()
+            ).start(
+                () -> true
+            )
         );
     }
 

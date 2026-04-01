@@ -78,15 +78,14 @@ final class CapInputStream extends InputStream {
             seen = -1;
         } else {
             seen = this.origin.read(buf, off, Math.min(len, (int) this.more));
-            this.more -= (long) seen;
+            this.more -= seen;
         }
         return seen;
     }
 
     @Override
     public long skip(final long num) throws IOException {
-        final long nskip = Math.min(num, this.more);
-        final long skipped = this.origin.skip(nskip);
+        final long skipped = this.origin.skip(Math.min(num, this.more));
         this.more -= skipped;
         return skipped;
     }

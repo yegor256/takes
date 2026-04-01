@@ -7,8 +7,10 @@ package org.takes.tk;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
@@ -38,7 +40,7 @@ import org.takes.rs.RsText;
  * Test case for {@link TkProxy}.
  * @since 0.25
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkProxyTest {
 
     /**
@@ -86,23 +88,24 @@ final class TkProxyTest {
     void justWorks(
         final String method, final String expected
     ) throws Exception {
+        final AtomicReference<RsPrint> result = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkMethods(method, new TkFixed(expected))
             )
         ).exec(
-            home ->
-                MatcherAssert.assertThat(
-                    "TkProxy must forward request to upstream server and return expected response",
-                    new RsPrint(
-                        new TkProxy(home).act(
-                            new RqFake(method)
-                        )
-                    ),
-                    new HasString(
-                        expected
+            home -> result.set(
+                new RsPrint(
+                    new TkProxy(home).act(
+                        new RqFake(method)
                     )
                 )
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkProxy must forward request to upstream server and return expected response",
+            result.get(),
+            new HasString(expected)
         );
     }
 
@@ -113,14 +116,16 @@ final class TkProxyTest {
         throws Exception {
         final Take take = req ->
             new RsText(new RqHref.Base(req).href().toString());
+        final AtomicReference<String> result = new AtomicReference<>();
+        final AtomicReference<URI> captured = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkMethods(method, take)
             )
         ).exec(
-            home ->
-                MatcherAssert.assertThat(
-                    "TkProxy must correctly map path with URL encoding to upstream server",
+            home -> {
+                captured.set(home);
+                result.set(
                     new RsBodyPrint(
                         new TkProxy(home).act(
                             new RqFake(
@@ -128,14 +133,19 @@ final class TkProxyTest {
                                 "/a/%D0%B0/c?%D0%B0=1#%D0%B0"
                             )
                         )
-                    ).asString(),
-                    Matchers.equalTo(
-                        String.format(
-                            "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
-                            home.getHost(), home.getPort()
-                        )
-                    )
+                    ).asString()
+                );
+            }
+        );
+        MatcherAssert.assertThat(
+            "TkProxy must correctly map path with URL encoding to upstream server",
+            result.get(),
+            Matchers.equalTo(
+                String.format(
+                    "http://%s:%d/a/%%D0%%B0/c?%%D0%%B0=1",
+                    captured.get().getHost(), captured.get().getPort()
                 )
+            )
         );
     }
 
@@ -145,15 +155,16 @@ final class TkProxyTest {
     void modifiesHost(
         final String method, final String expected
     ) throws Exception {
+        final AtomicReference<String> result = new AtomicReference<>();
+        final AtomicReference<URI> captured = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkMethods(method, TkProxyTest.ECHO)
             )
         ).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            home ->
-                MatcherAssert.assertThat(
-                    "TkProxy must modify Host header to point to upstream server",
+            home -> {
+                captured.set(home);
+                result.set(
                     new RsBodyPrint(
                         new TkProxy(home.toURL().toString()).act(
                             new RqFake(
@@ -169,15 +180,20 @@ final class TkProxyTest {
                                 ""
                             )
                         )
-                    ).asString(),
-                    Matchers.containsString(
-                        String.format(
-                            "Host: %s:%d",
-                            home.getHost(),
-                            home.getPort()
-                        )
-                    )
+                    ).asString()
+                );
+            }
+        );
+        MatcherAssert.assertThat(
+            "TkProxy must modify Host header to point to upstream server",
+            result.get(),
+            Matchers.containsString(
+                String.format(
+                    "Host: %s:%d",
+                    captured.get().getHost(),
+                    captured.get().getPort()
                 )
+            )
         );
     }
 
@@ -188,14 +204,16 @@ final class TkProxyTest {
         final String method, final String expected
     ) throws Exception {
         final String mark = "foo";
+        final AtomicReference<String> result = new AtomicReference<>();
+        final AtomicReference<URI> captured = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkMethods(method, TkProxyTest.ECHO)
             )
         ).exec(
-            home ->
-                MatcherAssert.assertThat(
-                    "TkProxy must add X-Takes-TkProxy header with proxy information",
+            home -> {
+                captured.set(home);
+                result.set(
                     new RsHeadPrint(
                         new TkProxy(
                             home.toURL().toString(),
@@ -212,15 +230,20 @@ final class TkProxyTest {
                                 ""
                             )
                         )
-                    ).asString(),
-                    Matchers.containsString(
-                        String.format(
-                            "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
-                            home,
-                            mark
-                        )
-                    )
+                    ).asString()
+                );
+            }
+        );
+        MatcherAssert.assertThat(
+            "TkProxy must add X-Takes-TkProxy header with proxy information",
+            result.get(),
+            Matchers.containsString(
+                String.format(
+                    "X-Takes-TkProxy: from /%%D0%%B0 to %s/%%D0%%B0 by %s",
+                    captured.get(),
+                    mark
                 )
+            )
         );
     }
 
@@ -228,43 +251,46 @@ final class TkProxyTest {
     @Tag("deep")
     void addsAllInitialHeaders() throws Exception {
         final String body = "Hello World !";
+        final AtomicReference<String> result = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkMethods("POST", TkProxyTest.ECHO)
             )
         ).exec(
-            home ->
-                MatcherAssert.assertThat(
-                    "TkProxy must forward all original request headers to upstream server",
-                    new RsBodyPrint(
-                        new TkProxy(home).act(
-                            new RqFake(
-                                Arrays.asList(
-                                    "POST /%D0%B0",
-                                    String.format(
-                                        "Content-Length: %s",
-                                        body.length()
-                                    ),
-                                    "Content-Type: text/plain",
-                                    "Accept: text/json",
-                                    "Cookie: a=45",
-                                    "Cookie: ttt=ALPHA",
-                                    "Accept-Encoding: gzip",
-                                    "Host: www.bar-foo.com"
+            home -> result.set(
+                new RsBodyPrint(
+                    new TkProxy(home).act(
+                        new RqFake(
+                            Arrays.asList(
+                                "POST /%D0%B0",
+                                String.format(
+                                    "Content-Length: %s",
+                                    body.length()
                                 ),
-                                body
-                            )
+                                "Content-Type: text/plain",
+                                "Accept: text/json",
+                                "Cookie: a=45",
+                                "Cookie: ttt=ALPHA",
+                                "Accept-Encoding: gzip",
+                                "Host: www.bar-foo.com"
+                            ),
+                            body
                         )
-                    ).asString(),
-                    Matchers.allOf(
-                        Matchers.containsString("Content-Length:"),
-                        Matchers.containsString("Content-Type:"),
-                        Matchers.containsString("Accept:"),
-                        Matchers.containsString("Cookie: a"),
-                        Matchers.containsString("Cookie: ttt"),
-                        Matchers.containsString("Accept-Encoding:")
                     )
-                )
+                ).asString()
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkProxy must forward all original request headers to upstream server",
+            result.get(),
+            Matchers.allOf(
+                Matchers.containsString("Content-Length:"),
+                Matchers.containsString("Content-Type:"),
+                Matchers.containsString("Accept:"),
+                Matchers.containsString("Cookie: a"),
+                Matchers.containsString("Cookie: ttt"),
+                Matchers.containsString("Accept-Encoding:")
+            )
         );
     }
 
@@ -278,6 +304,7 @@ final class TkProxyTest {
      *
      * @since 1.24.4
      */
+    @FunctionalInterface
     interface Factory {
         Request create(Request req);
     }

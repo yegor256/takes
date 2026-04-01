@@ -19,6 +19,7 @@ import org.takes.rs.RsHeadPrint;
  * Test case for {@link TkClasspath}.
  * @since 0.1
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkClasspathTest {
 
     @Test
@@ -38,15 +39,14 @@ final class TkClasspathTest {
 
     @Test
     void throwsWhenResourceNotFound() {
-        final HttpException exception = Assertions.assertThrows(
-            HttpException.class,
-            () -> new TkClasspath().act(
-                new RqFake(RqMethod.PUT, "/something-else", "")
-            )
-        );
         MatcherAssert.assertThat(
             "Exception should have HTTP_NOT_FOUND status code",
-            exception.code(),
+            Assertions.assertThrows(
+                HttpException.class,
+                () -> new TkClasspath().act(
+                    new RqFake(RqMethod.PUT, "/something-else", "")
+                )
+            ).code(),
             Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
         );
     }

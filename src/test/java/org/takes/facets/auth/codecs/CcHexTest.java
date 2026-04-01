@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcHex}.
  * @since 0.1
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcHexTest {
 
     @Test
@@ -43,25 +45,29 @@ final class CcHexTest {
         MatcherAssert.assertThat(
             "Hex decoding must produce correct identity URN",
             new CcHex(new CcPlain()).decode(
-                "75726E25-33417465-73742533-4141".getBytes()
+                "75726E25-33417465-73742533-4141".getBytes(StandardCharsets.UTF_8)
             ).urn(),
             Matchers.equalTo("urn:test:A")
         );
     }
 
     @Test
-    void decodesInvalidData() throws IOException {
+    void decodesInvalidDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Invalid hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
-                " % tjw".getBytes()
+                " % tjw".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
+    }
+
+    @Test
+    void decodesMalformedDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Malformed hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
-                "75-72-6E-253".getBytes()
+                "75-72-6E-253".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );

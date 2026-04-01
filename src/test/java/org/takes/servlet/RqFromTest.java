@@ -26,6 +26,7 @@ import org.takes.rq.RqWithoutHeader;
  *
  * @since 1.15
  */
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.UnnecessaryLocalRule"})
 final class RqFromTest {
 
     /**
@@ -50,94 +51,99 @@ final class RqFromTest {
     }
 
     @Test
-    void containsMethodAndHeader() throws Exception {
-        final String uri = "/a-test";
-        final String header = "foo";
-        final String value = "bar";
-        final Request original = new RqWithHeader(
-            new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
-            header,
-            value
-        );
-        final Request request = RqFromTest.requestFrom(original);
+    void preservesMethod() throws Exception {
         MatcherAssert.assertThat(
             "Method should be preserved",
-            new RqMethod.Base(request).method(),
+            new RqMethod.Base(RqFromTest.requestWithHeader()).method(),
             Matchers.equalTo(RqMethod.GET)
         );
+    }
+
+    @Test
+    void preservesUri() throws Exception {
         MatcherAssert.assertThat(
             "URI should be preserved",
-            new RqRequestLine.Base(request).uri(),
-            Matchers.equalTo(uri)
+            new RqRequestLine.Base(RqFromTest.requestWithHeader()).uri(),
+            Matchers.equalTo("/a-test")
         );
+    }
+
+    @Test
+    void preservesCustomHeader() throws Exception {
         MatcherAssert.assertThat(
             "Custom header should be preserved",
-            request,
-            new HmHeader<>(header, value)
+            RqFromTest.requestWithHeader(),
+            new HmHeader<>("foo", "bar")
         );
+    }
+
+    @Test
+    void addsLocalAddressHeader() throws Exception {
         MatcherAssert.assertThat(
             "Local address header should be added",
-            request,
+            RqFromTest.requestWithHeader(),
             new HmHeader<>("X-Takes-LocalAddress", RqFromTest.LOCALHOST)
         );
+    }
+
+    @Test
+    void addsRemoteAddressHeader() throws Exception {
         MatcherAssert.assertThat(
             "Remote address header should be added",
-            request,
+            RqFromTest.requestWithHeader(),
             new HmHeader<>("X-Takes-RemoteAddress", RqFromTest.LOCALHOST)
         );
     }
 
     @Test
-    void containsHostHeaderInHeader() throws Exception {
-        final String uri = "/one-more-test";
-        final String host = "www.thesite.com";
-        final Request original = new RqWithHeader(
-            new RqWithoutHeader(
-                new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
-                RqFromTest.HOST
-            ),
-            RqFromTest.HOST,
-            host
-        );
-        final Request request = RqFromTest.requestFrom(original);
+    void preservesHostHeader() throws Exception {
         MatcherAssert.assertThat(
             "Host header should be preserved",
-            request,
-            new HmHeader<>(RqFromTest.HOST, host)
+            RqFromTest.requestWithHost("/one-more-test", "www.thesite.com"),
+            new HmHeader<>(RqFromTest.HOST, "www.thesite.com")
         );
+    }
+
+    @Test
+    void preservesMethodWithHostHeader() throws Exception {
         MatcherAssert.assertThat(
             "Method should be preserved",
-            new RqMethod.Base(request).method(),
+            new RqMethod.Base(
+                RqFromTest.requestWithHost("/one-more-test", "www.thesite.com")
+            ).method(),
             Matchers.equalTo(RqMethod.GET)
         );
+    }
+
+    @Test
+    void preservesUriWithHostHeader() throws Exception {
+        final String uri = "/one-more-test";
         MatcherAssert.assertThat(
             "URI should be preserved",
-            new RqRequestLine.Base(request).uri(),
+            new RqRequestLine.Base(
+                RqFromTest.requestWithHost(uri, "www.thesite.com")
+            ).uri(),
             Matchers.equalTo(uri)
         );
     }
 
     @Test
-    void containsHostAndPortInHeader() throws Exception {
-        final String uri = "/b-test";
-        final String host = "192.168.0.1:12345";
-        final Request original = new RqWithHeader(
-            new RqWithoutHeader(
-                new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
-                RqFromTest.HOST
-            ),
-            RqFromTest.HOST,
-            host
-        );
-        final Request request = RqFromTest.requestFrom(original);
+    void preservesHostWithPort() throws Exception {
         MatcherAssert.assertThat(
             "Host header with port should be preserved",
-            request,
-            new HmHeader<>(RqFromTest.HOST, host)
+            RqFromTest.requestWithHost("/b-test", "192.168.0.1:12345"),
+            new HmHeader<>(RqFromTest.HOST, "192.168.0.1:12345")
         );
+    }
+
+    @Test
+    void preservesUriWithHostAndPort() throws Exception {
+        final String uri = "/b-test";
         MatcherAssert.assertThat(
             "URI should be preserved",
-            new RqRequestLine.Base(request).uri(),
+            new RqRequestLine.Base(
+                RqFromTest.requestWithHost(uri, "192.168.0.1:12345")
+            ).uri(),
             Matchers.equalTo(uri)
         );
     }
@@ -157,6 +163,29 @@ final class RqFromTest {
             "Body content should be preserved",
             request,
             new HmRqTextBody(content)
+        );
+    }
+
+    private static Request requestWithHeader() {
+        return RqFromTest.requestFrom(
+            new RqWithHeader(
+                new RqFake(RqMethod.GET, "/a-test HTTP/1.1"),
+                "foo",
+                "bar"
+            )
+        );
+    }
+
+    private static Request requestWithHost(final String uri, final String host) {
+        return RqFromTest.requestFrom(
+            new RqWithHeader(
+                new RqWithoutHeader(
+                    new RqFake(RqMethod.GET, String.format("%s HTTP/1.1", uri)),
+                    RqFromTest.HOST
+                ),
+                RqFromTest.HOST,
+                host
+            )
         );
     }
 

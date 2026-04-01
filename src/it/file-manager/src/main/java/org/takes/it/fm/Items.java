@@ -34,7 +34,6 @@ final class Items implements XeSource {
     }
 
     @Override
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     public Iterable<Directive> toXembly() throws IOException {
         final Collection<XeSource> items = new LinkedList<>();
         final File[] files = this.home.listFiles();

@@ -9,7 +9,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.EndsWith;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
@@ -18,12 +17,12 @@ import org.takes.Request;
  * Test case for {@link RqFake}.
  * @since 0.24
  */
-@SuppressWarnings("PMD.AvoidUsingHardCodedIP")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqFakeTest {
 
     @Test
     void conformsToEquality() {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new RqFake(
                 "GET",
@@ -35,7 +34,7 @@ final class RqFakeTest {
                     "https://localhost:8080"
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
@@ -56,14 +55,20 @@ final class RqFakeTest {
     }
 
     @Test
-    void printsBodyOnlyOnce() throws IOException {
+    void printsBodyOnFirstRead() throws IOException {
         final String body = "the body text";
-        final Request req = new RqFake("", "", body);
         MatcherAssert.assertThat(
             "First print must contain the request body",
-            new RqPrint(req).print(),
+            new RqPrint(new RqFake("", "", body)).print(),
             Matchers.containsString(body)
         );
+    }
+
+    @Test
+    void doesNotPrintBodyAfterConsumed() throws IOException {
+        final String body = "the body text for consume";
+        final Request req = new RqFake("", "", body);
+        new RqPrint(req).print();
         MatcherAssert.assertThat(
             "Second print must not contain the body after it was already consumed",
             new RqPrint(req).print(),

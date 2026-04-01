@@ -6,6 +6,7 @@ package org.takes.rq.multipart;
 
 import java.io.IOException;
 import java.nio.channels.ClosedChannelException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import org.cactoos.list.ListOf;
@@ -26,7 +27,11 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMtFake}.
  * @since 0.33
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule",
+    "PMD.UnitTestContainsTooManyAsserts"
+})
 final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.
@@ -101,32 +106,10 @@ final class RqMtFakeTest {
     }
 
     @Test
-    void parsesHttpBody() throws Exception {
+    void parsesHttpBodyHeader() throws Exception {
         final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
         final String part = "t4";
-        final RqMultipart multi = new RqMtFake(
-            new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP,
-                    new FormattedText("name=\"%s\"", part).asString()
-                ).asString()
-            ),
-            new RqWithHeaders(
-                new RqFake("", "", ""),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, 0
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP,
-                    "name=\"data\"; filename=\"a.rar\""
-                ).asString()
-            )
-        );
+        final RqMultipart multi = RqMtFakeTest.multipart(body, part);
         try {
             MatcherAssert.assertThat(
                 "Multipart request must have correct Content-Disposition header for named part",
@@ -135,6 +118,17 @@ final class RqMtFakeTest {
                 ).header("Content-Disposition"),
                 Matchers.hasItem("form-data; name=\"t4\"")
             );
+        } finally {
+            multi.part(part).iterator().next().body().close();
+        }
+    }
+
+    @Test
+    void parsesHttpBodyContent() throws Exception {
+        final String body = "40 N Wolfe Rd, Sunnyvale, CA 94085";
+        final String part = "t4";
+        final RqMultipart multi = RqMtFakeTest.multipart(body, part);
+        try {
             MatcherAssert.assertThat(
                 "Multipart request body must contain expected address content",
                 new RqPrint(
@@ -153,109 +147,57 @@ final class RqMtFakeTest {
     }
 
     @Test
-    void closesAllParts() throws Exception {
-        final String body = "RqMtFakeTest.closesAllParts";
-        final RqMultipart request = new RqMtFake(
-            new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "name=\"name\""
-                ).asString()
-            ),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, 0
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP,
-                    "name=\"content\"; filename=\"a.bin\""
-                ).asString()
-            )
-        );
-        final String exmessage =
-            "An IOException was expected since the Stream is closed";
-        final String name = "name";
-        final String content = "content";
-        final RqMtBase multi = new RqMtBase(request);
-        multi.part(name).iterator().next().body().read();
-        multi.part(content).iterator().next().body().read();
+    void closesNamePartAfterBodyClose() throws Exception {
+        final RqMtBase multi = RqMtFakeTest.closableMulti();
+        multi.part("name").iterator().next().body().read();
         multi.body().close();
         MatcherAssert.assertThat(
-            "Part with name should not be null",
-            multi.part(name).iterator().next(),
-            Matchers.notNullValue()
+            "Exception must be ClosedChannelException for name part",
+            Assertions.assertThrows(
+                IOException.class,
+                () -> multi.part("name").iterator().next().body().read()
+            ),
+            new IsInstanceOf(ClosedChannelException.class)
         );
-        try {
-            multi.part(name).iterator().next().body().read();
-            Assertions.fail(exmessage);
-        } catch (final IOException ex) {
-            MatcherAssert.assertThat(
-                "Exception must be ClosedChannelException for name part",
-                ex,
-                new IsInstanceOf(ClosedChannelException.class)
-            );
-        }
-        MatcherAssert.assertThat(
-            "Part with content should not be null",
-            multi.part(content).iterator().next(),
-            Matchers.notNullValue()
-        );
-        try {
-            multi.part(content).iterator().next().body().read();
-            Assertions.fail(exmessage);
-        } catch (final IOException ex) {
-            MatcherAssert.assertThat(
-                "Exception must be ClosedChannelException for content part",
-                ex,
-                new IsInstanceOf(ClosedChannelException.class)
-            );
-        }
     }
 
     @Test
-    void closesExplicitlyAllParts() throws Exception {
-        final String body = "RqMtFakeTest.closesExplicitlyAllParts";
-        final RqMultipart request = new RqMtFake(
-            new RqFake(),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
-                ).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "name=\"foo\""
-                ).asString()
-            ),
-            new RqWithHeaders(
-                new RqFake("", "", body),
-                new FormattedText(RqMtFakeTest.CONTENT_LENGTH, 0).asString(),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP,
-                    "name=\"bar\"; filename=\"a.bin\""
-                ).asString()
-            )
-        );
-        final String foo = "foo";
-        final String bar = "bar";
-        final RqMtBase multi = new RqMtBase(request);
+    void closesContentPartAfterBodyClose() throws Exception {
+        final RqMtBase multi = RqMtFakeTest.closableMulti();
+        multi.part("content").iterator().next().body().read();
         multi.body().close();
         MatcherAssert.assertThat(
-            "Foo part should not be null",
-            multi.part(foo).iterator().next(),
-            Matchers.notNullValue()
+            "Exception must be ClosedChannelException for content part",
+            Assertions.assertThrows(
+                IOException.class,
+                () -> multi.part("content").iterator().next().body().read()
+            ),
+            new IsInstanceOf(ClosedChannelException.class)
         );
-        multi.part(foo).iterator().next().body().close();
+    }
+
+    @Test
+    void closesExplicitlyFooPart() throws Exception {
+        final RqMtBase multi = RqMtFakeTest.fooBarMulti();
+        multi.body().close();
+        multi.part("foo").iterator().next().body().close();
         MatcherAssert.assertThat(
-            "Bar part should not be null",
-            multi.part(bar).iterator().next(),
+            "Foo part should not be null after explicit close",
+            multi.part("foo").iterator().next(),
             Matchers.notNullValue()
         );
-        multi.part(bar).iterator().next().body().close();
+    }
+
+    @Test
+    void closesExplicitlyBarPart() throws Exception {
+        final RqMtBase multi = RqMtFakeTest.fooBarMulti();
+        multi.body().close();
+        multi.part("bar").iterator().next().body().close();
+        MatcherAssert.assertThat(
+            "Bar part should not be null after explicit close",
+            multi.part("bar").iterator().next(),
+            Matchers.notNullValue()
+        );
     }
 
     @Test
@@ -266,7 +208,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP, "name=\"t5\""
@@ -297,7 +239,7 @@ final class RqMtFakeTest {
             new RqWithHeaders(
                 new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes().length
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
                 ).asString(),
                 new FormattedText(
                     RqMtFakeTest.CONTENT_DISP, "name=\"address\""
@@ -327,19 +269,105 @@ final class RqMtFakeTest {
 
     @Test
     void contentDispositionShouldBeRecognized() throws Exception {
-        new RqMtFake(
+        Assertions.assertDoesNotThrow(
+            () -> new RqMtFake(
+                new RqFake(),
+                new RqWithHeader(
+                    new RqFake(new ListOf<>(""), ""),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"field1\""
+                    ).asString()
+                ),
+                new RqWithHeader(
+                    new RqFake("", "", "field2Value"),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"field2\""
+                    ).asString()
+                )
+            )
+        );
+    }
+
+    private static RqMultipart multipart(
+        final String body, final String part
+    ) throws Exception {
+        return new RqMtFake(
             new RqFake(),
-            new RqWithHeader(
-                new RqFake(new ListOf<>(""), ""),
+            new RqWithHeaders(
+                new RqFake("", "", body),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "name=\"field1\""
+                    RqMtFakeTest.CONTENT_LENGTH, body.getBytes(StandardCharsets.UTF_8).length
+                ).asString(),
+                new FormattedText(
+                    RqMtFakeTest.CONTENT_DISP,
+                    new FormattedText("name=\"%s\"", part).asString()
                 ).asString()
             ),
-            new RqWithHeader(
-                new RqFake("", "", "field2Value"),
+            new RqWithHeaders(
+                new RqFake("", "", ""),
                 new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "name=\"field2\""
+                    RqMtFakeTest.CONTENT_LENGTH, 0
+                ).asString(),
+                new FormattedText(
+                    RqMtFakeTest.CONTENT_DISP,
+                    "name=\"data\"; filename=\"a.rar\""
                 ).asString()
+            )
+        );
+    }
+
+    private static RqMtBase closableMulti() throws Exception {
+        final String body = "RqMtFakeTest.closesAllParts";
+        return new RqMtBase(
+            new RqMtFake(
+                new RqFake(),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_LENGTH,
+                        body.getBytes(StandardCharsets.UTF_8).length
+                    ).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"name\""
+                    ).asString()
+                ),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_LENGTH, 0
+                    ).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP,
+                        "name=\"content\"; filename=\"a.bin\""
+                    ).asString()
+                )
+            )
+        );
+    }
+
+    private static RqMtBase fooBarMulti() throws Exception {
+        final String body = "RqMtFakeTest.closesExplicitlyAllParts";
+        return new RqMtBase(
+            new RqMtFake(
+                new RqFake(),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_LENGTH,
+                        body.getBytes(StandardCharsets.UTF_8).length
+                    ).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"foo\""
+                    ).asString()
+                ),
+                new RqWithHeaders(
+                    new RqFake("", "", body),
+                    new FormattedText(RqMtFakeTest.CONTENT_LENGTH, 0).asString(),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP,
+                        "name=\"bar\"; filename=\"a.bin\""
+                    ).asString()
+                )
             )
         );
     }

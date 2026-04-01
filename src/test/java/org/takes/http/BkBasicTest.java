@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.cactoos.bytes.BytesOf;
@@ -24,8 +25,6 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.HasString;
 import org.takes.Request;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
@@ -40,13 +39,14 @@ import org.takes.tk.TkText;
  * Test case for {@link BkBasic}.
  *
  * @since 0.15.2
+ * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.ExcessiveImports",
-        "PMD.TooManyMethods"
-    }) final class BkBasicTest {
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule"
+})
+final class BkBasicTest {
 
     /**
      * Carriage return constant.
@@ -71,7 +71,7 @@ import org.takes.tk.TkText;
         new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
             "Socket output must contain the response text",
-            baos.toString(),
+            baos.toString(StandardCharsets.UTF_8),
             Matchers.containsString(hello)
         );
     }
@@ -79,73 +79,83 @@ import org.takes.tk.TkText;
     @Test
     @Tag("deep")
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
+        final AtomicReference<Integer> status = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkRegex("/path/a", new TkText("a")),
                 new FkRegex("/path/b", new TkText("b"))
             )
         ).exec(
-            home -> new JdkRequest(String.format("%s/path/c", home))
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_NOT_FOUND)
+            home -> status.set(
+                new JdkRequest(String.format("%s/path/c", home))
+                    .fetch()
+                    .as(RestResponse.class)
+                    .status()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Request to unregistered path must return HTTP 404 Not Found",
+            status.get(),
+            Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
         );
     }
 
     @Test
-    @SuppressWarnings("PMD.CloseResource")
-    void addressesInHeadersAddedWithoutSlashes() throws Exception {
-        final Socket socket = BkBasicTest.createMockSocket();
-        final AtomicReference<Request> ref = new AtomicReference<>();
-        new BkBasic(
-            req -> {
-                ref.set(req);
-                return new ResponseOf(
-                    () -> Collections.singletonList("HTTP/1.1 200 OK"),
-                    req::body
-                );
-            }
-        ).accept(socket);
-        final Request request = ref.get();
-        final RqHeaders.Smart smart = new RqHeaders.Smart(request);
+    void localAddressHeaderHasNoSlashes() throws Exception {
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            BkBasicTest.capturedRequest()
+        );
         MatcherAssert.assertThat(
             "X-Takes-LocalAddress header must not contain slashes",
-            smart.single(
-                "X-Takes-LocalAddress",
-                ""
-            ),
-            Matchers.not(
-                Matchers.containsString("/")
-            )
+            smart.single("X-Takes-LocalAddress", ""),
+            Matchers.not(Matchers.containsString("/"))
+        );
+    }
+
+    @Test
+    void remoteAddressHeaderHasNoSlashes() throws Exception {
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            BkBasicTest.capturedRequest()
         );
         MatcherAssert.assertThat(
             "X-Takes-RemoteAddress header must not contain slashes",
-            smart.single(
-                "X-Takes-RemoteAddress",
-                ""
-            ),
-            Matchers.not(
-                Matchers.containsString("/")
-            )
+            smart.single("X-Takes-RemoteAddress", ""),
+            Matchers.not(Matchers.containsString("/"))
         );
+    }
+
+    @Test
+    void localSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
             "Local socket address must be present",
-            new RqSocket(request).getLocalAddress(),
+            new RqSocket(BkBasicTest.capturedRequest()).getLocalAddress(),
             Matchers.notNullValue()
         );
+    }
+
+    @Test
+    void localSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
             "Local socket port must be zero for mock socket",
-            new RqSocket(request).getLocalPort(),
+            new RqSocket(BkBasicTest.capturedRequest()).getLocalPort(),
             Matchers.equalTo(0)
         );
+    }
+
+    @Test
+    void remoteSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
             "Remote socket address must be present",
-            new RqSocket(request).getRemoteAddress(),
+            new RqSocket(BkBasicTest.capturedRequest()).getRemoteAddress(),
             Matchers.notNullValue()
         );
+    }
+
+    @Test
+    void remoteSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
             "Remote socket port must be zero for mock socket",
-            new RqSocket(request).getRemotePort(),
+            new RqSocket(BkBasicTest.capturedRequest()).getRemotePort(),
             Matchers.equalTo(0)
         );
     }
@@ -185,7 +195,7 @@ import org.takes.tk.TkText;
                         "Content-Length: 12",
                         "",
                         "Hello Second"
-                    ).asString().getBytes()
+                    ).asString().getBytes(StandardCharsets.UTF_8)
                 );
                 final InputStream input = socket.getInputStream();
                 final byte[] buffer = new byte[4096];
@@ -200,7 +210,7 @@ import org.takes.tk.TkText;
         }
         MatcherAssert.assertThat(
             "Two responses must be sent in one connection",
-            output.toString(),
+            output.toString(StandardCharsets.UTF_8),
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
             )
@@ -260,7 +270,7 @@ import org.takes.tk.TkText;
         }
         MatcherAssert.assertThat(
             "Response must contain 411 status for missing Content-Length",
-            output.toString(),
+            output.toString(StandardCharsets.UTF_8),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
     }
@@ -319,7 +329,7 @@ import org.takes.tk.TkText;
         }
         MatcherAssert.assertThat(
             "Response must contain text for closed connection request",
-            output.toString(),
+            output.toString(StandardCharsets.UTF_8),
             Matchers.containsString(text)
         );
     }
@@ -329,12 +339,12 @@ import org.takes.tk.TkText;
      * invalid URI.
      */
     @Test
-    void returnsABadRequestToAMissingPath() {
-        new Assertion<>(
+    void returnsABadRequestToAMissingPath() throws Exception {
+        MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            () -> this.responseForPath("GET", "\\"),
-            new HasString("400 Bad Request")
-        ).affirm();
+            this.responseForPath("GET", "\\"),
+            Matchers.containsString("400 Bad Request")
+        );
     }
 
     /**
@@ -350,21 +360,14 @@ import org.takes.tk.TkText;
      */
     @Disabled
     @Test
-    void returnsABadRequestToAControlCharInPath() {
-        new Assertion<>(
+    void returnsABadRequestToAControlCharInPath() throws Exception {
+        MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            () -> this.responseForPath("GET", "/\n"),
-            new HasString("400 Bad Request")
-        ).affirm();
+            this.responseForPath("GET", "/\n"),
+            Matchers.containsString("400 Bad Request")
+        );
     }
 
-    /**
-     * Creates Socket mock for reuse.
-     *
-     * @return Prepared Socket mock
-     * @throws Exception If some problem inside
-     */
-    @SuppressWarnings("PMD.CloseResource")
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
@@ -380,6 +383,22 @@ import org.takes.tk.TkText;
                 ).asBytes()
             )
         );
+    }
+
+    private static Request capturedRequest() throws Exception {
+        try (Socket socket = BkBasicTest.createMockSocket()) {
+            final AtomicReference<Request> ref = new AtomicReference<>();
+            new BkBasic(
+                req -> {
+                    ref.set(req);
+                    return new ResponseOf(
+                        () -> Collections.singletonList("HTTP/1.1 200 OK"),
+                        req::body
+                    );
+                }
+            ).accept(socket);
+            return ref.get();
+        }
     }
 
     /**
@@ -414,7 +433,8 @@ import org.takes.tk.TkText;
                 InputStream sockerInStream = socket.getInputStream()
             ) {
                 socketOutBuffer.write(
-                    new RqPrint(new RqFake(method, path)).asString().getBytes()
+                    new RqPrint(new RqFake(method, path))
+                        .asString().getBytes(StandardCharsets.UTF_8)
                 );
                 final byte[] buffer = new byte[4096];
                 for (
@@ -425,6 +445,6 @@ import org.takes.tk.TkText;
                 }
             }
         }
-        return output.toString();
+        return output.toString(StandardCharsets.UTF_8);
     }
 }

@@ -24,6 +24,7 @@ import org.takes.facets.fork.TkFork;
  * Test case for {@link FtCli}.
  * @since 0.1
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class FtCliTest {
 
     @Test

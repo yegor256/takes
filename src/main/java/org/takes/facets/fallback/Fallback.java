@@ -15,6 +15,7 @@ import org.takes.misc.Opt;
  * @see org.takes.facets.fallback.TkFallback
  * @since 0.1
  */
+@FunctionalInterface
 public interface Fallback {
 
     /**

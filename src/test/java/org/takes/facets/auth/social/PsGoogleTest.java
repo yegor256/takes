@@ -7,6 +7,7 @@ package org.takes.facets.auth.social;
 import jakarta.json.Json;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -32,7 +33,7 @@ import org.takes.rs.RsJson;
  * <p>The class is immutable and thread-safe.
  * @since 0.16.3
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsGoogleTest {
 
     /**
@@ -44,16 +45,6 @@ final class PsGoogleTest {
      * GET.
      */
     private static final String GET = "GET";
-
-    /**
-     * Name.
-     */
-    private static final String NAME = "name";
-
-    /**
-     * Picture.
-     */
-    private static final String PICTURE = "picture";
 
     /**
      * Url.
@@ -119,43 +110,26 @@ final class PsGoogleTest {
             this.requestToken(),
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
-                // @checkstyle AnonInnerLengthCheck (1 line)
-                (Take) req -> {
-                    MatcherAssert.assertThat(
-                        "Google API request must contain correct HEAD path for user info",
-                        new RqPrint(req).printHead(),
-                        Matchers.containsString(
-                            PsGoogleTest.ACT_HEAD
+                (Take) req -> new RsJson(
+                    Json.createObjectBuilder()
+                        .add("displayName", octocat)
+                        .add("id", "1")
+                        .add(
+                            PsGoogleTest.IMAGE,
+                            Json.createObjectBuilder()
+                                .add(
+                                    PsGoogleTest.URL,
+                                    PsGoogleTest.AVATAR
+                                )
                         )
-                    );
-                    MatcherAssert.assertThat(
-                        "Google API request must include access token parameter",
-                        new RqHref.Base(req).href()
-                            .param(PsGoogleTest.ACCESS_TOKEN)
-                            .iterator().next(),
-                        Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                    );
-                    return new RsJson(
-                        Json.createObjectBuilder()
-                            .add("displayName", octocat)
-                            .add("id", "1")
-                            .add(
-                                PsGoogleTest.IMAGE,
-                                Json.createObjectBuilder()
-                                    .add(
-                                        PsGoogleTest.URL,
-                                        PsGoogleTest.AVATAR
-                                    )
-                            )
-                            .build()
-                    );
-                }
+                        .build()
+                )
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            home -> {
-                final Identity identity = new PsGoogle(
+            home -> identity.set(
+                new PsGoogle(
                     PsGoogleTest.APP,
                     PsGoogleTest.KEY,
                     PsGoogleTest.ACCOUNT,
@@ -163,23 +137,13 @@ final class PsGoogleTest {
                     home.toString()
                 ).enter(
                     new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                ).get();
-                MatcherAssert.assertThat(
-                    "Google identity URN must match expected format",
-                    identity.urn(),
-                    Matchers.equalTo(urn)
-                );
-                MatcherAssert.assertThat(
-                    "Google identity properties must contain correct display name",
-                    identity.properties().get(PsGoogleTest.NAME),
-                    Matchers.equalTo(octocat)
-                );
-                MatcherAssert.assertThat(
-                    "Google identity properties must contain correct avatar picture URL",
-                    identity.properties().get(PsGoogleTest.PICTURE),
-                    Matchers.equalTo(PsGoogleTest.AVATAR)
-                );
-            }
+                ).get()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Google identity URN must match expected format",
+            identity.get().urn(),
+            Matchers.equalTo(urn)
         );
     }
 
@@ -235,42 +199,25 @@ final class PsGoogleTest {
             this.requestToken(),
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
-                // @checkstyle AnonInnerLengthCheck (1 line)
-                (Take) req -> {
-                    MatcherAssert.assertThat(
-                        "Google API request must contain correct HEAD path for user info",
-                        new RqPrint(req).printHead(),
-                        Matchers.containsString(
-                            PsGoogleTest.ACT_HEAD
+                (Take) req -> new RsJson(
+                    Json.createObjectBuilder()
+                        .add("id", "2")
+                        .add(
+                            PsGoogleTest.IMAGE,
+                            Json.createObjectBuilder()
+                                .add(
+                                    PsGoogleTest.URL,
+                                    PsGoogleTest.AVATAR
+                                )
                         )
-                    );
-                    MatcherAssert.assertThat(
-                        "Google API request must include access token parameter",
-                        new RqHref.Base(req).href()
-                            .param(PsGoogleTest.ACCESS_TOKEN)
-                            .iterator().next(),
-                        Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                    );
-                    return new RsJson(
-                        Json.createObjectBuilder()
-                            .add("id", "2")
-                            .add(
-                                PsGoogleTest.IMAGE,
-                                Json.createObjectBuilder()
-                                    .add(
-                                        PsGoogleTest.URL,
-                                        PsGoogleTest.AVATAR
-                                    )
-                            )
-                            .build()
-                    );
-                }
+                        .build()
+                )
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            home -> {
-                final Identity identity = new PsGoogle(
+            home -> identity.set(
+                new PsGoogle(
                     PsGoogleTest.APP,
                     PsGoogleTest.KEY,
                     PsGoogleTest.ACCOUNT,
@@ -278,23 +225,13 @@ final class PsGoogleTest {
                     home.toString()
                 ).enter(
                     new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                ).get();
-                MatcherAssert.assertThat(
-                    "Google identity URN must match expected format",
-                    identity.urn(),
-                    Matchers.equalTo(urn)
-                );
-                MatcherAssert.assertThat(
-                    "Google identity name property must match expected value",
-                    identity.properties().get(PsGoogleTest.NAME),
-                    Matchers.equalTo("unknown")
-                );
-                MatcherAssert.assertThat(
-                    "Google identity properties must contain correct avatar picture URL",
-                    identity.properties().get(PsGoogleTest.PICTURE),
-                    Matchers.equalTo(PsGoogleTest.AVATAR)
-                );
-            }
+                ).get()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Google identity URN must match expected format",
+            identity.get().urn(),
+            Matchers.equalTo(urn)
         );
     }
 

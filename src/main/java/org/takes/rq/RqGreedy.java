@@ -40,6 +40,7 @@ public final class RqGreedy extends RqWrap {
      * @return New request
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static Request consume(final Request req) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new RqPrint(req).printBody(baos);

@@ -17,28 +17,33 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link TempInputStream}.
  * @since 0.31
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TempInputStreamTest {
 
     @Test
-    void deletesTempFile() throws IOException {
-        final File file = File.createTempFile("tempfile", ".tmp");
+    void isAvailableForReading() throws IOException {
+        final File file = File.createTempFile("tempfile-avail", ".tmp");
         try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
-            out.write("Temp file deletion test");
+            out.write("Temp file reading test");
         }
         try (InputStream body = new TempInputStream(
             Files.newInputStream(file.toPath()), file
         )) {
-            MatcherAssert.assertThat(
-                "File is not created!",
-                file.exists(),
-                Matchers.is(true)
-            );
             MatcherAssert.assertThat(
                 "TempInputStream must be available for reading",
                 body.available(),
                 Matchers.greaterThanOrEqualTo(0)
             );
         }
+    }
+
+    @Test
+    void deletesTempFileOnClose() throws IOException {
+        final File file = File.createTempFile("tempfile-delete", ".tmp");
+        try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
+            out.write("Temp file deletion test");
+        }
+        new TempInputStream(Files.newInputStream(file.toPath()), file).close();
         MatcherAssert.assertThat(
             "File exists after stream closure",
             file.exists(),

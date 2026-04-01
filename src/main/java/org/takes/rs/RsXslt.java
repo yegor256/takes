@@ -171,11 +171,10 @@ public final class RsXslt extends RsWrap {
             );
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Source xsl = RsXslt.stylesheet(
+        RsXslt.transformer(
             factory,
-            new StreamSource(new ReaderOf(input))
-        );
-        RsXslt.transformer(factory, xsl).transform(
+            RsXslt.stylesheet(factory, new StreamSource(new ReaderOf(input)))
+        ).transform(
             new StreamSource(
                 new ReaderOf(input)
             ),

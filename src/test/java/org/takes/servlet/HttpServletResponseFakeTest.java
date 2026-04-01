@@ -12,7 +12,6 @@ import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasValues;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
@@ -114,13 +113,13 @@ final class HttpServletResponseFakeTest {
             new RsEmpty()
         );
         sresp.setStatus(502);
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Can't set a status in servlet response",
             sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
             new HasValues<>(
                 HttpServletResponseFakeTest.ERROR
             )
-        ).affirm();
+        );
     }
 
     @Test
@@ -129,12 +128,12 @@ final class HttpServletResponseFakeTest {
             new RsEmpty()
         );
         sresp.sendError(101, "Switching Protocol");
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Can't send a error in servlet response",
             sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
             new HasValues<>(
                 HttpServletResponseFakeTest.INFO
             )
-        ).affirm();
+        );
     }
 }

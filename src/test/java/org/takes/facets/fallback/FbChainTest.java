@@ -15,6 +15,7 @@ import org.takes.rs.RsText;
  * Test case for {@link FbChain}.
  * @since 0.13
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FbChainTest {
 
     @Test

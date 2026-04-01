@@ -19,26 +19,33 @@ import org.takes.rs.RsEmpty;
 final class FkEncodingTest {
 
     @Test
-    void matchesByAcceptEncodingHeader() throws IOException {
-        final String header = "Accept-Encoding";
+    void matchesSupportedEncoding() throws IOException {
         MatcherAssert.assertThat(
             "FkEncoding must match when requested encoding is supported",
             new FkEncoding("gzip", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), header, "gzip,deflate")
+                new RqWithHeader(new RqFake(), "Accept-Encoding", "gzip,deflate")
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void matchesAnyEncodingWhenEmpty() throws IOException {
         MatcherAssert.assertThat(
             "FkEncoding must match any encoding when empty encoding specified",
             new FkEncoding("", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), header, "xz,gzip,exi")
+                new RqWithHeader(new RqFake(), "Accept-Encoding", "xz,gzip,exi")
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void doesNotMatchUnsupportedEncoding() throws IOException {
         MatcherAssert.assertThat(
             "FkEncoding must not match when requested encoding is not supported",
             new FkEncoding("deflate", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), header, "gzip,exi")
+                new RqWithHeader(new RqFake(), "Accept-Encoding", "gzip,exi")
             ).has(),
             Matchers.is(false)
         );

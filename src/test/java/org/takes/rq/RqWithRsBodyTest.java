@@ -4,6 +4,7 @@
  */
 package org.takes.rq;
 
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ final class RqWithRsBodyTest {
                     new RqWithHeader(
                         new RqFake(),
                         "Content-Length",
-                        String.valueOf(body.getBytes().length)
+                        String.valueOf(body.getBytes(StandardCharsets.UTF_8).length)
                     ),
                     body
                 )

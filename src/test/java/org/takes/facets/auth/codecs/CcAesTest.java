@@ -4,6 +4,7 @@
  */
 package org.takes.facets.auth.codecs;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.SecureRandomSpi;
 import java.util.Arrays;
@@ -19,31 +20,41 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcAes}.
  * @since 0.13.8
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcAesTest {
+
+    /**
+     * Test AES key for encryption tests.
+     */
+    private static final byte[] TEST_KEY = {
+        (byte) -25, (byte) 62, (byte) 118, (byte) 92,
+        (byte) -35, (byte) -24, (byte) 92, (byte) 48,
+        (byte) 5, (byte) -4, (byte) -88, (byte) -95,
+        (byte) -110, (byte) -54, (byte) 43, (byte) -1,
+    };
+
+    /**
+     * Test random bytes for IV in encryption tests.
+     */
+    private static final byte[] TEST_RANDOM = {
+        (byte) 63, (byte) -27, (byte) -43, (byte) -52,
+        (byte) -70, (byte) -44, (byte) 86, (byte) -43,
+        (byte) -43, (byte) 116, (byte) -122, (byte) 105,
+        (byte) 108, (byte) -25, (byte) -126, (byte) 90,
+    };
+
     @Test
-    void encryptIdentity() throws Exception {
-        final byte[] key = {
-            (byte) -25, (byte) 62, (byte) 118, (byte) 92,
-            (byte) -35, (byte) -24, (byte) 92, (byte) 48,
-            (byte) 5, (byte) -4, (byte) -88, (byte) -95,
-            (byte) -110, (byte) -54, (byte) 43, (byte) -1,
-        };
-        final byte[] random = {
-            (byte) 63, (byte) -27, (byte) -43, (byte) -52,
-            (byte) -70, (byte) -44, (byte) 86, (byte) -43,
-            (byte) -43, (byte) 116, (byte) -122, (byte) 105,
-            (byte) 108, (byte) -25, (byte) -126, (byte) 90,
-        };
-        final byte[] encrypted = new CcAes(
-            new CcTest(),
-            new CcAesTest.FkRandom(random),
-            new SecretKeySpec(key, "AES")
-        ).encode(new Identity.Simple("urg:github:0000"));
+    void encryptedStartsWithIv() throws Exception {
         MatcherAssert.assertThat(
             "Encrypted identity does not start with IV",
-            Arrays.copyOf(encrypted, 16),
-            Matchers.equalTo(random)
+            Arrays.copyOf(CcAesTest.encrypt(), 16),
+            Matchers.equalTo(CcAesTest.TEST_RANDOM)
         );
+    }
+
+    @Test
+    void encryptedMessageMatches() throws Exception {
+        final byte[] encrypted = CcAesTest.encrypt();
         final byte[] message = new byte[encrypted.length - 16];
         System.arraycopy(encrypted, 16, message, 0, message.length);
         MatcherAssert.assertThat(
@@ -114,8 +125,16 @@ final class CcAesTest {
             DecodingException.class,
             () -> new CcAes(
                 new CcPlain(), "0123456701234567"
-            ).decode("broken input".getBytes())
+            ).decode("broken input".getBytes(StandardCharsets.UTF_8))
         );
+    }
+
+    private static byte[] encrypt() throws Exception {
+        return new CcAes(
+            new CcTest(),
+            new CcAesTest.FkRandom(CcAesTest.TEST_RANDOM),
+            new SecretKeySpec(CcAesTest.TEST_KEY, "AES")
+        ).encode(new Identity.Simple("urg:github:0000"));
     }
 
     /**

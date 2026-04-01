@@ -59,19 +59,34 @@ public final class CcCompact implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) {
-        final Map<String, String> map = new HashMap<>(0);
         try (DataInputStream stream = new DataInputStream(
             new ByteArrayInputStream(bytes)
             )
         ) {
-            final String urn = stream.readUTF();
-            while (stream.available() > 0) {
-                map.put(stream.readUTF(), stream.readUTF());
-            }
-            return new Identity.Simple(urn, map);
+            return new Identity.Simple(
+                stream.readUTF(),
+                CcCompact.props(stream, new HashMap<>(0))
+            );
         } catch (final IOException ex) {
             throw new DecodingException(ex);
         }
+    }
+
+    /**
+     * Read properties from stream into map.
+     * @param stream Data stream
+     * @param map Map to populate
+     * @return The populated map
+     * @throws IOException If reading fails
+     */
+    private static Map<String, String> props(
+        final DataInputStream stream,
+        final Map<String, String> map
+    ) throws IOException {
+        while (stream.available() > 0) {
+            map.put(stream.readUTF(), stream.readUTF());
+        }
+        return map;
     }
 
 }

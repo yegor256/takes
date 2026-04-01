@@ -24,11 +24,29 @@ import org.takes.rq.RqFake;
  * Test case for {@link PsFacebook}.
  * @since 0.15
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsFacebookTest {
 
     @Test
-    void canLogin() throws Exception {
-        final String identifier = RandomStringUtils.randomAlphanumeric(10);
+    void identityPresentAfterLogin() throws Exception {
+        MatcherAssert.assertThat(
+            "Identity must be present after successful Facebook login",
+            PsFacebookTest.login("test123").has(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void identityUrnMatchesExpected() throws Exception {
+        final String identifier = "test456";
+        MatcherAssert.assertThat(
+            "Identity URN must match expected Facebook format",
+            PsFacebookTest.login(identifier).get().urn(),
+            CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
+        );
+    }
+
+    private static Opt<Identity> login(final String identifier) throws Exception {
         final RandomStringGenerator generator =
             new RandomStringGenerator.Builder()
                 .filteredBy(
@@ -45,7 +63,6 @@ final class PsFacebookTest {
                 ).getBytes(StandardCharsets.UTF_8)
             ),
             new DefaultWebRequestor() {
-                // @checkstyle MethodArgumentCouldBeFinal
                 @Override
                 public Response executeGet(final String url) {
                     return new Response(
@@ -61,7 +78,7 @@ final class PsFacebookTest {
             generator.generate(10),
             generator.generate(10)
         );
-        final Opt<Identity> identity = pass.enter(
+        return pass.enter(
             new RqFake(
                 "GET",
                 String.format(
@@ -69,16 +86,6 @@ final class PsFacebookTest {
                     RandomStringUtils.randomAlphanumeric(10)
                 )
             )
-        );
-        MatcherAssert.assertThat(
-            "Identity must be present after successful Facebook login",
-            identity.has(),
-            Matchers.is(true)
-        );
-        MatcherAssert.assertThat(
-            "Identity URN must match expected Facebook format",
-            identity.get().urn(),
-            CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
         );
     }
 }

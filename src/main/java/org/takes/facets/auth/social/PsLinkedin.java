@@ -117,12 +117,13 @@ public final class PsLinkedin implements Pass {
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        final String uri = this.apihref
-            .with("oauth2_access_token", token)
-            .with("format", "json")
-            .toString();
         return PsLinkedin.parse(
-            new JdkRequest(uri)
+            new JdkRequest(
+                this.apihref
+                    .with("oauth2_access_token", token)
+                    .with("format", "json")
+                    .toString()
+            )
                 .header("accept", "application/json")
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
@@ -139,8 +140,7 @@ public final class PsLinkedin implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        final String uri = this.tkhref.toString();
-        return new JdkRequest(uri)
+        return new JdkRequest(this.tkhref.toString())
             .method("POST")
             .header("Accept", "application/xml")
             .body()

@@ -19,7 +19,9 @@ final class TkSlf4jTest {
 
     @Test
     void logsMessage() throws Exception {
-        new TkSlf4j(new TkText("test")).act(new RqFake());
+        Assertions.assertDoesNotThrow(
+            () -> new TkSlf4j(new TkText("test")).act(new RqFake())
+        );
     }
 
     @Test

@@ -12,27 +12,27 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import org.apache.commons.io.input.ClosedInputStream;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 
 /**
  * Test for {@link CopyBytesUntilBoundary}.
  *
  * @since 1.19
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CopyBytesUntilBoundaryTest {
 
     @Test
     @Disabled
-    @SuppressWarnings("PMD.CloseResource")
     void copiesLastRepeatedBytes() throws IOException {
         try (
             InputStream input = new ClosedInputStream();
-            ReadableByteChannel src = Channels.newChannel(input)
+            ReadableByteChannel src = Channels.newChannel(input);
+            WritableByteChannel target = Channels.newChannel(new ByteArrayOutputStream())
         ) {
-            final WritableByteChannel target = Channels.newChannel(new ByteArrayOutputStream());
             final ByteBuffer buffer = ByteBuffer.allocate(5);
             buffer.put(new byte[] {0, 0, 0, 13, 13});
             buffer.position(3);
@@ -45,11 +45,11 @@ final class CopyBytesUntilBoundaryTest {
                 buffer
             ).copy();
             final byte[] barray = buffer.array();
-            new Assertion<>(
+            MatcherAssert.assertThat(
                 "Buffer must copy last repeated bytes",
                 new byte[] {barray[0], barray[1]},
                 new IsEqual<>(new byte[] {13, 13})
-            ).affirm();
+            );
         }
     }
 }

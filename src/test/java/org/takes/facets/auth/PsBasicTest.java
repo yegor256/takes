@@ -6,16 +6,15 @@ package org.takes.facets.auth;
 
 import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.HttpException;
-import org.takes.Take;
 import org.takes.facets.forward.RsForward;
 import org.takes.facets.forward.TkForward;
 import org.takes.misc.Opt;
@@ -31,6 +30,7 @@ import org.takes.tk.TkText;
  * Test of {@link PsBasic}.
  * @since 0.20
  */
+@SuppressWarnings("PMD.TooManyMethods")
 final class PsBasicTest {
 
     /**
@@ -44,66 +44,39 @@ final class PsBasicTest {
     private static final String VALID_CODE = "?valid_code=%s";
 
     @Test
-    void handleConnectionWithValidCredential() throws IOException {
-        final String user = "john";
-        final Opt<Identity> identity = new PsBasic(
-            "RealmA",
-            new PsBasic.Fake(true)
-        ).enter(
-            new RqWithHeaders(
-                new RqFake(
-                    RqMethod.GET,
-                    String.format(
-                        PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(10)
-                    )
-                ),
-                PsBasicTest.header(user, "pass")
-            )
-        );
+    void identityPresentForValidCredential() throws IOException {
         MatcherAssert.assertThat(
             "Identity must be present for valid credentials",
-            identity.has(),
+            PsBasicTest.enterWithFake("john", "pass").has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void identityUrnMatchesForValidCredential() throws IOException {
+        final String user = "john";
         MatcherAssert.assertThat(
             "Identity URN must match expected user URN for valid credentials",
-            identity.get().urn(),
+            PsBasicTest.enterWithFake(user, "pass").get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
 
     @Test
-    void handleConnectionWithValidCredentialDefaultEntry()
-        throws Exception {
-        final String user = "johny";
-        final String password = "password2";
-        final Opt<Identity> identity = new PsBasic(
-            "RealmAA",
-            new PsBasic.Default(
-                "mike my%20password1 urn:basic:michael",
-                String.format("%s %s urn:basic:%s", user, password, user)
-            )
-        ).enter(
-            new RqWithHeaders(
-                new RqFake(
-                    RqMethod.GET,
-                    String.format(
-                        PsBasicTest.VALID_CODE,
-                        RandomStringUtils.randomAlphanumeric(10)
-                    )
-                ),
-                PsBasicTest.header(user, password)
-            )
-        );
+    void identityPresentForDefaultEntry() throws Exception {
         MatcherAssert.assertThat(
             "Identity must be present for valid credentials",
-            identity.has(),
+            PsBasicTest.enterWithDefault("johny", "password2").has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void identityUrnMatchesForDefaultEntry() throws Exception {
+        final String user = "johny";
         MatcherAssert.assertThat(
             "Identity URN must match expected user URN for default entry",
-            identity.get().urn(),
+            PsBasicTest.enterWithDefault(user, "password2").get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
@@ -143,36 +116,20 @@ final class PsBasicTest {
     }
 
     @Test
-    void handleMultipleHeadersWithValidCredential() throws Exception {
-        final String user = "bill";
-        final Opt<Identity> identity = new PsBasic(
-            "RealmC",
-            new PsBasic.Fake(true)
-        ).enter(
-            new RqWithHeaders(
-                new RqFake(
-                    RqMethod.GET,
-                    String.format(
-                        "?multiple_code=%s",
-                        RandomStringUtils.randomAlphanumeric(10)
-                    )
-                ),
-                PsBasicTest.header(user, "changeit"),
-                "Referer: http://teamed.io/",
-                "Connection:keep-alive",
-                "Content-Encoding:gzip",
-                "X-Check-Cacheable:YES",
-                "X-Powered-By:Java/1.7"
-            )
-        );
+    void identityPresentWithMultipleHeaders() throws Exception {
         MatcherAssert.assertThat(
             "Identity must be present for valid credentials",
-            identity.has(),
+            PsBasicTest.enterWithMultipleHeaders("bill", "changeit").has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void identityUrnMatchesWithMultipleHeaders() throws Exception {
+        final String user = "bill";
         MatcherAssert.assertThat(
             "Identity URN must match expected user URN with multiple headers",
-            identity.get().urn(),
+            PsBasicTest.enterWithMultipleHeaders(user, "changeit").get().urn(),
             CoreMatchers.equalTo(PsBasicTest.urn(user))
         );
     }
@@ -210,19 +167,18 @@ final class PsBasicTest {
 
     @Test
     void authenticatesUser() throws Exception {
-        final Take take = new TkAuth(
-            new TkSecure(
-                new TkText("secured")
-            ),
-            new PsBasic(
-                "myrealm",
-                new PsBasic.Default("mike secret11 urn:users:michael")
-            )
-        );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "PsBasic should authenticate mike",
             new RsPrint(
-                take.act(
+                new TkAuth(
+                    new TkSecure(
+                        new TkText("secured")
+                    ),
+                    new PsBasic(
+                        "myrealm",
+                        new PsBasic.Default("mike secret11 urn:users:michael")
+                    )
+                ).act(
                     new RqWithHeader(
                         new RqFake(),
                         PsBasicTest.header("mike", "secret11")
@@ -230,52 +186,106 @@ final class PsBasicTest {
                 )
             ),
             new HasString("HTTP/1.1 200 OK")
-        ).affirm();
+        );
     }
 
     @Test
     void requestAuthentication() throws Exception {
-        final Take take = new TkForward(
-            new TkAuth(
-                new TkSecure(
-                    new TkText("secured area...")
-                ),
-                new PsBasic(
-                    "the realm 5",
-                    new PsBasic.Default("bob pwd88 urn:users:bob")
-                )
-            )
-        );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with 401 Unauthorized status",
             new RsPrint(
-                take.act(new RqFake())
+                new TkForward(
+                    new TkAuth(
+                        new TkSecure(
+                            new TkText("secured area...")
+                        ),
+                        new PsBasic(
+                            "the realm 5",
+                            new PsBasic.Default("bob pwd88 urn:users:bob")
+                        )
+                    )
+                ).act(new RqFake())
             ),
             new HasString("HTTP/1.1 401 Unauthorized\r\n")
-        ).affirm();
+        );
     }
 
-    /**
-     * Generate the identity urn.
-     * @param user User
-     * @return URN
-     */
+    private static Opt<Identity> enterWithFake(
+        final String user,
+        final String pass
+    ) throws IOException {
+        return new PsBasic("RealmA", new PsBasic.Fake(true)).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        PsBasicTest.VALID_CODE,
+                        RandomStringUtils.randomAlphanumeric(10)
+                    )
+                ),
+                PsBasicTest.header(user, pass)
+            )
+        );
+    }
+
+    private static Opt<Identity> enterWithDefault(
+        final String user,
+        final String pass
+    ) throws IOException {
+        return new PsBasic(
+            "RealmAA",
+            new PsBasic.Default(
+                "mike my%20password1 urn:basic:michael",
+                String.format("%s %s urn:basic:%s", user, pass, user)
+            )
+        ).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        PsBasicTest.VALID_CODE,
+                        RandomStringUtils.randomAlphanumeric(10)
+                    )
+                ),
+                PsBasicTest.header(user, pass)
+            )
+        );
+    }
+
+    private static Opt<Identity> enterWithMultipleHeaders(
+        final String user,
+        final String pass
+    ) throws IOException {
+        return new PsBasic("RealmC", new PsBasic.Fake(true)).enter(
+            new RqWithHeaders(
+                new RqFake(
+                    RqMethod.GET,
+                    String.format(
+                        "?multiple_code=%s",
+                        RandomStringUtils.randomAlphanumeric(10)
+                    )
+                ),
+                PsBasicTest.header(user, pass),
+                "Referer: http://teamed.io/",
+                "Connection:keep-alive",
+                "Content-Encoding:gzip",
+                "X-Check-Cacheable:YES",
+                "X-Powered-By:Java/1.7"
+            )
+        );
+    }
+
     private static String urn(final String user) {
         return String.format("urn:basic:%s", user);
     }
 
-    /**
-     * Generate the string used on the request that store information about
-     * authentication.
-     * @param user Username
-     * @param pass Password
-     * @return Header string.
-     */
     private static String header(final String user, final String pass) {
-        final String auth = String.format("%s:%s", user, pass);
-        final String encoded = DatatypeConverter.printBase64Binary(
-            auth.getBytes()
+        return String.format(
+            PsBasicTest.AUTH_BASIC,
+            DatatypeConverter.printBase64Binary(
+                String.format("%s:%s", user, pass)
+                    .getBytes(StandardCharsets.UTF_8)
+            )
         );
-        return String.format(PsBasicTest.AUTH_BASIC, encoded);
     }
 }

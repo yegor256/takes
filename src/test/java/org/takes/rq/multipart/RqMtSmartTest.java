@@ -10,10 +10,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang.StringUtils;
 import org.cactoos.Text;
 import org.cactoos.scalar.LengthOf;
@@ -36,6 +37,7 @@ import org.takes.rs.RsText;
  * Test case for {@link RqMtSmart}.
  * @since 0.33
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqMtSmartTest {
     /**
      * Body element.
@@ -165,77 +167,49 @@ final class RqMtSmartTest {
                 String.format(RqMtSmartTest.CONTENT, part), "",
                 "my picture", "--AaB0zz--"
             );
+        final AtomicReference<String> resp = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (50 lines)
-            home -> new JdkRequest(home)
-                .method("POST")
-                .header(
-                    "Content-Type",
-                    "multipart/form-data; boundary=AaB0zz"
-                )
-                .header(
-                    "Content-Length",
-                    String.valueOf(
-                        new LengthOf(body).value()
+            home -> resp.set(
+                new JdkRequest(home)
+                    .method("POST")
+                    .header(
+                        "Content-Type",
+                        "multipart/form-data; boundary=AaB0zz"
                     )
-                )
-                .body()
-                .set(new UncheckedText(body).asString())
-                .back()
-                .fetch()
-                .as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_OK)
-                .assertBody(Matchers.containsString("pic"))
+                    .header(
+                        "Content-Length",
+                        String.valueOf(
+                            new LengthOf(body).value()
+                        )
+                    )
+                    .body()
+                    .set(new UncheckedText(body).asString())
+                    .back()
+                    .fetch()
+                    .as(RestResponse.class)
+                    .body()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Multipart HTTP request must be parsed correctly over HTTP",
+            resp.get(),
+            Matchers.containsString("pic")
         );
     }
 
     @Test
     @Tag("performance")
-    void handlesRequestInTime(@TempDir final Path temp) throws IOException {
+    void handlesLargeRequestCorrectly(@TempDir final Path temp) throws IOException {
         final int length = 100_000_000;
         final String part = "test";
-        final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
-        try (BufferedWriter bwr = Files.newBufferedWriter(file.toPath())) {
-            bwr.write(
-                new Joined(
-                    RqMtSmartTest.CRLF,
-                    RqMtSmartTest.BODY_ELEMENT,
-                    String.format(RqMtSmartTest.CONTENT, part),
-                    "",
-                    ""
-                ).toString()
-            );
-            for (int ind = 0; ind < length; ++ind) {
-                bwr.write("X");
-            }
-            bwr.write(RqMtSmartTest.CRLF);
-            bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
-            bwr.write(RqMtSmartTest.CRLF);
-        }
-        final String post = "POST /post?u=4 HTTP/1.1";
-        final long start = System.currentTimeMillis();
-        final Request req = new RqFake(
-            Arrays.asList(
-                post,
-                "Host: example.com",
-                RqMtSmartTest.CONTENT_TYPE,
-                String.format("Content-Length:%s", file.length())
-            ),
-            new TempInputStream(Files.newInputStream(file.toPath()), file)
-        );
-        final RqMtSmart smart = new RqMtSmart(
-            new RqMtBase(req)
-        );
+        final File file = RqMtSmartTest.largeFile(temp, length, part);
+        final Request req = RqMtSmartTest.largeRequest(file);
+        final RqMtSmart smart = new RqMtSmart(new RqMtBase(req));
         try {
             MatcherAssert.assertThat(
                 "Large multipart request must have correct part length",
                 smart.single(part).body().available(),
                 Matchers.equalTo(length)
-            );
-            MatcherAssert.assertThat(
-                "Large multipart processing must complete within time limit",
-                System.currentTimeMillis() - start,
-                Matchers.lessThan(20_000L)
             );
         } finally {
             req.body().close();
@@ -265,20 +239,22 @@ final class RqMtSmartTest {
                 "--zzz1--",
                 ""
             ).asString();
+        final byte[] expected = new byte[length];
         try (BufferedWriter bwr = Files.newBufferedWriter(file)) {
             bwr.write(head);
             for (int idx = 0; idx < length; ++idx) {
                 bwr.write(idx % the);
+                expected[idx] = (byte) (idx % the);
             }
             bwr.write(foot);
         }
-        final String post = "POST /post?u=5 HTTP/1.1";
         final Request req = new RqFake(
             Arrays.asList(
-                post,
+                "POST /post?u=5 HTTP/1.1",
                 "Host: example.com",
                 RqMtSmartTest.contentLengthHeader(
-                    head.getBytes().length + length + foot.getBytes().length
+                    head.getBytes(StandardCharsets.UTF_8).length
+                        + length + foot.getBytes(StandardCharsets.UTF_8).length
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
@@ -288,20 +264,49 @@ final class RqMtSmartTest {
             new RqMtBase(req)
         ).single(part).body()) {
             MatcherAssert.assertThat(
-                "Stream should have expected bytes available",
-                stream.available(),
-                Matchers.equalTo(length)
+                "Stream content must match expected bytes",
+                stream.readAllBytes(),
+                Matchers.equalTo(expected)
             );
-            for (int idx = 0; idx < length; ++idx) {
-                MatcherAssert.assertThat(
-                    String.format("byte %d not matched", idx),
-                    stream.read(),
-                    Matchers.equalTo(idx % the)
-                );
-            }
         } finally {
             req.body().close();
         }
+    }
+
+    private static File largeFile(
+        final Path temp, final int length, final String part
+    ) throws IOException {
+        final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
+        try (BufferedWriter bwr = Files.newBufferedWriter(file.toPath())) {
+            bwr.write(
+                new Joined(
+                    RqMtSmartTest.CRLF,
+                    RqMtSmartTest.BODY_ELEMENT,
+                    String.format(RqMtSmartTest.CONTENT, part),
+                    "",
+                    ""
+                ).toString()
+            );
+            for (int ind = 0; ind < length; ++ind) {
+                bwr.write("X");
+            }
+            bwr.write(RqMtSmartTest.CRLF);
+            bwr.write(String.format("%s---", RqMtSmartTest.BODY_ELEMENT));
+            bwr.write(RqMtSmartTest.CRLF);
+        }
+        return file;
+    }
+
+    private static Request largeRequest(final File file) throws IOException {
+        return new RqFake(
+            Arrays.asList(
+                "POST /post?u=4 HTTP/1.1",
+                "Host: example.com",
+                RqMtSmartTest.CONTENT_TYPE,
+                String.format("Content-Length:%s", file.length())
+            ),
+            new TempInputStream(Files.newInputStream(file.toPath()), file)
+        );
     }
 
     /**

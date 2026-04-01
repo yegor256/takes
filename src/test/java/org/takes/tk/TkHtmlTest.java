@@ -4,6 +4,7 @@
  */
 package org.takes.tk;
 
+import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Joined;
@@ -25,6 +26,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkHtml}.
  * @since 0.10
  */
+@SuppressWarnings("PMD.TooManyMethods")
 final class TkHtmlTest {
 
     /**
@@ -63,7 +65,7 @@ final class TkHtmlTest {
     void createsTextResponseFromByteArray(final String body) throws Exception {
         MatcherAssert.assertThat(
             "TkHtml must create proper HTML response from byte array",
-            new RsPrint(new TkHtml(body.getBytes()).act(new RqFake())),
+            new RsPrint(new TkHtml(body.getBytes(StandardCharsets.UTF_8)).act(new RqFake())),
             this.textMatcher(body)
         );
     }
@@ -79,14 +81,20 @@ final class TkHtmlTest {
     }
 
     @Test
-    void printsResourceMultipleTimes() throws Exception {
+    void printsResourceFirstTime() throws Exception {
         final String body = "<html>hello, dude!</html>";
-        final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
             "First HTML response must contain the expected body text",
-            new RsPrint(take.act(new RqFake())),
+            new RsPrint(new TkHtml(body).act(new RqFake())),
             new HasString(body)
         );
+    }
+
+    @Test
+    void printsResourceSecondTime() throws Exception {
+        final String body = "<html>hello, dude!</html>";
+        final Take take = new TkHtml(body);
+        take.act(new RqFake());
         MatcherAssert.assertThat(
             "Second HTML response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),
@@ -138,7 +146,7 @@ final class TkHtmlTest {
             new Joined(
                 "\r\n",
                 "HTTP/1.1 200 OK",
-                String.format("Content-Length: %s", body.getBytes().length),
+                String.format("Content-Length: %s", body.getBytes(StandardCharsets.UTF_8).length),
                 "Content-Type: text/html",
                 "",
                 body

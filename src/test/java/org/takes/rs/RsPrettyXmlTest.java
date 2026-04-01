@@ -13,13 +13,13 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Response;
 
 /**
  * Test case for {@link RsPrettyXml}.
  * @since 1.0
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsPrettyXmlTest {
 
     @Test
@@ -166,7 +166,7 @@ final class RsPrettyXmlTest {
     @Test
     void conformsToEqualsTest() {
         final Response response = new RsWithBody("<test> <a>test</a></test>");
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new RsPrettyXml(
                 response
@@ -176,6 +176,6 @@ final class RsPrettyXmlTest {
                     response
                 )
             )
-        ).affirm();
+        );
     }
 }

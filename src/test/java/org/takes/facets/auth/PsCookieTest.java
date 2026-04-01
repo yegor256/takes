@@ -5,8 +5,8 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.facets.auth.codecs.CcPlain;
 import org.takes.rs.RsEmpty;
@@ -20,7 +20,7 @@ final class PsCookieTest {
 
     @Test
     void addsCookieToResponse() throws IOException {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with Set-Cookie header",
             new RsPrint(
                 new PsCookie(
@@ -30,6 +30,6 @@ final class PsCookieTest {
             new HasString(
                 "Set-Cookie: foo=urn%3Atest%3A99;Path=/;HttpOnly;"
             )
-        ).affirm();
+        );
     }
 }

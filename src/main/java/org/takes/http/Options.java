@@ -68,6 +68,7 @@ final class Options {
      * @return Socket
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public ServerSocket socket() throws IOException {
         final String port = this.map.get("port");
         if (port == null) {
@@ -81,9 +82,10 @@ final class Options {
             if (file.exists()) {
                 try (Reader reader = new ReaderOf(file.toPath())) {
                     final char[] chars = new char[8];
-                    final int length = reader.read(chars);
                     socket = new ServerSocket(
-                        Integer.parseInt(new String(chars, 0, length))
+                        Integer.parseInt(
+                            new String(chars, 0, reader.read(chars))
+                        )
                     );
                 }
             } else {

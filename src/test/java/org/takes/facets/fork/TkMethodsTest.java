@@ -7,6 +7,9 @@ package org.takes.facets.fork;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
+import java.util.concurrent.atomic.AtomicInteger;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,13 +26,14 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkMethods}.
  * @since 0.17
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkMethodsTest {
     @Test
     void callsActOnProperMethods() throws Exception {
         final Take take = Mockito.mock(Take.class);
         final Request req = new RqFake(RqMethod.GET);
         new TkMethods(take, RqMethod.GET).act(req);
-        Mockito.verify(take).act(req);
+        Mockito.verify(take, Mockito.times(1)).act(req);
     }
 
     @Test
@@ -46,11 +50,19 @@ final class TkMethodsTest {
     @Tag("deep")
     void returnsMethodIsNotAllowedForUnsupportedMethods() throws
         Exception {
+        final AtomicInteger status = new AtomicInteger();
         new FtRemote(new TkMethods(new TkEmpty(), RqMethod.PUT)).exec(
-            url -> new JdkRequest(url)
-                .method(RqMethod.POST)
-                .fetch().as(RestResponse.class)
-                .assertStatus(HttpURLConnection.HTTP_BAD_METHOD)
+            url -> status.set(
+                new JdkRequest(url)
+                    .method(RqMethod.POST)
+                    .fetch().as(RestResponse.class)
+                    .status()
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkMethods must return HTTP 405 for unsupported HTTP methods",
+            status.get(),
+            Matchers.equalTo(HttpURLConnection.HTTP_BAD_METHOD)
         );
     }
 }

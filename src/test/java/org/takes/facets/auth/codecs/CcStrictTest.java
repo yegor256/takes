@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -30,7 +31,9 @@ final class CcStrictTest {
     void blocksInvalidUrn() {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> new CcStrict(new CcPlain()).decode("u%3Atest%3A9".getBytes())
+            () -> new CcStrict(new CcPlain()).decode(
+                "u%3Atest%3A9".getBytes(StandardCharsets.UTF_8)
+            )
         );
     }
 
@@ -48,22 +51,28 @@ final class CcStrictTest {
     }
 
     @Test
-    void passesValid() throws IOException {
+    void passesSimpleValidUrn() throws IOException {
         MatcherAssert.assertThat(
             "Valid URN must be encoded correctly by strict codec",
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test:1")
                 )
-            ), Matchers.equalTo("urn%3Atest%3A1")
+            ),
+            Matchers.equalTo("urn%3Atest%3A1")
         );
+    }
+
+    @Test
+    void passesComplexValidUrn() throws IOException {
         MatcherAssert.assertThat(
             "Complex valid URN must be encoded correctly by strict codec",
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test-domain-org:valid:1")
                 )
-            ), Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
+            ),
+            Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
         );
     }
 }

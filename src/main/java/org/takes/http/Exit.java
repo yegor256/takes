@@ -24,6 +24,7 @@ package org.takes.http;
  *
  * @since 0.1
  */
+@FunctionalInterface
 public interface Exit {
 
     /**

@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -19,7 +20,26 @@ import org.takes.Request;
 final class RqGreedyTest {
 
     @Test
-    void makesRequestGreedy() throws IOException {
+    void readsBodyOnFirstAccess() throws IOException {
+        MatcherAssert.assertThat(
+            "First body print must contain the expected text",
+            new RqPrint(RqGreedyTest.greedy()).printBody(),
+            Matchers.containsString("the body")
+        );
+    }
+
+    @Test
+    void readsBodyOnSecondAccess() throws IOException {
+        final Request req = RqGreedyTest.greedy();
+        new RqPrint(req).printBody();
+        MatcherAssert.assertThat(
+            "Second body print must contain the full expected text",
+            new RqPrint(req).printBody(),
+            Matchers.containsString("the body ...")
+        );
+    }
+
+    private static Request greedy() throws IOException {
         final String body = new Joined(
             "\r\n",
             "GET /test HTTP/1.1",
@@ -27,26 +47,16 @@ final class RqGreedyTest {
             "",
             "... the body ..."
         ).toString();
-        final Request req = new RqGreedy(
+        return new RqGreedy(
             new RqWithHeader(
                 new RqLive(
                     new ByteArrayInputStream(
-                        body.getBytes()
+                        body.getBytes(StandardCharsets.UTF_8)
                     )
                 ),
                 "Content-Length",
-                String.valueOf(body.getBytes().length)
+                String.valueOf(body.getBytes(StandardCharsets.UTF_8).length)
             )
-        );
-        MatcherAssert.assertThat(
-            "First body print must contain the expected text",
-            new RqPrint(req).printBody(),
-            Matchers.containsString("the body")
-        );
-        MatcherAssert.assertThat(
-            "Second body print must contain the full expected text",
-            new RqPrint(req).printBody(),
-            Matchers.containsString("the body ...")
         );
     }
 

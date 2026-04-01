@@ -11,7 +11,6 @@ import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.HttpException;
 import org.takes.Request;
 
@@ -171,7 +170,7 @@ final class RqSocketTest {
         final Request request = new RqWithHeader(
             new RqFake(), "X-Takes-LocalPort: 55555"
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "RqSocket must equal to other RqSocket",
             new RqSocket(
                 request
@@ -181,7 +180,7 @@ final class RqSocketTest {
                     request
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
@@ -189,7 +188,7 @@ final class RqSocketTest {
         final Request request = new RqWithHeader(
             new RqFake(), "X-Takes-LocalPort: 55555"
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "RqSocket must equal to other RqSocket",
             new RqSocket(
                 request
@@ -199,7 +198,7 @@ final class RqSocketTest {
                     request
                 ).hashCode()
             )
-        ).affirm();
+        );
     }
 
 }

@@ -5,7 +5,6 @@
 package org.takes.facets.auth;
 
 import jakarta.json.Json;
-import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -99,6 +98,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Opt<Identity> enter(final Request req) throws IOException {
         // @checkstyle ExecutableStatementCount (100 lines)
         Opt<Identity> user = new Opt.Empty<>();
@@ -126,14 +126,15 @@ public final class PsToken implements Pass {
             final byte[] jwtpayload = parts[1].getBytes(
                 Charset.defaultCharset()
             );
-            final byte[] jwtsign = parts[2].getBytes(Charset.defaultCharset());
             final ByteBuffer tocheck = ByteBuffer.allocate(
                 jwtheader.length + jwtpayload.length + 1
             );
             tocheck.put(jwtheader).put(".".getBytes(Charset.defaultCharset()))
                 .put(jwtpayload);
-            final byte[] checked = this.signature.sign(tocheck.array());
-            if (Arrays.equals(jwtsign, checked)) {
+            if (Arrays.equals(
+                parts[2].getBytes(Charset.defaultCharset()),
+                this.signature.sign(tocheck.array())
+            )) {
                 try (JsonReader rdr = Json.createReader(
                     new StringReader(
                         new String(
@@ -154,6 +155,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Response exit(final Response res,
         final Identity idt) throws Exception {
         final byte[] jwtheader = new Token.Jose(
@@ -168,18 +170,19 @@ public final class PsToken implements Pass {
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
         try (JsonReader reader = Json.createReader(res.body())) {
-            final JsonObject target = Json.createObjectBuilder()
-                .add("response", reader.read())
-                .add(
-                    "jwt", String.format(
-                        "%s.%s.%s",
-                        new String(jwtheader, Charset.defaultCharset()),
-                        new String(jwtpayload, Charset.defaultCharset()),
-                        new String(sign, Charset.defaultCharset())
+            return new RsJson(
+                Json.createObjectBuilder()
+                    .add("response", reader.read())
+                    .add(
+                        "jwt", String.format(
+                            "%s.%s.%s",
+                            new String(jwtheader, Charset.defaultCharset()),
+                            new String(jwtpayload, Charset.defaultCharset()),
+                            new String(sign, Charset.defaultCharset())
+                        )
                     )
-                )
-                .build();
-            return new RsJson(target);
+                    .build()
+            );
         }
     }
 }

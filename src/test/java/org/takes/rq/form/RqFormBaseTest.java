@@ -5,6 +5,7 @@
 package org.takes.rq.form;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -19,37 +20,20 @@ import org.takes.rq.RqForm;
  */
 final class RqFormBaseTest {
 
-    /**
-     * Content-Length header template.
-     */
-    private static final String HEADER = "Content-Length: %d";
-
     @Test
-    void parsesHttpBody() throws IOException {
-        final String body = "alpha=a+b+c&beta=%20Yes%20";
-        final RqForm req = new RqFormBase(
-            new RqBuffered(
-                new RqFake(
-                    Arrays.asList(
-                        "GET /h?a=3",
-                        "Host: www.example.com",
-                        String.format(
-                            RqFormBaseTest.HEADER,
-                            body.getBytes().length
-                        )
-                    ),
-                    body
-                )
-            )
-        );
+    void parsesHttpBodyParam() throws IOException {
         MatcherAssert.assertThat(
             "Form parameter beta must be URL-decoded properly",
-            req.param("beta"),
+            RqFormBaseTest.formRequest().param("beta"),
             Matchers.hasItem(" Yes ")
         );
+    }
+
+    @Test
+    void parsesHttpBodyNames() throws IOException {
         MatcherAssert.assertThat(
             "Form parameter names must contain alpha",
-            req.names(),
+            RqFormBaseTest.formRequest().names(),
             Matchers.hasItem("alpha")
         );
     }
@@ -71,6 +55,25 @@ final class RqFormBaseTest {
             "Form names method must return same instance on multiple calls",
             req.names() == req.names(),
             Matchers.is(Boolean.TRUE)
+        );
+    }
+
+    private static RqForm formRequest() throws IOException {
+        final String body = "alpha=a+b+c&beta=%20Yes%20";
+        return new RqFormBase(
+            new RqBuffered(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=3",
+                        "Host: www.example.com",
+                        String.format(
+                            "Content-Length: %d",
+                            body.getBytes(StandardCharsets.UTF_8).length
+                        )
+                    ),
+                    body
+                )
+            )
         );
     }
 }

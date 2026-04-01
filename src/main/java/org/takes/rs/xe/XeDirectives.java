@@ -74,7 +74,6 @@ public final class XeDirectives implements XeSource {
      * @param texts Texts
      * @return Directives
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Iterable<Directive> transform(final Iterable<String> texts) {
         final Collection<Directive> list = new LinkedList<>();
         for (final String text : texts) {

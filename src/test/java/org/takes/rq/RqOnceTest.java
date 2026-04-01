@@ -8,9 +8,9 @@ import java.io.IOException;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Randomized;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.takes.Request;
 
 /**
@@ -27,13 +27,13 @@ final class RqOnceTest {
                 () -> new InputStreamOf(new Randomized())
             )
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "the head must be cached",
             new RqPrint(req).printHead(),
             new IsEqual<>(
                 new RqPrint(req).printHead()
             )
-        ).affirm();
+        );
     }
 
     @Test
@@ -44,13 +44,13 @@ final class RqOnceTest {
                 new InputStreamOf(new Randomized())
             )
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "the body must be cached",
             new RqPrint(req).printBody(),
             new IsEqual<>(
                 new RqPrint(req).printBody()
             )
-        ).affirm();
+        );
     }
 
 }

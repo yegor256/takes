@@ -36,7 +36,7 @@ final class PsBasicDefaultTest {
     }
 
     @Test
-    void supportsBothKindsOfSpace() {
+    void supportsUrlEncodedSpaces() {
         MatcherAssert.assertThat(
             "PsBasic.Default must support URL-encoded spaces in passwords",
             new PsBasic.Default(
@@ -51,6 +51,10 @@ final class PsBasicDefaultTest {
                 .has(),
             new IsEqual<>(true)
         );
+    }
+
+    @Test
+    void supportsPlusEncodedSpaces() {
         MatcherAssert.assertThat(
             "PsBasic.Default must support plus-encoded spaces in passwords",
             new PsBasic.Default(

@@ -4,6 +4,7 @@
  */
 package org.takes.tk;
 
+import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -63,7 +64,7 @@ final class TkTextTest {
         final String body = "hello, world!";
         MatcherAssert.assertThat(
             "TkText must create proper text response from byte array",
-            new RsPrint(new TkText(body.getBytes()).act(new RqFake())),
+            new RsPrint(new TkText(body.getBytes(StandardCharsets.UTF_8)).act(new RqFake())),
             new IsText(
                 new Joined(
                     "\r\n",
@@ -97,14 +98,20 @@ final class TkTextTest {
     }
 
     @Test
-    void printsResourceMultipleTimes() throws Exception {
+    void printsResourceOnFirstRequest() throws Exception {
         final String body = "hello, dude!";
-        final Take take = new TkText(body);
         MatcherAssert.assertThat(
             "First response must contain the expected body text",
-            new RsPrint(take.act(new RqFake())),
+            new RsPrint(new TkText(body).act(new RqFake())),
             new HasString(body)
         );
+    }
+
+    @Test
+    void printsResourceOnSecondRequest() throws Exception {
+        final String body = "hello, dude!";
+        final Take take = new TkText(body);
+        take.act(new RqFake());
         MatcherAssert.assertThat(
             "Second response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),

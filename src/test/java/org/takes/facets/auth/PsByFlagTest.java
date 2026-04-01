@@ -14,7 +14,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.mockito.Mockito;
 import org.takes.Response;
 import org.takes.rq.RqFake;
@@ -83,10 +82,10 @@ final class PsByFlagTest {
     void mustEvaluateTrueEqualityTest() {
         final Map<Pattern, Pass> passes = new HashMap<>(1);
         passes.put(Pattern.compile("key"), new PsFake(true));
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new PsByFlag(passes),
             new IsEqual<>(new PsByFlag(passes))
-        ).affirm();
+        );
     }
 }

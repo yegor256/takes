@@ -6,6 +6,7 @@ package org.takes.facets.fallback;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.misc.Opt;
 import org.takes.rq.RqFake;
@@ -18,6 +19,7 @@ import org.takes.tk.TkFailure;
  * Test case for {@link TkFallback}.
  * @since 0.9.6
  */
+@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TkFallbackTest {
 
     @Test
@@ -61,25 +63,17 @@ final class TkFallbackTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     void fallsBackWithProperMessage() {
-        try {
-            new TkFallback(
-                new TkFailure(),
-                new FbChain()
-            ).act(new RqFake());
-            MatcherAssert.assertThat(
-                "Must throw exception when no fallback handles the error",
-                false,
-                Matchers.is(true)
-            );
-            //@checkstyle IllegalCatch (1 line)
-        } catch (final Exception exception) {
-            MatcherAssert.assertThat(
-                "Exception message must contain fallback information",
-                exception.getMessage(),
-                Matchers.containsString("fallback ")
-            );
-        }
+        MatcherAssert.assertThat(
+            "Exception message must contain fallback information",
+            Assertions.assertThrows(
+                Exception.class,
+                () -> new TkFallback(
+                    new TkFailure(),
+                    new FbChain()
+                ).act(new RqFake())
+            ).getMessage(),
+            Matchers.containsString("fallback ")
+        );
     }
 }

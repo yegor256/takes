@@ -33,7 +33,6 @@ import org.takes.rq.RqWrap;
  * Base implementation of {@link RqForm}.
  * @since 0.33
  */
-@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true)
 public final class RqFormBase extends RqWrap implements RqForm {
 

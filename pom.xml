@@ -91,6 +91,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.44</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
@@ -369,6 +370,13 @@
                   <new>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(org.xembly.Directive[])</new>
                   <justification>Pre-existing API pattern for convenient construction</justification>
                 </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.misc.Expires.Date::&lt;init&gt;(java.lang.String, java.util.Locale, ===java.util.Date===)</old>
+                  <new>parameter void org.takes.misc.Expires.Date::&lt;init&gt;(java.lang.String, java.util.Locale, ===java.time.Instant===)</new>
+                  <justification>Migrating from legacy java.util.Date to java.time.Instant</justification>
+                </item>
               </differences>
             </revapi.differences>
           </analysisConfiguration>
@@ -456,6 +464,13 @@
           <source>${jdk.version}</source>
           <target>${jdk.version}</target>
           <useIncrementalCompilation>false</useIncrementalCompilation>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>1.18.44</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>
@@ -508,7 +523,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.25.0</version>
+            <version>0.25.1</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>

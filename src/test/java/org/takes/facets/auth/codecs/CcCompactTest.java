@@ -5,6 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
@@ -16,6 +17,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcCompact}.
  * @since 0.5
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcCompactTest {
 
     @Test
@@ -35,18 +37,22 @@ final class CcCompactTest {
     }
 
     @Test
-    void decodesInvalidData() throws IOException {
+    void decodesInvalidDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Invalid compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
-                " % tjw".getBytes()
+                " % tjw".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
+    }
+
+    @Test
+    void decodesMalformedDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Malformed compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
-                "75726E253".getBytes()
+                "75726E253".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );

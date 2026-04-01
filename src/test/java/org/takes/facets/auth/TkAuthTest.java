@@ -10,7 +10,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.AllOf;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.llorllale.cactoos.matchers.StartsWith;
 import org.mockito.ArgumentCaptor;
@@ -29,6 +28,7 @@ import org.takes.tk.TkText;
  * Test case for {@link TkAuth}.
  * @since 0.9
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class TkAuthTest {
 
     @Test
@@ -53,7 +53,7 @@ final class TkAuthTest {
     @Test
     @SuppressWarnings("unchecked")
     void logsInUserViaCookie() throws Exception {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with header Set-Cookie",
             new RsPrint(
                 new TkAuth(
@@ -79,7 +79,7 @@ final class TkAuthTest {
                     new HasString("Set-Cookie: PsCookie=urn%3Atest%3A0")
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
@@ -109,7 +109,7 @@ final class TkAuthTest {
 
     @Test
     void logsUserOutWithCookiePresent() throws Exception {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with header setting empty cookie",
             new RsPrint(
                 new TkAuth(
@@ -130,7 +130,7 @@ final class TkAuthTest {
                 )
             ),
             new HasString("Set-Cookie: PsCookie=")
-        ).affirm();
+        );
     }
 
 }

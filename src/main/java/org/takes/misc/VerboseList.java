@@ -73,7 +73,6 @@ public final class VerboseList<T> implements List<T> {
         return this.origin.toArray();
     }
 
-    @SuppressWarnings("PMD.UseVarargs")
     @Override
     public <E> E[] toArray(final E[] arr) {
         return this.origin.toArray(arr);

@@ -19,51 +19,30 @@ import org.takes.rq.RqForm;
  */
 final class RqFormFakeTest {
 
-    /**
-     * Content-Length header template.
-     */
-    private static final String HEADER = "Content-Length: %d";
-
     @Test
-    void createsFormRequestWithParams() throws Exception {
-        final String key = "key";
-        final String akey = "anotherkey";
-        final String value = "value";
-        final String avalue = "a&b";
-        final String aavalue = "againanothervalue";
-        final RqForm req = new RqFormFake(
-            new RqFake(
-                new ListOf<>(
-                    "GET /form",
-                    "Host: www.example5.com",
-                    String.format(
-                        RqFormFakeTest.HEADER,
-                        URLEncoder.encode(
-                            "key=value&key=a&b&anotherkey=againanothervalue",
-                            "UTF-8"
-                        ).length()
-                    )
-                ),
-                ""
-            ),
-            key, value,
-            key, avalue,
-            akey, aavalue
-        );
+    void createsFormRequestWithKeyParam() throws Exception {
         MatcherAssert.assertThat(
             "Request parameter should contain expected values",
-            req.param(key),
-            Matchers.hasItems(value, avalue)
+            RqFormFakeTest.fakeForm().param("key"),
+            Matchers.hasItems("value", "a&b")
         );
+    }
+
+    @Test
+    void createsFormRequestWithAnotherKeyParam() throws Exception {
         MatcherAssert.assertThat(
             "Request parameter should contain expected additional value",
-            req.param(akey),
-            Matchers.hasItems(aavalue)
+            RqFormFakeTest.fakeForm().param("anotherkey"),
+            Matchers.hasItems("againanothervalue")
         );
+    }
+
+    @Test
+    void createsFormRequestWithAllParamNames() throws Exception {
         MatcherAssert.assertThat(
             "Request should contain all parameter names",
-            req.names(),
-            Matchers.hasItems(key, akey)
+            RqFormFakeTest.fakeForm().names(),
+            Matchers.hasItems("key", "anotherkey")
         );
     }
 
@@ -75,6 +54,28 @@ final class RqFormFakeTest {
                 new RqFake(),
                 "param"
             )
+        );
+    }
+
+    private static RqForm fakeForm() throws Exception {
+        return new RqFormFake(
+            new RqFake(
+                new ListOf<>(
+                    "GET /form",
+                    "Host: www.example5.com",
+                    String.format(
+                        "Content-Length: %d",
+                        URLEncoder.encode(
+                            "key=value&key=a&b&anotherkey=againanothervalue",
+                            "UTF-8"
+                        ).length()
+                    )
+                ),
+                ""
+            ),
+            "key", "value",
+            "key", "a&b",
+            "anotherkey", "againanothervalue"
         );
     }
 }

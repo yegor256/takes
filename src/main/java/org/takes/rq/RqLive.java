@@ -50,7 +50,6 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
         final Collection<String> head = new LinkedList<>();

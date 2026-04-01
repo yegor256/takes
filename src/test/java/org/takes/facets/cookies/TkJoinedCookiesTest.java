@@ -4,8 +4,8 @@
  */
 package org.takes.facets.cookies;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.llorllale.cactoos.matchers.HasString;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsPrint;
@@ -23,7 +23,7 @@ final class TkJoinedCookiesTest {
 
     @Test
     void joinsCookies() throws Exception {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with joined cookies",
             new RsPrint(
                 new TkJoinedCookies(
@@ -37,7 +37,7 @@ final class TkJoinedCookiesTest {
                 ).act(new RqFake())
             ),
             new HasString("Set-Cookie: a=1, b=1; Path=/")
-        ).affirm();
+        );
     }
 
 }

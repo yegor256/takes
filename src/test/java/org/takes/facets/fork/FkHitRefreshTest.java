@@ -13,7 +13,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.tk.TkEmpty;
@@ -22,25 +21,25 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkHitRefresh}.
  * @since 0.9
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FkHitRefreshTest {
 
     @Test
-    void refreshesOnDemand(@TempDir final Path temp) throws Exception {
-        final Request req = new RqWithHeader(
-            new RqFake(), "X-Takes-HitRefresh: yes"
-        );
-        final AtomicBoolean done = new AtomicBoolean(false);
-        final Fork fork = new FkHitRefresh(
-            temp.toFile(),
-            () -> done.set(true),
-            new TkEmpty()
-        );
-        TimeUnit.MILLISECONDS.sleep(10L);
-        FileUtils.touch(temp.resolve("hey.txt").toFile());
+    void matchesRequestWithHeader(@TempDir final Path temp) throws Exception {
         MatcherAssert.assertThat(
             "FkHitRefresh must match request when hit refresh header is present",
-            fork.route(req).has(),
+            FkHitRefreshTest.refreshFork(temp, new AtomicBoolean()).route(
+                new RqWithHeader(new RqFake(), "X-Takes-HitRefresh: yes")
+            ).has(),
             Matchers.is(true)
+        );
+    }
+
+    @Test
+    void executesTaskOnRefresh(@TempDir final Path temp) throws Exception {
+        final AtomicBoolean done = new AtomicBoolean(false);
+        FkHitRefreshTest.refreshFork(temp, done).route(
+            new RqWithHeader(new RqFake(), "X-Takes-HitRefresh: yes")
         );
         MatcherAssert.assertThat(
             "Hit refresh task must have been executed",
@@ -58,6 +57,20 @@ final class FkHitRefreshTest {
             ).route(new RqFake()).has(),
             Matchers.is(false)
         );
+    }
+
+    private static Fork refreshFork(
+        final Path temp,
+        final AtomicBoolean done
+    ) throws Exception {
+        final Fork fork = new FkHitRefresh(
+            temp.toFile(),
+            () -> done.set(true),
+            new TkEmpty()
+        );
+        TimeUnit.MILLISECONDS.sleep(10L);
+        FileUtils.touch(temp.resolve("hey.txt").toFile());
+        return fork;
     }
 
 }

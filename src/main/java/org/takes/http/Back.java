@@ -21,6 +21,7 @@ import java.net.Socket;
  *
  * @since 0.1
  */
+@FunctionalInterface
 public interface Back {
 
     /**

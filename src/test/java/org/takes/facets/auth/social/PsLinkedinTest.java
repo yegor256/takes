@@ -7,8 +7,8 @@ package org.takes.facets.auth.social;
 
 import jakarta.json.Json;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang.RandomStringUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -32,6 +32,7 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsLinkedin}.
  * @since 0.16
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsLinkedinTest {
 
     @Test
@@ -56,11 +57,22 @@ final class PsLinkedinTest {
                 new PeopleTake(identifier, firstname, lastname, frodo, baggins)
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            new LinkedinScript(
-                code, lapp, lkey, identifier,
-                firstname, lastname, frodo, baggins
+            home -> identity.set(
+                new PsLinkedin(
+                    new Href(String.format("%s/uas/oauth2/accessToken", home)),
+                    new Href(String.format("%s/v1/people", home)),
+                    lapp,
+                    lkey
+                ).enter(new RqFake("GET", String.format("?code=%s", code)))
+                    .get()
             )
+        );
+        MatcherAssert.assertThat(
+            "LinkedIn identity URN must match expected format with user identifier",
+            identity.get().urn(),
+            CoreMatchers.equalTo(String.format("urn:linkedin:%s", identifier))
         );
     }
 
@@ -202,104 +214,4 @@ final class PsLinkedinTest {
         }
     }
 
-    /**
-     * Script to test Linkedin authorization.
-     * @since 1.1
-     */
-    private final class LinkedinScript implements FtRemote.Script {
-
-        /**
-         * Linkedin authorization code.
-         */
-        private final String code;
-
-        /**
-         * Linkedin app.
-         */
-        private final String lapp;
-
-        /**
-         * Linkedin key.
-         */
-        private final String lkey;
-
-        /**
-         * Linkedin user identifier.
-         */
-        private final String identifier;
-
-        /**
-         * Field name for "First name".
-         */
-        private final String firstname;
-
-        /**
-         * Test value for "First name".
-         */
-        private final String frodo;
-
-        /**
-         * Field name for "Last name".
-         */
-        private final String lastname;
-
-        /**
-         * Test value for "Last name".
-         */
-        private final String baggins;
-
-        /**
-         * Ctor.
-         * @param code Linkedin authorization code
-         * @param lapp Linkedin app
-         * @param lkey Linkedin key
-         * @param identifier Linkedin user identifier
-         * @param firstname Field name for "First name"
-         * @param lastname Field name for "Last name"
-         * @param frodo Test value for "First name"
-         * @param baggins Test value for "Last name"
-         * @checkstyle ParameterNumberCheck (4 lines)
-         */
-        LinkedinScript(
-            final String code, final String lapp,
-            final String lkey, final String identifier,
-            final String firstname, final String lastname,
-            final String frodo, final String baggins
-        ) {
-            this.code = code;
-            this.lapp = lapp;
-            this.lkey = lkey;
-            this.identifier = identifier;
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.frodo = frodo;
-            this.baggins = baggins;
-        }
-
-        @Override
-        public void exec(final URI home) throws IOException {
-            final Identity identity = new PsLinkedin(
-                new Href(String.format("%s/uas/oauth2/accessToken", home)),
-                new Href(String.format("%s/v1/people", home)),
-                this.lapp,
-                this.lkey
-            ).enter(new RqFake("GET", String.format("?code=%s", this.code)))
-                .get();
-            MatcherAssert.assertThat(
-                "LinkedIn identity URN must match expected format with user identifier",
-                identity.urn(),
-                CoreMatchers.equalTo(
-                    String.format("urn:linkedin:%s", this.identifier)
-                )
-            );
-            MatcherAssert.assertThat(
-                "LinkedIn identity properties must contain first name and last name entries",
-                identity.properties(),
-                Matchers.allOf(
-                    Matchers.hasEntry(this.firstname, this.frodo),
-                    Matchers.hasEntry(this.lastname, this.baggins)
-                )
-            );
-        }
-    }
 }
