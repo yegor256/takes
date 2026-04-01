@@ -6,13 +6,14 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link MediaTypes}.
  * @since 0.6
  */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.TooManyMethods")
 final class MediaTypesTest {
 
     @Test
@@ -79,12 +80,38 @@ final class MediaTypesTest {
     }
 
     @Test
-    void parsesInvalidTypes() {
-        new MediaTypes("hello, how are you?");
-        new MediaTypes("////");
-        new MediaTypes("/;/;q=0.9");
-        new MediaTypes(",,,a;,;a,a90.0;,.0.0,;9a0");
-        new MediaTypes("\n\n\t\r\u20ac00");
+    void parsesInvalidTypesWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaTypes("hello, how are you?")
+        );
+    }
+
+    @Test
+    void parsesSlashesWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaTypes("////")
+        );
+    }
+
+    @Test
+    void parsesQualityValueWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaTypes("/;/;q=0.9")
+        );
+    }
+
+    @Test
+    void parsesMixedCharsWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaTypes(",,,a;,;a,a90.0;,.0.0,;9a0")
+        );
+    }
+
+    @Test
+    void parsesWhitespaceAndSpecialCharsWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaTypes("\n\n\t\r\u20ac00")
+        );
     }
 
 }

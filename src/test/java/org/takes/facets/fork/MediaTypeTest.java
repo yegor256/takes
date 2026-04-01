@@ -6,13 +6,14 @@ package org.takes.facets.fork;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link MediaType}.
  * @since 0.6
  */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.TooManyMethods")
 final class MediaTypeTest {
 
     @Test
@@ -70,11 +71,31 @@ final class MediaTypeTest {
     }
 
     @Test
-    void parsesInvalidTypes() {
-        new MediaType("hello, how are you?");
-        new MediaType("////");
-        new MediaType("/;/;q=0.9");
-        new MediaType("\n\n\t\r\u20ac00");
+    void parsesInvalidTypesWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaType("hello, how are you?")
+        );
+    }
+
+    @Test
+    void parsesSlashesWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaType("////")
+        );
+    }
+
+    @Test
+    void parsesQualityValueWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaType("/;/;q=0.9")
+        );
+    }
+
+    @Test
+    void parsesWhitespaceAndSpecialCharsWithoutException() {
+        Assertions.assertDoesNotThrow(
+            () -> new MediaType("\n\n\t\r\u20ac00")
+        );
     }
 
 }

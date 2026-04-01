@@ -37,10 +37,7 @@ import org.takes.rs.RsText;
  * Test case for {@link RqMtSmart}.
  * @since 0.33
  */
-@SuppressWarnings({
-    "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestShouldIncludeAssert"
-})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqMtSmartTest {
     /**
      * Body element.

@@ -32,7 +32,7 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsLinkedin}.
  * @since 0.16
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsLinkedinTest {
 
     @Test

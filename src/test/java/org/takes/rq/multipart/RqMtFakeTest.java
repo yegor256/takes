@@ -27,10 +27,7 @@ import org.takes.rq.RqWithHeaders;
  * Test case for {@link RqMtFake}.
  * @since 0.33
  */
-@SuppressWarnings({
-    "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestShouldIncludeAssert"
-})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqMtFakeTest {
     /**
      * Format string for {@code Content-Length} header.
@@ -352,19 +349,21 @@ final class RqMtFakeTest {
 
     @Test
     void contentDispositionShouldBeRecognized() throws Exception {
-        new RqMtFake(
-            new RqFake(),
-            new RqWithHeader(
-                new RqFake(new ListOf<>(""), ""),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "name=\"field1\""
-                ).asString()
-            ),
-            new RqWithHeader(
-                new RqFake("", "", "field2Value"),
-                new FormattedText(
-                    RqMtFakeTest.CONTENT_DISP, "name=\"field2\""
-                ).asString()
+        Assertions.assertDoesNotThrow(
+            () -> new RqMtFake(
+                new RqFake(),
+                new RqWithHeader(
+                    new RqFake(new ListOf<>(""), ""),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"field1\""
+                    ).asString()
+                ),
+                new RqWithHeader(
+                    new RqFake("", "", "field2Value"),
+                    new FormattedText(
+                        RqMtFakeTest.CONTENT_DISP, "name=\"field2\""
+                    ).asString()
+                )
             )
         );
     }

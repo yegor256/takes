@@ -18,7 +18,7 @@ import org.takes.rs.RsText;
  * Test case for {@link TkReadAlways}.
  * @since 0.30
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkReadAlwaysTest {
 
     @Test

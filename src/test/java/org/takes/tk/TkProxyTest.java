@@ -38,7 +38,7 @@ import org.takes.rs.RsText;
  * Test case for {@link TkProxy}.
  * @since 0.25
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkProxyTest {
 
     /**

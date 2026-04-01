@@ -19,6 +19,7 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 import org.takes.Request;
@@ -38,7 +39,7 @@ import org.takes.tk.TkText;
  * Test case for {@link FtBasic}.
  * @since 0.1
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FtBasicTest {
 
     /**
@@ -202,15 +203,17 @@ final class FtBasicTest {
     @Test
     @Tag("deep")
     void gracefullyHandlesBrokenPipe() throws IOException {
-        new FtBasic(
-            new BkSafe(
-                new BkBasic(
-                    new TkText("Body")
-                )
-            ),
-            FtBasicTest.server()
-        ).start(
-            () -> true
+        Assertions.assertDoesNotThrow(
+            () -> new FtBasic(
+                new BkSafe(
+                    new BkBasic(
+                        new TkText("Body")
+                    )
+                ),
+                FtBasicTest.server()
+            ).start(
+                () -> true
+            )
         );
     }
 

@@ -31,7 +31,7 @@ import org.xembly.Directives;
  * Test case for {@link org.takes.rq.RqMethod}.
  * @since 0.15.2
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsGithubTest {
 
     /**

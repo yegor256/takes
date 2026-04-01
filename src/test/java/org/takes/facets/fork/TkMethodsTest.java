@@ -23,14 +23,13 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkMethods}.
  * @since 0.17
  */
-@SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
 final class TkMethodsTest {
     @Test
     void callsActOnProperMethods() throws Exception {
         final Take take = Mockito.mock(Take.class);
         final Request req = new RqFake(RqMethod.GET);
         new TkMethods(take, RqMethod.GET).act(req);
-        Mockito.verify(take).act(req);
+        Mockito.verify(take, Mockito.times(1)).act(req);
     }
 
     @Test

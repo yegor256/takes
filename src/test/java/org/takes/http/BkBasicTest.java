@@ -44,8 +44,7 @@ import org.takes.tk.TkText;
  */
 @SuppressWarnings({
     "PMD.TooManyMethods",
-    "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestShouldIncludeAssert"
+    "PMD.UnnecessaryLocalRule"
 })
 final class BkBasicTest {
 

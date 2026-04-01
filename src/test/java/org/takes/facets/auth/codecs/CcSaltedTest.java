@@ -16,7 +16,6 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcSalted}.
  * @since 0.5
  */
-@SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
 final class CcSaltedTest {
 
     @Test
@@ -43,10 +42,13 @@ final class CcSaltedTest {
 
     @Test
     void encryptsLargeData() throws IOException {
-        new CcSalted(new CcPlain()).decode(
-            new CcSalted(new CcPlain()).encode(
-                new Identity.Simple(new String(new char[10_000]))
-            )
+        final Identity original = new Identity.Simple(new String(new char[10_000]));
+        MatcherAssert.assertThat(
+            "Large identity must be encoded and decoded back to same URN",
+            new CcSalted(new CcPlain()).decode(
+                new CcSalted(new CcPlain()).encode(original)
+            ).urn(),
+            Matchers.equalTo(original.urn())
         );
     }
 

@@ -15,12 +15,13 @@ import org.takes.rq.RqFake;
  * Test case for {@link TkSlf4j}.
  * @since 0.11.2
  */
-@SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
 final class TkSlf4jTest {
 
     @Test
     void logsMessage() throws Exception {
-        new TkSlf4j(new TkText("test")).act(new RqFake());
+        Assertions.assertDoesNotThrow(
+            () -> new TkSlf4j(new TkText("test")).act(new RqFake())
+        );
     }
 
     @Test
