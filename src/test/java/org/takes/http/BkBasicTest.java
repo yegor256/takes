@@ -43,8 +43,8 @@ import org.takes.tk.TkText;
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
  */
 @SuppressWarnings({
+    "PMD.TooManyMethods",
     "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestContainsTooManyAsserts",
     "PMD.UnitTestShouldIncludeAssert"
 })
 final class BkBasicTest {
@@ -95,58 +95,66 @@ final class BkBasicTest {
 
     @Test
     @SuppressWarnings("PMD.CloseResource")
-    void addressesInHeadersAddedWithoutSlashes() throws Exception {
-        final Socket socket = BkBasicTest.createMockSocket();
-        final AtomicReference<Request> ref = new AtomicReference<>();
-        new BkBasic(
-            req -> {
-                ref.set(req);
-                return new ResponseOf(
-                    () -> Collections.singletonList("HTTP/1.1 200 OK"),
-                    req::body
-                );
-            }
-        ).accept(socket);
-        final Request request = ref.get();
-        final RqHeaders.Smart smart = new RqHeaders.Smart(request);
+    void localAddressHeaderHasNoSlashes() throws Exception {
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            BkBasicTest.capturedRequest()
+        );
         MatcherAssert.assertThat(
             "X-Takes-LocalAddress header must not contain slashes",
-            smart.single(
-                "X-Takes-LocalAddress",
-                ""
-            ),
-            Matchers.not(
-                Matchers.containsString("/")
-            )
+            smart.single("X-Takes-LocalAddress", ""),
+            Matchers.not(Matchers.containsString("/"))
+        );
+    }
+
+    @Test
+    @SuppressWarnings("PMD.CloseResource")
+    void remoteAddressHeaderHasNoSlashes() throws Exception {
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            BkBasicTest.capturedRequest()
         );
         MatcherAssert.assertThat(
             "X-Takes-RemoteAddress header must not contain slashes",
-            smart.single(
-                "X-Takes-RemoteAddress",
-                ""
-            ),
-            Matchers.not(
-                Matchers.containsString("/")
-            )
+            smart.single("X-Takes-RemoteAddress", ""),
+            Matchers.not(Matchers.containsString("/"))
         );
+    }
+
+    @Test
+    @SuppressWarnings("PMD.CloseResource")
+    void localSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
             "Local socket address must be present",
-            new RqSocket(request).getLocalAddress(),
+            new RqSocket(BkBasicTest.capturedRequest()).getLocalAddress(),
             Matchers.notNullValue()
         );
+    }
+
+    @Test
+    @SuppressWarnings("PMD.CloseResource")
+    void localSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
             "Local socket port must be zero for mock socket",
-            new RqSocket(request).getLocalPort(),
+            new RqSocket(BkBasicTest.capturedRequest()).getLocalPort(),
             Matchers.equalTo(0)
         );
+    }
+
+    @Test
+    @SuppressWarnings("PMD.CloseResource")
+    void remoteSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
             "Remote socket address must be present",
-            new RqSocket(request).getRemoteAddress(),
+            new RqSocket(BkBasicTest.capturedRequest()).getRemoteAddress(),
             Matchers.notNullValue()
         );
+    }
+
+    @Test
+    @SuppressWarnings("PMD.CloseResource")
+    void remoteSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
             "Remote socket port must be zero for mock socket",
-            new RqSocket(request).getRemotePort(),
+            new RqSocket(BkBasicTest.capturedRequest()).getRemotePort(),
             Matchers.equalTo(0)
         );
     }
@@ -359,12 +367,6 @@ final class BkBasicTest {
         );
     }
 
-    /**
-     * Creates Socket mock for reuse.
-     *
-     * @return Prepared Socket mock
-     * @throws Exception If some problem inside
-     */
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
@@ -380,6 +382,21 @@ final class BkBasicTest {
                 ).asBytes()
             )
         );
+    }
+
+    private static Request capturedRequest() throws Exception {
+        final Socket socket = BkBasicTest.createMockSocket();
+        final AtomicReference<Request> ref = new AtomicReference<>();
+        new BkBasic(
+            req -> {
+                ref.set(req);
+                return new ResponseOf(
+                    () -> Collections.singletonList("HTTP/1.1 200 OK"),
+                    req::body
+                );
+            }
+        ).accept(socket);
+        return ref.get();
     }
 
     /**

@@ -15,7 +15,7 @@ import org.llorllale.cactoos.matchers.HasValues;
  * Test case for {@link Href}.
  * @since 0.7
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class HrefTest {
 
     @Test
@@ -44,42 +44,53 @@ final class HrefTest {
 
     @Test
     void buildsUriWithoutParams() {
-        final String uri = "http://a.example.com";
         MatcherAssert.assertThat(
             "URI without parameters must include trailing slash",
-            new Href(uri).toString(),
+            new Href("http://a.example.com").toString(),
             Matchers.equalTo("http://a.example.com/")
         );
     }
 
     @Test
-    void extractsParametersFromQuery() {
-        final String uri = "http://a.example.com?param1=hello&param2=world&param3=hello%20world";
+    void extractsFirstParameter() {
         MatcherAssert.assertThat(
-            "Can't get first parameter.",
-            new Href(uri).param("param1"),
+            "Cant get first parameter",
+            new Href("http://a.example.com?param1=hello&param2=world").param("param1"),
             new HasValues<>("hello")
         );
+    }
+
+    @Test
+    void extractsSecondParameter() {
         MatcherAssert.assertThat(
-            "Can't get second parameter.",
-            new Href(uri).param("param2"),
+            "Cant get second parameter",
+            new Href("http://a.example.com?param1=hello&param2=world").param("param2"),
             new HasValues<>("world")
         );
+    }
+
+    @Test
+    void extractsEscapedParameter() {
         MatcherAssert.assertThat(
-            "Can't extract correctly escaped sequences in parameter value.",
-            new Href(uri).param("param3"),
+            "Cant extract correctly escaped sequences in parameter value",
+            new Href("http://a.example.com?param3=hello%20world").param("param3"),
             new HasValues<>("hello world")
         );
     }
 
     @Test
-    void addsPath() {
+    void addsPathWithEncoding() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
             "Path segments must be URL-encoded when added",
             new Href("http://example.com").path("д").path("d").toString(),
             Matchers.equalTo("http://example.com/%D0%B4/d")
         );
+    }
+
+    @Test
+    void addsPathWithTrailingSlash() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
             "Path segments must be URL-encoded when base has trailing slash",
             new Href("http://example.com/").path("а").path("f").toString(),
@@ -88,16 +99,20 @@ final class HrefTest {
     }
 
     @Test
-    void acceptsEncodedQuery() {
-        final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
+    void preservesEncodedQuery() {
         MatcherAssert.assertThat(
             "Encoded query parameters must be preserved",
-            new Href(url).toString(),
-            Matchers.equalTo(url)
+            new Href("http://localhost/read?file=%5B%5D%28%29.txt").toString(),
+            Matchers.equalTo("http://localhost/read?file=%5B%5D%28%29.txt")
         );
+    }
+
+    @Test
+    void decodesEncodedParameterValue() {
         MatcherAssert.assertThat(
             "Encoded parameter values must be decoded when retrieved",
-            new Href(url).param("file").iterator().next(),
+            new Href("http://localhost/read?file=%5B%5D%28%29.txt")
+                .param("file").iterator().next(),
             Matchers.equalTo("[]().txt")
         );
     }

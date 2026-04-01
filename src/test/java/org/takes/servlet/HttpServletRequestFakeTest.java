@@ -24,7 +24,7 @@ import org.takes.rq.RqWithHeaders;
  *
  * @since 1.15
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class HttpServletRequestFakeTest {
     @Test
     void failsIfAHeaderIsNotFound() {

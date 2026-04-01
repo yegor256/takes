@@ -16,11 +16,11 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcSalted}.
  * @since 0.5
  */
-@SuppressWarnings({"PMD.UnitTestContainsTooManyAsserts", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
 final class CcSaltedTest {
 
     @Test
-    void decodesInvalidData() throws IOException {
+    void decodesInvalidDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Invalid salted data must decode to anonymous identity",
             new CcSafe(new CcSalted(new CcPlain())).decode(
@@ -28,6 +28,10 @@ final class CcSaltedTest {
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
+    }
+
+    @Test
+    void decodesMalformedDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Malformed salted data must decode to anonymous identity",
             new CcSafe(new CcSalted(new CcPlain())).decode(

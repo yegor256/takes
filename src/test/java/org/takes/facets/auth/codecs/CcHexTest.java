@@ -15,7 +15,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcHex}.
  * @since 0.1
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcHexTest {
 
     @Test
@@ -52,7 +52,7 @@ final class CcHexTest {
     }
 
     @Test
-    void decodesInvalidData() throws IOException {
+    void decodesInvalidDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Invalid hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(
@@ -60,6 +60,10 @@ final class CcHexTest {
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
+    }
+
+    @Test
+    void decodesMalformedDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Malformed hex data must decode to anonymous identity",
             new CcSafe(new CcHex(new CcPlain())).decode(

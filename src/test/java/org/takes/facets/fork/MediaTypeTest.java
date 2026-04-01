@@ -12,36 +12,50 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link MediaType}.
  * @since 0.6
  */
-@SuppressWarnings({"PMD.UnitTestContainsTooManyAsserts", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.UnitTestShouldIncludeAssert"})
 final class MediaTypeTest {
 
     @Test
-    void matchesTwoTypes() {
+    void wildcardMatchesSpecific() {
         MatcherAssert.assertThat(
             "Wildcard media type must match any specific type",
             new MediaType("*/*").matches(new MediaType("application/pdf")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void specificMatchesWildcard() {
         MatcherAssert.assertThat(
             "Specific media type must match wildcard",
             new MediaType("application/xml").matches(new MediaType("*/* ")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void specificSubtypeMatchesWildcard() {
         MatcherAssert.assertThat(
             "Specific subtype must match wildcard subtype",
             new MediaType("text/html").matches(new MediaType("text/*")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void wildcardSubtypeMatchesSpecific() {
         MatcherAssert.assertThat(
             "Wildcard subtype must match specific subtype",
             new MediaType("image/*").matches(new MediaType("image/png")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void differentTypesNotMatch() {
         MatcherAssert.assertThat(
             "Different media types must not match",
-            new MediaType("application/json").matches(
-                new MediaType("text")
-            ),
+            new MediaType("application/json").matches(new MediaType("text")),
             Matchers.is(false)
         );
     }

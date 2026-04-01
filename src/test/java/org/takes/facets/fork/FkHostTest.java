@@ -22,7 +22,7 @@ import org.takes.tk.TkText;
  * Test case for {@link FkHost}.
  * @since 0.32
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FkHostTest {
 
     @Test
@@ -43,18 +43,24 @@ final class FkHostTest {
 
     @Test
     void doesntMatchByHost() throws Exception {
-        final AtomicBoolean acted = new AtomicBoolean();
         MatcherAssert.assertThat(
             "FkHost must not match when request host is different from configured host",
-            new FkHost(
-                "google.com",
-                req -> {
-                    acted.set(true);
-                    return new RsEmpty();
-                }
-            ).route(new RqFake("PUT", "/?test")).has(),
+            new FkHost("google.com", new TkEmpty())
+                .route(new RqFake("PUT", "/?test")).has(),
             Matchers.is(false)
         );
+    }
+
+    @Test
+    void doesntExecuteTakeWhenHostMismatch() throws Exception {
+        final AtomicBoolean acted = new AtomicBoolean();
+        new FkHost(
+            "google.com",
+            req -> {
+                acted.set(true);
+                return new RsEmpty();
+            }
+        ).route(new RqFake("PUT", "/?test"));
         MatcherAssert.assertThat(
             "Take must not be executed when host does not match",
             acted.get(),

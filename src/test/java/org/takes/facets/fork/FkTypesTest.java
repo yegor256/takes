@@ -16,30 +16,36 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkTypes}.
  * @since 0.9
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkTypesTest {
 
     @Test
-    void matchesByAcceptHeader() throws Exception {
-        final String accept = "Accept";
+    void matchesWildcardAcceptHeader() throws Exception {
         MatcherAssert.assertThat(
             "FkTypes must match when wildcard Accept header is present",
             new FkTypes("text/xml", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), accept, "*/* ")
+                new RqWithHeader(new RqFake(), "Accept", "*/* ")
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void doesNotMatchDifferentAcceptType() throws Exception {
         MatcherAssert.assertThat(
             "FkTypes must not match when Accept header has different type",
             new FkTypes("application/json", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), accept, "image/*")
+                new RqWithHeader(new RqFake(), "Accept", "image/*")
             ).has(),
             Matchers.is(false)
         );
+    }
+
+    @Test
+    void matchesAnyTypeWithWildcard() throws Exception {
         MatcherAssert.assertThat(
             "FkTypes must match any type when wildcard type is configured",
             new FkTypes("*/*", new RsEmpty()).route(
-                new RqWithHeader(new RqFake(), accept, "text/html")
+                new RqWithHeader(new RqFake(), "Accept", "text/html")
             ).has(),
             Matchers.is(true)
         );

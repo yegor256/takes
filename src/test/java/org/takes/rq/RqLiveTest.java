@@ -19,7 +19,7 @@ import org.takes.Request;
  * Test case for {@link RqLive}.
  * @since 0.9
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqLiveTest {
 
     /**
@@ -28,27 +28,19 @@ final class RqLiveTest {
     private static final String CRLF = "\r\n";
 
     @Test
-    void buildsHttpRequest() throws IOException {
-        final Request req = new RqLive(
-            new InputStreamOf(
-                new Joined(
-                    RqLiveTest.CRLF,
-                    "GET / HTTP/1.1",
-                    "Host:e",
-                    "Content-Length: 5",
-                    "",
-                    "hello"
-                )
-            )
-        );
+    void parsesHostHeader() throws IOException {
         MatcherAssert.assertThat(
             "Host header must contain expected value",
-            new RqHeaders.Base(req).header("host"),
+            new RqHeaders.Base(RqLiveTest.simpleRequest()).header("host"),
             Matchers.hasItem("e")
         );
+    }
+
+    @Test
+    void parsesRequestBody() throws IOException {
         MatcherAssert.assertThat(
             "Request body must end with expected text",
-            new RqPrint(req).printBody(),
+            new RqPrint(RqLiveTest.simpleRequest()).printBody(),
             Matchers.endsWith("ello")
         );
     }
@@ -118,4 +110,18 @@ final class RqLiveTest {
         );
     }
 
+    private static Request simpleRequest() throws IOException {
+        return new RqLive(
+            new InputStreamOf(
+                new Joined(
+                    RqLiveTest.CRLF,
+                    "GET / HTTP/1.1",
+                    "Host:e",
+                    "Content-Length: 5",
+                    "",
+                    "hello"
+                )
+            )
+        );
+    }
 }

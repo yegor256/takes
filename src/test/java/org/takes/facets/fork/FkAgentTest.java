@@ -17,36 +17,37 @@ import org.takes.tk.TkEmpty;
  * @since 1.7.2
  * @checkstyle JavadocMethodCheck (500 lines)
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkAgentTest {
 
     @Test
-    void matchesByVersionGreater() throws Exception {
-        final String header = "User-Agent";
-        final String agent = "Chrome";
+    void matchesWhenVersionGreater() throws Exception {
         MatcherAssert.assertThat(
             "FkAgent must match when user agent version is greater than minimum",
             new FkAgent(
                 new TkEmpty(),
-                new AmVersion(agent, new AmVersion.VmGreater(12))
+                new AmVersion("Chrome", new AmVersion.VmGreater(12))
             ).route(
                 new RqWithHeader(
                     new RqFake(),
-                    header,
+                    "User-Agent",
                     "Chrome/63.0.3239.132"
                 )
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void doesNotMatchWhenVersionLess() throws Exception {
         MatcherAssert.assertThat(
             "FkAgent must not match when user agent version is less than minimum",
             new FkAgent(
                 new TkEmpty(),
-                new AmVersion(agent, new AmVersion.VmGreater(90))
+                new AmVersion("Chrome", new AmVersion.VmGreater(90))
             ).route(
                 new RqWithHeader(
                     new RqFake(),
-                    header,
+                    "User-Agent",
                     "Chrome/41.0.2227.0"
                 )
             ).has(),

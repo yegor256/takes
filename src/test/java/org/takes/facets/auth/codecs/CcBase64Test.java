@@ -19,7 +19,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcBase64}.
  * @since 0.13
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcBase64Test {
 
     @Test
@@ -49,23 +49,37 @@ final class CcBase64Test {
 
     @Test
     @SuppressWarnings("unchecked")
-    void encodesAndDecodes() throws IOException {
+    void encodesAndDecodesUrn() throws IOException {
         final String urn = "urn:test:Hello World!";
-        final Map<String, String> properties =
-            new MapOf<>(new MapEntry<>("userName", "user"));
-        final Codec codec = new CcBase64(new CcPlain());
-        final Identity expected = codec.decode(
-            codec.encode(new Identity.Simple(urn, properties))
-        );
         MatcherAssert.assertThat(
             "Encoded and decoded URN must match original",
-            expected.urn(),
+            CcBase64Test.roundTrip(urn).urn(),
             Matchers.equalTo(urn)
         );
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void encodesAndDecodesProperties() throws IOException {
+        final Map<String, String> properties =
+            new MapOf<>(new MapEntry<>("userName", "user"));
         MatcherAssert.assertThat(
             "Encoded and decoded properties must match original",
-            expected.properties(),
+            CcBase64Test.roundTrip("urn:test:Hello World!").properties(),
             Matchers.equalTo(properties)
+        );
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Identity roundTrip(final String urn) throws IOException {
+        final Codec codec = new CcBase64(new CcPlain());
+        return codec.decode(
+            codec.encode(
+                new Identity.Simple(
+                    urn,
+                    new MapOf<>(new MapEntry<>("userName", "user"))
+                )
+            )
         );
     }
 

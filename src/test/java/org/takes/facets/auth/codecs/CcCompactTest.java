@@ -17,7 +17,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcCompact}.
  * @since 0.5
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcCompactTest {
 
     @Test
@@ -37,7 +37,7 @@ final class CcCompactTest {
     }
 
     @Test
-    void decodesInvalidData() throws IOException {
+    void decodesInvalidDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Invalid compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(
@@ -45,6 +45,10 @@ final class CcCompactTest {
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
         );
+    }
+
+    @Test
+    void decodesMalformedDataToAnonymous() throws IOException {
         MatcherAssert.assertThat(
             "Malformed compact data must decode to anonymous identity",
             new CcSafe(new CcCompact()).decode(

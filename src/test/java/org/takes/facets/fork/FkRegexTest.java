@@ -16,7 +16,6 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkRegex}.
  * @since 0.4
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkRegexTest {
 
     /**
@@ -25,7 +24,7 @@ final class FkRegexTest {
     private static final String TESTPATH = "/h/tail/";
 
     @Test
-    void matchesByRegularExpression() throws Exception {
+    void matchesByStringRegex() throws Exception {
         MatcherAssert.assertThat(
             "FkRegex must match when path matches string regex pattern",
             new FkRegex("/h[a-z]{4}", new TkEmpty()).route(
@@ -33,6 +32,10 @@ final class FkRegexTest {
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void matchesByCompiledPattern() throws Exception {
         MatcherAssert.assertThat(
             "FkRegex must match when path matches compiled Pattern",
             new FkRegex(
@@ -43,6 +46,10 @@ final class FkRegexTest {
             ).has(),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void matchesRootWithQueryParams() throws Exception {
         MatcherAssert.assertThat(
             "FkRegex must match root path with query parameters",
             new FkRegex("/", new TkEmpty()).route(

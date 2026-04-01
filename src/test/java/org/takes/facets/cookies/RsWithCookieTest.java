@@ -15,7 +15,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link RsWithCookie}.
  * @since 0.9.6
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsWithCookieTest {
 
     /**
@@ -71,26 +71,24 @@ final class RsWithCookieTest {
 
     @Test
     void rejectsInvalidName() {
-        final IllegalArgumentException thrown = Assertions.assertThrows(
-            IllegalArgumentException.class,
-            () -> new RsWithCookie("f oo", "works")
-        );
         MatcherAssert.assertThat(
             "RsWithCookie should reject invalid cookie name",
-            thrown.getMessage(),
+            Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new RsWithCookie("f oo", "works")
+            ).getMessage(),
             new org.hamcrest.core.StringContains("Cookie name \"f oo\" contains invalid characters")
         );
     }
 
     @Test
     void rejectsInvalidValue() {
-        final IllegalArgumentException thrown = Assertions.assertThrows(
-            IllegalArgumentException.class,
-            () -> new RsWithCookie("cookiename", "wo\"rks")
-        );
         MatcherAssert.assertThat(
             "RsWithCookie should reject invalid cookie value",
-            thrown.getMessage(),
+            Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new RsWithCookie("cookiename", "wo\"rks")
+            ).getMessage(),
             new org.hamcrest.core.StringContains(
                 "Cookie value \"wo\"rks\" contains invalid characters"
             )

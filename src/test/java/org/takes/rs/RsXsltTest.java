@@ -95,7 +95,7 @@ final class RsXsltTest {
     }
 
     @Test
-    void closesDecoratedResponseInputStream() {
+    void closesDecoratedResponseInputStream() throws IOException {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",

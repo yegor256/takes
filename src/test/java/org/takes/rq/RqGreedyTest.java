@@ -39,7 +39,7 @@ final class RqGreedyTest {
         );
     }
 
-    private static Request greedy() {
+    private static Request greedy() throws IOException {
         final String body = new Joined(
             "\r\n",
             "GET /test HTTP/1.1",

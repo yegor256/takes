@@ -18,11 +18,10 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkAuthenticated}.
  * @since 0.9
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class FkAuthenticatedTest {
 
     @Test
-    void matchesIfAuthenticatedUser() throws Exception {
+    void doesNotMatchUnauthenticatedRequest() throws Exception {
         MatcherAssert.assertThat(
             "FkAuthenticated must not match unauthenticated requests",
             new FkAuthenticated(new TkEmpty()).route(
@@ -30,6 +29,10 @@ final class FkAuthenticatedTest {
             ).has(),
             Matchers.is(false)
         );
+    }
+
+    @Test
+    void matchesAuthenticatedRequest() throws Exception {
         MatcherAssert.assertThat(
             "FkAuthenticated must match requests with valid authentication header",
             new FkAuthenticated(new TkEmpty()).route(

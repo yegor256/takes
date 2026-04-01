@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
  * Unit tests for {@link org.takes.facets.auth.PsBasic.Default}.
  * @since 0.22
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class PsBasicDefaultTest {
 
     @Test
@@ -37,7 +36,7 @@ final class PsBasicDefaultTest {
     }
 
     @Test
-    void supportsBothKindsOfSpace() {
+    void supportsUrlEncodedSpaces() {
         MatcherAssert.assertThat(
             "PsBasic.Default must support URL-encoded spaces in passwords",
             new PsBasic.Default(
@@ -52,6 +51,10 @@ final class PsBasicDefaultTest {
                 .has(),
             new IsEqual<>(true)
         );
+    }
+
+    @Test
+    void supportsPlusEncodedSpaces() {
         MatcherAssert.assertThat(
             "PsBasic.Default must support plus-encoded spaces in passwords",
             new PsBasic.Default(

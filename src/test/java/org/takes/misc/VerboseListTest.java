@@ -26,8 +26,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
  */
 @SuppressWarnings({
     "PMD.TooManyMethods",
-    "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestContainsTooManyAsserts"
+    "PMD.UnnecessaryLocalRule"
 })
 @ExtendWith(MockitoExtension.class)
 final class VerboseListTest {
@@ -88,30 +87,43 @@ final class VerboseListTest {
     }
 
     @Test
-    void delegatesToArray() {
+    void delegatesToArrayNoArgs() {
         this.list.toArray();
         Mockito.verify(this.origin).toArray();
+    }
+
+    @Test
+    void delegatesToArrayWithArg() {
         final Object[] array = new Object[1];
         this.list.toArray(array);
         Mockito.verify(this.origin).toArray(array);
     }
 
     @Test
-    void delegatesAdd() {
-        final int index = 5;
+    void delegatesAddObject() {
         final Object obj = new Object();
         this.list.add(obj);
         Mockito.verify(this.origin).add(obj);
+    }
+
+    @Test
+    void delegatesAddAtIndex() {
+        final int index = 5;
+        final Object obj = new Object();
         this.list.add(index, obj);
         Mockito.verify(this.origin).add(index, obj);
     }
 
     @Test
-    void delegatesRemove() {
-        final int index = 5;
+    void delegatesRemoveObject() {
         final Object obj = new Object();
         this.list.remove(obj);
         Mockito.verify(this.origin).remove(obj);
+    }
+
+    @Test
+    void delegatesRemoveAtIndex() {
+        final int index = 5;
         this.list.remove(index);
         Mockito.verify(this.origin).remove(index);
     }
@@ -124,10 +136,15 @@ final class VerboseListTest {
     }
 
     @Test
-    void delegatesAddAll() {
+    void delegatesAddAllCollection() {
         final List<Object> collection = Collections.emptyList();
         this.list.addAll(collection);
         Mockito.verify(this.origin).addAll(collection);
+    }
+
+    @Test
+    void delegatesAddAllAtIndex() {
+        final List<Object> collection = Collections.emptyList();
         final int index = 5;
         this.list.addAll(index, collection);
         Mockito.verify(this.origin).addAll(index, collection);
@@ -183,9 +200,13 @@ final class VerboseListTest {
     }
 
     @Test
-    void delegatesListIterator() {
+    void delegatesListIteratorNoArgs() {
         this.list.listIterator();
         Mockito.verify(this.origin).listIterator();
+    }
+
+    @Test
+    void delegatesListIteratorAtIndex() {
         final int index = 5;
         this.list.listIterator(index);
         Mockito.verify(this.origin).listIterator(index);

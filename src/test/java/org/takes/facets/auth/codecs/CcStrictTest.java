@@ -18,7 +18,7 @@ import org.takes.facets.auth.Identity;
  * Test case for {@link CcStrict}.
  * @since 0.11.2
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcStrictTest {
     @Test
     void blocksEmptyUrn() {
@@ -52,22 +52,28 @@ final class CcStrictTest {
     }
 
     @Test
-    void passesValid() throws IOException {
+    void passesSimpleValidUrn() throws IOException {
         MatcherAssert.assertThat(
             "Valid URN must be encoded correctly by strict codec",
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test:1")
                 )
-            ), Matchers.equalTo("urn%3Atest%3A1")
+            ),
+            Matchers.equalTo("urn%3Atest%3A1")
         );
+    }
+
+    @Test
+    void passesComplexValidUrn() throws IOException {
         MatcherAssert.assertThat(
             "Complex valid URN must be encoded correctly by strict codec",
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test-domain-org:valid:1")
                 )
-            ), Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
+            ),
+            Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
         );
     }
 }

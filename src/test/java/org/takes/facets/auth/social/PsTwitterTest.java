@@ -22,16 +22,45 @@ import org.takes.rq.RqFake;
  * Test case for {@link PsTwitter}.
  * @since 1.0
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsTwitterTest {
 
     @Test
-    void logsIn() throws Exception {
-        final int tid = RandomUtils.nextInt(1000);
-        final String randname = RandomStringUtils.randomAlphanumeric(10);
-        final String picture = RandomStringUtils.randomAlphanumeric(10);
+    void identityUrnMatchesTwitterFormat() throws Exception {
+        final int tid = 123;
+        MatcherAssert.assertThat(
+            "Identity URN must match expected Twitter format",
+            PsTwitterTest.login(tid, "testname", "testpic").urn(),
+            CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
+        );
+    }
+
+    @Test
+    void identityNamePropertyMatches() throws Exception {
+        final String randname = "testuser";
+        MatcherAssert.assertThat(
+            "Identity name property must match expected value",
+            PsTwitterTest.login(456, randname, "pic").properties().get("name"),
+            CoreMatchers.equalTo(randname)
+        );
+    }
+
+    @Test
+    void identityPicturePropertyMatches() throws Exception {
+        final String picture = "mypic.jpg";
+        MatcherAssert.assertThat(
+            "Identity picture property must match expected value",
+            PsTwitterTest.login(789, "user", picture).properties().get("picture"),
+            CoreMatchers.equalTo(picture)
+        );
+    }
+
+    private static Identity login(
+        final int tid,
+        final String name,
+        final String picture
+    ) throws Exception {
         final String httpok = "HTTP OK";
-        final String name = "name";
         final Pass pass = new PsTwitter(
             new FakeRequest(
                 200,
@@ -48,7 +77,7 @@ final class PsTwitterTest {
                 Collections.emptyList(),
                 Json.createObjectBuilder()
                     .add("id", tid)
-                    .add(name, randname)
+                    .add("name", name)
                     .add("profile_image_url", picture)
                     .build()
                     .toString()
@@ -57,23 +86,6 @@ final class PsTwitterTest {
             RandomStringUtils.randomAlphanumeric(10),
             RandomStringUtils.randomAlphanumeric(10)
         );
-        final Identity identity = pass.enter(
-            new RqFake("GET", "")
-        ).get();
-        MatcherAssert.assertThat(
-            "Identity URN must match expected Twitter format",
-            identity.urn(),
-            CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
-        );
-        MatcherAssert.assertThat(
-            "Identity name property must match expected value",
-            identity.properties().get(name),
-            CoreMatchers.equalTo(randname)
-        );
-        MatcherAssert.assertThat(
-            "Identity picture property must match expected value",
-            identity.properties().get("picture"),
-            CoreMatchers.equalTo(picture)
-        );
+        return pass.enter(new RqFake("GET", "")).get();
     }
 }

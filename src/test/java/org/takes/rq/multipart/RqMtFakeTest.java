@@ -147,7 +147,7 @@ final class RqMtFakeTest {
 
     private static RqMultipart multipart(
         final String body, final String part
-    ) throws IOException {
+    ) throws Exception {
         return new RqMtFake(
             new RqFake(),
             new RqWithHeaders(
@@ -203,7 +203,7 @@ final class RqMtFakeTest {
         );
     }
 
-    private static RqMtBase closableMulti() throws IOException {
+    private static RqMtBase closableMulti() throws Exception {
         final String body = "RqMtFakeTest.closesAllParts";
         return new RqMtBase(
             new RqMtFake(
@@ -256,7 +256,7 @@ final class RqMtFakeTest {
         );
     }
 
-    private static RqMtBase fooBarMulti() throws IOException {
+    private static RqMtBase fooBarMulti() throws Exception {
         final String body = "RqMtFakeTest.closesExplicitlyAllParts";
         return new RqMtBase(
             new RqMtFake(

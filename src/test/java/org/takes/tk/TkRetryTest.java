@@ -25,7 +25,7 @@ import org.takes.rs.RsText;
  *
  * @since 0.28.3
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkRetryTest {
 
     /**
@@ -93,27 +93,38 @@ final class TkRetryTest {
 
     @Test
     @Tag("deep")
-    void retriesOnExceptionTillSuccess() throws Exception {
-        final String data = "data";
+    void retriesOnExceptionTillSuccessSpendsTime() throws Exception {
         final Take take = Mockito.mock(Take.class);
         Mockito
             .when(take.act(Mockito.any(Request.class)))
             .thenThrow(new IOException("oops"))
-            .thenReturn(new RsText(data));
+            .thenReturn(new RsText("data"));
         final long start = System.nanoTime();
         final int delay = TkRetryTest.DELAY;
-        final RsPrint response = new RsPrint(
-            new TkRetry(TkRetryTest.COUNT, delay, take).act(new RqFake(RqMethod.GET))
-        );
+        new TkRetry(TkRetryTest.COUNT, delay, take).act(new RqFake(RqMethod.GET));
         final long spent = System.nanoTime() - start;
         MatcherAssert.assertThat(
             "TkRetry must spend at least minimum expected time before success",
             (delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
             Matchers.lessThanOrEqualTo(spent)
         );
+    }
+
+    @Test
+    @Tag("deep")
+    void retriesOnExceptionTillSuccessReturnsResponse() throws Exception {
+        final String data = "data";
+        final Take take = Mockito.mock(Take.class);
+        Mockito
+            .when(take.act(Mockito.any(Request.class)))
+            .thenThrow(new IOException("oops"))
+            .thenReturn(new RsText(data));
         MatcherAssert.assertThat(
             "TkRetry must return successful response after retrying failed attempts",
-            response,
+            new RsPrint(
+                new TkRetry(TkRetryTest.COUNT, TkRetryTest.DELAY, take)
+                    .act(new RqFake(RqMethod.GET))
+            ),
             new HasString(data)
         );
     }

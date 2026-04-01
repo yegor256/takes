@@ -12,62 +12,68 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link MediaTypes}.
  * @since 0.6
  */
-@SuppressWarnings({"PMD.UnitTestContainsTooManyAsserts", "PMD.UnitTestShouldIncludeAssert"})
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.UnitTestShouldIncludeAssert"})
 final class MediaTypesTest {
 
     @Test
-    void matchesTwoTypes() {
+    void wildcardContainsSpecificType() {
         MatcherAssert.assertThat(
             "Wildcard media type must contain specific XML type",
-            new MediaTypes("*/*").contains(
-                new MediaTypes("application/xml")
-            ),
+            new MediaTypes("*/*").contains(new MediaTypes("application/xml")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void specificTypeContainsWildcard() {
         MatcherAssert.assertThat(
             "Specific PDF type must contain application wildcard type",
-            new MediaTypes("application/pdf").contains(
-                new MediaTypes("application/*")
-            ),
+            new MediaTypes("application/pdf").contains(new MediaTypes("application/*")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void qualityValuesContainPlainText() {
         MatcherAssert.assertThat(
             "Media types with quality values must contain plain text type",
-            new MediaTypes("text/html;q=0.2,*/*").contains(
-                new MediaTypes("text/plain")
-            ),
+            new MediaTypes("text/html;q=0.2,*/*").contains(new MediaTypes("text/plain")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void textTypesNotContainPartialType() {
         MatcherAssert.assertThat(
             "Text media types must not contain invalid partial text type",
-            new MediaTypes("text/html;q=1.0,text/json").contains(
-                new MediaTypes("text/p")
-            ),
-            Matchers.is(false)
-        );
-        MatcherAssert.assertThat(
-            "Text wildcard type must not contain application type",
-            new MediaTypes("text/*;q=1.0").contains(
-                new MediaTypes("application/x-file")
-            ),
+            new MediaTypes("text/html;q=1.0,text/json").contains(new MediaTypes("text/p")),
             Matchers.is(false)
         );
     }
 
     @Test
-    void matchesTwoCompositeTypes() {
+    void textWildcardNotContainApplicationType() {
+        MatcherAssert.assertThat(
+            "Text wildcard type must not contain application type",
+            new MediaTypes("text/*;q=1.0").contains(new MediaTypes("application/x-file")),
+            Matchers.is(false)
+        );
+    }
+
+    @Test
+    void compositeContainsMatchingType() {
         MatcherAssert.assertThat(
             "Composite media types must contain matching JSON type",
-            new MediaTypes("text/xml,text/json").contains(
-                new MediaTypes("text/json")
-            ),
+            new MediaTypes("text/xml,text/json").contains(new MediaTypes("text/json")),
             Matchers.is(true)
         );
+    }
+
+    @Test
+    void singleTypeContainsComposite() {
         MatcherAssert.assertThat(
             "Single JSON type must contain composite types including same JSON type",
-            new MediaTypes("text/x-json").contains(
-                new MediaTypes("text/plain,text/x-json")
-            ),
+            new MediaTypes("text/x-json").contains(new MediaTypes("text/plain,text/x-json")),
             Matchers.is(true)
         );
     }

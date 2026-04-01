@@ -20,7 +20,6 @@ import org.takes.facets.auth.Token.Jose;
  * Test case for {@link Token}.
  * @since 1.5
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class TokenTest {
     @Test
     void joseAlgorithm() {
@@ -45,7 +44,7 @@ final class TokenTest {
     }
 
     @Test
-    void jwtExpiration() throws ParseException {
+    void jwtIssuedDifferentFromExpiration() {
         final JsonObject jose = new Token.Jwt(
             new Identity.Simple("user"),
             3600L
@@ -55,6 +54,14 @@ final class TokenTest {
             jose.getString(Token.Jwt.ISSUED),
             Matchers.not(jose.getString(Token.Jwt.EXPIRATION))
         );
+    }
+
+    @Test
+    void jwtExpiresAfterIssued() throws ParseException {
+        final JsonObject jose = new Token.Jwt(
+            new Identity.Simple("user2"),
+            3600L
+        ).json();
         final SimpleDateFormat format =
             new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'", Locale.GERMAN);
         MatcherAssert.assertThat(

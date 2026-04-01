@@ -22,15 +22,37 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link FkHitRefresh}.
  * @since 0.9
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FkHitRefreshTest {
 
     @Test
-    void refreshesOnDemand(@TempDir final Path temp) throws Exception {
-        final Request req = new RqWithHeader(
-            new RqFake(), "X-Takes-HitRefresh: yes"
+    void matchesRequestWithHeader(@TempDir final Path temp) throws Exception {
+        MatcherAssert.assertThat(
+            "FkHitRefresh must match request when hit refresh header is present",
+            FkHitRefreshTest.refreshFork(temp, new AtomicBoolean()).route(
+                new RqWithHeader(new RqFake(), "X-Takes-HitRefresh: yes")
+            ).has(),
+            Matchers.is(true)
         );
+    }
+
+    @Test
+    void executesTaskOnRefresh(@TempDir final Path temp) throws Exception {
         final AtomicBoolean done = new AtomicBoolean(false);
+        FkHitRefreshTest.refreshFork(temp, done).route(
+            new RqWithHeader(new RqFake(), "X-Takes-HitRefresh: yes")
+        );
+        MatcherAssert.assertThat(
+            "Hit refresh task must have been executed",
+            done.get(),
+            Matchers.is(true)
+        );
+    }
+
+    private static Fork refreshFork(
+        final Path temp,
+        final AtomicBoolean done
+    ) throws Exception {
         final Fork fork = new FkHitRefresh(
             temp.toFile(),
             () -> done.set(true),
@@ -38,16 +60,7 @@ final class FkHitRefreshTest {
         );
         TimeUnit.MILLISECONDS.sleep(10L);
         FileUtils.touch(temp.resolve("hey.txt").toFile());
-        MatcherAssert.assertThat(
-            "FkHitRefresh must match request when hit refresh header is present",
-            fork.route(req).has(),
-            Matchers.is(true)
-        );
-        MatcherAssert.assertThat(
-            "Hit refresh task must have been executed",
-            done.get(),
-            Matchers.is(true)
-        );
+        return fork;
     }
 
     @Test

@@ -26,7 +26,7 @@ import org.takes.rs.RsPrint;
  * Test case for {@link TkHtml}.
  * @since 0.10
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkHtmlTest {
 
     /**
@@ -81,14 +81,20 @@ final class TkHtmlTest {
     }
 
     @Test
-    void printsResourceMultipleTimes() throws Exception {
+    void printsResourceFirstTime() throws Exception {
         final String body = "<html>hello, dude!</html>";
-        final Take take = new TkHtml(body);
         MatcherAssert.assertThat(
             "First HTML response must contain the expected body text",
-            new RsPrint(take.act(new RqFake())),
+            new RsPrint(new TkHtml(body).act(new RqFake())),
             new HasString(body)
         );
+    }
+
+    @Test
+    void printsResourceSecondTime() throws Exception {
+        final String body = "<html>hello, dude!</html>";
+        final Take take = new TkHtml(body);
+        take.act(new RqFake());
         MatcherAssert.assertThat(
             "Second HTML response must also contain the expected body text",
             new RsPrint(take.act(new RqFake())),

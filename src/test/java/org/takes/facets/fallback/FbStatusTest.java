@@ -22,7 +22,7 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FbStatus}.
  * @since 0.16.10
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FbStatusTest {
 
     @Test
@@ -81,26 +81,31 @@ final class FbStatusTest {
     }
 
     @Test
-    void sendsCorrectDefaultResponse() throws Exception {
-        final int code = HttpURLConnection.HTTP_NOT_FOUND;
-        final RqFallback req = new RqFallback.Fake(
-            code,
-            new IOException("Exception message")
-        );
-        final RsPrint response = new RsPrint(
-            new FbStatus(code).route(req).get()
-        );
+    void defaultResponseBodyContainsStatusAndMessage() throws Exception {
         MatcherAssert.assertThat(
             "Default response body must contain status and exception message",
-            new RsBodyPrint(response),
+            new RsBodyPrint(FbStatusTest.defaultResponse()),
             new IsText("404 Not Found: Exception message")
         );
+    }
+
+    @Test
+    void defaultResponseHeadersContainContentType() throws Exception {
         MatcherAssert.assertThat(
             "Default response headers must contain content type and status",
-            new RsHeadPrint(response).asString(),
+            new RsHeadPrint(FbStatusTest.defaultResponse()).asString(),
             Matchers.both(
                 Matchers.containsString("Content-Type: text/plain")
             ).and(Matchers.containsString("404 Not Found"))
+        );
+    }
+
+    private static RsPrint defaultResponse() throws Exception {
+        final int code = HttpURLConnection.HTTP_NOT_FOUND;
+        return new RsPrint(
+            new FbStatus(code).route(
+                new RqFallback.Fake(code, new IOException("Exception message"))
+            ).get()
         );
     }
 }
