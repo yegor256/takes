@@ -6,6 +6,7 @@ package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
 import com.restfb.DefaultWebRequestor;
+import com.restfb.WebRequestor.Request;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -64,7 +65,7 @@ final class PsFacebookTest {
             ),
             new DefaultWebRequestor() {
                 @Override
-                public Response executeGet(final String url) {
+                public Response executeGet(final Request request) {
                     return new Response(
                         HttpURLConnection.HTTP_OK,
                         String.format(
