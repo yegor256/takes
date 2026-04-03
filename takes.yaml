@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 860.979967481
+  seconds: 639.056634216
   version: 0.60.1
   what: judges-summary
-  when: 2026-04-01 05:02:47.887472182 Z
+  when: 2026-04-03 04:50:26.841857394 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -63485,18 +63485,6 @@
   some_unmerged_pulls: 1
   what: quality-of-service
   when: 2026-03-29 04:52:50.000000000 Z
-- _id: 19802
-  _job: 66110
-  _time: 2026-03-29 04:57:00.256570999 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  analyzers: 18
-  text: |-
-    The average number of builds per week (245.7) is decreasing (R=-0.85).
-    The average number of commits per week (5.6) is decreasing (R=-0.39).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (43.0 developers) is decreasing (R=-0.53).
-  what: assessment
-  when: 2026-03-29 04:57:00.276165790 Z
 - _id: 19805
   _job: 23728394231
   _time: 2026-03-30 04:49:02.254527775 Z
@@ -63539,29 +63527,6 @@
   start: *3
   what: earned-value
   when: 2026-03-30 05:00:54.725648934 Z
-- _id: 19810
-  _job: 66432
-  _time: 2026-03-31 04:58:11.499238256 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  what: learn-eva
-  when: 2026-03-31 04:58:11.479981532 Z
-- _id: 19811
-  _job: 23832408723
-  _time: 2026-04-01 04:49:06.543951989 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 8935390579
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 569
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19812
   _job: 23832408723
   _time: 2026-04-01 04:49:50.803779936 Z
@@ -63578,3 +63543,162 @@
   total_stars: 872
   what: dimensions-of-terrain
   when: 2026-04-01 04:49:50.812568065 Z
+- _id: 19813
+  _job: 66529
+  _time: 2026-04-01 05:03:18.588235444 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  analyzers: 18
+  text: |-
+    The average number of builds per week (245.7) is decreasing (R=-0.85).
+    The average number of commits per week (5.6) is decreasing (R=-0.39).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (43.0 developers) is decreasing (R=-0.53).
+  what: assessment
+  when: 2026-04-01 05:03:18.609745348 Z
+- _id: 19815
+  _job: 23884104628
+  _time: 2026-04-02 04:39:14.550542835 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  by_owner: 1
+  commit: a078707dfeef97929b6e7cfa08a7fe485daede91
+  default_branch: master
+  details: 'A new Git push #32365988361 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 10072729294
+  event_type: PushEvent
+  is_human: 1
+  push_id: 32365988361
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-04-01 11:50:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 19816
+  _job: 23884104628
+  _time: 2026-04-02 04:39:14.962570199 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  by_owner: 1
+  commit: 28afe006ccc06008faa50a5af166e2bcc2278849
+  default_branch: master
+  details: 'A new Git push #32365891048 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 10072632102
+  event_type: PushEvent
+  is_human: 1
+  push_id: 32365891048
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-04-01 11:47:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 19817
+  _job: 23884104628
+  _time: 2026-04-02 04:39:15.406863094 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  by_owner: 1
+  commit: 7900642e710903d94795b1892c9791f67e158e0c
+  default_branch: master
+  details: 'A new Git push #32365836882 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 10072577905
+  event_type: PushEvent
+  is_human: 1
+  push_id: 32365836882
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-04-01 11:46:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 19819
+  _job: 23884104628
+  _time: 2026-04-02 04:39:39.213951135 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1391 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1391
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-04-01 11:46:53.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19820
+  _job: 23884104628
+  _time: 2026-04-02 04:39:54.727125290 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  branch: renovate/com.restfb-restfb-3.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1531 has been "pull-was-closed".
+  failed_builds: 6
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1531
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-04-01 11:46:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19822
+  _job: 66647
+  _time: 2026-04-02 04:52:36.774883541 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  what: learn-eva
+  when: 2026-04-02 04:52:36.755345471 Z
+- _id: 19823
+  _job: 23934041958
+  _time: 2026-04-03 04:40:12.989016521 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 9013469934
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 571
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19824
+  _job: 23934041958
+  _time: 2026-04-03 04:40:30.414260349 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  total_active_contributors: 3
+  total_commits: 3691
+  total_contributors: 84
+  total_files: 532
+  total_forks: 212
+  total_issues: 747
+  total_pulls: 819
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 872
+  what: dimensions-of-terrain
+  when: 2026-04-03 04:40:30.423060489 Z
