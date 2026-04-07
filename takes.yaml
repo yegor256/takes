@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 680.385451299
+  seconds: 756.880465847
   version: 0.60.1
   what: judges-summary
-  when: 2026-04-05 04:55:52.075852021 Z
+  when: 2026-04-07 04:54:40.225706739 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -63484,7 +63484,7 @@
   some_pull_lifetime: 9247543.0
   some_unmerged_pulls: 1
   what: quality-of-service
-  when: 2026-03-29 04:52:50.000000000 Z
+  when: &129 2026-03-29 04:52:50.000000000 Z
 - _id: 19805
   _job: 23728394231
   _time: 2026-03-30 04:49:02.254527775 Z
@@ -63531,18 +63531,6 @@
   total_stars: 872
   what: dimensions-of-terrain
   when: 2026-04-01 04:49:50.812568065 Z
-- _id: 19813
-  _job: 66529
-  _time: 2026-04-01 05:03:18.588235444 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  analyzers: 18
-  text: |-
-    The average number of builds per week (245.7) is decreasing (R=-0.85).
-    The average number of commits per week (5.6) is decreasing (R=-0.39).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (43.0 developers) is decreasing (R=-0.53).
-  what: assessment
-  when: 2026-04-01 05:03:18.609745348 Z
 - _id: 19815
   _job: 23884104628
   _time: 2026-04-02 04:39:14.550542835 Z
@@ -63667,24 +63655,6 @@
   total_stars: 872
   what: dimensions-of-terrain
   when: 2026-04-03 04:40:30.423060489 Z
-- _id: 19825
-  _job: 66784
-  _time: 2026-04-03 04:50:50.515853739 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  analyzers: 18
-  text: |-
-    The average number of builds per week (245.7) is decreasing (R=-0.85).
-    The average number of commits per week (5.6) is decreasing (R=-0.39).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (39.0 developers) is decreasing (R=-0.55).
-  what: assessment
-  when: 2026-04-03 04:50:50.531149359 Z
-- _id: 19828
-  _job: 66911
-  _time: 2026-04-04 04:44:00.477962979 Z
-  _version: 0.19.9/0.60.2/0.17.15
-  what: learn-eva
-  when: 2026-04-04 04:44:00.459281550 Z
 - _id: 19830
   _job: 23994441564
   _time: 2026-04-05 04:44:39.556253109 Z
@@ -63699,23 +63669,6 @@
   total_reviews_submitted: 4
   what: quantity-of-deliverables
   when: 2026-04-05 04:44:39.000000000 Z
-- _id: 19831
-  _job: 23994441564
-  _time: 2026-04-05 04:45:12.394774091 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 9095446165
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 579
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19832
   _job: 23994441564
   _time: 2026-04-05 04:45:35.670307687 Z
@@ -63732,3 +63685,273 @@
   total_stars: 873
   what: dimensions-of-terrain
   when: 2026-04-05 04:45:35.680355524 Z
+- _id: 19833
+  _job: 66998
+  _time: 2026-04-05 04:56:27.850717707 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  analyzers: 18
+  text: |-
+    The average number of builds per week (247.5) is decreasing (R=-0.79).
+    The average number of commits per week (6.3) is decreasing (R=-0.15).
+    The average number of releases per month (0.2) is decreasing (R=-0.10).
+    The average monthly turnover (38.0 developers) is decreasing (R=-0.55).
+  what: assessment
+  when: 2026-04-05 04:56:27.861755548 Z
+- _id: 19836
+  _job: 24019085692
+  _time: 2026-04-06 04:48:19.940988175 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  total_active_contributors: 3
+  total_commits: 3691
+  total_contributors: 84
+  total_files: 532
+  total_forks: 212
+  total_issues: 747
+  total_pulls: 820
+  total_releases: 156
+  total_repositories: 1
+  total_stars: 873
+  what: dimensions-of-terrain
+  when: 2026-04-06 04:48:19.949763415 Z
+- _id: 19837
+  _job: 24019085692
+  _time: 2026-04-06 04:54:19.865859202 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  since: *129
+  some_backlog_size:
+  - 93
+  - 93
+  - 92
+  - 92
+  - 92
+  - 92
+  - 92
+  some_build_duration:
+  - 10
+  - 10
+  - 12
+  - 15
+  - 10
+  - 11
+  - 11
+  - 14
+  - 16
+  - 17
+  - 18
+  - 28
+  - 34
+  - 35
+  - 184
+  - 217
+  - 8
+  - 8
+  - 8
+  - 9
+  - 9
+  - 11
+  - 17
+  - 25
+  - 28
+  - 37
+  - 68
+  - 224
+  - 786
+  - 6
+  - 7
+  - 8
+  - 8
+  - 9
+  - 11
+  - 18
+  - 23
+  - 30
+  - 32
+  - 68
+  - 214
+  - 33
+  - 734
+  - 36
+  - 8
+  - 8
+  - 8
+  - 9
+  - 10
+  - 11
+  - 18
+  - 28
+  - 26
+  - 35
+  - 190
+  - 841
+  - 44
+  - 792
+  - 34
+  - 0
+  some_build_mttr:
+  - 27
+  - 86384
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  some_issue_lifetime: 187788.0
+  some_merged_pulls: 13
+  some_pull_files_size:
+  - 1
+  - 205
+  - 1
+  - 1
+  - 2
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 4728
+  - 2
+  - 2
+  - 4
+  - 4
+  - 2
+  - 2
+  some_pull_lifetime:
+  - 28184.0
+  - 63943.0
+  - 251182.0
+  - 58271.0
+  - 256521.0
+  - 525727.0
+  - 1438313.0
+  - 1523723.0
+  - 1585659.0
+  - 3560220.0
+  - 3679757.0
+  - 9224010.0
+  - 35215182.0
+  some_review_size:
+  - 0
+  - 2
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 1861
+  - 63562
+  - 3636
+  - 3732
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  some_unmerged_pulls: 5
+  what: quality-of-service
+  when: 2026-04-06 04:54:19.000000000 Z
+- _id: 19838
+  _job: 67097
+  _time: 2026-04-06 04:58:50.896796537 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  analyzers: 18
+  text: |-
+    The average number of builds per week (247.5) is decreasing (R=-0.79).
+    The average number of commits per week (6.3) is decreasing (R=-0.15).
+    The average number of releases per month (0.2) is decreasing (R=-0.10).
+    The average monthly turnover (38.0 developers) is decreasing (R=-0.55).
+  what: assessment
+  when: 2026-04-06 04:58:50.912516746 Z
+- _id: 19839
+  _job: 67097
+  _time: 2026-04-06 04:59:17.847260264 Z
+  _version: 0.19.9/0.60.2/0.17.15
+  what: learn-eva
+  when: 2026-04-06 04:59:17.832299624 Z
+- _id: 19840
+  _job: 24064638906
+  _time: 2026-04-07 04:42:34.176494490 Z
+  _version: 0.19.9/0.60.1/0.17.15
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 9153865056
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 583
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
