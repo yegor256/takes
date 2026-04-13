@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1150669">
+<fb version="0.19.6" size="1151223">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">831.614289974</seconds>
+    <seconds t="F">648.095184248</seconds>
     <version t="S">0.60.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-04-12T05:02:19Z</when>
+    <when t="T">2026-04-13T05:01:06Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -71570,19 +71570,6 @@
     <when t="T">2026-04-08T04:45:27Z</when>
   </f>
   <f>
-    <_id t="I">19847</_id>
-    <_job t="I">67531</_job>
-    <_time t="T">2026-04-09T04:56:44Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.15</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (247.5) is decreasing (R=-0.79).
-The average number of commits per week (6.3) is decreasing (R=-0.15).
-The average number of releases per month (0.2) is decreasing (R=-0.10).
-The average monthly turnover (38.0 developers) is decreasing (R=-0.55).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-04-09T04:56:44Z</when>
-  </f>
-  <f>
     <_id t="I">19850</_id>
     <_job t="I">24226906481</_job>
     <_time t="T">2026-04-10T04:49:08Z</_time>
@@ -71630,14 +71617,6 @@ The average monthly turnover (39.0 developers) is decreasing (R=-0.55).</text>
     <when t="T">2026-04-10T05:00:18Z</when>
   </f>
   <f>
-    <_id t="I">19855</_id>
-    <_job t="I">67775</_job>
-    <_time t="T">2026-04-11T04:48:05Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.15</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-04-11T04:48:05Z</when>
-  </f>
-  <f>
     <_id t="I">19857</_id>
     <_job t="I">24298918740</_job>
     <_time t="T">2026-04-12T04:48:36Z</_time>
@@ -71652,25 +71631,6 @@ The average monthly turnover (39.0 developers) is decreasing (R=-0.55).</text>
     <total_reviews_submitted t="I">0</total_reviews_submitted>
     <what t="S">quantity-of-deliverables</what>
     <when t="T">2026-04-12T04:48:36Z</when>
-  </f>
-  <f>
-    <_id t="I">19858</_id>
-    <_job t="I">24298918740</_job>
-    <_time t="T">2026-04-12T04:49:14Z</_time>
-    <_version t="S">0.19.9/0.60.1/0.17.15</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">9349205500</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">599</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">19859</_id>
@@ -71689,5 +71649,133 @@ The average monthly turnover (39.0 developers) is decreasing (R=-0.55).</text>
     <total_stars t="I">873</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-04-12T04:49:52Z</when>
+  </f>
+  <f>
+    <_id t="I">19860</_id>
+    <_job t="I">67876</_job>
+    <_time t="T">2026-04-12T05:02:44Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.15</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (239.4) is decreasing (R=-0.80).
+The average number of commits per week (6.1) is decreasing (R=-0.19).
+The average number of releases per month (0.2) is decreasing (R=-0.11).
+The average monthly turnover (39.0 developers) is decreasing (R=-0.55).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-04-12T05:02:44Z</when>
+  </f>
+  <f>
+    <_id t="I">19861</_id>
+    <_job t="I">67876</_job>
+    <_time t="T">2026-04-12T05:03:19Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.15</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-04-12T05:03:19Z</when>
+  </f>
+  <f>
+    <_id t="I">19862</_id>
+    <_job t="I">24326201032</_job>
+    <_time t="T">2026-04-13T04:50:44Z</_time>
+    <_version t="S">0.19.9/0.60.1/0.17.15</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">9387965568</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1537</min_issue_was_found>
+    <min_pull_was_found t="I">601</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19863</_id>
+    <_job t="I">24326201032</_job>
+    <_time t="T">2026-04-13T04:51:02Z</_time>
+    <_version t="S">0.19.9/0.60.1/0.17.15</_version>
+    <total_active_contributors t="I">3</total_active_contributors>
+    <total_commits t="I">3691</total_commits>
+    <total_contributors t="I">84</total_contributors>
+    <total_files t="I">532</total_files>
+    <total_forks t="I">213</total_forks>
+    <total_issues t="I">747</total_issues>
+    <total_pulls t="I">821</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">873</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-04-13T04:51:02Z</when>
+  </f>
+  <f>
+    <_id t="I">19864</_id>
+    <_job t="I">24326201032</_job>
+    <_time t="T">2026-04-13T04:57:26Z</_time>
+    <_version t="S">0.19.9/0.60.1/0.17.15</_version>
+    <since t="T">2026-04-06T04:54:19Z</since>
+    <some_backlog_size>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">92</v>
+    </some_backlog_size>
+    <some_build_duration>
+      <v t="I">859</v>
+      <v t="I">36</v>
+      <v t="I">765</v>
+      <v t="I">35</v>
+      <v t="I">936</v>
+      <v t="I">38</v>
+      <v t="I">746</v>
+      <v t="I">46</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">13</v>
+      <v t="I">18</v>
+      <v t="I">28</v>
+      <v t="I">33</v>
+      <v t="I">243</v>
+      <v t="I">919</v>
+      <v t="I">47</v>
+      <v t="I">942</v>
+      <v t="I">36</v>
+      <v t="I">0</v>
+    </some_build_duration>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+    </some_build_success_rate>
+    <some_merged_pulls t="I">0</some_merged_pulls>
+    <some_unmerged_pulls t="I">0</some_unmerged_pulls>
+    <what t="S">quality-of-service</what>
+    <when t="T">2026-04-13T04:57:26Z</when>
   </f>
 </fb>
