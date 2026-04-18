@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1151714">
+<fb version="0.19.6" size="1151998">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
+    <error t="S">end of file reached</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">640.144514452</seconds>
-    <version t="S">0.60.1</version>
+    <seconds t="F">805.80588537</seconds>
+    <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-04-17T04:59:15Z</when>
+    <when t="T">2026-04-18T04:55:18Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -71788,30 +71789,48 @@ The average monthly turnover (42.0 developers) is decreasing (R=-0.79).</text>
     <when t="T">2026-04-16T05:00:29Z</when>
   </f>
   <f>
-    <_id t="I">19875</_id>
-    <_job t="I">68398</_job>
-    <_time t="T">2026-04-16T05:01:02Z</_time>
+    <_id t="I">19877</_id>
+    <_job t="I">68553</_job>
+    <_time t="T">2026-04-17T05:00:01Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.15</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2026-04-16T05:01:02Z</when>
+    <when t="T">2026-04-17T05:00:01Z</when>
   </f>
   <f>
-    <_id t="I">19876</_id>
-    <_job t="I">24548213993</_job>
-    <_time t="T">2026-04-17T04:49:00Z</_time>
-    <_version t="S">0.19.9/0.60.1/0.17.15</_version>
+    <_id t="I">19878</_id>
+    <_job t="I">24597087009</_job>
+    <_time t="T">2026-04-18T04:42:27Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.16</_version>
     <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">9524549905</events_were_scanned>
+    <events_were_scanned t="I">9568430339</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
     <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">611</min_pull_was_found>
+    <min_pull_was_found t="I">612</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">1130</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19879</_id>
+    <_job t="I">24597087009</_job>
+    <_time t="T">2026-04-18T04:43:04Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.16</_version>
+    <total_active_contributors t="I">3</total_active_contributors>
+    <total_commits t="I">3692</total_commits>
+    <total_contributors t="I">84</total_contributors>
+    <total_files t="I">532</total_files>
+    <total_forks t="I">212</total_forks>
+    <total_issues t="I">747</total_issues>
+    <total_pulls t="I">823</total_pulls>
+    <total_releases t="I">156</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">873</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-04-18T04:43:04Z</when>
   </f>
 </fb>
