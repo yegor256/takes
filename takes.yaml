@@ -2,12 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: end of file reached
   inserted: 8
-  seconds: 805.80588537
+  seconds: 816.722158762
   version: 0.60.2
   what: judges-summary
-  when: 2026-04-18 04:55:18.587223957 Z
+  when: 2026-04-21 05:02:20.946121086 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -63968,7 +63967,7 @@
   total_releases_published: 0
   total_reviews_submitted: 0
   what: quantity-of-deliverables
-  when: 2026-04-12 04:48:36.000000000 Z
+  when: &132 2026-04-12 04:48:36.000000000 Z
 - _id: 19859
   _job: 24298918740
   _time: 2026-04-12 04:49:52.252639617 Z
@@ -64065,7 +64064,7 @@
   some_merged_pulls: 0
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2026-04-13 04:57:26.000000000 Z
+  when: &133 2026-04-13 04:57:26.000000000 Z
 - _id: 19867
   _job: 68109
   _time: 2026-04-14 05:03:09.890712399 Z
@@ -64128,13 +64127,27 @@
   _version: 0.19.9/0.60.2/0.17.15
   what: learn-eva
   when: 2026-04-17 05:00:01.166884688 Z
-- _id: 19878
-  _job: 24597087009
-  _time: 2026-04-18 04:42:27.666760846 Z
+- _id: 19879
+  _job: 24704568964
+  _time: 2026-04-21 04:48:53.784556628 Z
+  _version: 0.19.9/0.60.2/0.17.16
+  since: *132
+  total_builds_ran: 106
+  total_commits_pushed: 4
+  total_hoc_committed: 8
+  total_issues_created: 4
+  total_pulls_submitted: 4
+  total_releases_published: 0
+  total_reviews_submitted: 4
+  what: quantity-of-deliverables
+  when: 2026-04-21 04:48:53.000000000 Z
+- _id: 19880
+  _job: 24704568964
+  _time: 2026-04-21 04:49:30.683029648 Z
   _version: 0.19.9/0.60.2/0.17.16
   assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 9568430339
+  events_were_scanned: 9669181403
   issues_were_scanned: 1292
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
@@ -64145,19 +64158,186 @@
   types_were_scanned: 1130
   what: iterate
   where: github
-- _id: 19879
-  _job: 24597087009
-  _time: 2026-04-18 04:43:04.629978407 Z
+- _id: 19881
+  _job: 24704568964
+  _time: 2026-04-21 04:50:02.322814632 Z
   _version: 0.19.9/0.60.2/0.17.16
   total_active_contributors: 3
-  total_commits: 3692
+  total_commits: 3695
   total_contributors: 84
   total_files: 532
   total_forks: 212
   total_issues: 747
-  total_pulls: 823
+  total_pulls: 825
   total_releases: 156
   total_repositories: 1
   total_stars: 873
   what: dimensions-of-terrain
-  when: 2026-04-18 04:43:04.639109614 Z
+  when: 2026-04-21 04:50:02.342442007 Z
+- _id: 19882
+  _job: 24704568964
+  _time: 2026-04-21 04:58:08.463188552 Z
+  _version: 0.19.9/0.60.2/0.17.16
+  since: *133
+  some_backlog_size:
+  - 92
+  - 92
+  - 92
+  - 92
+  - 92
+  - 92
+  - 92
+  some_build_duration:
+  - 812
+  - 7
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 13
+  - 27
+  - 30
+  - 31
+  - 264
+  - 6
+  - 7
+  - 7
+  - 7
+  - 9
+  - 10
+  - 14
+  - 21
+  - 26
+  - 33
+  - 224
+  - 906
+  - 7
+  - 9
+  - 9
+  - 10
+  - 11
+  - 11
+  - 13
+  - 25
+  - 28
+  - 31
+  - 219
+  - 8
+  - 8
+  - 9
+  - 10
+  - 10
+  - 10
+  - 15
+  - 24
+  - 28
+  - 33
+  - 82
+  - 233
+  - 7
+  - 7
+  - 8
+  - 9
+  - 10
+  - 13
+  - 14
+  - 27
+  - 34
+  - 38
+  - 90
+  - 221
+  - 0
+  some_build_success_rate:
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  some_merged_pulls: 3
+  some_pull_files_size:
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 2
+  some_pull_lifetime:
+  - 15316.0
+  - 88971.0
+  - 60631.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 779
+  - 1588
+  - 890
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 1
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 1
+  some_unmerged_pulls: 0
+  what: quality-of-service
+  when: 2026-04-21 04:58:08.000000000 Z
