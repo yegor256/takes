@@ -91,7 +91,7 @@ final class ResponseOf {
             ) {
                 final byte[] buff = new byte[ResponseOf.BUFSIZE];
                 for (int read = body.read(buff); read >= 0; read = body.read(buff)) {
-                    out.write(buff);
+                    out.write(buff, 0, read);
                 }
             }
         } else {
