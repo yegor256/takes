@@ -76,7 +76,7 @@ final class MediaType implements Comparable<MediaType> {
      * @return TRUE if matches
      * @checkstyle BooleanExpressionComplexityCheck (10 lines)
      */
-    public boolean matches(final MediaType type) {
+    boolean matches(final MediaType type) {
         final String star = "*";
         return (this.high.equals(star)
             || type.high.equals(star)

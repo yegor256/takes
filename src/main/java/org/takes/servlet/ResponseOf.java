@@ -77,7 +77,7 @@ final class ResponseOf {
      * @param sresp Servlet response
      * @throws IOException If fails
      */
-    public void applyTo(final HttpServletResponse sresp) throws IOException {
+    void applyTo(final HttpServletResponse sresp) throws IOException {
         final Iterator<String> head = this.rsp.head().iterator();
         final Matcher matcher = ResponseOf.HTTP_MATCHER.matcher(head.next());
         if (matcher.matches()) {

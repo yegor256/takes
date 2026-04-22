@@ -174,7 +174,7 @@ public final class FkHitRefresh implements Fork {
          * @return The file to touch
          * @throws IOException If fails
          */
-        public File touchedFile() throws IOException {
+        File touchedFile() throws IOException {
             if (this.flag.isEmpty()) {
                 this.lock.writeLock().lock();
                 final File file = File.createTempFile("take", ".txt");
@@ -190,7 +190,7 @@ public final class FkHitRefresh implements Fork {
          * Touch the temporary file.
          * @throws IOException If fails
          */
-        public void touch() throws IOException {
+        void touch() throws IOException {
             try (OutputStream out = new IoChecked<>(
                 new ScalarOf<>(
                     () -> new OutputTo(this.touchedFile()).stream()

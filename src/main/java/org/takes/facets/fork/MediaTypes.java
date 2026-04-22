@@ -59,7 +59,7 @@ final class MediaTypes {
      * @param types Types
      * @return TRUE if any of these types are present inside this.list
      */
-    public boolean contains(final MediaTypes types) {
+    boolean contains(final MediaTypes types) {
         boolean contains = false;
         for (final MediaType type : types.list) {
             if (this.contains(type)) {
@@ -75,7 +75,7 @@ final class MediaTypes {
      * @param type Type
      * @return TRUE if this type is present inside this.list
      */
-    public boolean contains(final MediaType type) {
+    boolean contains(final MediaType type) {
         boolean contains = false;
         for (final MediaType mine : this.list) {
             if (mine.matches(type)) {
@@ -91,7 +91,7 @@ final class MediaTypes {
      * @param types Types
      * @return Merged list
      */
-    public MediaTypes merge(final MediaTypes types) {
+    MediaTypes merge(final MediaTypes types) {
         final SortedSet<MediaType> set = new TreeSet<>();
         set.addAll(this.list);
         set.addAll(types.list);
@@ -102,7 +102,7 @@ final class MediaTypes {
      * Is it empty?
      * @return TRUE if empty
      */
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return this.list.isEmpty();
     }
 

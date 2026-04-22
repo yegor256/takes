@@ -33,8 +33,7 @@ final class RsXsltTest {
      * Validate encoding.
      */
     @BeforeAll
-    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
-    public static void before() {
+    static void before() {
         Assumptions.assumeTrue(
             "UTF-8".equals(Charset.defaultCharset().name())
         );

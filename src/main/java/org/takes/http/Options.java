@@ -59,7 +59,7 @@ final class Options {
      * Is it a daemon?
      * @return TRUE if yes
      */
-    public boolean isDaemon() {
+    boolean isDaemon() {
         return this.map.containsKey("daemon");
     }
 
@@ -69,7 +69,7 @@ final class Options {
      * @throws IOException If fails
      */
     @SuppressWarnings("PMD.UnnecessaryLocalRule")
-    public ServerSocket socket() throws IOException {
+    ServerSocket socket() throws IOException {
         final String port = this.map.get("port");
         if (port == null) {
             throw new IllegalArgumentException("--port must be specified");
@@ -103,7 +103,7 @@ final class Options {
      * @return TRUE if this mode is ON
      * @since 0.9
      */
-    public boolean hitRefresh() {
+    boolean hitRefresh() {
         return this.map.containsKey("hit-refresh");
     }
 
@@ -111,7 +111,7 @@ final class Options {
      * Get the lifetime in milliseconds.
      * @return Port number
      */
-    public long lifetime() {
+    long lifetime() {
         return Long.parseLong(
             this.map.getOrDefault(
                 "lifetime", String.valueOf(Long.MAX_VALUE)
@@ -123,7 +123,7 @@ final class Options {
      * Get the threads.
      * @return Threads
      */
-    public int threads() {
+    int threads() {
         return Integer.parseInt(
             this.map.getOrDefault(
                 "threads",
@@ -136,7 +136,7 @@ final class Options {
      * Get the max latency in milliseconds.
      * @return Latency
      */
-    public long maxLatency() {
+    long maxLatency() {
         return Long.parseLong(
             this.map.getOrDefault(
                 "max-latency",
