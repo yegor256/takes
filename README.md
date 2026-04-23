@@ -19,13 +19,13 @@ Java 8 web development framework. Its key benefits, compared to all others,
 include these four fundamental principles:
 
 1. Not a single `null`
-([why is NULL bad?][null])
+([why NULL is bad][null])
 2. Not a single `public` `static` method
-([why are they bad?][utility])
+([why they're bad][utility])
 3. Not a single mutable class
-([why are they bad?][immutable])
+([why they're bad][immutable])
 4. Not a single `instanceof` keyword, type casting, or reflection
-([why?][casting])
+([why][casting])
 
 Of course, there are no configuration files.
 Besides that, these are the more traditional features, out of the box:
@@ -36,11 +36,11 @@ Besides that, these are the more traditional features, out of the box:
 * [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer)
 * Templates, including [Apache Velocity](http://velocity.apache.org/)
 
-This is what is not supported and will not be supported:
+The following is not and will not be supported:
 
 * [WebSockets](http://en.wikipedia.org/wiki/WebSocket)
 
-These two web systems use Takes, and they are open source:
+Open-source systems that use Takes:
 [rultor.com](http://www.rultor.com)
 ([sources](https://github.com/yegor256/rultor)),
 [jare.io](http://www.jare.io) ([sources](https://github.com/yegor256/jare)).
