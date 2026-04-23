@@ -62,7 +62,7 @@ final class MainRemoteTest {
      *
      * @since 0.23
      */
-    public static final class DemoApp {
+    static final class DemoApp {
         /**
          * Ctor.
          */
@@ -75,7 +75,7 @@ final class MainRemoteTest {
          * @param args Command line args
          * @throws IOException If fails
          */
-        public static void main(final String... args) throws IOException {
+        static void main(final String... args) throws IOException {
             new FtCli(new TkFixed("works fine!"), args).start(Exit.NEVER);
         }
     }
@@ -85,7 +85,7 @@ final class MainRemoteTest {
      *
      * @since 0.23
      */
-    public static final class DemoAppArgs {
+    static final class DemoAppArgs {
         /**
          * Ctor.
          */
@@ -98,7 +98,7 @@ final class MainRemoteTest {
          * @param args Command line args
          * @throws IOException If fails
          */
-        public static void main(final String... args) throws IOException {
+        static void main(final String... args) throws IOException {
             new FtCli(new TkFixed(args[1]), args[0]).start(Exit.NEVER);
         }
     }

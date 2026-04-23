@@ -69,7 +69,7 @@ final class SrvTakeTest {
      *
      * @since 1.16
      */
-    public final class TkApp implements Take {
+    final class TkApp implements Take {
         /**
          * ServletContext.
          */

@@ -85,7 +85,7 @@ public final class TkSmartRedirect extends TkWrap {
          * @return New location.
          * @throws IOException in case of error.
          */
-        public String location() throws IOException {
+        String location() throws IOException {
             final StringBuilder loc = new StringBuilder(this.origin);
             final URI target = URI.create(this.origin);
             final URI uri = URI.create(new RqRequestLine.Base(this.req).uri());
