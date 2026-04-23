@@ -60,8 +60,12 @@ public final class RqLive extends RqWrap {
             eof = false;
             if (data.get() == '\r') {
                 RqLive.checkLineFeed(input, baos, head.size() + 1);
-                if (baos.size() == 0) {
+                if (baos.size() == 0 && !head.isEmpty()) {
                     break;
+                }
+                if (baos.size() == 0) {
+                    data = RqLive.data(input, new Opt.Empty<>(), false);
+                    continue;
                 }
                 data = new Opt.Single<>(input.read());
                 final Opt<String> header = RqLive.newHeader(data, baos);
