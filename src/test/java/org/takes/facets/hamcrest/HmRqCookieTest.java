@@ -18,12 +18,22 @@ import org.takes.rq.RqWithHeader;
  */
 final class HmRqCookieTest {
 
+    /**
+     * Sample cookie name reused in assertions.
+     */
+    private static final String SESSION = "session";
+
+    /**
+     * Sample cookie value reused in assertions.
+     */
+    private static final String ABC = "abc";
+
     @Test
     void matchesCookieByNameAndValue() {
         MatcherAssert.assertThat(
-            "Request must have cookie 'session' with value 'abc'",
+            "Request must have cookie with the expected name and value",
             new RqWithHeader(new RqFake(), "Cookie: session=abc"),
-            new HmRqCookie("session", "abc")
+            new HmRqCookie(HmRqCookieTest.SESSION, HmRqCookieTest.ABC)
         );
     }
 
@@ -35,7 +45,7 @@ final class HmRqCookieTest {
                 new RqFake(),
                 "Cookie: user=Jeff; session=abc; theme=dark"
             ),
-            new HmRqCookie("session", "abc")
+            new HmRqCookie(HmRqCookieTest.SESSION, HmRqCookieTest.ABC)
         );
     }
 
@@ -53,7 +63,9 @@ final class HmRqCookieTest {
         MatcherAssert.assertThat(
             "Matcher must not match when Cookie header is absent",
             new RqFake(),
-            Matchers.not(new HmRqCookie("session", "abc"))
+            Matchers.not(
+                new HmRqCookie(HmRqCookieTest.SESSION, HmRqCookieTest.ABC)
+            )
         );
     }
 
@@ -62,13 +74,17 @@ final class HmRqCookieTest {
         MatcherAssert.assertThat(
             "Matcher must not match when cookie value differs",
             new RqWithHeader(new RqFake(), "Cookie: session=xyz"),
-            Matchers.not(new HmRqCookie("session", "abc"))
+            Matchers.not(
+                new HmRqCookie(HmRqCookieTest.SESSION, HmRqCookieTest.ABC)
+            )
         );
     }
 
     @Test
     void describesMismatchWithCookieName() {
-        final HmRqCookie matcher = new HmRqCookie("session", "abc");
+        final HmRqCookie matcher = new HmRqCookie(
+            HmRqCookieTest.SESSION, HmRqCookieTest.ABC
+        );
         final Request request = new RqWithHeader(
             new RqFake(), "Cookie: session=xyz"
         );
@@ -79,7 +95,7 @@ final class HmRqCookieTest {
             "Mismatch description must mention cookie name and actual value",
             description.toString(),
             Matchers.allOf(
-                Matchers.containsString("session"),
+                Matchers.containsString(HmRqCookieTest.SESSION),
                 Matchers.containsString("xyz")
             )
         );

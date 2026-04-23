@@ -18,12 +18,22 @@ import org.takes.rs.RsEmpty;
  */
 final class HmRsCookieTest {
 
+    /**
+     * Sample cookie name reused in assertions.
+     */
+    private static final String SESSION = "session";
+
+    /**
+     * Sample cookie value reused in assertions.
+     */
+    private static final String ABC = "abc";
+
     @Test
     void matchesCookieByNameAndValue() {
         MatcherAssert.assertThat(
-            "Response must have a Set-Cookie with name 'session' and value 'abc'",
-            new RsWithCookie("session", "abc"),
-            new HmRsCookie("session", "abc")
+            "Response must have a Set-Cookie with the expected name and value",
+            new RsWithCookie(HmRsCookieTest.SESSION, HmRsCookieTest.ABC),
+            new HmRsCookie(HmRsCookieTest.SESSION, HmRsCookieTest.ABC)
         );
     }
 
@@ -32,10 +42,10 @@ final class HmRsCookieTest {
         MatcherAssert.assertThat(
             "Matcher must ignore Path/HttpOnly/Secure attributes",
             new RsWithCookie(
-                "session", "abc",
+                HmRsCookieTest.SESSION, HmRsCookieTest.ABC,
                 "Path=/", "HttpOnly", "Secure"
             ),
-            new HmRsCookie("session", "abc")
+            new HmRsCookie(HmRsCookieTest.SESSION, HmRsCookieTest.ABC)
         );
     }
 
@@ -53,7 +63,9 @@ final class HmRsCookieTest {
         MatcherAssert.assertThat(
             "Matcher must not match a response without the named cookie",
             new RsEmpty(),
-            Matchers.not(new HmRsCookie("session", "abc"))
+            Matchers.not(
+                new HmRsCookie(HmRsCookieTest.SESSION, HmRsCookieTest.ABC)
+            )
         );
     }
 
@@ -61,33 +73,39 @@ final class HmRsCookieTest {
     void doesNotMatchWrongValue() {
         MatcherAssert.assertThat(
             "Matcher must not match if cookie value differs",
-            new RsWithCookie("session", "xyz"),
-            Matchers.not(new HmRsCookie("session", "abc"))
+            new RsWithCookie(HmRsCookieTest.SESSION, "xyz"),
+            Matchers.not(
+                new HmRsCookie(HmRsCookieTest.SESSION, HmRsCookieTest.ABC)
+            )
         );
     }
 
     @Test
-    void picksRightCookieAmongMany() {
-        final Response response = new RsWithCookie(
-            new RsWithCookie("a", "1"),
-            "b", "2"
-        );
-        MatcherAssert.assertThat(
-            "Matcher must find the 'b' cookie when multiple Set-Cookie headers exist",
-            response,
-            new HmRsCookie("b", "2")
-        );
+    void picksFirstCookieAmongMany() {
         MatcherAssert.assertThat(
             "Matcher must find the 'a' cookie when multiple Set-Cookie headers exist",
-            response,
+            new RsWithCookie(new RsWithCookie("a", "1"), "b", "2"),
             new HmRsCookie("a", "1")
         );
     }
 
     @Test
+    void picksSecondCookieAmongMany() {
+        MatcherAssert.assertThat(
+            "Matcher must find the 'b' cookie when multiple Set-Cookie headers exist",
+            new RsWithCookie(new RsWithCookie("a", "1"), "b", "2"),
+            new HmRsCookie("b", "2")
+        );
+    }
+
+    @Test
     void describesMismatchWithCookieName() {
-        final HmRsCookie matcher = new HmRsCookie("session", "abc");
-        final Response response = new RsWithCookie("session", "xyz", "Path=/");
+        final HmRsCookie matcher = new HmRsCookie(
+            HmRsCookieTest.SESSION, HmRsCookieTest.ABC
+        );
+        final Response response = new RsWithCookie(
+            HmRsCookieTest.SESSION, "xyz", "Path=/"
+        );
         matcher.matchesSafely(response);
         final StringDescription description = new StringDescription();
         matcher.describeMismatchSafely(response, description);
@@ -95,7 +113,7 @@ final class HmRsCookieTest {
             "Mismatch description must mention cookie name and actual value",
             description.toString(),
             Matchers.allOf(
-                Matchers.containsString("session"),
+                Matchers.containsString(HmRsCookieTest.SESSION),
                 Matchers.containsString("xyz")
             )
         );
