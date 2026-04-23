@@ -110,6 +110,50 @@ final class RqLiveTest {
         );
     }
 
+    @Test
+    void ignoresLeadingCrlfBeforeRequestLine() throws IOException {
+        final Request req = new RqLive(
+            new InputStreamOf(
+                new Joined(
+                    RqLiveTest.CRLF,
+                    "",
+                    "GET /leading HTTP/1.1",
+                    "Host:e",
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            "Leading CRLF must be ignored and request-line parsed",
+            new RqRequestLine.Base(req).uri(),
+            Matchers.equalTo("/leading")
+        );
+    }
+
+    @Test
+    void ignoresMultipleLeadingCrlfBeforeRequestLine() throws IOException {
+        final Request req = new RqLive(
+            new InputStreamOf(
+                new Joined(
+                    RqLiveTest.CRLF,
+                    "",
+                    "",
+                    "",
+                    "GET /many HTTP/1.1",
+                    "Host:e",
+                    "",
+                    ""
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            "Multiple leading CRLFs must be ignored",
+            new RqRequestLine.Base(req).uri(),
+            Matchers.equalTo("/many")
+        );
+    }
+
     private static Request simpleRequest() throws IOException {
         return new RqLive(
             new InputStreamOf(
