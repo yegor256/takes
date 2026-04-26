@@ -79,14 +79,12 @@ public final class XeMillis implements XeSource {
     public Iterable<Directive> toXembly() {
         final Directives dirs = new Directives();
         if (this.finish) {
-            dirs.xpath(this.name.toString())
-                .strict(1)
-                .xset(
-                    String.format(
-                        "%d - number(text())",
-                        System.currentTimeMillis()
-                    )
-                );
+            dirs.xpath(this.name.toString()).strict(1).xset(
+                String.format(
+                    "%d - number(text())",
+                    System.currentTimeMillis()
+                )
+            );
         } else {
             dirs.add(this.name.toString())
                 .set(Long.toString(System.currentTimeMillis()));

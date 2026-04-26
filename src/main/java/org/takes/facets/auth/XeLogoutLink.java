@@ -28,8 +28,7 @@ public final class XeLogoutLink extends XeWrap {
      * @param req Request
      * @throws IOException If fails
      */
-    public XeLogoutLink(final Request req)
-        throws IOException {
+    public XeLogoutLink(final Request req) throws IOException {
         this(req, "takes:logout", PsByFlag.class.getSimpleName());
     }
 

@@ -80,8 +80,7 @@ public final class FtRemote implements Front {
      * @param sec Value of {@code true} if the front is secure,
      *  {@code false} otherwise
      */
-    FtRemote(final Front front, final ServerSocket skt,
-        final boolean sec) {
+    FtRemote(final Front front, final ServerSocket skt, final boolean sec) {
         this.origin = front;
         this.socket = skt;
         this.secured = sec;
@@ -185,6 +184,7 @@ public final class FtRemote implements Front {
      */
     @FunctionalInterface
     public interface Script {
+
         /**
          * Execute the script against the running server.
          *

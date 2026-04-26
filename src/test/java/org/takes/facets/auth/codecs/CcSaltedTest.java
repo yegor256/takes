@@ -79,5 +79,4 @@ final class CcSaltedTest {
             () -> new CcSalted(new CcPlain()).decode(new byte[0])
         );
     }
-
 }

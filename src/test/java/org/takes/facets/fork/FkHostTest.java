@@ -4,7 +4,7 @@
  */
 package org.takes.facets.fork;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -22,21 +22,18 @@ import org.takes.tk.TkText;
  * Test case for {@link FkHost}.
  * @since 0.32
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FkHostTest {
 
     @Test
     void matchesByHost() throws Exception {
         MatcherAssert.assertThat(
             "FkHost must match when the host header matches the configured host",
-            new FkHost("www.foo.com", new TkText("boom"))
-                .route(
-                    new RqWithHeader(
-                        new RqEmpty(),
-                        "Host: www.foo.com"
-                    )
+            new FkHost("www.foo.com", new TkText("boom")).route(
+                new RqWithHeader(
+                    new RqEmpty(),
+                    "Host: www.foo.com"
                 )
-                .has(),
+            ).has(),
             Matchers.is(true)
         );
     }
@@ -73,8 +70,7 @@ final class FkHostTest {
         Assertions.assertThrows(
             HttpException.class,
             () -> new FkHost("google.com", new TkEmpty())
-                .route(new RqFake(Arrays.asList("GET / HTTP/1.1"), "body"))
+                .route(new RqFake(Collections.singletonList("GET / HTTP/1.1"), "body"))
         );
     }
-
 }

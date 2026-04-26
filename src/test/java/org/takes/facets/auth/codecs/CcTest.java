@@ -13,6 +13,7 @@ import org.takes.facets.auth.Identity;
  */
 @SuppressWarnings("PMD.TestClassWithoutTestCases")
 final class CcTest implements Codec {
+
     @Override
     public Identity decode(final byte[] bytes) {
         return new Identity.Simple(new String(bytes, StandardCharsets.UTF_8));

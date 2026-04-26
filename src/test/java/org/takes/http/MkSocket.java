@@ -12,7 +12,6 @@ import java.net.Socket;
 
 /**
  * Socket mock for reuse.
- *
  * @since 0.32
  */
 public final class MkSocket extends Socket {

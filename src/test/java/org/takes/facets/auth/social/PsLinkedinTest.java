@@ -50,11 +50,11 @@ final class PsLinkedinTest {
         final Take take = new TkFork(
             new FkRegex(
                 tokenpath,
-                new TokenTake(code, lapp, lkey, tokenpath)
+                new PsLinkedinTest.TokenTake(code, lapp, lkey, tokenpath)
             ),
             new FkRegex(
                 "/v1/people",
-                new PeopleTake(identifier, firstname, lastname, frodo, baggins)
+                new PsLinkedinTest.PeopleTake(identifier, firstname, lastname, frodo, baggins)
             )
         );
         final AtomicReference<Identity> identity = new AtomicReference<>();
@@ -141,11 +141,10 @@ final class PsLinkedinTest {
                 Matchers.endsWith(this.tokenpath)
             );
             return new RsJson(
-                Json.createObjectBuilder()
-                    .add(
-                        "access_token",
-                        RandomStringUtils.randomAlphanumeric(10)
-                    ).build()
+                Json.createObjectBuilder().add(
+                    "access_token",
+                    RandomStringUtils.randomAlphanumeric(10)
+                ).build()
             );
         }
     }
@@ -213,5 +212,4 @@ final class PsLinkedinTest {
             );
         }
     }
-
 }

@@ -142,6 +142,7 @@ final class CcAesTest {
      * @since 0.13.8
      */
     private static final class FkRandom extends SecureRandom {
+
         /**
          * Serial id.
          */

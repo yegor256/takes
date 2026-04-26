@@ -63,13 +63,14 @@ public final class XeGithubLink extends XeWrap {
         final CharSequence rel, final CharSequence flag) throws IOException {
         return new XeLink(
             rel,
-            new Href("https://github.com/login/oauth/authorize")
-                .with("client_id", app)
-                .with(
-                    "redirect_uri",
-                    new RqHref.Base(req).href()
-                        .with(flag, PsGithub.class.getSimpleName())
+            new Href("https://github.com/login/oauth/authorize").with(
+                "client_id", app
+            ).with(
+                "redirect_uri",
+                new RqHref.Base(req).href().with(
+                    flag, PsGithub.class.getSimpleName()
                 )
+            )
         );
     }
 }

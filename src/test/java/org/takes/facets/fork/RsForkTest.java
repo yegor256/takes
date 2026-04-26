@@ -96,5 +96,4 @@ final class RsForkTest {
             Matchers.endsWith("a POST")
         );
     }
-
 }

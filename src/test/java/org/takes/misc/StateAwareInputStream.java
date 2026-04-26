@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * InputStream decorator that knows if it was closed or not.
- *
  * @since 0.31
  */
 public final class StateAwareInputStream extends InputStream {
@@ -27,7 +26,6 @@ public final class StateAwareInputStream extends InputStream {
 
     /**
      * Constructor.
-     *
      * @param stream InputStream to decorate
      */
     public StateAwareInputStream(final InputStream stream) {

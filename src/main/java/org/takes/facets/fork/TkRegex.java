@@ -33,6 +33,7 @@ public interface TkRegex {
      * @since 0.28
      */
     final class Fake implements Take {
+
         /**
          * Original take, expecting {@link RqRegex}.
          */

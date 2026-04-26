@@ -118,13 +118,12 @@ public final class FtCli implements Front {
     private Exit exit(final Exit exit) {
         return new Exit.Or(
             exit,
-            new Lifetime(System.currentTimeMillis(), this.options.lifetime())
+            new FtCli.Lifetime(System.currentTimeMillis(), this.options.lifetime())
         );
     }
 
     /**
      * Lifetime exceeded exit.
-     *
      * @since 0.32.5
      */
     private static final class Lifetime implements Exit {

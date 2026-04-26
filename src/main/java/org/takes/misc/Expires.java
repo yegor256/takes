@@ -159,14 +159,12 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final long expiration) {
-            this.format = new Unchecked<>(
-                new Sticky<>(
-                    () -> DateTimeFormatter.ofPattern(ptn, locale)
-                        .withZone(ZoneId.of("GMT"))
+            this(
+                ptn,
+                locale,
+                new Unchecked<>(
+                    new Sticky<>(() -> Instant.ofEpochMilli(expiration))
                 )
-            );
-            this.expires = new Unchecked<>(
-                new Sticky<>(() -> Instant.ofEpochMilli(expiration))
             );
         }
 
@@ -178,13 +176,28 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final Instant expires) {
+            this(
+                ptn,
+                locale,
+                new Unchecked<>(new Sticky<>(() -> expires))
+            );
+        }
+
+        /**
+         * Ctor.
+         * @param ptn Date format pattern
+         * @param locale Locale
+         * @param expires Lazy expires
+         */
+        private Date(final String ptn, final Locale locale,
+            final Unchecked<Instant> expires) {
             this.format = new Unchecked<>(
                 new Sticky<>(
                     () -> DateTimeFormatter.ofPattern(ptn, locale)
                         .withZone(ZoneId.of("GMT"))
                 )
             );
-            this.expires = new Unchecked<>(new Sticky<>(() -> expires));
+            this.expires = expires;
         }
 
         @Override

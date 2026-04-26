@@ -73,8 +73,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
      * @param cookie Cookie name matcher
      * @param val Cookie value matcher
      */
-    public HmRsCookie(final Matcher<String> cookie,
-        final Matcher<String> val) {
+    public HmRsCookie(final Matcher<String> cookie, final Matcher<String> val) {
         super();
         this.name = cookie;
         this.value = val;

@@ -23,7 +23,6 @@ import org.takes.rq.RqWithoutHeader;
 
 /**
  * Test case for {@link  RqFrom}.
- *
  * @since 1.15
  */
 @SuppressWarnings({"PMD.TooManyMethods", "PMD.UnnecessaryLocalRule"})

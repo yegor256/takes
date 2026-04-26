@@ -29,6 +29,7 @@ import org.xembly.Directives;
  */
 @EqualsAndHashCode
 public final class XeFlash implements XeSource {
+
     /**
      * Compiled RsFlash message regexp pattern.
      */

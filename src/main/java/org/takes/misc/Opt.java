@@ -22,6 +22,7 @@ import lombok.EqualsAndHashCode;
  * @since 0.14
  */
 public interface Opt<T> {
+
     /**
      * Returns the contained instance.
      * @return Instance
@@ -48,6 +49,7 @@ public interface Opt<T> {
      */
     @EqualsAndHashCode
     final class Single<T> implements Opt<T> {
+
         /**
          * Origin.
          */
@@ -86,6 +88,7 @@ public interface Opt<T> {
      * @since 0.14
      */
     final class Empty<T> implements Opt<T> {
+
         @Override
         public T get() {
             throw new UnsupportedOperationException(

@@ -72,5 +72,4 @@ final class CcHexTest {
             Matchers.equalTo(Identity.ANONYMOUS)
         );
     }
-
 }

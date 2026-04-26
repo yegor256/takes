@@ -118,7 +118,6 @@ public final class RsWithCookie extends RsWrap {
      * Validates cookie value according to RFC 6265 section 4.1.1.
      * @param value The cookie value to validate
      * @return The validated cookie value
-     * @throws IllegalArgumentException If value contains invalid characters
      */
     private static CharSequence validValue(final CharSequence value) {
         if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
@@ -136,7 +135,6 @@ public final class RsWithCookie extends RsWrap {
      * Validates cookie name according to RFC 2616, section 2.2.
      * @param name The cookie name to validate
      * @return The validated cookie name
-     * @throws IllegalArgumentException If name contains invalid characters
      */
     private static CharSequence validName(final CharSequence name) {
         if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {

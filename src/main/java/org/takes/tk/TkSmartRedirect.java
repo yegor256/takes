@@ -47,7 +47,7 @@ public final class TkSmartRedirect extends TkWrap {
     public TkSmartRedirect(final String location, final int code) {
         super(
             req -> new RsRedirect(
-                new RedirectParams(
+                new TkSmartRedirect.RedirectParams(
                     req, location
                 ).location(),
                 code
@@ -60,6 +60,7 @@ public final class TkSmartRedirect extends TkWrap {
      * @since 1.9
      */
     private static final class RedirectParams {
+
         /**
          * Original request.
          */

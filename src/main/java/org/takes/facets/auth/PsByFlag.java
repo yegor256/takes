@@ -87,8 +87,7 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -136,6 +135,7 @@ public final class PsByFlag implements Pass {
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<Pattern, Pass> {
+
         /**
          * Serialization marker.
          */

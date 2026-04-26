@@ -35,6 +35,7 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
      * Ctor.
      *
      * <p>Will create instance with defaultCharset.
+     *
      * @param value Value to test against
      */
     public HmBody(final String value) {
@@ -81,12 +82,11 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
     public void describeMismatchSafely(final T item,
         final Description description) {
         try {
-            description.appendText("body was: ")
-                .appendText(
-                    Arrays.toString(
-                        HmBody.asBytes(HmBody.itemBody(item))
-                    )
-                );
+            description.appendText("body was: ").appendText(
+                Arrays.toString(
+                    HmBody.asBytes(HmBody.itemBody(item))
+                )
+            );
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }

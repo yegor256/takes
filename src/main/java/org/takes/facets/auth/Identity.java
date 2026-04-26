@@ -60,6 +60,7 @@ public interface Identity {
      * @since 0.1
      */
     final class Simple implements Identity {
+
         /**
          * URN.
          */

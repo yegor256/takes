@@ -44,10 +44,12 @@ public interface RqHref extends Request {
      * Request decorator, for HTTP URI query parsing.
      *
      * <p>The class is immutable and thread-safe.
+     *
      * @since 0.13.1
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqHref {
+
         /**
          * Ctor.
          * @param req Original request
@@ -58,7 +60,6 @@ public interface RqHref extends Request {
 
         @Override
         public Href href() throws IOException {
-            final String uri = new RqRequestLine.Base(this).uri();
             final Iterator<String> hosts = new RqHeaders.Base(this)
                 .header("host").iterator();
             final Iterator<String> protos = new RqHeaders.Base(this)
@@ -80,7 +81,7 @@ public interface RqHref extends Request {
                     "%s://%s%s",
                     new UncheckedText(proto).asString(),
                     new UncheckedText(host).asString(),
-                    uri
+                    new RqRequestLine.Base(this).uri()
                 )
             );
         }
@@ -95,6 +96,7 @@ public interface RqHref extends Request {
      */
     @EqualsAndHashCode
     final class Smart implements RqHref {
+
         /**
          * Original.
          */

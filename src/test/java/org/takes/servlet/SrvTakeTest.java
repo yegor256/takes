@@ -24,11 +24,10 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link SrvTake}.
- *
  * @since 1.16
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class SrvTakeTest {
+
     /**
      * Message returned if servlet Takes is executed correctly.
      */
@@ -49,27 +48,25 @@ final class SrvTakeTest {
         servlet.addMapping("/test");
         context.deploy(server);
         server.start();
-        new JdkRequest("http://localhost:18080/test")
-            .fetch()
-            .as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .assertBody(
-                new StringContains(
-                    new FormattedText(
-                        SrvTakeTest.MSG,
-                        name
-                    ).asString()
-                )
-            );
+        new JdkRequest("http://localhost:18080/test").fetch().as(
+            RestResponse.class
+        ).assertStatus(HttpURLConnection.HTTP_OK).assertBody(
+            new StringContains(
+                new FormattedText(
+                    SrvTakeTest.MSG,
+                    name
+                ).asString()
+            )
+        );
         server.shutdownNow();
     }
 
     /**
      * Fake TkApp (for {@link SrvTake} test only).
-     *
      * @since 1.16
      */
     final class TkApp implements Take {
+
         /**
          * ServletContext.
          */

@@ -82,6 +82,7 @@ public final class RsJson extends RsWrap {
      */
     @FunctionalInterface
     public interface Source {
+
         /**
          * Get JSON value.
          * @return JSON

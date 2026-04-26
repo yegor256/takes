@@ -52,5 +52,4 @@ public interface Front {
      * @throws IOException If network operations fail or server cannot start
      */
     void start(Exit exit) throws IOException;
-
 }

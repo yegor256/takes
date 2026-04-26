@@ -95,7 +95,6 @@ public interface Token {
      * and expiration information for secure token-based authentication.
      * @since 1.4
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     final class Jwt implements Token {
 
         /**
@@ -135,14 +134,12 @@ public interface Token {
                 new Sticky<>(
                     () -> {
                         final Instant now = Instant.now();
-                        return Json.createObjectBuilder()
-                            .add(Token.Jwt.ISSUED, Token.Jwt.ISOFORMAT.format(now))
-                            .add(
-                                Token.Jwt.EXPIRATION,
-                                Token.Jwt.ISOFORMAT.format(now.plusSeconds(age))
-                            )
-                            .add(Token.Jwt.SUBJECT, idt.urn())
-                            .build();
+                        return Json.createObjectBuilder().add(
+                            Token.Jwt.ISSUED, Token.Jwt.ISOFORMAT.format(now)
+                        ).add(
+                            Token.Jwt.EXPIRATION,
+                            Token.Jwt.ISOFORMAT.format(now.plusSeconds(age))
+                        ).add(Token.Jwt.SUBJECT, idt.urn()).build();
                     }
                 )
             );

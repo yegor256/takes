@@ -41,6 +41,7 @@ public interface RqRegex extends Request {
      * @since 0.9
      */
     final class Fake implements RqRegex {
+
         /**
          * Original request.
          */

@@ -132,5 +132,4 @@ final class TkAuthTest {
             new HasString("Set-Cookie: PsCookie=")
         );
     }
-
 }

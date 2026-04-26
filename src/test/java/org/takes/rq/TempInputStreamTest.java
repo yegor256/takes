@@ -26,9 +26,11 @@ final class TempInputStreamTest {
         try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
             out.write("Temp file reading test");
         }
-        try (InputStream body = new TempInputStream(
-            Files.newInputStream(file.toPath()), file
-        )) {
+        try (
+            InputStream body = new TempInputStream(
+                Files.newInputStream(file.toPath()), file
+            )
+        ) {
             MatcherAssert.assertThat(
                 "TempInputStream must be available for reading",
                 body.available(),

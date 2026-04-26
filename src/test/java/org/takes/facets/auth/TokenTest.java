@@ -21,6 +21,7 @@ import org.takes.facets.auth.Token.Jose;
  * @since 1.5
  */
 final class TokenTest {
+
     @Test
     void joseAlgorithm() {
         MatcherAssert.assertThat(

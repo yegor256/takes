@@ -60,6 +60,7 @@ import org.takes.rs.RsWithoutHeader;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public final class HttpServletResponseFake implements HttpServletResponse {
+
     /**
      * A Takes response.
      */
@@ -109,10 +110,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
     }
 
     @Override
-    public void sendError(
-        final int code,
-        final String reason
-    ) {
+    public void sendError(final int code, final String reason) {
         this.response.set(
             new RsWithStatus(
                 this.response.get(),

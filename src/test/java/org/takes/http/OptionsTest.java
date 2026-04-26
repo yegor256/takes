@@ -31,5 +31,4 @@ final class OptionsTest {
             Matchers.is(2)
         );
     }
-
 }

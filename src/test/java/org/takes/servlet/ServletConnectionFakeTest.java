@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link  ServletConnectionFake}.
- *
  * @since 2.0
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class ServletConnectionFakeTest {
+
     @Test
     void connectionIdEmptyCtor() {
         final ServletConnectionFake conn = new ServletConnectionFake();

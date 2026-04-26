@@ -15,7 +15,6 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link TkJoinedCookies}.
- *
  * @since 0.11
  * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
@@ -39,5 +38,4 @@ final class TkJoinedCookiesTest {
             new HasString("Set-Cookie: a=1, b=1; Path=/")
         );
     }
-
 }

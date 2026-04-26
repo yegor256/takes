@@ -22,5 +22,4 @@ final class RqRegexTest {
             Matchers.equalTo("hello.txt")
         );
     }
-
 }

@@ -12,7 +12,6 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link HmRqTextBody}.
- *
  * @since 2.0
  */
 final class HmRqTextRsBodyTest {

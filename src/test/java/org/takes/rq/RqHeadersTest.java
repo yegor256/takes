@@ -87,5 +87,4 @@ final class RqHeadersTest {
             Matchers.equalTo(type)
         );
     }
-
 }

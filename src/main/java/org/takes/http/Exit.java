@@ -58,6 +58,7 @@ public interface Exit {
      * @since 0.28
      */
     final class Or implements Exit {
+
         /**
          * Left.
          */
@@ -95,6 +96,7 @@ public interface Exit {
      * @since 0.28
      */
     final class And implements Exit {
+
         /**
          * Left.
          */
@@ -132,6 +134,7 @@ public interface Exit {
      * @since 0.28
      */
     final class Not implements Exit {
+
         /**
          * Origin.
          */
@@ -150,5 +153,4 @@ public interface Exit {
             return !this.origin.ready();
         }
     }
-
 }

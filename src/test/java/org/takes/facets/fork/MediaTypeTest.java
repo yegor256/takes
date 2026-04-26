@@ -96,5 +96,4 @@ final class MediaTypeTest {
             () -> new MediaType("\n\n\t\r\u20ac00")
         );
     }
-
 }

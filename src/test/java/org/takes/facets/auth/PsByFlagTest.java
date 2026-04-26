@@ -26,6 +26,7 @@ import org.takes.rs.RsWithType;
  * @since 0.10
  */
 final class PsByFlagTest {
+
     @Test
     void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(

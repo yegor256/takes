@@ -18,6 +18,7 @@ import org.takes.rs.RsPrint;
  * @since 0.10
  */
 final class TkRedirectTest {
+
     /**
      * Constant variable for HTTP header testing.
      */
@@ -84,5 +85,4 @@ final class TkRedirectTest {
             )
         );
     }
-
 }

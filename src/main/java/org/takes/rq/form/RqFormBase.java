@@ -57,8 +57,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
     }
 
     @Override
-    public Iterable<String> param(final CharSequence key)
-        throws IOException {
+    public Iterable<String> param(final CharSequence key) throws IOException {
         final List<String> values = this.map().getOrDefault(
             new UncheckedText(
                 new Lowered(key.toString())

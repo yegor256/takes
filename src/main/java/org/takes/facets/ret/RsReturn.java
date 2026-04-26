@@ -43,8 +43,7 @@ public final class RsReturn extends RsWrap {
      * @param loc The location URL to store as return location
      * @throws IOException If location validation or encoding fails
      */
-    public RsReturn(final Response res, final String loc)
-        throws IOException {
+    public RsReturn(final Response res, final String loc) throws IOException {
         this(res, loc, RsReturn.class.getSimpleName());
     }
 

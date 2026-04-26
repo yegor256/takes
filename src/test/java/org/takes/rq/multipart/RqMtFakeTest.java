@@ -29,10 +29,10 @@ import org.takes.rq.RqWithHeaders;
  */
 @SuppressWarnings({
     "PMD.TooManyMethods",
-    "PMD.UnnecessaryLocalRule",
-    "PMD.UnitTestContainsTooManyAsserts"
+    "PMD.UnnecessaryLocalRule"
 })
 final class RqMtFakeTest {
+
     /**
      * Format string for {@code Content-Length} header.
      */

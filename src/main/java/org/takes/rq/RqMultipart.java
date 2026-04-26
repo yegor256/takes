@@ -31,5 +31,4 @@ public interface RqMultipart extends Request {
      * @return All names
      */
     Iterable<String> names();
-
 }

@@ -54,5 +54,4 @@ public interface Take {
      * @throws Exception If fails
      */
     Response act(Request req) throws Exception;
-
 }

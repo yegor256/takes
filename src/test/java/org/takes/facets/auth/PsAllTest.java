@@ -71,7 +71,7 @@ final class PsAllTest {
     }
 
     @Test
-    void testOneSuccessful() throws Exception {
+    void passesWhenSinglePassSucceeds() throws Exception {
         MatcherAssert.assertThat(
             "Single successful pass must return true",
             new PsAll(
@@ -83,7 +83,7 @@ final class PsAllTest {
     }
 
     @Test
-    void testOneFail() throws Exception {
+    void failsWhenSinglePassFails() throws Exception {
         MatcherAssert.assertThat(
             "Single failed pass must return false",
             new PsAll(
@@ -95,7 +95,7 @@ final class PsAllTest {
     }
 
     @Test
-    void testSuccessfulIdx() throws Exception {
+    void returnsIdentityFromIndex() throws Exception {
         final int index = 3;
         final Pass resulting = new PsFixed(
             new Identity.Simple("urn:foo:test")
@@ -117,7 +117,7 @@ final class PsAllTest {
     }
 
     @Test
-    void testFail() throws Exception {
+    void failsWhenAnyPassFails() throws Exception {
         MatcherAssert.assertThat(
             "Must return false when any pass fails",
             new PsAll(

@@ -40,8 +40,7 @@ public final class PsFixed implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 }

@@ -68,5 +68,4 @@ final class FtCliTest {
             throw new IllegalStateException(ex);
         }
     }
-
 }

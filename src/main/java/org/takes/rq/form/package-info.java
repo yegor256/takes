@@ -59,6 +59,7 @@
  * new RqFormSmart(base).single("alpha")
  * }
  * </pre>
+ *
  * @since 0.33
  */
 package org.takes.rq.form;

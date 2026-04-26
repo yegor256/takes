@@ -9,7 +9,6 @@ import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Func;
-import org.cactoos.Scalar;
 import org.cactoos.map.MapEntry;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Joined;
@@ -73,8 +72,7 @@ public final class TkSlf4j implements Take {
     @Override
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     public Response act(final Request req) throws Exception {
-        final Scalar<Long> time = System::currentTimeMillis;
-        final long start = time.value();
+        final long mark = System.currentTimeMillis();
         final Logger logger = LoggerFactory.getLogger(this.target);
         final Func<MapEntry<String, Object[]>, String> entry =
             params -> new Joined(
@@ -85,7 +83,10 @@ public final class TkSlf4j implements Take {
                     new RqHref.Base(req).href()
                 ),
                 new FormattedText(params.getKey(), params.getValue()),
-                new FormattedText("in %d ms", time.value() - start)
+                new FormattedText(
+                    "in %d ms",
+                    System.currentTimeMillis() - mark
+                )
             ).asString();
         try {
             final Response rsp = this.origin.act(req);

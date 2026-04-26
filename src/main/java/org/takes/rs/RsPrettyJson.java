@@ -87,10 +87,10 @@ public final class RsPrettyJson implements Response {
      * @return New properly formatted body
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
-        try (JsonReader rdr = Json.createReader(body);
+        try (
+            JsonReader rdr = Json.createReader(body);
             JsonWriter wrt = Json.createWriterFactory(
                 Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
             ).createWriter(res)

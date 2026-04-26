@@ -11,7 +11,6 @@ import org.takes.rs.RsWithBody;
 
 /**
  * Test case for {@link HmRsTextBody}.
- *
  * @since 2.0
  */
 final class HmRsTextRsBodyTest {

@@ -9,5 +9,4 @@ package org.takes.misc;
  * @since 0.24
  */
 public interface PerformanceTests {
-
 }

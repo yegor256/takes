@@ -75,5 +75,4 @@ final class RqFakeTest {
             Matchers.not(Matchers.containsString(body))
         );
     }
-
 }

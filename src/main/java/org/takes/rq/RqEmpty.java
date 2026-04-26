@@ -4,7 +4,7 @@
  */
 package org.takes.rq;
 
-import java.util.Arrays;
+import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.InputStreamOf;
 
@@ -46,10 +46,9 @@ public final class RqEmpty extends RqWrap {
     public RqEmpty(final CharSequence method, final CharSequence query) {
         super(
             new RequestOf(
-                Arrays.asList(String.format("%s %s", method, query)),
+                Collections.singletonList(String.format("%s %s", method, query)),
                 new InputStreamOf("")
             )
         );
     }
-
 }

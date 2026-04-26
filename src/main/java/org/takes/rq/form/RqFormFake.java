@@ -36,8 +36,7 @@ public final class RqFormFake implements RqForm {
     }
 
     @Override
-    public Iterable<String> param(final CharSequence name)
-        throws IOException {
+    public Iterable<String> param(final CharSequence name) throws IOException {
         return this.fake.param(name);
     }
 
@@ -60,7 +59,6 @@ public final class RqFormFake implements RqForm {
      * Validate parameters.
      * @param params Parameters
      * @return Validated parameters if their count is even
-     * @throws IllegalArgumentException if parameters count is odd.
      */
     private static String[] validated(final String... params) {
         if (params.length % 2 != 0) {

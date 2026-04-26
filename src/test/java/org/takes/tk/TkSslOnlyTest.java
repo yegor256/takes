@@ -43,5 +43,4 @@ final class TkSslOnlyTest {
             new HasString("https://www.0crat.com/one/two?a=1")
         );
     }
-
 }

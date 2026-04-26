@@ -197,7 +197,7 @@ public final class FkRegex implements Fork {
         if (matcher.matches()) {
             resp = new Opt.Single<>(
                 this.target.value().act(
-                    new RqMatcher(matcher, req)
+                    new FkRegex.RqMatcher(matcher, req)
                 )
             );
         } else {

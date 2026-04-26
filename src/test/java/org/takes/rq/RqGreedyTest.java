@@ -59,5 +59,4 @@ final class RqGreedyTest {
             )
         );
     }
-
 }

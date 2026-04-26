@@ -19,6 +19,7 @@ import org.takes.tk.TkWrap;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class TkConsumes extends TkWrap {
+
     /**
      * Ctor.
      * @param take Original take

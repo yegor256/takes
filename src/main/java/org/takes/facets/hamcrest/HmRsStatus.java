@@ -45,8 +45,9 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
     @Override
     public Integer featureValueOf(final Response response) {
         try {
-            final String head = response.head().iterator().next();
-            return Integer.parseInt(head.split(" ")[1]);
+            return Integer.parseInt(
+                response.head().iterator().next().split(" ")[1]
+            );
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);
         }

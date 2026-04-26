@@ -26,5 +26,4 @@ final class FkParamsTest {
             Matchers.is(true)
         );
     }
-
 }

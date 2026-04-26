@@ -72,5 +72,4 @@ final class FkHitRefreshTest {
         FileUtils.touch(temp.resolve("hey.txt").toFile());
         return fork;
     }
-
 }

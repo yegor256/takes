@@ -118,5 +118,4 @@ final class TkTextTest {
             new HasString(body)
         );
     }
-
 }

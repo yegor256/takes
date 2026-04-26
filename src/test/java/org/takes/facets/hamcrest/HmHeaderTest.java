@@ -109,7 +109,7 @@ final class HmHeaderTest {
     }
 
     @Test
-    void testMismatchMessage() {
+    void describesMismatchMessage() {
         final HmHeader<Request> matcher = new HmHeader<>(
             "content-type", "text/plain"
         );

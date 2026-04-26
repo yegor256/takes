@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public class BkWrap implements Back {
+
     /**
      * Original back.
      */
@@ -31,5 +32,4 @@ public class BkWrap implements Back {
     public final void accept(final Socket socket) throws IOException {
         this.origin.accept(socket);
     }
-
 }

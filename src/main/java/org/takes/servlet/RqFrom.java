@@ -37,6 +37,7 @@ import org.takes.Request;
  * @since 2.0
  */
 final class RqFrom implements Request {
+
     /**
      * Servlet request.
      */
@@ -53,12 +54,12 @@ final class RqFrom implements Request {
     @Override
     public Iterable<String> head() {
         final Collection<String> head = new LinkedList<>();
-        head.add(new HttpHead(this.sreq).toString());
+        head.add(new RqFrom.HttpHead(this.sreq).toString());
         final Collection<String> names = Collections.list(
             this.sreq.getHeaderNames()
         );
         if (!names.stream().anyMatch("host"::equalsIgnoreCase)) {
-            head.add(new HttpHost(this.sreq).toString());
+            head.add(new RqFrom.HttpHost(this.sreq).toString());
         }
         names.forEach(
             header -> head.add(
@@ -148,6 +149,7 @@ final class RqFrom implements Request {
      * @since 2.0
      */
     private static final class HttpHost {
+
         /**
          * Default http port.
          */

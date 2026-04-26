@@ -22,5 +22,4 @@ final class IdentityTest {
             new IsEqual<>(Identity.ANONYMOUS)
         );
     }
-
 }

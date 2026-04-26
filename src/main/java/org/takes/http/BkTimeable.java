@@ -41,6 +41,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class BkTimeable extends Thread implements Back {
+
     /**
      * Original back.
      */

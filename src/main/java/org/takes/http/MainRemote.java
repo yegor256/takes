@@ -84,7 +84,7 @@ public final class MainRemote {
             passed[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
-            new MainMethod(
+            new MainRemote.MainMethod(
                 this.app.getDeclaredMethod("main", String[].class),
                 passed
             )
@@ -155,6 +155,7 @@ public final class MainRemote {
      */
     @FunctionalInterface
     public interface Script {
+
         /**
          * Execute it against this URI.
          * @param home URI of the running front
@@ -165,7 +166,6 @@ public final class MainRemote {
 
     /**
      * Runnable main method.
-     *
      * @since 0.32.5
      */
     private static final class MainMethod implements Runnable {

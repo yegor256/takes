@@ -77,15 +77,14 @@ public final class XeGoogleLink extends XeWrap {
         final CharSequence rel, final CharSequence redir) throws IOException {
         return new XeLink(
             rel,
-            new Href("https://accounts.google.com/o/oauth2/auth")
-                .with("client_id", app)
-                .with("redirect_uri", redir)
-                .with("response_type", "code")
-                .with("state", new RqHref.Base(req).href())
-                .with(
-                    "scope",
-                    "https://www.googleapis.com/auth/userinfo.profile"
-                )
+            new Href("https://accounts.google.com/o/oauth2/auth").with(
+                "client_id", app
+            ).with("redirect_uri", redir).with(
+                "response_type", "code"
+            ).with("state", new RqHref.Base(req).href()).with(
+                "scope",
+                "https://www.googleapis.com/auth/userinfo.profile"
+            )
         );
     }
 }

@@ -29,5 +29,4 @@ final class RsPreviousTest {
             )
         );
     }
-
 }

@@ -59,8 +59,9 @@ public final class CcCompact implements Codec {
 
     @Override
     public Identity decode(final byte[] bytes) {
-        try (DataInputStream stream = new DataInputStream(
-            new ByteArrayInputStream(bytes)
+        try (
+            DataInputStream stream = new DataInputStream(
+                new ByteArrayInputStream(bytes)
             )
         ) {
             return new Identity.Simple(

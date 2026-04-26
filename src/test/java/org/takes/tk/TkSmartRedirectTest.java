@@ -14,6 +14,7 @@ import org.takes.rq.RqFake;
  * @since 0.10
  */
 final class TkSmartRedirectTest {
+
     @Test
     void redirectCarriesQueryAndFragment() throws Exception {
         MatcherAssert.assertThat(
@@ -41,5 +42,4 @@ final class TkSmartRedirectTest {
             )
         );
     }
-
 }

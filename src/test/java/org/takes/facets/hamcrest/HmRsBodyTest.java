@@ -17,7 +17,6 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link HmBody}.
- *
  * @since 2.0
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

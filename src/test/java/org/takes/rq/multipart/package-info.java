@@ -5,7 +5,6 @@
 
 /**
  * Multipart tests.
- *
  * @since 0.33
  */
 package org.takes.rq.multipart;

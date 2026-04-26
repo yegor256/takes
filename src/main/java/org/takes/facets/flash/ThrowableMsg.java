@@ -35,7 +35,7 @@ final class ThrowableMsg implements CharSequence {
 
     @Override
     public int length() {
-        return this.toString().length();
+        return this.err.getLocalizedMessage().length();
     }
 
     @Override

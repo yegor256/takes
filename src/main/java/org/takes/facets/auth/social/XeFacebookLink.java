@@ -66,13 +66,14 @@ public final class XeFacebookLink extends XeWrap {
         final CharSequence rel, final CharSequence flag) throws IOException {
         return new XeLink(
             rel,
-            new Href("https://www.facebook.com/dialog/oauth")
-                .with("client_id", app)
-                .with(
-                    "redirect_uri",
-                    new RqHref.Base(req).href()
-                        .with(flag, PsFacebook.class.getSimpleName())
+            new Href("https://www.facebook.com/dialog/oauth").with(
+                "client_id", app
+            ).with(
+                "redirect_uri",
+                new RqHref.Base(req).href().with(
+                    flag, PsFacebook.class.getSimpleName()
                 )
+            )
         );
     }
 }

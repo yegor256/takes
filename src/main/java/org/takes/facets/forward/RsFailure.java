@@ -64,8 +64,7 @@ public final class RsFailure extends RsForward {
      * @param cause The error message that caused the failure
      * @throws UnsupportedEncodingException If URL encoding fails
      */
-    public RsFailure(final String cause)
-        throws UnsupportedEncodingException {
+    public RsFailure(final String cause) throws UnsupportedEncodingException {
         this(cause, RsFailure.HOME);
     }
 

@@ -66,8 +66,7 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
      * @param hdr Header name
      * @param vlm Value matcher
      */
-    public HmHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
+    public HmHeader(final String hdr, final Matcher<Iterable<String>> vlm) {
         this(Matchers.equalToIgnoringCase(hdr), vlm);
     }
 

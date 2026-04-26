@@ -102,7 +102,6 @@ public final class TkProxy implements Take {
 
     /**
      * Creates the request to be forwarded to the target host.
-     *
      * @param req Original request
      * @param dest Destination URL
      * @return Request to be forwarded
@@ -110,8 +109,9 @@ public final class TkProxy implements Take {
      */
     private com.jcabi.http.Request request(final Request req,
         final URI dest) throws Exception {
-        final String method = new RqMethod.Base(req).method();
-        com.jcabi.http.Request proxied = new JdkRequest(dest).method(method);
+        com.jcabi.http.Request proxied = new JdkRequest(dest).method(
+            new RqMethod.Base(req).method()
+        );
         final RqHeaders headers = new RqHeaders.Base(req);
         for (final String name : headers.names()) {
             if ("content-length".equals(
@@ -140,7 +140,6 @@ public final class TkProxy implements Take {
 
     /**
      * Creates the response received from the target host.
-     *
      * @param home Home host
      * @param dest Destination URL
      * @param rsp Response received from the target host

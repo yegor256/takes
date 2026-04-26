@@ -31,6 +31,7 @@ import org.takes.Request;
  * @since 2.0
  */
 public final class RequestOf implements Request {
+
     /**
      * Original head scalar.
      */
@@ -81,15 +82,12 @@ public final class RequestOf implements Request {
                     () -> RequestOf.class.equals(that.getClass()),
                     () -> {
                         final RequestOf other = (RequestOf) that;
+                        final Iterator<String> iter = other.head().iterator();
                         return new And(
-                            () -> {
-                                final Iterator<String> iter = other.head()
-                                    .iterator();
-                                return new And(
-                                    (String hdr) -> hdr.equals(iter.next()),
-                                    this.head()
-                                ).value();
-                            },
+                            () -> new And(
+                                (String hdr) -> hdr.equals(iter.next()),
+                                this.head()
+                            ).value(),
                             () -> new Equality<>(
                                 new BytesOf(this.body()),
                                 new BytesOf(other.body())

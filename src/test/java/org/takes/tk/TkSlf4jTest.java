@@ -8,7 +8,6 @@ package org.takes.tk;
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.takes.Take;
 import org.takes.rq.RqFake;
 
 /**
@@ -26,27 +25,24 @@ final class TkSlf4jTest {
 
     @Test
     void logsException() {
-        final Take take = new TkSlf4j(new TkFailure(new IOException("")));
         Assertions.assertThrows(
             IOException.class,
-            () -> take.act(new RqFake())
+            () -> new TkSlf4j(new TkFailure(new IOException(""))).act(new RqFake())
         );
     }
 
     @Test
     void logsRuntimeException() {
-        final Take take = new TkSlf4j(new TkFailure(new RuntimeException("")));
         Assertions.assertThrows(
             RuntimeException.class,
-            () -> take.act(new RqFake())
+            () -> new TkSlf4j(new TkFailure(new RuntimeException(""))).act(new RqFake())
         );
     }
 
     @Test
     void logsEmptyMessage() {
-        final Take take = new TkSlf4j(new TkEmpty());
         Assertions.assertDoesNotThrow(
-            () -> take.act(new RqFake())
+            () -> new TkSlf4j(new TkEmpty()).act(new RqFake())
         );
     }
 }

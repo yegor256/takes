@@ -105,8 +105,7 @@ public final class PsTwitter implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
-        throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         return new Opt.Single<>(this.identity(this.fetch()));
     }
 
@@ -123,17 +122,13 @@ public final class PsTwitter implements Pass {
      */
     private Identity identity(final String tkn) throws IOException {
         return parse(
-            this.user
-                .uri()
-                .set(
-                    URI.create(
-                        new Href(PsTwitter.VERIFY_URL)
-                            .with(PsTwitter.ACCESS_TOKEN, tkn)
-                            .toString()
-                    )
+            this.user.uri().set(
+                URI.create(
+                    new Href(PsTwitter.VERIFY_URL).with(
+                        PsTwitter.ACCESS_TOKEN, tkn
+                    ).toString()
                 )
-                .back()
-                .header("accept", "application/json")
+            ).back().header("accept", "application/json")
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .as(JsonResponse.class)
@@ -163,21 +158,18 @@ public final class PsTwitter implements Pass {
      * @throws IOException If failed
      */
     private String fetch() throws IOException {
-        return this.token
-            .method("POST")
-            .header(
-                "Content-Type",
-                "application/x-www-form-urlencoded;charset=UTF-8"
-            )
-            .header(
-                "Authorization",
-                String.format(
-                    "Basic %s", DatatypeConverter.printBase64Binary(
-                        new UncheckedBytes(
-                            new BytesOf(
-                                String.format("%s:%s", this.app, this.key)
-                            )
-                        ).asBytes()
+        return this.token.method("POST").header(
+            "Content-Type",
+            "application/x-www-form-urlencoded;charset=UTF-8"
+        ).header(
+            "Authorization",
+            String.format(
+                "Basic %s", DatatypeConverter.printBase64Binary(
+                    new UncheckedBytes(
+                        new BytesOf(
+                            String.format("%s:%s", this.app, this.key)
+                        )
+                    ).asBytes()
                     )
                 )
             )

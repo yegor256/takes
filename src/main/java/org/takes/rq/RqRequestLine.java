@@ -61,6 +61,7 @@ public interface RqRequestLine extends Request {
      * Request decorator for Request-Line header validation
      *
      * <p>The class is immutable and thread-safe.
+     *
      * @since 1.0
      */
     @EqualsAndHashCode(callSuper = true)
@@ -85,6 +86,7 @@ public interface RqRequestLine extends Request {
          * Token inside regex.
          */
         private enum Token {
+
             /**
              * METHOD token.
              */
@@ -155,7 +157,6 @@ public interface RqRequestLine extends Request {
 
         /**
          * Get Request-Line header.
-         *
          * @return Valid Request-Line header
          * @throws IOException If fails
          */
@@ -172,13 +173,11 @@ public interface RqRequestLine extends Request {
         /**
          * Validate Request-Line according to PATTERN
          * and return matcher.
-         *
          * @param line Request-Line header
          * @return Matcher that can be used to extract tokens
          * @throws HttpException If fails
          */
-        private static Matcher matcher(final String line)
-            throws HttpException {
+        private static Matcher matcher(final String line) throws HttpException {
             final Matcher matcher = RqRequestLine.Base.PATTERN.matcher(line);
             if (!matcher.matches()) {
                 throw new HttpException(
@@ -194,13 +193,11 @@ public interface RqRequestLine extends Request {
 
         /**
          * Validate Request-Line according to PATTERN.
-         *
          * @param line Request-Line header
          * @return Validated Request-Line header
          * @throws HttpException If fails
          */
-        private static String validated(final String line)
-            throws HttpException {
+        private static String validated(final String line) throws HttpException {
             if (!RqRequestLine.Base.PATTERN.matcher(line).matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
@@ -216,7 +213,6 @@ public interface RqRequestLine extends Request {
         /**
          * Check that token value is not null and
          * return trimmed value.
-         *
          * @param value Token value
          * @param token Token
          * @return Trimmed token value

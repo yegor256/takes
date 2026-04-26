@@ -36,6 +36,7 @@ import org.takes.rq.RqHeaders;
  * in any case.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @see org.takes.facets.fork.RsFork
  * @since 0.10
  */

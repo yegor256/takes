@@ -32,8 +32,7 @@ public class FbWrap implements Fallback {
     }
 
     @Override
-    public final Opt<Response> route(final RqFallback req)
-        throws Exception {
+    public final Opt<Response> route(final RqFallback req) throws Exception {
         return this.origin.route(req);
     }
 }

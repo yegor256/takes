@@ -41,7 +41,6 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      */
     public BkParallel(final Back back) {
@@ -50,7 +49,6 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      * @param threads Threads total
      */
@@ -66,7 +64,6 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      * @param svc Executor service
      * @since 0.9
@@ -93,6 +90,7 @@ public final class BkParallel extends BkWrap {
      * @since 0.1
      */
     private static final class Threads implements ThreadFactory {
+
         /**
          * Total threads created so far.
          */
@@ -111,5 +109,4 @@ public final class BkParallel extends BkWrap {
             return thread;
         }
     }
-
 }

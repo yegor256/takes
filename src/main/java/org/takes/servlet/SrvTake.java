@@ -58,6 +58,7 @@ import org.takes.Take;
  *  able store data in the server side, as a session does.
  */
 public final class SrvTake extends HttpServlet {
+
     /**
      * Id for serializable.
      */

@@ -26,5 +26,4 @@ final class FkMethodsTest {
             Matchers.is(true)
         );
     }
-
 }

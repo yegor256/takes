@@ -31,6 +31,7 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsGoogle}.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.16.3
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -111,18 +112,15 @@ final class PsGoogleTest {
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
                 (Take) req -> new RsJson(
-                    Json.createObjectBuilder()
-                        .add("displayName", octocat)
-                        .add("id", "1")
-                        .add(
-                            PsGoogleTest.IMAGE,
-                            Json.createObjectBuilder()
-                                .add(
-                                    PsGoogleTest.URL,
-                                    PsGoogleTest.AVATAR
-                                )
+                    Json.createObjectBuilder().add(
+                        "displayName", octocat
+                    ).add("id", "1").add(
+                        PsGoogleTest.IMAGE,
+                        Json.createObjectBuilder().add(
+                            PsGoogleTest.URL,
+                            PsGoogleTest.AVATAR
                         )
-                        .build()
+                    ).build()
                 )
             )
         );
@@ -200,17 +198,13 @@ final class PsGoogleTest {
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
                 (Take) req -> new RsJson(
-                    Json.createObjectBuilder()
-                        .add("id", "2")
-                        .add(
-                            PsGoogleTest.IMAGE,
-                            Json.createObjectBuilder()
-                                .add(
-                                    PsGoogleTest.URL,
-                                    PsGoogleTest.AVATAR
-                                )
+                    Json.createObjectBuilder().add("id", "2").add(
+                        PsGoogleTest.IMAGE,
+                        Json.createObjectBuilder().add(
+                            PsGoogleTest.URL,
+                            PsGoogleTest.AVATAR
                         )
-                        .build()
+                    ).build()
                 )
             )
         );
@@ -276,14 +270,10 @@ final class PsGoogleTest {
                     PsGoogleTest.CODE
                 );
                 return new RsJson(
-                    Json.createObjectBuilder()
-                        .add(
-                            PsGoogleTest.ACCESS_TOKEN,
-                            PsGoogleTest.GOOGLE_TOKEN
-                        )
-                        .add("expires_in", 1)
-                        .add("token_type", "Bearer")
-                        .build()
+                    Json.createObjectBuilder().add(
+                        PsGoogleTest.ACCESS_TOKEN,
+                        PsGoogleTest.GOOGLE_TOKEN
+                    ).add("expires_in", 1).add("token_type", "Bearer").build()
                 );
             }
         );
@@ -309,36 +299,29 @@ final class PsGoogleTest {
 
     /**
      * Construct a error response with google json syntax for errors.
-     * @return Json with error.
+     * @return Json with error
      * @throws IOException If some problem inside
      */
     private static RsJson createErrorJson() throws IOException {
         final String message = "message";
         return new RsJson(
-            Json.createObjectBuilder()
-                .add(
-                    "error",
-                    Json.createObjectBuilder()
-                        .add(
-                            "errors",
-                            Json.createArrayBuilder()
-                                .add(
-                                    Json.createObjectBuilder()
-                                        .add("domain", "usageLimits")
-                                        .add("reason", "accessNotConfigured")
-                                        .add(
-                                            "extendedHelp",
-                                            "https://developers.google.com"
-                                        )
-                                )
+            Json.createObjectBuilder().add(
+                "error",
+                Json.createObjectBuilder().add(
+                    "errors",
+                    Json.createArrayBuilder().add(
+                        Json.createObjectBuilder().add(
+                            "domain", "usageLimits"
+                        ).add("reason", "accessNotConfigured").add(
+                            "extendedHelp",
+                            "https://developers.google.com"
                         )
-                        .add(
-                            PsGoogleTest.CODE,
-                            HttpURLConnection.HTTP_BAD_REQUEST
-                        )
-                        .add(message, "Access Not Configured.")
-                )
-                .build()
+                    )
+                ).add(
+                    PsGoogleTest.CODE,
+                    HttpURLConnection.HTTP_BAD_REQUEST
+                ).add(message, "Access Not Configured.")
+            ).build()
         );
     }
 }

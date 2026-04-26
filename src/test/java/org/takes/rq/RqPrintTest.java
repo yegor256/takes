@@ -33,5 +33,4 @@ final class RqPrintTest {
             new HasString("/h?a=3")
         );
     }
-
 }

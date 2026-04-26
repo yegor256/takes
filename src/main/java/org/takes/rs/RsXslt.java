@@ -254,6 +254,7 @@ public final class RsXslt extends RsWrap {
      * @since 0.1
      */
     private static final class InClasspath implements URIResolver {
+
         @Override
         public Source resolve(final String href, final String base)
             throws TransformerException {

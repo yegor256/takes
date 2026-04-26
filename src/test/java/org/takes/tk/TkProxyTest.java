@@ -301,17 +301,16 @@ final class TkProxyTest {
 
     /**
      * Local interface for creating a request with an empty body.
-     *
      * @since 1.24.4
      */
     @FunctionalInterface
     interface Factory {
+
         Request create(Request req);
     }
 
     /**
      * Wrapper for a request with an empty body.
-     *
      * @since 1.24.4
      */
     private static final class RqWithoutBody implements Request {
@@ -323,7 +322,7 @@ final class TkProxyTest {
 
         /**
          * Ctor.
-         * @param req Original request.
+         * @param req Original request
          */
         RqWithoutBody(final Request req) {
             this.origin = req;

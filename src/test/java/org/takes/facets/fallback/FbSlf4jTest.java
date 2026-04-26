@@ -27,5 +27,4 @@ final class FbSlf4jTest {
             Matchers.is(false)
         );
     }
-
 }
