@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
  * @since 1.3
  */
 final class SiHmacTest {
+
     @Test
     void corrects() {
         MatcherAssert.assertThat(

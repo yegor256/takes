@@ -29,5 +29,4 @@ public interface XeSource {
      * @throws IOException If fails
      */
     Iterable<Directive> toXembly() throws IOException;
-
 }

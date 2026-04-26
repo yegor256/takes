@@ -39,8 +39,8 @@ public final class Equality<T> implements Scalar<Boolean> {
 
     /**
      * Ctor.
-     * @param source The first object to compare.
-     * @param compared The second object to compare.
+     * @param source The first object to compare
+     * @param compared The second object to compare
      */
     public Equality(final T source, final T compared) {
         this(() -> source, () -> compared);
@@ -48,8 +48,8 @@ public final class Equality<T> implements Scalar<Boolean> {
 
     /**
      * Ctor.
-     * @param source The first scalar to compare.
-     * @param compared The second scalar to compare.
+     * @param source The first scalar to compare
+     * @param compared The second scalar to compare
      */
     public Equality(final Scalar<T> source, final Scalar<T> compared) {
         this.first = source;

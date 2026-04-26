@@ -27,5 +27,4 @@ public final class TkConsumes extends TkWrap {
     public TkConsumes(final Take take, final String type) {
         super(new TkFork(new FkContentType(type, take)));
     }
-
 }

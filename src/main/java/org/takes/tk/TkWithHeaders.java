@@ -90,5 +90,4 @@ public final class TkWithHeaders extends TkWrap {
             req -> new RsWithHeaders(take.act(req), headers)
         );
     }
-
 }

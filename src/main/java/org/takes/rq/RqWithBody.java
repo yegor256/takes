@@ -27,8 +27,8 @@ public final class RqWithBody extends RqWrap {
 
     /**
      * Ctor.
-     * @param req The request.
-     * @param bdy The body.
+     * @param req The request
+     * @param bdy The body
      */
     public RqWithBody(final Request req, final CharSequence bdy) {
         super(

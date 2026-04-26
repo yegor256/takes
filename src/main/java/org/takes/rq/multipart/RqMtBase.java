@@ -57,6 +57,7 @@ import org.takes.rq.RqMultipart;
  */
 @lombok.EqualsAndHashCode(of = "origin")
 public final class RqMtBase implements RqMultipart {
+
     /**
      * The encoding used to create the request.
      */
@@ -79,7 +80,7 @@ public final class RqMtBase implements RqMultipart {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF = new String(new char[]{13, 10});
 
     /**
      * Map of params and values.
@@ -105,13 +106,6 @@ public final class RqMtBase implements RqMultipart {
      * Ctor.
      * @param req Original request
      * @throws IOException If fails
-     * @todo #950:30m Remove code from this ctor, leaving only
-     *  initialization. Currently this constructor access body
-     *  of the request and triggers its evaluation. This breaks
-     *  composition of multiple request, as it can be seen in
-     *  {@link RqMtFake}. When this task is done, remove
-     *  explicit lazy evaluation for RqMtFake.
-     * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
@@ -163,7 +157,7 @@ public final class RqMtBase implements RqMultipart {
 
     @Override
     public InputStream body() throws IOException {
-        return new CloseMultipart(this.origin.body());
+        return new RqMtBase.CloseMultipart(this.origin.body());
     }
 
     /**
@@ -201,8 +195,11 @@ public final class RqMtBase implements RqMultipart {
                 )
             );
         }
-        final ReadableByteChannel body = Channels.newChannel(this.stream);
-        if (body.read(this.buffer) < 0) {
+        final ReadableByteChannel body = Channels.newChannel(
+            this.stream
+        );
+        final ByteBuffer buf = this.buffer;
+        if (body.read(buf) < 0) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 "failed to read the request body"
@@ -211,15 +208,15 @@ public final class RqMtBase implements RqMultipart {
         final byte[] boundary = String.format(
             "%s--%s", RqMtBase.CRLF, matcher.group(1)
         ).getBytes(RqMtBase.ENCODING);
-        this.buffer.flip();
-        this.buffer.position(boundary.length - 2);
+        buf.flip();
+        buf.position(boundary.length - 2);
         final Collection<Request> requests = new LinkedList<>();
-        while (this.buffer.hasRemaining()) {
-            final byte data = this.buffer.get();
+        while (buf.hasRemaining()) {
+            final byte data = buf.get();
             if (data == '-') {
                 break;
             }
-            this.buffer.position(this.buffer.position() + 1);
+            buf.position(buf.position() + 1);
             requests.add(this.make(boundary, body));
         }
         return RqMtBase.asMap(requests);
@@ -239,11 +236,12 @@ public final class RqMtBase implements RqMultipart {
         final File file = File.createTempFile(
             RqMultipart.class.getName(), ".tmp"
         );
-        try (WritableByteChannel channel = Files.newByteChannel(
-            file.toPath(),
-            StandardOpenOption.READ,
-            StandardOpenOption.WRITE
-        )
+        try (
+            WritableByteChannel channel = Files.newByteChannel(
+                file.toPath(),
+                StandardOpenOption.READ,
+                StandardOpenOption.WRITE
+            )
         ) {
             channel.write(
                 ByteBuffer.wrap(
@@ -302,7 +300,7 @@ public final class RqMtBase implements RqMultipart {
 
         /**
          * Creates a {@code CloseParts} with the specified input.
-         * @param input The underlying input stream.
+         * @param input The underlying input stream
          */
         CloseMultipart(final InputStream input) {
             super(input);

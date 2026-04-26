@@ -110,5 +110,4 @@ public final class TkForward implements Take {
             return this.saved.get(0);
         }
     }
-
 }

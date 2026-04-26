@@ -48,5 +48,4 @@ public final class RsPrevious extends RsWrap {
             )
         );
     }
-
 }

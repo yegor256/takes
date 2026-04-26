@@ -88,5 +88,4 @@ public final class CcCompact implements Codec {
         }
         return map;
     }
-
 }

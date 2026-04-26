@@ -88,5 +88,4 @@ public final class XeGoogleLink extends XeWrap {
                 )
         );
     }
-
 }

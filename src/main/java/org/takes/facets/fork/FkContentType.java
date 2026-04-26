@@ -46,7 +46,7 @@ public final class FkContentType implements Fork {
     /**
      * Ctor.
      * @param atype Accepted type
-     * @param take Take to handle the request dynamically.
+     * @param take Take to handle the request dynamically
      */
     public FkContentType(final String atype, final Take take) {
         this.type = new MediaTypes(atype);
@@ -82,5 +82,4 @@ public final class FkContentType implements Fork {
         }
         return list;
     }
-
 }

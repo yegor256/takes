@@ -69,5 +69,4 @@ public interface TkRegex {
             return this.origin.act(new RqRegex.Fake(req, this.matcher));
         }
     }
-
 }

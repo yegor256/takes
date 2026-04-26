@@ -59,9 +59,9 @@ public final class ServletConnectionFake implements ServletConnection {
 
     /**
      * Ctor.
-     * @param conn Connection.
-     * @param proto Protocol.
-     * @param sec Secure flag.
+     * @param conn Connection
+     * @param proto Protocol
+     * @param sec Secure flag
      */
     public ServletConnectionFake(final String conn, final String proto, final boolean sec) {
         this.connection = conn;

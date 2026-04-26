@@ -39,5 +39,4 @@ public final class RsLogout extends RsWrap {
     public RsLogout(final Response res, final String cookie) {
         super(new RsWithCookie(res, cookie, ""));
     }
-
 }

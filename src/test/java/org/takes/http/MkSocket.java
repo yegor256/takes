@@ -34,7 +34,7 @@ public final class MkSocket extends Socket {
 
     /**
      * Constructs a {@code MkSocket} with the specified input stream.
-     * @param input The input stream of the socket.
+     * @param input The input stream of the socket
      */
     public MkSocket(final InputStream input) {
         super();
@@ -76,7 +76,7 @@ public final class MkSocket extends Socket {
     /**
      * Gives the output stream in {@link ByteArrayOutputStream} to be
      * able to test it.
-     * @return The output in {@link ByteArrayOutputStream}.
+     * @return The output in {@link ByteArrayOutputStream}
      */
     public ByteArrayOutputStream bufferedOutput() {
         return this.output;

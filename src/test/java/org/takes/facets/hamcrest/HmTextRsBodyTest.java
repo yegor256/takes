@@ -62,9 +62,8 @@ final class HmTextRsBodyTest {
 
         /**
          * Ctor.
-         *
-         * @param body Body matcher.
-         * @param charset Charset of the text.
+         * @param body Body matcher
+         * @param charset Charset of the text
          */
         HmTextBodyFake(final Matcher<String> body, final Charset charset) {
             super(body, charset);

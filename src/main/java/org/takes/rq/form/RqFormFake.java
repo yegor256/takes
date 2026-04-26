@@ -59,7 +59,7 @@ public final class RqFormFake implements RqForm {
     /**
      * Validate parameters.
      * @param params Parameters
-     * @return Validated parameters if their count is even.
+     * @return Validated parameters if their count is even
      * @throws IllegalArgumentException if parameters count is odd.
      */
     private static String[] validated(final String... params) {

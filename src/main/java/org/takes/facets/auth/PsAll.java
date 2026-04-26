@@ -31,7 +31,7 @@ public final class PsAll implements Pass {
 
     /**
      * Ctor.
-     * @param passes All Passes to be checked.
+     * @param passes All Passes to be checked
      * @param identity Index of a Pass whose Identity to return on successful
      *  {@link PsAll#enter(Request)}
      */

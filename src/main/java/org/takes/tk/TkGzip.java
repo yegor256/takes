@@ -97,5 +97,4 @@ public final class TkGzip extends TkWrap {
             }
         );
     }
-
 }

@@ -35,8 +35,8 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
-     * @param body Body matcher.
-     * @param charset Charset of the text.
+     * @param body Body matcher
+     * @param charset Charset of the text
      */
     public AbstractHmTextBody(final Matcher<String> body,
         final Charset charset) {

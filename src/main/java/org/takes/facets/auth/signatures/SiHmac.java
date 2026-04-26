@@ -23,6 +23,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public final class SiHmac implements Signature {
+
     /**
      * The HMAC 256 bit variant.
      */
@@ -50,16 +51,14 @@ public final class SiHmac implements Signature {
 
     /**
      * Constructor with string key using default 256-bit HMAC.
-     *
      * @param key The encryption key as a string
      */
     public SiHmac(final String key) {
-        this(key.getBytes(StandardCharsets.UTF_8), SiHmac.HMAC256);
+        this(key, SiHmac.HMAC256);
     }
 
     /**
      * Constructor with string key and specified bit length.
-     *
      * @param key The encryption key as a string
      * @param bits The signature bit length (256, 384, or 512)
      */
@@ -68,8 +67,7 @@ public final class SiHmac implements Signature {
     }
 
     /**
-     * Constructor with byte array key and specified bit length.
-     *
+     * Primary constructor with byte array key and specified bit length.
      * @param key The encryption key as a byte array
      * @param bits The signature bit length (256, 384, or 512)
      */
@@ -85,7 +83,6 @@ public final class SiHmac implements Signature {
 
     /**
      * Returns the signature bit length.
-     *
      * @return The bit length used for HMAC signature
      */
     public int bitlength() {
@@ -94,7 +91,6 @@ public final class SiHmac implements Signature {
 
     /**
      * Validates and returns the correct bit length.
-     *
      * @param bits The given bit length
      * @return The original bit length if valid (256, 384, or 512), otherwise 256
      */
@@ -110,7 +106,6 @@ public final class SiHmac implements Signature {
 
     /**
      * Encrypts the given bytes using HMAC and returns hex-encoded result.
-     *
      * @param bytes The bytes to encrypt
      * @return The encrypted bytes as hex-encoded string bytes
      * @throws IOException If encryption fails
@@ -128,12 +123,10 @@ public final class SiHmac implements Signature {
 
     /**
      * Creates a new MAC instance based on the configured bit length.
-     *
      * @return The configured MAC instance
      * @throws IOException If MAC creation fails
      */
-    private Mac create()
-        throws IOException {
+    private Mac create() throws IOException {
         final String algo = String.format("HmacSHA%s", this.bits);
         try {
             final Mac mac = Mac.getInstance(algo);

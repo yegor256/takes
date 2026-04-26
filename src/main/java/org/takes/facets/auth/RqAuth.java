@@ -70,5 +70,4 @@ public final class RqAuth extends RqWrap {
         }
         return user;
     }
-
 }

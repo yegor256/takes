@@ -37,5 +37,4 @@ public final class RsBuffered extends RsWrap {
             )
         );
     }
-
 }

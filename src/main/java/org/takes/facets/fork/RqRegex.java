@@ -105,5 +105,4 @@ public interface RqRegex extends Request {
             return this.request.body();
         }
     }
-
 }

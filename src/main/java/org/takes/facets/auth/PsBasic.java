@@ -10,13 +10,15 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
@@ -123,11 +125,11 @@ public final class PsBasic implements Pass {
      * Entry interface that validates user credentials.
      * Implementations of this interface determine whether a given
      * username and password combination is valid for authentication.
-     *
      * @since 0.20
      */
     @FunctionalInterface
     public interface Entry {
+
         /**
          * Check if the user credentials are valid.
          * @param user Username
@@ -147,6 +149,7 @@ public final class PsBasic implements Pass {
      * @since 0.20
      */
     public static final class Fake implements PsBasic.Entry {
+
         /**
          * Should we authenticate a user?
          */
@@ -180,10 +183,10 @@ public final class PsBasic implements Pass {
      * Empty implementation that always denies authentication.
      * This implementation always returns an empty identity,
      * effectively rejecting all authentication attempts.
-     *
      * @since 0.20
      */
     public static final class Empty implements PsBasic.Entry {
+
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             return new Opt.Empty<>();
@@ -194,10 +197,10 @@ public final class PsBasic implements Pass {
      * Default entry implementation that validates credentials against
      * a predefined set of username, password, and URN combinations.
      * Credentials are stored as URL-encoded strings separated by spaces.
-     *
      * @since 0.22
      */
     public static final class Default implements PsBasic.Entry {
+
         /**
          * How keys in
          * {@link org.takes.facets.auth.PsBasic.Default#usernames} are
@@ -213,25 +216,27 @@ public final class PsBasic implements Pass {
         /**
          * Map from login/password pairs to URNs.
          */
-        private final Map<String, String> usernames;
-
-        /**
-         * Public ctor.
-         * @param users Strings with user's login, password and URNs
-         */
-        public Default(final Iterable<String> users) {
-            this.usernames = Default.converted(users);
-        }
+        private final Unchecked<Map<String, String>> usernames;
 
         /**
          * Public ctor.
          * @param users Strings with user's login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
-         *  {@code "mike my%20password urn:jcabi-users:michael"}.
+         *  {@code "mike my%20password urn:jcabi-users:michael"}
          */
         public Default(final String... users) {
-            this(Arrays.asList(users));
+            this(new IterableOf<>(users));
+        }
+
+        /**
+         * Primary ctor.
+         * @param users Strings with user's login, password and URNs
+         */
+        public Default(final Iterable<String> users) {
+            this.usernames = new Unchecked<>(
+                new Sticky<>(() -> Default.converted(users))
+            );
         }
 
         @Override
@@ -264,8 +269,8 @@ public final class PsBasic implements Pass {
          * @param users Strings with user's login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
-         *  {@code "mike my%20password urn:jcabi-users:michael"}.
-         * @return Map from login/password pairs to URNs.
+         *  {@code "mike my%20password urn:jcabi-users:michael"}
+         * @return Map from login/password pairs to URNs
          */
         private static Map<String, String> converted(final Iterable<String> users) {
             final Map<String, String> result = new HashMap<>(0);
@@ -282,15 +287,15 @@ public final class PsBasic implements Pass {
 
         /**
          * Returns an URN corresponding to a login-password pair.
-         * @param user Login.
-         * @param pwd Password.
+         * @param user Login
+         * @param pwd Password
          * @return Opt with URN or empty if there is no such login-password
-         *  pair.
+         *  pair
          */
         private Opt<String> urn(final String user, final String pwd) {
             final String urn;
             try {
-                urn = this.usernames.get(
+                urn = this.usernames.value().get(
                     String.format(
                         PsBasic.Default.KEY_FORMAT,
                         URLEncoder.encode(
@@ -322,9 +327,9 @@ public final class PsBasic implements Pass {
          * Creates a key for
          *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
          * @param unified User string made of 3 urlencoded substrings
-         *  separated with non-urlencoded space characters.
+         *  separated with non-urlencoded space characters
          * @return Login and password parts with <pre>%20</pre> replaced with
-         *  <pre>+</pre>.
+         *  <pre>+</pre>
          */
         private static String key(final String unified) {
             return String.format(
@@ -340,7 +345,7 @@ public final class PsBasic implements Pass {
         /**
          * Checks if a unified user string is correctly formatted.
          * @param unified String with urlencoded user login, password and urn
-         *  separated with spaces.
+         *  separated with spaces
          */
         private static void validateUser(final String unified) {
             final boolean amount = PsBasic.Default.countSpaces(unified) != 2;
@@ -358,8 +363,8 @@ public final class PsBasic implements Pass {
 
         /**
          * Counts spaces in a string.
-         * @param txt Any string.
-         * @return Amount of spaces in string.
+         * @param txt Any string
+         * @return Amount of spaces in string
          */
         private static int countSpaces(final String txt) {
             int spaces = 0;

@@ -98,5 +98,4 @@ public interface Identity {
             return Collections.unmodifiableMap(this.props);
         }
     }
-
 }

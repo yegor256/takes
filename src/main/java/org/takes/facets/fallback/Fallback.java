@@ -25,5 +25,4 @@ public interface Fallback {
      * @throws Exception If fails
      */
     Opt<Response> route(RqFallback req) throws Exception;
-
 }

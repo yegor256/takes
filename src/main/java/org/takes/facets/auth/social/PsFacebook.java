@@ -225,5 +225,4 @@ public final class PsFacebook implements Pass {
             )
         );
     }
-
 }

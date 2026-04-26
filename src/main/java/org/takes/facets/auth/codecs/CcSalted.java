@@ -133,5 +133,4 @@ public final class CcSalted implements Codec {
         System.arraycopy(text, size + 1, output, 0, output.length);
         return output;
     }
-
 }

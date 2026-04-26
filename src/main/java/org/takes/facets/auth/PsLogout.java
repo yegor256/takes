@@ -31,5 +31,4 @@ public final class PsLogout implements Pass {
         final Identity identity) {
         return response;
     }
-
 }

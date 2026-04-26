@@ -25,5 +25,4 @@ public final class FbEmpty extends FbWrap {
             req -> new Opt.Empty<>()
         );
     }
-
 }

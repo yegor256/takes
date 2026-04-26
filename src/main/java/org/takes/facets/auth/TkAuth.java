@@ -88,5 +88,4 @@ public final class TkAuth implements Take {
         }
         return this.pass.exit(this.origin.act(wrap), identity);
     }
-
 }

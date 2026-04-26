@@ -60,5 +60,4 @@ public final class FkHost extends FkWrap {
             return ret;
         };
     }
-
 }

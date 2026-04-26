@@ -94,5 +94,4 @@ public final class RqWithAuth extends RqWrap {
             new TextOf(new CcPlain().encode(identity)).toString()
         );
     }
-
 }

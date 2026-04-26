@@ -102,5 +102,4 @@ public final class FkTypes implements Fork {
         }
         return list;
     }
-
 }

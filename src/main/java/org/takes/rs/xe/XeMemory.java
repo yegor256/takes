@@ -73,5 +73,4 @@ public final class XeMemory extends XeWrap {
     private static long mbs(final long bytes) {
         return bytes >> 20;
     }
-
 }

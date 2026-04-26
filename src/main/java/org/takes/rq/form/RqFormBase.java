@@ -113,7 +113,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameters.
-     * @return Parameters map or empty map in case of error.
+     * @return Parameters map or empty map in case of error
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> map() throws IOException {
@@ -125,7 +125,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameter.
-     * @return Parameters map or empty map in case of error.
+     * @return Parameters map or empty map in case of error
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> freshMap() throws IOException {

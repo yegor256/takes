@@ -35,10 +35,10 @@ public final class RqWithDefaultHeader extends RqWrap {
 
     /**
      * Builds the request with the default header if it is not already present.
-     * @param req Original request.
-     * @param hdr Header name.
-     * @param val Header value.
-     * @return The new request.
+     * @param req Original request
+     * @param hdr Header name
+     * @param val Header value
+     * @return The new request
      * @throws IOException in case of request errors
      */
     private static Request build(final Request req,

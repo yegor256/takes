@@ -47,5 +47,4 @@ public final class DecodingException extends RuntimeException {
     DecodingException(final Throwable cause) {
         super(cause);
     }
-
 }

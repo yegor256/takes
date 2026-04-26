@@ -186,5 +186,4 @@ public class RsForward extends HttpException implements Response {
     ) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
     }
-
 }

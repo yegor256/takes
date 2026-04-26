@@ -44,5 +44,4 @@ public final class PsFixed implements Pass {
         final Identity identity) {
         return response;
     }
-
 }

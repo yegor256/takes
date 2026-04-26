@@ -72,8 +72,8 @@ public final class TkSmartRedirect extends TkWrap {
 
         /**
          * Ctor.
-         * @param req Original request.
-         * @param origin Original location.
+         * @param req Original request
+         * @param origin Original location
          */
         RedirectParams(final Request req, final String origin) {
             this.req = req;
@@ -82,8 +82,8 @@ public final class TkSmartRedirect extends TkWrap {
 
         /**
          * Get location with composed params.
-         * @return New location.
-         * @throws IOException in case of error.
+         * @return New location
+         * @throws IOException in case of error
          */
         String location() throws IOException {
             final StringBuilder loc = new StringBuilder(this.origin);
@@ -103,5 +103,4 @@ public final class TkSmartRedirect extends TkWrap {
             return loc.toString();
         }
     }
-
 }

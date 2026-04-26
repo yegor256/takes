@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 
 /**
  * Interface for HTTP expiration date formatting and management.
@@ -27,7 +29,7 @@ public interface Expires {
 
     /**
      * String representation of expiration time.
-     * @return Representation of expiration time.
+     * @return Representation of expiration time
      */
     String print();
 
@@ -51,7 +53,7 @@ public interface Expires {
          * Constructor.
          */
         Never() {
-            this.origin = new Date(0L);
+            this.origin = new Expires.Date(0L);
         }
 
         @Override
@@ -70,6 +72,7 @@ public interface Expires {
      * @since 2.0
      */
     final class Expired implements Expires {
+
         @Override
         public String print() {
             return "Expires=0";
@@ -121,17 +124,18 @@ public interface Expires {
         /**
          * DateTimeFormatter for expiration.
          */
-        private final DateTimeFormatter format;
+        private final Unchecked<DateTimeFormatter> format;
 
         /**
          * Expires instant.
          */
-        private final Instant expires;
+        private final Unchecked<Instant> expires;
 
         /**
          * Ctor.
          *
          * <p>Will create instance with default format pattern.</p>
+         *
          * @param expiration Expiration in millis
          */
         public Date(final long expiration) {
@@ -155,7 +159,15 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final long expiration) {
-            this(ptn, locale, Instant.ofEpochMilli(expiration));
+            this.format = new Unchecked<>(
+                new Sticky<>(
+                    () -> DateTimeFormatter.ofPattern(ptn, locale)
+                        .withZone(ZoneId.of("GMT"))
+                )
+            );
+            this.expires = new Unchecked<>(
+                new Sticky<>(() -> Instant.ofEpochMilli(expiration))
+            );
         }
 
         /**
@@ -166,14 +178,18 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final Instant expires) {
-            this.format = DateTimeFormatter.ofPattern(ptn, locale)
-                .withZone(ZoneId.of("GMT"));
-            this.expires = expires;
+            this.format = new Unchecked<>(
+                new Sticky<>(
+                    () -> DateTimeFormatter.ofPattern(ptn, locale)
+                        .withZone(ZoneId.of("GMT"))
+                )
+            );
+            this.expires = new Unchecked<>(new Sticky<>(() -> expires));
         }
 
         @Override
         public String print() {
-            return this.format.format(this.expires);
+            return this.format.value().format(this.expires.value());
         }
     }
 }

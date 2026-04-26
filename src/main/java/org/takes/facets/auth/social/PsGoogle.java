@@ -219,5 +219,4 @@ public final class PsGoogle implements Pass {
             String.format("urn:google:%s", json.getString("id")), props
         );
     }
-
 }

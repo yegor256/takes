@@ -106,5 +106,4 @@ public final class RsGzip implements Response {
         }
         return baos.toByteArray();
     }
-
 }

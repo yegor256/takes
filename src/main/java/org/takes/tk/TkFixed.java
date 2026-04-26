@@ -102,5 +102,4 @@ public final class TkFixed extends TkWrap {
             req -> res
         );
     }
-
 }

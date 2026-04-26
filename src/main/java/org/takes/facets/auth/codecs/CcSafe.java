@@ -65,5 +65,4 @@ public final class CcSafe implements Codec {
         }
         return identity;
     }
-
 }

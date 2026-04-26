@@ -88,5 +88,4 @@ public final class RsJson extends RsWrap {
          */
         JsonStructure toJson();
     }
-
 }

@@ -75,5 +75,4 @@ public final class TkJoinedCookies extends TkWrap {
         }
         return out;
     }
-
 }

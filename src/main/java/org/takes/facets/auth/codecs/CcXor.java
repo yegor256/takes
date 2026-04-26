@@ -99,5 +99,4 @@ public final class CcXor implements Codec {
         }
         return output;
     }
-
 }

@@ -6,7 +6,6 @@ package org.takes.facets.fork.am;
 
 /**
  * Matches specified version.
- *
  * @since 1.7.2
  */
 public final class AmVersion implements AgentMatch {
@@ -23,8 +22,8 @@ public final class AmVersion implements AgentMatch {
 
     /**
      * Ctor.
-     * @param agent Uer agent name.
-     * @param version Version matcher.
+     * @param agent Uer agent name
+     * @param version Version matcher
      */
     public AmVersion(final String agent, final VersionMatch version) {
         this.agent = agent;
@@ -48,8 +47,8 @@ public final class AmVersion implements AgentMatch {
 
     /**
      * Parse major version number.
-     * @param part Token part.
-     * @return Parsed major version number.
+     * @param part Token part
+     * @return Parsed major version number
      */
     private static int majorVersion(final String part) {
         return Integer.parseInt(part.split("\\.")[0]);
@@ -57,7 +56,6 @@ public final class AmVersion implements AgentMatch {
 
     /**
      * Matches specified version when it greater than specified one.
-     *
      * @since 1.7.2
      */
     public static final class VmGreater implements VersionMatch {
@@ -69,7 +67,7 @@ public final class AmVersion implements AgentMatch {
 
         /**
          * Ctor.
-         * @param ver Version.
+         * @param ver Version
          */
         public VmGreater(final int ver) {
             this.ver = ver;

@@ -282,8 +282,8 @@ final class VerboseListTest {
 
     /**
      * Assert cause.
-     * @param exec Code block.
-     * @param cause Cause.
+     * @param exec Code block
+     * @param cause Cause
      */
     private void assertThat(final Executable exec, final Exception cause) {
         MatcherAssert.assertThat(

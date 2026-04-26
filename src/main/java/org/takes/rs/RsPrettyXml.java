@@ -169,9 +169,9 @@ public final class RsPrettyXml implements Response {
     /**
      * Parses body to get DOCTYPE and configure Transformer
      * with proper method, public id and system id.
-     * @param body The body to be parsed.
-     * @param transformer Transformer to configure with proper properties.
-     * @throws IOException if something goes wrong.
+     * @param body The body to be parsed
+     * @param transformer Transformer to configure with proper properties
+     * @throws IOException if something goes wrong
      */
     private static void prepareDocType(final InputStream body,
         final Transformer transformer) throws IOException {
@@ -207,9 +207,9 @@ public final class RsPrettyXml implements Response {
     /**
      * Parses the input stream and returns DocumentType built without loading
      * any external DTD schemas.
-     * @param body The body to be parsed.
-     * @return The documents DocumentType.
-     * @throws IOException if something goes wrong.
+     * @param body The body to be parsed
+     * @return The documents DocumentType
+     * @throws IOException if something goes wrong
      */
     private static DocumentType getDocType(final InputStream body)
         throws IOException {

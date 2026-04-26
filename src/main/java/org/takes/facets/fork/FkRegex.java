@@ -173,7 +173,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Allows disabling the standard way for handling trailing slashes.
-     * @param enabled Enables/Disables the removal of a trailing slash.
+     * @param enabled Enables/Disables the removal of a trailing slash
      * @return FkRegex
      */
     public FkRegex setRemoveTrailingSlash(final boolean enabled) {
@@ -208,7 +208,6 @@ public final class FkRegex implements Fork {
 
     /**
      * Request with a matcher inside.
-     *
      * @since 0.32.5
      */
     private static final class RqMatcher implements RqRegex {
@@ -248,5 +247,4 @@ public final class FkRegex implements Fork {
             return this.mtr;
         }
     }
-
 }

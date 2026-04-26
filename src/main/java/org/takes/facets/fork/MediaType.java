@@ -10,6 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
 import org.cactoos.list.ListOf;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
@@ -36,35 +38,41 @@ final class MediaType implements Comparable<MediaType> {
     /**
      * Priority.
      */
-    private final Double prio;
+    private final Unchecked<Double> prio;
 
     /**
      * High part.
      */
-    private final String high;
+    private final Unchecked<String> high;
 
     /**
      * Low part.
      */
-    private final String low;
+    private final Unchecked<String> low;
 
     /**
      * Ctor.
      * @param text Text to parse
      */
     MediaType(final String text) {
-        this.prio = MediaType.priority(text);
-        this.high = MediaType.highPart(text);
-        this.low = MediaType.lowPart(text);
+        this.prio = new Unchecked<>(
+            new Sticky<>(() -> MediaType.priority(text))
+        );
+        this.high = new Unchecked<>(
+            new Sticky<>(() -> MediaType.highPart(text))
+        );
+        this.low = new Unchecked<>(
+            new Sticky<>(() -> MediaType.lowPart(text))
+        );
     }
 
     @Override
     public int compareTo(final MediaType type) {
-        int cmp = this.prio.compareTo(type.prio);
+        int cmp = this.prio.value().compareTo(type.prio.value());
         if (cmp == 0) {
-            cmp = this.high.compareTo(type.high);
+            cmp = this.high.value().compareTo(type.high.value());
             if (cmp == 0) {
-                cmp = this.low.compareTo(type.low);
+                cmp = this.low.value().compareTo(type.low.value());
             }
         }
         return cmp;
@@ -78,18 +86,18 @@ final class MediaType implements Comparable<MediaType> {
      */
     boolean matches(final MediaType type) {
         final String star = "*";
-        return (this.high.equals(star)
-            || type.high.equals(star)
-            || this.high.equals(type.high))
-            && (this.low.equals(star)
-            || type.low.equals(star)
-            || this.low.equals(type.low));
+        return (this.high.value().equals(star)
+            || type.high.value().equals(star)
+            || this.high.value().equals(type.high.value()))
+            && (this.low.value().equals(star)
+            || type.low.value().equals(star)
+            || this.low.value().equals(type.low.value()));
     }
 
     /**
      * Splits the text parts.
-     * @param text The text to be split.
-     * @return Two first parts of the media type.
+     * @param text The text to be split
+     * @return Two first parts of the media type
      */
     private static List<Text> split(final String text) {
         return new ListOf<>(
@@ -103,8 +111,8 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Returns the media type priority.
-     * @param text The media type text.
-     * @return The priority of the media type.
+     * @param text The media type text
+     * @return The priority of the media type
      */
     private static Double priority(final String text) {
         final List<Text> parts = MediaType.split(text);
@@ -128,8 +136,8 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Returns the high part of the media type.
-     * @param text The media type text.
-     * @return The high part of the media type.
+     * @param text The media type text
+     * @return The high part of the media type
      */
     private static String highPart(final String text) {
         return new UncheckedText(
@@ -139,8 +147,8 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Returns the low part of the media type.
-     * @param text The media type text.
-     * @return The low part of the media type.
+     * @param text The media type text
+     * @return The low part of the media type
      */
     private static String lowPart(final String text) {
         final List<Text> sectors = MediaType.sectors(text);
@@ -155,8 +163,8 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Returns the media type sectors.
-     * @param text The media type text.
-     * @return Sectors of the media type.
+     * @param text The media type text
+     * @return Sectors of the media type
      */
     private static List<Text> sectors(final String text) {
         return new ListOf<>(
@@ -167,5 +175,4 @@ final class MediaType implements Comparable<MediaType> {
             )
         );
     }
-
 }

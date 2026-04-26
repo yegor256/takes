@@ -51,5 +51,4 @@ public final class XeLogoutLink extends XeWrap {
         )
         );
     }
-
 }

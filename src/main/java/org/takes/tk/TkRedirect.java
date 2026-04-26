@@ -45,5 +45,4 @@ public final class TkRedirect extends TkWrap {
             req -> new RsRedirect(location, code)
         );
     }
-
 }

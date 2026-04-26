@@ -65,5 +65,4 @@ public final class XeAppend extends XeWrap {
             )
         );
     }
-
 }

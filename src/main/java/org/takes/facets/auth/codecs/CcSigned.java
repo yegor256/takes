@@ -38,6 +38,7 @@ import org.takes.facets.auth.Identity;
  * @since 1.11.1
  */
 public final class CcSigned implements Codec {
+
     /**
      * Origin codec.
      */

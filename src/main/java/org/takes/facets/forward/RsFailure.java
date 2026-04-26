@@ -84,5 +84,4 @@ public final class RsFailure extends RsForward {
             loc
         );
     }
-
 }

@@ -41,7 +41,6 @@ public interface RsHeaders extends Response {
 
     /**
      * Get single header.
-     *
      * @param key Header name
      * @return List of values (can be empty)
      * @throws IOException If fails
@@ -50,7 +49,6 @@ public interface RsHeaders extends Response {
 
     /**
      * Get all header names.
-     *
      * @return All names
      * @throws IOException If fails
      */
@@ -70,9 +68,9 @@ public interface RsHeaders extends Response {
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RsWrap implements RsHeaders {
+
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         public Base(final Response req) {
@@ -80,8 +78,7 @@ public interface RsHeaders extends Response {
         }
 
         @Override
-        public List<String> header(final CharSequence key)
-            throws IOException {
+        public List<String> header(final CharSequence key) throws IOException {
             final List<String> values = this.map().getOrDefault(
                 new UncheckedText(
                     new Lowered(key.toString())
@@ -119,7 +116,6 @@ public interface RsHeaders extends Response {
 
         /**
          * Parse them all in a map.
-         *
          * @return Map of them
          * @throws IOException If fails
          */
@@ -172,6 +168,7 @@ public interface RsHeaders extends Response {
      */
     @EqualsAndHashCode
     final class Smart implements RsHeaders {
+
         /**
          * Original.
          */
@@ -181,21 +178,20 @@ public interface RsHeaders extends Response {
          * Ctor.
          * @param req Original request
          */
-        public Smart(final RsHeaders req) {
-            this.origin = req;
+        public Smart(final Response req) {
+            this(new RsHeaders.Base(req));
         }
 
         /**
          * Ctor.
          * @param req Original request
          */
-        public Smart(final Response req) {
-            this(new RsHeaders.Base(req));
+        public Smart(final RsHeaders req) {
+            this.origin = req;
         }
 
         @Override
-        public List<String> header(final CharSequence name)
-            throws IOException {
+        public List<String> header(final CharSequence name) throws IOException {
             return this.origin.header(name);
         }
 
@@ -253,6 +249,5 @@ public interface RsHeaders extends Response {
             }
             return value;
         }
-
     }
 }

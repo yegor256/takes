@@ -79,5 +79,4 @@ public final class TkGreedy extends TkWrap {
             request -> take.act(new RqGreedy(request))
         );
     }
-
 }

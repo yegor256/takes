@@ -29,5 +29,4 @@ public final class XeLinkSelf extends XeWrap {
             ).toXembly()
         );
     }
-
 }

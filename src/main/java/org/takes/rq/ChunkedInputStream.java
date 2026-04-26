@@ -59,7 +59,6 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Ctor.
-     *
      * @param stream The raw input stream
      */
     ChunkedInputStream(final InputStream stream) {
@@ -156,12 +155,11 @@ final class ChunkedInputStream extends InputStream {
      * Expects the stream to start with a chunksize in hex with optional
      * comments after a semicolon. The line must end with a CRLF: "a3; some
      * comment\r\n" Positions the stream at the start of the next line.
-     * @param stream The new input stream.
+     * @param stream The new input stream
      * @return The chunk size as integer
      * @throws IOException when the chunk size could not be parsed
      */
-    private static int chunkSize(final InputStream stream)
-        throws IOException {
+    private static int chunkSize(final InputStream stream) throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final String data = baos.toString(Charset.defaultCharset().name());
         final int separator = data.indexOf(';');
@@ -195,6 +193,7 @@ final class ChunkedInputStream extends InputStream {
      * Possible states of FSM that used to find chunk size.
      */
     private enum State {
+
         /**
          * Normal.
          */
@@ -215,9 +214,9 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Extract line with chunk size from stream.
-     * @param stream Input stream.
-     * @return Line with chunk size.
-     * @throws IOException If fails.
+     * @param stream Input stream
+     * @return Line with chunk size
+     * @throws IOException If fails
      */
     private static ByteArrayOutputStream sizeLine(final InputStream stream)
         throws IOException {
@@ -231,11 +230,11 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Get next state for FSM.
-     * @param stream Input stream.
-     * @param state Current state.
-     * @param line Current chunk size line.
-     * @return New state.
-     * @throws IOException If fails.
+     * @param stream Input stream
+     * @param state Current state
+     * @param line Current chunk size line
+     * @return New state
+     * @throws IOException If fails
      */
     private static State next(final InputStream stream, final State state,
         final ByteArrayOutputStream line) throws IOException {
@@ -272,10 +271,10 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Maintain next symbol for current state = State.NORMAL.
-     * @param state Current state.
-     * @param line Current chunk size line.
-     * @param next Next symbol.
-     * @return New state.
+     * @param state Current state
+     * @param line Current chunk size line
+     * @param next Next symbol
+     * @return New state
      */
     private static State nextNormal(final State state,
         final ByteArrayOutputStream line, final int next) {
@@ -297,12 +296,12 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Maintain next symbol for current state = State.QUOTED_STRING.
-     * @param stream Input stream.
-     * @param state Current state.
-     * @param line Current chunk size line.
-     * @param next Next symbol.
-     * @return New state.
-     * @throws IOException If fails.
+     * @param stream Input stream
+     * @param state Current state
+     * @param line Current chunk size line
+     * @param next Next symbol
+     * @return New state
+     * @throws IOException If fails
      * @checkstyle ParameterNumberCheck (3 lines)
      */
     private static State nextQuoted(final InputStream stream, final State state,

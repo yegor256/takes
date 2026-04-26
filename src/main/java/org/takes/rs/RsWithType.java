@@ -70,7 +70,7 @@ public final class RsWithType extends RsWrap {
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header if
-     *  present.
+     *  present
      */
     private RsWithType(final Response res, final CharSequence type,
         final Opt<Charset> charset) {
@@ -145,12 +145,11 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Html(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "text/html", charset));
         }
-
     }
 
     /**
@@ -188,12 +187,11 @@ public final class RsWithType extends RsWrap {
          * charset parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Json(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "application/json", charset));
         }
-
     }
 
     /**
@@ -231,12 +229,11 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Xml(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "text/xml", charset));
         }
-
     }
 
     /**
@@ -274,11 +271,10 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Text(final Response res, final Opt<Charset> charset) {
             super(RsWithType.make(res, "text/plain", charset));
         }
-
     }
 }

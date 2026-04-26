@@ -52,5 +52,4 @@ public final class TkSslOnly implements Take {
         }
         return answer;
     }
-
 }

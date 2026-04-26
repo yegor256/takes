@@ -8,10 +8,8 @@ import java.io.IOException;
 
 /**
  * HTTP-aware exception.
- *
  * @since 0.13
  */
-@SuppressWarnings("PMD.OnlyOneConstructorShouldDoInitialization")
 public class HttpException extends IOException {
 
     /**
@@ -30,12 +28,16 @@ public class HttpException extends IOException {
     private final int status;
 
     /**
+     * Detail message attached to the status (may be null).
+     */
+    private final String detail;
+
+    /**
      * Ctor.
      * @param code HTTP status code
      */
     public HttpException(final int code) {
-        super(Integer.toString(code));
-        this.status = code;
+        this(code, (String) null);
     }
 
     /**
@@ -44,8 +46,7 @@ public class HttpException extends IOException {
      * @param cause Cause of the problem
      */
     public HttpException(final int code, final String cause) {
-        super(String.format(HttpException.MESSAGE_FORMAT, code, cause));
-        this.status = code;
+        this(code, cause, null);
     }
 
     /**
@@ -54,20 +55,34 @@ public class HttpException extends IOException {
      * @param cause Cause of the problem
      */
     public HttpException(final int code, final Throwable cause) {
-        super(cause);
-        this.status = code;
+        this(code, null, cause);
     }
 
     /**
-     * Ctor.
+     * Primary ctor.
      * @param code HTTP status code
      * @param msg Exception message
      * @param cause Cause of the problem
      */
     public HttpException(final int code, final String msg,
         final Throwable cause) {
-        super(String.format(HttpException.MESSAGE_FORMAT, code, msg), cause);
+        super(cause);
         this.status = code;
+        this.detail = msg;
+    }
+
+    // @checkstyle DesignForExtensionCheck (10 lines)
+    @Override
+    public String getMessage() {
+        final String msg;
+        if (this.detail == null) {
+            msg = Integer.toString(this.status);
+        } else {
+            msg = String.format(
+                HttpException.MESSAGE_FORMAT, this.status, this.detail
+            );
+        }
+        return msg;
     }
 
     /**
@@ -77,5 +92,4 @@ public class HttpException extends IOException {
     public final int code() {
         return this.status;
     }
-
 }

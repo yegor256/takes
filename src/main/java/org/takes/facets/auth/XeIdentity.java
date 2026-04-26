@@ -43,5 +43,4 @@ public final class XeIdentity extends XeWrap {
             }
         );
     }
-
 }

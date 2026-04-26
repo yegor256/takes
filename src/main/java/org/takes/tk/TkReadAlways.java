@@ -46,5 +46,4 @@ public final class TkReadAlways implements Take {
         }
         return res;
     }
-
 }

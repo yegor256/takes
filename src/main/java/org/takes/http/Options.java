@@ -147,8 +147,8 @@ final class Options {
 
     /**
      * Convert the provided arguments into a Map.
-     * @param args Arguments to parse.
-     * @return Map A map containing all the arguments and their values.
+     * @param args Arguments to parse
+     * @return Map A map containing all the arguments and their values
      * @throws IllegalStateException If an argument doesn't match with the
      *  expected format which is {@code --([a-z\-]+)(=.+)?}.
      */

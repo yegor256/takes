@@ -171,7 +171,7 @@ public final class RsVelocity extends RsWrap {
     /**
      * Converts Map of CharSequence, Object to Map of String, Object.
      * @param params Parameters in Map of CharSequence, Object
-     * @return Map of String, Object.
+     * @return Map of String, Object
      */
     private static Map<String, Object> convert(
         final Map<CharSequence, Object> params) {
@@ -203,5 +203,4 @@ public final class RsVelocity extends RsWrap {
             super(key, obj);
         }
     }
-
 }

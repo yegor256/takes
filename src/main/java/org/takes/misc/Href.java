@@ -326,10 +326,7 @@ public final class Href implements CharSequence {
      * if it is possible otherwise an {@code IllegalArgumentException} will
      * be thrown.
      * @param txt The content to parse
-     * @return The {@code URI} corresponding to the specified content.
-     * @throws IllegalArgumentException in case the content could not be parsed
-     * @throws IllegalStateException in case an invalid character could not be
-     *  encoded properly.
+     * @return The {@code URI} corresponding to the specified content
      */
     private static URI createUri(final String txt) {
         final StringBuilder value = new StringBuilder(txt);
@@ -340,7 +337,8 @@ public final class Href implements CharSequence {
                 final int index = ex.getIndex();
                 if (index < 0 || index >= value.length()) {
                     throw new IllegalArgumentException(ex.getMessage(), ex);
-                } else if (ex.getReason().contains("authority")) {
+                }
+                if (ex.getReason().contains("authority")) {
                     final StringBuilder message = new StringBuilder(64);
                     message
                         .append("Illegal URI: ")
@@ -363,8 +361,8 @@ public final class Href implements CharSequence {
 
     /**
      * Convert the provided query into a Map.
-     * @param query The query to parse.
-     * @return A map containing all the query arguments and their values.
+     * @param query The query to parse
+     * @return A map containing all the query arguments and their values
      */
     private static SortedMap<String, List<String>> asMap(final String query) {
         final SortedMap<String, List<String>> params = new TreeMap<>();
@@ -390,9 +388,9 @@ public final class Href implements CharSequence {
     /**
      * Remove query and fragment parts from the provided URI and
      *   return the resulting URI.
-     * @param link The link from which parts need to be removed.
+     * @param link The link from which parts need to be removed
      * @return The URI corresponding to the same provided URI but without
-     *  query and fragment parts.
+     *  query and fragment parts
      */
     private static URI createBare(final URI link) {
         final URI uri;
@@ -413,8 +411,8 @@ public final class Href implements CharSequence {
 
     /**
      * Read fragment part from the given URI.
-     * @param link The link from which the fragment needs to be returned.
-     * @return Opt with fragment or empty if there is no fragment.
+     * @param link The link from which the fragment needs to be returned
+     * @return Opt with fragment or empty if there is no fragment
      */
     private static Opt<String> readFragment(final URI link) {
         final Opt<String> fragment;

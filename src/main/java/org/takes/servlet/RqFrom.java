@@ -165,7 +165,7 @@ final class RqFrom implements Request {
 
         /**
          * Ctor.
-         * @param request Servlet request.
+         * @param request Servlet request
          */
         private HttpHost(final HttpServletRequest request) {
             this.req = request;

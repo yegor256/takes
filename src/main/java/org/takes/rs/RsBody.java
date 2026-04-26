@@ -17,6 +17,8 @@ import org.cactoos.Input;
 import org.cactoos.io.InputOf;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.ScalarOf;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 
 /**
  * Interface for response body content used by {@link RsWithBody}.
@@ -38,14 +40,15 @@ import org.cactoos.scalar.ScalarOf;
  * @since 0.32
  */
 interface RsBody extends Input {
+
     @Override
     InputStream stream() throws IOException;
 
     /**
      * Gives the length of the stream.
-     * @return The length of the stream.
+     * @return The length of the stream
      * @throws IOException in case the length of the stream could not be
-     *  retrieved.
+     *  retrieved
      */
     int length() throws IOException;
 
@@ -62,7 +65,7 @@ interface RsBody extends Input {
 
         /**
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
-         * @param content The {@link java.net.URL} of the content.
+         * @param content The {@link java.net.URL} of the content
          */
         Url(final java.net.URL content) {
             this.source = content;
@@ -91,24 +94,26 @@ interface RsBody extends Input {
         /**
          * The content of the body in a byte array.
          */
-        private final byte[] bytes;
+        private final Unchecked<byte[]> bytes;
 
         /**
          * Constructs an {@code ByteArray} with the specified byte array.
-         * @param content The content of the body.
+         * @param content The content of the body
          */
         ByteArray(final byte[] content) {
-            this.bytes = content.clone();
+            this.bytes = new Unchecked<>(
+                new Sticky<>(content::clone)
+            );
         }
 
         @Override
         public InputStream stream() {
-            return new ByteArrayInputStream(this.bytes);
+            return new ByteArrayInputStream(this.bytes.value());
         }
 
         @Override
         public int length() {
-            return this.bytes.length;
+            return this.bytes.value().length;
         }
     }
 
@@ -130,7 +135,7 @@ interface RsBody extends Input {
 
         /**
          * Constructs an {@code Stream} with the specified {@link InputStream}.
-         * @param input The content of the body as stream.
+         * @param input The content of the body as stream
          */
         Stream(final InputStream input) {
             this.input = input;
@@ -151,7 +156,7 @@ interface RsBody extends Input {
 
         /**
          * Estimates the length of the {@code InputStream}.
-         * @throws IOException in case the length could not be estimated.
+         * @throws IOException in case the length could not be estimated
          */
         private void estimate() throws IOException {
             if (this.len.get() == -1) {
@@ -176,7 +181,7 @@ interface RsBody extends Input {
         /**
          * The temporary file that contains the content of the body.
          */
-        private final File tmp;
+        private final Unchecked<File> tmp;
 
         /**
          * The underlying body.
@@ -185,20 +190,26 @@ interface RsBody extends Input {
 
         /**
          * Constructs a {@code TempFile} with the specified {@link RsBody}.
-         * @param content The content of the body to store into a temporary file.
+         * @param content The content of the body to store into a temporary file
          */
-        @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
         TempFile(final RsBody content) {
             this.body = content;
-            this.tmp = new File(
-                System.getProperty("java.io.tmpdir"),
-                String.format(
-                    "%s-%s.tmp",
-                    RsBody.TempFile.class.getName(),
-                    UUID.randomUUID().toString()
+            this.tmp = new Unchecked<>(
+                new Sticky<>(
+                    () -> {
+                        final File file = new File(
+                            System.getProperty("java.io.tmpdir"),
+                            String.format(
+                                "%s-%s.tmp",
+                                RsBody.TempFile.class.getName(),
+                                UUID.randomUUID().toString()
+                            )
+                        );
+                        file.deleteOnExit();
+                        return file;
+                    }
                 )
             );
-            this.tmp.deleteOnExit();
         }
 
         @Override
@@ -219,26 +230,27 @@ interface RsBody extends Input {
          * Gives the {@code File} that contains the content of the underlying
          * {@code  Body}.
          * @return The {@code File} in which we stored the content of the
-         *  underlying {@code  Body}.
+         *  underlying {@code  Body}
          * @throws IOException In case the content of the underlying
-         *  {@code Body} could not be stored into the file.
+         *  {@code Body} could not be stored into the file
          */
         @SuppressWarnings(
             {"PMD.AvoidSynchronizedStatement", "PMD.UnnecessaryLocalRule"}
         )
         private File file() throws IOException {
-            synchronized (this.tmp) {
-                if (!this.tmp.exists()) {
-                    this.tmp.deleteOnExit();
+            final File file = this.tmp.value();
+            synchronized (file) {
+                if (!file.exists()) {
+                    file.deleteOnExit();
                     try (InputStream content = this.body.stream()) {
                         Files.copy(
                             content,
-                            Paths.get(this.tmp.getAbsolutePath()),
+                            Paths.get(file.getAbsolutePath()),
                             StandardCopyOption.REPLACE_EXISTING
                         );
                     }
                 }
-                return this.tmp;
+                return file;
             }
         }
     }

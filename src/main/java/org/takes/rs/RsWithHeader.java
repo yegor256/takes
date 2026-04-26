@@ -115,5 +115,4 @@ public final class RsWithHeader extends RsWrap {
         }
         return new Joined<String>(head, new IterableOf<>(header));
     }
-
 }

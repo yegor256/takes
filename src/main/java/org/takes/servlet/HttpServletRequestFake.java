@@ -68,6 +68,7 @@ import org.takes.rq.RqMethod;
     "PMD.CouplingBetweenObjects"
 })
 public final class HttpServletRequestFake implements HttpServletRequest {
+
     /**
      * A Takes Request.
      */
@@ -350,7 +351,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
      * Checks whether the requested session ID came in as part of the request
      * URL.
      * @return True, if the requested session ID came in as part of the request
-     *  URL.
+     *  URL
      * @deprecated Use isRequestedSessionIdFromURL() instead.
      */
     @Deprecated
@@ -361,17 +362,12 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public boolean authenticate(
-        final HttpServletResponse resp
-    ) {
+    public boolean authenticate(final HttpServletResponse resp) {
         throw new UnsupportedOperationException("#authenticate()");
     }
 
     @Override
-    public void login(
-        final String user,
-        final String password
-    ) {
+    public void login(final String user, final String password) {
         throw new UnsupportedOperationException("#login()");
     }
 
@@ -386,16 +382,12 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public Part getPart(
-        final String name
-    ) {
+    public Part getPart(final String name) {
         throw new UnsupportedOperationException("#getPart()");
     }
 
     @Override
-    public <T extends HttpUpgradeHandler> T upgrade(
-        final Class<T> cls
-    ) {
+    public <T extends HttpUpgradeHandler> T upgrade(final Class<T> cls) {
         throw new UnsupportedOperationException("#upgrade()");
     }
 
@@ -415,9 +407,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public void setCharacterEncoding(
-        final String encoding
-    ) {
+    public void setCharacterEncoding(final String encoding) {
         throw new UnsupportedOperationException("#setCharacterEncoding()");
     }
 
@@ -503,9 +493,9 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     /**
      * Gets the real path corresponding to the given virtual path.
-     * @param path The path.
-     * @return The real path, or null if the translation cannot be performed.
-     * @deprecated Use ServletContext.getRealPath(java.lang.String) instead.
+     * @param path The path
+     * @return The real path, or null if the translation cannot be performed
+     * @deprecated Use ServletContext.getRealPath(String) instead.
      */
     @Deprecated
     public String getRealPath(final String path) {

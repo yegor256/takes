@@ -16,8 +16,8 @@ public interface AgentMatch {
 
     /**
      * Returns true if specified token is acceptable.
-     * @param token Token.
-     * @return Whether specified token matches.
+     * @param token Token
+     * @return Whether specified token matches
      */
     boolean matches(String token);
 }
