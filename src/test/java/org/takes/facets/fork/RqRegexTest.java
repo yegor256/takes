@@ -4,9 +4,11 @@
  */
 package org.takes.facets.fork;
 
+import java.util.regex.Pattern;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link RqRegex}.
@@ -18,7 +20,10 @@ final class RqRegexTest {
     void matchesString() {
         MatcherAssert.assertThat(
             "RqRegex must capture group from regex pattern match",
-            new RqRegex.Fake("/([a-z\\.]+)", "/hello.txt").matcher().group(1),
+            new RqRegex.Fake(
+                new RqFake(),
+                Pattern.compile("/([a-z\\.]+)").matcher("/hello.txt")
+            ).matcher().group(1),
             Matchers.equalTo("hello.txt")
         );
     }

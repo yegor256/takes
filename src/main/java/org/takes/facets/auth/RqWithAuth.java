@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.io.InputStream;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
@@ -63,7 +64,7 @@ public final class RqWithAuth extends RqWrap {
      */
     public RqWithAuth(final Identity identity, final Request req)
         throws IOException {
-        this(identity, TkAuth.class.getSimpleName(), req);
+        this(identity, "TkAuth", req);
     }
 
     /**
@@ -75,23 +76,63 @@ public final class RqWithAuth extends RqWrap {
      */
     public RqWithAuth(final Identity identity, final String header,
         final Request req) throws IOException {
-        super(RqWithAuth.make(identity, header, req));
+        super(new RqWithAuth.LazyRq(identity, header, req));
     }
 
     /**
-     * Ctor.
-     * @param identity Identity
-     * @param header Header name
-     * @param req Request
-     * @return Request
-     * @throws IOException If fails
+     * Lazily-built authenticated request.
+     * @since 2.0
      */
-    private static Request make(final Identity identity, final String header,
-        final Request req) throws IOException {
-        return new RqWithHeader(
-            req,
-            header,
-            new TextOf(new CcPlain().encode(identity)).toString()
-        );
+    private static final class LazyRq implements Request {
+
+        /**
+         * Identity.
+         */
+        private final Identity identity;
+
+        /**
+         * Header name.
+         */
+        private final String header;
+
+        /**
+         * Original request.
+         */
+        private final Request req;
+
+        /**
+         * Ctor.
+         * @param ident Identity
+         * @param hdr Header name
+         * @param request Original request
+         */
+        LazyRq(final Identity ident, final String hdr, final Request request) {
+            this.identity = ident;
+            this.header = hdr;
+            this.req = request;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.delegate().head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.delegate().body();
+        }
+
+        /**
+         * Build the wrapped request.
+         * @return Decorated request
+         * @throws IOException If encoding fails
+         */
+        private Request delegate() throws IOException {
+            return new RqWithHeader(
+                this.req,
+                this.header,
+                new TextOf(new CcPlain().encode(this.identity)).toString()
+            );
+        }
     }
 }

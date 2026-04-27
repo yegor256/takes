@@ -118,6 +118,56 @@ interface RsBody extends Input {
     }
 
     /**
+     * Content of a body based on a CharSequence and a Charset.
+     * @since 2.0
+     */
+    final class Text implements RsBody {
+
+        /**
+         * The content of the body as text.
+         */
+        private final CharSequence content;
+
+        /**
+         * Charset used to encode the text.
+         */
+        private final java.nio.charset.Charset charset;
+
+        /**
+         * Ctor.
+         * @param body The content of the body
+         * @param chr Charset to encode with
+         */
+        Text(final CharSequence body, final java.nio.charset.Charset chr) {
+            this.content = body;
+            this.charset = chr;
+        }
+
+        @Override
+        public InputStream stream() {
+            return new ByteArrayInputStream(this.bytes());
+        }
+
+        @Override
+        public int length() {
+            return this.bytes().length;
+        }
+
+        /**
+         * Encode the text into bytes.
+         * @return Bytes
+         */
+        private byte[] bytes() {
+            if (this.content == null) {
+                throw new IllegalStateException(
+                    "Body content is null, cannot encode to bytes"
+                );
+            }
+            return this.content.toString().getBytes(this.charset);
+        }
+    }
+
+    /**
      * The content of the body based on an {@link InputStream}.
      * @since 0.32
      */

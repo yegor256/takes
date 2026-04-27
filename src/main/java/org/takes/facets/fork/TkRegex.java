@@ -5,7 +5,6 @@
 package org.takes.facets.fork;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -43,17 +42,6 @@ public interface TkRegex {
          * Matcher.
          */
         private final Matcher matcher;
-
-        /**
-         * Ctor.
-         * @param rgx Original destination
-         * @param ptn Pattern
-         * @param query Query
-         */
-        public Fake(final TkRegex rgx, final String ptn,
-            final CharSequence query) {
-            this(rgx, Pattern.compile(ptn).matcher(query));
-        }
 
         /**
          * Ctor.

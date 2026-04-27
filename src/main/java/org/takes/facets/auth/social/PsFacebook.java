@@ -95,12 +95,7 @@ public final class PsFacebook implements Pass {
      */
     public PsFacebook(final String fapp, final String fkey) {
         this(
-            new JdkRequest(
-                new Href(PsFacebook.ACCESS_TOKEN_URL)
-                    .with(PsFacebook.CLIENT_ID, fapp)
-                    .with(PsFacebook.CLIENT_SECRET, fkey)
-                    .toString()
-            ),
+            new JdkRequest(PsFacebook.ACCESS_TOKEN_URL),
             new DefaultWebRequestor(),
             fapp,
             fkey

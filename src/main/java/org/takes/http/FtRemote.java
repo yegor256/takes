@@ -60,7 +60,7 @@ public final class FtRemote implements Front {
      * @throws IOException If fails
      */
     public FtRemote(final Back that) throws IOException {
-        this(that, FtRemote.random());
+        this(that, new ServerSocket(0));
     }
 
     /**
@@ -154,17 +154,6 @@ public final class FtRemote implements Front {
                 ex
             );
         }
-    }
-
-    /**
-     * Make a random socket.
-     * @return Socket
-     * @throws IOException If fails
-     */
-    private static ServerSocket random() throws IOException {
-        final ServerSocket skt = new ServerSocket(0);
-        skt.setReuseAddress(true);
-        return skt;
     }
 
     /**

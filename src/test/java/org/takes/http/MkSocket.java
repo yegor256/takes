@@ -17,6 +17,11 @@ import java.net.Socket;
 public final class MkSocket extends Socket {
 
     /**
+     * Loopback address used for testing.
+     */
+    private static final InetAddress LOOPBACK = InetAddress.getLoopbackAddress();
+
+    /**
      * The address to provide for testing purpose.
      */
     private final InetAddress address;
@@ -37,7 +42,7 @@ public final class MkSocket extends Socket {
      */
     public MkSocket(final InputStream input) {
         super();
-        this.address = InetAddress.getLoopbackAddress();
+        this.address = MkSocket.LOOPBACK;
         this.output = new ByteArrayOutputStream();
         this.input = input;
     }

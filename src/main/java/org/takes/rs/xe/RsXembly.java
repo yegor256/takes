@@ -43,6 +43,11 @@ import org.xembly.Xembler;
 public final class RsXembly extends RsWrap {
 
     /**
+     * Lazily-built empty DOM Document used by the {@link XeSource} ctor.
+     */
+    private static final Node EMPTY_DOM = RsXembly.emptyDocument();
+
+    /**
      * Ctor.
      * @param sources Sources
      */
@@ -81,7 +86,7 @@ public final class RsXembly extends RsWrap {
      * @param src Source
      */
     public RsXembly(final XeSource src) {
-        this(RsXembly.emptyDocument(), src);
+        this(RsXembly.EMPTY_DOM, src);
     }
 
     /**

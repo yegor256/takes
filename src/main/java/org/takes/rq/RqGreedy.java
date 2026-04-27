@@ -31,21 +31,55 @@ public final class RqGreedy extends RqWrap {
      * @throws IOException If fails
      */
     public RqGreedy(final Request req) throws IOException {
-        super(RqGreedy.consume(req));
+        super(new RqGreedy.Greedy(req));
     }
 
     /**
-     * Consume the request.
-     * @param req Request
-     * @return New request
-     * @throws IOException If fails
+     * Request that lazily consumes the body of another request once.
+     * @since 2.0
      */
-    private static Request consume(final Request req) throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        new RqPrint(req).printBody(baos);
-        return new RequestOf(
-            req::head,
-            () -> new ByteArrayInputStream(baos.toByteArray())
-        );
+    private static final class Greedy implements Request {
+
+        /**
+         * Original request.
+         */
+        private final Request origin;
+
+        /**
+         * Cached body bytes.
+         */
+        private byte[] cached;
+
+        /**
+         * Ctor.
+         * @param req Original request
+         */
+        Greedy(final Request req) {
+            this.origin = req;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.origin.head();
+        }
+
+        @Override
+        public java.io.InputStream body() throws IOException {
+            return new ByteArrayInputStream(this.consumed());
+        }
+
+        /**
+         * Consume the body bytes once and cache them.
+         * @return Bytes
+         * @throws IOException If fails
+         */
+        private byte[] consumed() throws IOException {
+            if (this.cached == null) {
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                new RqPrint(this.origin).printBody(baos);
+                this.cached = baos.toByteArray();
+            }
+            return this.cached;
+        }
     }
 }

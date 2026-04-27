@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
+import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
@@ -26,7 +27,14 @@ public final class XeAppend extends XeWrap {
      * @param value Value to set
      */
     public XeAppend(final CharSequence target, final CharSequence value) {
-        this(target, new XeDirectives(new Directives().set(value.toString())));
+        this(
+            target,
+            new XeDirectives(
+                (Scalar<Iterable<Directive>>) () -> new Directives().set(
+                    value.toString()
+                )
+            )
+        );
     }
 
     /**

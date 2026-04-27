@@ -58,7 +58,7 @@ public final class RsWithStatus extends RsWrap {
      * @param code Status code
      */
     public RsWithStatus(final Response res, final int code) {
-        this(res, code, RsWithStatus.best(code));
+        this(res, code, new RsWithStatus.LazyReason(code));
     }
 
     /**
@@ -173,5 +173,54 @@ public final class RsWithStatus extends RsWrap {
         map.put(HttpURLConnection.HTTP_GATEWAY_TIMEOUT, "Gateway Timeout");
         map.put(HttpURLConnection.HTTP_VERSION, "HTTP Version Not Supported");
         return map;
+    }
+
+    /**
+     * CharSequence that lazily resolves to the best reason phrase
+     * for an HTTP status code.
+     * @since 2.0
+     */
+    private static final class LazyReason implements CharSequence {
+
+        /**
+         * HTTP status code.
+         */
+        private final int code;
+
+        /**
+         * Ctor.
+         * @param status HTTP status code
+         */
+        LazyReason(final int status) {
+            this.code = status;
+        }
+
+        @Override
+        public int length() {
+            return this.resolve().length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.resolve().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.resolve().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return this.resolve();
+        }
+
+        /**
+         * Resolve the reason phrase.
+         * @return Reason phrase
+         */
+        private String resolve() {
+            return RsWithStatus.best(this.code);
+        }
     }
 }

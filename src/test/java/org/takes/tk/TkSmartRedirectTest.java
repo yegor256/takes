@@ -5,6 +5,7 @@
 package org.takes.tk;
 
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.facets.hamcrest.HmHeader;
 import org.takes.rq.RqFake;
@@ -24,7 +25,7 @@ final class TkSmartRedirectTest {
             ),
             new HmHeader<>(
                 "Location",
-                "http://www.google.com/abc?b=2&a=1#test"
+                Matchers.hasItems("http://www.google.com/abc?b=2&a=1#test")
             )
         );
     }
@@ -38,7 +39,7 @@ final class TkSmartRedirectTest {
             ),
             new HmHeader<>(
                 "Location",
-                "/?f=1#xxx"
+                Matchers.hasItems("/?f=1#xxx")
             )
         );
     }

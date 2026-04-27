@@ -178,9 +178,10 @@ final class CcAesTest {
          * Ctor.
          * @param fake Bytes
          */
+        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
         FkRandomSpi(final byte[] fake) {
             super();
-            this.fake = fake.clone();
+            this.fake = fake;
         }
 
         @Override

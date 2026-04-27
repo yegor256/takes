@@ -88,18 +88,6 @@ public final class TkClasspath extends TkWrap {
 
     /**
      * Ctor.
-     * @param base Base class whose package will be used as resource prefix
-     */
-    public TkClasspath(final Class<?> base) {
-        this(
-            String.format(
-                "/%s", base.getPackage().getName().replace(".", "/")
-            )
-        );
-    }
-
-    /**
-     * Ctor.
      * @param prefix Classpath prefix for resource resolution
      */
     public TkClasspath(final String prefix) {

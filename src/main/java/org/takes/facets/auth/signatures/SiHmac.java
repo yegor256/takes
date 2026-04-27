@@ -50,43 +50,28 @@ public final class SiHmac implements Signature {
     private final int bits;
 
     /**
-     * Constructor with string key using default 256-bit HMAC.
-     * @param key The encryption key as a string
-     */
-    public SiHmac(final String key) {
-        this(key, SiHmac.HMAC256);
-    }
-
-    /**
-     * Constructor with string key and specified bit length.
-     * @param key The encryption key as a string
-     * @param bits The signature bit length (256, 384, or 512)
-     */
-    public SiHmac(final String key, final int bits) {
-        this(key.getBytes(StandardCharsets.UTF_8), bits);
-    }
-
-    /**
      * Primary constructor with byte array key and specified bit length.
      * @param key The encryption key as a byte array
      * @param bits The signature bit length (256, 384, or 512)
      */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public SiHmac(final byte[] key, final int bits) {
-        this.key = key.clone();
-        this.bits = SiHmac.bitLength(bits);
+        this.key = key;
+        this.bits = bits;
+    }
+
+    /**
+     * Returns the corrected signature bit length.
+     * @return The bit length used for HMAC signature, normalised to 256
+     *  if the configured value is not 256, 384 or 512
+     */
+    public int bitlength() {
+        return SiHmac.bitLength(this.bits);
     }
 
     @Override
     public byte[] sign(final byte[] data) throws IOException {
         return this.encrypt(data);
-    }
-
-    /**
-     * Returns the signature bit length.
-     * @return The bit length used for HMAC signature
-     */
-    public int bitlength() {
-        return this.bits;
     }
 
     /**
@@ -127,7 +112,7 @@ public final class SiHmac implements Signature {
      * @throws IOException If MAC creation fails
      */
     private Mac create() throws IOException {
-        final String algo = String.format("HmacSHA%s", this.bits);
+        final String algo = String.format("HmacSHA%s", this.bitlength());
         try {
             final Mac mac = Mac.getInstance(algo);
             mac.init(new SecretKeySpec(this.key, algo));

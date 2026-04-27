@@ -5,6 +5,7 @@
 
 package org.takes.facets.hamcrest;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.StringDescription;
@@ -31,7 +32,7 @@ final class HmRsBodyTest {
                 Collections.emptyList(),
                 body
             ),
-            new HmBody<>(body)
+            new HmBody<>(body.getBytes(StandardCharsets.UTF_8))
         );
     }
 
@@ -43,7 +44,7 @@ final class HmRsBodyTest {
                 Collections.emptyList(),
                 "this"
             ),
-            new IsNot<>(new HmBody<>("that"))
+            new IsNot<>(new HmBody<>("that".getBytes(StandardCharsets.UTF_8)))
         );
     }
 
@@ -53,7 +54,7 @@ final class HmRsBodyTest {
             Collections.emptyList(),
             "other"
         );
-        final HmBody<Body> matcher = new HmBody<>("some");
+        final HmBody<Body> matcher = new HmBody<>("some".getBytes(StandardCharsets.UTF_8));
         matcher.matchesSafely(request);
         final StringDescription description = new StringDescription();
         matcher.describeMismatchSafely(request, description);
@@ -72,7 +73,7 @@ final class HmRsBodyTest {
             Collections.emptyList(),
             "one"
         );
-        final HmBody<Body> matcher = new HmBody<>("two");
+        final HmBody<Body> matcher = new HmBody<>("two".getBytes(StandardCharsets.UTF_8));
         matcher.matchesSafely(request);
         final StringDescription description = new StringDescription();
         matcher.describeTo(description);

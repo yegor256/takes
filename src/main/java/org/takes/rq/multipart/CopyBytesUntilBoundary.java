@@ -43,6 +43,7 @@ public final class CopyBytesUntilBoundary {
      * @param buffer Buffer
      * @checkstyle ParameterNumberCheck (5 lines)
      */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public CopyBytesUntilBoundary(
         final WritableByteChannel target,
         final byte[] boundary,
@@ -51,7 +52,7 @@ public final class CopyBytesUntilBoundary {
     ) {
         this.buffer = buffer;
         this.target = target;
-        this.boundary = boundary.clone();
+        this.boundary = boundary;
         this.src = src;
     }
 

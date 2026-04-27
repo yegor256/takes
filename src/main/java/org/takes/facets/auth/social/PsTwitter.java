@@ -78,9 +78,7 @@ public final class PsTwitter implements Pass {
     public PsTwitter(final String name, final String keys) {
         this(
             new JdkRequest(
-                new Href("https://api.twitter.com/oauth2/token")
-                    .with("grant_type", "client_credentials")
-                    .toString()
+                "https://api.twitter.com/oauth2/token?grant_type=client_credentials"
             ),
             new JdkRequest(PsTwitter.VERIFY_URL), name, keys
         );

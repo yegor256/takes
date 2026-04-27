@@ -10,7 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.FormattedText;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
@@ -46,6 +45,11 @@ public class RsForward extends HttpException implements Response {
      * Original response.
      */
     private final transient Response origin;
+
+    /**
+     * Lazy detail message used by {@link #getMessage()}.
+     */
+    private final transient CharSequence lazyMsg;
 
     /**
      * Constructor with empty response and default home location.
@@ -137,16 +141,21 @@ public class RsForward extends HttpException implements Response {
      */
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
-        super(code, String.format("[%3d] %s %s", code, loc, res.toString()));
+        super(code);
+        this.lazyMsg = new RsForward.LazyMsg(res, code, loc);
         this.origin = new RsWithHeader(
             new RsWithoutHeader(
                 new RsWithStatus(res, code),
                 "Location"
             ),
-            new FormattedText(
-                "Location: %s", loc
-            ).toString()
+            "Location",
+            loc
         );
+    }
+
+    @Override
+    public String getMessage() {
+        return this.lazyMsg.toString();
     }
 
     @Override
@@ -185,5 +194,63 @@ public class RsForward extends HttpException implements Response {
         final ObjectInputStream stream
     ) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
+    }
+
+    /**
+     * CharSequence that lazily formats the detail message of an RsForward.
+     * @since 2.0
+     */
+    private static final class LazyMsg implements CharSequence {
+
+        /**
+         * Original response.
+         */
+        private final Response res;
+
+        /**
+         * HTTP status code.
+         */
+        private final int code;
+
+        /**
+         * Location.
+         */
+        private final CharSequence loc;
+
+        /**
+         * Ctor.
+         * @param origin Original response
+         * @param status HTTP status code
+         * @param location Location
+         */
+        LazyMsg(final Response origin, final int status,
+            final CharSequence location) {
+            this.res = origin;
+            this.code = status;
+            this.loc = location;
+        }
+
+        @Override
+        public int length() {
+            return this.toString().length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.toString().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.toString().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return String.format(
+                "[%3d] %s %s",
+                this.code, this.loc, this.res
+            );
+        }
     }
 }

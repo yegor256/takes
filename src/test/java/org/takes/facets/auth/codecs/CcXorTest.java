@@ -33,7 +33,7 @@ final class CcXorTest {
                     return new Identity.Simple(new String(bytes, StandardCharsets.UTF_8));
                 }
             },
-            "secret"
+            "secret".getBytes(StandardCharsets.UTF_8)
         );
         MatcherAssert.assertThat(
             "Round-trip XOR encoding must preserve original identity URN",

@@ -4,7 +4,8 @@
  */
 package org.takes.facets.fork;
 
-import java.util.Collections;
+import java.util.AbstractCollection;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
@@ -43,7 +44,7 @@ final class MediaTypes {
      * @param text Text to parse
      */
     MediaTypes(final String text) {
-        this(MediaTypes.parse(text));
+        this(new TreeSet<>(new MediaTypes.Bag(text)));
     }
 
     /**
@@ -51,7 +52,7 @@ final class MediaTypes {
      * @param types Set of types
      */
     MediaTypes(final SortedSet<MediaType> types) {
-        this.list = Collections.unmodifiableSortedSet(types);
+        this.list = new TreeSet<>(types);
     }
 
     /**
@@ -124,5 +125,51 @@ final class MediaTypes {
             }
         }
         return list;
+    }
+
+    /**
+     * Lazy collection that parses the source text only when iterated.
+     * @since 2.0
+     */
+    private static final class Bag extends AbstractCollection<MediaType> {
+
+        /**
+         * Source text.
+         */
+        private final String src;
+
+        /**
+         * Cached parsed set.
+         */
+        private SortedSet<MediaType> cached;
+
+        /**
+         * Ctor.
+         * @param src Source text
+         */
+        Bag(final String src) {
+            this.src = src;
+        }
+
+        @Override
+        public Iterator<MediaType> iterator() {
+            return this.parsed().iterator();
+        }
+
+        @Override
+        public int size() {
+            return this.parsed().size();
+        }
+
+        /**
+         * Parse and cache the result.
+         * @return Parsed set
+         */
+        private SortedSet<MediaType> parsed() {
+            if (this.cached == null) {
+                this.cached = MediaTypes.parse(this.src);
+            }
+            return this.cached;
+        }
     }
 }

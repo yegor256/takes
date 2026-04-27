@@ -47,16 +47,7 @@ public final class TkSlf4j implements Take {
      * @param take Original
      */
     public TkSlf4j(final Take take) {
-        this(take, TkSlf4j.class);
-    }
-
-    /**
-     * Ctor.
-     * @param take Original
-     * @param tgt Log target
-     */
-    public TkSlf4j(final Take take, final Class<?> tgt) {
-        this(take, tgt.getCanonicalName());
+        this(take, "org.takes.tk.TkSlf4j");
     }
 
     /**

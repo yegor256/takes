@@ -13,7 +13,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.OutputTo;
-import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.ScalarOf;
 import org.takes.Request;
@@ -47,16 +46,6 @@ public final class FkHitRefresh implements Fork {
      * A handle for tracking changes.
      */
     private final HitRefreshHandle handle;
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param that Target
-     */
-    public FkHitRefresh(final File file, final String cmd, final Take that) {
-        this(file, new ListOf<>(cmd.split(" ")), that);
-    }
 
     /**
      * Ctor.

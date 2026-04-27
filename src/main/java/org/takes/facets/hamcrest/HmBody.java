@@ -10,7 +10,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -30,26 +29,6 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
      * Body.
      */
     private final InputStream body;
-
-    /**
-     * Ctor.
-     *
-     * <p>Will create instance with defaultCharset.
-     *
-     * @param value Value to test against
-     */
-    public HmBody(final String value) {
-        this(value, Charset.defaultCharset());
-    }
-
-    /**
-     * Ctor.
-     * @param value Value to test against
-     * @param charset Charset of given value
-     */
-    public HmBody(final String value, final Charset charset) {
-        this(value.getBytes(charset));
-    }
 
     /**
      * Ctor.

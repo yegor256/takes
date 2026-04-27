@@ -53,7 +53,8 @@ final class FkHitRefreshTest {
         MatcherAssert.assertThat(
             "FkHitRefresh must not match request when hit refresh header is missing",
             new FkHitRefresh(
-                temp, "", new TkEmpty()
+                temp, () -> {
+                }, new TkEmpty()
             ).route(new RqFake()).has(),
             Matchers.is(false)
         );

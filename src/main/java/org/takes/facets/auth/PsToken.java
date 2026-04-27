@@ -66,7 +66,7 @@ public final class PsToken implements Pass {
      * @param key
      *  The secret key to sign with
      */
-    public PsToken(final String key) {
+    public PsToken(final byte[] key) {
         this(new SiHmac(key, SiHmac.HMAC256), 3600L);
     }
 
@@ -77,7 +77,7 @@ public final class PsToken implements Pass {
      * @param seconds
      *  The life span of the token
      */
-    public PsToken(final String key, final long seconds) {
+    public PsToken(final byte[] key, final long seconds) {
         this(new SiHmac(key, SiHmac.HMAC256), seconds);
     }
 

@@ -30,9 +30,7 @@ public final class RqFormFake implements RqForm {
      * @param params Parameters
      */
     public RqFormFake(final Request req, final String... params) {
-        this.fake = new RqFormBase(
-            new RqWithBody(req, construct(validated(params)))
-        );
+        this.fake = new RqFormBase(new RqWithBody(req, new RqFormFake.Body(params)));
     }
 
     @Override
@@ -100,6 +98,48 @@ public final class RqFormFake implements RqForm {
                 String.format("Failed to encode '%s'", txt),
                 ex
             );
+        }
+    }
+
+    /**
+     * CharSequence whose value is computed lazily from URL-encoded parameters.
+     * @since 2.0
+     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    private static final class Body implements CharSequence {
+
+        /**
+         * Source parameters.
+         */
+        private final String[] params;
+
+        /**
+         * Ctor.
+         * @param all Parameters
+         */
+        Body(final String... all) {
+            this.params = all;
+        }
+
+        @SuppressWarnings("PMD.UseStringBufferLength")
+        @Override
+        public int length() {
+            return this.toString().length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.toString().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.toString().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return RqFormFake.construct(RqFormFake.validated(this.params));
         }
     }
 }

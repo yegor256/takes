@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsEqual;
 import org.takes.Request;
 
 /**
@@ -57,7 +57,7 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
      * @param val Exact cookie value
      */
     public HmRqCookie(final String cookie, final String val) {
-        this(Matchers.equalTo(cookie), Matchers.equalTo(val));
+        this(new IsEqual<>(cookie), new IsEqual<>(val));
     }
 
     /**
@@ -66,7 +66,7 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
      * @param val Cookie value matcher
      */
     public HmRqCookie(final String cookie, final Matcher<String> val) {
-        this(Matchers.equalTo(cookie), val);
+        this(new IsEqual<>(cookie), val);
     }
 
     /**

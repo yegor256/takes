@@ -4,6 +4,7 @@
  */
 package org.takes.facets.fork;
 
+import java.util.regex.Pattern;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ final class FkParamsTest {
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             "FkParams must match request when parameter matches regex pattern",
-            new FkParams("a", "[0-9]+", new TkEmpty()).route(
+            new FkParams("a", Pattern.compile("[0-9]+"), new TkEmpty()).route(
                 new RqFake("GET", "/hello?a=1")
             ).has(),
             Matchers.is(true)

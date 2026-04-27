@@ -75,7 +75,7 @@ final class RsWithCookieTest {
             "RsWithCookie should reject invalid cookie name",
             Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new RsWithCookie("f oo", "works")
+                () -> new RsWithCookie("f oo", "works").head().iterator().next()
             ).getMessage(),
             new org.hamcrest.core.StringContains("Cookie name \"f oo\" contains invalid characters")
         );
@@ -87,7 +87,7 @@ final class RsWithCookieTest {
             "RsWithCookie should reject invalid cookie value",
             Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new RsWithCookie("cookiename", "wo\"rks")
+                () -> new RsWithCookie("cookiename", "wo\"rks").head().iterator().next()
             ).getMessage(),
             new org.hamcrest.core.StringContains(
                 "Cookie value \"wo\"rks\" contains invalid characters"

@@ -35,7 +35,7 @@ public final class XeDirectives implements XeSource {
      * @param dirs Directives
      */
     public XeDirectives(final String... dirs) {
-        this(XeDirectives.transform(new ListOf<>(dirs)));
+        this(() -> XeDirectives.transform(new ListOf<>(dirs)));
     }
 
     /**

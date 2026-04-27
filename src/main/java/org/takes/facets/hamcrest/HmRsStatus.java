@@ -7,7 +7,7 @@ package org.takes.facets.hamcrest;
 import java.io.IOException;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.takes.Response;
 
 /**
@@ -31,7 +31,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
      * @since 0.17
      */
     public HmRsStatus(final int val) {
-        this(Matchers.equalTo(val));
+        this(new IsEqual<>(val));
     }
 
     /**

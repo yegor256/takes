@@ -138,7 +138,7 @@ final class RqMtBaseTest {
                     .next(),
                 new HmHeader<>(
                     "content-length",
-                    "102"
+                    Matchers.hasItems("102")
                 )
             );
         } finally {

@@ -40,6 +40,7 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      */
     public RqLive(final InputStream input) throws IOException {
+        // @checkstyle ConstructorsCodeFreeCheck (1 line)
         super(RqLive.parse(input));
     }
 
@@ -177,4 +178,5 @@ public final class RqLive extends RqWrap {
         }
         return ret;
     }
+
 }

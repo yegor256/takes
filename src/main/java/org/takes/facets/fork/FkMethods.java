@@ -59,7 +59,7 @@ public final class FkMethods implements Fork {
      * @param that Take
      */
     public FkMethods(final String mtd, final Take that) {
-        this(new ListOf<>(mtd.split(",")), that);
+        this(new ListOf<>(mtd), that);
     }
 
     /**

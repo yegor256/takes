@@ -7,6 +7,7 @@ package org.takes.tk;
 import java.net.HttpURLConnection;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.IsText;
 import org.takes.facets.hamcrest.HmHeader;
@@ -82,7 +83,7 @@ final class TkRedirectTest {
             ),
             new HmHeader<>(
                 "Location",
-                target
+                Matchers.hasItems(target)
             )
         );
     }

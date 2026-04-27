@@ -53,7 +53,7 @@ final class HmHeaderTest {
             ),
             Matchers.not(
                 new HmHeader<>(
-                    "host", "fake.org"
+                    "host", Matchers.hasItems("fake.org")
                 )
             )
         );
@@ -65,7 +65,7 @@ final class HmHeaderTest {
             "Request must have header1 with value1",
             new RqWithHeader(new RqFake(), "header1: value1"),
             new HmHeader<>(
-                "header1", "value1"
+                "header1", Matchers.hasItems("value1")
             )
         );
     }
@@ -77,7 +77,7 @@ final class HmHeaderTest {
             new RqWithHeader(new RqFake(), "header2: value2"),
             Matchers.not(
                 new HmHeader<>(
-                    "header2", "value21"
+                    "header2", Matchers.hasItems("value21")
                 )
             )
         );
@@ -111,7 +111,7 @@ final class HmHeaderTest {
     @Test
     void describesMismatchMessage() {
         final HmHeader<Request> matcher = new HmHeader<>(
-            "content-type", "text/plain"
+            "content-type", Matchers.hasItems("text/plain")
         );
         final StringDescription description = new StringDescription();
         final RqWithHeaders req =

@@ -71,7 +71,7 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence name,
         final CharSequence value) {
-        this(res, String.format("%s: %s", name, value));
+        this(res, new RsWithHeader.HeaderText(name, value));
     }
 
     /**
@@ -114,5 +114,52 @@ public final class RsWithHeader extends RsWrap {
             );
         }
         return new Joined<String>(head, new IterableOf<>(header));
+    }
+
+    /**
+     * CharSequence that lazily formats a HTTP header line.
+     * @since 2.0
+     */
+    private static final class HeaderText implements CharSequence {
+
+        /**
+         * Header name.
+         */
+        private final CharSequence name;
+
+        /**
+         * Header value.
+         */
+        private final CharSequence value;
+
+        /**
+         * Ctor.
+         * @param hdr Header name
+         * @param val Header value
+         */
+        HeaderText(final CharSequence hdr, final CharSequence val) {
+            this.name = hdr;
+            this.value = val;
+        }
+
+        @Override
+        public int length() {
+            return this.name.length() + 2 + this.value.length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.toString().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.toString().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s: %s", this.name, this.value);
+        }
     }
 }

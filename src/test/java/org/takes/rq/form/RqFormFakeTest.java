@@ -53,7 +53,7 @@ final class RqFormFakeTest {
             () -> new RqFormFake(
                 new RqFake(),
                 "param"
-            )
+            ).body().read()
         );
     }
 

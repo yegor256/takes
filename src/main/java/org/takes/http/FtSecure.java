@@ -6,9 +6,7 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import javax.net.ssl.SSLServerSocketFactory;
 import lombok.EqualsAndHashCode;
-import org.takes.Take;
 
 /**
  * Secure (SSL) front.
@@ -33,38 +31,6 @@ public final class FtSecure implements Front {
      * The original front that is initialized with an SSLServerSocket.
      */
     private final Front front;
-
-    /**
-     * Ctor.
-     * @param tks Take
-     * @throws IOException If fails
-     */
-    public FtSecure(final Take tks) throws IOException {
-        this(tks, 443);
-    }
-
-    /**
-     * Ctor.
-     * @param tks Take
-     * @param prt Port
-     * @throws IOException If fails
-     */
-    public FtSecure(final Take tks, final int prt) throws IOException {
-        this(new BkBasic(tks), prt);
-    }
-
-    /**
-     * Ctor.
-     * @param that Back
-     * @param port Port
-     * @throws IOException If fails
-     */
-    public FtSecure(final Back that, final int port) throws IOException {
-        this(
-            that,
-            SSLServerSocketFactory.getDefault().createServerSocket(port)
-        );
-    }
 
     /**
      * Ctor.

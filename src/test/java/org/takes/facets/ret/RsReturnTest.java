@@ -45,7 +45,10 @@ final class RsReturnTest {
     void rejectsInvalidLocation() {
         Assertions.assertThrows(
             IOException.class,
-            () -> new RsReturn(new RsEmpty(), "http://www.netbout.com/,PsCookie=")
+            () -> new RsReturn(
+                new RsEmpty(),
+                "http://www.netbout.com/,PsCookie="
+            ).head()
         );
     }
 }

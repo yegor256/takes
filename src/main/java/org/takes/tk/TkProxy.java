@@ -54,23 +54,6 @@ public final class TkProxy implements Take {
 
     /**
      * Ctor.
-     * @param tgt Target to which requests are forwarded
-     */
-    public TkProxy(final String tgt) {
-        this(URI.create(tgt), "org.takes.tk.TkProxy");
-    }
-
-    /**
-     * Ctor.
-     * @param tgt Target to which requests are forwarded
-     * @param mark Marker (text label) to add to the HTTP header
-     */
-    public TkProxy(final String tgt, final String mark) {
-        this(URI.create(tgt), mark);
-    }
-
-    /**
-     * Ctor.
      *
      * <p>The {@code target} parameter takes the destination URL
      * to which requests are proxied. Some valid examples:</p>

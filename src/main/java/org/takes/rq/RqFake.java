@@ -60,10 +60,7 @@ public final class RqFake extends RqWrap {
     public RqFake(final CharSequence method, final CharSequence query,
         final CharSequence body) {
         this(
-            new ListOf<>(
-                String.format("%s %s", method, query),
-                "Host: www.example.com"
-            ),
+            new RqFake.HeadList(method, query),
             body
         );
     }
@@ -111,5 +108,50 @@ public final class RqFake extends RqWrap {
      */
     public RqFake(final List<String> head, final InputStream body) {
         super(new RequestOf(new ListOf<>(head), body));
+    }
+
+    /**
+     * Lazily-built head list with the request line and a dummy Host header.
+     * @since 2.0
+     */
+    private static final class HeadList extends java.util.AbstractList<String> {
+
+        /**
+         * HTTP method.
+         */
+        private final CharSequence method;
+
+        /**
+         * HTTP query.
+         */
+        private final CharSequence query;
+
+        /**
+         * Ctor.
+         * @param mtd Method
+         * @param qry Query
+         */
+        HeadList(final CharSequence mtd, final CharSequence qry) {
+            this.method = mtd;
+            this.query = qry;
+        }
+
+        @Override
+        public String get(final int index) {
+            final String line;
+            if (index == 0) {
+                line = String.format("%s %s", this.method, this.query);
+            } else if (index == 1) {
+                line = "Host: www.example.com";
+            } else {
+                throw new IndexOutOfBoundsException(index);
+            }
+            return line;
+        }
+
+        @Override
+        public int size() {
+            return 2;
+        }
     }
 }

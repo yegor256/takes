@@ -7,9 +7,7 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.takes.Request;
-import org.takes.rq.RqFake;
 
 /**
  * Request with a matcher of URI.
@@ -51,26 +49,6 @@ public interface RqRegex extends Request {
          * Matcher.
          */
         private final Matcher mtr;
-
-        /**
-         * Ctor.
-         * @param ptn Pattern
-         * @param query Query
-         */
-        public Fake(final String ptn, final CharSequence query) {
-            this(new RqFake(), ptn, query);
-        }
-
-        /**
-         * Ctor.
-         * @param req Request
-         * @param ptn Pattern
-         * @param query Query
-         */
-        public Fake(final Request req, final String ptn,
-            final CharSequence query) {
-            this(req, Pattern.compile(ptn).matcher(query));
-        }
 
         /**
          * Ctor.

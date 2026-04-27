@@ -5,6 +5,7 @@
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import org.takes.Request;
 
 /**
@@ -30,7 +31,7 @@ public final class RqWithDefaultHeader extends RqWrap {
     public RqWithDefaultHeader(final Request req,
         final String hdr,
         final String val) throws IOException {
-        super(RqWithDefaultHeader.build(req, hdr, val));
+        super(new RqWithDefaultHeader.LazyRq(req, hdr, val));
     }
 
     /**
@@ -50,5 +51,49 @@ public final class RqWithDefaultHeader extends RqWrap {
             request = new RqWithHeader(req, hdr, val);
         }
         return request;
+    }
+
+    /**
+     * Lazily-built request that adds a default header on demand.
+     * @since 2.0
+     */
+    private static final class LazyRq implements Request {
+
+        /**
+         * Original request.
+         */
+        private final Request req;
+
+        /**
+         * Header name.
+         */
+        private final String hdr;
+
+        /**
+         * Header value.
+         */
+        private final String val;
+
+        /**
+         * Ctor.
+         * @param request Original request
+         * @param header Header name
+         * @param value Header value
+         */
+        LazyRq(final Request request, final String header, final String value) {
+            this.req = request;
+            this.hdr = header;
+            this.val = value;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return RqWithDefaultHeader.build(this.req, this.hdr, this.val).head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return RqWithDefaultHeader.build(this.req, this.hdr, this.val).body();
+        }
     }
 }

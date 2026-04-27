@@ -111,7 +111,7 @@ public final class RsFlash extends RsWrap {
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final CharSequence msg, final Expires.Date expires)
+    public RsFlash(final CharSequence msg, final Expires expires)
         throws UnsupportedEncodingException {
         this(msg, Level.INFO, expires);
     }
@@ -148,7 +148,7 @@ public final class RsFlash extends RsWrap {
      *  supported
      * @since 2.0
      */
-    public RsFlash(final Throwable err, final Expires.Date expires)
+    public RsFlash(final Throwable err, final Expires expires)
         throws UnsupportedEncodingException {
         this(new ThrowableMsg(err), Level.SEVERE, expires);
     }
@@ -190,7 +190,7 @@ public final class RsFlash extends RsWrap {
      * @since 2.0
      */
     public RsFlash(final Throwable err, final Level level,
-        final Expires.Date expires) throws UnsupportedEncodingException {
+        final Expires expires) throws UnsupportedEncodingException {
         this(new ThrowableMsg(err), level, expires);
     }
 
@@ -225,7 +225,7 @@ public final class RsFlash extends RsWrap {
      * @since 2.0
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final Expires.Date expires) throws UnsupportedEncodingException {
+        final Expires expires) throws UnsupportedEncodingException {
         this(msg, level, RsFlash.COOKIE, expires);
     }
 
@@ -244,13 +244,7 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final CharSequence msg, final Level level,
         final String cookie) throws UnsupportedEncodingException {
-        super(
-            new ResponseOf(
-                () -> RsFlash.makeDefault(msg, level, cookie).head(),
-                () -> RsFlash.makeDefault(msg, level, cookie).body()
-            )
-        );
-        this.text = new FormattedText(RsFlash.TEXT_FORMAT, level, msg);
+        this(msg, level, cookie, new RsFlash.HourFromNow());
     }
 
     /**
@@ -266,7 +260,7 @@ public final class RsFlash extends RsWrap {
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final String cookie, final Expires.Date expires)
+        final String cookie, final Expires expires)
         throws UnsupportedEncodingException {
         super(
             new ResponseOf(
@@ -288,29 +282,6 @@ public final class RsFlash extends RsWrap {
     }
 
     /**
-     * Creates a response with flash message cookie using default 1-hour
-     * expiration.
-     * @param msg The flash message text
-     * @param level The logging level for message severity
-     * @param cookie The cookie name to use
-     * @return A response with the Set-Cookie header containing the flash
-     *  message
-     * @throws UnsupportedEncodingException If URL encoding fails
-     */
-    private static Response makeDefault(final CharSequence msg,
-        final Level level, final String cookie)
-        throws UnsupportedEncodingException {
-        return RsFlash.make(
-            msg,
-            level,
-            cookie,
-            new Expires.Date(
-                System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
-            )
-        );
-    }
-
-    /**
      * Creates a response with flash message cookie.
      * @param msg The flash message text
      * @param level The logging level for message severity
@@ -322,7 +293,7 @@ public final class RsFlash extends RsWrap {
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static Response make(final CharSequence msg, final Level level,
-        final String cookie, final Expires.Date expires)
+        final String cookie, final Expires expires)
         throws UnsupportedEncodingException {
         return new RsWithCookie(
             cookie,
@@ -337,5 +308,20 @@ public final class RsFlash extends RsWrap {
             "Path=/",
             expires.print()
         );
+    }
+
+    /**
+     * Default expiration set to one hour from "now" (now is determined at
+     * the time {@link #print()} is called).
+     * @since 2.0
+     */
+    private static final class HourFromNow implements Expires {
+
+        @Override
+        public String print() {
+            return new Expires.Date(
+                System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
+            ).print();
+        }
     }
 }

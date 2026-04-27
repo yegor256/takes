@@ -61,7 +61,7 @@ public final class PsByFlag implements Pass {
      * @since 0.5.1
      */
     public PsByFlag(final String flg, final PsByFlag.Pair... pairs) {
-        this(flg, PsByFlag.asMap(pairs));
+        this(flg, new PsByFlag.PairsMap(pairs));
     }
 
     /**
@@ -114,18 +114,36 @@ public final class PsByFlag implements Pass {
     }
 
     /**
-     * Convert entries to map.
-     * @param entries Entries
-     * @return Map
+     * Map view backed by a varargs entry array.
+     * @since 2.0
      */
-    @SafeVarargs
-    private static Map<Pattern, Pass> asMap(
-        final Map.Entry<Pattern, Pass>... entries) {
-        final Map<Pattern, Pass> map = new HashMap<>(entries.length);
-        for (final Map.Entry<Pattern, Pass> ent : entries) {
-            map.put(ent.getKey(), ent.getValue());
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    private static final class PairsMap
+        extends java.util.AbstractMap<Pattern, Pass> {
+
+        /**
+         * Source entries.
+         */
+        private final Map.Entry<Pattern, Pass>[] entries;
+
+        /**
+         * Ctor.
+         * @param ents Entries
+         */
+        @SafeVarargs
+        PairsMap(final Map.Entry<Pattern, Pass>... ents) {
+            this.entries = ents;
         }
-        return map;
+
+        @Override
+        public java.util.Set<Map.Entry<Pattern, Pass>> entrySet() {
+            final java.util.Set<Map.Entry<Pattern, Pass>> set =
+                new java.util.LinkedHashSet<>(this.entries.length);
+            for (final Map.Entry<Pattern, Pass> ent : this.entries) {
+                set.add(ent);
+            }
+            return set;
+        }
     }
 
     /**
@@ -139,15 +157,6 @@ public final class PsByFlag implements Pass {
          * Serialization marker.
          */
         private static final long serialVersionUID = 7362482770166663015L;
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param pass Pass
-         */
-        public Pair(final String key, final Pass pass) {
-            this(Pattern.compile(Pattern.quote(key)), pass);
-        }
 
         /**
          * Ctor.

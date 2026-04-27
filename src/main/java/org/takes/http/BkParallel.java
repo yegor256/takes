@@ -6,8 +6,10 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.EqualsAndHashCode;
 
@@ -40,11 +42,17 @@ import lombok.EqualsAndHashCode;
 public final class BkParallel extends BkWrap {
 
     /**
+     * Default thread-pool multiplier applied to available processor count.
+     */
+    private static final int DEFAULT_THREADS =
+        Runtime.getRuntime().availableProcessors() << 2;
+
+    /**
      * Ctor.
      * @param back Original back
      */
     public BkParallel(final Back back) {
-        this(back, Runtime.getRuntime().availableProcessors() << 2);
+        this(back, BkParallel.DEFAULT_THREADS);
     }
 
     /**
@@ -55,8 +63,10 @@ public final class BkParallel extends BkWrap {
     public BkParallel(final Back back, final int threads) {
         this(
             back,
-            Executors.newFixedThreadPool(
-                threads,
+            new ThreadPoolExecutor(
+                threads, threads, 0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>(),
                 new BkParallel.Threads()
             )
         );

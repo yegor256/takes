@@ -64,9 +64,7 @@ public final class FkEncoding implements Fork {
      * @param response Response to return
      */
     public FkEncoding(final String enc, final Response response) {
-        this.encoding = new UncheckedText(
-            new Lowered(new Trimmed(new TextOf(enc)))
-        ).asString();
+        this.encoding = enc;
         this.origin = response;
     }
 
@@ -74,8 +72,11 @@ public final class FkEncoding implements Fork {
     public Opt<Response> route(final Request req) throws IOException {
         final Iterator<String> headers =
             new RqHeaders.Base(req).header("Accept-Encoding").iterator();
+        final String norm = new UncheckedText(
+            new Lowered(new Trimmed(new TextOf(this.encoding)))
+        ).asString();
         final Opt<Response> resp;
-        if (this.encoding.isEmpty()) {
+        if (norm.isEmpty()) {
             resp = new Opt.Single<>(this.origin);
         } else if (headers.hasNext()) {
             final Collection<String> items = Arrays.asList(
@@ -89,7 +90,7 @@ public final class FkEncoding implements Fork {
                     ).asString()
                 )
             );
-            if (items.contains(this.encoding)) {
+            if (items.contains(norm)) {
                 resp = new Opt.Single<>(this.origin);
             } else {
                 resp = new Opt.Empty<>();

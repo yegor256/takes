@@ -252,7 +252,7 @@ final class TkProxyTest {
         captured.set(home);
         result.set(
             new RsBodyPrint(
-                new TkProxy(home.toURL().toString()).act(
+                new TkProxy(home).act(
                     new RqFake(
                         Arrays.asList(
                             String.format(
@@ -287,7 +287,7 @@ final class TkProxyTest {
         result.set(
             new RsHeadPrint(
                 new TkProxy(
-                    home.toURL().toString(),
+                    home,
                     mark
                 ).act(
                     new RqFake(
