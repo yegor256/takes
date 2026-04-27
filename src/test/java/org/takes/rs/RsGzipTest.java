@@ -29,7 +29,14 @@ final class RsGzipTest {
         MatcherAssert.assertThat(
             "Gzip response must contain Content-Encoding header",
             new RsHeadPrint(
-                new RsGzip(new RsText("some unicode text: \u20ac\n\t"))
+                new RsGzip(
+                    new RsText(
+                        String.format(
+                            "some unicode text: \u20ac%c\t",
+                            (char) 10
+                        )
+                    )
+                )
             ).asString(),
             Matchers.containsString("Content-Encoding: gzip")
         );
@@ -37,7 +44,10 @@ final class RsGzipTest {
 
     @Test
     void decompressesToOriginalText() throws IOException {
-        final String text = "some unicode text: \u20ac\n\t";
+        final String text = String.format(
+            "some unicode text: \u20ac%c\t",
+            (char) 10
+        );
         MatcherAssert.assertThat(
             "Decompressed gzip content must match original text",
             IOUtils.toString(
@@ -102,5 +112,4 @@ final class RsGzipTest {
             )
         );
     }
-
 }

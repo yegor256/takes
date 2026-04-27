@@ -28,5 +28,4 @@ final class TkVersionedTest {
             new HasString("X-Takes-Version")
         );
     }
-
 }

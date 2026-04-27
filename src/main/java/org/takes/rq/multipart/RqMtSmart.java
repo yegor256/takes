@@ -17,6 +17,7 @@ import org.takes.rq.RqMultipart;
  * @since 0.33
  */
 public final class RqMtSmart implements RqMultipart {
+
     /**
      * Original request.
      */

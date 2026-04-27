@@ -45,16 +45,6 @@ public final class FkParams implements Fork {
      * @param ptn Pattern
      * @param that Take
      */
-    public FkParams(final String param, final String ptn, final Take that) {
-        this(param, Pattern.compile(ptn), that);
-    }
-
-    /**
-     * Ctor.
-     * @param param Name of param
-     * @param ptn Pattern
-     * @param that Take
-     */
     public FkParams(final String param, final Pattern ptn, final Take that) {
         this.name = param;
         this.pattern = ptn;
@@ -74,5 +64,4 @@ public final class FkParams implements Fork {
         }
         return resp;
     }
-
 }

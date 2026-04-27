@@ -142,6 +142,7 @@ final class CcAesTest {
      * @since 0.13.8
      */
     private static final class FkRandom extends SecureRandom {
+
         /**
          * Serial id.
          */
@@ -177,9 +178,10 @@ final class CcAesTest {
          * Ctor.
          * @param fake Bytes
          */
+        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
         FkRandomSpi(final byte[] fake) {
             super();
-            this.fake = fake.clone();
+            this.fake = fake;
         }
 
         @Override

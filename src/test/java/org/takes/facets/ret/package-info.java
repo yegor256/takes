@@ -5,7 +5,6 @@
 
 /**
  * Return, tests.
- *
  * @since 0.20
  */
 package org.takes.facets.ret;

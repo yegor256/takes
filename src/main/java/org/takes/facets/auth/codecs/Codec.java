@@ -57,5 +57,4 @@ public interface Codec {
      * @throws IOException If fails
      */
     Identity decode(byte[] bytes) throws IOException;
-
 }

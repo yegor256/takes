@@ -16,6 +16,7 @@ import org.llorllale.cactoos.matchers.IsText;
  * Test case for {@link RsWithStatus}.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.16.9
  */
 final class RsWithStatusTest {
@@ -32,7 +33,7 @@ final class RsWithStatusTest {
             ),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 404 Not Found",
                     "Host: example.com",
                     "",

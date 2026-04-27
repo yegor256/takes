@@ -229,16 +229,26 @@ final class RsXsltTest {
             " ",
             "<xsl:stylesheet version=\"1.0\"",
             "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"",
-            "xmlns:rt=\"http://xml.apache.org/xalan/java/java.lang.Runtime\"",
-            "xmlns:ob=\"http://xml.apache.org/xalan/java/java.lang.Object\">\n",
-            " <xsl:template match=\"/\">\n",
-            "  <xsl:variable name=\"rtobject\" select=\"rt:getRuntime()\"/>\n",
+            String.format(
+                "xmlns:rt=\"http://xml.apache.org/xalan/java/%s.Runtime\"",
+                "java.lang"
+            ),
+            String.format(
+                "xmlns:ob=\"http://xml.apache.org/xalan/java/%s.Object\">%n",
+                "java.lang"
+            ),
+            String.format(" <xsl:template match=\"/\">%n"),
+            String.format(
+                "  <xsl:variable name=\"rtobject\" select=\"rt:getRuntime()\"/>%n"
+            ),
             "  <xsl:variable name=\"process\"",
-            "select=\"rt:exec($rtobject,'open -a Calculator')\"/>\n",
+            String.format(
+                "select=\"rt:exec($rtobject,'open -a Calculator')\"/>%n"
+            ),
             "  <xsl:variable name=\"processString\"",
-            "select=\"ob:toString($process)\"/>\n",
-            "  <xsl:value-of select=\"$processString\"/>\n",
-            " </xsl:template>\n",
+            String.format("select=\"ob:toString($process)\"/>%n"),
+            String.format("  <xsl:value-of select=\"$processString\"/>%n"),
+            String.format(" </xsl:template>%n"),
             "</xsl:stylesheet>"
         );
         MatcherAssert.assertThat(
@@ -254,5 +264,4 @@ final class RsXsltTest {
             )
         );
     }
-
 }

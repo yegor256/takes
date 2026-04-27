@@ -5,10 +5,7 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.cactoos.bytes.BytesOf;
-import org.cactoos.bytes.UncheckedBytes;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -23,7 +20,7 @@ import org.takes.facets.auth.Identity;
  *
  * <p>Usage example:
  * <pre> {@code
- * final Codec codec = new CcXor(new CcPlain(), "secret-key");
+ * final Codec codec = new CcXor(new CcPlain(), keyBytes);
  * final Identity identity = new Identity.Simple("urn:user:john", props);
  * final byte[] encoded = codec.encode(identity);
  * final Identity decoded = codec.decode(encoded);
@@ -51,21 +48,10 @@ public final class CcXor implements Codec {
      * @param codec Original codec
      * @param key Secret key for encoding
      */
-    public CcXor(final Codec codec, final String key) {
-        this(
-            codec,
-            new UncheckedBytes(new BytesOf(key)).asBytes()
-        );
-    }
-
-    /**
-     * Ctor.
-     * @param codec Original codec
-     * @param key Secret key for encoding
-     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public CcXor(final Codec codec, final byte[] key) {
         this.origin = codec;
-        this.secret = Arrays.copyOf(key, key.length);
+        this.secret = key;
     }
 
     @Override
@@ -99,5 +85,4 @@ public final class CcXor implements Codec {
         }
         return output;
     }
-
 }

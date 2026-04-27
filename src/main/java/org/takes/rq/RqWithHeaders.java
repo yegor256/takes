@@ -4,10 +4,10 @@
  */
 package org.takes.rq;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -34,7 +34,7 @@ public final class RqWithHeaders extends RqWrap {
      * @param headers Headers to add
      */
     public RqWithHeaders(final Request req, final CharSequence... headers) {
-        this(req, Arrays.asList(headers));
+        this(req, new ListOf<>(headers));
     }
 
     /**

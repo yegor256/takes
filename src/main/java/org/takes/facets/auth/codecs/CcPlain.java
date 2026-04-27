@@ -110,5 +110,4 @@ public final class CcPlain implements Codec {
             throw new DecodingException(ex);
         }
     }
-
 }

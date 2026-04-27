@@ -55,5 +55,4 @@ public final class FbSlf4j extends FbWrap {
             new TextOf(new BytesOf(req.throwable()))
         );
     }
-
 }

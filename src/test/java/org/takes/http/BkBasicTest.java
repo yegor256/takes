@@ -37,7 +37,6 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link BkBasic}.
- *
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
@@ -51,7 +50,8 @@ final class BkBasicTest {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     /**
      * POST header constant.
@@ -177,10 +177,11 @@ final class BkBasicTest {
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(
-                "127.0.0.1",
-                server.getLocalPort()
-            )
+            try (
+                Socket socket = new Socket(
+                    "127.0.0.1",
+                    server.getLocalPort()
+                )
             ) {
                 socket.getOutputStream().write(
                     new Joined(
@@ -220,7 +221,6 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 411 when a persistent connection request
      * has no Content-Length.
-     *
      * @throws Exception If some problem inside
      */
     @Disabled
@@ -241,10 +241,11 @@ final class BkBasicTest {
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
-            )
+            try (
+                Socket socket = new Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
@@ -277,7 +278,6 @@ final class BkBasicTest {
 
     /**
      * BkBasic can accept no content-length on closed connection.
-     *
      * @throws Exception If some problem inside
      */
     @Disabled
@@ -299,10 +299,11 @@ final class BkBasicTest {
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
-            )
+            try (
+                Socket socket = new Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
@@ -363,7 +364,7 @@ final class BkBasicTest {
     void returnsABadRequestToAControlCharInPath() throws Exception {
         MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            this.responseForPath("GET", "/\n"),
+            this.responseForPath("GET", String.format("/%c", (char) 10)),
             Matchers.containsString("400 Bad Request")
         );
     }
@@ -404,7 +405,6 @@ final class BkBasicTest {
     /**
      * Starts a new clean server with only root path and tries to send a
      * request.
-     *
      * @param method HTTP method to be called
      * @param path Endpoint to be called
      * @return Server textual response

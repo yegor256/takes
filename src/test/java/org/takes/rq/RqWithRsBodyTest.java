@@ -33,5 +33,4 @@ final class RqWithRsBodyTest {
             Matchers.equalTo(body)
         );
     }
-
 }

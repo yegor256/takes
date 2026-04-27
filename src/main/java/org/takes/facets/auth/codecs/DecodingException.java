@@ -36,16 +36,24 @@ public final class DecodingException extends RuntimeException {
      * Public ctor.
      * @param cause The cause of it
      */
-    DecodingException(final String cause) {
-        super(cause);
+    DecodingException(final Throwable cause) {
+        this(null, cause);
     }
 
     /**
      * Public ctor.
      * @param cause The cause of it
      */
-    DecodingException(final Throwable cause) {
-        super(cause);
+    DecodingException(final String cause) {
+        this(cause, null);
     }
 
+    /**
+     * Primary ctor.
+     * @param message Detail message
+     * @param cause Throwable cause
+     */
+    private DecodingException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
 }

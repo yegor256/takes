@@ -7,8 +7,8 @@ package org.takes.facets.hamcrest;
 import java.io.IOException;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsEqual;
 import org.takes.Response;
 
 /**
@@ -56,7 +56,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
      * @param val Exact cookie value
      */
     public HmRsCookie(final String cookie, final String val) {
-        this(Matchers.equalTo(cookie), Matchers.equalTo(val));
+        this(new IsEqual<>(cookie), new IsEqual<>(val));
     }
 
     /**
@@ -65,7 +65,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
      * @param val Cookie value matcher
      */
     public HmRsCookie(final String cookie, final Matcher<String> val) {
-        this(Matchers.equalTo(cookie), val);
+        this(new IsEqual<>(cookie), val);
     }
 
     /**
@@ -73,8 +73,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
      * @param cookie Cookie name matcher
      * @param val Cookie value matcher
      */
-    public HmRsCookie(final Matcher<String> cookie,
-        final Matcher<String> val) {
+    public HmRsCookie(final Matcher<String> cookie, final Matcher<String> val) {
         super();
         this.name = cookie;
         this.value = val;

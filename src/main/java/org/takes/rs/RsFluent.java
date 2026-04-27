@@ -110,5 +110,4 @@ public final class RsFluent extends RsWrap {
     public RsFluent withBody(final InputStream body) {
         return new RsFluent(new RsWithBody(this, body));
     }
-
 }

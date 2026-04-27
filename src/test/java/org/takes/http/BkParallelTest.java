@@ -19,12 +19,12 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link BkParallel}.
- *
  * @since 0.15.2
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class BkParallelTest {
+
     @Test
     void allRequestsStart() throws Exception {
         final CountDownLatch started = new CountDownLatch(3);

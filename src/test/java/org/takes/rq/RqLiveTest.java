@@ -25,7 +25,8 @@ final class RqLiveTest {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     @Test
     void parsesHostHeader() throws IOException {
@@ -92,7 +93,10 @@ final class RqLiveTest {
             IOException.class,
             () -> new RqLive(
                 new ByteArrayInputStream(
-                    "GET /test HTTP/1.1\r\nHost: \u20ac".getBytes(StandardCharsets.UTF_8)
+                    String.format(
+                        "GET /test HTTP/1.1%sHost: \u20ac",
+                        RqLiveTest.CRLF
+                    ).getBytes(StandardCharsets.UTF_8)
                 )
             )
         );
@@ -104,7 +108,10 @@ final class RqLiveTest {
             IOException.class,
             () -> new RqLive(
                 new ByteArrayInputStream(
-                    "GET /test HTTP/1.1\rHost: localhost".getBytes(StandardCharsets.UTF_8)
+                    String.format(
+                        "GET /test HTTP/1.1%cHost: localhost",
+                        (char) 13
+                    ).getBytes(StandardCharsets.UTF_8)
                 )
             )
         );

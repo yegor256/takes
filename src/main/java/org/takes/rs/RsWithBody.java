@@ -10,8 +10,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.bytes.BytesOf;
-import org.cactoos.bytes.UncheckedBytes;
 import org.takes.Response;
 
 /**
@@ -75,7 +73,7 @@ public final class RsWithBody extends RsWrap {
      * @param body Body
      */
     public RsWithBody(final Response res, final CharSequence body) {
-        this(res, new UncheckedBytes(new BytesOf(body)).asBytes());
+        this(res, new RsBody.Text(body, java.nio.charset.StandardCharsets.UTF_8));
     }
 
     /**
@@ -87,7 +85,7 @@ public final class RsWithBody extends RsWrap {
      */
     public RsWithBody(final Response res, final CharSequence body,
         final Charset charset) {
-        this(res, body.toString().getBytes(charset));
+        this(res, new RsBody.Text(body, charset));
     }
 
     /**

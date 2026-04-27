@@ -25,5 +25,4 @@ public interface Fork {
      * @throws Exception If fails
      */
     Opt<Response> route(Request req) throws Exception;
-
 }

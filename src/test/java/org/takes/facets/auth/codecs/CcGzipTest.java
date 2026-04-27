@@ -12,7 +12,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcGzip}.
- *
  * @since 0.16
  */
 final class CcGzipTest {
@@ -33,10 +32,9 @@ final class CcGzipTest {
             }
         );
         final String urn = "test:gzip";
-        final byte[] encode = gzip.encode(new Identity.Simple(urn));
         MatcherAssert.assertThat(
             "Gzip decompressed identity must contain original URN",
-            gzip.decode(encode).urn(),
+            gzip.decode(gzip.encode(new Identity.Simple(urn))).urn(),
             Matchers.containsString(urn)
         );
     }

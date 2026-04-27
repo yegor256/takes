@@ -6,9 +6,9 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -33,7 +33,7 @@ public final class RsFork extends RsWrap {
      * @param list List of forks
      */
     public RsFork(final Request req, final Fork... list) {
-        this(req, Arrays.asList(list));
+        this(req, new ListOf<>(list));
     }
 
     /**
@@ -73,5 +73,4 @@ public final class RsFork extends RsWrap {
         }
         throw new HttpException(HttpURLConnection.HTTP_NOT_FOUND);
     }
-
 }

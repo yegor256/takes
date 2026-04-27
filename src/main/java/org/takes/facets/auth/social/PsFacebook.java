@@ -95,12 +95,7 @@ public final class PsFacebook implements Pass {
      */
     public PsFacebook(final String fapp, final String fkey) {
         this(
-            new JdkRequest(
-                new Href(PsFacebook.ACCESS_TOKEN_URL)
-                    .with(PsFacebook.CLIENT_ID, fapp)
-                    .with(PsFacebook.CLIENT_SECRET, fkey)
-                    .toString()
-            ),
+            new JdkRequest(PsFacebook.ACCESS_TOKEN_URL),
             new DefaultWebRequestor(),
             fapp,
             fkey
@@ -124,8 +119,7 @@ public final class PsFacebook implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request trequest)
-        throws IOException {
+    public Opt<Identity> enter(final Request trequest) throws IOException {
         final Href href = new RqHref.Base(trequest).href();
         final Iterator<String> code = href.param(PsFacebook.CODE).iterator();
         if (!code.hasNext()) {
@@ -155,8 +149,7 @@ public final class PsFacebook implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -190,19 +183,15 @@ public final class PsFacebook implements Pass {
      */
     private String token(final String home, final String code)
         throws IOException {
-        final String response = this.request
-            .uri()
-            .set(
-                URI.create(
-                    new Href(PsFacebook.ACCESS_TOKEN_URL)
-                        .with(PsFacebook.CLIENT_ID, this.app)
-                        .with("redirect_uri", home)
-                        .with(PsFacebook.CLIENT_SECRET, this.key)
-                        .with(PsFacebook.CODE, code)
-                        .toString()
-                )
+        final String response = this.request.uri().set(
+            URI.create(
+                new Href(PsFacebook.ACCESS_TOKEN_URL).with(
+                    PsFacebook.CLIENT_ID, this.app
+                ).with("redirect_uri", home).with(
+                    PsFacebook.CLIENT_SECRET, this.key
+                ).with(PsFacebook.CODE, code).toString()
             )
-            .back()
+        ).back()
             .fetch()
             .as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK).body();
@@ -225,5 +214,4 @@ public final class PsFacebook implements Pass {
             )
         );
     }
-
 }

@@ -89,5 +89,4 @@ public final class XeTransform<T> implements Iterable<XeSource> {
             }
         };
     }
-
 }

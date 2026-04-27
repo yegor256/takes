@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -57,7 +58,7 @@ final class RqMethodTest {
     @Test
     void failsOnMissingUri() {
         final RqMethod.Base req = new RqMethod.Base(
-            new RqSimple(Arrays.asList("GET"), null)
+            new RqSimple(Collections.singletonList("GET"), null)
         );
         Assertions.assertThrows(
             IOException.class,
@@ -70,7 +71,7 @@ final class RqMethodTest {
         Assertions.assertThrows(
             IOException.class,
             () -> new RqMethod.Base(
-                new RqSimple(Arrays.asList("GET / HTTP/1.1 abc"), null)
+                new RqSimple(Collections.singletonList("GET / HTTP/1.1 abc"), null)
             ).method()
         );
     }
@@ -80,7 +81,7 @@ final class RqMethodTest {
         Assertions.assertThrows(
             IOException.class,
             () -> new RqMethod.Base(
-                new RqSimple(Arrays.asList("GET /     HTTP/1.1"), null)
+                new RqSimple(Collections.singletonList("GET /     HTTP/1.1"), null)
             ).method()
         );
     }

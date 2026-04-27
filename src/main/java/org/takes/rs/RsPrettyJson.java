@@ -6,7 +6,6 @@ package org.takes.rs;
 
 import jakarta.json.Json;
 import jakarta.json.JsonException;
-import jakarta.json.JsonReader;
 import jakarta.json.JsonWriter;
 import jakarta.json.stream.JsonGenerator;
 import java.io.ByteArrayOutputStream;
@@ -87,15 +86,14 @@ public final class RsPrettyJson implements Response {
      * @return New properly formatted body
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
-        try (JsonReader rdr = Json.createReader(body);
+        try (
             JsonWriter wrt = Json.createWriterFactory(
                 Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
             ).createWriter(res)
         ) {
-            wrt.writeObject(rdr.readObject());
+            wrt.writeObject(Json.createReader(body).readObject());
         } catch (final JsonException ex) {
             throw new IOException(ex);
         }

@@ -22,6 +22,11 @@ import org.takes.Response;
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsPrettyXmlTest {
 
+    /**
+     * Linefeed character.
+     */
+    private static final String LF = String.valueOf((char) 10);
+
     @Test
     void formatsXmlBody() throws IOException {
         MatcherAssert.assertThat(
@@ -31,7 +36,12 @@ final class RsPrettyXmlTest {
                     new RsWithBody("<test><a>foo</a></test>")
                 )
             ).asString(),
-            Matchers.is("<test>\n   <a>foo</a>\n</test>\n")
+            Matchers.is(
+                String.format(
+                    "<test>%1$s   <a>foo</a>%1$s</test>%1$s",
+                    RsPrettyXmlTest.LF
+                )
+            )
         );
     }
 
@@ -75,14 +85,20 @@ final class RsPrettyXmlTest {
             new IsEqual<>(
                 new Joined(
                     "",
-                    "<!DOCTYPE html\n",
-                    "  SYSTEM \"about:legacy-compat\">\n",
-                    "<html>\n",
-                    "   <head>\n",
+                    String.format("<!DOCTYPE html%s", RsPrettyXmlTest.LF),
+                    String.format(
+                        "  SYSTEM \"about:legacy-compat\">%s",
+                        RsPrettyXmlTest.LF
+                    ),
+                    String.format("<html>%s", RsPrettyXmlTest.LF),
+                    String.format("   <head>%s", RsPrettyXmlTest.LF),
                     "      <meta http-equiv=\"Content-Type\"",
-                    " content=\"text/html; charset=UTF-8\">\n",
-                    "   </head>\n",
-                    "   <body></body>\n",
+                    String.format(
+                        " content=\"text/html; charset=UTF-8\">%s",
+                        RsPrettyXmlTest.LF
+                    ),
+                    String.format("   </head>%s", RsPrettyXmlTest.LF),
+                    String.format("   <body></body>%s", RsPrettyXmlTest.LF),
                     "</html>"
                 )
             )
@@ -119,14 +135,26 @@ final class RsPrettyXmlTest {
             new IsEqual<>(
                 new Joined(
                     "",
-                    "<!DOCTYPE html\n  ",
+                    String.format("<!DOCTYPE html%s  ", RsPrettyXmlTest.LF),
                     pid,
-                    "\"http://www.w3.org/TR/html4/loose.dtd\">\n",
+                    String.format(
+                        "\"http://www.w3.org/TR/html4/loose.dtd\">%s",
+                        RsPrettyXmlTest.LF
+                    ),
                     xhtml,
-                    "\n   <head>\n      ",
+                    String.format(
+                        "%1$s   <head>%1$s      ",
+                        RsPrettyXmlTest.LF
+                    ),
                     "<meta http-equiv=\"Content-Type\" content=\"text/html; ",
-                    "charset=UTF-8\" /><a>foo</a></head>\n   ",
-                    "<body>this is body</body>\n</html>"
+                    String.format(
+                        "charset=UTF-8\" /><a>foo</a></head>%s   ",
+                        RsPrettyXmlTest.LF
+                    ),
+                    String.format(
+                        "<body>this is body</body>%s</html>",
+                        RsPrettyXmlTest.LF
+                    )
                 )
             )
         );
@@ -144,7 +172,10 @@ final class RsPrettyXmlTest {
     void reportsCorrectContentLength() throws IOException {
         final int clength = new RsBodyPrint(
             new RsWithBody(
-                "<test>\n   <a>test</a>\n</test>\n"
+                String.format(
+                    "<test>%1$s   <a>test</a>%1$s</test>%1$s",
+                    RsPrettyXmlTest.LF
+                )
             )
         ).asString().length();
         MatcherAssert.assertThat(

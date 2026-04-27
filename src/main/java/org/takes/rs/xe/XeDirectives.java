@@ -5,11 +5,11 @@
 package org.takes.rs.xe;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
+import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
 import org.xembly.Directive;
 import org.xembly.Directives;
@@ -35,7 +35,7 @@ public final class XeDirectives implements XeSource {
      * @param dirs Directives
      */
     public XeDirectives(final String... dirs) {
-        this(XeDirectives.transform(Arrays.asList(dirs)));
+        this(() -> XeDirectives.transform(new ListOf<>(dirs)));
     }
 
     /**
@@ -43,7 +43,7 @@ public final class XeDirectives implements XeSource {
      * @param dirs Directives
      */
     public XeDirectives(final Directive... dirs) {
-        this(Arrays.asList(dirs));
+        this(new ListOf<>(dirs));
     }
 
     /**
@@ -90,5 +90,4 @@ public final class XeDirectives implements XeSource {
         }
         return list;
     }
-
 }

@@ -63,33 +63,30 @@ public final class PsToken implements Pass {
     /**
      * Ctor. This is equivalent to {@code PsToken(key, 3600)}, signing with 256
      * bit.
-     *
      * @param key
      *  The secret key to sign with
      */
-    public PsToken(final String key) {
+    public PsToken(final byte[] key) {
         this(new SiHmac(key, SiHmac.HMAC256), 3600L);
     }
 
     /**
      * Ctor. This uses a 256-bit HMAC signature.
-     *
      * @param key
      *  The secret key to sign with
      * @param seconds
-     *  The life span of the token.
+     *  The life span of the token
      */
-    public PsToken(final String key, final long seconds) {
+    public PsToken(final byte[] key, final long seconds) {
         this(new SiHmac(key, SiHmac.HMAC256), seconds);
     }
 
     /**
      * Ctor.
-     *
      * @param sign
-     *  A {@see Signature}.
+     *  A {@see Signature}
      * @param seconds
-     *  The life span of the token.
+     *  The life span of the token
      */
     private PsToken(final SiHmac sign, final long seconds) {
         this.header = "Authorization";
@@ -135,14 +132,16 @@ public final class PsToken implements Pass {
                 parts[2].getBytes(Charset.defaultCharset()),
                 this.signature.sign(tocheck.array())
             )) {
-                try (JsonReader rdr = Json.createReader(
-                    new StringReader(
-                        new String(
-                            Base64.getDecoder().decode(jwtpayload),
-                            Charset.defaultCharset()
+                try (
+                    JsonReader rdr = Json.createReader(
+                        new StringReader(
+                            new String(
+                                Base64.getDecoder().decode(jwtpayload),
+                                Charset.defaultCharset()
+                            )
                         )
                     )
-                )) {
+                ) {
                     user = new Opt.Single<>(
                         new Identity.Simple(
                             rdr.readObject().getString(Token.Jwt.SUBJECT)
@@ -170,17 +169,16 @@ public final class PsToken implements Pass {
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
         try (JsonReader reader = Json.createReader(res.body())) {
+            final String jwt = String.format(
+                "%s.%s.%s",
+                new String(jwtheader, Charset.defaultCharset()),
+                new String(jwtpayload, Charset.defaultCharset()),
+                new String(sign, Charset.defaultCharset())
+            );
             return new RsJson(
                 Json.createObjectBuilder()
                     .add("response", reader.read())
-                    .add(
-                        "jwt", String.format(
-                            "%s.%s.%s",
-                            new String(jwtheader, Charset.defaultCharset()),
-                            new String(jwtpayload, Charset.defaultCharset()),
-                            new String(sign, Charset.defaultCharset())
-                        )
-                    )
+                    .add("jwt", jwt)
                     .build()
             );
         }

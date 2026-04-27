@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,6 +16,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
+import org.cactoos.list.ListOf;
 
 /**
  * Command-line options.
@@ -44,7 +44,7 @@ final class Options {
      * @since 0.9
      */
     Options(final String... args) {
-        this(Arrays.asList(args));
+        this(new ListOf<>(args));
     }
 
     /**
@@ -52,7 +52,7 @@ final class Options {
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
-        this.map = Options.asMap(args);
+        this.map = new Options.LazyMap(args);
     }
 
     /**
@@ -147,10 +147,8 @@ final class Options {
 
     /**
      * Convert the provided arguments into a Map.
-     * @param args Arguments to parse.
-     * @return Map A map containing all the arguments and their values.
-     * @throws IllegalStateException If an argument doesn't match with the
-     *  expected format which is {@code --([a-z\-]+)(=.+)?}.
+     * @param args Arguments to parse
+     * @return Map A map containing all the arguments and their values
      */
     private static Map<String, String> asMap(final Iterable<String> args) {
         final Map<String, String> map = new HashMap<>(0);
@@ -170,5 +168,61 @@ final class Options {
             }
         }
         return map;
+    }
+
+    /**
+     * Map view that lazily parses the command-line arguments on first access.
+     * @since 2.0
+     */
+    private static final class LazyMap extends java.util.AbstractMap<String, String> {
+
+        /**
+         * Source arguments.
+         */
+        private final Iterable<String> args;
+
+        /**
+         * Cached parsed map.
+         */
+        private Map<String, String> cached;
+
+        /**
+         * Ctor.
+         * @param source Source arguments
+         */
+        LazyMap(final Iterable<String> source) {
+            this.args = source;
+        }
+
+        @Override
+        public java.util.Set<Map.Entry<String, String>> entrySet() {
+            return this.parsed().entrySet();
+        }
+
+        @Override
+        public boolean containsKey(final Object key) {
+            return this.parsed().containsKey(key);
+        }
+
+        @Override
+        public String get(final Object key) {
+            return this.parsed().get(key);
+        }
+
+        @Override
+        public String getOrDefault(final Object key, final String def) {
+            return this.parsed().getOrDefault(key, def);
+        }
+
+        /**
+         * Parse and cache the result.
+         * @return Parsed map
+         */
+        private Map<String, String> parsed() {
+            if (this.cached == null) {
+                this.cached = Options.asMap(this.args);
+            }
+            return this.cached;
+        }
     }
 }

@@ -49,10 +49,9 @@ final class PsFacebookTest {
 
     private static Opt<Identity> login(final String identifier) throws Exception {
         final RandomStringGenerator generator =
-            new RandomStringGenerator.Builder()
-                .filteredBy(
-                    Character::isLetterOrDigit, Character::isIdeographic
-                ).get();
+            new RandomStringGenerator.Builder().filteredBy(
+                Character::isLetterOrDigit, Character::isIdeographic
+            ).get();
         final Pass pass = new PsFacebook(
             new FakeRequest(
                 200,

@@ -30,6 +30,7 @@ import org.takes.rq.RqWrap;
  * @since 0.14
  */
 public interface RqCookies extends Request {
+
     /**
      * Retrieves the value of a single cookie by name.
      * @param name The cookie name to look for
@@ -57,6 +58,7 @@ public interface RqCookies extends Request {
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqCookies {
+
         /**
          * Constructor that decorates the given request with cookie parsing.
          * @param req The original HTTP request to decorate

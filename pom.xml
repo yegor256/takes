@@ -377,6 +377,189 @@
                   <new>parameter void org.takes.misc.Expires.Date::&lt;init&gt;(java.lang.String, java.util.Locale, ===java.time.Instant===)</new>
                   <justification>Migrating from legacy java.util.Date to java.time.Instant</justification>
                 </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.fork.FkHitRefresh::&lt;init&gt;(java.io.File, java.lang.String, org.takes.Take)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden String.split call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.fork.FkParams::&lt;init&gt;(java.lang.String, java.lang.String, org.takes.Take)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Pattern.compile call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.fork.RqRegex.Fake::&lt;init&gt;(java.lang.String, java.lang.CharSequence)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Pattern.compile call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.fork.RqRegex.Fake::&lt;init&gt;(org.takes.Request, java.lang.String, java.lang.CharSequence)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Pattern.compile call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.fork.TkRegex.Fake::&lt;init&gt;(org.takes.facets.fork.TkRegex, java.lang.String, java.lang.CharSequence)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Pattern.compile call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.hamcrest.HmBody&lt;T extends org.takes.Body&gt;::&lt;init&gt;(java.lang.String)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden String.getBytes call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.hamcrest.HmBody&lt;T extends org.takes.Body&gt;::&lt;init&gt;(java.lang.String, java.nio.charset.Charset)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden String.getBytes call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.hamcrest.HmHeader&lt;T extends org.takes.Head&gt;::&lt;init&gt;(java.lang.String, java.lang.String)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Matchers.hasItems call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.auth.PsByFlag.Pair::&lt;init&gt;(java.lang.String, org.takes.facets.auth.Pass)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Pattern.compile call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.auth.codecs.CcXor::&lt;init&gt;(org.takes.facets.auth.codecs.Codec, java.lang.String)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden BytesOf().asBytes() call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.tk.TkClasspath::&lt;init&gt;(java.lang.Class&lt;?&gt;)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden String.format/getName/replace calls in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.tk.TkProxy::&lt;init&gt;(java.lang.String, java.lang.String)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden URI.create call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.tk.TkProxy::&lt;init&gt;(java.lang.String)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden URI.create call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.tk.TkSlf4j::&lt;init&gt;(org.takes.Take, java.lang.Class&lt;?&gt;)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden Class.getCanonicalName call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.auth.signatures.SiHmac::&lt;init&gt;(java.lang.String)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden String.getBytes call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.facets.auth.signatures.SiHmac::&lt;init&gt;(java.lang.String, int)</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden String.getBytes call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.http.FtSecure::&lt;init&gt;(org.takes.Take, int) throws java.io.IOException</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (chained delegation through removed (Back,int) ctor)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.http.FtSecure::&lt;init&gt;(org.takes.Take) throws java.io.IOException</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (chained delegation through removed (Back,int) ctor)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.http.FtSecure::&lt;init&gt;(org.takes.http.Back, int) throws java.io.IOException</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden SSLServerSocketFactory.getDefault().createServerSocket call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.removed</code>
+                  <old>method void org.takes.rs.RsVelocity::&lt;init&gt;(java.net.URL, org.takes.rs.RsVelocity.Pair[]) throws java.io.IOException</old>
+                  <justification>Removed to comply with qulice ConstructorsCodeFreeCheck (forbidden URL.openStream call in delegation)</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.auth.PsToken::&lt;init&gt;(===java.lang.String===)</old>
+                  <new>parameter void org.takes.facets.auth.PsToken::&lt;init&gt;(===byte[]===)</new>
+                  <justification>Changed key parameter from String to byte[] to satisfy qulice ConstructorsCodeFreeCheck</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.auth.PsToken::&lt;init&gt;(===java.lang.String===, long)</old>
+                  <new>parameter void org.takes.facets.auth.PsToken::&lt;init&gt;(===byte[]===, long)</new>
+                  <justification>Changed key parameter from String to byte[] to satisfy qulice ConstructorsCodeFreeCheck</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.CharSequence, ===org.takes.misc.Expires.Date===) throws java.io.UnsupportedEncodingException</old>
+                  <new>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.CharSequence, ===org.takes.misc.Expires===) throws java.io.UnsupportedEncodingException</new>
+                  <justification>Widened type from Expires.Date to Expires to support lazy expiration</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.Throwable, ===org.takes.misc.Expires.Date===) throws java.io.UnsupportedEncodingException</old>
+                  <new>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.Throwable, ===org.takes.misc.Expires===) throws java.io.UnsupportedEncodingException</new>
+                  <justification>Widened type from Expires.Date to Expires to support lazy expiration</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.CharSequence, java.util.logging.Level, ===org.takes.misc.Expires.Date===) throws java.io.UnsupportedEncodingException</old>
+                  <new>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.CharSequence, java.util.logging.Level, ===org.takes.misc.Expires===) throws java.io.UnsupportedEncodingException</new>
+                  <justification>Widened type from Expires.Date to Expires to support lazy expiration</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.Throwable, java.util.logging.Level, ===org.takes.misc.Expires.Date===) throws java.io.UnsupportedEncodingException</old>
+                  <new>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.Throwable, java.util.logging.Level, ===org.takes.misc.Expires===) throws java.io.UnsupportedEncodingException</new>
+                  <justification>Widened type from Expires.Date to Expires to support lazy expiration</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.CharSequence, java.util.logging.Level, java.lang.String, ===org.takes.misc.Expires.Date===) throws java.io.UnsupportedEncodingException</old>
+                  <new>parameter void org.takes.facets.flash.RsFlash::&lt;init&gt;(java.lang.CharSequence, java.util.logging.Level, java.lang.String, ===org.takes.misc.Expires===) throws java.io.UnsupportedEncodingException</new>
+                  <justification>Widened type from Expires.Date to Expires to support lazy expiration</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.tk.TkWithHeader::&lt;init&gt;(org.takes.Take, ===java.lang.String===)</old>
+                  <new>parameter void org.takes.tk.TkWithHeader::&lt;init&gt;(org.takes.Take, ===java.lang.CharSequence===)</new>
+                  <justification>Widened type from String to CharSequence to satisfy qulice ConstructorsOrderCheck</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.nowFinal</code>
+                  <old>method java.lang.String java.lang.Throwable::getMessage() @ org.takes.facets.forward.RsForward</old>
+                  <new>method java.lang.String org.takes.facets.forward.RsForward::getMessage()</new>
+                  <justification>Override of inherited Throwable.getMessage() made final to satisfy DesignForExtensionCheck</justification>
+                </item>
               </differences>
             </revapi.differences>
           </analysisConfiguration>
@@ -523,7 +706,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.25.2</version>
+            <version>0.27.5</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>

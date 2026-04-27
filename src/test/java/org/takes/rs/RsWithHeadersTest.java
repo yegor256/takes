@@ -30,7 +30,7 @@ final class RsWithHeadersTest {
             ),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 204 No Content",
                     host,
                     type,
@@ -40,5 +40,4 @@ final class RsWithHeadersTest {
             )
         );
     }
-
 }

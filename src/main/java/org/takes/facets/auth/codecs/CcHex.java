@@ -130,5 +130,4 @@ public final class CcHex implements Codec {
         }
         return dec;
     }
-
 }

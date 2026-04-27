@@ -57,8 +57,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
     }
 
     @Override
-    public Iterable<String> param(final CharSequence key)
-        throws IOException {
+    public Iterable<String> param(final CharSequence key) throws IOException {
         final List<String> values = this.map().getOrDefault(
             new UncheckedText(
                 new Lowered(key.toString())
@@ -113,7 +112,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameters.
-     * @return Parameters map or empty map in case of error.
+     * @return Parameters map or empty map in case of error
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> map() throws IOException {
@@ -125,7 +124,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameter.
-     * @return Parameters map or empty map in case of error.
+     * @return Parameters map or empty map in case of error
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> freshMap() throws IOException {

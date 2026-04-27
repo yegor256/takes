@@ -11,7 +11,6 @@ import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
@@ -21,13 +20,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * Tests for {@link VerboseList}.
- *
  * @since 0.32
  */
-@SuppressWarnings({
-    "PMD.TooManyMethods",
-    "PMD.UnnecessaryLocalRule"
-})
+@SuppressWarnings("PMD.TooManyMethods")
 @ExtendWith(MockitoExtension.class)
 final class VerboseListTest {
 
@@ -42,38 +37,22 @@ final class VerboseListTest {
     @Mock
     private List<Object> origin;
 
-    /**
-     * Decorator.
-     */
-    private VerboseList<Object> list;
-
-    /**
-     * Creates decorator.
-     */
-    @BeforeEach
-    void setUp() {
-        this.list = new VerboseList<>(
-            this.origin,
-            new TextOf(VerboseListTest.MSG)
-        );
-    }
-
     @Test
     void delegatesSize() {
-        this.list.size();
+        this.verboseList().size();
         Mockito.verify(this.origin).size();
     }
 
     @Test
     void delegatesIsEmpty() {
-        this.list.isEmpty();
+        this.verboseList().isEmpty();
         Mockito.verify(this.origin).isEmpty();
     }
 
     @Test
     void delegatesContains() {
         final Object obj = new Object();
-        this.list.contains(obj);
+        this.verboseList().contains(obj);
         Mockito.verify(this.origin).contains(obj);
     }
 
@@ -81,28 +60,28 @@ final class VerboseListTest {
     void returnsVerboseIterator() {
         MatcherAssert.assertThat(
             "List iterator must be wrapped in VerboseIterator",
-            this.list.iterator(),
+            this.verboseList().iterator(),
             Matchers.instanceOf(VerboseIterator.class)
         );
     }
 
     @Test
     void delegatesToArrayNoArgs() {
-        this.list.toArray();
+        this.verboseList().toArray();
         Mockito.verify(this.origin).toArray();
     }
 
     @Test
     void delegatesToArrayWithArg() {
         final Object[] array = new Object[1];
-        this.list.toArray(array);
+        this.verboseList().toArray(array);
         Mockito.verify(this.origin).toArray(array);
     }
 
     @Test
     void delegatesAddObject() {
         final Object obj = new Object();
-        this.list.add(obj);
+        this.verboseList().add(obj);
         Mockito.verify(this.origin).add(obj);
     }
 
@@ -110,35 +89,35 @@ final class VerboseListTest {
     void delegatesAddAtIndex() {
         final int index = 5;
         final Object obj = new Object();
-        this.list.add(index, obj);
+        this.verboseList().add(index, obj);
         Mockito.verify(this.origin).add(index, obj);
     }
 
     @Test
     void delegatesRemoveObject() {
         final Object obj = new Object();
-        this.list.remove(obj);
+        this.verboseList().remove(obj);
         Mockito.verify(this.origin).remove(obj);
     }
 
     @Test
     void delegatesRemoveAtIndex() {
         final int index = 5;
-        this.list.remove(index);
+        this.verboseList().remove(index);
         Mockito.verify(this.origin).remove(index);
     }
 
     @Test
     void delegatesContainsAll() {
         final List<Object> collection = Collections.emptyList();
-        this.list.containsAll(collection);
+        this.verboseList().containsAll(collection);
         Mockito.verify(this.origin).containsAll(collection);
     }
 
     @Test
     void delegatesAddAllCollection() {
         final List<Object> collection = Collections.emptyList();
-        this.list.addAll(collection);
+        this.verboseList().addAll(collection);
         Mockito.verify(this.origin).addAll(collection);
     }
 
@@ -146,34 +125,34 @@ final class VerboseListTest {
     void delegatesAddAllAtIndex() {
         final List<Object> collection = Collections.emptyList();
         final int index = 5;
-        this.list.addAll(index, collection);
+        this.verboseList().addAll(index, collection);
         Mockito.verify(this.origin).addAll(index, collection);
     }
 
     @Test
     void delegatesRemoveAll() {
         final List<Object> collection = Collections.emptyList();
-        this.list.removeAll(collection);
+        this.verboseList().removeAll(collection);
         Mockito.verify(this.origin).removeAll(collection);
     }
 
     @Test
     void delegatesRetainAll() {
         final List<Object> collection = Collections.emptyList();
-        this.list.retainAll(collection);
+        this.verboseList().retainAll(collection);
         Mockito.verify(this.origin).retainAll(collection);
     }
 
     @Test
     void delegatesClear() {
-        this.list.clear();
+        this.verboseList().clear();
         Mockito.verify(this.origin).clear();
     }
 
     @Test
     void delegatesGet() {
         final int index = 5;
-        this.list.get(index);
+        this.verboseList().get(index);
         Mockito.verify(this.origin).get(index);
     }
 
@@ -181,34 +160,34 @@ final class VerboseListTest {
     void delegatesSet() {
         final int index = 5;
         final Object obj = new Object();
-        this.list.set(index, obj);
+        this.verboseList().set(index, obj);
         Mockito.verify(this.origin).set(index, obj);
     }
 
     @Test
     void delegatesIndexOf() {
         final Object obj = new Object();
-        this.list.indexOf(obj);
+        this.verboseList().indexOf(obj);
         Mockito.verify(this.origin).indexOf(obj);
     }
 
     @Test
     void delegatesLastIndexOf() {
         final Object obj = new Object();
-        this.list.lastIndexOf(obj);
+        this.verboseList().lastIndexOf(obj);
         Mockito.verify(this.origin).lastIndexOf(obj);
     }
 
     @Test
     void delegatesListIteratorNoArgs() {
-        this.list.listIterator();
+        this.verboseList().listIterator();
         Mockito.verify(this.origin).listIterator();
     }
 
     @Test
     void delegatesListIteratorAtIndex() {
         final int index = 5;
-        this.list.listIterator(index);
+        this.verboseList().listIterator(index);
         Mockito.verify(this.origin).listIterator(index);
     }
 
@@ -216,7 +195,7 @@ final class VerboseListTest {
     void delegatesSubList() {
         final int from = 3;
         final int toidx = 5;
-        this.list.subList(from, toidx);
+        this.verboseList().subList(from, toidx);
         Mockito.verify(this.origin).subList(from, toidx);
     }
 
@@ -226,7 +205,10 @@ final class VerboseListTest {
         final List<Object> collection = Collections.emptyList();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).addAll(index, collection);
-        this.assertThat(() -> this.list.addAll(index, collection), cause);
+        this.assertThat(
+            () -> this.verboseList().addAll(index, collection),
+            cause
+        );
     }
 
     @Test
@@ -234,7 +216,7 @@ final class VerboseListTest {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).get(index);
-        this.assertThat(() -> this.list.get(index), cause);
+        this.assertThat(() -> this.verboseList().get(index), cause);
     }
 
     @Test
@@ -243,7 +225,7 @@ final class VerboseListTest {
         final Object obj = new Object();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).set(index, obj);
-        this.assertThat(() -> this.list.set(index, obj), cause);
+        this.assertThat(() -> this.verboseList().set(index, obj), cause);
     }
 
     @Test
@@ -252,7 +234,7 @@ final class VerboseListTest {
         final Object obj = new Object();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).add(index, obj);
-        this.assertThat(() -> this.list.add(index, obj), cause);
+        this.assertThat(() -> this.verboseList().add(index, obj), cause);
     }
 
     @Test
@@ -260,7 +242,7 @@ final class VerboseListTest {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).remove(index);
-        this.assertThat(() -> this.list.remove(index), cause);
+        this.assertThat(() -> this.verboseList().remove(index), cause);
     }
 
     @Test
@@ -268,7 +250,10 @@ final class VerboseListTest {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).listIterator(index);
-        this.assertThat(() -> this.list.listIterator(index), cause);
+        this.assertThat(
+            () -> this.verboseList().listIterator(index),
+            cause
+        );
     }
 
     @Test
@@ -277,13 +262,27 @@ final class VerboseListTest {
         final int toidx = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).subList(from, toidx);
-        this.assertThat(() -> this.list.subList(from, toidx), cause);
+        this.assertThat(
+            () -> this.verboseList().subList(from, toidx),
+            cause
+        );
+    }
+
+    /**
+     * Build a fresh decorated list using the mocked origin.
+     * @return Decorator wrapping the mock origin
+     */
+    private VerboseList<Object> verboseList() {
+        return new VerboseList<>(
+            this.origin,
+            new TextOf(VerboseListTest.MSG)
+        );
     }
 
     /**
      * Assert cause.
-     * @param exec Code block.
-     * @param cause Cause.
+     * @param exec Code block
+     * @param cause Cause
      */
     private void assertThat(final Executable exec, final Exception cause) {
         MatcherAssert.assertThat(

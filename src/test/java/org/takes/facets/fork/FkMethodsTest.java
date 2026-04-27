@@ -4,6 +4,7 @@
  */
 package org.takes.facets.fork;
 
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -20,11 +21,10 @@ final class FkMethodsTest {
     void matchesByRegularExpression() throws Exception {
         MatcherAssert.assertThat(
             "FkMethods must match when request method is in allowed methods list",
-            new FkMethods("PUT,GET", new TkEmpty()).route(
+            new FkMethods(new ListOf<>("PUT", "GET"), new TkEmpty()).route(
                 new RqFake("GET", "/hello?a=1")
             ).has(),
             Matchers.is(true)
         );
     }
-
 }

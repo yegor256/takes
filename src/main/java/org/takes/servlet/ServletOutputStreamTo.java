@@ -35,6 +35,7 @@ import java.io.OutputStream;
  * @since 1.14
  */
 public final class ServletOutputStreamTo extends ServletOutputStream {
+
     /**
      * Target.
      */

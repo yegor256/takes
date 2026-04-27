@@ -44,5 +44,4 @@ public interface RqForm extends Request {
      * @throws IOException if something fails reading parameters
      */
     Iterable<String> names() throws IOException;
-
 }

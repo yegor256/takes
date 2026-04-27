@@ -28,6 +28,7 @@ import org.takes.rq.RqHref;
  * Linkedin OAuth landing/callback page.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.11.3
  */
 @EqualsAndHashCode(of = { "app", "key" })
@@ -89,8 +90,7 @@ public final class PsLinkedin implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
-        throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param(PsLinkedin.CODE).iterator();
         if (!code.hasNext()) {
@@ -105,8 +105,7 @@ public final class PsLinkedin implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -123,8 +122,7 @@ public final class PsLinkedin implements Pass {
                     .with("oauth2_access_token", token)
                     .with("format", "json")
                     .toString()
-            )
-                .header("accept", "application/json")
+            ).header("accept", "application/json")
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .as(JsonResponse.class).json().readObject()

@@ -60,7 +60,7 @@ public final class FtRemote implements Front {
      * @throws IOException If fails
      */
     public FtRemote(final Back that) throws IOException {
-        this(that, FtRemote.random());
+        this(that, new ServerSocket(0));
     }
 
     /**
@@ -80,8 +80,7 @@ public final class FtRemote implements Front {
      * @param sec Value of {@code true} if the front is secure,
      *  {@code false} otherwise
      */
-    FtRemote(final Front front, final ServerSocket skt,
-        final boolean sec) {
+    FtRemote(final Front front, final ServerSocket skt, final boolean sec) {
         this.origin = front;
         this.socket = skt;
         this.secured = sec;
@@ -158,17 +157,6 @@ public final class FtRemote implements Front {
     }
 
     /**
-     * Make a random socket.
-     * @return Socket
-     * @throws IOException If fails
-     */
-    private static ServerSocket random() throws IOException {
-        final ServerSocket skt = new ServerSocket(0);
-        skt.setReuseAddress(true);
-        return skt;
-    }
-
-    /**
      * Script to execute against a running server.
      *
      * <p>This interface represents a test script or client code that will
@@ -185,6 +173,7 @@ public final class FtRemote implements Front {
      */
     @FunctionalInterface
     public interface Script {
+
         /**
          * Execute the script against the running server.
          *

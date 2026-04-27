@@ -54,5 +54,4 @@ final class FkAgentTest {
             Matchers.is(false)
         );
     }
-
 }

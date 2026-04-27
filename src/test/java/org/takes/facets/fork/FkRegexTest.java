@@ -74,13 +74,10 @@ final class FkRegexTest {
     void keepsTrailingSlash() throws Exception {
         MatcherAssert.assertThat(
             "FkRegex must match exact path when trailing slash removal is disabled",
-            new FkRegex(FkRegexTest.TESTPATH, new TkEmpty())
-                .setRemoveTrailingSlash(false)
-                .route(
-                    new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
-                ).has(),
+            new FkRegex(FkRegexTest.TESTPATH, new TkEmpty()).setRemoveTrailingSlash(false).route(
+                new RqFake(RqMethod.POST, FkRegexTest.TESTPATH)
+            ).has(),
             Matchers.is(true)
         );
     }
-
 }

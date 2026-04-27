@@ -37,5 +37,4 @@ public interface Back {
      * @throws IOException If fails to process the socket
      */
     void accept(Socket socket) throws IOException;
-
 }

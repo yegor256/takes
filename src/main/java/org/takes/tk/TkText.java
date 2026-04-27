@@ -9,6 +9,7 @@ import java.net.URL;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Scalar;
+import org.takes.Take;
 import org.takes.rs.RsText;
 
 /**
@@ -89,8 +90,8 @@ public final class TkText extends TkWrap {
      * @param body Text content to return in response
      */
     public TkText(final String body) {
-        super(
-            req -> new RsText(body)
+        this(
+            (Take) req -> new RsText(body)
         );
     }
 
@@ -100,8 +101,8 @@ public final class TkText extends TkWrap {
      * @since 1.4
      */
     public TkText(final Scalar<String> body) {
-        super(
-            req -> new RsText(body.value())
+        this(
+            (Take) req -> new RsText(body.value())
         );
     }
 
@@ -110,8 +111,8 @@ public final class TkText extends TkWrap {
      * @param body Binary content to return as text
      */
     public TkText(final byte[] body) {
-        super(
-            req -> new RsText(body)
+        this(
+            (Take) req -> new RsText(body)
         );
     }
 
@@ -120,8 +121,8 @@ public final class TkText extends TkWrap {
      * @param url URL pointing to text content to serve
      */
     public TkText(final URL url) {
-        super(
-            req -> new RsText(url)
+        this(
+            (Take) req -> new RsText(url)
         );
     }
 
@@ -130,9 +131,16 @@ public final class TkText extends TkWrap {
      * @param body Input stream containing text content
      */
     public TkText(final InputStream body) {
-        super(
-            req -> new RsText(body)
+        this(
+            (Take) req -> new RsText(body)
         );
     }
 
+    /**
+     * Ctor.
+     * @param take Origin take that produces the text response
+     */
+    public TkText(final Take take) {
+        super(take);
+    }
 }

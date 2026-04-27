@@ -35,5 +35,4 @@ final class XeLifetimeTest {
             )
         );
     }
-
 }

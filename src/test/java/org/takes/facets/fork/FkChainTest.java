@@ -44,7 +44,7 @@ final class FkChainTest {
             ),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",

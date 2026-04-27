@@ -30,6 +30,7 @@ import org.takes.Request;
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqLengthAware extends RqWrap {
+
     /**
      * Constant for the Content-Length header.
      */
@@ -72,5 +73,4 @@ public final class RqLengthAware extends RqWrap {
         }
         return result;
     }
-
 }

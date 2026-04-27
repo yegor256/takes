@@ -52,5 +52,4 @@ public final class RsRedirect extends RsWrap {
         )
         );
     }
-
 }

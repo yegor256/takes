@@ -4,9 +4,9 @@
  */
 package org.takes.rs.xe;
 
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
+import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
 import org.xembly.Directives;
 
@@ -25,7 +25,7 @@ public final class XeChain extends XeWrap {
      * @param src Sources
      */
     public XeChain(final XeSource... src) {
-        this(Arrays.asList(src));
+        this(new ListOf<>(src));
     }
 
     /**
@@ -54,5 +54,4 @@ public final class XeChain extends XeWrap {
             }
         );
     }
-
 }

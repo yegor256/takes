@@ -14,6 +14,8 @@ import org.cactoos.text.UncheckedText;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.ServletRegistration;
 import org.glassfish.grizzly.servlet.WebappContext;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -24,11 +26,10 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link SrvTake}.
- *
  * @since 1.16
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class SrvTakeTest {
+
     /**
      * Message returned if servlet Takes is executed correctly.
      */
@@ -49,27 +50,38 @@ final class SrvTakeTest {
         servlet.addMapping("/test");
         context.deploy(server);
         server.start();
-        new JdkRequest("http://localhost:18080/test")
-            .fetch()
-            .as(RestResponse.class)
-            .assertStatus(HttpURLConnection.HTTP_OK)
-            .assertBody(
-                new StringContains(
-                    new FormattedText(
-                        SrvTakeTest.MSG,
-                        name
-                    ).asString()
+        try {
+            MatcherAssert.assertThat(
+                "Servlet must respond with OK and the expected greeting body",
+                new JdkRequest("http://localhost:18080/test")
+                    .fetch().as(RestResponse.class),
+                Matchers.allOf(
+                    Matchers.hasProperty(
+                        "status",
+                        Matchers.equalTo(HttpURLConnection.HTTP_OK)
+                    ),
+                    Matchers.hasProperty(
+                        "body",
+                        new StringContains(
+                            new FormattedText(
+                                SrvTakeTest.MSG,
+                                name
+                            ).asString()
+                        )
+                    )
                 )
             );
-        server.shutdownNow();
+        } finally {
+            server.shutdownNow();
+        }
     }
 
     /**
      * Fake TkApp (for {@link SrvTake} test only).
-     *
      * @since 1.16
      */
     final class TkApp implements Take {
+
         /**
          * ServletContext.
          */

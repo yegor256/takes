@@ -26,5 +26,4 @@ final class RsRedirectTest {
             new HasString("HTTP/1.1 303 See Other")
         );
     }
-
 }

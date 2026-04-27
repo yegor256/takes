@@ -5,7 +5,6 @@
 package org.takes.facets.auth;
 
 import java.util.AbstractMap;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -44,7 +43,7 @@ public final class PsByFlag implements Pass {
      * @since 0.5.1
      */
     public PsByFlag(final PsByFlag.Pair... pairs) {
-        this(PsByFlag.class.getSimpleName(), pairs);
+        this("PsByFlag", pairs);
     }
 
     /**
@@ -52,7 +51,7 @@ public final class PsByFlag implements Pass {
      * @param map Map
      */
     public PsByFlag(final Map<Pattern, Pass> map) {
-        this(PsByFlag.class.getSimpleName(), map);
+        this("PsByFlag", map);
     }
 
     /**
@@ -62,7 +61,7 @@ public final class PsByFlag implements Pass {
      * @since 0.5.1
      */
     public PsByFlag(final String flg, final PsByFlag.Pair... pairs) {
-        this(flg, PsByFlag.asMap(pairs));
+        this(flg, new PsByFlag.PairsMap(pairs));
     }
 
     /**
@@ -72,7 +71,7 @@ public final class PsByFlag implements Pass {
      */
     public PsByFlag(final String flg, final Map<Pattern, Pass> map) {
         this.flag = flg;
-        this.passes = Collections.unmodifiableMap(map);
+        this.passes = new HashMap<>(map);
     }
 
     @Override
@@ -87,8 +86,7 @@ public final class PsByFlag implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -116,18 +114,36 @@ public final class PsByFlag implements Pass {
     }
 
     /**
-     * Convert entries to map.
-     * @param entries Entries
-     * @return Map
+     * Map view backed by a varargs entry array.
+     * @since 2.0
      */
-    @SafeVarargs
-    private static Map<Pattern, Pass> asMap(
-        final Map.Entry<Pattern, Pass>... entries) {
-        final Map<Pattern, Pass> map = new HashMap<>(entries.length);
-        for (final Map.Entry<Pattern, Pass> ent : entries) {
-            map.put(ent.getKey(), ent.getValue());
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    private static final class PairsMap
+        extends java.util.AbstractMap<Pattern, Pass> {
+
+        /**
+         * Source entries.
+         */
+        private final Map.Entry<Pattern, Pass>[] entries;
+
+        /**
+         * Ctor.
+         * @param ents Entries
+         */
+        @SafeVarargs
+        PairsMap(final Map.Entry<Pattern, Pass>... ents) {
+            this.entries = ents;
         }
-        return map;
+
+        @Override
+        public java.util.Set<Map.Entry<Pattern, Pass>> entrySet() {
+            final java.util.Set<Map.Entry<Pattern, Pass>> set =
+                new java.util.LinkedHashSet<>(this.entries.length);
+            for (final Map.Entry<Pattern, Pass> ent : this.entries) {
+                set.add(ent);
+            }
+            return set;
+        }
     }
 
     /**
@@ -136,6 +152,7 @@ public final class PsByFlag implements Pass {
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<Pattern, Pass> {
+
         /**
          * Serialization marker.
          */
@@ -146,18 +163,8 @@ public final class PsByFlag implements Pass {
          * @param key Key
          * @param pass Pass
          */
-        public Pair(final String key, final Pass pass) {
-            this(Pattern.compile(Pattern.quote(key)), pass);
-        }
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param pass Pass
-         */
         public Pair(final Pattern key, final Pass pass) {
             super(key, pass);
         }
     }
-
 }

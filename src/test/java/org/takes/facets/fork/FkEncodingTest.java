@@ -50,5 +50,4 @@ final class FkEncodingTest {
             Matchers.is(false)
         );
     }
-
 }

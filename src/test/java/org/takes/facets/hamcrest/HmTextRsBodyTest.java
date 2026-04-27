@@ -17,14 +17,13 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link AbstractHmTextBody}.
- *
  * @since 2.0
  */
 final class HmTextRsBodyTest {
 
     @Test
     void describesMismatchCorrectly() {
-        final AbstractHmTextBody<Text> matcher = new HmTextBodyFake(
+        final AbstractHmTextBody<Text> matcher = new HmTextRsBodyTest.HmTextBodyFake(
             new IsEqual<>("courage"), Charset.defaultCharset()
         );
         final StringDescription description = new StringDescription();
@@ -42,7 +41,7 @@ final class HmTextRsBodyTest {
     @Test
     void describesExpectedCorrectly() {
         final String expected = "red";
-        final AbstractHmTextBody<Text> matcher = new HmTextBodyFake(
+        final AbstractHmTextBody<Text> matcher = new HmTextRsBodyTest.HmTextBodyFake(
             new IsEqual<>(expected), Charset.defaultCharset()
         );
         final StringDescription description = new StringDescription();
@@ -62,9 +61,8 @@ final class HmTextRsBodyTest {
 
         /**
          * Ctor.
-         *
-         * @param body Body matcher.
-         * @param charset Charset of the text.
+         * @param body Body matcher
+         * @param charset Charset of the text
          */
         HmTextBodyFake(final Matcher<String> body, final Charset charset) {
             super(body, charset);

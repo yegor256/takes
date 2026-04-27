@@ -40,7 +40,6 @@ public interface RqHeaders extends Request {
 
     /**
      * Get single header.
-     *
      * @param key Header name
      * @return List of values (can be empty)
      * @throws IOException If fails
@@ -49,7 +48,6 @@ public interface RqHeaders extends Request {
 
     /**
      * Get all header names.
-     *
      * @return All names
      * @throws IOException If fails
      */
@@ -64,9 +62,9 @@ public interface RqHeaders extends Request {
      */
     @EqualsAndHashCode(callSuper = true)
     final class Base extends RqWrap implements RqHeaders {
+
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         public Base(final Request req) {
@@ -74,8 +72,7 @@ public interface RqHeaders extends Request {
         }
 
         @Override
-        public List<String> header(final CharSequence key)
-            throws IOException {
+        public List<String> header(final CharSequence key) throws IOException {
             final List<String> values = this.map().getOrDefault(
                 new UncheckedText(
                     new Lowered(key.toString())
@@ -113,7 +110,6 @@ public interface RqHeaders extends Request {
 
         /**
          * Parse them all in a map.
-         *
          * @return Map of them
          * @throws IOException If fails
          */
@@ -166,6 +162,7 @@ public interface RqHeaders extends Request {
      */
     @EqualsAndHashCode
     final class Smart implements RqHeaders {
+
         /**
          * Original.
          */
@@ -175,21 +172,20 @@ public interface RqHeaders extends Request {
          * Ctor.
          * @param req Original request
          */
-        public Smart(final RqHeaders req) {
-            this.origin = req;
+        public Smart(final Request req) {
+            this(new RqHeaders.Base(req));
         }
 
         /**
          * Ctor.
          * @param req Original request
          */
-        public Smart(final Request req) {
-            this(new RqHeaders.Base(req));
+        public Smart(final RqHeaders req) {
+            this.origin = req;
         }
 
         @Override
-        public List<String> header(final CharSequence name)
-            throws IOException {
+        public List<String> header(final CharSequence name) throws IOException {
             return this.origin.header(name);
         }
 
@@ -247,6 +243,5 @@ public interface RqHeaders extends Request {
             }
             return value;
         }
-
     }
 }

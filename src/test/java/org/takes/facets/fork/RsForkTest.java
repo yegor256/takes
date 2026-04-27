@@ -6,6 +6,7 @@ package org.takes.facets.fork;
 
 import java.io.IOException;
 import java.util.Arrays;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.takes.Request;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsBodyPrint;
 import org.takes.rs.RsText;
+import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link RsFork}.
@@ -90,11 +92,13 @@ final class RsForkTest {
                 new RsFork(
                     new RqFake("POST", "/test?1", "alpha=1"),
                     new FkMethods("GET", new RsText("it's a GET")),
-                    new FkMethods("POST,PUT", new RsText("it's a POST"))
+                    new FkMethods(
+                        new ListOf<>("POST", "PUT"),
+                        new TkFixed(new RsText("it's a POST"))
+                    )
                 )
             ).asString(),
             Matchers.endsWith("a POST")
         );
     }
-
 }

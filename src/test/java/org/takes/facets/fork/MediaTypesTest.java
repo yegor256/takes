@@ -110,8 +110,9 @@ final class MediaTypesTest {
     @Test
     void parsesWhitespaceAndSpecialCharsWithoutException() {
         Assertions.assertDoesNotThrow(
-            () -> new MediaTypes("\n\n\t\r\u20ac00")
+            () -> new MediaTypes(
+                String.format("%n%n\t%c00", '\u20ac')
+            )
         );
     }
-
 }

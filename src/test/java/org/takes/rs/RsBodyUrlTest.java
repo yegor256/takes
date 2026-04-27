@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsBody.Url}.
- *
  * @since 1.15
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

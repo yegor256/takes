@@ -4,7 +4,6 @@
  */
 package org.takes.facets.auth;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.takes.Request;
@@ -31,17 +30,18 @@ public final class PsAll implements Pass {
 
     /**
      * Ctor.
-     * @param passes All Passes to be checked.
+     * @param passes All Passes to be checked
      * @param identity Index of a Pass whose Identity to return on successful
      *  {@link PsAll#enter(Request)}
      */
     public PsAll(final List<? extends Pass> passes, final int identity) {
         this.all = new ArrayList<Pass>(passes);
-        this.index = this.validated(identity);
+        this.index = identity;
     }
 
     @Override
     public Opt<Identity> enter(final Request request) throws Exception {
+        this.checkIndex();
         final Opt<Identity> result;
         if (this.allMatch(request)) {
             result = this.all.get(this.index).enter(request);
@@ -54,36 +54,28 @@ public final class PsAll implements Pass {
     @Override
     public Response exit(final Response response, final Identity identity)
         throws Exception {
-        if (this.index >= this.all.size()) {
-            throw new IOException(
-                "Index of identity is greater than Pass collection size"
-            );
-        }
+        this.checkIndex();
         return this.all.get(this.index).exit(response, identity);
     }
 
     /**
-     * Validate index.
-     * @param idx Index of a Pass whose Identity to return on successful
-     *  {@link PsAll#enter(Request)}
-     * @return Validated index
+     * Validate the configured index.
      */
-    private int validated(final int idx) {
-        if (idx < 0) {
+    private void checkIndex() {
+        if (this.index < 0) {
             throw new IllegalArgumentException(
-                String.format("Index %d must be >= 0.", idx)
+                String.format("Index %d must be >= 0.", this.index)
             );
         }
-        if (idx >= this.all.size()) {
+        if (this.index >= this.all.size()) {
             throw new IllegalArgumentException(
                 String.format(
                     "Trying to return index %d from a list of %d passes",
-                    idx,
+                    this.index,
                     this.all.size()
                 )
             );
         }
-        return idx;
     }
 
     /**

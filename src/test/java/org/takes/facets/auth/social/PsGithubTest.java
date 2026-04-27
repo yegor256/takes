@@ -86,9 +86,9 @@ final class PsGithubTest {
 
     /**
      * Performs the basic login.
-     * @param directive The directive object.
+     * @param directive The directive object
      * @return The identity from login
-     * @throws Exception If some problem inside.
+     * @throws Exception If some problem inside
      */
     private Identity performLogin(final Directives directive) throws Exception {
         final String app = "app";
@@ -109,7 +109,7 @@ final class PsGithubTest {
             ),
             new FkRegex(
                 "/user",
-                new TkFakeLogin()
+                new PsGithubTest.TkFakeLogin()
             )
         );
         final AtomicReference<Identity> identity = new AtomicReference<>();
@@ -128,7 +128,7 @@ final class PsGithubTest {
 
     /**
      * Creates the basic directives, without access token.
-     * @return A basic directive.
+     * @return A basic directive
      */
     private static Directives directiveWithoutAccessToken() {
         return new Directives().add("OAuth")
@@ -157,17 +157,16 @@ final class PsGithubTest {
      * @since 0.15.2
      */
     private static final class TkFakeLogin implements Take {
+
         @Override
         public Response act(final Request req) throws IOException {
             return new RsJson(
-                Json.createObjectBuilder()
-                    .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
-                    .add("id", 1)
-                    .add(
-                        "avatar_url",
-                        PsGithubTest.OCTOCAT_GIF_URL
-                    )
-                    .build()
+                Json.createObjectBuilder().add(
+                    PsGithubTest.LOGIN, PsGithubTest.OCTOCAT
+                ).add("id", 1).add(
+                    "avatar_url",
+                    PsGithubTest.OCTOCAT_GIF_URL
+                ).build()
             );
         }
     }

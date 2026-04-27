@@ -33,5 +33,4 @@ public final class TkWithType extends TkWrap {
             req -> new RsWithType(take.act(req), type)
         );
     }
-
 }

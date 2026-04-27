@@ -5,11 +5,11 @@
 package org.takes.tk;
 
 import java.net.HttpURLConnection;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -101,7 +101,7 @@ public final class TkCors implements Take {
      */
     public TkCors(final Take take, final String... domains) {
         this.origin = take;
-        this.allowed = new HashSet<>(Arrays.asList(domains));
+        this.allowed = new HashSet<>(new ListOf<>(domains));
     }
 
     @Override

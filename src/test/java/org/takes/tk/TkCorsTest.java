@@ -52,8 +52,7 @@ final class TkCorsTest {
     }
 
     @Test
-    void cantHandleConnectionsWithWrongDomainOnOrigin()
-        throws Exception {
+    void cantHandleConnectionsWithWrongDomainOnOrigin() throws Exception {
         MatcherAssert.assertThat(
             "Wrong value on header.",
             new RsHeadPrint(

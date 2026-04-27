@@ -7,8 +7,9 @@ package org.takes.facets.hamcrest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.core.IsEqual;
 import org.takes.Response;
 
 /**
@@ -27,7 +28,7 @@ public final class HmRsTextBody extends AbstractHmTextBody<Response> {
      * @param expected String to test against
      */
     public HmRsTextBody(final String expected) {
-        this(Matchers.equalTo(expected));
+        this(new IsEqual<>(expected));
     }
 
     /**
@@ -35,7 +36,7 @@ public final class HmRsTextBody extends AbstractHmTextBody<Response> {
      * @param bdm Text body matcher
      */
     public HmRsTextBody(final Matcher<String> bdm) {
-        this(bdm, Charset.defaultCharset());
+        this(bdm, StandardCharsets.UTF_8);
     }
 
     /**

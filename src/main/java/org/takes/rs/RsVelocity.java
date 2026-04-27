@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.net.URL;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,23 +67,11 @@ public final class RsVelocity extends RsWrap {
     /**
      * Ctor.
      * @param template Template
-     * @param params List of params
-     * @throws IOException If fails
-     * @since 0.11
-     */
-    public RsVelocity(final URL template,
-        final RsVelocity.Pair... params) throws IOException {
-        this(template.openStream(), params);
-    }
-
-    /**
-     * Ctor.
-     * @param template Template
      * @param params Entries
      */
     public RsVelocity(final InputStream template,
         final RsVelocity.Pair... params) {
-        this(template, RsVelocity.asMap(params));
+        this(template, new RsVelocity.PairsMap(params));
     }
 
     /**
@@ -154,24 +141,9 @@ public final class RsVelocity extends RsWrap {
     }
 
     /**
-     * Convert entries to map.
-     * @param entries Entries
-     * @return Map
-     */
-    @SafeVarargs
-    private static Map<CharSequence, Object> asMap(
-        final Map.Entry<CharSequence, Object>... entries) {
-        final Map<CharSequence, Object> map = new HashMap<>(entries.length);
-        for (final Map.Entry<CharSequence, Object> ent : entries) {
-            map.put(ent.getKey(), ent.getValue());
-        }
-        return map;
-    }
-
-    /**
      * Converts Map of CharSequence, Object to Map of String, Object.
      * @param params Parameters in Map of CharSequence, Object
-     * @return Map of String, Object.
+     * @return Map of String, Object
      */
     private static Map<String, Object> convert(
         final Map<CharSequence, Object> params) {
@@ -183,12 +155,45 @@ public final class RsVelocity extends RsWrap {
     }
 
     /**
+     * Map view backed by a varargs entry array.
+     * @since 2.0
+     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    private static final class PairsMap
+        extends java.util.AbstractMap<CharSequence, Object> {
+
+        /**
+         * Source entries.
+         */
+        private final Map.Entry<CharSequence, Object>[] entries;
+
+        /**
+         * Ctor.
+         * @param ents Entries
+         */
+        @SafeVarargs
+        PairsMap(final Map.Entry<CharSequence, Object>... ents) {
+            this.entries = ents;
+        }
+
+        @Override
+        public java.util.Set<Map.Entry<CharSequence, Object>> entrySet() {
+            final java.util.Set<Map.Entry<CharSequence, Object>> set =
+                new java.util.LinkedHashSet<>(this.entries.length);
+            for (final Map.Entry<CharSequence, Object> ent : this.entries) {
+                set.add(ent);
+            }
+            return set;
+        }
+    }
+
+    /**
      * Pair of values.
-     *
      * @since 0.1
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<CharSequence, Object> {
+
         /**
          * Serialization marker.
          */
@@ -203,5 +208,4 @@ public final class RsVelocity extends RsWrap {
             super(key, obj);
         }
     }
-
 }

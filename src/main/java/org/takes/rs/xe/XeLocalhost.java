@@ -60,5 +60,4 @@ public final class XeLocalhost extends XeWrap {
             }
         );
     }
-
 }

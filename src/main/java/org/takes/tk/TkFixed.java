@@ -84,6 +84,14 @@ public final class TkFixed extends TkWrap {
 
     /**
      * Ctor.
+     * @param res Fixed response object to return for all requests
+     */
+    public TkFixed(final Response res) {
+        this(() -> res);
+    }
+
+    /**
+     * Ctor.
      * @param res Scalar supplier of response for lazy generation
      * @since 1.4
      */
@@ -92,15 +100,4 @@ public final class TkFixed extends TkWrap {
             req -> res.value()
         );
     }
-
-    /**
-     * Ctor.
-     * @param res Fixed response object to return for all requests
-     */
-    public TkFixed(final Response res) {
-        super(
-            req -> res
-        );
-    }
-
 }

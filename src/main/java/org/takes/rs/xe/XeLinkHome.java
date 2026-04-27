@@ -30,5 +30,4 @@ public final class XeLinkHome extends XeWrap {
             ).toXembly()
         );
     }
-
 }

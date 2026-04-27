@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.IoChecked;
+import org.takes.Take;
 
 /**
  * Take that always throws an exception when invoked.
@@ -89,8 +90,8 @@ public final class TkFailure extends TkWrap {
      * @param err Runtime exception to throw on each request
      */
     public TkFailure(final RuntimeException err) {
-        super(
-            request -> {
+        this(
+            (Take) request -> {
                 throw err;
             }
         );
@@ -102,8 +103,8 @@ public final class TkFailure extends TkWrap {
      * @since 1.4
      */
     public TkFailure(final Scalar<IOException> err) {
-        super(
-            request -> {
+        this(
+            (Take) request -> {
                 throw new IoChecked<>(err).value();
             }
         );
@@ -115,11 +116,18 @@ public final class TkFailure extends TkWrap {
      * @since 0.27
      */
     public TkFailure(final IOException err) {
-        super(
-            request -> {
+        this(
+            (Take) request -> {
                 throw err;
             }
         );
     }
 
+    /**
+     * Ctor.
+     * @param take Origin take that always fails
+     */
+    public TkFailure(final Take take) {
+        super(take);
+    }
 }

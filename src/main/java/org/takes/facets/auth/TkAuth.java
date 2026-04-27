@@ -46,7 +46,7 @@ public final class TkAuth implements Take {
      * @param pss Pass
      */
     public TkAuth(final Take take, final Pass pss) {
-        this(take, pss, TkAuth.class.getSimpleName());
+        this(take, pss, "TkAuth");
     }
 
     /**
@@ -88,5 +88,4 @@ public final class TkAuth implements Take {
         }
         return this.pass.exit(this.origin.act(wrap), identity);
     }
-
 }

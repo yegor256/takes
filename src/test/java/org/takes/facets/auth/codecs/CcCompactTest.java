@@ -57,5 +57,4 @@ final class CcCompactTest {
             Matchers.equalTo(Identity.ANONYMOUS)
         );
     }
-
 }

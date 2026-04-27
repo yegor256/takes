@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqLengthAware}.
- *
  * @since 0.1
  */
 @SuppressWarnings({
@@ -97,15 +96,17 @@ final class RqLengthAwareTest {
                 return 1;
             }
         };
-        try (InputStream stream = new RqLengthAware(
-            new RqFake(
-                Arrays.asList(
-                    "GET /test1",
-                    "Host: b.example.com"
-                ),
-                data
-            )
-        ).body()) {
+        try (
+            InputStream stream = new RqLengthAware(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /test1",
+                        "Host: b.example.com"
+                    ),
+                    data
+                )
+            ).body()
+        ) {
             final byte[] result = new byte[bytes.length];
             for (int idx = 0; idx < bytes.length; idx = idx + 1) {
                 result[idx] = (byte) stream.read();

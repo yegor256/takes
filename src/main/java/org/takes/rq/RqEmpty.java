@@ -4,7 +4,6 @@
  */
 package org.takes.rq;
 
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.InputStreamOf;
 
@@ -46,10 +45,49 @@ public final class RqEmpty extends RqWrap {
     public RqEmpty(final CharSequence method, final CharSequence query) {
         super(
             new RequestOf(
-                Arrays.asList(String.format("%s %s", method, query)),
+                new RqEmpty.HeadList(method, query),
                 new InputStreamOf("")
             )
         );
     }
 
+    /**
+     * Lazily-built single-element head list with the request line.
+     * @since 2.0
+     */
+    private static final class HeadList extends java.util.AbstractList<String> {
+
+        /**
+         * HTTP method.
+         */
+        private final CharSequence method;
+
+        /**
+         * HTTP query.
+         */
+        private final CharSequence query;
+
+        /**
+         * Ctor.
+         * @param mtd Method
+         * @param qry Query
+         */
+        HeadList(final CharSequence mtd, final CharSequence qry) {
+            this.method = mtd;
+            this.query = qry;
+        }
+
+        @Override
+        public String get(final int index) {
+            if (index != 0) {
+                throw new IndexOutOfBoundsException(index);
+            }
+            return String.format("%s %s", this.method, this.query);
+        }
+
+        @Override
+        public int size() {
+            return 1;
+        }
+    }
 }

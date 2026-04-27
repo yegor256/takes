@@ -23,7 +23,6 @@ import org.takes.rq.RqWithoutHeader;
 
 /**
  * Test case for {@link  RqFrom}.
- *
  * @since 1.15
  */
 @SuppressWarnings({"PMD.TooManyMethods", "PMD.UnnecessaryLocalRule"})
@@ -73,7 +72,7 @@ final class RqFromTest {
         MatcherAssert.assertThat(
             "Custom header should be preserved",
             RqFromTest.requestWithHeader(),
-            new HmHeader<>("foo", "bar")
+            new HmHeader<>("foo", Matchers.hasItems("bar"))
         );
     }
 
@@ -82,7 +81,7 @@ final class RqFromTest {
         MatcherAssert.assertThat(
             "Local address header should be added",
             RqFromTest.requestWithHeader(),
-            new HmHeader<>("X-Takes-LocalAddress", RqFromTest.LOCALHOST)
+            new HmHeader<>("X-Takes-LocalAddress", Matchers.hasItems(RqFromTest.LOCALHOST))
         );
     }
 
@@ -91,7 +90,7 @@ final class RqFromTest {
         MatcherAssert.assertThat(
             "Remote address header should be added",
             RqFromTest.requestWithHeader(),
-            new HmHeader<>("X-Takes-RemoteAddress", RqFromTest.LOCALHOST)
+            new HmHeader<>("X-Takes-RemoteAddress", Matchers.hasItems(RqFromTest.LOCALHOST))
         );
     }
 
@@ -100,7 +99,7 @@ final class RqFromTest {
         MatcherAssert.assertThat(
             "Host header should be preserved",
             RqFromTest.requestWithHost("/one-more-test", "www.thesite.com"),
-            new HmHeader<>(RqFromTest.HOST, "www.thesite.com")
+            new HmHeader<>(RqFromTest.HOST, Matchers.hasItems("www.thesite.com"))
         );
     }
 
@@ -132,7 +131,7 @@ final class RqFromTest {
         MatcherAssert.assertThat(
             "Host header with port should be preserved",
             RqFromTest.requestWithHost("/b-test", "192.168.0.1:12345"),
-            new HmHeader<>(RqFromTest.HOST, "192.168.0.1:12345")
+            new HmHeader<>(RqFromTest.HOST, Matchers.hasItems("192.168.0.1:12345"))
         );
     }
 

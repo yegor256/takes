@@ -55,5 +55,4 @@ final class CcPlainTest {
             Matchers.equalTo(Identity.ANONYMOUS)
         );
     }
-
 }

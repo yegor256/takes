@@ -11,6 +11,8 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 
 /**
  * JSON Token interface for creating and encoding authentication tokens.
@@ -26,14 +28,12 @@ public interface Token {
 
     /**
      * Get the token as a JSON object.
-     *
      * @return The token in JSON notation
      */
     JsonObject json();
 
     /**
      * Get the Base64-encoded representation of the token.
-     *
      * @return The token in JSON notation, Base64-encoded
      */
     byte[] encoded();
@@ -45,6 +45,7 @@ public interface Token {
      * @since 1.4
      */
     final class Jose implements Token {
+
         /**
          * The header short for algorithm.
          */
@@ -58,28 +59,32 @@ public interface Token {
         /**
          * JOSE object.
          */
-        private final JsonObject joseo;
+        private final Unchecked<JsonObject> joseo;
 
         /**
          * JSON Object Signing and Encryption Header.
-         * @param bitlength Of encryption bits.
+         * @param bitlength Of encryption bits
          */
         public Jose(final int bitlength) {
-            this.joseo = Json.createObjectBuilder()
-                .add(Token.Jose.ALGORITHM, String.format("HS%s", bitlength))
-                .add(Token.Jose.TYPE, "JWT")
-                .build();
+            this.joseo = new Unchecked<>(
+                new Sticky<>(
+                    () -> Json.createObjectBuilder()
+                        .add(Token.Jose.ALGORITHM, String.format("HS%s", bitlength))
+                        .add(Token.Jose.TYPE, "JWT")
+                        .build()
+                )
+            );
         }
 
         @Override
         public JsonObject json() {
-            return this.joseo;
+            return this.joseo.value();
         }
 
         @Override
         public byte[] encoded() {
             return Base64.getEncoder().encode(
-                this.joseo.toString().getBytes(Charset.defaultCharset())
+                this.joseo.value().toString().getBytes(Charset.defaultCharset())
             );
         }
     }
@@ -90,8 +95,8 @@ public interface Token {
      * and expiration information for secure token-based authentication.
      * @since 1.4
      */
-    @SuppressWarnings("PMD.ConstructorOnlyInitializesOrCallOtherConstructors")
     final class Jwt implements Token {
+
         /**
          * The header short for subject.
          */
@@ -117,31 +122,38 @@ public interface Token {
         /**
          * JWT object.
          */
-        private final JsonObject jwto;
+        private final Unchecked<JsonObject> jwto;
 
         /**
          * JSON Web Token.
          * @param idt Identity
-         * @param age Lifetime of token.
+         * @param age Lifetime of token
          */
         public Jwt(final Identity idt, final long age) {
-            final Instant now = Instant.now();
-            this.jwto = Json.createObjectBuilder()
-                .add(Token.Jwt.ISSUED, Token.Jwt.ISOFORMAT.format(now))
-                .add(Token.Jwt.EXPIRATION, Token.Jwt.ISOFORMAT.format(now.plusSeconds(age)))
-                .add(Token.Jwt.SUBJECT, idt.urn())
-                .build();
+            this.jwto = new Unchecked<>(
+                new Sticky<>(
+                    () -> {
+                        final Instant now = Instant.now();
+                        return Json.createObjectBuilder().add(
+                            Token.Jwt.ISSUED, Token.Jwt.ISOFORMAT.format(now)
+                        ).add(
+                            Token.Jwt.EXPIRATION,
+                            Token.Jwt.ISOFORMAT.format(now.plusSeconds(age))
+                        ).add(Token.Jwt.SUBJECT, idt.urn()).build();
+                    }
+                )
+            );
         }
 
         @Override
         public JsonObject json() {
-            return this.jwto;
+            return this.jwto.value();
         }
 
         @Override
         public byte[] encoded() {
             return Base64.getEncoder().encode(
-                this.jwto.toString().getBytes(Charset.defaultCharset())
+                this.jwto.value().toString().getBytes(Charset.defaultCharset())
             );
         }
     }

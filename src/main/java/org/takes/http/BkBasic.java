@@ -179,5 +179,4 @@ public final class BkBasic implements Back {
             String.format("%s: %d", BkBasic.REMOTEPORT, socket.getPort())
         );
     }
-
 }

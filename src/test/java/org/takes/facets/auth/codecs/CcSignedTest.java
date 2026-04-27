@@ -17,6 +17,7 @@ import org.takes.facets.auth.Identity;
  * @checkstyle JavadocMethodCheck (500 lines)
  */
 final class CcSignedTest {
+
     @Test
     void signAndVerify() throws IOException {
         final String urn = "urn:github:346236";

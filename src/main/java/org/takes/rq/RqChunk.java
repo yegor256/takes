@@ -56,5 +56,4 @@ public final class RqChunk extends RqWrap {
         }
         return result;
     }
-
 }

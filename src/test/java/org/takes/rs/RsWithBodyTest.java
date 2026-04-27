@@ -28,9 +28,11 @@ final class RsWithBodyTest {
             "Response with body must include content length and body content",
             new RsPrint(res).print(),
             Matchers.containsString(
-                "Content-Length: 18\r\n\r\nпривет"
+                String.format(
+                    "Content-Length: 18%1$s%1$sпривет",
+                    String.valueOf((char) 13) + (char) 10
+                )
             )
         );
     }
-
 }

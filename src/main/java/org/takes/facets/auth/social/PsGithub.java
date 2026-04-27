@@ -95,8 +95,7 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
-        throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param(PsGithub.CODE).iterator();
         if (!code.hasNext()) {
@@ -111,8 +110,7 @@ public final class PsGithub implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -149,8 +147,7 @@ public final class PsGithub implements Pass {
             new Href(this.github)
                 .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
                 .toString()
-        )
-            .method("POST")
+        ).method("POST")
             .header("Accept", "application/xml")
             .body()
             .formParam("client_id", this.app)

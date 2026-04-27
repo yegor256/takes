@@ -5,11 +5,15 @@
 package org.takes.facets.ret;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import lombok.ToString;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.Sticky;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.Expires;
@@ -43,9 +47,8 @@ public final class RsReturn extends RsWrap {
      * @param loc The location URL to store as return location
      * @throws IOException If location validation or encoding fails
      */
-    public RsReturn(final Response res, final String loc)
-        throws IOException {
-        this(res, loc, RsReturn.class.getSimpleName());
+    public RsReturn(final Response res, final String loc) throws IOException {
+        this(res, loc, "RsReturn");
     }
 
     /**
@@ -57,21 +60,7 @@ public final class RsReturn extends RsWrap {
      */
     public RsReturn(final Response res, final String loc, final String cookie)
         throws IOException {
-        // @checkstyle IndentationCheck (18 lines)
-        super(
-            new RsWithCookie(
-                res,
-                cookie,
-                URLEncoder.encode(
-                    RsReturn.validLocation(loc), Charset.defaultCharset().name()
-                ),
-                "Path=/",
-                new Expires.Date(
-                    System.currentTimeMillis()
-                        + TimeUnit.HOURS.toMillis(1L)
-                ).print()
-            )
-        );
+        super(new RsReturn.LazyResponse(res, loc, cookie));
     }
 
     /**
@@ -90,5 +79,51 @@ public final class RsReturn extends RsWrap {
             );
         }
         return loc;
+    }
+
+    /**
+     * Lazily-built return-cookie response.
+     * @since 2.0
+     */
+    private static final class LazyResponse implements Response {
+
+        /**
+         * Cached underlying response.
+         */
+        private final Scalar<Response> inner;
+
+        /**
+         * Ctor.
+         * @param res Wrapped response
+         * @param loc Return location URL
+         * @param cookie Cookie name
+         */
+        LazyResponse(final Response res, final String loc, final String cookie) {
+            this.inner = new Sticky<>(
+                () -> new RsWithCookie(
+                    res,
+                    cookie,
+                    URLEncoder.encode(
+                        RsReturn.validLocation(loc),
+                        Charset.defaultCharset().name()
+                    ),
+                    "Path=/",
+                    new Expires.Date(
+                        System.currentTimeMillis()
+                            + TimeUnit.HOURS.toMillis(1L)
+                    ).print()
+                )
+            );
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return new IoChecked<>(this.inner).value().head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return new IoChecked<>(this.inner).value().body();
+        }
     }
 }

@@ -113,5 +113,4 @@ public final class RsText extends RsWrap {
     public RsText(final Response res) {
         super(new RsWithType(res, "text/plain"));
     }
-
 }

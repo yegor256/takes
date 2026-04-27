@@ -11,7 +11,6 @@ import java.nio.channels.WritableByteChannel;
 
 /**
  * Copy bytes until boundary reached.
- *
  * @since 1.19
  */
 public final class CopyBytesUntilBoundary {
@@ -44,6 +43,7 @@ public final class CopyBytesUntilBoundary {
      * @param buffer Buffer
      * @checkstyle ParameterNumberCheck (5 lines)
      */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public CopyBytesUntilBoundary(
         final WritableByteChannel target,
         final byte[] boundary,
@@ -52,7 +52,7 @@ public final class CopyBytesUntilBoundary {
     ) {
         this.buffer = buffer;
         this.target = target;
-        this.boundary = boundary.clone();
+        this.boundary = boundary;
         this.src = src;
     }
 
@@ -61,9 +61,7 @@ public final class CopyBytesUntilBoundary {
      * @throws IOException If problems found in
      * @checkstyle ExecutableStatementCountCheck (500 lines)
      */
-    @SuppressWarnings(
-        {"PMD.CognitiveComplexity", "PMD.UnnecessaryLocalRule"}
-    )
+    @SuppressWarnings("PMD.CognitiveComplexity")
     public void copy() throws IOException {
         int match = 0;
         boolean cont = true;

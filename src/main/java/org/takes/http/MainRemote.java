@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
@@ -58,9 +57,10 @@ public final class MainRemote {
      * @param type Class with main method
      * @param passed Additional arguments to be passed to the main method
      */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public MainRemote(final Class<?> type, final String... passed) {
         this.app = type;
-        this.args = Arrays.copyOf(passed, passed.length);
+        this.args = passed;
     }
 
     /**
@@ -84,7 +84,7 @@ public final class MainRemote {
             passed[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
-            new MainMethod(
+            new MainRemote.MainMethod(
                 this.app.getDeclaredMethod("main", String[].class),
                 passed
             )
@@ -155,6 +155,7 @@ public final class MainRemote {
      */
     @FunctionalInterface
     public interface Script {
+
         /**
          * Execute it against this URI.
          * @param home URI of the running front
@@ -165,7 +166,6 @@ public final class MainRemote {
 
     /**
      * Runnable main method.
-     *
      * @since 0.32.5
      */
     private static final class MainMethod implements Runnable {
@@ -185,9 +185,10 @@ public final class MainRemote {
          * @param method Main method
          * @param passed Additional arguments to be passed to the main method
          */
+        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
         MainMethod(final Method method, final String... passed) {
             this.method = method;
-            this.passed = Arrays.copyOf(passed, passed.length);
+            this.passed = passed;
         }
 
         @Override

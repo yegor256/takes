@@ -39,6 +39,7 @@ import org.takes.rs.RsText;
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqMtSmartTest {
+
     /**
      * Body element.
      */
@@ -53,7 +54,8 @@ final class RqMtSmartTest {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     /**
      * Content disposition.
@@ -170,21 +172,15 @@ final class RqMtSmartTest {
         final AtomicReference<String> resp = new AtomicReference<>();
         new FtRemote(take).exec(
             home -> resp.set(
-                new JdkRequest(home)
-                    .method("POST")
-                    .header(
-                        "Content-Type",
-                        "multipart/form-data; boundary=AaB0zz"
+                new JdkRequest(home).method("POST").header(
+                    "Content-Type",
+                    "multipart/form-data; boundary=AaB0zz"
+                ).header(
+                    "Content-Length",
+                    String.valueOf(
+                        new LengthOf(body).value()
                     )
-                    .header(
-                        "Content-Length",
-                        String.valueOf(
-                            new LengthOf(body).value()
-                        )
-                    )
-                    .body()
-                    .set(new UncheckedText(body).asString())
-                    .back()
+                ).body().set(new UncheckedText(body).asString()).back()
                     .fetch()
                     .as(RestResponse.class)
                     .body()
@@ -260,9 +256,11 @@ final class RqMtSmartTest {
             ),
             new TempInputStream(Files.newInputStream(file), file.toFile())
         );
-        try (InputStream stream = new RqMtSmart(
-            new RqMtBase(req)
-        ).single(part).body()) {
+        try (
+            InputStream stream = new RqMtSmart(
+                new RqMtBase(req)
+            ).single(part).body()
+        ) {
             MatcherAssert.assertThat(
                 "Stream content must match expected bytes",
                 stream.readAllBytes(),

@@ -4,10 +4,9 @@
  */
 package org.takes.facets.fork;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -60,7 +59,7 @@ public final class FkMethods implements Fork {
      * @param that Take
      */
     public FkMethods(final String mtd, final Take that) {
-        this(Arrays.asList(mtd.split(",")), that);
+        this(new ListOf<>(mtd), that);
     }
 
     /**
@@ -69,7 +68,7 @@ public final class FkMethods implements Fork {
      * @param that Take
      */
     public FkMethods(final Collection<String> mtds, final Take that) {
-        this.methods = Collections.unmodifiableCollection(mtds);
+        this.methods = new ListOf<>(mtds);
         this.take = that;
     }
 
@@ -83,5 +82,4 @@ public final class FkMethods implements Fork {
         }
         return resp;
     }
-
 }

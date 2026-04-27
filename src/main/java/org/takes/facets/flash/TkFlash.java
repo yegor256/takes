@@ -59,7 +59,7 @@ public final class TkFlash implements Take {
      * @param take The original take to decorate
      */
     public TkFlash(final Take take) {
-        this(take, RsFlash.class.getSimpleName());
+        this(take, "RsFlash");
     }
 
     /**

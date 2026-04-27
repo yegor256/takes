@@ -5,8 +5,8 @@
 package org.takes.http;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Take;
 import org.takes.rq.RqWithHeader;
 
@@ -52,7 +52,7 @@ public final class FtCli implements Front {
      * @param args Arguments
      */
     public FtCli(final Take tks, final String... args) {
-        this(tks, Arrays.asList(args));
+        this(tks, new ListOf<>(args));
     }
 
     /**
@@ -118,13 +118,12 @@ public final class FtCli implements Front {
     private Exit exit(final Exit exit) {
         return new Exit.Or(
             exit,
-            new Lifetime(System.currentTimeMillis(), this.options.lifetime())
+            new FtCli.Lifetime(System.currentTimeMillis(), this.options.lifetime())
         );
     }
 
     /**
      * Lifetime exceeded exit.
-     *
      * @since 0.32.5
      */
     private static final class Lifetime implements Exit {

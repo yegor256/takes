@@ -37,7 +37,7 @@ public final class RqAuth extends RqWrap {
      * @param request Original
      */
     public RqAuth(final Request request) {
-        this(request, TkAuth.class.getSimpleName());
+        this(request, "TkAuth");
     }
 
     /**
@@ -70,5 +70,4 @@ public final class RqAuth extends RqWrap {
         }
         return user;
     }
-
 }

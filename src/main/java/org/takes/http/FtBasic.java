@@ -100,5 +100,4 @@ public final class FtBasic implements Front {
         } catch (final SocketTimeoutException ignored) {
         }
     }
-
 }

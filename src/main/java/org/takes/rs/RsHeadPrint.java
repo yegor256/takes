@@ -39,5 +39,4 @@ public final class RsHeadPrint implements Text {
     public String asString() throws IOException {
         return new RsPrint(this.origin).printHead();
     }
-
 }

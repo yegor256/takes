@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Arrays;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -22,6 +21,7 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.io.WriterTo;
+import org.cactoos.list.ListOf;
 import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
@@ -43,11 +43,16 @@ import org.xembly.Xembler;
 public final class RsXembly extends RsWrap {
 
     /**
+     * Lazily-built empty DOM Document used by the {@link XeSource} ctor.
+     */
+    private static final Node EMPTY_DOM = RsXembly.emptyDocument();
+
+    /**
      * Ctor.
      * @param sources Sources
      */
     public RsXembly(final XeSource... sources) {
-        this(Arrays.asList(sources));
+        this(new ListOf<>(sources));
     }
 
     /**
@@ -56,7 +61,7 @@ public final class RsXembly extends RsWrap {
      * @param sources Sources
      */
     public RsXembly(final Node dom, final XeSource... sources) {
-        this(dom, Arrays.asList(sources));
+        this(dom, new ListOf<>(sources));
     }
 
     /**
@@ -81,7 +86,7 @@ public final class RsXembly extends RsWrap {
      * @param src Source
      */
     public RsXembly(final XeSource src) {
-        this(RsXembly.emptyDocument(), src);
+        this(RsXembly.EMPTY_DOM, src);
     }
 
     /**

@@ -12,6 +12,7 @@ import java.io.IOException;
  */
 @FunctionalInterface
 public interface Head {
+
     /**
      * All lines above the body.
      * @return List of lines

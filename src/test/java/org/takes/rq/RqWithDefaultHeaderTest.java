@@ -20,7 +20,8 @@ final class RqWithDefaultHeaderTest {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     @Test
     void providesDefaultHeader() throws IOException {

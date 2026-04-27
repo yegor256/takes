@@ -19,9 +19,23 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsPrintTest {
 
+    /**
+     * Carriage return + line feed.
+     */
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
+
+    /**
+     * Three line feeds.
+     */
+    private static final String THREE_LFS =
+        String.valueOf((char) 10) + (char) 10 + (char) 10;
+
     @Test
     void printsBytesCorrectly() {
-        final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
+        final Text response = new RsPrint(
+            new RsWithHeader("name", RsPrintTest.THREE_LFS)
+        );
         Assertions.assertThrows(
             IllegalArgumentException.class,
             response::asString
@@ -30,7 +44,9 @@ final class RsPrintTest {
 
     @Test
     void failsOnInvalidHeader() {
-        final Text response = new RsPrint(new RsWithHeader("name", "\n\n\n"));
+        final Text response = new RsPrint(
+            new RsWithHeader("name", RsPrintTest.THREE_LFS)
+        );
         Assertions.assertThrows(
             IllegalArgumentException.class,
             response::asString
@@ -46,7 +62,12 @@ final class RsPrintTest {
             "must write head as String",
             response.asString(),
             new HasToString<>(
-                new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+                new IsEqual<>(
+                    String.format(
+                        "HTTP/1.1 500 Internal Server Error%1$s%1$s",
+                        RsPrintTest.CRLF
+                    )
+                )
             )
         );
     }
@@ -59,7 +80,12 @@ final class RsPrintTest {
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
             ).asString(),
             new HasToString<>(
-                new IsEqual<>("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+                new IsEqual<>(
+                    String.format(
+                        "HTTP/1.1 203 Non-Authoritative%1$s%1$s",
+                        RsPrintTest.CRLF
+                    )
+                )
             )
         );
     }

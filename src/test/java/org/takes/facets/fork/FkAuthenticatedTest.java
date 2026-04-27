@@ -47,5 +47,4 @@ final class FkAuthenticatedTest {
             Matchers.is(true)
         );
     }
-
 }

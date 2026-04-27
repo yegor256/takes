@@ -37,5 +37,4 @@ public class FkWrap implements Fork {
     public final Opt<Response> route(final Request req) throws Exception {
         return this.origin.route(req);
     }
-
 }

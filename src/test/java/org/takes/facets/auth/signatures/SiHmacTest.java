@@ -15,11 +15,12 @@ import org.junit.jupiter.api.Test;
  * @since 1.3
  */
 final class SiHmacTest {
+
     @Test
     void corrects() {
         MatcherAssert.assertThat(
             "Must have proper bit length",
-            new SiHmac("test", 123).bitlength(),
+            new SiHmac("test".getBytes(StandardCharsets.UTF_8), 123).bitlength(),
             new IsEqual<>(SiHmac.HMAC256)
         );
     }
@@ -29,7 +30,10 @@ final class SiHmacTest {
         MatcherAssert.assertThat(
             "Must have proper signature",
             new String(
-                new SiHmac("key", SiHmac.HMAC256).sign(
+                new SiHmac(
+                    "key".getBytes(StandardCharsets.UTF_8),
+                    SiHmac.HMAC256
+                ).sign(
                     "The quick brown fox jumps over the lazy dog".getBytes(StandardCharsets.UTF_8)
                 )
             ),
@@ -41,7 +45,7 @@ final class SiHmacTest {
 
     @Test
     void mustEvaluateTrueEqualityTest() {
-        final String key = "key";
+        final byte[] key = "key".getBytes(StandardCharsets.UTF_8);
         MatcherAssert.assertThat(
             "Must evaluate true equality",
             new SiHmac(key, SiHmac.HMAC256),

@@ -26,13 +26,14 @@ import org.takes.rs.RsWithType;
  * @since 0.10
  */
 final class PsByFlagTest {
+
     @Test
     void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(
             "Flag not found must return false",
             new PsByFlag(
                 new PsByFlag.Pair(
-                    "test", new PsFake(true)
+                    Pattern.compile(Pattern.quote("test")), new PsFake(true)
                 )
             ).enter(
                 new RqFake("GET", "/?PsByFlag=x")
@@ -47,7 +48,7 @@ final class PsByFlagTest {
             "Matching flag must return expected identity URN",
             new PsByFlag(
                 new PsByFlag.Pair(
-                    "some-key", new PsFake(true)
+                    Pattern.compile(Pattern.quote("some-key")), new PsFake(true)
                 )
             ).enter(new RqFake("POST", "/?PsByFlag=some-key")).get()
                 .urn(),

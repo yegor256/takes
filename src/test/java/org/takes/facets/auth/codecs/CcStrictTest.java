@@ -19,6 +19,7 @@ import org.takes.facets.auth.Identity;
  * @since 0.11.2
  */
 final class CcStrictTest {
+
     @Test
     void blocksEmptyUrn() {
         Assertions.assertThrows(

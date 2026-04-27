@@ -67,5 +67,4 @@ public final class TkSecure implements Take {
         }
         return this.origin.act(request);
     }
-
 }

@@ -29,7 +29,7 @@ final class TkTextTest {
             new RsPrint(new TkText(body).act(new RqFake())),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
@@ -48,7 +48,7 @@ final class TkTextTest {
             new RsPrint(new TkText(() -> body).act(new RqFake())),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
@@ -67,7 +67,7 @@ final class TkTextTest {
             new RsPrint(new TkText(body.getBytes(StandardCharsets.UTF_8)).act(new RqFake())),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
@@ -86,7 +86,7 @@ final class TkTextTest {
             new RsPrint(new TkText(new InputStreamOf(body)).act(new RqFake())),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     String.format("Content-Length: %s", body.length()),
                     "Content-Type: text/plain",
@@ -118,5 +118,4 @@ final class TkTextTest {
             new HasString(body)
         );
     }
-
 }

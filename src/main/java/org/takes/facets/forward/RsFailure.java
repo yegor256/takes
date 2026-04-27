@@ -44,28 +44,11 @@ public final class RsFailure extends RsForward {
     }
 
     /**
-     * Constructor with throwable cause and custom redirect location.
-     * @param cause The throwable that caused the failure
-     * @param loc The location URL to redirect to
-     * @throws UnsupportedEncodingException If URL encoding fails
-     * @since 0.21
-     */
-    public RsFailure(final Throwable cause, final CharSequence loc)
-        throws UnsupportedEncodingException {
-        super(
-            new RsFlash(cause),
-            HttpURLConnection.HTTP_MOVED_PERM,
-            loc
-        );
-    }
-
-    /**
      * Constructor with string cause and default home location.
      * @param cause The error message that caused the failure
      * @throws UnsupportedEncodingException If URL encoding fails
      */
-    public RsFailure(final String cause)
-        throws UnsupportedEncodingException {
+    public RsFailure(final String cause) throws UnsupportedEncodingException {
         this(cause, RsFailure.HOME);
     }
 
@@ -78,11 +61,33 @@ public final class RsFailure extends RsForward {
      */
     public RsFailure(final String cause, final CharSequence loc)
         throws UnsupportedEncodingException {
+        this(new RsFlash(cause), loc);
+    }
+
+    /**
+     * Constructor with throwable cause and custom redirect location.
+     * @param cause The throwable that caused the failure
+     * @param loc The location URL to redirect to
+     * @throws UnsupportedEncodingException If URL encoding fails
+     * @since 0.21
+     */
+    public RsFailure(final Throwable cause, final CharSequence loc)
+        throws UnsupportedEncodingException {
+        this(new RsFlash(cause), loc);
+    }
+
+    /**
+     * Primary constructor with flash response and redirect location.
+     * @param flash The flash response with the failure message
+     * @param loc The location URL to redirect to
+     * @throws UnsupportedEncodingException If URL encoding fails
+     */
+    public RsFailure(final RsFlash flash, final CharSequence loc)
+        throws UnsupportedEncodingException {
         super(
-            new RsFlash(cause),
+            flash,
             HttpURLConnection.HTTP_MOVED_PERM,
             loc
         );
     }
-
 }

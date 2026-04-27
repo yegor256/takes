@@ -28,5 +28,4 @@ public final class FkFixed extends FkWrap {
             req -> new Opt.Single<>(take.act(req))
         );
     }
-
 }

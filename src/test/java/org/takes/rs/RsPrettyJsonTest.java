@@ -21,6 +21,11 @@ import org.junit.jupiter.api.Test;
  */
 final class RsPrettyJsonTest {
 
+    /**
+     * Line feed character.
+     */
+    private static final String LF = String.valueOf((char) 10);
+
     @Test
     void formatsJsonBody() throws Exception {
         MatcherAssert.assertThat(
@@ -31,7 +36,10 @@ final class RsPrettyJsonTest {
                 )
             ).asString(),
             Matchers.is(
-                "{\n    \"widget\": {\n        \"debug\": \"on\"\n    }\n}"
+                String.format(
+                    "{%1$s    \"widget\": {%1$s        \"debug\": \"on\"%1$s    }%1$s}",
+                    RsPrettyJsonTest.LF
+                )
             )
         );
     }
@@ -51,7 +59,10 @@ final class RsPrettyJsonTest {
             w.write(
                 new RsBodyPrint(
                     new RsWithBody(
-                        "{\n    \"test\": {\n        \"test\": \"test\"\n    }\n}"
+                        String.format(
+                            "{%1$s    \"test\": {%1$s        \"test\": \"test\"%1$s    }%1$s}",
+                            RsPrettyJsonTest.LF
+                        )
                     )
                 ).asString()
             );

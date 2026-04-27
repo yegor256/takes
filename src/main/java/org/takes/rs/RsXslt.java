@@ -155,8 +155,8 @@ public final class RsXslt extends RsWrap {
     /**
      * Transform XML into HTML.
      * @param factory Transformer factory
-     * @param xml XML page to be transformed.
-     * @return Resulting HTML page.
+     * @param xml XML page to be transformed
+     * @return Resulting HTML page
      * @throws TransformerException If fails
      */
     private static InputStream transform(final TransformerFactory factory,
@@ -254,6 +254,7 @@ public final class RsXslt extends RsWrap {
      * @since 0.1
      */
     private static final class InClasspath implements URIResolver {
+
         @Override
         public Source resolve(final String href, final String base)
             throws TransformerException {
@@ -289,5 +290,4 @@ public final class RsXslt extends RsWrap {
             );
         }
     }
-
 }

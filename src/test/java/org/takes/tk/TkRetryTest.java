@@ -22,7 +22,6 @@ import org.takes.rs.RsText;
 
 /**
  * TkRetry can retry till success or retry count is reached.
- *
  * @since 0.28.3
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -66,28 +65,7 @@ final class TkRetryTest {
     void retriesOnExceptionTillCount() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                final Take take = Mockito.mock(Take.class);
-                Mockito
-                    .when(take.act(Mockito.any(Request.class)))
-                    .thenThrow(new IOException("oops"));
-                final long start = System.nanoTime();
-                final int count = TkRetryTest.COUNT;
-                final int delay = TkRetryTest.DELAY;
-                try {
-                    new TkRetry(count, delay, take).act(
-                        new RqFake(RqMethod.GET)
-                    );
-                } catch (final IOException exception) {
-                    final long spent = System.nanoTime() - start;
-                    MatcherAssert.assertThat(
-                        "TkRetry must spend at least minimum expected time when all retries fail",
-                        (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
-                        Matchers.lessThanOrEqualTo(spent)
-                    );
-                    throw exception;
-                }
-            }
+            () -> TkRetryTest.retryAndAssertSpent()
         );
     }
 
@@ -127,5 +105,32 @@ final class TkRetryTest {
             ),
             new HasString(data)
         );
+    }
+
+    /**
+     * Retry on exception till count and assert minimum spent time.
+     * @throws Exception If fails
+     */
+    private static void retryAndAssertSpent() throws Exception {
+        final Take take = Mockito.mock(Take.class);
+        Mockito
+            .when(take.act(Mockito.any(Request.class)))
+            .thenThrow(new IOException("oops"));
+        final long start = System.nanoTime();
+        final int count = TkRetryTest.COUNT;
+        final int delay = TkRetryTest.DELAY;
+        try {
+            new TkRetry(count, delay, take).act(
+                new RqFake(RqMethod.GET)
+            );
+        } catch (final IOException exception) {
+            final long spent = System.nanoTime() - start;
+            MatcherAssert.assertThat(
+                "TkRetry must spend at least minimum expected time when all retries fail",
+                (count * delay - TkRetryTest.HUNDRED) * (long) TkRetryTest.TO_NANOS,
+                Matchers.lessThanOrEqualTo(spent)
+            );
+            throw exception;
+        }
     }
 }

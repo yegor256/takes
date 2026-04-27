@@ -23,6 +23,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public final class SiHmac implements Signature {
+
     /**
      * The HMAC 256 bit variant.
      */
@@ -49,33 +50,23 @@ public final class SiHmac implements Signature {
     private final int bits;
 
     /**
-     * Constructor with string key using default 256-bit HMAC.
-     *
-     * @param key The encryption key as a string
-     */
-    public SiHmac(final String key) {
-        this(key.getBytes(StandardCharsets.UTF_8), SiHmac.HMAC256);
-    }
-
-    /**
-     * Constructor with string key and specified bit length.
-     *
-     * @param key The encryption key as a string
-     * @param bits The signature bit length (256, 384, or 512)
-     */
-    public SiHmac(final String key, final int bits) {
-        this(key.getBytes(StandardCharsets.UTF_8), bits);
-    }
-
-    /**
-     * Constructor with byte array key and specified bit length.
-     *
+     * Primary constructor with byte array key and specified bit length.
      * @param key The encryption key as a byte array
      * @param bits The signature bit length (256, 384, or 512)
      */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public SiHmac(final byte[] key, final int bits) {
-        this.key = key.clone();
-        this.bits = SiHmac.bitLength(bits);
+        this.key = key;
+        this.bits = bits;
+    }
+
+    /**
+     * Returns the corrected signature bit length.
+     * @return The bit length used for HMAC signature, normalised to 256
+     *  if the configured value is not 256, 384 or 512
+     */
+    public int bitlength() {
+        return SiHmac.bitLength(this.bits);
     }
 
     @Override
@@ -84,17 +75,7 @@ public final class SiHmac implements Signature {
     }
 
     /**
-     * Returns the signature bit length.
-     *
-     * @return The bit length used for HMAC signature
-     */
-    public int bitlength() {
-        return this.bits;
-    }
-
-    /**
      * Validates and returns the correct bit length.
-     *
      * @param bits The given bit length
      * @return The original bit length if valid (256, 384, or 512), otherwise 256
      */
@@ -110,7 +91,6 @@ public final class SiHmac implements Signature {
 
     /**
      * Encrypts the given bytes using HMAC and returns hex-encoded result.
-     *
      * @param bytes The bytes to encrypt
      * @return The encrypted bytes as hex-encoded string bytes
      * @throws IOException If encryption fails
@@ -128,13 +108,11 @@ public final class SiHmac implements Signature {
 
     /**
      * Creates a new MAC instance based on the configured bit length.
-     *
      * @return The configured MAC instance
      * @throws IOException If MAC creation fails
      */
-    private Mac create()
-        throws IOException {
-        final String algo = String.format("HmacSHA%s", this.bits);
+    private Mac create() throws IOException {
+        final String algo = String.format("HmacSHA%s", this.bitlength());
         try {
             final Mac mac = Mac.getInstance(algo);
             mac.init(new SecretKeySpec(this.key, algo));

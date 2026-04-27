@@ -6,7 +6,6 @@ package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 import org.cactoos.map.MapEntry;
 import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
@@ -60,12 +59,12 @@ final class CcBase64Test {
     @Test
     @SuppressWarnings("unchecked")
     void encodesAndDecodesProperties() throws IOException {
-        final Map<String, String> properties =
-            new MapOf<>(new MapEntry<>("userName", "user"));
         MatcherAssert.assertThat(
             "Encoded and decoded properties must match original",
             CcBase64Test.roundTrip("urn:test:Hello World!").properties(),
-            Matchers.equalTo(properties)
+            Matchers.equalTo(
+                new MapOf<>(new MapEntry<>("userName", "user"))
+            )
         );
     }
 

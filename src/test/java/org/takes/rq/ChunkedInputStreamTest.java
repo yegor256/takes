@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link ChunkedInputStream}.
- *
  * @since 0.31.2
  */
 @SuppressWarnings({
@@ -116,18 +115,20 @@ final class ChunkedInputStreamTest {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());
-        try (InputStream stream = new ChunkedInputStream(
-            IOUtils.toInputStream(
-                new Joined(
-                    "\r\n",
-                    length + ignored,
-                    data,
-                    "0",
-                    ""
-                ).toString(),
-                StandardCharsets.UTF_8
+        try (
+            InputStream stream = new ChunkedInputStream(
+                IOUtils.toInputStream(
+                    new Joined(
+                        String.valueOf((char) 13) + (char) 10,
+                        length + ignored,
+                        data,
+                        "0",
+                        ""
+                    ).toString(),
+                    StandardCharsets.UTF_8
+                )
             )
-        )) {
+        ) {
             final byte[] buf = new byte[data.length()];
             stream.read(buf);
             MatcherAssert.assertThat(
@@ -171,7 +172,7 @@ final class ChunkedInputStreamTest {
         return new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(data.length()),
                     data,
                     "0",
@@ -188,7 +189,7 @@ final class ChunkedInputStreamTest {
         return new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),

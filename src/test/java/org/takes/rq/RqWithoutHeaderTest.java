@@ -28,5 +28,4 @@ final class RqWithoutHeaderTest {
             Matchers.not(Matchers.containsString("Host: "))
         );
     }
-
 }

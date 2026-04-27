@@ -26,8 +26,8 @@ import org.takes.tk.TkEmpty;
  * Test case for {@link TkMethods}.
  * @since 0.17
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkMethodsTest {
+
     @Test
     void callsActOnProperMethods() throws Exception {
         final Take take = Mockito.mock(Take.class);
@@ -48,8 +48,7 @@ final class TkMethodsTest {
 
     @Test
     @Tag("deep")
-    void returnsMethodIsNotAllowedForUnsupportedMethods() throws
-        Exception {
+    void returnsMethodIsNotAllowedForUnsupportedMethods() throws Exception {
         final AtomicInteger status = new AtomicInteger();
         new FtRemote(new TkMethods(new TkEmpty(), RqMethod.PUT)).exec(
             url -> status.set(

@@ -38,5 +38,4 @@ public final class FbFixed extends FbWrap {
             req -> new Opt.Single<>(take.act(req))
         );
     }
-
 }

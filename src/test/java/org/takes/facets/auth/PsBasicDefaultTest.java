@@ -24,13 +24,10 @@ final class PsBasicDefaultTest {
                     "bob qwe%20r%20ty%3A%2B urn:foo:robert",
                     "alice пароль urn:foo:alice",
                 }
-            )
-                .enter(
-                    "bob",
-                    "qwe r ty:+"
-                )
-                .get()
-                .urn(),
+            ).enter(
+                "bob",
+                "qwe r ty:+"
+            ).get().urn(),
             new IsEqual<>("urn:foo:robert")
         );
     }
@@ -43,12 +40,10 @@ final class PsBasicDefaultTest {
                 new String[]{
                     "yvonne hey%20you urn:foo:z",
                 }
-            )
-                .enter(
-                    "yvonne",
-                    "hey you"
-                )
-                .has(),
+            ).enter(
+                "yvonne",
+                "hey you"
+            ).has(),
             new IsEqual<>(true)
         );
     }
@@ -61,12 +56,10 @@ final class PsBasicDefaultTest {
                 new String[]{
                     "zak hey+me urn:foo:z",
                 }
-            )
-                .enter(
-                    "zak",
-                    "hey me"
-                )
-                .has(),
+            ).enter(
+                "zak",
+                "hey me"
+            ).has(),
             new IsEqual<>(true)
         );
     }
@@ -79,12 +72,10 @@ final class PsBasicDefaultTest {
                 new String[]{
                     "abraham+lincoln qwer urn:foo:z",
                 }
-            )
-                .enter(
-                    "abraham lincoln",
-                    "qwer"
-                )
-                .has(),
+            ).enter(
+                "abraham lincoln",
+                "qwer"
+            ).has(),
             new IsEqual<>(true)
         );
     }
@@ -101,13 +92,10 @@ final class PsBasicDefaultTest {
                         URLEncoder.encode(urn, "UTF-8")
                     ),
                 }
-            )
-                .enter(
-                    "login",
-                    "password"
-                )
-                .get()
-                .urn(),
+            ).enter(
+                "login",
+                "password"
+            ).get().urn(),
             new IsEqual<>(urn)
         );
     }
@@ -121,9 +109,7 @@ final class PsBasicDefaultTest {
                     "charlie qwerty urn:foo:charlie",
                     "doreen 123 urn:foo:doreen",
                 }
-            )
-                .enter("charlie", "wrongpassword")
-                .has(),
+            ).enter("charlie", "wrongpassword").has(),
             new IsEqual<>(false)
         );
     }
@@ -137,9 +123,7 @@ final class PsBasicDefaultTest {
                     "eddie qwerty urn:foo:eddie",
                     "fiona 123 urn:foo:fiona",
                 }
-            )
-                .enter("mike", "anything")
-                .has(),
+            ).enter("mike", "anything").has(),
             new IsEqual<>(false)
         );
     }

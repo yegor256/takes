@@ -94,8 +94,7 @@ public final class PsGoogle implements Pass {
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
      */
-    public PsGoogle(final String gapp, final String gkey,
-        final String uri) {
+    public PsGoogle(final String gapp, final String gkey, final String uri) {
         this(
             gapp,
             gkey,
@@ -124,8 +123,7 @@ public final class PsGoogle implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
-        throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param(PsGoogle.CODE).iterator();
         if (!code.hasNext()) {
@@ -138,8 +136,7 @@ public final class PsGoogle implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
@@ -219,5 +216,4 @@ public final class PsGoogle implements Pass {
             String.format("urn:google:%s", json.getString("id")), props
         );
     }
-
 }

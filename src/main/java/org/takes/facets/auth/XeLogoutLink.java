@@ -9,7 +9,9 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
+import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
+import org.xembly.Directive;
 
 /**
  * Xembly source that creates an XML link element for user logout.
@@ -28,9 +30,8 @@ public final class XeLogoutLink extends XeWrap {
      * @param req Request
      * @throws IOException If fails
      */
-    public XeLogoutLink(final Request req)
-        throws IOException {
-        this(req, "takes:logout", PsByFlag.class.getSimpleName());
+    public XeLogoutLink(final Request req) throws IOException {
+        this(req, "takes:logout", "PsByFlag");
     }
 
     /**
@@ -42,14 +43,50 @@ public final class XeLogoutLink extends XeWrap {
      */
     public XeLogoutLink(final Request req, final String rel,
         final String flag) throws IOException {
-        super(
-            new XeLink(
-                rel,
-                new RqHref.Base(req).href().with(
-                    flag, PsLogout.class.getSimpleName()
-                ).toString()
-        )
-        );
+        super(new XeLogoutLink.LazySrc(req, rel, flag));
     }
 
+    /**
+     * Lazy XeSource that builds the logout link on demand.
+     * @since 2.0
+     */
+    private static final class LazySrc implements XeSource {
+
+        /**
+         * Request.
+         */
+        private final Request req;
+
+        /**
+         * Relation.
+         */
+        private final String rel;
+
+        /**
+         * Flag.
+         */
+        private final String flag;
+
+        /**
+         * Ctor.
+         * @param request Request
+         * @param relation Relation
+         * @param fly Flag
+         */
+        LazySrc(final Request request, final String relation, final String fly) {
+            this.req = request;
+            this.rel = relation;
+            this.flag = fly;
+        }
+
+        @Override
+        public Iterable<Directive> toXembly() throws IOException {
+            return new XeLink(
+                this.rel,
+                new RqHref.Base(this.req).href()
+                    .with(this.flag, "PsLogout")
+                    .toString()
+            ).toXembly();
+        }
+    }
 }

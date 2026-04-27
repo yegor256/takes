@@ -35,5 +35,4 @@ public interface Pass {
      * @throws Exception If the wrapping process fails
      */
     Response exit(Response response, Identity identity) throws Exception;
-
 }

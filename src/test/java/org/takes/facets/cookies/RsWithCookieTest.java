@@ -15,13 +15,13 @@ import org.takes.rs.RsPrint;
  * Test case for {@link RsWithCookie}.
  * @since 0.9.6
  */
-@SuppressWarnings("PMD.UnitTestContainsTooManyAsserts")
 final class RsWithCookieTest {
 
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     @Test
     void addsCookieToResponse() {
@@ -75,7 +75,7 @@ final class RsWithCookieTest {
             "RsWithCookie should reject invalid cookie name",
             Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new RsWithCookie("f oo", "works")
+                () -> new RsWithCookie("f oo", "works").head().iterator().next()
             ).getMessage(),
             new org.hamcrest.core.StringContains("Cookie name \"f oo\" contains invalid characters")
         );
@@ -87,7 +87,7 @@ final class RsWithCookieTest {
             "RsWithCookie should reject invalid cookie value",
             Assertions.assertThrows(
                 IllegalArgumentException.class,
-                () -> new RsWithCookie("cookiename", "wo\"rks")
+                () -> new RsWithCookie("cookiename", "wo\"rks").head().iterator().next()
             ).getMessage(),
             new org.hamcrest.core.StringContains(
                 "Cookie value \"wo\"rks\" contains invalid characters"

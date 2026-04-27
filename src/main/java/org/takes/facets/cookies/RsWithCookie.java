@@ -4,9 +4,14 @@
  */
 package org.takes.facets.cookies;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.Sticky;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
@@ -83,17 +88,7 @@ public final class RsWithCookie extends RsWrap {
      */
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
-        super(
-            new RsWithHeader(
-                res,
-                RsWithCookie.SET_COOKIE,
-                RsWithCookie.make(
-                    RsWithCookie.validName(name),
-                    RsWithCookie.validValue(value),
-                    attrs
-                )
-            )
-        );
+        super(new RsWithCookie.LazyResponse(res, name, value, attrs));
     }
 
     /**
@@ -118,7 +113,6 @@ public final class RsWithCookie extends RsWrap {
      * Validates cookie value according to RFC 6265 section 4.1.1.
      * @param value The cookie value to validate
      * @return The validated cookie value
-     * @throws IllegalArgumentException If value contains invalid characters
      */
     private static CharSequence validValue(final CharSequence value) {
         if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
@@ -136,7 +130,6 @@ public final class RsWithCookie extends RsWrap {
      * Validates cookie name according to RFC 2616, section 2.2.
      * @param name The cookie name to validate
      * @return The validated cookie name
-     * @throws IllegalArgumentException If name contains invalid characters
      */
     private static CharSequence validName(final CharSequence name) {
         if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {
@@ -148,5 +141,50 @@ public final class RsWithCookie extends RsWrap {
             );
         }
         return name;
+    }
+
+    /**
+     * Lazily-built cookie response.
+     * @since 2.0
+     */
+    private static final class LazyResponse implements Response {
+
+        /**
+         * Cached underlying response.
+         */
+        private final Scalar<Response> inner;
+
+        /**
+         * Ctor.
+         * @param res Wrapped response
+         * @param name Cookie name
+         * @param value Cookie value
+         * @param attrs Cookie attributes
+         * @checkstyle ParameterNumberCheck (4 lines)
+         */
+        LazyResponse(final Response res, final CharSequence name,
+            final CharSequence value, final CharSequence... attrs) {
+            this.inner = new Sticky<>(
+                () -> new RsWithHeader(
+                    res,
+                    RsWithCookie.SET_COOKIE,
+                    RsWithCookie.make(
+                        RsWithCookie.validName(name),
+                        RsWithCookie.validValue(value),
+                        attrs
+                    )
+                )
+            );
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return new IoChecked<>(this.inner).value().head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return new IoChecked<>(this.inner).value().body();
+        }
     }
 }

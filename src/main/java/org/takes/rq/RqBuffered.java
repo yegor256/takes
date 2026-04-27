@@ -34,5 +34,4 @@ public final class RqBuffered extends RqWrap {
             )
         );
     }
-
 }

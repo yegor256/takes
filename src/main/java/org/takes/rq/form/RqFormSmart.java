@@ -46,8 +46,7 @@ public final class RqFormSmart implements RqForm {
     }
 
     @Override
-    public Iterable<String> param(final CharSequence name)
-        throws IOException {
+    public Iterable<String> param(final CharSequence name) throws IOException {
         return this.origin.param(name);
     }
 

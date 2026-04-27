@@ -4,6 +4,8 @@
  */
 package org.takes.rs;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -70,11 +72,11 @@ public final class RsWithType extends RsWrap {
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header if
-     *  present.
+     *  present
      */
     private RsWithType(final Response res, final CharSequence type,
         final Opt<Charset> charset) {
-        super(RsWithType.make(res, type, charset));
+        super(new RsWithType.LazyRs(res, type, charset));
     }
 
     /**
@@ -145,12 +147,11 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Html(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "text/html", charset));
+            super(new RsWithType.LazyRs(res, "text/html", charset));
         }
-
     }
 
     /**
@@ -188,12 +189,11 @@ public final class RsWithType extends RsWrap {
          * charset parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Json(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "application/json", charset));
+            super(new RsWithType.LazyRs(res, "application/json", charset));
         }
-
     }
 
     /**
@@ -231,12 +231,11 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Xml(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "text/xml", charset));
+            super(new RsWithType.LazyRs(res, "text/xml", charset));
         }
-
     }
 
     /**
@@ -274,11 +273,55 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Text(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "text/plain", charset));
+            super(new RsWithType.LazyRs(res, "text/plain", charset));
+        }
+    }
+
+    /**
+     * Lazily-built typed response.
+     * @since 2.0
+     */
+    private static final class LazyRs implements Response {
+
+        /**
+         * Original response.
+         */
+        private final Response res;
+
+        /**
+         * Content type.
+         */
+        private final CharSequence type;
+
+        /**
+         * Optional charset.
+         */
+        private final Opt<Charset> charset;
+
+        /**
+         * Ctor.
+         * @param origin Original response
+         * @param ctype Content type
+         * @param chr Optional charset
+         */
+        LazyRs(final Response origin, final CharSequence ctype,
+            final Opt<Charset> chr) {
+            this.res = origin;
+            this.type = ctype;
+            this.charset = chr;
         }
 
+        @Override
+        public Iterable<String> head() throws IOException {
+            return RsWithType.make(this.res, this.type, this.charset).head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return RsWithType.make(this.res, this.type, this.charset).body();
+        }
     }
 }

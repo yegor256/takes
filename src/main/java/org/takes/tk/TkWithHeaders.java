@@ -4,10 +4,10 @@
  */
 package org.takes.tk;
 
-import java.util.Arrays;
 import java.util.Collection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.Take;
 import org.takes.rs.RsWithHeaders;
 
@@ -77,7 +77,7 @@ public final class TkWithHeaders extends TkWrap {
      * @param headers HTTP headers to add to responses
      */
     public TkWithHeaders(final Take take, final String... headers) {
-        this(take, Arrays.asList(headers));
+        this(take, new ListOf<>(headers));
     }
 
     /**
@@ -90,5 +90,4 @@ public final class TkWithHeaders extends TkWrap {
             req -> new RsWithHeaders(take.act(req), headers)
         );
     }
-
 }

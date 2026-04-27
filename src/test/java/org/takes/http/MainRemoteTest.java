@@ -59,10 +59,10 @@ final class MainRemoteTest {
 
     /**
      * Demo app.
-     *
      * @since 0.23
      */
     static final class DemoApp {
+
         /**
          * Ctor.
          */
@@ -82,10 +82,10 @@ final class MainRemoteTest {
 
     /**
      * Demo app.
-     *
      * @since 0.23
      */
     static final class DemoAppArgs {
+
         /**
          * Ctor.
          */
@@ -102,5 +102,4 @@ final class MainRemoteTest {
             new FtCli(new TkFixed(args[1]), args[0]).start(Exit.NEVER);
         }
     }
-
 }

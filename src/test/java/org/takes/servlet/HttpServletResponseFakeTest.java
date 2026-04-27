@@ -18,10 +18,10 @@ import org.takes.rs.RsWithHeader;
 
 /**
  * Test case for {@link  HttpServletResponseFake}.
- *
  * @since 1.14
  */
 final class HttpServletResponseFakeTest {
+
     /**
      * Set-Cookie header name.
      */

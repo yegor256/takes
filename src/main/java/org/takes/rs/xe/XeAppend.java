@@ -4,10 +4,11 @@
  */
 package org.takes.rs.xe;
 
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
+import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
+import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
@@ -26,7 +27,14 @@ public final class XeAppend extends XeWrap {
      * @param value Value to set
      */
     public XeAppend(final CharSequence target, final CharSequence value) {
-        this(target, new XeDirectives(new Directives().set(value.toString())));
+        this(
+            target,
+            new XeDirectives(
+                (Scalar<Iterable<Directive>>) () -> new Directives().set(
+                    value.toString()
+                )
+            )
+        );
     }
 
     /**
@@ -35,7 +43,7 @@ public final class XeAppend extends XeWrap {
      * @param src Source
      */
     public XeAppend(final CharSequence target, final XeSource... src) {
-        this(target, Arrays.asList(src));
+        this(target, new ListOf<>(src));
     }
 
     /**
@@ -45,11 +53,7 @@ public final class XeAppend extends XeWrap {
      * @since 0.13
      */
     public XeAppend(final CharSequence target, final Iterable<XeSource> src) {
-        super(
-            () -> new Directives().add(target.toString()).append(
-                new XeChain(src).toXembly()
-            )
-        );
+        this(target, (Scalar<XeSource>) () -> new XeChain(src));
     }
 
     /**
@@ -65,5 +69,4 @@ public final class XeAppend extends XeWrap {
             )
         );
     }
-
 }

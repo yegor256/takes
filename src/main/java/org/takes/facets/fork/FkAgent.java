@@ -45,8 +45,8 @@ public final class FkAgent implements Fork {
 
     /**
      * Ctor.
-     * @param take Take to handle the request dynamically.
-     * @param match Matcher.
+     * @param take Take to handle the request dynamically
+     * @param match Matcher
      */
     public FkAgent(final Take take, final AgentMatch match) {
         this.take = take;
@@ -68,8 +68,8 @@ public final class FkAgent implements Fork {
 
     /**
      * Extract tokens from request.
-     * @param req Request.
-     * @return List of user agent tokens.
+     * @param req Request
+     * @return List of user agent tokens
      * @throws IOException If some problems inside.
      */
     private static List<String> tokens(final Request req) throws IOException {

@@ -33,7 +33,6 @@ public final class RsBodyPrint implements Text {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      */
     public RsBodyPrint(final Response res) {

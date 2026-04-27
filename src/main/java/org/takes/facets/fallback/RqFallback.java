@@ -46,6 +46,7 @@ public interface RqFallback extends Request {
      * @since 0.13
      */
     final class Fake implements RqFallback {
+
         /**
          * Original request.
          */
@@ -110,5 +111,4 @@ public interface RqFallback extends Request {
             return this.request.body();
         }
     }
-
 }

@@ -28,5 +28,4 @@ final class RsHeadersTest {
             Matchers.hasItem("text/plain")
         );
     }
-
 }

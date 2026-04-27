@@ -31,6 +31,7 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsGoogle}.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.16.3
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -111,18 +112,15 @@ final class PsGoogleTest {
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
                 (Take) req -> new RsJson(
-                    Json.createObjectBuilder()
-                        .add("displayName", octocat)
-                        .add("id", "1")
-                        .add(
-                            PsGoogleTest.IMAGE,
-                            Json.createObjectBuilder()
-                                .add(
-                                    PsGoogleTest.URL,
-                                    PsGoogleTest.AVATAR
-                                )
+                    Json.createObjectBuilder().add(
+                        "displayName", octocat
+                    ).add("id", "1").add(
+                        PsGoogleTest.IMAGE,
+                        Json.createObjectBuilder().add(
+                            PsGoogleTest.URL,
+                            PsGoogleTest.AVATAR
                         )
-                        .build()
+                    ).build()
                 )
             )
         );
@@ -200,17 +198,13 @@ final class PsGoogleTest {
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
                 (Take) req -> new RsJson(
-                    Json.createObjectBuilder()
-                        .add("id", "2")
-                        .add(
-                            PsGoogleTest.IMAGE,
-                            Json.createObjectBuilder()
-                                .add(
-                                    PsGoogleTest.URL,
-                                    PsGoogleTest.AVATAR
-                                )
+                    Json.createObjectBuilder().add("id", "2").add(
+                        PsGoogleTest.IMAGE,
+                        Json.createObjectBuilder().add(
+                            PsGoogleTest.URL,
+                            PsGoogleTest.AVATAR
                         )
-                        .build()
+                    ).build()
                 )
             )
         );
@@ -242,50 +236,54 @@ final class PsGoogleTest {
     private FkRegex requestToken() {
         return new FkRegex(
             "/o/oauth2/token",
-            // @checkstyle AnonInnerLengthCheck (1 line)
-            (Take) req -> {
-                MatcherAssert.assertThat(
-                    "Google OAuth token request must be POST to correct endpoint",
-                    new RqPrint(req).printHead(),
-                    Matchers.containsString("POST /o/oauth2/token")
-                );
-                final Request greq = new RqGreedy(req);
-                PsGoogleTest.assertParam(
-                    greq,
-                    "client_id",
-                    PsGoogleTest.APP
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    "redirect_uri",
-                    PsGoogleTest.ACCOUNT
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    "client_secret",
-                    PsGoogleTest.KEY
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    "grant_type",
-                    "authorization_code"
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    PsGoogleTest.CODE,
-                    PsGoogleTest.CODE
-                );
-                return new RsJson(
-                    Json.createObjectBuilder()
-                        .add(
-                            PsGoogleTest.ACCESS_TOKEN,
-                            PsGoogleTest.GOOGLE_TOKEN
-                        )
-                        .add("expires_in", 1)
-                        .add("token_type", "Bearer")
-                        .build()
-                );
-            }
+            (Take) req -> PsGoogleTest.tokenResponse(req)
+        );
+    }
+
+    /**
+     * Validate token request and produce response.
+     * @param req Request
+     * @return Token response
+     * @throws IOException If some problem inside
+     */
+    private static org.takes.Response tokenResponse(final Request req)
+        throws IOException {
+        MatcherAssert.assertThat(
+            "Google OAuth token request must be POST to correct endpoint",
+            new RqPrint(req).printHead(),
+            Matchers.containsString("POST /o/oauth2/token")
+        );
+        final Request greq = new RqGreedy(req);
+        PsGoogleTest.assertParam(
+            greq,
+            "client_id",
+            PsGoogleTest.APP
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "redirect_uri",
+            PsGoogleTest.ACCOUNT
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "client_secret",
+            PsGoogleTest.KEY
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "grant_type",
+            "authorization_code"
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            PsGoogleTest.CODE,
+            PsGoogleTest.CODE
+        );
+        return new RsJson(
+            Json.createObjectBuilder().add(
+                PsGoogleTest.ACCESS_TOKEN,
+                PsGoogleTest.GOOGLE_TOKEN
+            ).add("expires_in", 1).add("token_type", "Bearer").build()
         );
     }
 
@@ -309,36 +307,29 @@ final class PsGoogleTest {
 
     /**
      * Construct a error response with google json syntax for errors.
-     * @return Json with error.
+     * @return Json with error
      * @throws IOException If some problem inside
      */
     private static RsJson createErrorJson() throws IOException {
         final String message = "message";
         return new RsJson(
-            Json.createObjectBuilder()
-                .add(
-                    "error",
-                    Json.createObjectBuilder()
-                        .add(
-                            "errors",
-                            Json.createArrayBuilder()
-                                .add(
-                                    Json.createObjectBuilder()
-                                        .add("domain", "usageLimits")
-                                        .add("reason", "accessNotConfigured")
-                                        .add(
-                                            "extendedHelp",
-                                            "https://developers.google.com"
-                                        )
-                                )
+            Json.createObjectBuilder().add(
+                "error",
+                Json.createObjectBuilder().add(
+                    "errors",
+                    Json.createArrayBuilder().add(
+                        Json.createObjectBuilder().add(
+                            "domain", "usageLimits"
+                        ).add("reason", "accessNotConfigured").add(
+                            "extendedHelp",
+                            "https://developers.google.com"
                         )
-                        .add(
-                            PsGoogleTest.CODE,
-                            HttpURLConnection.HTTP_BAD_REQUEST
-                        )
-                        .add(message, "Access Not Configured.")
-                )
-                .build()
+                    )
+                ).add(
+                    PsGoogleTest.CODE,
+                    HttpURLConnection.HTTP_BAD_REQUEST
+                ).add(message, "Access Not Configured.")
+            ).build()
         );
     }
 }

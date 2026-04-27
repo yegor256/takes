@@ -30,12 +30,6 @@ public final class TkWithCookie extends TkWrap {
      * @param value Cookie value
      */
     public TkWithCookie(final Take take, final String key, final String value) {
-        super(
-            new TkWithHeaders(
-                take,
-                String.format("Set-Cookie: %s=%s", key, value)
-        )
-        );
+        super(req -> new RsWithCookie(take.act(req), key, value));
     }
-
 }

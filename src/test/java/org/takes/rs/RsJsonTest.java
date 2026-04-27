@@ -53,5 +53,4 @@ final class RsJsonTest {
             Matchers.equalTo(size)
         );
     }
-
 }

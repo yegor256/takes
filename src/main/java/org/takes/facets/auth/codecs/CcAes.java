@@ -19,6 +19,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -53,6 +55,7 @@ import org.takes.facets.auth.Identity;
  */
 @EqualsAndHashCode
 public final class CcAes implements Codec {
+
     /**
      * Secure random instance.
      */
@@ -71,7 +74,7 @@ public final class CcAes implements Codec {
     /**
      * The encryption key.
      */
-    private final Key key;
+    private final Unchecked<Key> key;
 
     /**
      * Random.
@@ -80,18 +83,29 @@ public final class CcAes implements Codec {
 
     /**
      * Constructor for the class.
-     *
      * @param codec Original codec
      * @param key The encryption key
      * @since 0.22
      */
     public CcAes(final Codec codec, final String key) {
-        this(codec, key.getBytes(Charset.defaultCharset()));
+        this(
+            codec,
+            CcAes.RANDOM,
+            new Unchecked<>(
+                new Sticky<>(
+                    () -> new SecretKeySpec(
+                        CcAes.withCorrectBlockSize(
+                            key.getBytes(Charset.defaultCharset())
+                        ),
+                        "AES"
+                    )
+                )
+            )
+        );
     }
 
     /**
      * Constructor for the class.
-     *
      * @param codec Original codec
      * @param key The encryption key
      */
@@ -99,15 +113,18 @@ public final class CcAes implements Codec {
         this(
             codec,
             CcAes.RANDOM,
-            new SecretKeySpec(
-                CcAes.withCorrectBlockSize(key.clone()), "AES"
+            new Unchecked<>(
+                new Sticky<>(
+                    () -> new SecretKeySpec(
+                        CcAes.withCorrectBlockSize(key.clone()), "AES"
+                    )
+                )
             )
         );
     }
 
     /**
      * Constructor for the class.
-     *
      * @param codec Original codec
      * @param random Random generator
      * @param key The encryption key
@@ -117,9 +134,23 @@ public final class CcAes implements Codec {
         final SecureRandom random,
         final Key key
     ) {
+        this(codec, random, new Unchecked<>(new Sticky<>(() -> key)));
+    }
+
+    /**
+     * Primary constructor.
+     * @param codec Original codec
+     * @param random Random generator
+     * @param key The encryption key wrapped in Unchecked
+     */
+    private CcAes(
+        final Codec codec,
+        final SecureRandom random,
+        final Unchecked<Key> key
+    ) {
         this.origin = codec;
-        this.key = key;
         this.random = random;
+        this.key = key;
     }
 
     @Override
@@ -134,7 +165,6 @@ public final class CcAes implements Codec {
 
     /**
      * Encrypt the given bytes using AES.
-     *
      * @param bytes Bytes to encrypt
      * @return Encrypted byte using AES algorithm
      * @throws IOException for all unexpected exceptions
@@ -164,7 +194,6 @@ public final class CcAes implements Codec {
 
     /**
      * Check the block size of the key.
-     *
      * @param key The encryption key
      * @return The verified encryption key
      */
@@ -182,7 +211,6 @@ public final class CcAes implements Codec {
 
     /**
      * Decrypt the given bytes using AES.
-     *
      * @param bytes Bytes to decrypt
      * @return Decrypted bytes
      * @throws IOException for all unexpected exceptions
@@ -213,7 +241,6 @@ public final class CcAes implements Codec {
 
     /**
      * Create new cipher based on the valid mode from {@link Cipher} class.
-     *
      * @param mode Either Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
      * @param spec Param spec (IV)
      * @return The cipher
@@ -223,7 +250,7 @@ public final class CcAes implements Codec {
         throws IOException {
         try {
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-            cipher.init(mode, this.key, spec, this.random);
+            cipher.init(mode, this.key.value(), spec, this.random);
             return cipher;
         } catch (final InvalidKeyException | NoSuchAlgorithmException
             | InvalidAlgorithmParameterException

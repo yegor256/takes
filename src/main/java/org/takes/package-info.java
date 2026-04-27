@@ -19,7 +19,7 @@
  * @see <a href="https://github.com/yegor256/takes">GitHub project</a>
  * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
  * @see <a href="https://en.wikipedia.org/wiki/Takes_(framework)">wikipedia about Takes framework</a>
- * @todo #998:30min Replace the usage of {@link java.lang.String}.format
+ * @todo #998:30min Replace the usage of String#format
  *  in the project and leverage {@link org.cactoos.text.FormattedText} decorator
  *  as it is an elegant object-oriented way.
  */

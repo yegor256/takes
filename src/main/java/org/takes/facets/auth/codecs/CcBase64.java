@@ -78,13 +78,12 @@ public final class CcBase64 implements Codec {
 
     /**
      * Check the byte array for non-Base64 characters.
-     *
      * @param bytes The values to check
-     * @return An array of the found non-Base64 characters.
+     * @return An array of the found non-Base64 characters
      */
     private static byte[] checkIllegalCharacters(final byte[] bytes) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        for (final byte the: bytes) {
+        for (final byte the : bytes) {
             if (CcBase64.BASE64CHARS.indexOf(the) < 0) {
                 out.write(the);
             }

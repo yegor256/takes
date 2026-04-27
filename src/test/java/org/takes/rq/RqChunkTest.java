@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqChunk}.
- *
  * @since 0.1
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -113,22 +112,24 @@ final class RqChunkTest {
         final String data = "Build and Run";
         final String ignored = ";ignored-stuff";
         final String length = Integer.toHexString(data.length());
-        try (InputStream stream = new RqChunk(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=3",
-                    "Host: c.example.com",
-                    "Transfer-Encoding: chunked"
-                ),
-                new Joined(
-                    "\r\n",
-                    length + ignored,
-                    data,
-                    "0",
-                    ""
-                ).toString()
-            )
-        ).body()) {
+        try (
+            InputStream stream = new RqChunk(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=3",
+                        "Host: c.example.com",
+                        "Transfer-Encoding: chunked"
+                    ),
+                    new Joined(
+                        String.valueOf((char) 13) + (char) 10,
+                        length + ignored,
+                        data,
+                        "0",
+                        ""
+                    ).toString()
+                )
+            ).body()
+        ) {
             final byte[] buf = new byte[data.length()];
             stream.read(buf);
             MatcherAssert.assertThat(
@@ -148,7 +149,7 @@ final class RqChunkTest {
                     "Transfer-Encoding: chunked"
                 ),
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(data.length()),
                     data,
                     "0",
@@ -169,7 +170,7 @@ final class RqChunkTest {
                     "Transfer-Encoding: chunked"
                 ),
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),

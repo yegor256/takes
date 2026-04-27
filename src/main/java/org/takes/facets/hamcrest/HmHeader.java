@@ -14,8 +14,8 @@ import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.text.IsEqualIgnoringCase;
 import org.takes.Head;
 
 /**
@@ -51,6 +51,15 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     * @param hdr Header name
+     * @param vlm Value matcher
+     */
+    public HmHeader(final String hdr, final Matcher<Iterable<String>> vlm) {
+        this(new IsEqualIgnoringCase(hdr), vlm);
+    }
+
+    /**
+     * Ctor.
      * @param hdrm Header matcher
      * @param vlm Value matcher
      */
@@ -59,28 +68,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
         super();
         this.header = hdrm;
         this.value = vlm;
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    public HmHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(hdr), vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param val Header value
-     */
-    public HmHeader(final String hdr, final String val) {
-        this(
-            Matchers.equalToIgnoringCase(hdr),
-            Matchers.hasItems(val)
-        );
     }
 
     @Override

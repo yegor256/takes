@@ -4,8 +4,8 @@
  */
 package org.takes.rq;
 
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 
 /**
@@ -31,7 +31,7 @@ public final class RqWithHeader extends RqWrap {
      */
     public RqWithHeader(final Request req, final CharSequence name,
         final CharSequence value) {
-        this(req, String.format("%s: %s", name, value));
+        this(req, new RqWithHeader.HeaderText(name, value));
     }
 
     /**
@@ -40,6 +40,53 @@ public final class RqWithHeader extends RqWrap {
      * @param header Header to add
      */
     public RqWithHeader(final Request req, final CharSequence header) {
-        super(new RqWithHeaders(req, Collections.singleton(header)));
+        super(new RqWithHeaders(req, new ListOf<>(header)));
+    }
+
+    /**
+     * CharSequence that lazily formats a HTTP header line.
+     * @since 2.0
+     */
+    private static final class HeaderText implements CharSequence {
+
+        /**
+         * Header name.
+         */
+        private final CharSequence name;
+
+        /**
+         * Header value.
+         */
+        private final CharSequence value;
+
+        /**
+         * Ctor.
+         * @param hdr Header name
+         * @param val Header value
+         */
+        HeaderText(final CharSequence hdr, final CharSequence val) {
+            this.name = hdr;
+            this.value = val;
+        }
+
+        @Override
+        public int length() {
+            return this.name.length() + 2 + this.value.length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.toString().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.toString().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s: %s", this.name, this.value);
+        }
     }
 }

@@ -51,7 +51,7 @@ public final class PsCookie implements Pass {
      * @param cdc Codec
      */
     public PsCookie(final Codec cdc) {
-        this(cdc, PsCookie.class.getSimpleName());
+        this(cdc, "PsCookie");
     }
 
     /**

@@ -7,7 +7,6 @@ package org.takes.facets.fork;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -32,6 +31,7 @@ import org.takes.rq.RqHeaders;
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {
+
     /**
      * Command to execute.
      */
@@ -46,16 +46,6 @@ public final class FkHitRefresh implements Fork {
      * A handle for tracking changes.
      */
     private final HitRefreshHandle handle;
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param that Target
-     */
-    public FkHitRefresh(final File file, final String cmd, final Take that) {
-        this(file, Arrays.asList(cmd.split(" ")), that);
-    }
 
     /**
      * Ctor.
@@ -91,7 +81,7 @@ public final class FkHitRefresh implements Fork {
         this(
             cmd,
             that,
-            new HitRefreshHandle(file)
+            new FkHitRefresh.HitRefreshHandle(file)
         );
     }
 
@@ -130,6 +120,7 @@ public final class FkHitRefresh implements Fork {
      * @since 0.9
      */
     private static final class HitRefreshHandle {
+
         /**
          * Directory to watch.
          */
@@ -191,11 +182,13 @@ public final class FkHitRefresh implements Fork {
          * @throws IOException If fails
          */
         void touch() throws IOException {
-            try (OutputStream out = new IoChecked<>(
-                new ScalarOf<>(
-                    () -> new OutputTo(this.touchedFile()).stream()
-                )
-            ).value()) {
+            try (
+                OutputStream out = new IoChecked<>(
+                    new ScalarOf<>(
+                        () -> new OutputTo(this.touchedFile()).stream()
+                    )
+                ).value()
+            ) {
                 out.write('+');
             }
         }
