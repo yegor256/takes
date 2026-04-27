@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,6 +16,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
+import org.cactoos.list.ListOf;
 
 /**
  * Command-line options.
@@ -44,7 +44,7 @@ final class Options {
      * @since 0.9
      */
     Options(final String... args) {
-        this(Arrays.asList(args));
+        this(new ListOf<>(args));
     }
 
     /**

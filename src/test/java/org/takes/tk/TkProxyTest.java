@@ -162,27 +162,7 @@ final class TkProxyTest {
                 new FkMethods(method, TkProxyTest.ECHO)
             )
         ).exec(
-            home -> {
-                captured.set(home);
-                result.set(
-                    new RsBodyPrint(
-                        new TkProxy(home.toURL().toString()).act(
-                            new RqFake(
-                                Arrays.asList(
-                                    String.format(
-                                        "%s /f?%%D0%%B0=3&b-6",
-                                        method
-                                    ),
-                                    "Host: example.com",
-                                    "Accept: text/xml",
-                                    "Accept: text/html"
-                                ),
-                                ""
-                            )
-                        )
-                    ).asString()
-                );
-            }
+            home -> TkProxyTest.captureModifyHost(home, method, captured, result)
         );
         MatcherAssert.assertThat(
             "TkProxy must modify Host header to point to upstream server",
@@ -211,28 +191,7 @@ final class TkProxyTest {
                 new FkMethods(method, TkProxyTest.ECHO)
             )
         ).exec(
-            home -> {
-                captured.set(home);
-                result.set(
-                    new RsHeadPrint(
-                        new TkProxy(
-                            home.toURL().toString(),
-                            mark
-                        ).act(
-                            new RqFake(
-                                Arrays.asList(
-                                    String.format(
-                                        "%s /%%D0%%B0",
-                                        method
-                                    ),
-                                    "Host: www.bar.com"
-                                ),
-                                ""
-                            )
-                        )
-                    ).asString()
-                );
-            }
+            home -> TkProxyTest.captureSpecificHeader(home, method, mark, captured, result)
         );
         MatcherAssert.assertThat(
             "TkProxy must add X-Takes-TkProxy header with proxy information",
@@ -257,28 +216,7 @@ final class TkProxyTest {
                 new FkMethods("POST", TkProxyTest.ECHO)
             )
         ).exec(
-            home -> result.set(
-                new RsBodyPrint(
-                    new TkProxy(home).act(
-                        new RqFake(
-                            Arrays.asList(
-                                "POST /%D0%B0",
-                                String.format(
-                                    "Content-Length: %s",
-                                    body.length()
-                                ),
-                                "Content-Type: text/plain",
-                                "Accept: text/json",
-                                "Cookie: a=45",
-                                "Cookie: ttt=ALPHA",
-                                "Accept-Encoding: gzip",
-                                "Host: www.bar-foo.com"
-                            ),
-                            body
-                        )
-                    )
-                ).asString()
-            )
+            home -> TkProxyTest.captureAllInitialHeaders(home, body, result)
         );
         MatcherAssert.assertThat(
             "TkProxy must forward all original request headers to upstream server",
@@ -297,6 +235,107 @@ final class TkProxyTest {
     private static Request createEchoRequest(final Request req) throws IOException {
         final String method = new RqMethod.Base(req).method();
         return TkProxyTest.NOBODIES.getOrDefault(method, rq -> req).create(req);
+    }
+
+    /**
+     * Capture proxied response and modified host header.
+     * @param home Home URI
+     * @param method HTTP method
+     * @param captured Captured URI holder
+     * @param result Result holder
+     * @throws Exception If fails
+     * @checkstyle ParameterNumberCheck (4 lines)
+     */
+    private static void captureModifyHost(final URI home, final String method,
+        final AtomicReference<URI> captured,
+        final AtomicReference<String> result) throws Exception {
+        captured.set(home);
+        result.set(
+            new RsBodyPrint(
+                new TkProxy(home.toURL().toString()).act(
+                    new RqFake(
+                        Arrays.asList(
+                            String.format(
+                                "%s /f?%%D0%%B0=3&b-6",
+                                method
+                            ),
+                            "Host: example.com",
+                            "Accept: text/xml",
+                            "Accept: text/html"
+                        ),
+                        ""
+                    )
+                )
+            ).asString()
+        );
+    }
+
+    /**
+     * Capture proxied response with specific header.
+     * @param home Home URI
+     * @param method HTTP method
+     * @param mark Mark for proxy
+     * @param captured Captured URI holder
+     * @param result Result holder
+     * @throws Exception If fails
+     * @checkstyle ParameterNumberCheck (4 lines)
+     */
+    private static void captureSpecificHeader(final URI home, final String method,
+        final String mark, final AtomicReference<URI> captured,
+        final AtomicReference<String> result) throws Exception {
+        captured.set(home);
+        result.set(
+            new RsHeadPrint(
+                new TkProxy(
+                    home.toURL().toString(),
+                    mark
+                ).act(
+                    new RqFake(
+                        Arrays.asList(
+                            String.format(
+                                "%s /%%D0%%B0",
+                                method
+                            ),
+                            "Host: www.bar.com"
+                        ),
+                        ""
+                    )
+                )
+            ).asString()
+        );
+    }
+
+    /**
+     * Capture proxied response with all initial headers.
+     * @param home Home URI
+     * @param body Request body
+     * @param result Result holder
+     * @throws Exception If fails
+     */
+    private static void captureAllInitialHeaders(final URI home, final String body,
+        final AtomicReference<String> result) throws Exception {
+        result.set(
+            new RsBodyPrint(
+                new TkProxy(home).act(
+                    new RqFake(
+                        Arrays.asList(
+                            "POST /%D0%B0",
+                            String.format(
+                                "Content-Length: %s",
+                                body.length()
+                            ),
+                            "Content-Type: text/plain",
+                            "Accept: text/json",
+                            "Cookie: a=45",
+                            "Cookie: ttt=ALPHA",
+                            "Accept-Encoding: gzip",
+                            "Host: www.bar-foo.com"
+                        ),
+                        body
+                    )
+                )
+            ).asString()
+        );
     }
 
     /**

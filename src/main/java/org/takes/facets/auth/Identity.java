@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -76,7 +77,7 @@ public interface Identity {
          * @param urn URN of the identity
          */
         public Simple(final String urn) {
-            this(urn, Collections.emptyMap());
+            this(urn, new HashMap<>(0));
         }
 
         /**
@@ -86,7 +87,7 @@ public interface Identity {
          */
         public Simple(final String urn, final Map<String, String> map) {
             this.name = urn;
-            this.props = Collections.unmodifiableMap(map);
+            this.props = new HashMap<>(map);
         }
 
         @Override

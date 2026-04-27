@@ -37,27 +37,19 @@ public final class FkHost extends FkWrap {
      * @param take Take to use
      */
     public FkHost(final String host, final Take take) {
-        super(FkHost.fork(host, take));
-    }
-
-    /**
-     * Make fork.
-     * @param host Host
-     * @param take Take to use
-     * @return Fork
-     */
-    private static Fork fork(final String host, final Take take) {
-        return req -> {
-            final Opt<Response> ret;
-            if (new EqualsNullable(
-                new Lowered(host),
-                new Lowered(new RqHeaders.Smart(req).single("host"))
-            ).value()) {
-                ret = new Opt.Single<>(take.act(req));
-            } else {
-                ret = new Opt.Empty<>();
+        super(
+            (Fork) req -> {
+                final Opt<Response> ret;
+                if (new EqualsNullable(
+                    new Lowered(host),
+                    new Lowered(new RqHeaders.Smart(req).single("host"))
+                ).value()) {
+                    ret = new Opt.Single<>(take.act(req));
+                } else {
+                    ret = new Opt.Empty<>();
+                }
+                return ret;
             }
-            return ret;
-        };
+        );
     }
 }

@@ -236,46 +236,54 @@ final class PsGoogleTest {
     private FkRegex requestToken() {
         return new FkRegex(
             "/o/oauth2/token",
-            // @checkstyle AnonInnerLengthCheck (1 line)
-            (Take) req -> {
-                MatcherAssert.assertThat(
-                    "Google OAuth token request must be POST to correct endpoint",
-                    new RqPrint(req).printHead(),
-                    Matchers.containsString("POST /o/oauth2/token")
-                );
-                final Request greq = new RqGreedy(req);
-                PsGoogleTest.assertParam(
-                    greq,
-                    "client_id",
-                    PsGoogleTest.APP
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    "redirect_uri",
-                    PsGoogleTest.ACCOUNT
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    "client_secret",
-                    PsGoogleTest.KEY
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    "grant_type",
-                    "authorization_code"
-                );
-                PsGoogleTest.assertParam(
-                    greq,
-                    PsGoogleTest.CODE,
-                    PsGoogleTest.CODE
-                );
-                return new RsJson(
-                    Json.createObjectBuilder().add(
-                        PsGoogleTest.ACCESS_TOKEN,
-                        PsGoogleTest.GOOGLE_TOKEN
-                    ).add("expires_in", 1).add("token_type", "Bearer").build()
-                );
-            }
+            (Take) req -> PsGoogleTest.tokenResponse(req)
+        );
+    }
+
+    /**
+     * Validate token request and produce response.
+     * @param req Request
+     * @return Token response
+     * @throws IOException If some problem inside
+     */
+    private static org.takes.Response tokenResponse(final Request req)
+        throws IOException {
+        MatcherAssert.assertThat(
+            "Google OAuth token request must be POST to correct endpoint",
+            new RqPrint(req).printHead(),
+            Matchers.containsString("POST /o/oauth2/token")
+        );
+        final Request greq = new RqGreedy(req);
+        PsGoogleTest.assertParam(
+            greq,
+            "client_id",
+            PsGoogleTest.APP
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "redirect_uri",
+            PsGoogleTest.ACCOUNT
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "client_secret",
+            PsGoogleTest.KEY
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "grant_type",
+            "authorization_code"
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            PsGoogleTest.CODE,
+            PsGoogleTest.CODE
+        );
+        return new RsJson(
+            Json.createObjectBuilder().add(
+                PsGoogleTest.ACCESS_TOKEN,
+                PsGoogleTest.GOOGLE_TOKEN
+            ).add("expires_in", 1).add("token_type", "Bearer").build()
         );
     }
 

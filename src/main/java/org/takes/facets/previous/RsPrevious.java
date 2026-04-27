@@ -39,7 +39,7 @@ public final class RsPrevious extends RsWrap {
         super(
             new RsWithCookie(
                 rsp,
-                TkPrevious.class.getSimpleName(),
+                "TkPrevious",
                 URLEncoder.encode(location, "UTF-8"),
                 "Path=/",
                 new Expires.Date(

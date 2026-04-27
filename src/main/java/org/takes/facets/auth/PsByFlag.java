@@ -5,7 +5,6 @@
 package org.takes.facets.auth;
 
 import java.util.AbstractMap;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -44,7 +43,7 @@ public final class PsByFlag implements Pass {
      * @since 0.5.1
      */
     public PsByFlag(final PsByFlag.Pair... pairs) {
-        this(PsByFlag.class.getSimpleName(), pairs);
+        this("PsByFlag", pairs);
     }
 
     /**
@@ -52,7 +51,7 @@ public final class PsByFlag implements Pass {
      * @param map Map
      */
     public PsByFlag(final Map<Pattern, Pass> map) {
-        this(PsByFlag.class.getSimpleName(), map);
+        this("PsByFlag", map);
     }
 
     /**
@@ -72,7 +71,7 @@ public final class PsByFlag implements Pass {
      */
     public PsByFlag(final String flg, final Map<Pattern, Pass> map) {
         this.flag = flg;
-        this.passes = Collections.unmodifiableMap(map);
+        this.passes = new HashMap<>(map);
     }
 
     @Override

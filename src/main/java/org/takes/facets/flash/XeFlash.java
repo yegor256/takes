@@ -52,7 +52,7 @@ public final class XeFlash implements XeSource {
      * @param request The HTTP request containing flash cookies
      */
     public XeFlash(final Request request) {
-        this(request, RsFlash.class.getSimpleName());
+        this(request, "RsFlash");
     }
 
     /**

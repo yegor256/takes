@@ -35,7 +35,7 @@ public final class XeFacebookLink extends XeWrap {
      */
     public XeFacebookLink(final Request req, final CharSequence app)
         throws IOException {
-        this(req, app, "takes:facebook", PsByFlag.class.getSimpleName());
+        this(req, app, "takes:facebook", "PsByFlag");
     }
 
     /**

@@ -36,7 +36,7 @@ public final class DecodingException extends RuntimeException {
      * Public ctor.
      * @param cause The cause of it
      */
-    DecodingException(final String cause) {
+    DecodingException(final Throwable cause) {
         super(cause);
     }
 
@@ -44,7 +44,7 @@ public final class DecodingException extends RuntimeException {
      * Public ctor.
      * @param cause The cause of it
      */
-    DecodingException(final Throwable cause) {
+    DecodingException(final String cause) {
         super(cause);
     }
 }

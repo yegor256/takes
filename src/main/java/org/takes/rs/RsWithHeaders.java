@@ -5,9 +5,9 @@
 package org.takes.rs;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.Response;
 
 /**
@@ -40,7 +40,7 @@ public final class RsWithHeaders extends RsWrap {
      * @param headers Headers
      */
     public RsWithHeaders(final Response res, final CharSequence... headers) {
-        this(res, Arrays.asList(headers));
+        this(res, new ListOf<>(headers));
     }
 
     /**

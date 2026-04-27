@@ -4,9 +4,9 @@
  */
 package org.takes.rs.xe;
 
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
+import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
 import org.xembly.Directives;
 
@@ -35,7 +35,7 @@ public final class XeAppend extends XeWrap {
      * @param src Source
      */
     public XeAppend(final CharSequence target, final XeSource... src) {
-        this(target, Arrays.asList(src));
+        this(target, new ListOf<>(src));
     }
 
     /**

@@ -6,14 +6,11 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
-import org.cactoos.bytes.BytesOf;
-import org.cactoos.bytes.UncheckedBytes;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.list.ListOf;
 
 /**
  * Fake HTTP request implementation for testing purposes.
@@ -63,7 +60,7 @@ public final class RqFake extends RqWrap {
     public RqFake(final CharSequence method, final CharSequence query,
         final CharSequence body) {
         this(
-            Arrays.asList(
+            new ListOf<>(
                 String.format("%s %s", method, query),
                 "Host: www.example.com"
             ),
@@ -79,9 +76,8 @@ public final class RqFake extends RqWrap {
     public RqFake(final List<String> head, final CharSequence body) {
         this(
             head,
-            new UncheckedBytes(
-                new BytesOf(body.toString())
-            ).asBytes());
+            new InputStreamOf(body)
+        );
     }
 
     /**
@@ -104,7 +100,7 @@ public final class RqFake extends RqWrap {
     public RqFake(final List<String> head, final byte[] body) {
         this(
             head,
-            new ByteArrayInputStream(Arrays.copyOf(body, body.length))
+            new ByteArrayInputStream(body)
         );
     }
 
@@ -114,6 +110,6 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final InputStream body) {
-        super(new RequestOf(Collections.unmodifiableList(head), body));
+        super(new RequestOf(new ListOf<>(head), body));
     }
 }

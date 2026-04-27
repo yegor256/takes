@@ -5,9 +5,8 @@
 package org.takes.facets.fork;
 
 import java.net.HttpURLConnection;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.list.ListOf;
@@ -55,7 +54,7 @@ public final class TkFork implements Take {
      * Ctor.
      */
     public TkFork() {
-        this(Collections.emptyList());
+        this(new ArrayList<Fork>(0));
     }
 
     /**
@@ -63,7 +62,7 @@ public final class TkFork implements Take {
      * @param frks Forks
      */
     public TkFork(final Fork... frks) {
-        this(Arrays.asList(frks));
+        this(new ListOf<>(frks));
     }
 
     /**

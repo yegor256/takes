@@ -32,7 +32,7 @@ public final class XeGithubLink extends XeWrap {
      */
     public XeGithubLink(final Request req, final CharSequence app)
         throws IOException {
-        this(req, app, "takes:github", PsByFlag.class.getSimpleName());
+        this(req, app, "takes:github", "PsByFlag");
     }
 
     /**

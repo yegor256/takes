@@ -127,72 +127,91 @@ public final class TkFallback extends TkWrap {
      * @param fbk Fallback
      * @param req Request
      * @return Response
-     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
-    @SuppressWarnings({
-        "PMD.AvoidCatchingGenericException",
-        "PMD.CognitiveComplexity"
-    })
     private static Response wrap(final Response res, final Fallback fbk,
         final Request req) {
         return new ResponseOf(
-            () -> {
-                final long start = System.currentTimeMillis();
-                Iterable<String> head;
-                try {
-                    head = res.head();
-                } catch (final HttpException ex) {
-                    try {
-                        head = fbk.route(
-                            TkFallback.fallback(req, start, ex, ex.code())
-                        ).get().head();
-                    } catch (final Exception exx) {
-                        throw (IOException) new IOException(exx).initCause(ex);
-                    }
-                // @checkstyle IllegalCatchCheck (1 line)
-                } catch (final Throwable ex) {
-                    try {
-                        head = fbk.route(
-                            TkFallback.fallback(
-                                req, start, ex,
-                                HttpURLConnection.HTTP_INTERNAL_ERROR
-                            )
-                        ).get().head();
-                    } catch (final Exception exx) {
-                        throw (IOException) new IOException(exx).initCause(ex);
-                    }
-                }
-                return head;
-            },
-            () -> {
-                final long start = System.currentTimeMillis();
-                InputStream body;
-                try {
-                    body = res.body();
-                } catch (final HttpException ex) {
-                    try {
-                        body = fbk.route(
-                            TkFallback.fallback(req, start, ex, ex.code())
-                        ).get().body();
-                    } catch (final Exception exx) {
-                        throw (IOException) new IOException(exx).initCause(ex);
-                    }
-                // @checkstyle IllegalCatchCheck (1 line)
-                } catch (final Throwable ex) {
-                    try {
-                        body = fbk.route(
-                            TkFallback.fallback(
-                                req, start, ex,
-                                HttpURLConnection.HTTP_INTERNAL_ERROR
-                            )
-                        ).get().body();
-                    } catch (final Exception exx) {
-                        throw (IOException) new IOException(exx).initCause(ex);
-                    }
-                }
-                return body;
-            }
+            () -> TkFallback.head(res, fbk, req),
+            () -> TkFallback.body(res, fbk, req)
         );
+    }
+
+    /**
+     * Get head from response with fallback.
+     * @param res Response to read head from
+     * @param fbk Fallback
+     * @param req Request
+     * @return Head iterable
+     * @throws IOException If fails
+     */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+    private static Iterable<String> head(final Response res, final Fallback fbk,
+        final Request req) throws IOException {
+        final long start = System.currentTimeMillis();
+        Iterable<String> head;
+        try {
+            head = res.head();
+        } catch (final HttpException ex) {
+            try {
+                head = fbk.route(
+                    TkFallback.fallback(req, start, ex, ex.code())
+                ).get().head();
+            } catch (final Exception exx) {
+                throw (IOException) new IOException(exx).initCause(ex);
+            }
+        // @checkstyle IllegalCatchCheck (1 line)
+        } catch (final Throwable ex) {
+            try {
+                head = fbk.route(
+                    TkFallback.fallback(
+                        req, start, ex,
+                        HttpURLConnection.HTTP_INTERNAL_ERROR
+                    )
+                ).get().head();
+            } catch (final Exception exx) {
+                throw (IOException) new IOException(exx).initCause(ex);
+            }
+        }
+        return head;
+    }
+
+    /**
+     * Get body from response with fallback.
+     * @param res Response to read body from
+     * @param fbk Fallback
+     * @param req Request
+     * @return Body stream
+     * @throws IOException If fails
+     */
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+    private static InputStream body(final Response res, final Fallback fbk,
+        final Request req) throws IOException {
+        final long start = System.currentTimeMillis();
+        InputStream body;
+        try {
+            body = res.body();
+        } catch (final HttpException ex) {
+            try {
+                body = fbk.route(
+                    TkFallback.fallback(req, start, ex, ex.code())
+                ).get().body();
+            } catch (final Exception exx) {
+                throw (IOException) new IOException(exx).initCause(ex);
+            }
+        // @checkstyle IllegalCatchCheck (1 line)
+        } catch (final Throwable ex) {
+            try {
+                body = fbk.route(
+                    TkFallback.fallback(
+                        req, start, ex,
+                        HttpURLConnection.HTTP_INTERNAL_ERROR
+                    )
+                ).get().body();
+            } catch (final Exception exx) {
+                throw (IOException) new IOException(exx).initCause(ex);
+            }
+        }
+        return body;
     }
 
     /**

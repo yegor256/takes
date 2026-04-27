@@ -101,30 +101,7 @@ final class RqMtBaseTest {
     void throwsExceptionOnNoClosingBoundaryFound() {
         Assertions.assertThrows(
             IOException.class,
-            () -> {
-                final String host = "Host: rtw.example.com";
-                final String length = "Content-Length: 100007";
-                final String posthead = "POST /h?a=4 HTTP/1.1";
-                final String address = "447 N Wolfe Rd, Sunnyvale, CA 94085";
-                new RqMtBase(
-                    new RqFake(
-                        Arrays.asList(
-                            posthead,
-                            host,
-                            RqMtBaseTest.CONTENT_TYPE,
-                            length
-                        ),
-                        new Joined(
-                            RqMtBaseTest.CRLF,
-                            RqMtBaseTest.BODY_ELEMENT,
-                            "Content-Disposition: form-data; fake=\"t2\"",
-                            "",
-                            address,
-                            "Content-Transfer-Encoding: uwf-8"
-                        ).asString()
-                    )
-                );
-            }
+            () -> RqMtBaseTest.parseWithoutClosingBoundary()
         );
     }
 
@@ -187,5 +164,34 @@ final class RqMtBaseTest {
      */
     private static String contentLengthHeader(final long length) {
         return String.format("Content-Length: %d", length);
+    }
+
+    /**
+     * Try to parse a multipart request that has no closing boundary.
+     * @throws Exception If fails
+     */
+    private static void parseWithoutClosingBoundary() throws Exception {
+        final String host = "Host: rtw.example.com";
+        final String length = "Content-Length: 100007";
+        final String posthead = "POST /h?a=4 HTTP/1.1";
+        final String address = "447 N Wolfe Rd, Sunnyvale, CA 94085";
+        new RqMtBase(
+            new RqFake(
+                Arrays.asList(
+                    posthead,
+                    host,
+                    RqMtBaseTest.CONTENT_TYPE,
+                    length
+                ),
+                new Joined(
+                    RqMtBaseTest.CRLF,
+                    RqMtBaseTest.BODY_ELEMENT,
+                    "Content-Disposition: form-data; fake=\"t2\"",
+                    "",
+                    address,
+                    "Content-Transfer-Encoding: uwf-8"
+                ).asString()
+            )
+        );
     }
 }

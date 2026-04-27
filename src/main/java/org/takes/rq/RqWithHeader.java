@@ -4,8 +4,8 @@
  */
 package org.takes.rq;
 
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 
 /**
@@ -40,6 +40,6 @@ public final class RqWithHeader extends RqWrap {
      * @param header Header to add
      */
     public RqWithHeader(final Request req, final CharSequence header) {
-        super(new RqWithHeaders(req, Collections.singleton(header)));
+        super(new RqWithHeaders(req, new ListOf<>(header)));
     }
 }

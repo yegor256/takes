@@ -4,8 +4,8 @@
  */
 package org.takes.facets.auth;
 
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -32,7 +32,7 @@ public final class PsChain implements Pass {
      * @param list Passes
      */
     public PsChain(final Pass... list) {
-        this(Arrays.asList(list));
+        this(new ListOf<>(list));
     }
 
     /**

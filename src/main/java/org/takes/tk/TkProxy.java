@@ -49,7 +49,7 @@ public final class TkProxy implements Take {
      * @param tgt Target to which requests are forwarded
      */
     public TkProxy(final URI tgt) {
-        this(tgt, TkProxy.class.getName());
+        this(tgt, "org.takes.tk.TkProxy");
     }
 
     /**
@@ -57,7 +57,7 @@ public final class TkProxy implements Take {
      * @param tgt Target to which requests are forwarded
      */
     public TkProxy(final String tgt) {
-        this(URI.create(tgt), TkProxy.class.getName());
+        this(URI.create(tgt), "org.takes.tk.TkProxy");
     }
 
     /**

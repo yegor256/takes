@@ -46,7 +46,7 @@ public final class TkReturn implements Take {
      * @param take The original take to decorate
      */
     public TkReturn(final Take take) {
-        this(take, RsReturn.class.getSimpleName());
+        this(take, "RsReturn");
     }
 
     /**

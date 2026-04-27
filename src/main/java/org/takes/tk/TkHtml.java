@@ -81,8 +81,8 @@ public final class TkHtml extends TkWrap {
      * @param body HTML content to return in response
      */
     public TkHtml(final String body) {
-        super(
-            req -> new RsHtml(body)
+        this(
+            (Take) req -> new RsHtml(body)
         );
     }
 
@@ -92,8 +92,8 @@ public final class TkHtml extends TkWrap {
      * @since 1.4
      */
     public TkHtml(final Scalar<String> body) {
-        super(
-            req -> new RsHtml(body.value())
+        this(
+            (Take) req -> new RsHtml(body.value())
         );
     }
 
@@ -102,8 +102,8 @@ public final class TkHtml extends TkWrap {
      * @param body Binary HTML content to return
      */
     public TkHtml(final byte[] body) {
-        super(
-            req -> new RsHtml(body)
+        this(
+            (Take) req -> new RsHtml(body)
         );
     }
 
@@ -112,8 +112,8 @@ public final class TkHtml extends TkWrap {
      * @param url URL pointing to HTML content to serve
      */
     public TkHtml(final URL url) {
-        super(
-            req -> new RsHtml(url)
+        this(
+            (Take) req -> new RsHtml(url)
         );
     }
 
@@ -122,8 +122,16 @@ public final class TkHtml extends TkWrap {
      * @param body Input stream containing HTML content
      */
     public TkHtml(final InputStream body) {
-        super(
-            req -> new RsHtml(body)
+        this(
+            (Take) req -> new RsHtml(body)
         );
+    }
+
+    /**
+     * Ctor.
+     * @param take Origin take that produces the HTML response
+     */
+    public TkHtml(final Take take) {
+        super(take);
     }
 }

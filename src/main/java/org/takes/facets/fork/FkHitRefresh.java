@@ -7,13 +7,13 @@ package org.takes.facets.fork;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.OutputTo;
+import org.cactoos.list.ListOf;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.ScalarOf;
 import org.takes.Request;
@@ -55,7 +55,7 @@ public final class FkHitRefresh implements Fork {
      * @param that Target
      */
     public FkHitRefresh(final File file, final String cmd, final Take that) {
-        this(file, Arrays.asList(cmd.split(" ")), that);
+        this(file, new ListOf<>(cmd.split(" ")), that);
     }
 
     /**

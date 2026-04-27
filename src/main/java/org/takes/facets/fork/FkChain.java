@@ -4,9 +4,9 @@
  */
 package org.takes.facets.fork;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -27,7 +27,7 @@ public final class FkChain implements Fork {
      * Ctor.
      */
     public FkChain() {
-        this(Collections.emptyList());
+        this(new ArrayList<Fork>(0));
     }
 
     /**
@@ -35,7 +35,7 @@ public final class FkChain implements Fork {
      * @param forks Forks
      */
     public FkChain(final Fork... forks) {
-        this(Arrays.asList(forks));
+        this(new ListOf<>(forks));
     }
 
     /**
@@ -43,7 +43,7 @@ public final class FkChain implements Fork {
      * @param forks Forks
      */
     public FkChain(final Collection<Fork> forks) {
-        this.forks = Collections.unmodifiableCollection(forks);
+        this.forks = new ListOf<>(forks);
     }
 
     @Override

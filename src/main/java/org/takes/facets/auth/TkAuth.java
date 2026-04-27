@@ -46,7 +46,7 @@ public final class TkAuth implements Take {
      * @param pss Pass
      */
     public TkAuth(final Take take, final Pass pss) {
-        this(take, pss, TkAuth.class.getSimpleName());
+        this(take, pss, "TkAuth");
     }
 
     /**

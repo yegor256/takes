@@ -4,8 +4,8 @@
  */
 package org.takes.facets.fallback;
 
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Response;
 import org.takes.misc.Opt;
 
@@ -24,7 +24,7 @@ public final class FbChain extends FbWrap {
      * @param fallbacks Fallbacks to chain
      */
     public FbChain(final Fallback... fallbacks) {
-        this(Arrays.asList(fallbacks));
+        this(new ListOf<>(fallbacks));
     }
 
     /**
