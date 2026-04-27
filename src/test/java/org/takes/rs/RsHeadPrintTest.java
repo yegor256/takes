@@ -17,6 +17,12 @@ import org.llorllale.cactoos.matchers.Throws;
 final class RsHeadPrintTest {
 
     /**
+     * Carriage return + line feed.
+     */
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
+
+    /**
      * HeadPrint can fail on invalid chars.
      */
     @Test
@@ -24,7 +30,10 @@ final class RsHeadPrintTest {
         MatcherAssert.assertThat(
             "Must catch invalid header exception",
             () -> new RsHeadPrint(
-                new RsWithHeader("name", "\n\n\n")
+                new RsWithHeader(
+                    "name",
+                    String.valueOf((char) 10) + (char) 10 + (char) 10
+                )
             ).asString(),
             new Throws<>(IllegalArgumentException.class)
         );
@@ -37,7 +46,12 @@ final class RsHeadPrintTest {
             new RsHeadPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
             ),
-            new IsText("HTTP/1.1 500 Internal Server Error\r\n\r\n")
+            new IsText(
+                String.format(
+                    "HTTP/1.1 500 Internal Server Error%1$s%1$s",
+                    RsHeadPrintTest.CRLF
+                )
+            )
         );
     }
 
@@ -48,7 +62,12 @@ final class RsHeadPrintTest {
             new RsHeadPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
             ),
-            new IsText("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+            new IsText(
+                String.format(
+                    "HTTP/1.1 203 Non-Authoritative%1$s%1$s",
+                    RsHeadPrintTest.CRLF
+                )
+            )
         );
     }
 }

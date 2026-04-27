@@ -82,12 +82,8 @@ public final class RequestOf implements Request {
                     () -> RequestOf.class.equals(that.getClass()),
                     () -> {
                         final RequestOf other = (RequestOf) that;
-                        final Iterator<String> iter = other.head().iterator();
                         return new And(
-                            () -> new And(
-                                (String hdr) -> hdr.equals(iter.next()),
-                                this.head()
-                            ).value(),
+                            () -> RequestOf.sameHead(this.head(), other.head()),
                             () -> new Equality<>(
                                 new BytesOf(this.body()),
                                 new BytesOf(other.body())
@@ -102,5 +98,25 @@ public final class RequestOf implements Request {
     @Override
     public int hashCode() {
         return new HashCode(new Unchecked<>(this.shead::head).value()).value();
+    }
+
+    /**
+     * Compare two head iterables element by element.
+     * @param mine Head of this request
+     * @param theirs Head of the other request
+     * @return TRUE if both iterables yield identical sequences
+     */
+    private static boolean sameHead(final Iterable<String> mine,
+        final Iterable<String> theirs) {
+        final Iterator<String> first = mine.iterator();
+        final Iterator<String> second = theirs.iterator();
+        boolean equal = true;
+        while (first.hasNext() && second.hasNext()) {
+            if (!first.next().equals(second.next())) {
+                equal = false;
+                break;
+            }
+        }
+        return equal && !first.hasNext() && !second.hasNext();
     }
 }

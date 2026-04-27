@@ -41,7 +41,7 @@ final class RqGreedyTest {
 
     private static Request greedy() throws IOException {
         final String body = new Joined(
-            "\r\n",
+            String.valueOf((char) 13) + (char) 10,
             "GET /test HTTP/1.1",
             "Host: localhost",
             "",

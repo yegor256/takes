@@ -64,7 +64,7 @@ final class RsVelocityTest {
                 ).body(),
                 StandardCharsets.UTF_8
             ),
-            Matchers.equalTo("Hello World!\n")
+            Matchers.equalTo(String.format("Hello World!%c", (char) 10))
         );
     }
 }

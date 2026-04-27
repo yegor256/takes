@@ -100,7 +100,9 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public void printHead(final OutputStream output) throws IOException {
-        final String eol = "\r\n";
+        final String eol = new String(
+            new char[]{(char) 13, (char) 10}
+        );
         try (Writer writer = new WriterTo(output)) {
             for (final String line : this.head()) {
                 writer.append(line);

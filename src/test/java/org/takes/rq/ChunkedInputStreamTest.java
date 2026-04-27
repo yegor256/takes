@@ -119,7 +119,7 @@ final class ChunkedInputStreamTest {
             InputStream stream = new ChunkedInputStream(
                 IOUtils.toInputStream(
                     new Joined(
-                        "\r\n",
+                        String.valueOf((char) 13) + (char) 10,
                         length + ignored,
                         data,
                         "0",
@@ -172,7 +172,7 @@ final class ChunkedInputStreamTest {
         return new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(data.length()),
                     data,
                     "0",
@@ -189,7 +189,7 @@ final class ChunkedInputStreamTest {
         return new ChunkedInputStream(
             IOUtils.toInputStream(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),

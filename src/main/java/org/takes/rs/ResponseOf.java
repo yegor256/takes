@@ -85,14 +85,7 @@ public final class ResponseOf implements Response {
                     () -> {
                         final ResponseOf other = (ResponseOf) that;
                         return new And(
-                            () -> {
-                                final Iterator<String> iter = other.head()
-                                    .iterator();
-                                return new And(
-                                    (String hdr) -> hdr.equals(iter.next()),
-                                    this.head()
-                                ).value();
-                            },
+                            () -> ResponseOf.sameHead(this.head(), other.head()),
                             () -> new Equality<>(
                                 new BytesOf(this.body()),
                                 new BytesOf(other.body())
@@ -107,5 +100,25 @@ public final class ResponseOf implements Response {
     @Override
     public int hashCode() {
         return new HashCode(new Unchecked<>(this.shead).value()).value();
+    }
+
+    /**
+     * Compare two head iterables element by element.
+     * @param mine Head of this response
+     * @param theirs Head of the other response
+     * @return TRUE if both iterables yield identical sequences
+     */
+    private static boolean sameHead(final Iterable<String> mine,
+        final Iterable<String> theirs) {
+        final Iterator<String> first = mine.iterator();
+        final Iterator<String> second = theirs.iterator();
+        boolean equal = true;
+        while (first.hasNext() && second.hasNext()) {
+            if (!first.next().equals(second.next())) {
+                equal = false;
+                break;
+            }
+        }
+        return equal && !first.hasNext() && !second.hasNext();
     }
 }

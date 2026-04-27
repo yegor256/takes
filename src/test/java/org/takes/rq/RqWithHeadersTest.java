@@ -36,7 +36,7 @@ final class RqWithHeadersTest {
             ),
             new StartsWith(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "GET / HTTP/1.1",
                     "Host: www.example.com",
                     testheader,

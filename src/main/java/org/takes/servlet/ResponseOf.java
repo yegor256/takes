@@ -109,7 +109,6 @@ final class ResponseOf {
         final String header) {
         final Iterator<Text> split = new Split(header, ":").iterator();
         final UncheckedText name = new UncheckedText(new Trimmed(split.next()));
-        final UncheckedText val = new UncheckedText(new Trimmed(split.next()));
         if (new Equality<Text>(
             new TextOf("set-cookie"),
             new Lowered(name)
@@ -121,7 +120,10 @@ final class ResponseOf {
                 );
             }
         } else {
-            sresp.setHeader(name.asString(), val.asString());
+            sresp.setHeader(
+                name.asString(),
+                new UncheckedText(new Trimmed(split.next())).asString()
+            );
         }
     }
 }

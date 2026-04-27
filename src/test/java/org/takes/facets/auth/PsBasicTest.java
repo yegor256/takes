@@ -206,7 +206,12 @@ final class PsBasicTest {
                     )
                 ).act(new RqFake())
             ),
-            new HasString("HTTP/1.1 401 Unauthorized\r\n")
+            new HasString(
+                String.format(
+                    "HTTP/1.1 401 Unauthorized%c%c",
+                    (char) 13, (char) 10
+                )
+            )
         );
     }
 

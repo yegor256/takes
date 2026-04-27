@@ -50,7 +50,8 @@ final class BkBasicTest {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     /**
      * POST header constant.
@@ -363,7 +364,7 @@ final class BkBasicTest {
     void returnsABadRequestToAControlCharInPath() throws Exception {
         MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            this.responseForPath("GET", "/\n"),
+            this.responseForPath("GET", String.format("/%c", (char) 10)),
             Matchers.containsString("400 Bad Request")
         );
     }

@@ -45,11 +45,7 @@ public final class XeAppend extends XeWrap {
      * @since 0.13
      */
     public XeAppend(final CharSequence target, final Iterable<XeSource> src) {
-        super(
-            () -> new Directives().add(target.toString()).append(
-                new XeChain(src).toXembly()
-            )
-        );
+        this(target, (Scalar<XeSource>) () -> new XeChain(src));
     }
 
     /**

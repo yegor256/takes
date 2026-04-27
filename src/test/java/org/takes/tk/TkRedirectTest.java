@@ -27,7 +27,8 @@ final class TkRedirectTest {
     /**
      * New line constant.
      */
-    private static final String NEWLINE = "\r\n";
+    private static final String NEWLINE =
+        String.valueOf((char) 13) + (char) 10;
 
     @Test
     void createsRedirectResponseWithUrl() throws Exception {

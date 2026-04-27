@@ -48,7 +48,12 @@ final class RqFakeTest {
             "Request print must contain the correct HTTP method and body ending",
             new RqPrint(req),
             Matchers.allOf(
-                new HasString("GET /just-a-test HTTP/1.1\r\n"),
+                new HasString(
+                    String.format(
+                        "GET /just-a-test HTTP/1.1%c%c",
+                        (char) 13, (char) 10
+                    )
+                ),
                 new EndsWith("=alpha")
             )
         );

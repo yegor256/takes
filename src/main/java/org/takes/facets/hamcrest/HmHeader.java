@@ -51,18 +51,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
-     * @param hdrm Header matcher
-     * @param vlm Value matcher
-     */
-    public HmHeader(final Matcher<String> hdrm,
-        final Matcher<Iterable<String>> vlm) {
-        super();
-        this.header = hdrm;
-        this.value = vlm;
-    }
-
-    /**
-     * Ctor.
      * @param hdr Header name
      * @param vlm Value matcher
      */
@@ -80,6 +68,18 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
             Matchers.equalToIgnoringCase(hdr),
             Matchers.hasItems(val)
         );
+    }
+
+    /**
+     * Ctor.
+     * @param hdrm Header matcher
+     * @param vlm Value matcher
+     */
+    public HmHeader(final Matcher<String> hdrm,
+        final Matcher<Iterable<String>> vlm) {
+        super();
+        this.header = hdrm;
+        this.value = vlm;
     }
 
     @Override

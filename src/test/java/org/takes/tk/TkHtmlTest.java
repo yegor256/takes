@@ -144,7 +144,7 @@ final class TkHtmlTest {
     private IsText textMatcher(final String body) {
         return new IsText(
             new Joined(
-                "\r\n",
+                String.valueOf((char) 13) + (char) 10,
                 "HTTP/1.1 200 OK",
                 String.format("Content-Length: %s", body.getBytes(StandardCharsets.UTF_8).length),
                 "Content-Type: text/html",

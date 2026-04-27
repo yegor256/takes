@@ -84,7 +84,8 @@ public final class TkSlf4j implements Take {
                 ),
                 new FormattedText(params.getKey(), params.getValue()),
                 new FormattedText(
-                    "in %d ms",
+                    "started %d in %d ms",
+                    mark,
                     System.currentTimeMillis() - mark
                 )
             ).asString();

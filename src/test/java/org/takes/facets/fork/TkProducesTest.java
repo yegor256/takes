@@ -71,7 +71,7 @@ final class TkProducesTest {
             new RsPrint(response),
             new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     "Content-Type: application/json",
                     "",

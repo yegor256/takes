@@ -112,7 +112,9 @@ public final class RsPrint extends RsWrap implements Text {
      * @since 0.10
      */
     public void printHead(final OutputStream output) throws IOException {
-        final String eol = "\r\n";
+        final String eol = new String(
+            new char[]{(char) 13, (char) 10}
+        );
         final Writer writer =
             new OutputStreamWriter(output, StandardCharsets.UTF_8);
         int pos = 0;
