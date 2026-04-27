@@ -49,7 +49,7 @@ public class RsForward extends HttpException implements Response {
     /**
      * Lazy detail message used by {@link #getMessage()}.
      */
-    private final transient CharSequence lazyMsg;
+    private final transient CharSequence msg;
 
     /**
      * Constructor with empty response and default home location.
@@ -142,7 +142,7 @@ public class RsForward extends HttpException implements Response {
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
         super(code);
-        this.lazyMsg = new RsForward.LazyMsg(res, code, loc);
+        this.msg = new RsForward.LazyMsg(res, code, loc);
         this.origin = new RsWithHeader(
             new RsWithoutHeader(
                 new RsWithStatus(res, code),
@@ -154,8 +154,8 @@ public class RsForward extends HttpException implements Response {
     }
 
     @Override
-    public String getMessage() {
-        return this.lazyMsg.toString();
+    public final String getMessage() {
+        return this.msg.toString();
     }
 
     @Override
@@ -230,6 +230,7 @@ public class RsForward extends HttpException implements Response {
             this.loc = location;
         }
 
+        @SuppressWarnings("PMD.UseStringBufferLength")
         @Override
         public int length() {
             return this.toString().length();

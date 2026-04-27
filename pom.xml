@@ -553,6 +553,13 @@
                   <new>parameter void org.takes.tk.TkWithHeader::&lt;init&gt;(org.takes.Take, ===java.lang.CharSequence===)</new>
                   <justification>Widened type from String to CharSequence to satisfy qulice ConstructorsOrderCheck</justification>
                 </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.nowFinal</code>
+                  <old>method java.lang.String java.lang.Throwable::getMessage() @ org.takes.facets.forward.RsForward</old>
+                  <new>method java.lang.String org.takes.facets.forward.RsForward::getMessage()</new>
+                  <justification>Override of inherited Throwable.getMessage() made final to satisfy DesignForExtensionCheck</justification>
+                </item>
               </differences>
             </revapi.differences>
           </analysisConfiguration>
