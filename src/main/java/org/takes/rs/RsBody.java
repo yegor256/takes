@@ -139,6 +139,11 @@ interface RsBody extends Input {
          * @param chr Charset to encode with
          */
         Text(final CharSequence body, final java.nio.charset.Charset chr) {
+            if (body == null) {
+                throw new IllegalStateException(
+                    "Body content is null, cannot encode to bytes"
+                );
+            }
             this.content = body;
             this.charset = chr;
         }
