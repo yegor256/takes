@@ -39,21 +39,33 @@ final class VerboseListTest {
 
     @Test
     void delegatesSize() {
-        this.verboseList().size();
-        Mockito.verify(this.origin).size();
+        Mockito.when(this.origin.size()).thenReturn(7);
+        MatcherAssert.assertThat(
+            "size must be delegated to origin",
+            this.verboseList().size(),
+            Matchers.is(7)
+        );
     }
 
     @Test
     void delegatesIsEmpty() {
-        this.verboseList().isEmpty();
-        Mockito.verify(this.origin).isEmpty();
+        Mockito.when(this.origin.isEmpty()).thenReturn(true);
+        MatcherAssert.assertThat(
+            "isEmpty must be delegated to origin",
+            this.verboseList().isEmpty(),
+            Matchers.is(true)
+        );
     }
 
     @Test
     void delegatesContains() {
         final Object obj = new Object();
-        this.verboseList().contains(obj);
-        Mockito.verify(this.origin).contains(obj);
+        Mockito.when(this.origin.contains(obj)).thenReturn(true);
+        MatcherAssert.assertThat(
+            "contains must be delegated to origin",
+            this.verboseList().contains(obj),
+            Matchers.is(true)
+        );
     }
 
     @Test
@@ -67,8 +79,13 @@ final class VerboseListTest {
 
     @Test
     void delegatesToArrayNoArgs() {
-        this.verboseList().toArray();
-        Mockito.verify(this.origin).toArray();
+        final Object[] expected = {new Object(), new Object()};
+        Mockito.when(this.origin.toArray()).thenReturn(expected);
+        MatcherAssert.assertThat(
+            "toArray must be delegated to origin",
+            this.verboseList().toArray(),
+            Matchers.is(expected)
+        );
     }
 
     @Test
@@ -110,8 +127,12 @@ final class VerboseListTest {
     @Test
     void delegatesContainsAll() {
         final List<Object> collection = Collections.emptyList();
-        this.verboseList().containsAll(collection);
-        Mockito.verify(this.origin).containsAll(collection);
+        Mockito.when(this.origin.containsAll(collection)).thenReturn(true);
+        MatcherAssert.assertThat(
+            "containsAll must be delegated to origin",
+            this.verboseList().containsAll(collection),
+            Matchers.is(true)
+        );
     }
 
     @Test
