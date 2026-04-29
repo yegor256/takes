@@ -2,11 +2,13 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/1364/reviews?per_page=100:
+    504 - We couldn''... (Octokit::ServerError)'
   inserted: 8
-  seconds: 810.25141311
+  seconds: 432.683088238
   version: 0.60.2
   what: judges-summary
-  when: 2026-04-28 05:14:51.834382396 Z
+  when: 2026-04-29 05:06:52.761662484 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -64368,18 +64370,6 @@
   total_stars: 875
   what: dimensions-of-terrain
   when: 2026-04-26 04:51:30.457117000 Z
-- _id: 19900
-  _job: 69277
-  _time: 2026-04-26 05:01:37.483015842 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (234.0) is decreasing (R=-0.80).
-    The average number of commits per week (6.0) is decreasing (R=-0.20).
-    The average number of releases per month (0.1) is decreasing (R=-0.11).
-    The average monthly turnover (43.0 developers) is decreasing (R=-0.79).
-  what: assessment
-  when: 2026-04-26 05:01:37.500278220 Z
 - _id: 19903
   _job: 24977235548
   _time: 2026-04-27 04:56:21.107381710 Z
@@ -64408,12 +64398,6 @@
     The average monthly turnover (43.0 developers) is decreasing (R=-0.79).
   what: assessment
   when: 2026-04-27 05:07:19.417335208 Z
-- _id: 19905
-  _job: 69354
-  _time: 2026-04-27 05:07:45.166884236 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  what: learn-eva
-  when: 2026-04-27 05:07:45.134535672 Z
 - _id: 19907
   _job: 25034818579
   _time: 2026-04-28 05:01:38.899868139 Z
@@ -64428,23 +64412,6 @@
   total_reviews_submitted: 11
   what: quantity-of-deliverables
   when: 2026-04-28 05:01:38.000000000 Z
-- _id: 19908
-  _job: 25034818579
-  _time: 2026-04-28 05:02:16.076355235 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 9941328473
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 629
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19909
   _job: 25034818579
   _time: 2026-04-28 05:02:48.228186498 Z
@@ -64466,5 +64433,322 @@
   _time: 2026-04-28 05:12:20.779372101 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *135
+  some_backlog_size:
+  - 92
+  - 92
+  - 92
+  - 90
+  - 91
+  - 92
+  - 91
+  some_build_duration:
+  - 794
+  - 36
+  - 36
+  - 8
+  - 8
+  - 9
+  - 10
+  - 11
+  - 11
+  - 12
+  - 31
+  - 26
+  - 34
+  - 238
+  - 7
+  - 8
+  - 8
+  - 10
+  - 10
+  - 11
+  - 15
+  - 26
+  - 32
+  - 37
+  - 7
+  - 7
+  - 8
+  - 9
+  - 9
+  - 10
+  - 18
+  - 24
+  - 225
+  - 33
+  - 37
+  - 288
+  - 10
+  - 11
+  - 12
+  - 12
+  - 12
+  - 14
+  - 17
+  - 29
+  - 35
+  - 35
+  - 90
+  - 8
+  - 8
+  - 8
+  - 9
+  - 10
+  - 10
+  - 12
+  - 25
+  - 32
+  - 35
+  - 274
+  - 260
+  - 918
+  some_build_mttr: 289
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_issue_lifetime:
+  - 114139.0
+  - 2656946.0
+  - 61961156.0
+  some_merged_pulls: 14
+  some_pull_files_size:
+  - 391
+  - 1
+  - 4
+  - 1
+  - 2
+  - 2
+  - 1
+  - 10
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 5797
+  - 2
+  - 571
+  - 2
+  - 50
+  - 4
+  - 2
+  - 55
+  - 2
+  - 4
+  - 2
+  - 2
+  - 12
+  - 2
+  some_pull_lifetime:
+  - 1997.0
+  - 10240.0
+  - 30251.0
+  - 116065.0
+  - 45223.0
+  - 143899.0
+  - 11774.0
+  - 46605.0
+  - 61916.0
+  - 62737.0
+  - 113784.0
+  - 816430.0
+  - 1076458.0
+  - 1710027.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 1989
+  - 920
+  - 749
+  - 1609
+  - 11648
+  - 46362
+  - 814
+  - 1628
+  - 2470
+  - 775668
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  some_unmerged_pulls: 0
   what: quality-of-service
   when: 2026-04-28 05:12:20.000000000 Z
+- _id: 19911
+  _job: 69563
+  _time: 2026-04-28 05:15:19.560498244 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (239.6) is decreasing (R=-0.70).
+    The average number of commits per week (7.0) is staying still.
+    The average number of releases per month (0.3) is decreasing (R=0.14).
+    The average monthly turnover (43.0 developers) is decreasing (R=-0.79).
+  what: assessment
+  when: 2026-04-28 05:15:19.575699878 Z
+- _id: 19912
+  _job: 69563
+  _time: 2026-04-28 05:15:44.886081029 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  what: learn-eva
+  when: 2026-04-28 05:15:44.855955993 Z
+- _id: 19913
+  _job: 25091712719
+  _time: 2026-04-29 04:59:45.127367791 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  by_owner: 1
+  commit: 953ddbd7e6eaba414cfc20f8b4a18b4cd8282d72
+  default_branch: master
+  details: 'A new Git push #33433297481 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 11141643385
+  event_type: PushEvent
+  is_human: 1
+  push_id: 33433297481
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-04-28 09:45:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 19915
+  _job: 25091712719
+  _time: 2026-04-29 05:00:16.354822777 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1399 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1399
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-28 14:23:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 19916
+  _job: 25091712719
+  _time: 2026-04-29 05:00:30.468721650 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11155365143
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 630
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github

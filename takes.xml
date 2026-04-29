@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1154842">
+<fb version="0.19.6" size="1156537">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
+    <error t="S">GET https://api.github.com/repos/yegor256/takes/pulls/1364/reviews?per_page=100: 504 - We couldn'... (Octokit::ServerError)</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">810.25141311</seconds>
+    <seconds t="F">432.683088238</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-04-28T05:14:51Z</when>
+    <when t="T">2026-04-29T05:06:52Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -72059,19 +72060,6 @@
     <when t="T">2026-04-26T04:51:30Z</when>
   </f>
   <f>
-    <_id t="I">19900</_id>
-    <_job t="I">69277</_job>
-    <_time t="T">2026-04-26T05:01:37Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (234.0) is decreasing (R=-0.80).
-The average number of commits per week (6.0) is decreasing (R=-0.20).
-The average number of releases per month (0.1) is decreasing (R=-0.11).
-The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-04-26T05:01:37Z</when>
-  </f>
-  <f>
     <_id t="I">19903</_id>
     <_job t="I">24977235548</_job>
     <_time t="T">2026-04-27T04:56:21Z</_time>
@@ -72103,14 +72091,6 @@ The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
     <when t="T">2026-04-27T05:07:19Z</when>
   </f>
   <f>
-    <_id t="I">19905</_id>
-    <_job t="I">69354</_job>
-    <_time t="T">2026-04-27T05:07:45Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-04-27T05:07:45Z</when>
-  </f>
-  <f>
     <_id t="I">19907</_id>
     <_job t="I">25034818579</_job>
     <_time t="T">2026-04-28T05:01:38Z</_time>
@@ -72125,25 +72105,6 @@ The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
     <total_reviews_submitted t="I">11</total_reviews_submitted>
     <what t="S">quantity-of-deliverables</what>
     <when t="T">2026-04-28T05:01:38Z</when>
-  </f>
-  <f>
-    <_id t="I">19908</_id>
-    <_job t="I">25034818579</_job>
-    <_time t="T">2026-04-28T05:02:16Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">9941328473</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">629</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">19909</_id>
@@ -72169,7 +72130,343 @@ The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
     <_time t="T">2026-04-28T05:12:20Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
     <since t="T">2026-04-21T04:58:08Z</since>
+    <some_backlog_size>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">92</v>
+      <v t="I">90</v>
+      <v t="I">91</v>
+      <v t="I">92</v>
+      <v t="I">91</v>
+    </some_backlog_size>
+    <some_build_duration>
+      <v t="I">794</v>
+      <v t="I">36</v>
+      <v t="I">36</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">31</v>
+      <v t="I">26</v>
+      <v t="I">34</v>
+      <v t="I">238</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">15</v>
+      <v t="I">26</v>
+      <v t="I">32</v>
+      <v t="I">37</v>
+      <v t="I">7</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">18</v>
+      <v t="I">24</v>
+      <v t="I">225</v>
+      <v t="I">33</v>
+      <v t="I">37</v>
+      <v t="I">288</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">12</v>
+      <v t="I">12</v>
+      <v t="I">14</v>
+      <v t="I">17</v>
+      <v t="I">29</v>
+      <v t="I">35</v>
+      <v t="I">35</v>
+      <v t="I">90</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">12</v>
+      <v t="I">25</v>
+      <v t="I">32</v>
+      <v t="I">35</v>
+      <v t="I">274</v>
+      <v t="I">260</v>
+      <v t="I">918</v>
+    </some_build_duration>
+    <some_build_mttr t="I">289</some_build_mttr>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_build_success_rate>
+    <some_issue_lifetime>
+      <v t="F">114139.0</v>
+      <v t="F">2656946.0</v>
+      <v t="F">61961156.0</v>
+    </some_issue_lifetime>
+    <some_merged_pulls t="I">14</some_merged_pulls>
+    <some_pull_files_size>
+      <v t="I">391</v>
+      <v t="I">1</v>
+      <v t="I">4</v>
+      <v t="I">1</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">1</v>
+      <v t="I">10</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_pull_files_size>
+    <some_pull_hoc_size>
+      <v t="I">5797</v>
+      <v t="I">2</v>
+      <v t="I">571</v>
+      <v t="I">2</v>
+      <v t="I">50</v>
+      <v t="I">4</v>
+      <v t="I">2</v>
+      <v t="I">55</v>
+      <v t="I">2</v>
+      <v t="I">4</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">12</v>
+      <v t="I">2</v>
+    </some_pull_hoc_size>
+    <some_pull_lifetime>
+      <v t="F">1997.0</v>
+      <v t="F">10240.0</v>
+      <v t="F">30251.0</v>
+      <v t="F">116065.0</v>
+      <v t="F">45223.0</v>
+      <v t="F">143899.0</v>
+      <v t="F">11774.0</v>
+      <v t="F">46605.0</v>
+      <v t="F">61916.0</v>
+      <v t="F">62737.0</v>
+      <v t="F">113784.0</v>
+      <v t="F">816430.0</v>
+      <v t="F">1076458.0</v>
+      <v t="F">1710027.0</v>
+    </some_pull_lifetime>
+    <some_review_size>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_review_size>
+    <some_review_time>
+      <v t="I">1989</v>
+      <v t="I">920</v>
+      <v t="I">749</v>
+      <v t="I">1609</v>
+      <v t="I">11648</v>
+      <v t="I">46362</v>
+      <v t="I">814</v>
+      <v t="I">1628</v>
+      <v t="I">2470</v>
+      <v t="I">775668</v>
+    </some_review_time>
+    <some_reviewers_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_reviewers_per_pull>
+    <some_reviews_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_reviews_per_pull>
+    <some_unmerged_pulls t="I">0</some_unmerged_pulls>
     <what t="S">quality-of-service</what>
     <when t="T">2026-04-28T05:12:20Z</when>
+  </f>
+  <f>
+    <_id t="I">19911</_id>
+    <_job t="I">69563</_job>
+    <_time t="T">2026-04-28T05:15:19Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (239.6) is decreasing (R=-0.70).
+The average number of commits per week (7.0) is staying still.
+The average number of releases per month (0.3) is decreasing (R=0.14).
+The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-04-28T05:15:19Z</when>
+  </f>
+  <f>
+    <_id t="I">19912</_id>
+    <_job t="I">69563</_job>
+    <_time t="T">2026-04-28T05:15:44Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-04-28T05:15:44Z</when>
+  </f>
+  <f>
+    <_id t="I">19913</_id>
+    <_job t="I">25091712719</_job>
+    <_time t="T">2026-04-29T04:59:45Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <by_owner t="I">1</by_owner>
+    <commit t="S">953ddbd7e6eaba414cfc20f8b4a18b4cd8282d72</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #33433297481 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
+    <event_id t="I">11141643385</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">33433297481</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2026-04-28T09:45:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19915</_id>
+    <_job t="I">25091712719</_job>
+    <_time t="T">2026-04-29T05:00:16Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/xml-apis-xml-apis-replacement</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1399 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1399</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">12</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-04-28T14:23:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">19916</_id>
+    <_job t="I">25091712719</_job>
+    <_time t="T">2026-04-29T05:00:30Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">11155365143</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1537</min_issue_was_found>
+    <min_pull_was_found t="I">630</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
