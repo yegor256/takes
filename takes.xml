@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1156779">
+<fb version="0.19.6" size="1157288">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
-    <error t="S">GET https://api.github.com/repositories/28924109/events?page=3&amp;per_page=100: 500 -  (Octokit::InternalServerError)</error>
+    <error t="S">GET https://api.github.com/repos/yegor256/takes/pulls/1086/reviews?per_page=100: 504 - We couldn'... (Octokit::ServerError)</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">771.219043816</seconds>
+    <seconds t="F">546.24199409</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-04-30T05:15:06Z</when>
+    <when t="T">2026-05-01T05:13:47Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -72078,19 +72078,6 @@
     <when t="T">2026-04-27T04:56:21Z</when>
   </f>
   <f>
-    <_id t="I">19904</_id>
-    <_job t="I">69354</_job>
-    <_time t="T">2026-04-27T05:07:19Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (234.0) is decreasing (R=-0.80).
-The average number of commits per week (6.0) is decreasing (R=-0.20).
-The average number of releases per month (0.1) is decreasing (R=-0.11).
-The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-04-27T05:07:19Z</when>
-  </f>
-  <f>
     <_id t="I">19907</_id>
     <_job t="I">25034818579</_job>
     <_time t="T">2026-04-28T05:01:38Z</_time>
@@ -72444,33 +72431,6 @@ The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">19917</_id>
-    <_job t="I">69672</_job>
-    <_time t="T">2026-04-29T05:07:40Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-04-29T05:07:40Z</when>
-  </f>
-  <f>
-    <_id t="I">19918</_id>
-    <_job t="I">25148273731</_job>
-    <_time t="T">2026-04-30T05:02:48Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">11155365143</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1537</min_issue_was_found>
-    <min_pull_was_found t="I">631</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1130</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">19919</_id>
     <_job t="I">25148273731</_job>
     <_time t="T">2026-04-30T05:03:16Z</_time>
@@ -72487,5 +72447,77 @@ The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
     <total_stars t="I">876</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-04-30T05:03:16Z</when>
+  </f>
+  <f>
+    <_id t="I">19920</_id>
+    <_job t="I">69828</_job>
+    <_time t="T">2026-04-30T05:15:41Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (239.6) is decreasing (R=-0.70).
+The average number of commits per week (7.0) is staying still.
+The average number of releases per month (0.3) is decreasing (R=0.14).
+The average monthly turnover (43.0 developers) is decreasing (R=-0.79).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-04-30T05:15:41Z</when>
+  </f>
+  <f>
+    <_id t="I">19921</_id>
+    <_job t="I">69828</_job>
+    <_time t="T">2026-04-30T05:16:06Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-04-30T05:16:06Z</when>
+  </f>
+  <f>
+    <_id t="I">19923</_id>
+    <_job t="I">25203072695</_job>
+    <_time t="T">2026-05-01T05:04:55Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <details t="S">Apparently, yegor256/takes#1451 has been "issue-was-closed".</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1451</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2026-05-01T04:18:22Z</when>
+    <where t="S">github</where>
+    <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">19924</_id>
+    <_job t="I">25203072695</_job>
+    <_time t="T">2026-05-01T05:05:08Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">8985524256</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1537</min_issue_was_found>
+    <min_pull_was_found t="I">632</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1130</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">19925</_id>
+    <_job t="I">25203072695</_job>
+    <_time t="T">2026-05-01T05:05:35Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <total_active_contributors t="I">7</total_active_contributors>
+    <total_commits t="I">3754</total_commits>
+    <total_contributors t="I">88</total_contributors>
+    <total_files t="I">537</total_files>
+    <total_forks t="I">213</total_forks>
+    <total_issues t="I">750</total_issues>
+    <total_pulls t="I">852</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">876</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-05-01T05:05:35Z</when>
   </f>
 </fb>

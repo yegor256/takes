@@ -2,13 +2,13 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repositories/28924109/events?page=3&per_page=100:
-    500 -  (Octokit::InternalServerError)'
+  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/1086/reviews?per_page=100:
+    504 - We couldn''... (Octokit::ServerError)'
   inserted: 8
-  seconds: 771.219043816
+  seconds: 546.24199409
   version: 0.60.2
   what: judges-summary
-  when: 2026-04-30 05:15:06.760155765 Z
+  when: 2026-05-01 05:13:47.412701377 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -64386,18 +64386,6 @@
   total_stars: 875
   what: dimensions-of-terrain
   when: 2026-04-27 04:56:21.116593767 Z
-- _id: 19904
-  _job: 69354
-  _time: 2026-04-27 05:07:19.399006529 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (234.0) is decreasing (R=-0.80).
-    The average number of commits per week (6.0) is decreasing (R=-0.20).
-    The average number of releases per month (0.1) is decreasing (R=-0.11).
-    The average monthly turnover (43.0 developers) is decreasing (R=-0.79).
-  what: assessment
-  when: 2026-04-27 05:07:19.417335208 Z
 - _id: 19907
   _job: 25034818579
   _time: 2026-04-28 05:01:38.899868139 Z
@@ -64730,29 +64718,6 @@
   when: 2026-04-28 14:23:35.000000000 Z
   where: github
   who: 526301
-- _id: 19917
-  _job: 69672
-  _time: 2026-04-29 05:07:40.795241205 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  what: learn-eva
-  when: 2026-04-29 05:07:40.764779614 Z
-- _id: 19918
-  _job: 25148273731
-  _time: 2026-04-30 05:02:48.940760998 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11155365143
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 631
-  repository: 28924109
-  types_were_scanned: 1130
-  what: iterate
-  where: github
 - _id: 19919
   _job: 25148273731
   _time: 2026-04-30 05:03:16.298731898 Z
@@ -64769,3 +64734,66 @@
   total_stars: 876
   what: dimensions-of-terrain
   when: 2026-04-30 05:03:16.307551218 Z
+- _id: 19920
+  _job: 69828
+  _time: 2026-04-30 05:15:41.377838712 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (239.6) is decreasing (R=-0.70).
+    The average number of commits per week (7.0) is staying still.
+    The average number of releases per month (0.3) is decreasing (R=0.14).
+    The average monthly turnover (43.0 developers) is decreasing (R=-0.79).
+  what: assessment
+  when: 2026-04-30 05:15:41.392675225 Z
+- _id: 19921
+  _job: 69828
+  _time: 2026-04-30 05:16:06.452573962 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  what: learn-eva
+  when: 2026-04-30 05:16:06.423574152 Z
+- _id: 19923
+  _job: 25203072695
+  _time: 2026-05-01 05:04:55.581028897 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: Apparently, yegor256/takes#1451 has been "issue-was-closed".
+  is_human: 0
+  issue: 1451
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-05-01 04:18:22.000000000 Z
+  where: github
+  who: 24456188
+- _id: 19924
+  _job: 25203072695
+  _time: 2026-05-01 05:05:08.868838474 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 8985524256
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1537
+  min_pull_was_found: 632
+  repository: 28924109
+  types_were_scanned: 1130
+  what: iterate
+  where: github
+- _id: 19925
+  _job: 25203072695
+  _time: 2026-05-01 05:05:35.294910171 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 7
+  total_commits: 3754
+  total_contributors: 88
+  total_files: 537
+  total_forks: 213
+  total_issues: 750
+  total_pulls: 852
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 876
+  what: dimensions-of-terrain
+  when: 2026-05-01 05:05:35.303944443 Z
