@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.729940581
+  seconds: 847.737622895
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-02 05:04:20.362511850 Z
+  when: 2026-05-03 05:16:29.120663293 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -64659,18 +64659,6 @@
   some_unmerged_pulls: 0
   what: quality-of-service
   when: 2026-04-28 05:12:20.000000000 Z
-- _id: 19911
-  _job: 69563
-  _time: 2026-04-28 05:15:19.560498244 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (239.6) is decreasing (R=-0.70).
-    The average number of commits per week (7.0) is staying still.
-    The average number of releases per month (0.3) is decreasing (R=0.14).
-    The average monthly turnover (43.0 developers) is decreasing (R=-0.79).
-  what: assessment
-  when: 2026-04-28 05:15:19.575699878 Z
 - _id: 19913
   _job: 25091712719
   _time: 2026-04-29 04:59:45.127367791 Z
@@ -64772,12 +64760,6 @@
   total_stars: 876
   what: dimensions-of-terrain
   when: 2026-05-01 05:05:35.303944443 Z
-- _id: 19926
-  _job: 69993
-  _time: 2026-05-01 05:14:44.846963651 Z
-  _version: 0.19.10/0.60.2/0.17.17
-  what: learn-eva
-  when: 2026-05-01 05:14:44.819004921 Z
 - _id: 19927
   _job: 69993
   _time: 2026-05-01 05:14:45.055484646 Z
@@ -64928,6 +64910,7 @@
   issue: 1602
   repository: 28924109
   review: 2026-05-01 16:35:08.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -65137,23 +65120,6 @@
   when: 2026-03-02 16:25:46.000000000 Z
   where: github
   who: 41898282
-- _id: 19955
-  _job: 25244100050
-  _time: 2026-05-02 04:54:09.244530559 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11308365480
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1537
-  min_pull_was_found: 633
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 19956
   _job: 25244100050
   _time: 2026-05-02 05:02:44.841396670 Z
@@ -65169,5 +65135,876 @@
   seconds: 45530
   what: code-was-reviewed
   when: 2026-05-01 16:35:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 19957
+  _job: 70193
+  _time: 2026-05-02 05:04:50.572237879 Z
+  _version: 0.19.10/0.60.2/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (239.6) is decreasing (R=-0.70).
+    The average number of commits per week (7.0) is staying still.
+    The average number of releases per month (0.3) is decreasing (R=0.14).
+    The average monthly turnover (39.0 developers) is decreasing (R=-0.76).
+  what: assessment
+  when: 2026-05-02 05:04:50.585130314 Z
+- _id: 19958
+  _job: 70193
+  _time: 2026-05-02 05:05:15.854181819 Z
+  _version: 0.19.10/0.60.2/0.17.17
+  what: learn-eva
+  when: 2026-05-02 05:05:15.812123394 Z
+- _id: 19960
+  _job: 25270415750
+  _time: 2026-05-03 05:02:47.973942652 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1538 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1538
+  repository: 28924109
+  review: 2025-12-30 03:16:30.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-30 03:34:23.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19961
+  _job: 25270415750
+  _time: 2026-05-03 05:03:07.328243933 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1539 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1539
+  repository: 28924109
+  review: 2026-01-01 16:37:09.000000000 Z
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-18 14:57:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 19962
+  _job: 25270415750
+  _time: 2026-05-03 05:03:16.736726523 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-parent-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1540 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1540
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-18 14:57:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 19963
+  _job: 25270415750
+  _time: 2026-05-03 05:03:25.545147147 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.codehaus.mojo-license-maven-plugin-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1541 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1541
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-18 14:57:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 19964
+  _job: 25270415750
+  _time: 2026-05-03 05:03:34.460866231 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1542 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1542
+  repository: 28924109
+  review: 2026-04-02 04:05:28.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-02 05:07:40.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19965
+  _job: 25270415750
+  _time: 2026-05-03 05:03:43.458521734 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/junit-framework-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1543 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1543
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-19 05:52:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 19966
+  _job: 25270415750
+  _time: 2026-05-03 05:03:51.748714634 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/jersey-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1544 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  issue: 1544
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-19 05:52:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 19967
+  _job: 25270415750
+  _time: 2026-05-03 05:04:00.706594469 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1545 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1545
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-19 05:52:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 19968
+  _job: 25270415750
+  _time: 2026-05-03 05:04:09.335600607 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1546 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1546
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-19 06:49:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 19969
+  _job: 25270415750
+  _time: 2026-05-03 05:04:17.981609385 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1547 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1547
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-02-19 06:49:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 19970
+  _job: 25270415750
+  _time: 2026-05-03 05:04:27.014007866 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.glassfish.grizzly-grizzly-http-servlet-server-5.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1548 has been "pull-was-closed".
+  failed_builds: 6
+  files: 1
+  hoc: 2
+  issue: 1548
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-04-01 11:46:52.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19971
+  _job: 25270415750
+  _time: 2026-05-03 05:04:35.695605320 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1549 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1549
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-03-02 16:27:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 19972
+  _job: 25270415750
+  _time: 2026-05-03 05:04:45.203324840 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1550 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1550
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-03-02 16:24:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 19973
+  _job: 25270415750
+  _time: 2026-05-03 05:04:53.782360067 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/mockito-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1552 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1552
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-03-02 16:24:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 19974
+  _job: 25270415750
+  _time: 2026-05-03 05:05:02.432904538 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1553 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1553
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-03-02 16:24:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 19975
+  _job: 25270415750
+  _time: 2026-05-03 05:05:10.893547767 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1554 has been "pull-was-closed".
+  failed_builds: 0
+  files: 2
+  hoc: 26
+  issue: 1554
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-03-02 16:25:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 19976
+  _job: 25270415750
+  _time: 2026-05-03 05:05:12.700069316 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1604 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1604
+  repository: 28924109
+  review: 2026-05-03 03:39:04.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-03 04:12:31.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19977
+  _job: 25270415750
+  _time: 2026-05-03 05:05:21.378533402 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1606 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1606
+  repository: 28924109
+  review: 2026-05-03 03:39:01.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-03 03:54:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 19978
+  _job: 25270415750
+  _time: 2026-05-03 05:05:37.119754171 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The issue yegor256/takes#1603 has been earlier opened by @0pdd.
+  issue: 1603
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-05-01 04:18:23.000000000 Z
+  where: github
+  who: 24456188
+- _id: 19979
+  _job: 25270415750
+  _time: 2026-05-03 05:05:37.359441929 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The issue yegor256/takes#1588 has been earlier opened by @revive-code-bot[bot].
+  issue: 1588
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-04-27 05:00:24.000000000 Z
+  where: github
+  who: 166734835
+- _id: 19980
+  _job: 25270415750
+  _time: 2026-05-03 05:05:37.668239408 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The issue yegor256/takes#1586 has been earlier opened by @yegor256.
+  issue: 1586
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-04-26 10:38:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 19981
+  _job: 25270415750
+  _time: 2026-05-03 05:05:37.932411667 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The issue yegor256/takes#1565 has been earlier opened by @yegor256.
+  issue: 1565
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-03-30 06:47:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 19982
+  _job: 25270415750
+  _time: 2026-05-03 05:05:38.021079880 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The issue yegor256/takes#1561 has been earlier opened by @revive-code-bot[bot].
+  issue: 1561
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-03-27 05:00:06.000000000 Z
+  where: github
+  who: 166734835
+- _id: 19983
+  _job: 25270415750
+  _time: 2026-05-03 05:05:38.104714596 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The issue yegor256/takes#1559 has been earlier opened by @illia-m-b.
+  issue: 1559
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-03-24 11:54:07.000000000 Z
+  where: github
+  who: 214269542
+- _id: 19984
+  _job: 25270415750
+  _time: 2026-05-03 05:05:38.954218262 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11343182104
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1551
+  min_pull_was_found: 634
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 19985
+  _job: 25270415750
+  _time: 2026-05-03 05:06:07.294474317 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 7
+  total_commits: 3762
+  total_contributors: 88
+  total_files: 537
+  total_forks: 213
+  total_issues: 750
+  total_pulls: 857
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 876
+  what: dimensions-of-terrain
+  when: 2026-05-03 05:06:07.305057702 Z
+- _id: 19986
+  _job: 25270415750
+  _time: 2026-05-03 05:06:10.611077834 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: 'We found out that the user #214269542 is known in GitHub as @illia-m-b.'
+  name: illia-m-b
+  what: who-has-name
+  when: 2026-05-03 05:06:10.615000814 Z
+  where: github
+  who: 214269542
+- _id: 19987
+  _job: 25270415750
+  _time: 2026-05-03 05:06:47.003287398 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1559.
+  issue: 1559
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-03-24 12:45:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 19988
+  _job: 25270415750
+  _time: 2026-05-03 05:06:48.173192649 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1586.
+  issue: 1586
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-04-26 10:38:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 19989
+  _job: 25270415750
+  _time: 2026-05-03 05:06:48.766185801 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The "bug" label was attached by @0pdd to the issue yegor256/takes#1603.
+  issue: 1603
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-05-01 04:18:24.000000000 Z
+  where: github
+  who: 24456188
+- _id: 19990
+  _job: 25270415750
+  _time: 2026-05-03 05:06:49.343061540 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1555 has been opened by @renovate[bot].
+  issue: 1555
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-02 18:37:22.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19991
+  _job: 25270415750
+  _time: 2026-05-03 05:06:50.161145673 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.projectlombok-lombok-1.x
+  details: The missing pull yegor256/takes#1556 has been opened by @renovate[bot].
+  issue: 1556
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-11 04:03:28.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19992
+  _job: 25270415750
+  _time: 2026-05-03 05:06:50.842332382 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/mockito-monorepo
+  details: The missing pull yegor256/takes#1557 has been opened by @renovate[bot].
+  issue: 1557
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-11 21:15:37.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19993
+  _job: 25270415750
+  _time: 2026-05-03 05:06:51.502094006 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-parent-0.x
+  details: The missing pull yegor256/takes#1558 has been opened by @renovate[bot].
+  issue: 1558
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-12 20:59:00.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19994
+  _job: 25270415750
+  _time: 2026-05-03 05:06:52.198902818 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/jaxb-ri-monorepo
+  details: The missing pull yegor256/takes#1560 has been opened by @renovate[bot].
+  issue: 1560
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-26 09:44:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19995
+  _job: 25270415750
+  _time: 2026-05-03 05:06:52.914763929 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.cactoos-cactoos-0.x
+  details: The missing pull yegor256/takes#1562 has been opened by @renovate[bot].
+  issue: 1562
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-29 12:31:30.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19996
+  _job: 25270415750
+  _time: 2026-05-03 05:06:53.682745942 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/codecov-codecov-action-6.x
+  details: The missing pull yegor256/takes#1563 has been opened by @renovate[bot].
+  issue: 1563
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-29 12:31:37.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19997
+  _job: 25270415750
+  _time: 2026-05-03 05:06:54.390521341 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/davidanson-markdownlint-cli2-action-23.x
+  details: The missing pull yegor256/takes#1564 has been opened by @renovate[bot].
+  issue: 1564
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-29 13:11:25.000000000 Z
+  where: github
+  who: 29139614
+- _id: 19998
+  _job: 25270415750
+  _time: 2026-05-03 05:06:55.062648335 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: '1565'
+  details: The missing pull yegor256/takes#1566 has been opened by @yegor256.
+  issue: 1566
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-03-31 17:11:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 19999
+  _job: 25270415750
+  _time: 2026-05-03 05:06:55.994205781 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1567 has been opened by @renovate[bot].
+  issue: 1567
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-01 20:46:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20000
+  _job: 25270415750
+  _time: 2026-05-03 05:06:56.656585635 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  details: The missing pull yegor256/takes#1568 has been opened by @renovate[bot].
+  issue: 1568
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-03 09:24:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20001
+  _job: 25270415750
+  _time: 2026-05-03 05:06:57.317861214 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: patch-3
+  details: The missing pull yegor256/takes#1569 has been opened by @artur-intech.
+  issue: 1569
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-10 16:31:33.000000000 Z
+  where: github
+  who: 22315378
+- _id: 20002
+  _job: 25270415750
+  _time: 2026-05-03 05:06:58.221564681 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1570 has been opened by @renovate[bot].
+  issue: 1570
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-13 16:44:22.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20003
+  _job: 25270415750
+  _time: 2026-05-03 05:06:58.905718512 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1571 has been opened by @renovate[bot].
+  issue: 1571
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-17 11:13:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20004
+  _job: 25270415750
+  _time: 2026-05-03 05:06:59.756586944 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  details: The missing pull yegor256/takes#1572 has been opened by @renovate[bot].
+  issue: 1572
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-19 16:34:43.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20005
+  _job: 25270415750
+  _time: 2026-05-03 05:07:00.418210899 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  details: The missing pull yegor256/takes#1573 has been opened by @renovate[bot].
+  issue: 1573
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-20 12:48:45.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20006
+  _job: 25270415750
+  _time: 2026-05-03 05:07:01.075981591 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1574 has been opened by @renovate[bot].
+  issue: 1574
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-21 09:47:39.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20007
+  _job: 25270415750
+  _time: 2026-05-03 05:13:45.745279916 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1538 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h27m and 0 comments.
+  hoc: 2
+  issue: 1538
+  repository: 28924109
+  review_comments: 0
+  seconds: 34064
+  what: code-was-reviewed
+  when: 2025-12-30 03:16:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 20008
+  _job: 25270415750
+  _time: 2026-05-03 05:13:46.178964170 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1539 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 21h39m and 0 comments.
+  hoc: 2
+  issue: 1539
+  repository: 28924109
+  review_comments: 0
+  seconds: 77979
+  what: code-was-reviewed
+  when: 2026-01-01 16:37:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20009
+  _job: 25270415750
+  _time: 2026-05-03 05:13:46.309983932 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1542 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 1021h7m and 0 comments.
+  hoc: 2
+  issue: 1542
+  repository: 28924109
+  review_comments: 0
+  seconds: 3676026
+  what: code-was-reviewed
+  when: 2026-04-02 04:05:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 20010
+  _job: 25270415750
+  _time: 2026-05-03 05:13:46.542849438 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1604 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 34h49m and 0 comments.
+  hoc: 2
+  issue: 1604
+  repository: 28924109
+  review_comments: 0
+  seconds: 125376
+  what: code-was-reviewed
+  when: 2026-05-03 03:39:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 20011
+  _job: 25270415750
+  _time: 2026-05-03 05:13:46.652426476 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1606 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 30h28m and 0 comments.
+  hoc: 4
+  issue: 1606
+  repository: 28924109
+  review_comments: 0
+  seconds: 109725
+  what: code-was-reviewed
+  when: 2026-05-03 03:39:01.000000000 Z
   where: github
   who: 526301
