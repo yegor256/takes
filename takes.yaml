@@ -2,13 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/takes/pulls/592/reviews?per_page=100:
-    504 - We couldn''t... (Octokit::ServerError)'
   inserted: 8
-  seconds: 786.526679952
+  seconds: 838.021853515
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-04 05:15:53.459689511 Z
+  when: 2026-05-05 05:04:59.118226797 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -66081,12 +66079,6 @@
     The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
   what: assessment
   when: 2026-05-03 05:16:58.120506360 Z
-- _id: 20013
-  _job: 70406
-  _time: 2026-05-03 05:17:23.444831292 Z
-  _version: 0.19.10/0.60.2/0.17.17
-  what: learn-eva
-  when: 2026-05-03 05:17:23.417436564 Z
 - _id: 20015
   _job: 25301947241
   _time: 2026-05-04 05:03:10.048707390 Z
@@ -66167,6 +66159,7 @@
   is_human: 1
   issue: 1555
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -66191,6 +66184,7 @@
   is_human: 1
   issue: 1556
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -66215,6 +66209,7 @@
   is_human: 1
   issue: 1557
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -66239,6 +66234,7 @@
   is_human: 1
   issue: 1558
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -66312,6 +66308,7 @@
   issue: 1563
   repository: 28924109
   review: 2026-03-30 03:42:12.000000000 Z
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -66336,6 +66333,7 @@
   is_human: 1
   issue: 1564
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 14
   suggestions: 0
   what: pull-was-merged
@@ -66361,6 +66359,7 @@
   issue: 1566
   repository: 28924109
   review: 2026-03-31 17:18:11.000000000 Z
+  review_comments: 2
   succeeded_builds: 15
   suggestions: 2
   what: pull-was-merged
@@ -66386,6 +66385,7 @@
   issue: 1567
   repository: 28924109
   review: 2026-04-02 04:05:25.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66410,6 +66410,7 @@
   is_human: 1
   issue: 1568
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66434,6 +66435,7 @@
   is_human: 1
   issue: 1569
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66459,6 +66461,7 @@
   issue: 1570
   repository: 28924109
   review: 2026-04-14 04:03:44.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66484,6 +66487,7 @@
   issue: 1571
   repository: 28924109
   review: 2026-04-18 03:48:46.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66509,6 +66513,7 @@
   issue: 1572
   repository: 28924109
   review: 2026-04-20 16:51:06.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66534,6 +66539,7 @@
   issue: 1573
   repository: 28924109
   review: 2026-04-20 16:51:02.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66559,29 +66565,13 @@
   issue: 1574
   repository: 28924109
   review: 2026-04-22 16:42:53.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-04-22 17:24:03.000000000 Z
   where: github
   who: 8086956
-- _id: 20037
-  _job: 25301947241
-  _time: 2026-05-04 05:07:25.758003507 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 9043889710
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1559
-  min_pull_was_found: 636
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20038
   _job: 25301947241
   _time: 2026-05-04 05:08:06.722906027 Z
@@ -66830,3 +66820,857 @@
   when: 2026-04-28 15:01:10.000000000 Z
   where: github
   who: 29139614
+- _id: 20057
+  _job: 70575
+  _time: 2026-05-04 05:17:00.316654002 Z
+  _version: 0.19.10/0.60.2/0.17.17
+  what: learn-eva
+  when: 2026-05-04 05:17:00.288882052 Z
+- _id: 20059
+  _job: 25358439297
+  _time: 2026-05-05 04:51:46.355290840 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.projectlombok-lombok-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1575 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1575
+  repository: 28924109
+  review: 2026-04-22 16:42:50.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-22 17:09:58.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20060
+  _job: 25358439297
+  _time: 2026-05-05 04:51:57.382050008 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.cactoos-cactoos-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1576 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1576
+  repository: 28924109
+  review: 2026-04-22 16:42:47.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-22 16:56:21.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20061
+  _job: 25358439297
+  _time: 2026-05-05 04:52:10.026206737 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: claude/upgrade-dependencies-tnRPs
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 1
+  details: Apparently, yegor256/takes#1577 has been "pull-was-merged".
+  failed_builds: 0
+  files: 10
+  hoc: 55
+  issue: 1577
+  repository: 28924109
+  review: 2026-04-22 14:38:40.000000000 Z
+  succeeded_builds: 12
+  suggestions: 1
+  what: pull-was-merged
+  when: 2026-04-23 03:31:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 20062
+  _job: 25358439297
+  _time: 2026-05-05 04:52:17.230500379 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.glassfish.grizzly-grizzly-http-servlet-server-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1578 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1578
+  repository: 28924109
+  review: 2026-04-30 17:12:48.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-30 18:21:06.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20063
+  _job: 25358439297
+  _time: 2026-05-05 04:52:24.506120227 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: claude/fix-windows-build-1aWtg
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1579 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1579
+  repository: 28924109
+  review: 2026-04-23 04:44:00.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-23 07:58:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 20064
+  _job: 25358439297
+  _time: 2026-05-05 04:52:32.249067896 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1580 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1580
+  repository: 28924109
+  review: 2026-04-28 03:41:23.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-28 14:23:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 20065
+  _job: 25358439297
+  _time: 2026-05-05 04:52:39.645937368 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/commons-io-commons-io-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1581 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1581
+  repository: 28924109
+  review: 2026-04-25 03:31:19.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-25 03:58:09.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20066
+  _job: 25358439297
+  _time: 2026-05-05 04:52:46.726322443 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: fix-1295-leading-crlf
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1582 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 50
+  issue: 1582
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-24 05:59:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 20067
+  _job: 25358439297
+  _time: 2026-05-05 04:52:52.595800731 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1583 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1583
+  repository: 28924109
+  review: 2026-04-25 03:31:16.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-25 03:43:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20068
+  _job: 25358439297
+  _time: 2026-05-05 04:52:59.692539249 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: fix-1559-cookie-matchers
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1584 has been "pull-was-merged".
+  failed_builds: 0
+  files: 4
+  hoc: 571
+  issue: 1584
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-24 05:56:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 20069
+  _job: 25358439297
+  _time: 2026-05-05 04:53:06.373803853 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1585 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 12
+  issue: 1585
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-28 10:04:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20070
+  _job: 25358439297
+  _time: 2026-05-05 04:53:07.929367911 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.cactoos-cactoos-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1587 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1587
+  repository: 28924109
+  review: 2026-04-26 16:40:27.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-26 16:55:47.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20071
+  _job: 25358439297
+  _time: 2026-05-05 04:53:20.745603169 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: '1586'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1589 has been "pull-was-merged".
+  failed_builds: 0
+  files: 391
+  hoc: 5797
+  issue: 1589
+  repository: 28924109
+  review: 2026-04-27 17:47:21.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-27 18:20:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 20072
+  _job: 25358439297
+  _time: 2026-05-05 04:53:27.367203154 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1590 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1590
+  repository: 28924109
+  review: 2026-04-28 03:41:20.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-28 10:04:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 20073
+  _job: 25358439297
+  _time: 2026-05-05 04:53:34.331057987 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1591 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 12
+  issue: 1591
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-04-28 10:05:13.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20074
+  _job: 25358439297
+  _time: 2026-05-05 04:53:35.876393987 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1592 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1592
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-28 14:23:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 20075
+  _job: 25358439297
+  _time: 2026-05-05 04:53:42.582456412 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1593 has been "pull-was-closed".
+  failed_builds: 3
+  files: 1
+  hoc: 2
+  issue: 1593
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-03 04:12:55.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20076
+  _job: 25358439297
+  _time: 2026-05-05 04:53:50.752051620 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 10933184764
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1561
+  min_pull_was_found: 639
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20077
+  _job: 25358439297
+  _time: 2026-05-05 04:54:22.601998507 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: 'We found out that the user #9535539 is known in GitHub as @bibonix.'
+  name: bibonix
+  what: who-has-name
+  when: 2026-05-05 04:54:22.772157697 Z
+  where: github
+  who: 9535539
+- _id: 20078
+  _job: 25358439297
+  _time: 2026-05-05 04:55:02.361217832 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The missing pull yegor256/takes#1594 has been opened by @renovate[bot].
+  issue: 1594
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-28 15:01:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20079
+  _job: 25358439297
+  _time: 2026-05-05 04:55:03.160360677 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: add-architecture-section
+  details: The missing pull yegor256/takes#1595 has been opened by @bibonix.
+  issue: 1595
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-29 09:42:21.000000000 Z
+  where: github
+  who: 9535539
+- _id: 20080
+  _job: 25358439297
+  _time: 2026-05-05 04:55:03.752933334 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/davidanson-markdownlint-cli2-action-23.x
+  details: The missing pull yegor256/takes#1596 has been opened by @renovate[bot].
+  issue: 1596
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-29 10:05:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20081
+  _job: 25358439297
+  _time: 2026-05-05 04:55:04.384257851 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The missing pull yegor256/takes#1597 has been opened by @renovate[bot].
+  issue: 1597
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-30 05:25:37.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20082
+  _job: 25358439297
+  _time: 2026-05-05 04:55:04.983315637 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  details: The missing pull yegor256/takes#1598 has been opened by @renovate[bot].
+  issue: 1598
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-30 10:35:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20083
+  _job: 25358439297
+  _time: 2026-05-05 04:55:05.648205541 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1599 has been opened by @renovate[bot].
+  issue: 1599
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-30 16:28:46.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20084
+  _job: 25358439297
+  _time: 2026-05-05 04:55:06.225923109 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The missing pull yegor256/takes#1600 has been opened by @renovate[bot].
+  issue: 1600
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-30 18:08:07.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20085
+  _job: 25358439297
+  _time: 2026-05-05 04:55:06.832863183 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The missing pull yegor256/takes#1601 has been opened by @github-actions[bot].
+  issue: 1601
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-04-30 18:08:40.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20086
+  _job: 25358439297
+  _time: 2026-05-05 05:01:02.206007294 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1563 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 15h10m and 0 comments.
+  hoc: 2
+  issue: 1563
+  repository: 28924109
+  review_comments: 0
+  seconds: 54635
+  what: code-was-reviewed
+  when: 2026-03-30 03:42:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 20087
+  _job: 25358439297
+  _time: 2026-05-05 05:01:04.270440623 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1566 with 4728 HoC created by @yegor256
+    was reviewed by @copilot after 0h6m and 2 comments.
+  hoc: 4728
+  issue: 1566
+  repository: 28924109
+  review_comments: 2
+  seconds: 381
+  what: code-was-reviewed
+  when: 2026-03-31 17:18:11.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20088
+  _job: 25358439297
+  _time: 2026-05-05 05:01:05.606425051 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1567 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h18m and 0 comments.
+  hoc: 2
+  issue: 1567
+  repository: 28924109
+  review_comments: 0
+  seconds: 26324
+  what: code-was-reviewed
+  when: 2026-04-02 04:05:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 20089
+  _job: 25358439297
+  _time: 2026-05-05 05:01:07.593373050 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1570 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 11h19m and 0 comments.
+  hoc: 2
+  issue: 1570
+  repository: 28924109
+  review_comments: 0
+  seconds: 40762
+  what: code-was-reviewed
+  when: 2026-04-14 04:03:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 20090
+  _job: 25358439297
+  _time: 2026-05-05 05:01:08.690937515 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1571 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 16h35m and 0 comments.
+  hoc: 2
+  issue: 1571
+  repository: 28924109
+  review_comments: 0
+  seconds: 59741
+  what: code-was-reviewed
+  when: 2026-04-18 03:48:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 20091
+  _job: 25358439297
+  _time: 2026-05-05 05:01:09.716423224 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1572 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 24h16m and 0 comments.
+  hoc: 2
+  issue: 1572
+  repository: 28924109
+  review_comments: 0
+  seconds: 87383
+  what: code-was-reviewed
+  when: 2026-04-20 16:51:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 20092
+  _job: 25358439297
+  _time: 2026-05-05 05:01:10.838577259 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1573 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h2m and 0 comments.
+  hoc: 2
+  issue: 1573
+  repository: 28924109
+  review_comments: 0
+  seconds: 14537
+  what: code-was-reviewed
+  when: 2026-04-20 16:51:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 20093
+  _job: 25358439297
+  _time: 2026-05-05 05:01:11.914698417 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1574 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 30h55m and 0 comments.
+  hoc: 2
+  issue: 1574
+  repository: 28924109
+  review_comments: 0
+  seconds: 111314
+  what: code-was-reviewed
+  when: 2026-04-22 16:42:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 20094
+  _job: 25358439297
+  _time: 2026-05-05 05:01:12.673421112 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1575 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 16h58m and 0 comments.
+  hoc: 4
+  issue: 1575
+  repository: 28924109
+  review_comments: 0
+  seconds: 61109
+  what: code-was-reviewed
+  when: 2026-04-22 16:42:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 20095
+  _job: 25358439297
+  _time: 2026-05-05 05:01:13.079460615 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1576 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 16h58m and 0 comments.
+  hoc: 2
+  issue: 1576
+  repository: 28924109
+  review_comments: 0
+  seconds: 61103
+  what: code-was-reviewed
+  when: 2026-04-22 16:42:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 20096
+  _job: 25358439297
+  _time: 2026-05-05 05:01:13.512848095 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1577 with 55 HoC created by @yegor256 was
+    reviewed by @copilot after 0h4m and 1 comments.
+  hoc: 55
+  issue: 1577
+  repository: 28924109
+  review_comments: 1
+  seconds: 243
+  what: code-was-reviewed
+  when: 2026-04-22 14:38:40.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20097
+  _job: 25358439297
+  _time: 2026-05-05 05:01:13.867030189 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1578 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 181h40m and 0 comments.
+  hoc: 2
+  issue: 1578
+  repository: 28924109
+  review_comments: 0
+  seconds: 654026
+  what: code-was-reviewed
+  when: 2026-04-30 17:12:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 20098
+  _job: 25358439297
+  _time: 2026-05-05 05:01:14.259045439 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 526301
+  comments: 1
+  details: The pull request yegor256/takes#1579 with 2 HoC created by @yegor256 was
+    reviewed by @copilot after 0h2m and 0 comments.
+  hoc: 2
+  issue: 1579
+  repository: 28924109
+  review_comments: 0
+  seconds: 126
+  what: code-was-reviewed
+  when: 2026-04-23 04:44:00.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20099
+  _job: 25358439297
+  _time: 2026-05-05 05:01:14.663548529 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1580 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 111h41m and 0 comments.
+  hoc: 2
+  issue: 1580
+  repository: 28924109
+  review_comments: 0
+  seconds: 402098
+  what: code-was-reviewed
+  when: 2026-04-28 03:41:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 20100
+  _job: 25358439297
+  _time: 2026-05-05 05:01:15.051040633 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1581 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 39h31m and 0 comments.
+  hoc: 4
+  issue: 1581
+  repository: 28924109
+  review_comments: 0
+  seconds: 142289
+  what: code-was-reviewed
+  when: 2026-04-25 03:31:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 20101
+  _job: 25358439297
+  _time: 2026-05-05 05:01:15.894068031 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1583 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 32h1m and 0 comments.
+  hoc: 2
+  issue: 1583
+  repository: 28924109
+  review_comments: 0
+  seconds: 115316
+  what: code-was-reviewed
+  when: 2026-04-25 03:31:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 20102
+  _job: 25358439297
+  _time: 2026-05-05 05:01:16.901604531 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1587 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 2h35m and 0 comments.
+  hoc: 2
+  issue: 1587
+  repository: 28924109
+  review_comments: 0
+  seconds: 9320
+  what: code-was-reviewed
+  when: 2026-04-26 16:40:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 20103
+  _job: 25358439297
+  _time: 2026-05-05 05:01:17.353466122 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1589 with 5797 HoC created by @yegor256
+    was reviewed by @copilot after 0h0m and 0 comments.
+  hoc: 5797
+  issue: 1589
+  repository: 28924109
+  review_comments: 0
+  seconds: 8
+  what: code-was-reviewed
+  when: 2026-04-27 17:47:21.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20104
+  _job: 25358439297
+  _time: 2026-05-05 05:01:17.771495732 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1590 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h49m and 0 comments.
+  hoc: 2
+  issue: 1590
+  repository: 28924109
+  review_comments: 0
+  seconds: 35343
+  what: code-was-reviewed
+  when: 2026-04-28 03:41:20.000000000 Z
+  where: github
+  who: 526301
