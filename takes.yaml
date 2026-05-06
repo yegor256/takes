@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 838.021853515
+  seconds: 810.809222494
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-05 05:04:59.118226797 Z
+  when: 2026-05-06 05:13:54.722553786 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -64398,7 +64398,7 @@
   total_releases_published: 1
   total_reviews_submitted: 11
   what: quantity-of-deliverables
-  when: 2026-04-28 05:01:38.000000000 Z
+  when: &136 2026-04-28 05:01:38.000000000 Z
 - _id: 19909
   _job: 25034818579
   _time: 2026-04-28 05:02:48.228186498 Z
@@ -64660,7 +64660,7 @@
   some_triage_time: 2.0
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2026-04-28 05:12:20.000000000 Z
+  when: &137 2026-04-28 05:12:20.000000000 Z
 - _id: 19913
   _job: 25091712719
   _time: 2026-04-29 04:59:45.127367791 Z
@@ -65153,18 +65153,6 @@
   when: 2026-05-01 16:35:08.000000000 Z
   where: github
   who: 526301
-- _id: 19957
-  _job: 70193
-  _time: 2026-05-02 05:04:50.572237879 Z
-  _version: 0.19.10/0.60.2/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (239.6) is decreasing (R=-0.70).
-    The average number of commits per week (7.0) is staying still.
-    The average number of releases per month (0.3) is decreasing (R=0.14).
-    The average monthly turnover (39.0 developers) is decreasing (R=-0.76).
-  what: assessment
-  when: 2026-05-02 05:04:50.585130314 Z
 - _id: 19960
   _job: 25270415750
   _time: 2026-05-03 05:02:47.973942652 Z
@@ -66820,12 +66808,6 @@
   when: 2026-04-28 15:01:10.000000000 Z
   where: github
   who: 29139614
-- _id: 20057
-  _job: 70575
-  _time: 2026-05-04 05:17:00.316654002 Z
-  _version: 0.19.10/0.60.2/0.17.17
-  what: learn-eva
-  when: 2026-05-04 05:17:00.288882052 Z
 - _id: 20059
   _job: 25358439297
   _time: 2026-05-05 04:51:46.355290840 Z
@@ -66844,6 +66826,7 @@
   issue: 1575
   repository: 28924109
   review: 2026-04-22 16:42:50.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66868,6 +66851,7 @@
   issue: 1576
   repository: 28924109
   review: 2026-04-22 16:42:47.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66892,6 +66876,7 @@
   issue: 1577
   repository: 28924109
   review: 2026-04-22 14:38:40.000000000 Z
+  review_comments: 1
   succeeded_builds: 12
   suggestions: 1
   what: pull-was-merged
@@ -66916,6 +66901,7 @@
   issue: 1578
   repository: 28924109
   review: 2026-04-30 17:12:48.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66940,6 +66926,7 @@
   issue: 1579
   repository: 28924109
   review: 2026-04-23 04:44:00.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66964,6 +66951,7 @@
   issue: 1580
   repository: 28924109
   review: 2026-04-28 03:41:23.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -66988,6 +66976,7 @@
   issue: 1581
   repository: 28924109
   review: 2026-04-25 03:31:19.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67011,6 +67000,7 @@
   hoc: 50
   issue: 1582
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67035,6 +67025,7 @@
   issue: 1583
   repository: 28924109
   review: 2026-04-25 03:31:16.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67058,6 +67049,7 @@
   hoc: 571
   issue: 1584
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67081,6 +67073,7 @@
   hoc: 12
   issue: 1585
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   suggestions: 0
   what: pull-was-merged
@@ -67105,6 +67098,7 @@
   issue: 1587
   repository: 28924109
   review: 2026-04-26 16:40:27.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67129,6 +67123,7 @@
   issue: 1589
   repository: 28924109
   review: 2026-04-27 17:47:21.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67153,6 +67148,7 @@
   issue: 1590
   repository: 28924109
   review: 2026-04-28 03:41:20.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67199,6 +67195,7 @@
   hoc: 2
   issue: 1592
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67228,23 +67225,6 @@
   when: 2026-05-03 04:12:55.000000000 Z
   where: github
   who: 29139614
-- _id: 20076
-  _job: 25358439297
-  _time: 2026-05-05 04:53:50.752051620 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10933184764
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1561
-  min_pull_was_found: 639
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20077
   _job: 25358439297
   _time: 2026-05-05 04:54:22.601998507 Z
@@ -67674,3 +67654,265 @@
   when: 2026-04-28 03:41:20.000000000 Z
   where: github
   who: 526301
+- _id: 20105
+  _job: 70748
+  _time: 2026-05-05 05:05:28.262781835 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (239.6) is decreasing (R=-0.70).
+    The average number of commits per week (7.0) is staying still.
+    The average number of releases per month (0.3) is decreasing (R=0.14).
+    The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
+  what: assessment
+  when: 2026-05-05 05:05:28.296258737 Z
+- _id: 20106
+  _job: 70748
+  _time: 2026-05-05 05:05:57.745342990 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-05 05:05:57.716074244 Z
+- _id: 20108
+  _job: 25417330628
+  _time: 2026-05-06 05:00:52.290373082 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  since: *136
+  total_builds_ran: 393
+  total_commits_pushed: 35
+  total_hoc_committed: 1201
+  total_issues_created: 20
+  total_pulls_submitted: 19
+  total_releases_published: 1
+  total_reviews_submitted: 12
+  what: quantity-of-deliverables
+  when: 2026-05-06 05:00:52.000000000 Z
+- _id: 20109
+  _job: 25417330628
+  _time: 2026-05-06 05:01:39.785103236 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1594 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1594
+  repository: 28924109
+  review: 2026-04-30 03:44:10.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-30 05:24:32.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20110
+  _job: 25417330628
+  _time: 2026-05-06 05:01:51.261962739 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: add-architecture-section
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1595 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 137
+  issue: 1595
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-29 10:04:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 20111
+  _job: 25417330628
+  _time: 2026-05-06 05:02:00.702091626 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/davidanson-markdownlint-cli2-action-23.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1596 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1596
+  repository: 28924109
+  review: 2026-04-30 03:44:08.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-30 04:08:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20112
+  _job: 25417330628
+  _time: 2026-05-06 05:02:21.688783714 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1597 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1597
+  repository: 28924109
+  review: 2026-04-30 17:12:45.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-30 18:07:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20113
+  _job: 25417330628
+  _time: 2026-05-06 05:02:33.747077948 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1598 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1598
+  repository: 28924109
+  review: 2026-04-30 17:12:40.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-30 17:50:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20114
+  _job: 25417330628
+  _time: 2026-05-06 05:02:45.220797423 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1599 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1599
+  repository: 28924109
+  review: 2026-04-30 17:12:36.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-04-30 17:29:40.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20115
+  _job: 25417330628
+  _time: 2026-05-06 05:03:04.941170045 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1600 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1600
+  repository: 28924109
+  review: 2026-05-01 03:35:27.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-01 03:55:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20116
+  _job: 25417330628
+  _time: 2026-05-06 05:03:17.089825962 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1601 has been "pull-was-closed".
+  failed_builds: 0
+  files: 4
+  hoc: 145
+  issue: 1601
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-04-30 18:08:43.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20117
+  _job: 25417330628
+  _time: 2026-05-06 05:03:21.860174770 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 10933677160
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1565
+  min_pull_was_found: 640
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20118
+  _job: 25417330628
+  _time: 2026-05-06 05:04:22.069511481 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 7
+  total_commits: 3767
+  total_contributors: 88
+  total_files: 541
+  total_forks: 213
+  total_issues: 750
+  total_pulls: 859
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-05-06 05:04:22.079213487 Z
+- _id: 20119
+  _job: 25417330628
+  _time: 2026-05-06 05:13:54.622715300 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  since: *137
+  what: quality-of-service
+  when: 2026-05-06 05:13:54.000000000 Z
