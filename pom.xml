@@ -109,7 +109,7 @@
     <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>
-      <version>1.0.b2</version>
+      <version>1.4.01</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -209,7 +209,7 @@
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-matchers</artifactId>
-      <version>1.9.0</version>
+      <version>1.8.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -706,7 +706,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.27.6</version>
+            <version>0.27.5</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
@@ -768,13 +768,13 @@
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-core</artifactId>
-          <version>4.0.8</version>
+          <version>4.0.7</version>
           <scope>runtime</scope>
         </dependency>
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-impl</artifactId>
-          <version>4.0.8</version>
+          <version>4.0.7</version>
           <scope>runtime</scope>
         </dependency>
       </dependencies>
