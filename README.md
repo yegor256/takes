@@ -1283,7 +1283,7 @@ changing application code.**
 [`SrvTake`](src/main/java/org/takes/servlet/SrvTake.java) adapts any `Take` to a
 standard [`HttpServlet`](https://jakarta.ee/specifications/servlet/), allowing
 the same application to run standalone (via `FtBasic`) or inside Tomcat, Jetty,
-or any [Servlet 3.x](https://jakarta.ee/specifications/servlet/3.1/) container.
+or any [Servlet 6.x](https://jakarta.ee/specifications/servlet/6.1/) container.
 The adapter translates a `ServletRequest` into a `Request` and serialises the
 `Response` back to the `ServletResponse`. This provides deployment flexibility
 without coupling the application logic to any container API.
