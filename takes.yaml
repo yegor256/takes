@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.809222494
+  seconds: 768.359131979
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-06 05:13:54.722553786 Z
+  when: 2026-05-07 05:15:13.451897738 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -66055,18 +66055,6 @@
   when: 2026-05-03 03:39:01.000000000 Z
   where: github
   who: 526301
-- _id: 20012
-  _job: 70406
-  _time: 2026-05-03 05:16:58.102630620 Z
-  _version: 0.19.10/0.60.2/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (239.6) is decreasing (R=-0.70).
-    The average number of commits per week (7.0) is staying still.
-    The average number of releases per month (0.3) is decreasing (R=0.14).
-    The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
-  what: assessment
-  when: 2026-05-03 05:16:58.120506360 Z
 - _id: 20015
   _job: 25301947241
   _time: 2026-05-04 05:03:10.048707390 Z
@@ -66823,6 +66811,7 @@
   failed_builds: 0
   files: 1
   hoc: 4
+  is_human: 0
   issue: 1575
   repository: 28924109
   review: 2026-04-22 16:42:50.000000000 Z
@@ -66848,6 +66837,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1576
   repository: 28924109
   review: 2026-04-22 16:42:47.000000000 Z
@@ -66873,6 +66863,7 @@
   failed_builds: 0
   files: 10
   hoc: 55
+  is_human: 1
   issue: 1577
   repository: 28924109
   review: 2026-04-22 14:38:40.000000000 Z
@@ -66898,6 +66889,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1578
   repository: 28924109
   review: 2026-04-30 17:12:48.000000000 Z
@@ -66923,6 +66915,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1579
   repository: 28924109
   review: 2026-04-23 04:44:00.000000000 Z
@@ -66948,6 +66941,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1580
   repository: 28924109
   review: 2026-04-28 03:41:23.000000000 Z
@@ -66973,6 +66967,7 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 0
   issue: 1581
   repository: 28924109
   review: 2026-04-25 03:31:19.000000000 Z
@@ -66998,6 +66993,7 @@
   failed_builds: 0
   files: 2
   hoc: 50
+  is_human: 1
   issue: 1582
   repository: 28924109
   review_comments: 0
@@ -67022,6 +67018,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1583
   repository: 28924109
   review: 2026-04-25 03:31:16.000000000 Z
@@ -67047,6 +67044,7 @@
   failed_builds: 0
   files: 4
   hoc: 571
+  is_human: 1
   issue: 1584
   repository: 28924109
   review_comments: 0
@@ -67071,6 +67069,7 @@
   failed_builds: 0
   files: 1
   hoc: 12
+  is_human: 1
   issue: 1585
   repository: 28924109
   review_comments: 0
@@ -67095,6 +67094,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1587
   repository: 28924109
   review: 2026-04-26 16:40:27.000000000 Z
@@ -67120,6 +67120,7 @@
   failed_builds: 0
   files: 391
   hoc: 5797
+  is_human: 1
   issue: 1589
   repository: 28924109
   review: 2026-04-27 17:47:21.000000000 Z
@@ -67145,6 +67146,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1590
   repository: 28924109
   review: 2026-04-28 03:41:20.000000000 Z
@@ -67170,6 +67172,7 @@
   failed_builds: 0
   files: 1
   hoc: 12
+  is_human: 0
   issue: 1591
   repository: 28924109
   succeeded_builds: 0
@@ -67193,6 +67196,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1592
   repository: 28924109
   review_comments: 0
@@ -67217,6 +67221,7 @@
   failed_builds: 3
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1593
   repository: 28924109
   succeeded_builds: 9
@@ -67230,6 +67235,7 @@
   _time: 2026-05-05 04:54:22.601998507 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: 'We found out that the user #9535539 is known in GitHub as @bibonix.'
+  is_human: 1
   name: bibonix
   what: who-has-name
   when: 2026-05-05 04:54:22.772157697 Z
@@ -67241,6 +67247,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/xml-apis-xml-apis-2.x
   details: The missing pull yegor256/takes#1594 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1594
   repository: 28924109
   what: pull-was-opened
@@ -67253,6 +67260,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: add-architecture-section
   details: The missing pull yegor256/takes#1595 has been opened by @bibonix.
+  is_human: 1
   issue: 1595
   repository: 28924109
   what: pull-was-opened
@@ -67265,6 +67273,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/davidanson-markdownlint-cli2-action-23.x
   details: The missing pull yegor256/takes#1596 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1596
   repository: 28924109
   what: pull-was-opened
@@ -67277,6 +67286,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/xml-apis-xml-apis-replacement
   details: The missing pull yegor256/takes#1597 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1597
   repository: 28924109
   what: pull-was-opened
@@ -67289,6 +67299,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/com.restfb-restfb-2026.x
   details: The missing pull yegor256/takes#1598 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1598
   repository: 28924109
   what: pull-was-opened
@@ -67301,6 +67312,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/crate-ci-typos-1.x
   details: The missing pull yegor256/takes#1599 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1599
   repository: 28924109
   what: pull-was-opened
@@ -67313,6 +67325,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/xml-apis-xml-apis-2.x
   details: The missing pull yegor256/takes#1600 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1600
   repository: 28924109
   what: pull-was-opened
@@ -67325,6 +67338,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: up
   details: The missing pull yegor256/takes#1601 has been opened by @github-actions[bot].
+  is_human: 0
   issue: 1601
   repository: 28924109
   what: pull-was-opened
@@ -67340,6 +67354,7 @@
   details: The pull request yegor256/takes#1563 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 15h10m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1563
   repository: 28924109
   review_comments: 0
@@ -67357,6 +67372,7 @@
   details: The pull request yegor256/takes#1566 with 4728 HoC created by @yegor256
     was reviewed by @copilot after 0h6m and 2 comments.
   hoc: 4728
+  is_human: 0
   issue: 1566
   repository: 28924109
   review_comments: 2
@@ -67374,6 +67390,7 @@
   details: The pull request yegor256/takes#1567 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 7h18m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1567
   repository: 28924109
   review_comments: 0
@@ -67391,6 +67408,7 @@
   details: The pull request yegor256/takes#1570 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 11h19m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1570
   repository: 28924109
   review_comments: 0
@@ -67408,6 +67426,7 @@
   details: The pull request yegor256/takes#1571 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 16h35m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1571
   repository: 28924109
   review_comments: 0
@@ -67425,6 +67444,7 @@
   details: The pull request yegor256/takes#1572 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 24h16m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1572
   repository: 28924109
   review_comments: 0
@@ -67442,6 +67462,7 @@
   details: The pull request yegor256/takes#1573 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 4h2m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1573
   repository: 28924109
   review_comments: 0
@@ -67459,6 +67480,7 @@
   details: The pull request yegor256/takes#1574 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 30h55m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1574
   repository: 28924109
   review_comments: 0
@@ -67476,6 +67498,7 @@
   details: The pull request yegor256/takes#1575 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 16h58m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1575
   repository: 28924109
   review_comments: 0
@@ -67493,6 +67516,7 @@
   details: The pull request yegor256/takes#1576 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 16h58m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1576
   repository: 28924109
   review_comments: 0
@@ -67510,6 +67534,7 @@
   details: The pull request yegor256/takes#1577 with 55 HoC created by @yegor256 was
     reviewed by @copilot after 0h4m and 1 comments.
   hoc: 55
+  is_human: 0
   issue: 1577
   repository: 28924109
   review_comments: 1
@@ -67527,6 +67552,7 @@
   details: The pull request yegor256/takes#1578 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 181h40m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1578
   repository: 28924109
   review_comments: 0
@@ -67544,6 +67570,7 @@
   details: The pull request yegor256/takes#1579 with 2 HoC created by @yegor256 was
     reviewed by @copilot after 0h2m and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 1579
   repository: 28924109
   review_comments: 0
@@ -67561,6 +67588,7 @@
   details: The pull request yegor256/takes#1580 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 111h41m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1580
   repository: 28924109
   review_comments: 0
@@ -67578,6 +67606,7 @@
   details: The pull request yegor256/takes#1581 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 39h31m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1581
   repository: 28924109
   review_comments: 0
@@ -67595,6 +67624,7 @@
   details: The pull request yegor256/takes#1583 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 32h1m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1583
   repository: 28924109
   review_comments: 0
@@ -67612,6 +67642,7 @@
   details: The pull request yegor256/takes#1587 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 2h35m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1587
   repository: 28924109
   review_comments: 0
@@ -67629,6 +67660,7 @@
   details: The pull request yegor256/takes#1589 with 5797 HoC created by @yegor256
     was reviewed by @copilot after 0h0m and 0 comments.
   hoc: 5797
+  is_human: 0
   issue: 1589
   repository: 28924109
   review_comments: 0
@@ -67646,6 +67678,7 @@
   details: The pull request yegor256/takes#1590 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 9h49m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1590
   repository: 28924109
   review_comments: 0
@@ -67666,12 +67699,6 @@
     The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
   what: assessment
   when: 2026-05-05 05:05:28.296258737 Z
-- _id: 20106
-  _job: 70748
-  _time: 2026-05-05 05:05:57.745342990 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-05 05:05:57.716074244 Z
 - _id: 20108
   _job: 25417330628
   _time: 2026-05-06 05:00:52.290373082 Z
@@ -67701,9 +67728,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1594
   repository: 28924109
   review: 2026-04-30 03:44:10.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67725,8 +67754,10 @@
   failed_builds: 0
   files: 1
   hoc: 137
+  is_human: 1
   issue: 1595
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67748,9 +67779,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1596
   repository: 28924109
   review: 2026-04-30 03:44:08.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67772,9 +67805,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1597
   repository: 28924109
   review: 2026-04-30 17:12:45.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67796,9 +67831,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1598
   repository: 28924109
   review: 2026-04-30 17:12:40.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67820,9 +67857,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1599
   repository: 28924109
   review: 2026-04-30 17:12:36.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67844,9 +67883,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1600
   repository: 28924109
   review: 2026-05-01 03:35:27.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -67868,6 +67909,7 @@
   failed_builds: 0
   files: 4
   hoc: 145
+  is_human: 0
   issue: 1601
   repository: 28924109
   succeeded_builds: 0
@@ -67876,23 +67918,6 @@
   when: 2026-04-30 18:08:43.000000000 Z
   where: github
   who: 41898282
-- _id: 20117
-  _job: 25417330628
-  _time: 2026-05-06 05:03:21.860174770 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10933677160
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1565
-  min_pull_was_found: 640
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20118
   _job: 25417330628
   _time: 2026-05-06 05:04:22.069511481 Z
@@ -67914,5 +67939,416 @@
   _time: 2026-05-06 05:13:54.622715300 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *137
+  some_backlog_size:
+  - 91
+  - 92
+  - 90
+  - 90
+  - 89
+  - 89
+  - 89
+  some_build_duration:
+  - 6
+  - 7
+  - 9
+  - 10
+  - 11
+  - 13
+  - 13
+  - 31
+  - 958
+  - 35
+  - 7
+  - 7
+  - 9
+  - 10
+  - 11
+  - 13
+  - 24
+  - 24
+  - 32
+  - 239
+  - 7
+  - 8
+  - 8
+  - 9
+  - 9
+  - 11
+  - 14
+  - 21
+  - 29
+  - 33
+  - 80
+  - 252
+  - 8
+  - 9
+  - 9
+  - 10
+  - 13
+  - 14
+  - 16
+  - 26
+  - 27
+  - 33
+  - 72
+  - 241
+  - 906
+  - 45
+  - 958
+  - 43
+  - 10
+  - 10
+  - 10
+  - 12
+  - 14
+  - 15
+  - 20
+  - 23
+  - 35
+  - 37
+  - 255
+  - 939
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_issue_lifetime:
+  - 20907949.0
+  - 135314714.0
+  - 161272092.0
+  some_merged_pulls: 21
+  some_pull_files_size:
+  - 5
+  - 2
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 235
+  - 4
+  - 4
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 137
+  - 2
+  - 2
+  - 2
+  - 12
+  - 2
+  - 2
+  - 2
+  some_pull_lifetime:
+  - 6145.0
+  - 86670.0
+  - 110681.0
+  - 2.0
+  - 127383.0
+  - 46334.0
+  - 3.0
+  - 35263.0
+  - 3654.0
+  - 26086.0
+  - 45697.0
+  - 64946.0
+  - 1332.0
+  - 138196.0
+  - 2385.0
+  - 8.0
+  - 58334.0
+  - 359424.0
+  - 440625.0
+  - 658124.0
+  - 37514224.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 1292
+  - 956
+  - 2007
+  - 804
+  - 1223
+  - 1024
+  - 2240
+  - 3269
+  - 1446
+  - 6022
+  - 22991
+  - 38527
+  - 4098
+  some_reviewers_per_pull:
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 1
+  - 0
+  some_reviews_per_pull:
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 1
+  - 0
+  some_triage_time: 1.0
+  some_unmerged_pulls: 3
   what: quality-of-service
   when: 2026-05-06 05:13:54.000000000 Z
+- _id: 20120
+  _job: 70894
+  _time: 2026-05-06 05:14:27.356158518 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (242.9) is decreasing (R=-0.63).
+    The average number of commits per week (7.7) is increasing (R=0.15).
+    The average number of releases per month (0.4) is increasing (R=0.27).
+    The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
+  what: assessment
+  when: 2026-05-06 05:14:27.374904726 Z
+- _id: 20121
+  _job: 70894
+  _time: 2026-05-06 05:15:00.635422054 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-06 05:15:00.605761284 Z
+- _id: 20122
+  _job: 25476976127
+  _time: 2026-05-07 05:03:08.338065882 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11024502716
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1586
+  min_pull_was_found: 641
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20123
+  _job: 25476976127
+  _time: 2026-05-07 05:10:32.712166465 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1594 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 36h42m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1594
+  repository: 28924109
+  review_comments: 0
+  seconds: 132174
+  what: code-was-reviewed
+  when: 2026-04-30 03:44:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 20124
+  _job: 25476976127
+  _time: 2026-05-07 05:10:34.005694053 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1596 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 17h38m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1596
+  repository: 28924109
+  review_comments: 0
+  seconds: 63500
+  what: code-was-reviewed
+  when: 2026-04-30 03:44:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 20125
+  _job: 25476976127
+  _time: 2026-05-07 05:10:34.710159318 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1597 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 11h47m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1597
+  repository: 28924109
+  review_comments: 0
+  seconds: 42428
+  what: code-was-reviewed
+  when: 2026-04-30 17:12:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 20126
+  _job: 25476976127
+  _time: 2026-05-07 05:10:35.772493386 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1598 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 6h37m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1598
+  repository: 28924109
+  review_comments: 0
+  seconds: 23846
+  what: code-was-reviewed
+  when: 2026-04-30 17:12:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 20127
+  _job: 25476976127
+  _time: 2026-05-07 05:10:36.865504768 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1599 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 0h43m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1599
+  repository: 28924109
+  review_comments: 0
+  seconds: 2630
+  what: code-was-reviewed
+  when: 2026-04-30 17:12:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 20128
+  _job: 25476976127
+  _time: 2026-05-07 05:10:37.995138479 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1600 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 9h27m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1600
+  repository: 28924109
+  review_comments: 0
+  seconds: 34040
+  what: code-was-reviewed
+  when: 2026-05-01 03:35:27.000000000 Z
+  where: github
+  who: 526301
