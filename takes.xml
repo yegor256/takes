@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1218683">
+<fb version="0.19.6" size="1220194">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">768.359131979</seconds>
+    <seconds t="F">842.60098658</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-05-07T05:15:13Z</when>
+    <when t="T">2026-05-08T05:04:02Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -75706,19 +75706,6 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">20105</_id>
-    <_job t="I">70748</_job>
-    <_time t="T">2026-05-05T05:05:28Z</_time>
-    <_version t="S">0.19.10/0.60.3/0.17.17</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (239.6) is decreasing (R=-0.70).
-The average number of commits per week (7.0) is staying still.
-The average number of releases per month (0.3) is decreasing (R=0.14).
-The average monthly turnover (39.0 developers) is decreasing (R=-0.75).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-05-05T05:05:28Z</when>
-  </f>
-  <f>
     <_id t="I">20108</_id>
     <_job t="I">25417330628</_job>
     <_time t="T">2026-05-06T05:00:52Z</_time>
@@ -76275,33 +76262,6 @@ The average monthly turnover (39.0 developers) is decreasing (R=-0.75).</text>
     <when t="T">2026-05-06T05:14:27Z</when>
   </f>
   <f>
-    <_id t="I">20121</_id>
-    <_job t="I">70894</_job>
-    <_time t="T">2026-05-06T05:15:00Z</_time>
-    <_version t="S">0.19.10/0.60.3/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-05-06T05:15:00Z</when>
-  </f>
-  <f>
-    <_id t="I">20122</_id>
-    <_job t="I">25476976127</_job>
-    <_time t="T">2026-05-07T05:03:08Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">11024502716</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1586</min_issue_was_found>
-    <min_pull_was_found t="I">641</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1551</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">20123</_id>
     <_job t="I">25476976127</_job>
     <_time t="T">2026-05-07T05:10:32Z</_time>
@@ -76412,6 +76372,131 @@ The average monthly turnover (39.0 developers) is decreasing (R=-0.75).</text>
     <seconds t="I">34040</seconds>
     <what t="S">code-was-reviewed</what>
     <when t="T">2026-05-01T03:35:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20129</_id>
+    <_job t="I">71059</_job>
+    <_time t="T">2026-05-07T05:15:43Z</_time>
+    <_version t="S">0.19.10/0.60.3/0.17.17</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (242.9) is decreasing (R=-0.63).
+The average number of commits per week (7.7) is increasing (R=0.15).
+The average number of releases per month (0.4) is increasing (R=0.27).
+The average monthly turnover (39.0 developers) is decreasing (R=-0.75).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-05-07T05:15:43Z</when>
+  </f>
+  <f>
+    <_id t="I">20130</_id>
+    <_job t="I">71059</_job>
+    <_time t="T">2026-05-07T05:16:16Z</_time>
+    <_version t="S">0.19.10/0.60.3/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-05-07T05:16:16Z</when>
+  </f>
+  <f>
+    <_id t="I">20132</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:50:27Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <details t="S">Apparently, yegor256/takes#1303 has been "issue-was-closed".</details>
+    <issue t="I">1303</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2026-05-07T17:00:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20133</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:50:27Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <details t="S">Apparently, yegor256/takes#1307 has been "issue-was-closed".</details>
+    <issue t="I">1307</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2026-05-07T17:00:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20134</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:50:29Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <details t="S">Apparently, yegor256/takes#1366 has been "issue-was-closed".</details>
+    <issue t="I">1366</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2026-05-07T17:00:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20135</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:50:55Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">9219525886</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1588</min_issue_was_found>
+    <min_pull_was_found t="I">644</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1551</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">20136</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:51:46Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <total_active_contributors t="I">7</total_active_contributors>
+    <total_commits t="I">3780</total_commits>
+    <total_contributors t="I">88</total_contributors>
+    <total_files t="I">541</total_files>
+    <total_forks t="I">213</total_forks>
+    <total_issues t="I">750</total_issues>
+    <total_pulls t="I">866</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">877</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-05-08T04:51:46Z</when>
+  </f>
+  <f>
+    <_id t="I">20137</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:52:39Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1207.</details>
+    <issue t="I">1207</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2026-05-07T17:01:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20138</_id>
+    <_job t="I">25537385734</_job>
+    <_time t="T">2026-05-08T04:52:49Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1440.</details>
+    <issue t="I">1440</issue>
+    <label t="S">bug</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2026-05-07T16:59:38Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>

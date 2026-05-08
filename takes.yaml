@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 768.359131979
+  seconds: 842.60098658
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-07 05:15:13.451897738 Z
+  when: 2026-05-08 05:04:02.259941565 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -67687,18 +67687,6 @@
   when: 2026-04-28 03:41:20.000000000 Z
   where: github
   who: 526301
-- _id: 20105
-  _job: 70748
-  _time: 2026-05-05 05:05:28.262781835 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (239.6) is decreasing (R=-0.70).
-    The average number of commits per week (7.0) is staying still.
-    The average number of releases per month (0.3) is decreasing (R=0.14).
-    The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
-  what: assessment
-  when: 2026-05-05 05:05:28.296258737 Z
 - _id: 20108
   _job: 25417330628
   _time: 2026-05-06 05:00:52.290373082 Z
@@ -68221,29 +68209,6 @@
     The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
   what: assessment
   when: 2026-05-06 05:14:27.374904726 Z
-- _id: 20121
-  _job: 70894
-  _time: 2026-05-06 05:15:00.635422054 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-06 05:15:00.605761284 Z
-- _id: 20122
-  _job: 25476976127
-  _time: 2026-05-07 05:03:08.338065882 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11024502716
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1586
-  min_pull_was_found: 641
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20123
   _job: 25476976127
   _time: 2026-05-07 05:10:32.712166465 Z
@@ -68350,5 +68315,113 @@
   seconds: 34040
   what: code-was-reviewed
   when: 2026-05-01 03:35:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 20129
+  _job: 71059
+  _time: 2026-05-07 05:15:43.131740419 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (242.9) is decreasing (R=-0.63).
+    The average number of commits per week (7.7) is increasing (R=0.15).
+    The average number of releases per month (0.4) is increasing (R=0.27).
+    The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
+  what: assessment
+  when: 2026-05-07 05:15:43.148362272 Z
+- _id: 20130
+  _job: 71059
+  _time: 2026-05-07 05:16:16.342659630 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-07 05:16:16.314785223 Z
+- _id: 20132
+  _job: 25537385734
+  _time: 2026-05-08 04:50:27.077981525 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: Apparently, yegor256/takes#1303 has been "issue-was-closed".
+  issue: 1303
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-05-07 17:00:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 20133
+  _job: 25537385734
+  _time: 2026-05-08 04:50:27.954560332 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: Apparently, yegor256/takes#1307 has been "issue-was-closed".
+  issue: 1307
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-05-07 17:00:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 20134
+  _job: 25537385734
+  _time: 2026-05-08 04:50:29.519457350 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: Apparently, yegor256/takes#1366 has been "issue-was-closed".
+  issue: 1366
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-05-07 17:00:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 20135
+  _job: 25537385734
+  _time: 2026-05-08 04:50:55.427154932 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 9219525886
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1588
+  min_pull_was_found: 644
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20136
+  _job: 25537385734
+  _time: 2026-05-08 04:51:46.200648215 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 7
+  total_commits: 3780
+  total_contributors: 88
+  total_files: 541
+  total_forks: 213
+  total_issues: 750
+  total_pulls: 866
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-05-08 04:51:46.212763529 Z
+- _id: 20137
+  _job: 25537385734
+  _time: 2026-05-08 04:52:39.578660554 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1207.
+  issue: 1207
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-05-07 17:01:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 20138
+  _job: 25537385734
+  _time: 2026-05-08 04:52:49.980954721 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1440.
+  issue: 1440
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-05-07 16:59:38.000000000 Z
   where: github
   who: 526301
