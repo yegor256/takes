@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 842.60098658
+  seconds: 779.119935428
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-08 05:04:02.259941565 Z
+  when: 2026-05-09 05:09:14.897806381 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -68329,17 +68329,12 @@
     The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
   what: assessment
   when: 2026-05-07 05:15:43.148362272 Z
-- _id: 20130
-  _job: 71059
-  _time: 2026-05-07 05:16:16.342659630 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-07 05:16:16.314785223 Z
 - _id: 20132
   _job: 25537385734
   _time: 2026-05-08 04:50:27.077981525 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: Apparently, yegor256/takes#1303 has been "issue-was-closed".
+  is_human: 1
   issue: 1303
   repository: 28924109
   what: issue-was-closed
@@ -68351,6 +68346,7 @@
   _time: 2026-05-08 04:50:27.954560332 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: Apparently, yegor256/takes#1307 has been "issue-was-closed".
+  is_human: 1
   issue: 1307
   repository: 28924109
   what: issue-was-closed
@@ -68362,29 +68358,13 @@
   _time: 2026-05-08 04:50:29.519457350 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: Apparently, yegor256/takes#1366 has been "issue-was-closed".
+  is_human: 1
   issue: 1366
   repository: 28924109
   what: issue-was-closed
   when: 2026-05-07 17:00:08.000000000 Z
   where: github
   who: 526301
-- _id: 20135
-  _job: 25537385734
-  _time: 2026-05-08 04:50:55.427154932 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 9219525886
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1588
-  min_pull_was_found: 644
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20136
   _job: 25537385734
   _time: 2026-05-08 04:51:46.200648215 Z
@@ -68406,6 +68386,7 @@
   _time: 2026-05-08 04:52:39.578660554 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1207.
+  is_human: 1
   issue: 1207
   label: bug
   repository: 28924109
@@ -68418,10 +68399,415 @@
   _time: 2026-05-08 04:52:49.980954721 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1440.
+  is_human: 1
   issue: 1440
   label: bug
   repository: 28924109
   what: label-was-attached
   when: 2026-05-07 16:59:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 20139
+  _job: 71234
+  _time: 2026-05-08 05:05:04.424512108 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-08 05:05:04.400822761 Z
+- _id: 20140
+  _job: 25592229562
+  _time: 2026-05-09 04:56:30.882583840 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/takes#1621 has been opened by @renovate[bot].
+  event_id: 9240349557
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1621
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-08 14:35:46.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20141
+  _job: 25592229562
+  _time: 2026-05-09 04:56:31.098319364 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull request yegor256/takes#1620 has been opened by @renovate[bot].
+  event_id: 9240346405
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1620
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-08 14:35:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20142
+  _job: 25592229562
+  _time: 2026-05-09 04:56:31.796584516 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1619 has been closed by @github-actions[bot],
+    with 4 HoC and 0 comments.
+  event_id: 9228789198
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1619
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-08 09:05:37.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20143
+  _job: 25592229562
+  _time: 2026-05-09 04:56:33.381029115 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The pull request yegor256/takes#1619 has been opened by @github-actions[bot].
+  event_id: 9228783381
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1619
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-08 09:05:35.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20144
+  _job: 25592229562
+  _time: 2026-05-09 04:56:33.565730915 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1618 has been opened by @renovate[bot].
+  event_id: 9228767514
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1618
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-08 09:05:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20145
+  _job: 25592229562
+  _time: 2026-05-09 04:56:34.438649470 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1617 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 9228253328
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1617
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-05-08 08:50:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 20147
+  _job: 25592229562
+  _time: 2026-05-09 04:56:56.357037561 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull yegor256/takes#1617 has been opened earlier by @renovate[bot].
+  is_human: 0
+  issue: 1617
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-08 03:51:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20148
+  _job: 25592229562
+  _time: 2026-05-09 04:57:09.230097258 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1617 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1617
+  repository: 28924109
+  review: 2026-05-08 08:50:14.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-08 09:04:02.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20149
+  _job: 25592229562
+  _time: 2026-05-09 04:57:21.379456285 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1618 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1618
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-08 14:34:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 20150
+  _job: 25592229562
+  _time: 2026-05-09 04:57:28.102183729 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1620 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1620
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-08 14:39:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 20151
+  _job: 25592229562
+  _time: 2026-05-09 04:57:34.344616351 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1621 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1621
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-08 14:41:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 20152
+  _job: 25592229562
+  _time: 2026-05-09 04:57:41.732057206 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11593814060
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1603
+  min_pull_was_found: 647
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20153
+  _job: 25592229562
+  _time: 2026-05-09 04:58:13.671592975 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 7
+  total_commits: 3787
+  total_contributors: 88
+  total_files: 541
+  total_forks: 213
+  total_issues: 750
+  total_pulls: 870
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-05-09 04:58:13.680406145 Z
+- _id: 20154
+  _job: 25592229562
+  _time: 2026-05-09 04:58:54.194006335 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-jcabi-matchers-1.x
+  details: The missing pull yegor256/takes#1607 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1607
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-03 03:55:20.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20155
+  _job: 25592229562
+  _time: 2026-05-09 04:58:54.798924210 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The missing pull yegor256/takes#1608 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1608
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-03 04:12:52.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20156
+  _job: 25592229562
+  _time: 2026-05-09 04:58:55.453184899 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: 1117-head-once-body-once
+  details: The missing pull yegor256/takes#1609 has been opened by @bibonix.
+  is_human: 1
+  issue: 1609
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-03 08:44:03.000000000 Z
+  where: github
+  who: 9535539
+- _id: 20157
+  _job: 25592229562
+  _time: 2026-05-09 04:58:56.122539841 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/jaxb-ri-monorepo
+  details: The missing pull yegor256/takes#1610 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1610
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-05 10:57:09.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20158
+  _job: 25592229562
+  _time: 2026-05-09 04:58:56.696230747 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/davidanson-markdownlint-cli2-action-23.x
+  details: The missing pull yegor256/takes#1611 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1611
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-06 14:19:17.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20159
+  _job: 25592229562
+  _time: 2026-05-09 04:58:57.238217750 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The missing pull yegor256/takes#1612 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1612
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-06 14:19:28.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20160
+  _job: 25592229562
+  _time: 2026-05-09 04:58:57.787597505 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The missing pull yegor256/takes#1613 has been opened by @github-actions[bot].
+  is_human: 0
+  issue: 1613
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-06 14:25:49.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20161
+  _job: 25592229562
+  _time: 2026-05-09 04:58:58.393215244 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The missing pull yegor256/takes#1614 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1614
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-06 17:26:38.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20162
+  _job: 25592229562
+  _time: 2026-05-09 04:58:58.958647079 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The missing pull yegor256/takes#1615 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1615
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-07 14:22:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20163
+  _job: 25592229562
+  _time: 2026-05-09 04:58:59.641488695 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: fix-architecture-servlet-version
+  details: The missing pull yegor256/takes#1616 has been opened by @bibonix.
+  is_human: 1
+  issue: 1616
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-07 15:15:48.000000000 Z
+  where: github
+  who: 9535539
+- _id: 20164
+  _job: 25592229562
+  _time: 2026-05-09 05:04:58.276908339 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1617 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h59m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1617
+  repository: 28924109
+  review_comments: 0
+  seconds: 17943
+  what: code-was-reviewed
+  when: 2026-05-08 08:50:14.000000000 Z
   where: github
   who: 526301
