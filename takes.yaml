@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 767.369143624
+  seconds: 720.390661039
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-10 05:16:42.122454843 Z
+  when: 2026-05-11 05:20:20.644994995 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -68305,18 +68305,6 @@
   when: 2026-05-01 03:35:27.000000000 Z
   where: github
   who: 526301
-- _id: 20129
-  _job: 71059
-  _time: 2026-05-07 05:15:43.131740419 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (242.9) is decreasing (R=-0.63).
-    The average number of commits per week (7.7) is increasing (R=0.15).
-    The average number of releases per month (0.4) is increasing (R=0.27).
-    The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
-  what: assessment
-  when: 2026-05-07 05:15:43.148362272 Z
 - _id: 20132
   _job: 25537385734
   _time: 2026-05-08 04:50:27.077981525 Z
@@ -68792,12 +68780,6 @@
     The average monthly turnover (39.0 developers) is decreasing (R=-0.75).
   what: assessment
   when: 2026-05-09 05:09:44.357987673 Z
-- _id: 20166
-  _job: 71424
-  _time: 2026-05-09 05:10:13.772254270 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-09 05:10:13.743070475 Z
 - _id: 20168
   _job: 25620359720
   _time: 2026-05-10 05:04:23.224491578 Z
@@ -68817,6 +68799,7 @@
   issue: 1607
   repository: 28924109
   review: 2026-05-04 03:38:18.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -68842,6 +68825,7 @@
   issue: 1608
   repository: 28924109
   review: 2026-05-04 03:38:15.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -68866,6 +68850,7 @@
   is_human: 1
   issue: 1609
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -68891,6 +68876,7 @@
   issue: 1610
   repository: 28924109
   review: 2026-05-06 09:47:47.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -68916,6 +68902,7 @@
   issue: 1611
   repository: 28924109
   review: 2026-05-06 16:57:22.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -68941,6 +68928,7 @@
   issue: 1612
   repository: 28924109
   review: 2026-05-06 16:57:18.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -68989,6 +68977,7 @@
   is_human: 1
   issue: 1614
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -69014,6 +69003,7 @@
   issue: 1615
   repository: 28924109
   review: 2026-05-08 03:36:04.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -69038,29 +69028,13 @@
   is_human: 1
   issue: 1616
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-07 15:27:19.000000000 Z
   where: github
   who: 526301
-- _id: 20178
-  _job: 25620359720
-  _time: 2026-05-10 05:05:35.019631658 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11645031809
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1603
-  min_pull_was_found: 648
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20179
   _job: 25620359720
   _time: 2026-05-10 05:06:04.927113501 Z
@@ -69185,3 +69159,54 @@
   when: 2026-05-08 03:36:04.000000000 Z
   where: github
   who: 526301
+- _id: 20186
+  _job: 71574
+  _time: 2026-05-10 05:17:11.369677505 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (242.9) is decreasing (R=-0.63).
+    The average number of commits per week (7.7) is increasing (R=0.15).
+    The average number of releases per month (0.4) is increasing (R=0.27).
+    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
+  what: assessment
+  when: 2026-05-10 05:17:11.386238402 Z
+- _id: 20187
+  _job: 71574
+  _time: 2026-05-10 05:17:39.932198243 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-10 05:17:39.905333571 Z
+- _id: 20188
+  _job: 25651459261
+  _time: 2026-05-11 05:08:51.690547871 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11676128967
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1603
+  min_pull_was_found: 649
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20189
+  _job: 25651459261
+  _time: 2026-05-11 05:09:22.277812073 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 6
+  total_commits: 3795
+  total_contributors: 88
+  total_files: 541
+  total_forks: 213
+  total_issues: 750
+  total_pulls: 879
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-05-11 05:09:22.293151616 Z
