@@ -5,6 +5,7 @@
 package org.takes.facets.fork;
 
 import java.net.HttpURLConnection;
+import java.util.Collection;
 import lombok.ToString;
 import org.cactoos.list.ListOf;
 import org.takes.HttpException;
@@ -26,9 +27,19 @@ public final class TkMethods extends TkWrap {
      * @param methods Methods the take should act
      */
     public TkMethods(final Take take, final String... methods) {
+        this(new ListOf<>(methods), take);
+    }
+
+    /**
+     * Ctor.
+     * @param methods Methods the take should act
+     * @param take Original take
+     * @since 1.24
+     */
+    public TkMethods(final Collection<String> methods, final Take take) {
         super(
             new TkFork(
-                new FkMethods(new ListOf<>(methods), take),
+                new FkMethods(methods, take),
                 new FkFixed(
                     new TkFailure(
                         () -> new HttpException(

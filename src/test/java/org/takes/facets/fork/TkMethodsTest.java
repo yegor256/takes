@@ -8,6 +8,7 @@ import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -27,6 +28,14 @@ import org.takes.tk.TkEmpty;
  * @since 0.17
  */
 final class TkMethodsTest {
+
+    @Test
+    void acceptsCollectionOfMethodsBeforeTakeMatchingFkMethods() throws Exception {
+        final Take take = Mockito.mock(Take.class);
+        final Request req = new RqFake(RqMethod.GET);
+        new TkMethods(new ListOf<>(RqMethod.GET), take).act(req);
+        Mockito.verify(take, Mockito.times(1)).act(req);
+    }
 
     @Test
     void callsActOnProperMethods() throws Exception {
