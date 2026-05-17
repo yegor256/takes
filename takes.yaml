@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.26880128
+  seconds: 820.408075592
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-16 05:13:48.506048692 Z
+  when: 2026-05-17 05:19:10.444649234 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -70146,12 +70146,6 @@
     The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
   what: assessment
   when: 2026-05-15 05:19:56.623900223 Z
-- _id: 20259
-  _job: 72226
-  _time: 2026-05-15 05:20:25.276998313 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-15 05:20:25.248395260 Z
 - _id: 20260
   _job: 25953319126
   _time: 2026-05-16 05:00:22.302083679 Z
@@ -70295,6 +70289,7 @@
   issue: 1639
   repository: 28924109
   review: 2026-05-13 03:34:36.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -70318,6 +70313,7 @@
   hoc: 2
   issue: 1640
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -70365,29 +70361,13 @@
   issue: 1651
   repository: 28924109
   review: 2026-05-16 03:34:07.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-16 03:49:19.000000000 Z
   where: github
   who: 8086956
-- _id: 20272
-  _job: 25953319126
-  _time: 2026-05-16 05:02:36.138997961 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11593813071
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1603
-  min_pull_was_found: 659
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20273
   _job: 25953319126
   _time: 2026-05-16 05:04:22.103843658 Z
@@ -70672,5 +70652,213 @@
   seconds: 76873
   what: code-was-reviewed
   when: 2026-05-16 03:34:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 20291
+  _job: 72375
+  _time: 2026-05-16 05:15:40.321569652 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-16 05:15:40.292718970 Z
+- _id: 20293
+  _job: 25981949755
+  _time: 2026-05-17 05:06:20.491856441 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1646 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1646
+  repository: 28924109
+  review: 2026-05-14 09:18:26.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-14 09:31:53.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20294
+  _job: 25981949755
+  _time: 2026-05-17 05:06:44.536022904 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1647 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1647
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-14 06:24:28.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20295
+  _job: 25981949755
+  _time: 2026-05-17 05:06:46.765436054 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1648 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1648
+  repository: 28924109
+  review: 2026-05-14 17:30:10.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-14 17:50:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20296
+  _job: 25981949755
+  _time: 2026-05-17 05:07:06.322008550 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1649 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1649
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-15 06:12:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 20297
+  _job: 25981949755
+  _time: 2026-05-17 05:07:15.763828254 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1652 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1652
+  repository: 28924109
+  review: 2026-05-16 16:41:15.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-16 16:53:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20298
+  _job: 25981949755
+  _time: 2026-05-17 05:07:35.157993447 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 9548755271
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1603
+  min_pull_was_found: 661
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20299
+  _job: 25981949755
+  _time: 2026-05-17 05:08:24.146686785 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 6
+  total_commits: 3817
+  total_contributors: 88
+  total_files: 541
+  total_forks: 214
+  total_issues: 750
+  total_pulls: 904
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 875
+  what: dimensions-of-terrain
+  when: 2026-05-17 05:08:24.155932602 Z
+- _id: 20300
+  _job: 25981949755
+  _time: 2026-05-17 05:17:52.685341861 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1646 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 2h55m and 0 comments.
+  hoc: 2
+  issue: 1646
+  repository: 28924109
+  review_comments: 0
+  seconds: 10550
+  what: code-was-reviewed
+  when: 2026-05-14 09:18:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 20301
+  _job: 25981949755
+  _time: 2026-05-17 05:17:53.378445704 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1648 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h57m and 0 comments.
+  hoc: 2
+  issue: 1648
+  repository: 28924109
+  review_comments: 0
+  seconds: 28662
+  what: code-was-reviewed
+  when: 2026-05-14 17:30:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 20302
+  _job: 25981949755
+  _time: 2026-05-17 05:17:53.737141181 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1652 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 12h50m and 0 comments.
+  hoc: 2
+  issue: 1652
+  repository: 28924109
+  review_comments: 0
+  seconds: 46242
+  what: code-was-reviewed
+  when: 2026-05-16 16:41:15.000000000 Z
   where: github
   who: 526301
