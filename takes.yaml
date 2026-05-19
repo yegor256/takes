@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 807.440126823
+  seconds: 835.400711676
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-18 05:29:18.534035359 Z
+  when: 2026-05-19 05:27:30.325272679 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -70486,18 +70486,6 @@
   when: 2026-05-13 04:17:06.000000000 Z
   where: github
   who: 41898282
-- _id: 20258
-  _job: 72226
-  _time: 2026-05-15 05:19:56.602665364 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (256.8) is decreasing (R=-0.44).
-    The average number of commits per week (8.7) is increasing (R=0.28).
-    The average number of releases per month (0.4) is decreasing (R=0.24).
-    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
-  what: assessment
-  when: 2026-05-15 05:19:56.623900223 Z
 - _id: 20260
   _job: 25953319126
   _time: 2026-05-16 05:00:22.302083679 Z
@@ -71244,12 +71232,6 @@
     The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
   what: assessment
   when: 2026-05-17 05:19:46.232855041 Z
-- _id: 20304
-  _job: 72509
-  _time: 2026-05-17 05:20:14.939229092 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-17 05:20:14.909291726 Z
 - _id: 20305
   _job: 26014878720
   _time: 2026-05-18 05:15:54.581638964 Z
@@ -71365,6 +71347,7 @@
   issue: 1654
   repository: 28924109
   review: 2026-05-18 03:53:51.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -71390,29 +71373,13 @@
   issue: 1655
   repository: 28924109
   review: 2026-05-18 03:53:48.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-18 04:09:28.000000000 Z
   where: github
   who: 8086956
-- _id: 20314
-  _job: 26014878720
-  _time: 2026-05-18 05:16:55.856409182 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11650716364
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1603
-  min_pull_was_found: 662
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20315
   _job: 26014878720
   _time: 2026-05-18 05:17:25.626861711 Z
@@ -71465,3 +71432,84 @@
   when: 2026-05-18 03:53:48.000000000 Z
   where: github
   who: 526301
+- _id: 20318
+  _job: 72637
+  _time: 2026-05-18 05:31:23.384588058 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (256.8) is decreasing (R=-0.44).
+    The average number of commits per week (8.7) is increasing (R=0.28).
+    The average number of releases per month (0.4) is decreasing (R=0.24).
+    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
+  what: assessment
+  when: 2026-05-18 05:31:23.404922664 Z
+- _id: 20319
+  _job: 72637
+  _time: 2026-05-18 05:31:52.307218893 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-18 05:31:52.278035603 Z
+- _id: 20321
+  _job: 26077645298
+  _time: 2026-05-19 05:14:20.354771116 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1656 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1656
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-18 06:22:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20322
+  _job: 26077645298
+  _time: 2026-05-19 05:14:33.094565993 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1657 has been "pull-was-closed".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1657
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-18 06:23:17.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20323
+  _job: 26077645298
+  _time: 2026-05-19 05:14:35.119267500 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11676116708
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1603
+  min_pull_was_found: 663
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
