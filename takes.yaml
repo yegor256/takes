@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 861.405105209
+  seconds: 810.271264489
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-21 05:30:51.042018504 Z
+  when: 2026-05-22 05:26:44.948831721 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -71528,12 +71528,6 @@
     The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
   what: assessment
   when: 2026-05-20 05:31:53.972094865 Z
-- _id: 20331
-  _job: 72872
-  _time: 2026-05-20 05:32:23.959258899 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-20 05:32:23.930519569 Z
 - _id: 20332
   _job: 26206925791
   _time: 2026-05-21 05:16:45.544495699 Z
@@ -71672,6 +71666,7 @@
   issue: 1664
   repository: 28924109
   review: 2026-05-20 09:28:49.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -71696,29 +71691,13 @@
   issue: 1665
   repository: 28924109
   review: 2026-05-20 17:27:22.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-20 17:41:42.000000000 Z
   where: github
   who: 8086956
-- _id: 20342
-  _job: 26206925791
-  _time: 2026-05-21 05:18:03.323011569 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 9702871762
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1603
-  min_pull_was_found: 668
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20343
   _job: 26206925791
   _time: 2026-05-21 05:18:42.120089976 Z
@@ -71839,5 +71818,687 @@
   seconds: 27753
   what: code-was-reviewed
   when: 2026-05-20 17:27:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 20352
+  _job: 73043
+  _time: 2026-05-21 05:31:55.918126074 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-21 05:31:55.867980978 Z
+- _id: 20353
+  _job: 73043
+  _time: 2026-05-21 05:31:56.191865416 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  ac: 24
+  cost_of_qod: 3.6479392426844504
+  ev: 671
+  pv: 16263
+  qod: 184
+  qod_per_day: 18.13402373959668
+  qod_per_sec: 8.68615247688732e-06
+  start: *3
+  what: earned-value
+  when: 2026-05-21 05:31:56.192106117 Z
+- _id: 20354
+  _job: 26269698117
+  _time: 2026-05-22 05:13:29.507841713 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1675 has been closed by @github-actions[bot],
+    with 2 HoC and 0 comments.
+  event_id: 9769067687
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1675
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-21 17:24:53.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20355
+  _job: 26269698117
+  _time: 2026-05-22 05:13:31.414258379 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull request yegor256/takes#1676 has been opened by @renovate[bot].
+  event_id: 9769066582
+  event_type: PullRequestEvent
+  issue: 1676
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-22 03:44:28.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20356
+  _job: 26269698117
+  _time: 2026-05-22 05:13:32.372725505 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1674 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 9768751881
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  issue: 1674
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-05-22 03:30:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 20357
+  _job: 26269698117
+  _time: 2026-05-22 05:13:33.006133385 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The pull request yegor256/takes#1675 has been opened by @github-actions[bot].
+  event_id: 9750466961
+  event_type: PullRequestEvent
+  issue: 1675
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 17:24:51.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20358
+  _job: 26269698117
+  _time: 2026-05-22 05:13:33.219085307 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1674 has been opened by @renovate[bot].
+  event_id: 9750447214
+  event_type: PullRequestEvent
+  issue: 1674
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 17:24:19.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20359
+  _job: 26269698117
+  _time: 2026-05-22 05:13:34.268942791 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1673 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 9749908855
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  issue: 1673
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-05-21 17:10:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 20360
+  _job: 26269698117
+  _time: 2026-05-22 05:13:35.158860518 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull request yegor256/takes#1673 has been opened by @renovate[bot].
+  event_id: 9732171669
+  event_type: PullRequestEvent
+  issue: 1673
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 09:51:37.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20361
+  _job: 26269698117
+  _time: 2026-05-22 05:13:35.343131971 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1672 has been closed by @github-actions[bot],
+    with 0 HoC and 0 comments.
+  event_id: 9732167444
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 0
+  hoc: 0
+  issue: 1672
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-21 08:29:48.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20362
+  _job: 26269698117
+  _time: 2026-05-22 05:13:48.155487396 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1671 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 9731668459
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  issue: 1671
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-05-21 09:39:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 20363
+  _job: 26269698117
+  _time: 2026-05-22 05:13:48.783971514 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The pull request yegor256/takes#1672 has been opened by @github-actions[bot].
+  event_id: 9728937544
+  event_type: PullRequestEvent
+  issue: 1672
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 08:29:46.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20364
+  _job: 26269698117
+  _time: 2026-05-22 05:13:48.971281139 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1671 has been opened by @renovate[bot].
+  event_id: 9728917097
+  event_type: PullRequestEvent
+  issue: 1671
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 08:29:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20365
+  _job: 26269698117
+  _time: 2026-05-22 05:13:50.519443011 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull request yegor256/takes#1670 has been opened by @renovate[bot].
+  event_id: 9724547396
+  event_type: PullRequestEvent
+  issue: 1670
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 06:27:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20366
+  _job: 26269698117
+  _time: 2026-05-22 05:13:51.307255914 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1669 has been closed by @github-actions[bot],
+    with 2 HoC and 0 comments.
+  event_id: 9724309307
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1669
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-21 06:19:38.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20367
+  _job: 26269698117
+  _time: 2026-05-22 05:13:52.848972236 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The pull request yegor256/takes#1669 has been opened by @github-actions[bot].
+  event_id: 9724308446
+  event_type: PullRequestEvent
+  issue: 1669
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 06:19:38.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20368
+  _job: 26269698117
+  _time: 2026-05-22 05:13:52.997504319 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1668 has been opened by @renovate[bot].
+  event_id: 9724295136
+  event_type: PullRequestEvent
+  issue: 1668
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-21 06:19:11.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20370
+  _job: 26269698117
+  _time: 2026-05-22 05:14:28.903496179 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1658 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1658
+  repository: 28924109
+  review: 2026-05-18 09:33:09.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-18 09:45:23.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20371
+  _job: 26269698117
+  _time: 2026-05-22 05:14:42.264992169 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1659 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1659
+  repository: 28924109
+  review: 2026-05-19 09:27:17.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-20 06:20:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 20372
+  _job: 26269698117
+  _time: 2026-05-22 05:14:49.786690154 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1660 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1660
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-19 06:14:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 20373
+  _job: 26269698117
+  _time: 2026-05-22 05:14:51.389241280 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1661 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1661
+  repository: 28924109
+  review: 2026-05-19 09:27:13.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-19 09:40:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20374
+  _job: 26269698117
+  _time: 2026-05-22 05:15:05.109588945 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1662 has been "pull-was-closed".
+  failed_builds: 0
+  files: 0
+  hoc: 0
+  issue: 1662
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-05-19 09:41:28.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20375
+  _job: 26269698117
+  _time: 2026-05-22 05:15:06.725073031 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/junit-framework-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1663 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1663
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-20 06:20:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 20376
+  _job: 26269698117
+  _time: 2026-05-22 05:15:13.480738806 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1667 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1667
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-21 06:17:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 20377
+  _job: 26269698117
+  _time: 2026-05-22 05:15:20.659953313 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1668 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1668
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-21 06:26:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 20378
+  _job: 26269698117
+  _time: 2026-05-22 05:15:27.893693439 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1670 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1670
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-21 06:34:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 20379
+  _job: 26269698117
+  _time: 2026-05-22 05:15:34.286513749 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1671 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1671
+  repository: 28924109
+  review: 2026-05-21 09:36:59.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-21 09:50:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20380
+  _job: 26269698117
+  _time: 2026-05-22 05:15:36.387584327 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1673 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1673
+  repository: 28924109
+  review: 2026-05-21 17:10:33.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-21 17:23:19.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20381
+  _job: 26269698117
+  _time: 2026-05-22 05:15:49.025487524 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1674 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1674
+  repository: 28924109
+  review: 2026-05-22 03:30:04.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-22 03:44:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20382
+  _job: 26269698117
+  _time: 2026-05-22 05:16:02.624344961 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 11839078988
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1603
+  min_pull_was_found: 670
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20383
+  _job: 26269698117
+  _time: 2026-05-22 05:23:56.327944772 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1658 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 3h9m and 0 comments.
+  hoc: 2
+  issue: 1658
+  repository: 28924109
+  review_comments: 0
+  seconds: 11361
+  what: code-was-reviewed
+  when: 2026-05-18 09:33:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20384
+  _job: 26269698117
+  _time: 2026-05-22 05:23:57.170787863 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1659 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 23h35m and 0 comments.
+  hoc: 2
+  issue: 1659
+  repository: 28924109
+  review_comments: 0
+  seconds: 84930
+  what: code-was-reviewed
+  when: 2026-05-19 09:27:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 20385
+  _job: 26269698117
+  _time: 2026-05-22 05:23:57.875589355 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1661 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 3h12m and 0 comments.
+  hoc: 2
+  issue: 1661
+  repository: 28924109
+  review_comments: 0
+  seconds: 11551
+  what: code-was-reviewed
+  when: 2026-05-19 09:27:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 20386
+  _job: 26269698117
+  _time: 2026-05-22 05:23:58.959968849 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1671 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 1h7m and 0 comments.
+  hoc: 2
+  issue: 1671
+  repository: 28924109
+  review_comments: 0
+  seconds: 4067
+  what: code-was-reviewed
+  when: 2026-05-21 09:36:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 20387
+  _job: 26269698117
+  _time: 2026-05-22 05:23:59.083680945 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1673 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h18m and 0 comments.
+  hoc: 2
+  issue: 1673
+  repository: 28924109
+  review_comments: 0
+  seconds: 26336
+  what: code-was-reviewed
+  when: 2026-05-21 17:10:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 20388
+  _job: 26269698117
+  _time: 2026-05-22 05:23:59.201931688 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1674 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 10h5m and 0 comments.
+  hoc: 2
+  issue: 1674
+  repository: 28924109
+  review_comments: 0
+  seconds: 36345
+  what: code-was-reviewed
+  when: 2026-05-22 03:30:04.000000000 Z
   where: github
   who: 526301
