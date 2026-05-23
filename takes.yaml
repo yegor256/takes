@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.271264489
+  seconds: 823.655075727
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-22 05:26:44.948831721 Z
+  when: 2026-05-23 05:17:20.147946309 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -71420,18 +71420,6 @@
   when: 2026-05-18 03:53:48.000000000 Z
   where: github
   who: 526301
-- _id: 20318
-  _job: 72637
-  _time: 2026-05-18 05:31:23.384588058 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (256.8) is decreasing (R=-0.44).
-    The average number of commits per week (8.7) is increasing (R=0.28).
-    The average number of releases per month (0.4) is decreasing (R=0.24).
-    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
-  what: assessment
-  when: 2026-05-18 05:31:23.404922664 Z
 - _id: 20321
   _job: 26077645298
   _time: 2026-05-19 05:14:20.354771116 Z
@@ -71820,12 +71808,6 @@
   when: 2026-05-20 17:27:22.000000000 Z
   where: github
   who: 526301
-- _id: 20352
-  _job: 73043
-  _time: 2026-05-21 05:31:55.918126074 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-21 05:31:55.867980978 Z
 - _id: 20353
   _job: 73043
   _time: 2026-05-21 05:31:56.191865416 Z
@@ -72119,6 +72101,7 @@
   issue: 1658
   repository: 28924109
   review: 2026-05-18 09:33:09.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72143,6 +72126,7 @@
   issue: 1659
   repository: 28924109
   review: 2026-05-19 09:27:17.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72166,6 +72150,7 @@
   hoc: 2
   issue: 1660
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 0
   suggestions: 0
   what: pull-was-merged
@@ -72190,6 +72175,7 @@
   issue: 1661
   repository: 28924109
   review: 2026-05-19 09:27:13.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72236,6 +72222,7 @@
   hoc: 2
   issue: 1663
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72259,6 +72246,7 @@
   hoc: 2
   issue: 1667
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72282,6 +72270,7 @@
   hoc: 2
   issue: 1668
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72305,6 +72294,7 @@
   hoc: 2
   issue: 1670
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72329,6 +72319,7 @@
   issue: 1671
   repository: 28924109
   review: 2026-05-21 09:36:59.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72353,6 +72344,7 @@
   issue: 1673
   repository: 28924109
   review: 2026-05-21 17:10:33.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -72377,29 +72369,13 @@
   issue: 1674
   repository: 28924109
   review: 2026-05-22 03:30:04.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-22 03:44:03.000000000 Z
   where: github
   who: 8086956
-- _id: 20382
-  _job: 26269698117
-  _time: 2026-05-22 05:16:02.624344961 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11839078988
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1603
-  min_pull_was_found: 670
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20383
   _job: 26269698117
   _time: 2026-05-22 05:23:56.327944772 Z
@@ -72500,5 +72476,97 @@
   seconds: 36345
   what: code-was-reviewed
   when: 2026-05-22 03:30:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 20389
+  _job: 73190
+  _time: 2026-05-22 08:34:45.676335494 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (263.3) is decreasing (R=-0.36).
+    The average number of commits per week (8.9) is increasing (R=0.30).
+    The average number of releases per month (0.4) is decreasing (R=0.21).
+    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
+  what: assessment
+  when: 2026-05-22 08:34:45.692248217 Z
+- _id: 20390
+  _job: 73190
+  _time: 2026-05-22 08:35:13.964550943 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-22 08:35:13.933558231 Z
+- _id: 20392
+  _job: 26324118225
+  _time: 2026-05-23 05:04:20.978724527 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1676 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1676
+  repository: 28924109
+  review: 2026-05-22 17:15:10.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-22 17:33:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20393
+  _job: 26324118225
+  _time: 2026-05-23 05:04:40.748031799 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 9811778870
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1603
+  min_pull_was_found: 673
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20394
+  _job: 26324118225
+  _time: 2026-05-23 05:05:18.261531217 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 6
+  total_commits: 3836
+  total_contributors: 88
+  total_files: 541
+  total_forks: 214
+  total_issues: 750
+  total_pulls: 928
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 875
+  what: dimensions-of-terrain
+  when: 2026-05-23 05:05:18.276208315 Z
+- _id: 20395
+  _job: 26324118225
+  _time: 2026-05-23 05:13:16.236989886 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1676 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 13h30m and 0 comments.
+  hoc: 2
+  issue: 1676
+  repository: 28924109
+  review_comments: 0
+  seconds: 48642
+  what: code-was-reviewed
+  when: 2026-05-22 17:15:10.000000000 Z
   where: github
   who: 526301
