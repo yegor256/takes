@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1303063">
+<fb version="0.19.6" size="1307649">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">823.378961715</seconds>
+    <seconds t="F">821.704353322</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-05-28T05:30:57Z</when>
+    <when t="T">2026-05-29T05:31:24Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -81748,14 +81748,6 @@ The average monthly turnover (26.0 developers) is decreasing (R=-0.63).</text>
     <when t="T">2026-05-27T09:35:30Z</when>
   </f>
   <f>
-    <_id t="I">20432</_id>
-    <_job t="I">74083</_job>
-    <_time t="T">2026-05-27T09:36:01Z</_time>
-    <_version t="S">0.19.10/0.60.3/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-05-27T09:36:01Z</when>
-  </f>
-  <f>
     <_id t="I">20433</_id>
     <_job t="I">26556185186</_job>
     <_time t="T">2026-05-28T05:17:17Z</_time>
@@ -81896,25 +81888,6 @@ The average monthly turnover (26.0 developers) is decreasing (R=-0.63).</text>
     <who t="I">200635707</who>
   </f>
   <f>
-    <_id t="I">20442</_id>
-    <_job t="I">26556185186</_job>
-    <_time t="T">2026-05-28T05:18:02Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">9985566700</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1603</min_issue_was_found>
-    <min_pull_was_found t="I">681</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1551</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">20443</_id>
     <_job t="I">26556185186</_job>
     <_time t="T">2026-05-28T05:18:40Z</_time>
@@ -81985,7 +81958,525 @@ The average monthly turnover (26.0 developers) is decreasing (R=-0.63).</text>
     <_time t="T">2026-05-28T05:26:58Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
     <since t="T">2026-05-20T05:27:59Z</since>
+    <some_backlog_size>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">85</v>
+      <v t="I">85</v>
+    </some_backlog_size>
+    <some_build_duration>
+      <v t="I">10</v>
+      <v t="I">15</v>
+      <v t="I">24</v>
+      <v t="I">9</v>
+      <v t="I">9</v>
+      <v t="I">12</v>
+      <v t="I">14</v>
+      <v t="I">14</v>
+      <v t="I">14</v>
+      <v t="I">15</v>
+      <v t="I">26</v>
+      <v t="I">36</v>
+      <v t="I">242</v>
+      <v t="I">7</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">14</v>
+      <v t="I">28</v>
+      <v t="I">28</v>
+      <v t="I">37</v>
+      <v t="I">69</v>
+      <v t="I">259</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">13</v>
+      <v t="I">16</v>
+      <v t="I">32</v>
+      <v t="I">36</v>
+      <v t="I">231</v>
+      <v t="I">907</v>
+      <v t="I">34</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">13</v>
+      <v t="I">22</v>
+      <v t="I">36</v>
+      <v t="I">34</v>
+      <v t="I">250</v>
+      <v t="I">7</v>
+      <v t="I">9</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">12</v>
+      <v t="I">14</v>
+      <v t="I">16</v>
+      <v t="I">24</v>
+      <v t="I">31</v>
+      <v t="I">35</v>
+      <v t="I">269</v>
+      <v t="I">945</v>
+    </some_build_duration>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_build_success_rate>
+    <some_merged_pulls t="I">23</some_merged_pulls>
+    <some_pull_files_size>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_pull_files_size>
+    <some_pull_hoc_size>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+      <v t="I">2</v>
+    </some_pull_hoc_size>
+    <some_pull_lifetime>
+      <v t="F">13545.0</v>
+      <v t="F">86176.0</v>
+      <v t="F">23065.0</v>
+      <v t="F">83148.0</v>
+      <v t="F">8927.0</v>
+      <v t="F">36978.0</v>
+      <v t="F">36977.0</v>
+      <v t="F">49741.0</v>
+      <v t="F">37179.0</v>
+      <v t="F">37184.0</v>
+      <v t="F">27102.0</v>
+      <v t="F">4905.0</v>
+      <v t="F">4905.0</v>
+      <v t="F">369.0</v>
+      <v t="F">1.0</v>
+      <v t="F">456.0</v>
+      <v t="F">45302.0</v>
+      <v t="F">5.0</v>
+      <v t="F">28613.0</v>
+      <v t="F">12136.0</v>
+      <v t="F">28021.0</v>
+      <v t="F">160110.0</v>
+      <v t="F">2212007.0</v>
+    </some_pull_lifetime>
+    <some_review_size>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_review_size>
+    <some_review_time>
+      <v t="I">816</v>
+      <v t="I">837</v>
+      <v t="I">1468</v>
+      <v t="I">7067</v>
+      <v t="I">899</v>
+      <v t="I">1099</v>
+      <v t="I">839</v>
+      <v t="I">766</v>
+      <v t="I">838</v>
+      <v t="I">860</v>
+      <v t="I">893</v>
+      <v t="I">75180</v>
+    </some_review_time>
+    <some_reviewers_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+    </some_reviewers_per_pull>
+    <some_reviews_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+    </some_reviews_per_pull>
+    <some_unmerged_pulls t="I">6</some_unmerged_pulls>
     <what t="S">quality-of-service</what>
     <when t="T">2026-05-28T05:26:58Z</when>
+  </f>
+  <f>
+    <_id t="I">20449</_id>
+    <_job t="I">74263</_job>
+    <_time t="T">2026-05-28T05:31:58Z</_time>
+    <_version t="S">0.19.10/0.60.3/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-05-28T05:31:58Z</when>
+  </f>
+  <f>
+    <_id t="I">20450</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:17:46Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <comments t="I">0</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1691 has been reviewed by @akmhatey-ai with 2 HoC and 0 comments.</details>
+    <event_id t="I">10031008670</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1691</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2026-05-29T03:50:39Z</when>
+    <where t="S">github</where>
+    <who t="I">260399619</who>
+  </f>
+  <f>
+    <_id t="I">20451</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:17:47Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/crate-ci-typos-1.x</branch>
+    <details t="S">The pull request yegor256/takes#1691 has been opened by @renovate[bot].</details>
+    <event_id t="I">10029668641</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <issue t="I">1691</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-05-29T02:47:52Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20452</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:17:47Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <comments t="I">0</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1690 has been reviewed by @ghx5t-sol with 4 HoC and 0 comments.</details>
+    <event_id t="I">9993640089</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1690</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2026-05-28T09:14:40Z</when>
+    <where t="S">github</where>
+    <who t="I">200635707</who>
+  </f>
+  <f>
+    <_id t="I">20453</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:17:48Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/jaxb-ri-monorepo</branch>
+    <details t="S">The pull request yegor256/takes#1690 has been opened by @renovate[bot].</details>
+    <event_id t="I">9992290826</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <issue t="I">1690</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-05-28T08:38:24Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20455</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:18:26Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/org.eclipse.parsson-jakarta.json-1.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1685 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1685</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-05-26T17:40:09Z</review>
+    <succeeded_builds t="I">12</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-05-26T17:53:45Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">20456</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:18:44Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1688 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1688</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-05-28T02:36:13Z</review>
+    <succeeded_builds t="I">12</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-05-28T06:20:14Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20457</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:18:51Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1689 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <issue t="I">1689</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-05-28T02:30:28Z</review>
+    <succeeded_builds t="I">12</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-05-28T06:20:08Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20458</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:18:59Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">11993793447</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1687</min_issue_was_found>
+    <min_pull_was_found t="I">688</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1551</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">20459</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:19:30Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <total_active_contributors t="I">6</total_active_contributors>
+    <total_commits t="I">3845</total_commits>
+    <total_contributors t="I">88</total_contributors>
+    <total_files t="I">541</total_files>
+    <total_forks t="I">215</total_forks>
+    <total_issues t="I">751</total_issues>
+    <total_pulls t="I">939</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">875</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-05-29T05:19:30Z</when>
+  </f>
+  <f>
+    <_id t="I">20460</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:26:32Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <author t="I">29139614</author>
+    <comments t="I">3</comments>
+    <details t="S">The pull request yegor256/takes#1685 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 3h32m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1685</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">12729</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2026-05-26T17:40:09Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20461</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:26:33Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <author t="I">29139614</author>
+    <comments t="I">0</comments>
+    <details t="S">The pull request yegor256/takes#1688 with 2 HoC created by @renovate[bot] was reviewed by @ghx5t-sol after 16h52m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1688</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">60754</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2026-05-28T02:36:13Z</when>
+    <where t="S">github</where>
+    <who t="I">200635707</who>
+  </f>
+  <f>
+    <_id t="I">20462</_id>
+    <_job t="I">26619516530</_job>
+    <_time t="T">2026-05-29T05:26:33Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <author t="I">29139614</author>
+    <comments t="I">0</comments>
+    <details t="S">The pull request yegor256/takes#1689 with 2 HoC created by @renovate[bot] was reviewed by @ghx5t-sol after 4h36m and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <issue t="I">1689</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">16560</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2026-05-28T02:30:28Z</when>
+    <where t="S">github</where>
+    <who t="I">200635707</who>
   </f>
 </fb>
