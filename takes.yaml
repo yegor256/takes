@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 821.704353322
+  seconds: 828.232556589
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-29 05:31:24.774776908 Z
+  when: 2026-05-30 05:19:23.571273376 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -73207,18 +73207,6 @@
   when: 2026-05-25 03:36:48.000000000 Z
   where: github
   who: 526301
-- _id: 20423
-  _job: 73644
-  _time: 2026-05-25 05:31:41.406852581 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (263.3) is decreasing (R=-0.36).
-    The average number of commits per week (8.9) is increasing (R=0.30).
-    The average number of releases per month (0.4) is decreasing (R=0.21).
-    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
-  what: assessment
-  when: 2026-05-25 05:31:41.427298188 Z
 - _id: 20428
   _job: 26492334277
   _time: 2026-05-27 05:18:34.624331948 Z
@@ -73710,12 +73698,6 @@
   some_unmerged_pulls: 6
   what: quality-of-service
   when: 2026-05-28 05:26:58.000000000 Z
-- _id: 20449
-  _job: 74263
-  _time: 2026-05-28 05:31:58.185733143 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-28 05:31:58.139440593 Z
 - _id: 20450
   _job: 26619516530
   _time: 2026-05-29 05:17:46.360706311 Z
@@ -73800,6 +73782,7 @@
   issue: 1685
   repository: 28924109
   review: 2026-05-26 17:40:09.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -73824,6 +73807,7 @@
   issue: 1688
   repository: 28924109
   review: 2026-05-28 02:36:13.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -73848,29 +73832,13 @@
   issue: 1689
   repository: 28924109
   review: 2026-05-28 02:30:28.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-28 06:20:08.000000000 Z
   where: github
   who: 526301
-- _id: 20458
-  _job: 26619516530
-  _time: 2026-05-29 05:18:59.535880489 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 11993793447
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 688
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20459
   _job: 26619516530
   _time: 2026-05-29 05:19:30.651081812 Z
@@ -73938,3 +73906,120 @@
   when: 2026-05-28 02:30:28.000000000 Z
   where: github
   who: 200635707
+- _id: 20463
+  _job: 74485
+  _time: 2026-05-29 05:31:55.630067507 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (269.0) is decreasing (R=-0.29).
+    The average number of commits per week (9.2) is increasing (R=0.33).
+    The average number of releases per month (0.4) is decreasing (R=0.18).
+    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
+  what: assessment
+  when: 2026-05-29 05:31:55.650240400 Z
+- _id: 20464
+  _job: 74485
+  _time: 2026-05-29 05:32:26.834004565 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-29 05:32:26.783744815 Z
+- _id: 20466
+  _job: 26675234952
+  _time: 2026-05-30 05:06:22.500336139 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/jaxb-ri-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1690 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  issue: 1690
+  repository: 28924109
+  review: 2026-05-28 09:14:37.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-29 06:17:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 20467
+  _job: 26675234952
+  _time: 2026-05-30 05:06:35.477857852 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1691 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1691
+  repository: 28924109
+  review: 2026-05-29 03:50:38.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-05-29 06:17:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 20468
+  _job: 26675234952
+  _time: 2026-05-30 05:06:43.650766831 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 10063022641
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 689
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20469
+  _job: 26675234952
+  _time: 2026-05-30 05:15:17.510755923 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 0
+  details: The pull request yegor256/takes#1690 with 4 HoC created by @renovate[bot]
+    was reviewed by @ghx5t-sol after 0h36m and 0 comments.
+  hoc: 4
+  issue: 1690
+  repository: 28924109
+  review_comments: 0
+  seconds: 2173
+  what: code-was-reviewed
+  when: 2026-05-28 09:14:37.000000000 Z
+  where: github
+  who: 200635707
+- _id: 20470
+  _job: 26675234952
+  _time: 2026-05-30 05:15:18.344874797 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 0
+  details: The pull request yegor256/takes#1691 with 2 HoC created by @renovate[bot]
+    was reviewed by @akmhatey-ai after 1h2m and 0 comments.
+  hoc: 2
+  issue: 1691
+  repository: 28924109
+  review_comments: 0
+  seconds: 3766
+  what: code-was-reviewed
+  when: 2026-05-29 03:50:38.000000000 Z
+  where: github
+  who: 260399619
