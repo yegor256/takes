@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 828.232556589
+  seconds: 707.150079821
   version: 0.60.2
   what: judges-summary
-  when: 2026-05-30 05:19:23.571273376 Z
+  when: 2026-05-31 05:30:25.029968032 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -73261,6 +73261,7 @@
   event_type: PullRequestReviewEvent
   files: 5
   hoc: 137
+  is_human: 1
   issue: 1684
   repository: 28924109
   review_comments: 0
@@ -73280,6 +73281,7 @@
   event_type: PullRequestReviewEvent
   files: 1
   hoc: 28
+  is_human: 1
   issue: 1686
   repository: 28924109
   review_comments: 0
@@ -73299,6 +73301,7 @@
   event_type: PullRequestReviewEvent
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1688
   repository: 28924109
   review_comments: 0
@@ -73318,6 +73321,7 @@
   event_type: PullRequestReviewEvent
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1689
   repository: 28924109
   review_comments: 0
@@ -73333,6 +73337,7 @@
   details: The pull request yegor256/takes#1689 has been opened by @renovate[bot].
   event_id: 9975511359
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1689
   repository: 28924109
   what: pull-was-opened
@@ -73347,6 +73352,7 @@
   details: The pull request yegor256/takes#1688 has been opened by @renovate[bot].
   event_id: 9947732653
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1688
   repository: 28924109
   what: pull-was-opened
@@ -73359,6 +73365,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: '1440'
   details: The pull yegor256/takes#1684 has been opened earlier by @ghx5t-sol.
+  is_human: 1
   issue: 1684
   repository: 28924109
   what: pull-was-opened
@@ -73371,6 +73378,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: '1114'
   details: The pull yegor256/takes#1686 has been opened earlier by @ghx5t-sol.
+  is_human: 1
   issue: 1686
   repository: 28924109
   what: pull-was-opened
@@ -73382,6 +73390,7 @@
   _time: 2026-05-28 05:18:40.442599168 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: 'We found out that the user #260399619 is known in GitHub as @akmhatey-ai.'
+  is_human: 1
   name: akmhatey-ai
   what: who-has-name
   when: 2026-05-28 05:18:40.447169910 Z
@@ -73392,6 +73401,7 @@
   _time: 2026-05-28 05:18:40.478348675 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: 'We found out that the user #200635707 is known in GitHub as @ghx5t-sol.'
+  is_human: 1
   name: ghx5t-sol
   what: who-has-name
   when: 2026-05-28 05:18:40.481776045 Z
@@ -73403,6 +73413,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/xml-apis-xml-apis-replacement
   details: The missing pull yegor256/takes#1683 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1683
   repository: 28924109
   what: pull-was-opened
@@ -73415,6 +73426,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/org.eclipse.parsson-jakarta.json-1.x
   details: The missing pull yegor256/takes#1685 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1685
   repository: 28924109
   what: pull-was-opened
@@ -73426,6 +73438,7 @@
   _time: 2026-05-28 05:19:24.275152562 Z
   _version: 0.19.9/0.60.2/0.17.17
   details: The missing issue yegor256/takes#1687 has been opened by @revive-code-bot[bot].
+  is_human: 0
   issue: 1687
   repository: 28924109
   what: issue-was-opened
@@ -73710,6 +73723,7 @@
   event_type: PullRequestReviewEvent
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1691
   repository: 28924109
   review_comments: 0
@@ -73725,6 +73739,7 @@
   details: The pull request yegor256/takes#1691 has been opened by @renovate[bot].
   event_id: 10029668641
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1691
   repository: 28924109
   what: pull-was-opened
@@ -73743,6 +73758,7 @@
   event_type: PullRequestReviewEvent
   files: 1
   hoc: 4
+  is_human: 1
   issue: 1690
   repository: 28924109
   review_comments: 0
@@ -73758,6 +73774,7 @@
   details: The pull request yegor256/takes#1690 has been opened by @renovate[bot].
   event_id: 9992290826
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1690
   repository: 28924109
   what: pull-was-opened
@@ -73779,6 +73796,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1685
   repository: 28924109
   review: 2026-05-26 17:40:09.000000000 Z
@@ -73804,6 +73822,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1688
   repository: 28924109
   review: 2026-05-28 02:36:13.000000000 Z
@@ -73829,6 +73848,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1689
   repository: 28924109
   review: 2026-05-28 02:30:28.000000000 Z
@@ -73864,6 +73884,7 @@
   details: The pull request yegor256/takes#1685 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 3h32m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1685
   repository: 28924109
   review_comments: 0
@@ -73881,6 +73902,7 @@
   details: The pull request yegor256/takes#1688 with 2 HoC created by @renovate[bot]
     was reviewed by @ghx5t-sol after 16h52m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1688
   repository: 28924109
   review_comments: 0
@@ -73898,6 +73920,7 @@
   details: The pull request yegor256/takes#1689 with 2 HoC created by @renovate[bot]
     was reviewed by @ghx5t-sol after 4h36m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1689
   repository: 28924109
   review_comments: 0
@@ -73918,12 +73941,6 @@
     The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
   what: assessment
   when: 2026-05-29 05:31:55.650240400 Z
-- _id: 20464
-  _job: 74485
-  _time: 2026-05-29 05:32:26.834004565 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-05-29 05:32:26.783744815 Z
 - _id: 20466
   _job: 26675234952
   _time: 2026-05-30 05:06:22.500336139 Z
@@ -73939,9 +73956,11 @@
   failed_builds: 0
   files: 1
   hoc: 4
+  is_human: 1
   issue: 1690
   repository: 28924109
   review: 2026-05-28 09:14:37.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -73963,32 +73982,17 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1691
   repository: 28924109
   review: 2026-05-29 03:50:38.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-05-29 06:17:44.000000000 Z
   where: github
   who: 526301
-- _id: 20468
-  _job: 26675234952
-  _time: 2026-05-30 05:06:43.650766831 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10063022641
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 689
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20469
   _job: 26675234952
   _time: 2026-05-30 05:15:17.510755923 Z
@@ -73998,6 +74002,7 @@
   details: The pull request yegor256/takes#1690 with 4 HoC created by @renovate[bot]
     was reviewed by @ghx5t-sol after 0h36m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1690
   repository: 28924109
   review_comments: 0
@@ -74015,6 +74020,7 @@
   details: The pull request yegor256/takes#1691 with 2 HoC created by @renovate[bot]
     was reviewed by @akmhatey-ai after 1h2m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1691
   repository: 28924109
   review_comments: 0
@@ -74023,3 +74029,42 @@
   when: 2026-05-29 03:50:38.000000000 Z
   where: github
   who: 260399619
+- _id: 20471
+  _job: 74587
+  _time: 2026-05-30 05:20:43.830616284 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-05-30 05:20:43.781787559 Z
+- _id: 20472
+  _job: 26704084910
+  _time: 2026-05-31 05:19:20.688255235 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 12005347905
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 690
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20473
+  _job: 26704084910
+  _time: 2026-05-31 05:19:52.043974962 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 6
+  total_commits: 3851
+  total_contributors: 88
+  total_files: 541
+  total_forks: 215
+  total_issues: 751
+  total_pulls: 942
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 875
+  what: dimensions-of-terrain
+  when: 2026-05-31 05:19:52.058905484 Z
