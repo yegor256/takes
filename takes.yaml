@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 827.402371976
+  seconds: 813.132422229
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-03 05:44:35.843799239 Z
+  when: 2026-06-04 05:41:11.913472855 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -73698,7 +73698,7 @@
   - 1
   some_unmerged_pulls: 6
   what: quality-of-service
-  when: 2026-05-28 05:26:58.000000000 Z
+  when: &145 2026-05-28 05:26:58.000000000 Z
 - _id: 20450
   _job: 26619516530
   _time: 2026-05-29 05:17:46.360706311 Z
@@ -74021,18 +74021,6 @@
   total_stars: 875
   what: dimensions-of-terrain
   when: 2026-05-31 05:19:52.058905484 Z
-- _id: 20474
-  _job: 74725
-  _time: 2026-05-31 05:30:57.106932172 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (269.0) is decreasing (R=-0.29).
-    The average number of commits per week (9.2) is increasing (R=0.33).
-    The average number of releases per month (0.4) is decreasing (R=0.18).
-    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
-  what: assessment
-  when: 2026-05-31 05:30:57.127704115 Z
 - _id: 20477
   _job: 26736936599
   _time: 2026-06-01 05:30:19.105367583 Z
@@ -74061,12 +74049,6 @@
     The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
   what: assessment
   when: 2026-06-01 05:41:39.529769616 Z
-- _id: 20479
-  _job: 74875
-  _time: 2026-06-01 05:42:08.112320845 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-06-01 05:42:08.063557655 Z
 - _id: 20480
   _job: 74875
   _time: 2026-06-01 05:42:08.354215845 Z
@@ -74112,29 +74094,13 @@
   hoc: 2
   issue: 1683
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-06-02 06:11:01.000000000 Z
   where: github
   who: 526301
-- _id: 20484
-  _job: 26865656935
-  _time: 2026-06-03 05:31:57.665282357 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10197688326
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 700
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20485
   _job: 26865656935
   _time: 2026-06-03 05:32:57.903427623 Z
@@ -74151,3 +74117,131 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-03 05:32:57.919811359 Z
+- _id: 20486
+  _job: 75346
+  _time: 2026-06-03 05:45:16.720513480 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (268.0) is decreasing (R=-0.28).
+    The average number of commits per week (9.2) is increasing (R=0.32).
+    The average number of releases per month (0.4) is decreasing (R=0.16).
+    The average monthly turnover (25.0 developers) is decreasing (R=-0.58).
+  what: assessment
+  when: 2026-06-03 05:45:16.738958912 Z
+- _id: 20487
+  _job: 75346
+  _time: 2026-06-03 05:45:49.808060591 Z
+  _version: 0.19.10/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-06-03 05:45:49.758041855 Z
+- _id: 20488
+  _job: 26932705193
+  _time: 2026-06-04 05:27:43.020562969 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/takes#1698 has been opened by @renovate[bot].
+  event_id: 10213095814
+  event_type: PullRequestEvent
+  issue: 1698
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-03 05:46:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20489
+  _job: 26932705193
+  _time: 2026-06-04 05:28:37.504797400 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 12058530523
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 701
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20490
+  _job: 26932705193
+  _time: 2026-06-04 05:30:33.988469718 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  details: The missing pull yegor256/takes#1692 has been opened by @renovate[bot].
+  issue: 1692
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-29 08:47:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20491
+  _job: 26932705193
+  _time: 2026-06-04 05:30:34.769216990 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  details: The missing pull yegor256/takes#1693 has been opened by @renovate[bot].
+  issue: 1693
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-29 16:07:52.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20492
+  _job: 26932705193
+  _time: 2026-06-04 05:30:35.620892220 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/net.sf.saxon-saxon-he-13.x
+  details: The missing pull yegor256/takes#1694 has been opened by @renovate[bot].
+  issue: 1694
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-05-29 16:07:58.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20493
+  _job: 26932705193
+  _time: 2026-06-04 05:30:36.823306158 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-1.x
+  details: The missing pull yegor256/takes#1695 has been opened by @renovate[bot].
+  issue: 1695
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-02 06:13:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20494
+  _job: 26932705193
+  _time: 2026-06-04 05:30:37.692078291 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The missing pull yegor256/takes#1696 has been opened by @renovate[bot].
+  issue: 1696
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-02 06:13:21.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20495
+  _job: 26932705193
+  _time: 2026-06-04 05:30:38.560827458 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The missing pull yegor256/takes#1697 has been opened by @renovate[bot].
+  issue: 1697
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-02 18:15:55.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20496
+  _job: 26932705193
+  _time: 2026-06-04 05:39:41.659400386 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  since: *145
+  what: quality-of-service
+  when: 2026-06-04 05:39:41.000000000 Z
