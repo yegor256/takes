@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.642251131
+  seconds: 849.459821034
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-06 05:20:18.800028161 Z
+  when: 2026-06-07 05:33:34.861034400 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -74037,18 +74037,6 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-01 05:30:19.114659634 Z
-- _id: 20478
-  _job: 74875
-  _time: 2026-06-01 05:41:39.510038530 Z
-  _version: 0.19.10/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (269.0) is decreasing (R=-0.29).
-    The average number of commits per week (9.2) is increasing (R=0.33).
-    The average number of releases per month (0.4) is decreasing (R=0.18).
-    The average monthly turnover (26.0 developers) is decreasing (R=-0.63).
-  what: assessment
-  when: 2026-06-01 05:41:39.529769616 Z
 - _id: 20480
   _job: 74875
   _time: 2026-06-01 05:42:08.354215845 Z
@@ -74220,14 +74208,87 @@
   _time: 2026-06-04 05:39:41.659400386 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *145
+  some_backlog_size:
+  - 85
+  - 85
+  - 85
+  - 85
+  - 85
+  - 85
+  - 85
+  some_merged_pulls: 9
+  some_pull_files_size:
+  - 1
+  - 1
+  - 2
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 4
+  - 4
+  - 2
+  - 4
+  - 2
+  - 2
+  - 2
+  some_pull_lifetime:
+  - 42704.0
+  - 7936.0
+  - 6371.0
+  - 3995.0
+  - 12592.0
+  - 77964.0
+  - 30340.0
+  - 74195.0
+  - 780187.0
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 817
+  - 2515
+  - 940
+  - 3336
+  - 8826
+  - 75791
+  - 13780
+  - 13441
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 1
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 1
+  - 2
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  some_unmerged_pulls: 0
   what: quality-of-service
   when: 2026-06-04 05:39:41.000000000 Z
-- _id: 20497
-  _job: 75545
-  _time: 2026-06-04 05:42:47.218608336 Z
-  _version: 0.19.11/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-06-04 05:42:47.169908642 Z
 - _id: 20499
   _job: 27053341304
   _time: 2026-06-06 05:07:44.063680448 Z
@@ -74246,6 +74307,7 @@
   issue: 1692
   repository: 28924109
   review: 2026-05-29 08:58:09.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -74270,6 +74332,7 @@
   issue: 1693
   repository: 28924109
   review: 2026-05-29 17:38:23.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -74294,6 +74357,7 @@
   issue: 1694
   repository: 28924109
   review: 2026-05-29 17:38:19.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -74318,6 +74382,7 @@
   issue: 1696
   repository: 28924109
   review: 2026-06-02 17:51:28.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -74341,29 +74406,13 @@
   hoc: 2
   issue: 1697
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-06-04 06:17:21.000000000 Z
   where: github
   who: 526301
-- _id: 20504
-  _job: 27053341304
-  _time: 2026-06-06 05:09:22.174787164 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10347419045
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 702
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20505
   _job: 27053341304
   _time: 2026-06-06 05:10:20.578506913 Z
@@ -74380,3 +74429,189 @@
   total_stars: 875
   what: dimensions-of-terrain
   when: 2026-06-06 05:10:20.587750079 Z
+- _id: 20506
+  _job: 75968
+  _time: 2026-06-06 05:20:55.827793769 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (268.0) is decreasing (R=-0.28).
+    The average number of commits per week (9.2) is increasing (R=0.32).
+    The average number of releases per month (0.4) is decreasing (R=0.16).
+    The average monthly turnover (24.0 developers) is decreasing (R=-0.58).
+  what: assessment
+  when: 2026-06-06 05:20:55.847211441 Z
+- _id: 20507
+  _job: 75968
+  _time: 2026-06-06 05:21:28.930915050 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-06-06 05:21:28.912522785 Z
+- _id: 20508
+  _job: 27083602912
+  _time: 2026-06-07 05:19:28.537768265 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/codecov-codecov-action-7.x
+  details: The pull request yegor256/takes#1702 has been opened by @renovate[bot].
+  event_id: 10371599823
+  event_type: PullRequestEvent
+  issue: 1702
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-07 05:03:44.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20509
+  _job: 27083602912
+  _time: 2026-06-07 05:20:12.509497634 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 12114440107
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 703
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20510
+  _job: 27083602912
+  _time: 2026-06-07 05:20:49.842631271 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 5
+  total_commits: 3855
+  total_contributors: 88
+  total_files: 541
+  total_forks: 215
+  total_issues: 751
+  total_pulls: 950
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 875
+  what: dimensions-of-terrain
+  when: 2026-06-07 05:20:49.851956808 Z
+- _id: 20511
+  _job: 27083602912
+  _time: 2026-06-07 05:21:39.739329512 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The missing pull yegor256/takes#1699 has been opened by @renovate[bot].
+  issue: 1699
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-04 06:23:30.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20512
+  _job: 27083602912
+  _time: 2026-06-07 05:21:40.445061362 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: up
+  details: The missing pull yegor256/takes#1700 has been opened by @github-actions[bot].
+  issue: 1700
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-04 06:24:01.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20513
+  _job: 27083602912
+  _time: 2026-06-07 05:21:41.089256314 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.glassfish.grizzly-grizzly-http-servlet-server-5.x
+  details: The missing pull yegor256/takes#1701 has been opened by @renovate[bot].
+  issue: 1701
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-05 21:01:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20514
+  _job: 27083602912
+  _time: 2026-06-07 05:28:30.598379396 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1692 with 4 HoC created by @renovate[bot]
+    was reviewed by @akmhatey-ai after 0h10m and 0 comments.
+  hoc: 4
+  issue: 1692
+  repository: 28924109
+  review_comments: 0
+  seconds: 659
+  what: code-was-reviewed
+  when: 2026-05-29 08:58:09.000000000 Z
+  where: github
+  who: 260399619
+- _id: 20515
+  _job: 27083602912
+  _time: 2026-06-07 05:28:31.317332915 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1692 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 0h52m and 0 comments.
+  hoc: 4
+  issue: 1692
+  repository: 28924109
+  review_comments: 0
+  seconds: 3175
+  what: code-was-reviewed
+  when: 2026-05-29 09:40:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 20516
+  _job: 27083602912
+  _time: 2026-06-07 05:28:31.900065144 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1693 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 1h30m and 0 comments.
+  hoc: 4
+  issue: 1693
+  repository: 28924109
+  review_comments: 0
+  seconds: 5431
+  what: code-was-reviewed
+  when: 2026-05-29 17:38:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 20517
+  _job: 27083602912
+  _time: 2026-06-07 05:28:32.765883952 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1694 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 1h30m and 0 comments.
+  hoc: 2
+  issue: 1694
+  repository: 28924109
+  review_comments: 0
+  seconds: 5421
+  what: code-was-reviewed
+  when: 2026-05-29 17:38:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 20518
+  _job: 27083602912
+  _time: 2026-06-07 05:28:33.798655754 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1696 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 11h38m and 0 comments.
+  hoc: 2
+  issue: 1696
+  repository: 28924109
+  review_comments: 0
+  seconds: 41887
+  what: code-was-reviewed
+  when: 2026-06-02 17:51:28.000000000 Z
+  where: github
+  who: 526301
