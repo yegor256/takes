@@ -2,13 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: "GET https://api.github.com/repos/yegor256/takes/pulls/840: 504 - <!DOCTYPE
-    html>\r\n<!--\r\n\r\nHello f... (Octokit::ServerError)"
   inserted: 8
-  seconds: 661.093304429
+  seconds: 720.568577681
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-08 05:32:10.223052751 Z
+  when: 2026-06-09 05:27:48.858629747 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -74738,12 +74736,6 @@
     The average monthly turnover (24.0 developers) is decreasing (R=-0.58).
   what: assessment
   when: 2026-06-07 05:34:18.049293479 Z
-- _id: 20520
-  _job: 76149
-  _time: 2026-06-07 05:34:51.355313130 Z
-  _version: 0.19.11/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-06-07 05:34:51.307296104 Z
 - _id: 20522
   _job: 27117640125
   _time: 2026-06-08 05:22:03.132538078 Z
@@ -74786,6 +74778,7 @@
   is_human: 1
   issue: 1701
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -74810,29 +74803,13 @@
   is_human: 1
   issue: 1702
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-06-07 06:10:59.000000000 Z
   where: github
   who: 526301
-- _id: 20525
-  _job: 27117640125
-  _time: 2026-06-08 05:22:39.064000522 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10372279457
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 706
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20526
   _job: 27117640125
   _time: 2026-06-08 05:23:27.935068573 Z
@@ -74849,3 +74826,46 @@
   total_stars: 875
   what: dimensions-of-terrain
   when: 2026-06-08 05:23:27.950174536 Z
+- _id: 20527
+  _job: 76255
+  _time: 2026-06-08 05:33:14.225408780 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-06-08 05:33:14.204571197 Z
+- _id: 20528
+  _job: 27185410177
+  _time: 2026-06-09 05:15:51.364331072 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  by_owner: 1
+  commit: 6c5e22e3f46e2d349ad22d6aa66e1ac5bac8ffcb
+  default_branch: master
+  details: 'A new Git push #35317392190 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 13027874855
+  event_type: PushEvent
+  is_human: 1
+  push_id: 35317392190
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-06-09 04:57:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 20529
+  _job: 27185410177
+  _time: 2026-06-09 05:16:33.580271571 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 13027874855
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 708
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github

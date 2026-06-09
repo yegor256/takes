@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1320766">
+<fb version="0.19.6" size="1321137">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
-    <error t="S">GET https://api.github.com/repos/yegor256/takes/pulls/840: 504 - &lt;!DOCTYPE html&gt;&#13;
-&lt;!--&#13;
-&#13;
-Hello f... (Octokit::ServerError)</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">661.093304429</seconds>
+    <seconds t="F">720.568577681</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-06-08T05:32:10Z</when>
+    <when t="T">2026-06-09T05:27:48Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -83349,14 +83345,6 @@ The average monthly turnover (24.0 developers) is decreasing (R=-0.58).</text>
     <when t="T">2026-06-07T05:34:18Z</when>
   </f>
   <f>
-    <_id t="I">20520</_id>
-    <_job t="I">76149</_job>
-    <_time t="T">2026-06-07T05:34:51Z</_time>
-    <_version t="S">0.19.11/0.60.3/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-06-07T05:34:51Z</when>
-  </f>
-  <f>
     <_id t="I">20522</_id>
     <_job t="I">27117640125</_job>
     <_time t="T">2026-06-08T05:22:03Z</_time>
@@ -83401,6 +83389,7 @@ The average monthly turnover (24.0 developers) is decreasing (R=-0.58).</text>
     <is_human t="I">1</is_human>
     <issue t="I">1701</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">12</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -83427,31 +83416,13 @@ The average monthly turnover (24.0 developers) is decreasing (R=-0.58).</text>
     <is_human t="I">1</is_human>
     <issue t="I">1702</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">12</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
     <when t="T">2026-06-07T06:10:59Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">20525</_id>
-    <_job t="I">27117640125</_job>
-    <_time t="T">2026-06-08T05:22:39Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">10372279457</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1687</min_issue_was_found>
-    <min_pull_was_found t="I">706</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1551</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
   </f>
   <f>
     <_id t="I">20526</_id>
@@ -83470,5 +83441,53 @@ The average monthly turnover (24.0 developers) is decreasing (R=-0.58).</text>
     <total_stars t="I">875</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-06-08T05:23:27Z</when>
+  </f>
+  <f>
+    <_id t="I">20527</_id>
+    <_job t="I">76255</_job>
+    <_time t="T">2026-06-08T05:33:14Z</_time>
+    <_version t="S">0.19.11/0.60.3/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-06-08T05:33:14Z</when>
+  </f>
+  <f>
+    <_id t="I">20528</_id>
+    <_job t="I">27185410177</_job>
+    <_time t="T">2026-06-09T05:15:51Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <by_owner t="I">1</by_owner>
+    <commit t="S">6c5e22e3f46e2d349ad22d6aa66e1ac5bac8ffcb</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #35317392190 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
+    <event_id t="I">13027874855</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">35317392190</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">28924109</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2026-06-09T04:57:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20529</_id>
+    <_job t="I">27185410177</_job>
+    <_time t="T">2026-06-09T05:16:33Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">13027874855</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1687</min_issue_was_found>
+    <min_pull_was_found t="I">708</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1551</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
