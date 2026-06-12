@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 763.167514285
+  seconds: 816.790766716
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-11 05:33:26.777740405 Z
+  when: 2026-06-12 05:36:00.639546756 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -74406,7 +74406,7 @@
   - 0
   some_unmerged_pulls: 0
   what: quality-of-service
-  when: 2026-06-04 05:39:41.000000000 Z
+  when: &147 2026-06-04 05:39:41.000000000 Z
 - _id: 20499
   _job: 27053341304
   _time: 2026-06-06 05:07:44.063680448 Z
@@ -74862,12 +74862,6 @@
     The average monthly turnover (24.0 developers) is decreasing (R=-0.58).
   what: assessment
   when: 2026-06-10 07:35:52.599310803 Z
-- _id: 20535
-  _job: 76661
-  _time: 2026-06-10 07:36:24.030657774 Z
-  _version: 0.19.11/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-06-10 07:36:24.002222227 Z
 - _id: 20537
   _job: 27325622671
   _time: 2026-06-11 05:20:46.935509760 Z
@@ -74882,23 +74876,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2026-06-11 05:20:46.000000000 Z
-- _id: 20538
-  _job: 27325622671
-  _time: 2026-06-11 05:21:21.908368539 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 13107526703
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 710
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20539
   _job: 27325622671
   _time: 2026-06-11 05:21:54.372341907 Z
@@ -74915,3 +74892,160 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-11 05:21:54.388645711 Z
+- _id: 20540
+  _job: 76764
+  _time: 2026-06-11 05:34:27.592493831 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-06-11 05:34:27.571123497 Z
+- _id: 20541
+  _job: 27396320872
+  _time: 2026-06-12 05:22:27.754501817 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  by_owner: 1
+  commit: b4f37633404220aca8b289a141f246675ff7620f
+  default_branch: master
+  details: 'A new Git push #35481752857 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 13193482467
+  event_type: PushEvent
+  push_id: 35481752857
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-06-11 21:57:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 20543
+  _job: 27396320872
+  _time: 2026-06-12 05:22:55.551311211 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/org.codehaus.mojo-exec-maven-plugin-3.x
+  comments: 5
+  comments_appreciated: 1
+  comments_by_author: 1
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1175 has been "pull-was-closed".
+  failed_builds: 3
+  files: 1
+  hoc: 2
+  issue: 1175
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-11 06:27:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 20544
+  _job: 27396320872
+  _time: 2026-06-12 05:23:17.565992486 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-1.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1695 has been "pull-was-closed".
+  failed_builds: 4
+  files: 1
+  hoc: 2
+  issue: 1695
+  repository: 28924109
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-11 06:27:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 20545
+  _job: 27396320872
+  _time: 2026-06-12 05:23:29.948940108 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/crate-ci-typos-1.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1698 has been "pull-was-closed".
+  failed_builds: 1
+  files: 1
+  hoc: 2
+  issue: 1698
+  repository: 28924109
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-11 06:27:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20546
+  _job: 27396320872
+  _time: 2026-06-12 05:23:41.303751764 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1699 has been "pull-was-closed".
+  failed_builds: 1
+  files: 1
+  hoc: 2
+  issue: 1699
+  repository: 28924109
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-11 06:27:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 20547
+  _job: 27396320872
+  _time: 2026-06-12 05:23:53.228768961 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 13193482467
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 711
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20548
+  _job: 27396320872
+  _time: 2026-06-12 05:24:45.426738805 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 4
+  total_commits: 3858
+  total_contributors: 88
+  total_files: 541
+  total_forks: 214
+  total_issues: 751
+  total_pulls: 952
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 874
+  what: dimensions-of-terrain
+  when: 2026-06-12 05:24:45.439233746 Z
+- _id: 20549
+  _job: 27396320872
+  _time: 2026-06-12 05:34:44.371085258 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  since: *147
+  what: quality-of-service
+  when: 2026-06-12 05:34:44.000000000 Z
