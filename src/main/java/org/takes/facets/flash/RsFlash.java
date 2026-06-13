@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.flash;
 
@@ -29,33 +10,29 @@ import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
 import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.Expires;
+import org.takes.rs.ResponseOf;
 import org.takes.rs.RsWrap;
 
 /**
- * Forwarding response.
+ * A response decorator that adds flash messages to HTTP responses via cookies.
  *
- * <p>This class helps you to automate the flash message mechanism, by
- * adding flash messages to your responses.
+ * <p>This class implements the flash message mechanism by adding Set-Cookie headers
+ * containing temporary messages that persist between HTTP requests. The flash concept,
+ * borrowed from Ruby on Rails, enables passing temporary variables between requests,
+ * which is particularly useful for redirect scenarios.
  *
- * <p>The flash concept is taken from Ruby on Rails, it is actually the ability
- * to pass temporary variables between requests which is particularly helpful
- * especially in case of a redirect.
+ * <p>Flash messages are ideal for displaying success or error notifications after
+ * form submissions or other user actions. The mechanism uses cookies to maintain
+ * state temporarily, making it unsuitable for stateless components like RESTful
+ * services.
  *
- * <p>The flash message mechanism is meant to be used in case you have a
- * dynamic content to render in which you want to add success or error
- * messages. The typical use case is when you have a form that the user can
- * submit and you want to be able to indicate whether the request was
- * successful or not.
- *
- * <p>The flash mechanism is a stateful mechanism based on a cookie so it is
- * not meant to be used to implement stateless components such as a RESTful
- * service.
- *
- * <p>Here is a simple example that shows how to properly use it:
+ * <p>Basic usage example:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
@@ -64,11 +41,8 @@ import org.takes.rs.RsWrap;
  *   }
  * }</pre>
  *
- * <p>This decorator will add the
- * required "Set-Cookie" header to the response. This is all it is doing.
- * The response is added to the cookie in URL-encoded format, together
- * with the logging level. Flash messages could be of different severity,
- * we're using Java logging levels for that, for example:
+ * <p>The decorator adds a Set-Cookie header with the message in URL-encoded format,
+ * combined with a logging level for severity indication:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
@@ -82,16 +56,14 @@ import org.takes.rs.RsWrap;
  *   }
  * }</pre>
  *
- * <p>This is how the HTTP response will look like (simplified):
+ * <p>The resulting HTTP response will contain:
  *
  * <pre> HTTP/1.1 303 See Other
  * Set-Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
- * <p>Here, the name of the cookie is {@code RsFlash}. You can change this
- * default name using a constructor of {@link org.takes.facets.flash.RsFlash}.
- *
- * <p>To clean up the cookie in the following requests, you will need to
- * decorate your {@code Take} with {@link TkFlash}.
+ * <p>The default cookie name is {@code RsFlash}, but it can be customized using
+ * appropriate constructors. To clean up cookies after consumption, decorate your
+ * {@code Take} with {@link TkFlash}.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -106,21 +78,25 @@ public final class RsFlash extends RsWrap {
     private static final String TEXT_FORMAT = "%s/%s";
 
     /**
+     * Default cookie name.
+     */
+    private static final String COOKIE = "RsFlash";
+
+    /**
      * To string.
      */
-    private final CharSequence text;
+    private final Text text;
 
     /**
      * Constructs a {@code RsFlash} with the specified message.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param msg Message to show
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final CharSequence msg)
-        throws UnsupportedEncodingException {
+    public RsFlash(final CharSequence msg) throws UnsupportedEncodingException {
         this(msg, Level.INFO);
     }
 
@@ -128,14 +104,14 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified message and expiration
      * date of the cookie.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param msg Message
      * @param expires Date of the cookie
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final CharSequence msg, final Expires.Date expires)
+    public RsFlash(final CharSequence msg, final Expires expires)
         throws UnsupportedEncodingException {
         this(msg, Level.INFO, expires);
     }
@@ -144,24 +120,17 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified error.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
      * <p>By default it will use {@code RsFlash} as cookie name and expiration
-     * date of the cookie will be 1 hour after instance creation.</p>
+     * date of the cookie will be 1 hour after instance creation.
      *
      * @param err Error
      * @throws UnsupportedEncodingException In case the default encoding is not
      *  supported
      */
-    public RsFlash(final Throwable err)
-        throws UnsupportedEncodingException {
-        this(
-            err,
-            new Expires.Date(
-                System.currentTimeMillis()
-                    + TimeUnit.HOURS.toMillis(1L)
-            )
-        );
+    public RsFlash(final Throwable err) throws UnsupportedEncodingException {
+        this(new ThrowableMsg(err), Level.SEVERE);
     }
 
     /**
@@ -169,9 +138,9 @@ public final class RsFlash extends RsWrap {
      * expiration date.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param err Error
      * @param expires Date of the cookie
@@ -179,19 +148,19 @@ public final class RsFlash extends RsWrap {
      *  supported
      * @since 2.0
      */
-    public RsFlash(final Throwable err, final Expires.Date expires)
+    public RsFlash(final Throwable err, final Expires expires)
         throws UnsupportedEncodingException {
-        this(err, Level.SEVERE, expires);
+        this(new ThrowableMsg(err), Level.SEVERE, expires);
     }
 
     /**
      * Constructs a {@code RsFlash} with the specified error and logging level.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
      * <p>By default it will use {@code RsFlash} as cookie name and expiration
-     * date of the cookie will be 1 hour after instance creation.</p>
+     * date of the cookie will be 1 hour after instance creation.
      *
      * @param err Error
      * @param level Level
@@ -201,14 +170,7 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final Throwable err, final Level level)
         throws UnsupportedEncodingException {
-        this(
-            err.getLocalizedMessage(),
-            level,
-            new Expires.Date(
-                System.currentTimeMillis()
-                    + TimeUnit.HOURS.toMillis(1L)
-            )
-        );
+        this(new ThrowableMsg(err), level);
     }
 
     /**
@@ -216,8 +178,9 @@ public final class RsFlash extends RsWrap {
      * and cookie expiration date.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}}.</p>
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * {@link Throwable#getLocalizedMessage()}.
+     *
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param err Error
      * @param level Level
@@ -227,8 +190,8 @@ public final class RsFlash extends RsWrap {
      * @since 2.0
      */
     public RsFlash(final Throwable err, final Level level,
-        final Expires.Date expires) throws UnsupportedEncodingException {
-        this(err.getLocalizedMessage(), level, expires);
+        final Expires expires) throws UnsupportedEncodingException {
+        this(new ThrowableMsg(err), level, expires);
     }
 
     /**
@@ -236,7 +199,7 @@ public final class RsFlash extends RsWrap {
      * level.
      *
      * <p>By default it will use {@code RsFlash} as cookie name and default
-     * cookie expiration date will be 1 hour after instance creation.</p>
+     * cookie expiration date will be 1 hour after instance creation.
      *
      * @param msg Message
      * @param level Level
@@ -245,14 +208,14 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final CharSequence msg, final Level level)
         throws UnsupportedEncodingException {
-        this(msg, level, RsFlash.class.getSimpleName());
+        this(msg, level, RsFlash.COOKIE);
     }
 
     /**
      * Constructs a {@code RsFlash} with the specified message, logging level
      * and cookie expiration date.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param msg Message
      * @param level Level
@@ -262,13 +225,8 @@ public final class RsFlash extends RsWrap {
      * @since 2.0
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final Expires.Date expires) throws UnsupportedEncodingException {
-        this(
-            msg,
-            level,
-            RsFlash.class.getSimpleName(),
-            expires
-        );
+        final Expires expires) throws UnsupportedEncodingException {
+        this(msg, level, RsFlash.COOKIE, expires);
     }
 
     /**
@@ -286,15 +244,7 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final CharSequence msg, final Level level,
         final String cookie) throws UnsupportedEncodingException {
-        this(
-            msg,
-            level,
-            cookie,
-            new Expires.Date(
-                System.currentTimeMillis()
-                    + TimeUnit.HOURS.toMillis(1L)
-            )
-        );
+        this(msg, level, cookie, new RsFlash.HourFromNow());
     }
 
     /**
@@ -310,33 +260,40 @@ public final class RsFlash extends RsWrap {
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     public RsFlash(final CharSequence msg, final Level level,
-        final String cookie, final Expires.Date expires)
+        final String cookie, final Expires expires)
         throws UnsupportedEncodingException {
-        super(RsFlash.make(msg, level, cookie, expires));
-        this.text = String.format(RsFlash.TEXT_FORMAT, level, msg);
+        super(
+            new ResponseOf(
+                () -> RsFlash.make(msg, level, cookie, expires).head(),
+                () -> RsFlash.make(msg, level, cookie, expires).body()
+            )
+        );
+        this.text = new FormattedText(RsFlash.TEXT_FORMAT, level, msg);
     }
 
     @Override
     public String toString() {
         return String.format(
             "%s(super=%s, text=%s)",
-            RsFlash.class.getSimpleName(), super.toString(), this.text
+            RsFlash.class.getSimpleName(),
+            super.toString(),
+            new UncheckedText(this.text).asString()
         );
     }
 
     /**
-     * Make a response.
-     * @param msg Message
-     * @param level Level
-     * @param cookie Cookie name
-     * @param expires Date of the cookie
-     * @return Response
-     * @throws UnsupportedEncodingException In case the default encoding is not
-     *  supported
+     * Creates a response with flash message cookie.
+     * @param msg The flash message text
+     * @param level The logging level for message severity
+     * @param cookie The cookie name to use
+     * @param expires The cookie expiration date
+     * @return A response with the Set-Cookie header containing the flash
+     *  message
+     * @throws UnsupportedEncodingException If URL encoding fails
      * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static Response make(final CharSequence msg, final Level level,
-        final String cookie, final Expires.Date expires)
+        final String cookie, final Expires expires)
         throws UnsupportedEncodingException {
         return new RsWithCookie(
             cookie,
@@ -351,5 +308,20 @@ public final class RsFlash extends RsWrap {
             "Path=/",
             expires.print()
         );
+    }
+
+    /**
+     * Default expiration set to one hour from "now" (now is determined at
+     * the time {@link #print()} is called).
+     * @since 2.0
+     */
+    private static final class HourFromNow implements Expires {
+
+        @Override
+        public String print() {
+            return new Expires.Date(
+                System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
+            ).print();
+        }
     }
 }

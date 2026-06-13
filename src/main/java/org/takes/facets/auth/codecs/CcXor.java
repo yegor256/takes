@@ -1,37 +1,30 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
 import org.takes.facets.auth.Identity;
 
 /**
- * XOR codec.
+ * XOR codec that provides basic encryption by applying XOR operation with
+ * a secret key to the encoded identity data.
+ *
+ * <p>This codec decorates another codec and applies a simple XOR encryption
+ * algorithm to the resulting bytes. The secret key is cycled through when
+ * it is shorter than the data being encrypted, providing a basic form of
+ * stream cipher encryption. If the secret key is empty, the data passes
+ * through unchanged.
+ *
+ * <p>Usage example:
+ * <pre> {@code
+ * final Codec codec = new CcXor(new CcPlain(), keyBytes);
+ * final Identity identity = new Identity.Simple("urn:user:john", props);
+ * final byte[] encoded = codec.encode(identity);
+ * final Identity decoded = codec.decode(encoded);
+ * }</pre>
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -55,22 +48,10 @@ public final class CcXor implements Codec {
      * @param codec Original codec
      * @param key Secret key for encoding
      */
-    public CcXor(final Codec codec, final String key) {
-        this(
-            codec,
-            new UncheckedBytes(
-                new BytesOf(key)
-            ).asBytes());
-    }
-
-    /**
-     * Ctor.
-     * @param codec Original codec
-     * @param key Secret key for encoding
-     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public CcXor(final Codec codec, final byte[] key) {
         this.origin = codec;
-        this.secret = Arrays.copyOf(key, key.length);
+        this.secret = key;
     }
 
     @Override
@@ -104,5 +85,4 @@ public final class CcXor implements Codec {
         }
         return output;
     }
-
 }

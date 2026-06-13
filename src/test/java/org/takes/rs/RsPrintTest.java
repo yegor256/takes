@@ -1,56 +1,60 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
-import java.io.IOException;
-import org.cactoos.io.BytesOf;
+import org.cactoos.Text;
 import org.cactoos.iterable.IterableOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.object.HasToString;
-import org.junit.Test;
-import org.llorllale.cactoos.matchers.Assertion;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsPrint}.
  * @since 1.19
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RsPrintTest {
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class RsPrintTest {
 
     /**
-     * RsPrint can fail on invalid chars.
-     * @throws IOException If some problem inside
+     * Carriage return + line feed.
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void failsOnInvalidHeader() throws IOException {
-        new RsPrint(new RsWithHeader("name", "\n\n\n")).asString();
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
+
+    /**
+     * Three line feeds.
+     */
+    private static final String THREE_LFS =
+        String.valueOf((char) 10) + (char) 10 + (char) 10;
+
+    @Test
+    void printsBytesCorrectly() {
+        final Text response = new RsPrint(
+            new RsWithHeader("name", RsPrintTest.THREE_LFS)
+        );
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            response::asString
+        );
     }
 
     @Test
-    public void simple() throws Exception {
+    void failsOnInvalidHeader() {
+        final Text response = new RsPrint(
+            new RsWithHeader("name", RsPrintTest.THREE_LFS)
+        );
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            response::asString
+        );
+    }
+
+    @Test
+    void simple() throws Exception {
         final RsPrint response = new RsPrint(
             new RsSimple(new IterableOf<>("HTTP/1.1 500 Internal Server Error"), "")
         );
@@ -58,30 +62,30 @@ public final class RsPrintTest {
             "must write head as String",
             response.asString(),
             new HasToString<>(
-                new IsEqual<>("HTTP/1.1 500 Internal Server Error\r\n\r\n")
-            )
-        );
-        MatcherAssert.assertThat(
-            "must write head as Bytes",
-            response.asBytes(),
-            new IsEqual<>(
-                new BytesOf("HTTP/1.1 500 Internal Server Error\r\n\r\n").asBytes()
+                new IsEqual<>(
+                    String.format(
+                        "HTTP/1.1 500 Internal Server Error%1$s%1$s",
+                        RsPrintTest.CRLF
+                    )
+                )
             )
         );
     }
 
-    /**
-     * RFC 7230 says we shall support dashes in response first line.
-     */
     @Test
-    public void simpleWithDash() throws IOException {
-        new Assertion<>(
+    void simpleWithDash() throws Exception {
+        MatcherAssert.assertThat(
             "must write head with dashes",
             new RsPrint(
                 new RsSimple(new IterableOf<>("HTTP/1.1 203 Non-Authoritative"), "")
             ).asString(),
             new HasToString<>(
-                new IsEqual<>("HTTP/1.1 203 Non-Authoritative\r\n\r\n")
+                new IsEqual<>(
+                    String.format(
+                        "HTTP/1.1 203 Non-Authoritative%1$s%1$s",
+                        RsPrintTest.CRLF
+                    )
+                )
             )
         );
     }

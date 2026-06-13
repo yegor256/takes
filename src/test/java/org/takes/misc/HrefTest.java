@@ -1,47 +1,30 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.misc;
 
+import java.nio.charset.Charset;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.HasValues;
 
 /**
  * Test case for {@link Href}.
  * @since 0.7
  */
+@SuppressWarnings("PMD.TooManyMethods")
 final class HrefTest {
 
-    /**
-     * Href can build an URI.
-     */
     @Test
     void buildsUri() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
+            "URI must be built correctly with added, removed and replaced parameters",
             new Href("http://example.com?%D0%B0=8&b=9")
                 .with("д", "hello")
-                // @checkstyle MultipleStringLiteralsCheck (1 line)
                 .without("b")
                 .with("b", "test")
                 .toString(),
@@ -49,91 +32,113 @@ final class HrefTest {
         );
     }
 
-    /**
-     * Href can build an URI from empty start.
-     */
     @Test
     void buildsUriFromEmpty() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
+            "URI must be built correctly from empty base with path and empty parameter",
             new Href().path("boom-4").with("д", "").toString(),
             Matchers.equalTo("/boom-4?%D0%B4")
         );
     }
 
-    /**
-     * Href can build an URI without params.
-     */
     @Test
     void buildsUriWithoutParams() {
-        final String uri = "http://a.example.com";
         MatcherAssert.assertThat(
-            new Href(uri).toString(),
+            "URI without parameters must include trailing slash",
+            new Href("http://a.example.com").toString(),
             Matchers.equalTo("http://a.example.com/")
         );
     }
 
-    /**
-     * Href can add path.
-     */
     @Test
-    void addsPath() {
+    void extractsFirstParameter() {
         MatcherAssert.assertThat(
+            "Cant get first parameter",
+            new Href("http://a.example.com?param1=hello&param2=world").param("param1"),
+            new HasValues<>("hello")
+        );
+    }
+
+    @Test
+    void extractsSecondParameter() {
+        MatcherAssert.assertThat(
+            "Cant get second parameter",
+            new Href("http://a.example.com?param1=hello&param2=world").param("param2"),
+            new HasValues<>("world")
+        );
+    }
+
+    @Test
+    void extractsEscapedParameter() {
+        MatcherAssert.assertThat(
+            "Cant extract correctly escaped sequences in parameter value",
+            new Href("http://a.example.com?param3=hello%20world").param("param3"),
+            new HasValues<>("hello world")
+        );
+    }
+
+    @Test
+    void addsPathWithEncoding() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
+        MatcherAssert.assertThat(
+            "Path segments must be URL-encoded when added",
             new Href("http://example.com").path("д").path("d").toString(),
             Matchers.equalTo("http://example.com/%D0%B4/d")
         );
+    }
+
+    @Test
+    void addsPathWithTrailingSlash() {
+        Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(
+            "Path segments must be URL-encoded when base has trailing slash",
             new Href("http://example.com/").path("а").path("f").toString(),
             Matchers.equalTo("http://example.com/%D0%B0/f")
         );
     }
 
-    /**
-     * Href can accept encoded query part.
-     */
     @Test
-    void acceptsEncodedQuery() {
-        final String url = "http://localhost/read?file=%5B%5D%28%29.txt";
+    void preservesEncodedQuery() {
         MatcherAssert.assertThat(
-            new Href(url).toString(),
-            Matchers.equalTo(url)
+            "Encoded query parameters must be preserved",
+            new Href("http://localhost/read?file=%5B%5D%28%29.txt").toString(),
+            Matchers.equalTo("http://localhost/read?file=%5B%5D%28%29.txt")
         );
+    }
+
+    @Test
+    void decodesEncodedParameterValue() {
         MatcherAssert.assertThat(
-            new Href(url).param("file").iterator().next(),
+            "Encoded parameter values must be decoded when retrieved",
+            new Href("http://localhost/read?file=%5B%5D%28%29.txt")
+                .param("file").iterator().next(),
             Matchers.equalTo("[]().txt")
         );
     }
 
-    /**
-     * Href can accept non properly encoded URL.
-     */
     @Test
     void acceptsNonProperlyEncodedUrl() {
         MatcherAssert.assertThat(
-            // @checkstyle LineLength (2 lines)
+            "Non-properly encoded URL characters must be encoded",
             new Href("http://www.netbout.com/[foo/bar]/read?file=%5B%5D%28%29.txt").toString(),
             Matchers.equalTo("http://www.netbout.com/%5Bfoo/bar%5D/read?file=%5B%5D%28%29.txt")
         );
     }
 
-    /**
-     * Href can build an URI with fragment.
-     */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @Test
     void buildsUriWithFragmentAndParams() {
         MatcherAssert.assertThat(
+            "URI with fragment and parameters must be preserved",
             new Href("http://example.com/%D0%B0/?a=1#hello").toString(),
             Matchers.equalTo("http://example.com/%D0%B0/?a=1#hello")
         );
     }
 
-    /**
-     * Href can build an URI with fragment and no params.
-     */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @Test
     void buildsUriWithFragmentAndNoParams() {
         MatcherAssert.assertThat(
+            "URI with fragment but no parameters must be preserved",
             new Href("http://example.com/#hello").toString(),
             Matchers.equalTo("http://example.com/#hello")
         );

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -28,7 +9,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.ServerSocket;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -36,9 +16,15 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
+import org.cactoos.list.ListOf;
 
 /**
- * Command line options.
+ * Command-line options.
+ *
+ * <p>This class parses and provides access to command-line options
+ * for configuring the HTTP server. It supports options such as port
+ * specification, daemon mode, thread count, hit-refresh mode, and
+ * maximum latency settings.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -58,7 +44,7 @@ final class Options {
      * @since 0.9
      */
     Options(final String... args) {
-        this(Arrays.asList(args));
+        this(new ListOf<>(args));
     }
 
     /**
@@ -66,14 +52,14 @@ final class Options {
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
-        this.map = Options.asMap(args);
+        this.map = new Options.LazyMap(args);
     }
 
     /**
      * Is it a daemon?
      * @return TRUE if yes
      */
-    public boolean isDaemon() {
+    boolean isDaemon() {
         return this.map.containsKey("daemon");
     }
 
@@ -82,7 +68,8 @@ final class Options {
      * @return Socket
      * @throws IOException If fails
      */
-    public ServerSocket socket() throws IOException {
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
+    ServerSocket socket() throws IOException {
         final String port = this.map.get("port");
         if (port == null) {
             throw new IllegalArgumentException("--port must be specified");
@@ -94,11 +81,11 @@ final class Options {
             final File file = new File(port);
             if (file.exists()) {
                 try (Reader reader = new ReaderOf(file.toPath())) {
-                    // @checkstyle MagicNumber (1 line)
                     final char[] chars = new char[8];
-                    final int length = reader.read(chars);
                     socket = new ServerSocket(
-                        Integer.parseInt(new String(chars, 0, length))
+                        Integer.parseInt(
+                            new String(chars, 0, reader.read(chars))
+                        )
                     );
                 }
             } else {
@@ -116,7 +103,7 @@ final class Options {
      * @return TRUE if this mode is ON
      * @since 0.9
      */
-    public boolean hitRefresh() {
+    boolean hitRefresh() {
         return this.map.containsKey("hit-refresh");
     }
 
@@ -124,7 +111,7 @@ final class Options {
      * Get the lifetime in milliseconds.
      * @return Port number
      */
-    public long lifetime() {
+    long lifetime() {
         return Long.parseLong(
             this.map.getOrDefault(
                 "lifetime", String.valueOf(Long.MAX_VALUE)
@@ -136,7 +123,7 @@ final class Options {
      * Get the threads.
      * @return Threads
      */
-    public int threads() {
+    int threads() {
         return Integer.parseInt(
             this.map.getOrDefault(
                 "threads",
@@ -149,7 +136,7 @@ final class Options {
      * Get the max latency in milliseconds.
      * @return Latency
      */
-    public long maxLatency() {
+    long maxLatency() {
         return Long.parseLong(
             this.map.getOrDefault(
                 "max-latency",
@@ -160,10 +147,8 @@ final class Options {
 
     /**
      * Convert the provided arguments into a Map.
-     * @param args Arguments to parse.
-     * @return Map A map containing all the arguments and their values.
-     * @throws IllegalStateException If an argument doesn't match with the
-     *  expected format which is {@code --([a-z\-]+)(=.+)?}.
+     * @param args Arguments to parse
+     * @return Map A map containing all the arguments and their values
      */
     private static Map<String, String> asMap(final Iterable<String> args) {
         final Map<String, String> map = new HashMap<>(0);
@@ -172,7 +157,7 @@ final class Options {
             final Matcher matcher = ptn.matcher(arg);
             if (!matcher.matches()) {
                 throw new IllegalStateException(
-                    String.format("can't parse this argument: '%s'", arg)
+                    String.format("Can't parse this argument: '%s'", arg)
                 );
             }
             final String value = matcher.group(2);
@@ -183,5 +168,61 @@ final class Options {
             }
         }
         return map;
+    }
+
+    /**
+     * Map view that lazily parses the command-line arguments on first access.
+     * @since 2.0
+     */
+    private static final class LazyMap extends java.util.AbstractMap<String, String> {
+
+        /**
+         * Source arguments.
+         */
+        private final Iterable<String> args;
+
+        /**
+         * Cached parsed map.
+         */
+        private Map<String, String> cached;
+
+        /**
+         * Ctor.
+         * @param source Source arguments
+         */
+        LazyMap(final Iterable<String> source) {
+            this.args = source;
+        }
+
+        @Override
+        public java.util.Set<Map.Entry<String, String>> entrySet() {
+            return this.parsed().entrySet();
+        }
+
+        @Override
+        public boolean containsKey(final Object key) {
+            return this.parsed().containsKey(key);
+        }
+
+        @Override
+        public String get(final Object key) {
+            return this.parsed().get(key);
+        }
+
+        @Override
+        public String getOrDefault(final Object key, final String def) {
+            return this.parsed().getOrDefault(key, def);
+        }
+
+        /**
+         * Parse and cache the result.
+         * @return Parsed map
+         */
+        private Map<String, String> parsed() {
+            if (this.cached == null) {
+                this.cached = Options.asMap(this.args);
+            }
+            return this.cached;
+        }
     }
 }

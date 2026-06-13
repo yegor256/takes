@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -27,6 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -40,26 +24,29 @@ import lombok.ToString;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
+import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
 /**
- * Response that converts XML into HTML using attached XSL stylesheet.
+ * Response decorator that transforms XML to HTML using XSL stylesheets.
  *
- * <p>The encapsulated response must produce an XML document with
- * an attached XSL stylesheet, for example:
+ * <p>This decorator processes XML responses that contain XSL stylesheet
+ * processing instructions and transforms them into HTML or other formats.
+ * The stylesheet location is resolved using a configurable URIResolver,
+ * with classpath resolution as the default. Transformer factories are
+ * cached for performance.
  *
+ * <p>Expected XML format:
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page/&gt;
  * </pre>
  *
- * <p>{@link org.takes.rs.RsXslt} will try to find that {@code /xsl/home.xsl}
- * resource in classpath. If it's not found a runtime exception will thrown.
+ * <p>The stylesheet {@code /xsl/home.xsl} will be resolved on the classpath.
+ * If not found, a runtime exception is thrown.
  *
- * <p>The best way to use this decorator is in combination with
- * {@link org.takes.rs.xe.RsXembly}, for example:
- *
- * <pre> new RsXSLT(
+ * <p>Example usage with RsXembly:
+ * <pre>new RsXslt(
  *   new RsXembly(
  *     new XeStylesheet("/xsl/home.xsl"),
  *     new XeAppend(
@@ -71,19 +58,23 @@ import org.takes.Response;
  *   )
  * )</pre>
  *
- * <p><strong>Note:</strong> It is highly recommended to use
- * Saxon as a default XSL transformer. All others, including Apache
- * Xalan, won't work correctly in most cases.</p>
+ * <p><strong>Note:</strong> Saxon is recommended as the XSL transformer
+ * for best compatibility and performance.
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @see org.takes.rs.xe.RsXembly
+ * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsXslt extends RsWrap {
+
+    /**
+     * Cached factory.
+     */
+    private static final Map<URIResolver, TransformerFactory> FACTORIES =
+        new ConcurrentHashMap<>(0);
 
     /**
      * Ctor.
@@ -100,10 +91,41 @@ public final class RsXslt extends RsWrap {
      */
     public RsXslt(final Response rsp, final URIResolver resolver) {
         super(
-            new ResponseOf(
-                rsp::head,
-                () -> RsXslt.transform(rsp.body(), resolver)
+            new RsWithHeader(
+                new ResponseOf(
+                    rsp::head,
+                    () -> RsXslt.transform(rsp.body(), resolver)
+                ),
+                () -> String.format(
+                    "X-Takes-RsXslt-TransformerFactory: %s",
+                    RsXslt.factory(resolver).getClass().getCanonicalName()
+                )
             )
+        );
+    }
+
+    /**
+     * Get factory for the given resolver.
+     * @param resolver Resolver
+     * @return Factory
+     */
+    private static TransformerFactory factory(final URIResolver resolver) {
+        return RsXslt.FACTORIES.computeIfAbsent(
+            resolver,
+            res -> {
+                final TransformerFactory fct = TransformerFactory.newInstance();
+                fct.setURIResolver(res);
+                new Unchecked<>(
+                    () -> {
+                        fct.setFeature(
+                            XMLConstants.FEATURE_SECURE_PROCESSING,
+                            true
+                        );
+                        return 0;
+                    }
+                ).value();
+                return fct;
+            }
         );
     }
 
@@ -116,20 +138,25 @@ public final class RsXslt extends RsWrap {
      */
     private static InputStream transform(final InputStream origin,
         final URIResolver resolver) throws IOException {
+        final TransformerFactory fct = RsXslt.factory(resolver);
         try {
-            final TransformerFactory factory = TransformerFactory.newInstance();
-            factory.setURIResolver(resolver);
-            return RsXslt.transform(factory, origin);
+            return RsXslt.transform(fct, origin);
         } catch (final TransformerException ex) {
-            throw new IOException(ex);
+            throw new IOException(
+                String.format(
+                    "Can't transform via %s",
+                    fct.getClass().getName()
+                ),
+                ex
+            );
         }
     }
 
     /**
      * Transform XML into HTML.
      * @param factory Transformer factory
-     * @param xml XML page to be transformed.
-     * @return Resulting HTML page.
+     * @param xml XML page to be transformed
+     * @return Resulting HTML page
      * @throws TransformerException If fails
      */
     private static InputStream transform(final TransformerFactory factory,
@@ -138,14 +165,16 @@ public final class RsXslt extends RsWrap {
         try {
             input = RsXslt.consume(xml);
         } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to consume XML by XSLT",
+                ex
+            );
         }
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        final Source xsl = RsXslt.stylesheet(
+        RsXslt.transformer(
             factory,
-            new StreamSource(new ReaderOf(input))
-        );
-        RsXslt.transformer(factory, xsl).transform(
+            RsXslt.stylesheet(factory, new StreamSource(new ReaderOf(input)))
+        ).transform(
             new StreamSource(
                 new ReaderOf(input)
             ),
@@ -164,18 +193,15 @@ public final class RsXslt extends RsWrap {
      */
     private static byte[] consume(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
-        try {
+        try (InputStream stream = input) {
             while (true) {
-                final int bytes = input.read(buf);
+                final int bytes = stream.read(buf);
                 if (bytes < 0) {
                     break;
                 }
                 baos.write(buf, 0, bytes);
             }
-        } finally {
-            input.close();
         }
         return baos.toByteArray();
     }
@@ -195,7 +221,7 @@ public final class RsXslt extends RsWrap {
         );
         if (stylesheet == null) {
             throw new IllegalArgumentException(
-                "no associated stylesheet found in XML"
+                "No associated stylesheet found in XML"
             );
         }
         return stylesheet;
@@ -228,6 +254,7 @@ public final class RsXslt extends RsWrap {
      * @since 0.1
      */
     private static final class InClasspath implements URIResolver {
+
         @Override
         public Source resolve(final String href, final String base)
             throws TransformerException {
@@ -238,11 +265,14 @@ public final class RsXslt extends RsWrap {
                 uri = URI.create(base).resolve(href);
             }
             final InputStream input;
-            if (uri.isAbsolute()) {
+            if (uri.isAbsolute() && !"file".equals(uri.getScheme())) {
                 try {
                     input = uri.toURL().openStream();
                 } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        String.format("Failed to open URL '%s'", uri),
+                        ex
+                    );
                 }
             } else {
                 input = this.getClass().getResourceAsStream(uri.getPath());
@@ -260,5 +290,4 @@ public final class RsXslt extends RsWrap {
             );
         }
     }
-
 }

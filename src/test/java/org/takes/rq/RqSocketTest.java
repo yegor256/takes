@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -28,27 +9,22 @@ import java.net.InetAddress;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
-import org.llorllale.cactoos.matchers.Assertion;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 import org.takes.Request;
 
 /**
  * Test case for {@link RqSocket}.
  * @since 1.0
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
- * @checkstyle MagicNumberCheck (500 lines)
  */
-@SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.AvoidDuplicateLiterals"})
-public final class RqSocketTest {
+@SuppressWarnings("PMD.AvoidUsingHardCodedIP")
+final class RqSocketTest {
 
-    /**
-     * RqSocket can return local address.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void returnLocalAddress() throws IOException {
+    void returnLocalAddress() throws IOException {
         MatcherAssert.assertThat(
+            "Local address must be parsed from X-Takes-LocalAddress header",
             new RqSocket(
                 new RqWithHeader(
                     new RqFake(), "X-Takes-LocalAddress: 192.168.134.1"
@@ -58,13 +34,10 @@ public final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return local port.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void returnLocalPort() throws IOException {
+    void returnLocalPort() throws IOException {
         MatcherAssert.assertThat(
+            "Local port must be parsed from X-Takes-LocalPort header",
             new RqSocket(
                 new RqWithHeader(new RqFake(), "X-Takes-LocalPort: 55555")
             ).getLocalPort(),
@@ -72,13 +45,10 @@ public final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return remote address.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void returnRemoteAddress() throws IOException {
+    void returnRemoteAddress() throws IOException {
         MatcherAssert.assertThat(
+            "Remote address must be parsed from X-Takes-RemoteAddress header",
             new RqSocket(
                 new RqWithHeader(
                     new RqFake(), "X-Takes-RemoteAddress: 10.233.189.20"
@@ -88,13 +58,10 @@ public final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return remote port.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void returnRemotePort() throws IOException {
+    void returnRemotePort() throws IOException {
         MatcherAssert.assertThat(
+            "Remote port must be parsed from X-Takes-RemotePort header",
             new RqSocket(
                 new RqWithHeader(new RqFake(), "X-Takes-RemotePort: 80")
             ).getRemotePort(),
@@ -102,104 +69,108 @@ public final class RqSocketTest {
         );
     }
 
-    /**
-     * RqSocket can return not found remote address.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void returnNotFoundRemoteAddress() throws IOException {
-        try {
-            new RqSocket(
-                new RqWithHeader(
-                    new RqFake(), "X-Takes-NotFoundInetAddress: x.x.x.x"
-                )
-            ).getRemoteAddress();
-        } catch (final HttpException ex) {
-            MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString(
-                    "header \"X-Takes-RemoteAddress\" is mandatory"
-                )
-            );
-            throw ex;
-        }
-    }
-
-    /**
-     * RqSocket can return not found local address.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void returnNotFoundLocalAddress() throws IOException {
-        try {
-            new RqSocket(
-                new RqWithHeader(
-                    new RqFake(), "X-Takes-NotFoundInetAddress: 10.233.189.20"
-                )
-            ).getLocalAddress();
-        } catch (final HttpException ex) {
-            MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString(
-                    "header \"X-Takes-LocalAddress\" is mandatory"
-                )
-            );
-            throw ex;
-        }
-    }
-
-    /**
-     * RqSocket can return not found remote port.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void returnNotFoundRemotePort() throws IOException {
-        try {
-            new RqSocket(
-                new RqWithHeader(new RqFake(), "X-Takes-NotFoundPort: 22")
-            ).getRemotePort();
-        } catch (final HttpException ex) {
-            MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString(
-                    "header \"X-Takes-RemotePort\" is mandatory"
-                )
-            );
-            throw ex;
-        }
-    }
-
-    /**
-     * RqSocket can return not found local port.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void returnNotFoundLocalPort() throws IOException {
-        try {
-            new RqSocket(
-                new RqWithHeader(new RqFake(), "X-Takes-NotFoundPort: 80")
-            ).getLocalPort();
-        } catch (final HttpException ex) {
-            MatcherAssert.assertThat(
-                ex.getMessage(),
-                Matchers.containsString(
-                    "header \"X-Takes-LocalPort\" is mandatory"
-                )
-            );
-            throw ex;
-        }
-    }
-
-    /**
-     * Checks RqSocket equals method.
-     * @throws Exception If some problem inside
-     */
     @Test
-    public void mustEqualToSameTypeRequest() throws Exception {
+    void returnNotFoundRemoteAddress() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                try {
+                    new RqSocket(
+                        new RqWithHeader(
+                            new RqFake(), "X-Takes-NotFoundInetAddress: x.x.x.x"
+                        )
+                    ).getRemoteAddress();
+                } catch (final HttpException ex) {
+                    MatcherAssert.assertThat(
+                        "Exception message must indicate missing remote address header",
+                        ex.getMessage(),
+                        Matchers.containsString(
+                            "Header \"X-Takes-RemoteAddress\" is mandatory"
+                        )
+                    );
+                    throw ex;
+                }
+            }
+        );
+    }
+
+    @Test
+    void returnNotFoundLocalAddress() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                try {
+                    new RqSocket(
+                        new RqWithHeader(
+                            new RqFake(), "X-Takes-NotFoundInetAddress: 10.233.189.20"
+                        )
+                    ).getLocalAddress();
+                } catch (final HttpException ex) {
+                    MatcherAssert.assertThat(
+                        "Exception message must indicate missing local address header",
+                        ex.getMessage(),
+                        Matchers.containsString(
+                            "Header \"X-Takes-LocalAddress\" is mandatory"
+                        )
+                    );
+                    throw ex;
+                }
+            }
+        );
+    }
+
+    @Test
+    void returnNotFoundRemotePort() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                try {
+                    new RqSocket(
+                        new RqWithHeader(new RqFake(), "X-Takes-NotFoundPort: 22")
+                    ).getRemotePort();
+                } catch (final HttpException ex) {
+                    MatcherAssert.assertThat(
+                        "Exception message must indicate missing remote port header",
+                        ex.getMessage(),
+                        Matchers.containsString(
+                            "Header \"X-Takes-RemotePort\" is mandatory"
+                        )
+                    );
+                    throw ex;
+                }
+            }
+        );
+    }
+
+    @Test
+    void returnNotFoundLocalPort() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                try {
+                    new RqSocket(
+                        new RqWithHeader(new RqFake(), "X-Takes-NotFoundPort: 80")
+                    ).getLocalPort();
+                } catch (final HttpException ex) {
+                    MatcherAssert.assertThat(
+                        "Exception message must indicate missing local port header",
+                        ex.getMessage(),
+                        Matchers.containsString(
+                            "Header \"X-Takes-LocalPort\" is mandatory"
+                        )
+                    );
+                    throw ex;
+                }
+            }
+        );
+    }
+
+    @Test
+    void mustEqualToSameTypeRequest() {
         final Request request = new RqWithHeader(
             new RqFake(), "X-Takes-LocalPort: 55555"
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "RqSocket must equal to other RqSocket",
             new RqSocket(
                 request
@@ -209,15 +180,15 @@ public final class RqSocketTest {
                     request
                 )
             )
-        ).affirm();
+        );
     }
 
     @Test
-    public void hashCodeMustEqualToSameTypeRequest() throws Exception {
+    void hashCodeMustEqualToSameTypeRequest() {
         final Request request = new RqWithHeader(
             new RqFake(), "X-Takes-LocalPort: 55555"
         );
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "RqSocket must equal to other RqSocket",
             new RqSocket(
                 request
@@ -227,7 +198,6 @@ public final class RqSocketTest {
                     request
                 ).hashCode()
             )
-        ).affirm();
+        );
     }
-
 }

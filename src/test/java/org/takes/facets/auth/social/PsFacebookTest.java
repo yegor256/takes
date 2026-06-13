@@ -1,30 +1,12 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
 import com.restfb.DefaultWebRequestor;
+import com.restfb.WebRequestor.Request;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -42,22 +24,34 @@ import org.takes.rq.RqFake;
 /**
  * Test case for {@link PsFacebook}.
  * @since 0.15
- * @checkstyle MagicNumberCheck (500 lines)
  */
-public class PsFacebookTest {
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class PsFacebookTest {
 
-    /**
-     * Tests if PsFacebook can call DefaultFacebookClient APIs.
-     * @throws Exception if any error occurs
-     */
     @Test
-    public final void canLogin() throws Exception {
-        final String identifier = RandomStringUtils.randomAlphanumeric(10);
+    void identityPresentAfterLogin() throws Exception {
+        MatcherAssert.assertThat(
+            "Identity must be present after successful Facebook login",
+            PsFacebookTest.login("test123").has(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void identityUrnMatchesExpected() throws Exception {
+        final String identifier = "test456";
+        MatcherAssert.assertThat(
+            "Identity URN must match expected Facebook format",
+            PsFacebookTest.login(identifier).get().urn(),
+            CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
+        );
+    }
+
+    private static Opt<Identity> login(final String identifier) throws Exception {
         final RandomStringGenerator generator =
-            new RandomStringGenerator.Builder()
-                .filteredBy(
-                    Character::isLetterOrDigit, Character::isIdeographic
-                ).build();
+            new RandomStringGenerator.Builder().filteredBy(
+                Character::isLetterOrDigit, Character::isIdeographic
+            ).get();
         final Pass pass = new PsFacebook(
             new FakeRequest(
                 200,
@@ -70,7 +64,7 @@ public class PsFacebookTest {
             ),
             new DefaultWebRequestor() {
                 @Override
-                public Response executeGet(final String url) {
+                public Response executeGet(final Request request) {
                     return new Response(
                         HttpURLConnection.HTTP_OK,
                         String.format(
@@ -84,7 +78,7 @@ public class PsFacebookTest {
             generator.generate(10),
             generator.generate(10)
         );
-        final Opt<Identity> identity = pass.enter(
+        return pass.enter(
             new RqFake(
                 "GET",
                 String.format(
@@ -92,11 +86,6 @@ public class PsFacebookTest {
                     RandomStringUtils.randomAlphanumeric(10)
                 )
             )
-        );
-        MatcherAssert.assertThat(identity.has(), Matchers.is(true));
-        MatcherAssert.assertThat(
-            identity.get().urn(),
-            CoreMatchers.equalTo(String.format("urn:facebook:%s", identifier))
         );
     }
 }

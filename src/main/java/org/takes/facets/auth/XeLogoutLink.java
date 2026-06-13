@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -28,10 +9,14 @@ import lombok.EqualsAndHashCode;
 import org.takes.Request;
 import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
+import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
+import org.xembly.Directive;
 
 /**
- * Xembly source to create a LINK to logout.
+ * Xembly source that creates an XML link element for user logout.
+ * This class generates a link that, when accessed, will trigger
+ * the logout process by directing the user to the appropriate logout handler.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -45,9 +30,8 @@ public final class XeLogoutLink extends XeWrap {
      * @param req Request
      * @throws IOException If fails
      */
-    public XeLogoutLink(final Request req)
-        throws IOException {
-        this(req, "takes:logout", PsByFlag.class.getSimpleName());
+    public XeLogoutLink(final Request req) throws IOException {
+        this(req, "takes:logout", "PsByFlag");
     }
 
     /**
@@ -59,14 +43,50 @@ public final class XeLogoutLink extends XeWrap {
      */
     public XeLogoutLink(final Request req, final String rel,
         final String flag) throws IOException {
-        super(
-            new XeLink(
-                rel,
-                new RqHref.Base(req).href().with(
-                    flag, PsLogout.class.getSimpleName()
-                ).toString()
-        )
-        );
+        super(new XeLogoutLink.LazySrc(req, rel, flag));
     }
 
+    /**
+     * Lazy XeSource that builds the logout link on demand.
+     * @since 2.0
+     */
+    private static final class LazySrc implements XeSource {
+
+        /**
+         * Request.
+         */
+        private final Request req;
+
+        /**
+         * Relation.
+         */
+        private final String rel;
+
+        /**
+         * Flag.
+         */
+        private final String flag;
+
+        /**
+         * Ctor.
+         * @param request Request
+         * @param relation Relation
+         * @param fly Flag
+         */
+        LazySrc(final Request request, final String relation, final String fly) {
+            this.req = request;
+            this.rel = relation;
+            this.flag = fly;
+        }
+
+        @Override
+        public Iterable<Directive> toXembly() throws IOException {
+            return new XeLink(
+                this.rel,
+                new RqHref.Base(this.req).href()
+                    .with(this.flag, "PsLogout")
+                    .toString()
+            ).toXembly();
+        }
+    }
 }

@@ -1,41 +1,22 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
+import jakarta.json.JsonObject;
+import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-import javax.json.JsonObject;
-import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -49,7 +30,6 @@ import org.takes.misc.Opt;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.16
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = {"app", "key"})
 public final class PsTwitter implements Pass {
@@ -98,9 +78,7 @@ public final class PsTwitter implements Pass {
     public PsTwitter(final String name, final String keys) {
         this(
             new JdkRequest(
-                new Href("https://api.twitter.com/oauth2/token")
-                    .with("grant_type", "client_credentials")
-                    .toString()
+                "https://api.twitter.com/oauth2/token?grant_type=client_credentials"
             ),
             new JdkRequest(PsTwitter.VERIFY_URL), name, keys
         );
@@ -125,8 +103,7 @@ public final class PsTwitter implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
-        throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         return new Opt.Single<>(this.identity(this.fetch()));
     }
 
@@ -136,24 +113,20 @@ public final class PsTwitter implements Pass {
     }
 
     /**
-     * Get user name from Twitter, with the token provided.
+     * Get the user name from Twitter with the provided token.
      * @param tkn Twitter access token
      * @return The user found in Twitter
      * @throws IOException If fails
      */
     private Identity identity(final String tkn) throws IOException {
         return parse(
-            this.user
-                .uri()
-                .set(
-                    URI.create(
-                        new Href(PsTwitter.VERIFY_URL)
-                            .with(PsTwitter.ACCESS_TOKEN, tkn)
-                            .toString()
-                    )
+            this.user.uri().set(
+                URI.create(
+                    new Href(PsTwitter.VERIFY_URL).with(
+                        PsTwitter.ACCESS_TOKEN, tkn
+                    ).toString()
                 )
-                .back()
-                .header("accept", "application/json")
+            ).back().header("accept", "application/json")
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .as(JsonResponse.class)
@@ -183,21 +156,18 @@ public final class PsTwitter implements Pass {
      * @throws IOException If failed
      */
     private String fetch() throws IOException {
-        return this.token
-            .method("POST")
-            .header(
-                "Content-Type",
-                "application/x-www-form-urlencoded;charset=UTF-8"
-            )
-            .header(
-                "Authorization",
-                String.format(
-                    "Basic %s", DatatypeConverter.printBase64Binary(
-                        new UncheckedBytes(
-                            new BytesOf(
-                                String.format("%s:%s", this.app, this.key)
-                            )
-                        ).asBytes()
+        return this.token.method("POST").header(
+            "Content-Type",
+            "application/x-www-form-urlencoded;charset=UTF-8"
+        ).header(
+            "Authorization",
+            String.format(
+                "Basic %s", DatatypeConverter.printBase64Binary(
+                    new UncheckedBytes(
+                        new BytesOf(
+                            String.format("%s:%s", this.app, this.key)
+                        )
+                    ).asBytes()
                     )
                 )
             )

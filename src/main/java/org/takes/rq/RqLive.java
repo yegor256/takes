@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -30,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
@@ -37,12 +19,17 @@ import org.takes.Request;
 import org.takes.misc.Opt;
 
 /**
- * Live request.
+ * HTTP request parser that reads from a raw input stream.
+ *
+ * <p>This class parses HTTP requests directly from input streams,
+ * handling the HTTP protocol format including request line parsing,
+ * header validation, and proper CRLF line ending handling. It performs
+ * strict validation of HTTP format compliance and throws appropriate
+ * exceptions for malformed requests.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqLive extends RqWrap {
@@ -53,6 +40,7 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      */
     public RqLive(final InputStream input) throws IOException {
+        // @checkstyle ConstructorsCodeFreeCheck (1 line)
         super(RqLive.parse(input));
     }
 
@@ -63,7 +51,6 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
         final Collection<String> head = new LinkedList<>();
@@ -74,8 +61,12 @@ public final class RqLive extends RqWrap {
             eof = false;
             if (data.get() == '\r') {
                 RqLive.checkLineFeed(input, baos, head.size() + 1);
-                if (baos.size() == 0) {
+                if (baos.size() == 0 && !head.isEmpty()) {
                     break;
+                }
+                if (baos.size() == 0) {
+                    data = RqLive.data(input, new Opt.Empty<>(), false);
+                    continue;
                 }
                 data = new Opt.Single<>(input.read());
                 final Opt<String> header = RqLive.newHeader(data, baos);
@@ -109,11 +100,11 @@ public final class RqLive extends RqWrap {
         if (input.read() != '\n') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
+                new FormattedText(
                     "there is no LF after CR in header, line #%d: \"%s\"",
                     position,
-                    new TextOf(baos.toByteArray()).asString()
-                )
+                    new TextOf(baos.toByteArray())
+                ).toString()
             );
         }
     }
@@ -151,7 +142,6 @@ public final class RqLive extends RqWrap {
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
-        // @checkstyle MagicNumber (1 line)
         if ((data.get() > 0x7f || data.get() < 0x20)
             && data.get() != '\t') {
             throw new HttpException(
@@ -160,7 +150,7 @@ public final class RqLive extends RqWrap {
                     "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
                     data.get(),
                     position,
-                    new TextOf(baos.toByteArray()).asString()
+                    new TextOf(baos.toByteArray())
                 )
             );
         }

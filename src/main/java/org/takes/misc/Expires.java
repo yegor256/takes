@@ -1,47 +1,44 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.misc;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.TimeZone;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 
 /**
- * Expiration date in GMT.
+ * Interface for HTTP expiration date formatting and management.
+ *
+ * <p>This interface provides functionality to format expiration dates
+ * for HTTP headers, particularly for cache control and cookie expiration.
+ * All dates are formatted in GMT timezone according to HTTP specifications.
+ * The interface includes several implementations for common expiration
+ * scenarios including never expiring, already expired, and timed expiration.
+ *
+ * <p>All implementations must be immutable and thread-safe.
  *
  * @since 2.0
  */
+@FunctionalInterface
 public interface Expires {
 
     /**
      * String representation of expiration time.
-     * @return Representation of expirate time.
+     * @return Representation of expiration time
      */
     String print();
 
     /**
-     * Never expires.
+     * Implementation that represents content that never expires.
+     *
+     * <p>This implementation creates an expiration date set to epoch (0L)
+     * which effectively means the content never expires according to HTTP
+     * caching semantics.
      *
      * @since 2.0
      */
@@ -56,7 +53,7 @@ public interface Expires {
          * Constructor.
          */
         Never() {
-            this.origin = new Date(0L);
+            this.origin = new Expires.Date(0L);
         }
 
         @Override
@@ -66,11 +63,16 @@ public interface Expires {
     }
 
     /**
-     * Already expired. Returns "0" according to RFC7234.
+     * Implementation that represents already expired content.
+     *
+     * <p>This implementation returns "Expires=0" which indicates that
+     * the content has already expired according to RFC 7234. This is
+     * useful for immediate cache invalidation.
      *
      * @since 2.0
      */
     final class Expired implements Expires {
+
         @Override
         public String print() {
             return "Expires=0";
@@ -78,7 +80,11 @@ public interface Expires {
     }
 
     /**
-     * Expires in one hour of the given time.
+     * Implementation that represents content expiring in one hour.
+     *
+     * <p>This implementation wraps another Expires instance and represents
+     * content that expires one hour from the given base time. It delegates
+     * to the wrapped instance for the actual expiration formatting.
      *
      * @since 2.0
      */
@@ -104,26 +110,32 @@ public interface Expires {
     }
 
     /**
-     * Expiration date in GMT.
+     * Implementation that formats specific expiration dates in GMT.
+     *
+     * <p>This implementation formats expiration dates using configurable
+     * date format patterns, locales, and specific expiration times.
+     * It uses DateTimeFormatter with GMT timezone for HTTP-compliant
+     * date formatting. DateTimeFormatter is thread-safe by design.
      *
      * @since 2.0
      */
     final class Date implements Expires {
 
         /**
-         * DateFormat for expiration.
+         * DateTimeFormatter for expiration.
          */
-        private final ThreadLocal<SimpleDateFormat> format;
+        private final Unchecked<DateTimeFormatter> format;
 
         /**
-         * Expires date.
+         * Expires instant.
          */
-        private final java.util.Date expires;
+        private final Unchecked<Instant> expires;
 
         /**
          * Ctor.
          *
          * <p>Will create instance with default format pattern.</p>
+         *
          * @param expiration Expiration in millis
          */
         public Date(final long expiration) {
@@ -147,28 +159,50 @@ public interface Expires {
          */
         public Date(final String ptn, final Locale locale,
             final long expiration) {
-            this(ptn, locale, new java.util.Date(expiration));
+            this(
+                ptn,
+                locale,
+                new Unchecked<>(
+                    new Sticky<>(() -> Instant.ofEpochMilli(expiration))
+                )
+            );
         }
 
         /**
          * Ctor.
          * @param ptn Date format pattern
          * @param locale Locale
-         * @param expires Date when expires
+         * @param expires Instant when expires
          */
         public Date(final String ptn, final Locale locale,
-            final java.util.Date expires) {
-            this.format = ThreadLocal.withInitial(
-                () -> new SimpleDateFormat(ptn, locale)
+            final Instant expires) {
+            this(
+                ptn,
+                locale,
+                new Unchecked<>(new Sticky<>(() -> expires))
             );
-            this.expires = new java.util.Date(expires.getTime());
+        }
+
+        /**
+         * Ctor.
+         * @param ptn Date format pattern
+         * @param locale Locale
+         * @param expires Lazy expires
+         */
+        private Date(final String ptn, final Locale locale,
+            final Unchecked<Instant> expires) {
+            this.format = new Unchecked<>(
+                new Sticky<>(
+                    () -> DateTimeFormatter.ofPattern(ptn, locale)
+                        .withZone(ZoneId.of("GMT"))
+                )
+            );
+            this.expires = expires;
         }
 
         @Override
         public String print() {
-            final SimpleDateFormat fmt = this.format.get();
-            fmt.setTimeZone(TimeZone.getTimeZone("GMT"));
-            return fmt.format(this.expires);
+            return this.format.value().format(this.expires.value());
         }
     }
 }

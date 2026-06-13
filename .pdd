@@ -1,6 +1,7 @@
 --source=.
 --verbose
 --exclude target/**/*
+--exclude .idea/**/*
 --exclude src/site/resources/**/*
 --exclude src/test/resources/org/takes/http/keystore
 --rule min-words:20

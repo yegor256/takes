@@ -1,42 +1,26 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
 import org.takes.Request;
-import org.takes.facets.auth.PsByFlag;
 import org.takes.misc.Href;
 import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
+import org.xembly.Directive;
 
 /**
- * Xembly source to create a LINK to Facebook OAuth page.
+ * An Xembly source that creates a link to the Facebook OAuth authorization page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>This class generates XML elements for Facebook OAuth authentication links,
+ * allowing users to authenticate through Facebook's OAuth flow. The generated
+ * links include the necessary parameters for redirecting users to Facebook's
+ * authorization endpoint. The class is immutable and thread-safe.
  *
  * @since 0.5
  */
@@ -44,52 +28,86 @@ import org.takes.rs.xe.XeWrap;
 public final class XeFacebookLink extends XeWrap {
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Facebook application ID
-     * @throws IOException If fails
+     * Constructor with request and Facebook application ID.
+     * @param req The HTTP request
+     * @param app The Facebook application ID
+     * @throws IOException If link creation fails
      */
     public XeFacebookLink(final Request req, final CharSequence app)
         throws IOException {
-        this(req, app, "takes:facebook", PsByFlag.class.getSimpleName());
+        this(req, app, "takes:facebook", "PsByFlag");
     }
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Github application ID
-     * @param rel Related
-     * @param flag Flag to add
-     * @throws IOException If fails
+     * Constructor with full customization options.
+     * @param req The HTTP request
+     * @param app The Facebook application ID
+     * @param rel The relation type for the link
+     * @param flag The flag to add to the redirect URI
+     * @throws IOException If link creation fails
      * @checkstyle ParameterNumberCheck (4 lines)
      */
     public XeFacebookLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence flag) throws IOException {
-        super(XeFacebookLink.make(req, app, rel, flag));
+        super(new XeFacebookLink.LazyLink(req, app, rel, flag));
     }
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Github application ID
-     * @param rel Related
-     * @param flag Flag to add
-     * @return Source
-     * @throws IOException If fails
-     * @checkstyle ParameterNumberCheck (4 lines)
+     * Lazy XeSource that builds the Facebook OAuth link on demand.
+     * @since 2.0
+     * @checkstyle ParameterNumberCheck (10 lines)
      */
-    private static XeSource make(final Request req, final CharSequence app,
-        final CharSequence rel, final CharSequence flag) throws IOException {
-        return new XeLink(
-            rel,
-            new Href("https://www.facebook.com/dialog/oauth")
-                .with("client_id", app)
-                .with(
-                    "redirect_uri",
-                    new RqHref.Base(req).href()
-                        .with(flag, PsFacebook.class.getSimpleName())
-                )
-        );
-    }
+    private static final class LazyLink implements XeSource {
 
+        /**
+         * Request.
+         */
+        private final Request req;
+
+        /**
+         * Application ID.
+         */
+        private final CharSequence app;
+
+        /**
+         * Relation.
+         */
+        private final CharSequence rel;
+
+        /**
+         * Flag.
+         */
+        private final CharSequence flag;
+
+        /**
+         * Ctor.
+         * @param request HTTP request
+         * @param application App ID
+         * @param relation Relation type
+         * @param fly Flag
+         * @checkstyle ParameterNumberCheck (4 lines)
+         */
+        LazyLink(final Request request, final CharSequence application,
+            final CharSequence relation, final CharSequence fly) {
+            this.req = request;
+            this.app = application;
+            this.rel = relation;
+            this.flag = fly;
+        }
+
+        @Override
+        public Iterable<Directive> toXembly() throws IOException {
+            return new XeLink(
+                this.rel,
+                new Href("https://www.facebook.com/dialog/oauth").with(
+                    "client_id", this.app
+                ).with(
+                    "redirect_uri",
+                    new RqHref.Base(this.req).href().with(
+                        this.flag, "PsFacebook"
+                    )
+                )
+            ).toXembly();
+        }
+    }
 }

@@ -1,29 +1,11 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fork;
 
-import java.util.Collections;
+import java.util.AbstractCollection;
+import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
@@ -38,8 +20,8 @@ import org.cactoos.text.UncheckedText;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.6
  * @see org.takes.facets.fork.FkTypes
+ * @since 0.6
  */
 @ToString
 @EqualsAndHashCode
@@ -62,7 +44,7 @@ final class MediaTypes {
      * @param text Text to parse
      */
     MediaTypes(final String text) {
-        this(MediaTypes.parse(text));
+        this(new TreeSet<>(new MediaTypes.Bag(text)));
     }
 
     /**
@@ -70,7 +52,7 @@ final class MediaTypes {
      * @param types Set of types
      */
     MediaTypes(final SortedSet<MediaType> types) {
-        this.list = Collections.unmodifiableSortedSet(types);
+        this.list = new TreeSet<>(types);
     }
 
     /**
@@ -78,7 +60,7 @@ final class MediaTypes {
      * @param types Types
      * @return TRUE if any of these types are present inside this.list
      */
-    public boolean contains(final MediaTypes types) {
+    boolean contains(final MediaTypes types) {
         boolean contains = false;
         for (final MediaType type : types.list) {
             if (this.contains(type)) {
@@ -94,7 +76,7 @@ final class MediaTypes {
      * @param type Type
      * @return TRUE if this type is present inside this.list
      */
-    public boolean contains(final MediaType type) {
+    boolean contains(final MediaType type) {
         boolean contains = false;
         for (final MediaType mine : this.list) {
             if (mine.matches(type)) {
@@ -110,7 +92,7 @@ final class MediaTypes {
      * @param types Types
      * @return Merged list
      */
-    public MediaTypes merge(final MediaTypes types) {
+    MediaTypes merge(final MediaTypes types) {
         final SortedSet<MediaType> set = new TreeSet<>();
         set.addAll(this.list);
         set.addAll(types.list);
@@ -121,7 +103,7 @@ final class MediaTypes {
      * Is it empty?
      * @return TRUE if empty
      */
-    public boolean isEmpty() {
+    boolean isEmpty() {
         return this.list.isEmpty();
     }
 
@@ -130,7 +112,6 @@ final class MediaTypes {
      * @param text Text to parse
      * @return List of media types
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<>();
         final Iterable<Text> parts = new Split(
@@ -144,5 +125,51 @@ final class MediaTypes {
             }
         }
         return list;
+    }
+
+    /**
+     * Lazy collection that parses the source text only when iterated.
+     * @since 2.0
+     */
+    private static final class Bag extends AbstractCollection<MediaType> {
+
+        /**
+         * Source text.
+         */
+        private final String src;
+
+        /**
+         * Cached parsed set.
+         */
+        private SortedSet<MediaType> cached;
+
+        /**
+         * Ctor.
+         * @param src Source text
+         */
+        Bag(final String src) {
+            this.src = src;
+        }
+
+        @Override
+        public Iterator<MediaType> iterator() {
+            return this.parsed().iterator();
+        }
+
+        @Override
+        public int size() {
+            return this.parsed().size();
+        }
+
+        /**
+         * Parse and cache the result.
+         * @return Parsed set
+         */
+        private SortedSet<MediaType> parsed() {
+            if (this.cached == null) {
+                this.cached = MediaTypes.parse(this.src);
+            }
+            return this.cached;
+        }
     }
 }

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -29,9 +10,8 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.AllOf;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.HasString;
 import org.llorllale.cactoos.matchers.StartsWith;
-import org.llorllale.cactoos.matchers.TextHasString;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.takes.Request;
@@ -47,14 +27,10 @@ import org.takes.tk.TkText;
 /**
  * Test case for {@link TkAuth}.
  * @since 0.9
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
 final class TkAuthTest {
 
-    /**
-     * TkAuth can login a user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsUserIn() throws Exception {
         final Pass pass = new PsFixed(new Identity.Simple("urn:test:1"));
@@ -66,6 +42,7 @@ final class TkAuthTest {
             ArgumentCaptor.forClass(Request.class);
         Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
+            "Auth header must contain encoded identity URN",
             new RqHeaders.Base(captor.getValue()).header(
                 TkAuth.class.getSimpleName()
             ),
@@ -73,14 +50,10 @@ final class TkAuthTest {
         );
     }
 
-    /**
-     * TkAuth can login a user via cookie.
-     * @throws Exception If some problem inside
-     */
     @Test
     @SuppressWarnings("unchecked")
     void logsInUserViaCookie() throws Exception {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with header Set-Cookie",
             new RsPrint(
                 new TkAuth(
@@ -103,16 +76,12 @@ final class TkAuthTest {
             new AllOf<>(
                 new IterableOf<>(
                     new StartsWith("HTTP/1.1 200 "),
-                    new TextHasString("Set-Cookie: PsCookie=urn%3Atest%3A0")
+                    new HasString("Set-Cookie: PsCookie=urn%3Atest%3A0")
                 )
             )
-        ).affirm();
+        );
     }
 
-    /**
-     * TkAuth can logout a user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsUserOut() throws Exception {
         final Pass pass = new PsLogout();
@@ -130,6 +99,7 @@ final class TkAuthTest {
             ArgumentCaptor.forClass(Request.class);
         Mockito.verify(take).act(captor.capture());
         MatcherAssert.assertThat(
+            "Auth header must be empty after logout",
             new RqHeaders.Base(captor.getValue()).header(
                 TkAuth.class.getSimpleName()
             ),
@@ -137,13 +107,9 @@ final class TkAuthTest {
         );
     }
 
-    /**
-     * TkAuth can logout a user when a login cookie is present.
-     * @throws Exception If some problem inside
-     */
     @Test
     void logsUserOutWithCookiePresent() throws Exception {
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Response with header setting empty cookie",
             new RsPrint(
                 new TkAuth(
@@ -163,8 +129,7 @@ final class TkAuthTest {
                     )
                 )
             ),
-            new TextHasString("Set-Cookie: PsCookie=")
-        ).affirm();
+            new HasString("Set-Cookie: PsCookie=")
+        );
     }
-
 }

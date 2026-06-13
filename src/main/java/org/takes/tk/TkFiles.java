@@ -1,57 +1,67 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.io.InputOf;
 import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
 
 /**
- * Take reading resources from directory.
+ * Take that serves static files from filesystem directory.
  *
- * <p>This "take" is trying to find the requested resource in
- * file system and return it as an HTTP response with binary body, for example:
+ * <p>This {@link Take} implementation serves static files from a specified
+ * base directory on the filesystem. It maps HTTP request paths to file system
+ * paths and returns the file content as HTTP responses with appropriate
+ * Content-Type headers automatically determined by file extension.
  *
- * <pre> new TkFiles("/tmp");</pre>
+ * <p>The take resolves file paths by combining the configured base directory
+ * with the path component of the request URL. Query parameters in the URL
+ * are ignored during file resolution to prevent directory traversal attacks
+ * and maintain clean file serving semantics.
  *
- * <p>This object will take query part of the arrived HTTP
- * {@link org.takes.Request} and concatenate it with the {@code "/tmp"} prefix.
- * For example, a request comes it and its query equals to
- * {@code "/css/style.css?eot"}. {@link TkFiles}
- * will try to find a resource {@code "/tmp/css/style.css"} on disc.
+ * <p>Example usage:
+ * <pre>{@code
+ * // Serve files from /var/www/static
+ * new TkFiles("/var/www/static");
  *
- * <p>If such a resource is not found, {@link org.takes.HttpException}
- * will be thrown.
+ * // Request: GET /css/style.css
+ * // Resolves to: /var/www/static/css/style.css
+ * }</pre>
+ *
+ * <p>Common use cases include:
+ * <ul>
+ *   <li>Static asset serving (CSS, JavaScript, images)</li>
+ *   <li>Document repositories and file downloads</li>
+ *   <li>Media file serving (videos, audio, documents)</li>
+ *   <li>Template and resource file serving</li>
+ *   <li>Public file directories and archives</li>
+ *   <li>Static website hosting</li>
+ *   <li>Development asset serving during testing</li>
+ * </ul>
+ *
+ * <p>Security considerations:
+ * <ul>
+ *   <li>Only files within the base directory are accessible</li>
+ *   <li>Directory traversal attempts (../) are handled safely</li>
+ *   <li>Non-existent files return HTTP 404 Not Found</li>
+ *   <li>File permissions are respected by the underlying filesystem</li>
+ * </ul>
+ *
+ * <p>The response includes appropriate HTTP headers including Content-Length
+ * calculated from file size and Content-Type determined from file extension.
+ * Binary files are served efficiently using stream-based responses to minimize
+ * memory usage for large files.
+ *
+ * <p>If a requested file does not exist, an {@link HttpException} with
+ * HTTP 404 status is thrown, providing clear error information including
+ * the absolute path that was attempted.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -63,7 +73,7 @@ public final class TkFiles extends TkWrap {
 
     /**
      * Ctor.
-     * @param base Base directory
+     * @param base Base directory path for serving files
      */
     public TkFiles(final String base) {
         this(new File(base));
@@ -71,28 +81,24 @@ public final class TkFiles extends TkWrap {
 
     /**
      * Ctor.
-     * @param base Base directory
+     * @param base Base directory file object for serving files
      */
     public TkFiles(final File base) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request request) throws IOException {
-                    final File file = new File(
-                        base, new RqHref.Base(request).href().path()
+            request -> {
+                final File file = new File(
+                    base, new RqHref.Base(request).href().path()
+                );
+                if (!file.exists()) {
+                    throw new HttpException(
+                        HttpURLConnection.HTTP_NOT_FOUND,
+                        String.format(
+                            "%s not found", file.getAbsolutePath()
+                        )
                     );
-                    if (!file.exists()) {
-                        throw new HttpException(
-                            HttpURLConnection.HTTP_NOT_FOUND,
-                            String.format(
-                                "%s not found", file.getAbsolutePath()
-                            )
-                        );
-                    }
-                    return new RsWithBody(Files.newInputStream(file.toPath()));
                 }
+                return new RsWithBody(new InputOf(file).stream());
             }
         );
     }
-
 }

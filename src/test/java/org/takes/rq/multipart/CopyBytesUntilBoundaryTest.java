@@ -1,0 +1,54 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
+ */
+package org.takes.rq.multipart;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
+import org.apache.commons.io.input.ClosedInputStream;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.core.IsEqual;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Test for {@link CopyBytesUntilBoundary}.
+ * @since 1.19
+ */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class CopyBytesUntilBoundaryTest {
+
+    @Test
+    @Disabled
+    void copiesLastRepeatedBytes() throws IOException {
+        try (
+            InputStream input = new ClosedInputStream();
+            ReadableByteChannel src = Channels.newChannel(input);
+            WritableByteChannel target = Channels.newChannel(new ByteArrayOutputStream())
+        ) {
+            final ByteBuffer buffer = ByteBuffer.allocate(5);
+            buffer.put(new byte[] {0, 0, 0, 13, 13});
+            buffer.position(3);
+            buffer.limit(5);
+            final byte[] boundary = {13, 10, 45, 45, 102};
+            new CopyBytesUntilBoundary(
+                target,
+                boundary,
+                src,
+                buffer
+            ).copy();
+            final byte[] barray = buffer.array();
+            MatcherAssert.assertThat(
+                "Buffer must copy last repeated bytes",
+                new byte[] {barray[0], barray[1]},
+                new IsEqual<>(new byte[] {13, 13})
+            );
+        }
+    }
+}

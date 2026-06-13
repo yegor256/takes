@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fork;
 
@@ -29,6 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -76,18 +59,22 @@ import org.takes.tk.TkText;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see TkFork
  * @see TkRegex
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @since 0.4
  */
 @EqualsAndHashCode
 public final class FkRegex implements Fork {
 
     /**
-     * Pattern.
+     * Pattern flags for case-insensitive multiline matching.
      */
-    private final Pattern pattern;
+    private static final int FLAGS = Pattern.CASE_INSENSITIVE | Pattern.DOTALL;
+
+    /**
+     * Pattern (lazy).
+     */
+    private final Scalar<Pattern> pattern;
 
     /**
      * Target.
@@ -105,10 +92,7 @@ public final class FkRegex implements Fork {
      * @param text Text
      */
     public FkRegex(final String ptn, final String text) {
-        this(
-            Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
-            new TkText(text)
-        );
+        this(ptn, new TkText(text));
     }
 
     /**
@@ -134,76 +118,72 @@ public final class FkRegex implements Fork {
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      */
-    public FkRegex(final String ptn, final Take tke) {
-        this(
-            Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
-            tke
-        );
+    public FkRegex(final String ptn, final Take that) {
+        this(ptn, (TkRegex) req -> that.act(req));
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      */
-    public FkRegex(final Pattern ptn, final Take tke) {
-        this(
-            ptn,
-            new TkRegex() {
-                @Override
-                public Response act(final RqRegex req) throws Exception {
-                    return tke.act(req);
-                }
-            }
-        );
+    public FkRegex(final Pattern ptn, final Take that) {
+        this(ptn, (TkRegex) req -> that.act(req));
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      */
-    public FkRegex(final String ptn, final TkRegex tke) {
-        this(
-            Pattern.compile(ptn, Pattern.CASE_INSENSITIVE | Pattern.DOTALL),
-            tke
-        );
+    public FkRegex(final String ptn, final TkRegex that) {
+        this((Scalar<Pattern>) () -> Pattern.compile(ptn, FkRegex.FLAGS), that);
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      */
-    public FkRegex(final Pattern ptn, final TkRegex tke) {
-        this(
-            ptn,
-            new Scalar<TkRegex>() {
-                @Override
-                public TkRegex value() {
-                    return tke;
-                }
-            }
-        );
+    public FkRegex(final Pattern ptn, final TkRegex that) {
+        this((Scalar<Pattern>) () -> ptn, that);
     }
 
     /**
      * Ctor.
      * @param ptn Pattern
-     * @param tke Take
+     * @param that Take
      * @since 1.4
      */
-    public FkRegex(final Pattern ptn, final Scalar<TkRegex> tke) {
-        this.pattern = ptn;
-        this.target = tke;
+    public FkRegex(final Pattern ptn, final Scalar<TkRegex> that) {
+        this((Scalar<Pattern>) () -> ptn, that);
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern (lazy)
+     * @param that Take
+     */
+    private FkRegex(final Scalar<Pattern> ptn, final TkRegex that) {
+        this(ptn, (Scalar<TkRegex>) () -> that);
+    }
+
+    /**
+     * Ctor.
+     * @param ptn Pattern (lazy)
+     * @param that Take
+     */
+    private FkRegex(final Scalar<Pattern> ptn, final Scalar<TkRegex> that) {
+        this.pattern = new Sticky<>(ptn);
+        this.target = that;
         this.removeslash = true;
     }
 
     /**
      * Allows disabling the standard way for handling trailing slashes.
-     * @param enabled Enables/Disables the removal of a trailing slash.
+     * @param enabled Enables/Disables the removal of a trailing slash
      * @return FkRegex
      */
     public FkRegex setRemoveTrailingSlash(final boolean enabled) {
@@ -216,17 +196,18 @@ public final class FkRegex implements Fork {
         String path = new RqHref.Base(req).href().path();
         if (
             this.removeslash
-                && path.length() > 1
-                && path.charAt(path.length() - 1) == '/'
+                && !path.isEmpty()
+                && path.endsWith("/")
+                && !"/".equals(path)
         ) {
             path = path.substring(0, path.length() - 1);
         }
-        final Matcher matcher = this.pattern.matcher(path);
+        final Matcher matcher = new Unchecked<>(this.pattern).value().matcher(path);
         final Opt<Response> resp;
         if (matcher.matches()) {
             resp = new Opt.Single<>(
                 this.target.value().act(
-                    new RqMatcher(matcher, req)
+                    new FkRegex.RqMatcher(matcher, req)
                 )
             );
         } else {
@@ -237,7 +218,6 @@ public final class FkRegex implements Fork {
 
     /**
      * Request with a matcher inside.
-     *
      * @since 0.32.5
      */
     private static final class RqMatcher implements RqRegex {
@@ -277,5 +257,4 @@ public final class FkRegex implements Fork {
             return this.mtr;
         }
     }
-
 }

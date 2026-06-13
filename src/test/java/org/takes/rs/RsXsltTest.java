@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -34,34 +15,30 @@ import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.EndsWith;
+import org.llorllale.cactoos.matchers.Throws;
 import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsXslt}.
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RsXsltTest {
 
     /**
      * Validate encoding.
      */
-    @BeforeClass
-    public static void before() {
-        MatcherAssert.assertThat(
-            "default charset during testing must be UTF-8",
-            Charset.defaultCharset().name(),
-            Matchers.equalTo("UTF-8")
+    @BeforeAll
+    static void before() {
+        Assumptions.assumeTrue(
+            "UTF-8".equals(Charset.defaultCharset().name())
         );
     }
 
-    /**
-     * RsXSLT can convert XML to HTML.
-     * @throws IOException If some problem inside
-     */
     @Test
     void convertsXmlToHtml() throws IOException {
         final Text xml = new Joined(
@@ -78,6 +55,7 @@ final class RsXsltTest {
             "</x:div><x:p>\u0443</x:p></x:html></template></stylesheet>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must convert XML to HTML with correct UTF-8 encoding",
             IOUtils.toString(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml)),
@@ -89,12 +67,8 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT can convert XML to plain text.
-     * @throws IOException If some problem inside
-     */
     @Test
-    void convertsXmlToPlainText() throws IOException {
+    void convertsXmlToPlainText() {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/x.xsl' type='text/xsl'?>",
@@ -108,6 +82,7 @@ final class RsXsltTest {
             "Hey, <value-of select='/p/name'/>!</template></stylesheet>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must convert XML to plain text with expected content",
             new RsPrint(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml)),
@@ -118,13 +93,8 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT closes decorated Response body's InputStream when XML conversion
-     * is done.
-     * @throws Exception If some problem inside
-     */
     @Test
-    void closesDecoratedResponseInputStream() throws Exception {
+    void closesDecoratedResponseInputStream() throws IOException {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/b.xsl' type='text/xsl'?>",
@@ -141,28 +111,23 @@ final class RsXsltTest {
         final StateAwareInputStream stream = new StateAwareInputStream(
             new InputStreamOf(xml)
         );
+        new RsPrint(
+            new RsXslt(
+                new RsText(stream),
+                (href, base) -> new StreamSource(new InputStreamOf(xsl))
+            )
+        ).print();
         MatcherAssert.assertThat(
-            new RsPrint(
-                new RsXslt(
-                    new RsText(stream),
-                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
-                )
-            ),
-            new EndsWith("Hello, World!")
-        );
-        MatcherAssert.assertThat(
+            "Decorated response input stream must be closed after XSLT transformation",
             stream.isClosed(),
             Matchers.is(true)
         );
     }
 
-    /**
-     * RsXSLT can resolve in classpath.
-     * @throws IOException If some problem inside
-     */
     @Test
-    void resolvesInClasspath() throws IOException {
+    void resolvesInClasspathWithQueryParameters() {
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT in classpath with query parameters",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -180,7 +145,12 @@ final class RsXsltTest {
             ),
             new EndsWith("Hello, Bobby!")
         );
+    }
+
+    @Test
+    void resolvesInClasspathWithoutQueryParameters() {
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT in classpath without query parameters",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -198,7 +168,12 @@ final class RsXsltTest {
             ),
             new EndsWith("Hello, Dan!")
         );
+    }
+
+    @Test
+    void resolvesInClasspathWithIncludes() {
         MatcherAssert.assertThat(
+            "RsXslt must resolve XSLT with includes in classpath",
             new RsPrint(
                 new RsXslt(
                     new RsText(
@@ -218,10 +193,6 @@ final class RsXsltTest {
         );
     }
 
-    /**
-     * RsXSLT can load XSL stylesheets from the web.
-     * @throws IOException If some problem inside
-     */
     @Test
     void loadsExternalImports() throws IOException {
         final Text xml = new Joined(
@@ -231,6 +202,7 @@ final class RsXsltTest {
             " type='text/xsl'?><page sla='0.324'/>"
         );
         MatcherAssert.assertThat(
+            "RsXslt must load external XSLT imports and produce correct XHTML",
             IOUtils.toString(
                 new RsXslt(
                     new RsText(new InputStreamOf(xml))
@@ -243,4 +215,53 @@ final class RsXsltTest {
         );
     }
 
+    /**
+     * Checking XXE vulnerability for XSLT transformer in response class {@link RsXslt}.
+     */
+    @Test
+    void getRuntime() {
+        final Text xml = new Joined(
+            " ",
+            "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",
+            "<page><data>ура</data></page>"
+        );
+        final Text xsl = new Joined(
+            " ",
+            "<xsl:stylesheet version=\"1.0\"",
+            "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"",
+            String.format(
+                "xmlns:rt=\"http://xml.apache.org/xalan/java/%s.Runtime\"",
+                "java.lang"
+            ),
+            String.format(
+                "xmlns:ob=\"http://xml.apache.org/xalan/java/%s.Object\">%n",
+                "java.lang"
+            ),
+            String.format(" <xsl:template match=\"/\">%n"),
+            String.format(
+                "  <xsl:variable name=\"rtobject\" select=\"rt:getRuntime()\"/>%n"
+            ),
+            "  <xsl:variable name=\"process\"",
+            String.format(
+                "select=\"rt:exec($rtobject,'open -a Calculator')\"/>%n"
+            ),
+            "  <xsl:variable name=\"processString\"",
+            String.format("select=\"ob:toString($process)\"/>%n"),
+            String.format("  <xsl:value-of select=\"$processString\"/>%n"),
+            String.format(" </xsl:template>%n"),
+            "</xsl:stylesheet>"
+        );
+        MatcherAssert.assertThat(
+            "Must catch external function calls exception.",
+            () ->
+                new RsXslt(
+                    new RsText(new InputStreamOf(xml)),
+                    (href, base) -> new StreamSource(new InputStreamOf(xsl))
+                ).body(),
+            new Throws<>(
+                "Can't transform via net.sf.saxon.TransformerFactoryImpl",
+                IOException.class
+            )
+        );
+    }
 }

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.misc;
 
@@ -36,20 +17,36 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import org.cactoos.text.FormattedText;
 
 /**
- * HTTP URI/HREF.
+ * HTTP URI/HREF builder and parser with query parameter manipulation.
+ *
+ * <p>This class provides comprehensive functionality for building, parsing,
+ * and manipulating HTTP URIs and HREFs. It supports automatic URL encoding/decoding,
+ * query parameter management, path construction, and fragment handling.
+ * The implementation handles malformed URIs by automatically encoding problematic
+ * characters and provides a fluent interface for URI construction.
+ *
+ * <p>Key features:
+ * <ul>
+ * <li>Automatic URL encoding and decoding</li>
+ * <li>Query parameter addition, removal, and retrieval</li>
+ * <li>Path appending with proper encoding</li>
+ * <li>Fragment support</li>
+ * <li>Verbose error messages for missing parameters</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.7
  */
-@SuppressWarnings
-    (
-        {
-            "PMD.TooManyMethods",
-            "PMD.OnlyOneConstructorShouldDoInitialization"
-        }
-    )
+@SuppressWarnings(
+    {
+        "PMD.TooManyMethods",
+        "PMD.GodClass"
+    }
+)
 public final class Href implements CharSequence {
 
     /**
@@ -60,17 +57,17 @@ public final class Href implements CharSequence {
     /**
      * URI (without query and fragment parts).
      */
-    private final URI uri;
+    private final org.cactoos.Scalar<URI> link;
 
     /**
      * Params.
      */
-    private final SortedMap<String, List<String>> params;
+    private final org.cactoos.Scalar<SortedMap<String, List<String>>> params;
 
     /**
      * Fragment.
      */
-    private final Opt<String> fragment;
+    private final org.cactoos.Scalar<Opt<String>> frag;
 
     /**
      * Ctor.
@@ -84,16 +81,17 @@ public final class Href implements CharSequence {
      * @param txt Text of the link
      */
     public Href(final CharSequence txt) {
-        this(Href.createUri(txt.toString()));
-    }
-
-    /**
-     * Ctor.
-     * @param link The link
-     */
-    private Href(final URI link) {
-        this(Href.createBare(link), Href.asMap(link.getRawQuery()),
-            Href.readFragment(link));
+        this(
+            (org.cactoos.Scalar<URI>) () -> Href.createBare(
+                Href.createUri(txt.toString())
+            ),
+            (org.cactoos.Scalar<SortedMap<String, List<String>>>) () -> Href.asMap(
+                Href.createUri(txt.toString()).getRawQuery()
+            ),
+            (org.cactoos.Scalar<Opt<String>>) () -> Href.readFragment(
+                Href.createUri(txt.toString())
+            )
+        );
     }
 
     /**
@@ -105,14 +103,33 @@ public final class Href implements CharSequence {
     private Href(final URI link,
         final SortedMap<String, List<String>> map,
         final Opt<String> frgmnt) {
-        this.uri = link;
-        this.params = map;
-        this.fragment = frgmnt;
+        this(
+            (org.cactoos.Scalar<URI>) () -> link,
+            (org.cactoos.Scalar<SortedMap<String, List<String>>>) () -> map,
+            (org.cactoos.Scalar<Opt<String>>) () -> frgmnt
+        );
+    }
+
+    /**
+     * Primary constructor with lazy holders.
+     * @param uri URI scalar
+     * @param map Params scalar
+     * @param frg Fragment scalar
+     */
+    private Href(final org.cactoos.Scalar<URI> uri,
+        final org.cactoos.Scalar<SortedMap<String, List<String>>> map,
+        final org.cactoos.Scalar<Opt<String>> frg) {
+        this.link = new org.cactoos.scalar.Sticky<>(uri);
+        this.params = new org.cactoos.scalar.Sticky<>(map);
+        this.frag = new org.cactoos.scalar.Sticky<>(frg);
     }
 
     @Override
     public int length() {
-        return this.toString().length();
+        final StringBuilder text = new StringBuilder(this.bare());
+        this.appendParams(text);
+        this.appendFragment(text);
+        return text.length();
     }
 
     @Override
@@ -128,28 +145,8 @@ public final class Href implements CharSequence {
     @Override
     public String toString() {
         final StringBuilder text = new StringBuilder(this.bare());
-        if (!this.params.isEmpty()) {
-            boolean first = true;
-            for (final Map.Entry<String, List<String>> ent
-                : this.params.entrySet()) {
-                for (final String value : ent.getValue()) {
-                    if (first) {
-                        text.append('?');
-                        first = false;
-                    } else {
-                        text.append('&');
-                    }
-                    text.append(Href.encode(ent.getKey()));
-                    if (!value.isEmpty()) {
-                        text.append('=').append(Href.encode(value));
-                    }
-                }
-            }
-        }
-        if (this.fragment.has()) {
-            text.append('#');
-            text.append(this.fragment.get());
-        }
+        this.appendParams(text);
+        this.appendFragment(text);
         return text.toString();
     }
 
@@ -159,7 +156,7 @@ public final class Href implements CharSequence {
      * @since 0.9
      */
     public String path() {
-        return this.uri.getPath();
+        return this.uri().getPath();
     }
 
     /**
@@ -168,8 +165,8 @@ public final class Href implements CharSequence {
      * @since 0.14
      */
     public String bare() {
-        final StringBuilder text = new StringBuilder(this.uri.toString());
-        if (this.uri.getPath().isEmpty()) {
+        final StringBuilder text = new StringBuilder(this.uri().toString());
+        if (this.uri().getPath().isEmpty()) {
             text.append('/');
         }
         return text.toString();
@@ -182,7 +179,7 @@ public final class Href implements CharSequence {
      * @since 0.9
      */
     public Iterable<String> param(final Object key) {
-        final List<String> values = this.params.getOrDefault(
+        final List<String> values = this.params().getOrDefault(
             key.toString(),
             Collections.emptyList()
         );
@@ -190,15 +187,15 @@ public final class Href implements CharSequence {
         if (values.isEmpty()) {
             iter = new VerboseIterable<>(
                 Collections.emptyList(),
-                String.format(
+                new FormattedText(
                     "there are no URI params by name \"%s\" among %d others",
-                    key, this.params.size()
+                    key, this.params().size()
                 )
             );
         } else {
             iter = new VerboseIterable<>(
                 values,
-                String.format(
+                new FormattedText(
                     "there are only %d URI params by name \"%s\"",
                     values.size(), key
                 )
@@ -216,14 +213,14 @@ public final class Href implements CharSequence {
         return new Href(
             URI.create(
                 new StringBuilder(
-                    Href.TRAILING_SLASH.matcher(this.uri.toString())
+                    Href.TRAILING_SLASH.matcher(this.uri().toString())
                         .replaceAll("")
                 )
                 .append('/')
                 .append(Href.encode(suffix.toString())).toString()
             ),
-            this.params,
-            this.fragment
+            this.params(),
+            this.fragment()
         );
     }
 
@@ -234,12 +231,12 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href with(final Object key, final Object value) {
-        final SortedMap<String, List<String>> map = new TreeMap<>(this.params);
+        final SortedMap<String, List<String>> map = new TreeMap<>(this.params());
         if (!map.containsKey(key.toString())) {
             map.put(key.toString(), new LinkedList<>());
         }
         map.get(key.toString()).add(value.toString());
-        return new Href(this.uri, map, this.fragment);
+        return new Href(this.uri(), map, this.fragment());
     }
 
     /**
@@ -248,9 +245,59 @@ public final class Href implements CharSequence {
      * @return New HREF
      */
     public Href without(final Object key) {
-        final SortedMap<String, List<String>> map = new TreeMap<>(this.params);
+        final SortedMap<String, List<String>> map = new TreeMap<>(this.params());
         map.remove(key.toString());
-        return new Href(this.uri, map, this.fragment);
+        return new Href(this.uri(), map, this.fragment());
+    }
+
+    /**
+     * Append parameters to StringBuilder.
+     * @param text StringBuilder to append to
+     */
+    private void appendParams(final StringBuilder text) {
+        if (!this.params().isEmpty()) {
+            boolean first = true;
+            for (final Map.Entry<String, List<String>> ent
+                : this.params().entrySet()) {
+                first = Href.appendParam(text, ent, first);
+            }
+        }
+    }
+
+    /**
+     * Append single parameter to StringBuilder.
+     * @param text StringBuilder to append to
+     * @param ent Parameter entry
+     * @param first Whether this is the first parameter
+     * @return Whether next parameter will be first
+     */
+    private static boolean appendParam(final StringBuilder text,
+        final Map.Entry<String, List<String>> ent, final boolean first) {
+        boolean result = first;
+        for (final String value : ent.getValue()) {
+            if (result) {
+                text.append('?');
+                result = false;
+            } else {
+                text.append('&');
+            }
+            text.append(Href.encode(ent.getKey()));
+            if (!value.isEmpty()) {
+                text.append('=').append(Href.encode(value));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Append fragment to StringBuilder.
+     * @param text StringBuilder to append to
+     */
+    private void appendFragment(final StringBuilder text) {
+        if (this.fragment().has()) {
+            text.append('#');
+            text.append(this.fragment().get());
+        }
     }
 
     /**
@@ -264,7 +311,10 @@ public final class Href implements CharSequence {
                 txt, Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to encode '%s'", txt),
+                ex
+            );
         }
     }
 
@@ -279,7 +329,10 @@ public final class Href implements CharSequence {
                 txt, Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to decode '%s'", txt),
+                ex
+            );
         }
     }
 
@@ -290,37 +343,44 @@ public final class Href implements CharSequence {
      * if it is possible otherwise an {@code IllegalArgumentException} will
      * be thrown.
      * @param txt The content to parse
-     * @return The {@code URI} corresponding to the specified content.
-     * @throws IllegalArgumentException in case the content could not be parsed
-     * @throws IllegalStateException in case an invalid character could not be
-     *  encoded properly.
+     * @return The {@code URI} corresponding to the specified content
      */
     private static URI createUri(final String txt) {
-        URI result;
-        try {
-            result = new URI(txt);
-        } catch (final URISyntaxException ex) {
-            final int index = ex.getIndex();
-            if (index == -1) {
-                throw new IllegalArgumentException(ex.getMessage(), ex);
+        final StringBuilder value = new StringBuilder(txt);
+        while (true) {
+            try {
+                return new URI(value.toString());
+            } catch (final URISyntaxException ex) {
+                final int index = ex.getIndex();
+                if (index < 0 || index >= value.length()) {
+                    throw new IllegalArgumentException(ex.getMessage(), ex);
+                }
+                if (ex.getReason().contains("authority")) {
+                    final StringBuilder message = new StringBuilder(64);
+                    message
+                        .append("Illegal URI: ")
+                        .append(txt)
+                        .append(". Parsing breaks on index ")
+                        .append(index - (value.length() - txt.length()));
+                    throw new IllegalArgumentException(
+                        message.toString(),
+                        ex
+                    );
+                }
+                value.replace(
+                    index,
+                    index + 1,
+                    Href.encode(value.substring(index, index + 1))
+                );
             }
-            final StringBuilder value = new StringBuilder(txt);
-            value.replace(
-                index,
-                index + 1,
-                Href.encode(value.substring(index, index + 1))
-            );
-            result = Href.createUri(value.toString());
         }
-        return result;
     }
 
     /**
      * Convert the provided query into a Map.
-     * @param query The query to parse.
-     * @return A map containing all the query arguments and their values.
+     * @param query The query to parse
+     * @return A map containing all the query arguments and their values
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static SortedMap<String, List<String>> asMap(final String query) {
         final SortedMap<String, List<String>> params = new TreeMap<>();
         if (query != null) {
@@ -345,9 +405,9 @@ public final class Href implements CharSequence {
     /**
      * Remove query and fragment parts from the provided URI and
      *   return the resulting URI.
-     * @param link The link from which parts need to be removed.
+     * @param link The link from which parts need to be removed
      * @return The URI corresponding to the same provided URI but without
-     *  query and fragment parts.
+     *  query and fragment parts
      */
     private static URI createBare(final URI link) {
         final URI uri;
@@ -368,8 +428,8 @@ public final class Href implements CharSequence {
 
     /**
      * Read fragment part from the given URI.
-     * @param link The link from which the fragment needs to be returned.
-     * @return Opt with fragment or empty if there is no fragment.
+     * @param link The link from which the fragment needs to be returned
+     * @return Opt with fragment or empty if there is no fragment
      */
     private static Opt<String> readFragment(final URI link) {
         final Opt<String> fragment;
@@ -379,5 +439,29 @@ public final class Href implements CharSequence {
             fragment = new Opt.Single<>(link.getRawFragment());
         }
         return fragment;
+    }
+
+    /**
+     * Get the URI.
+     * @return URI
+     */
+    private URI uri() {
+        return new org.cactoos.scalar.Unchecked<>(this.link).value();
+    }
+
+    /**
+     * Get the params map.
+     * @return Map
+     */
+    private SortedMap<String, List<String>> params() {
+        return new org.cactoos.scalar.Unchecked<>(this.params).value();
+    }
+
+    /**
+     * Get the fragment.
+     * @return Fragment
+     */
+    private Opt<String> fragment() {
+        return new org.cactoos.scalar.Unchecked<>(this.frag).value();
     }
 }

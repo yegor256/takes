@@ -1,37 +1,17 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
+import jakarta.json.Json;
+import jakarta.json.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 import lombok.EqualsAndHashCode;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.scalar.Constant;
@@ -51,65 +31,62 @@ import org.takes.rq.RqHeaders;
 import org.takes.rs.RsJson;
 
 /**
- * Pass with JSON Web Token (JWT).
+ * Pass that authenticates users using JSON Web Token (JWT).
+ * This implementation validates JWT tokens from the Authorization header,
+ * verifying the signature and extracting the user identity from the payload.
+ * It supports token generation and validation using HMAC signatures.
  *
  * <p>
  * The class is immutable and thread-safe.
  *
  * @since 1.4
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle AvoidDuplicateLiterals (500 lines)
  * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class PsToken implements Pass {
 
     /**
-     * Signature algorithm.
+     * HMAC signature algorithm for signing and verifying tokens.
      */
     private final SiHmac signature;
 
     /**
-     * HTTP Header to read.
+     * Name of the HTTP header containing the JWT token.
      */
     private final String header;
 
     /**
-     * Max age of token, in seconds.
+     * Maximum age of the token before expiration, in seconds.
      */
     private final long age;
 
     /**
      * Ctor. This is equivalent to {@code PsToken(key, 3600)}, signing with 256
      * bit.
-     *
      * @param key
      *  The secret key to sign with
      */
-    public PsToken(final String key) {
-        // @checkstyle MagicNumber (1 line)
+    public PsToken(final byte[] key) {
         this(new SiHmac(key, SiHmac.HMAC256), 3600L);
     }
 
     /**
      * Ctor. This uses a 256-bit HMAC signature.
-     *
      * @param key
      *  The secret key to sign with
      * @param seconds
-     *  The life span of the token.
+     *  The life span of the token
      */
-    public PsToken(final String key, final long seconds) {
+    public PsToken(final byte[] key, final long seconds) {
         this(new SiHmac(key, SiHmac.HMAC256), seconds);
     }
 
     /**
      * Ctor.
-     *
      * @param sign
-     *  A {@see Signature}.
+     *  A {@see Signature}
      * @param seconds
-     *  The life span of the token.
+     *  The life span of the token
      */
     private PsToken(final SiHmac sign, final long seconds) {
         this.header = "Authorization";
@@ -118,6 +95,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Opt<Identity> enter(final Request req) throws IOException {
         // @checkstyle ExecutableStatementCount (100 lines)
         Opt<Identity> user = new Opt.Empty<>();
@@ -145,22 +123,25 @@ public final class PsToken implements Pass {
             final byte[] jwtpayload = parts[1].getBytes(
                 Charset.defaultCharset()
             );
-            final byte[] jwtsign = parts[2].getBytes(Charset.defaultCharset());
             final ByteBuffer tocheck = ByteBuffer.allocate(
                 jwtheader.length + jwtpayload.length + 1
             );
             tocheck.put(jwtheader).put(".".getBytes(Charset.defaultCharset()))
                 .put(jwtpayload);
-            final byte[] checked = this.signature.sign(tocheck.array());
-            if (Arrays.equals(jwtsign, checked)) {
-                try (JsonReader rdr = Json.createReader(
-                    new StringReader(
-                        new String(
-                            Base64.getDecoder().decode(jwtpayload),
-                            Charset.defaultCharset()
+            if (Arrays.equals(
+                parts[2].getBytes(Charset.defaultCharset()),
+                this.signature.sign(tocheck.array())
+            )) {
+                try (
+                    JsonReader rdr = Json.createReader(
+                        new StringReader(
+                            new String(
+                                Base64.getDecoder().decode(jwtpayload),
+                                Charset.defaultCharset()
+                            )
                         )
                     )
-                )) {
+                ) {
                     user = new Opt.Single<>(
                         new Identity.Simple(
                             rdr.readObject().getString(Token.Jwt.SUBJECT)
@@ -173,6 +154,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Response exit(final Response res,
         final Identity idt) throws Exception {
         final byte[] jwtheader = new Token.Jose(
@@ -187,18 +169,18 @@ public final class PsToken implements Pass {
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
         try (JsonReader reader = Json.createReader(res.body())) {
-            final JsonObject target = Json.createObjectBuilder()
-                .add("response", reader.read())
-                .add(
-                    "jwt", String.format(
-                        "%s.%s.%s",
-                        new String(jwtheader, Charset.defaultCharset()),
-                        new String(jwtpayload, Charset.defaultCharset()),
-                        new String(sign, Charset.defaultCharset())
-                    )
-                )
-                .build();
-            return new RsJson(target);
+            final String jwt = String.format(
+                "%s.%s.%s",
+                new String(jwtheader, Charset.defaultCharset()),
+                new String(jwtpayload, Charset.defaultCharset()),
+                new String(sign, Charset.defaultCharset())
+            );
+            return new RsJson(
+                Json.createObjectBuilder()
+                    .add("response", reader.read())
+                    .add("jwt", jwt)
+                    .build()
+            );
         }
     }
 }

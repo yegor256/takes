@@ -1,40 +1,27 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
+import jakarta.json.Json;
+import jakarta.json.JsonStructure;
+import jakarta.json.JsonWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
-import javax.json.Json;
-import javax.json.JsonStructure;
-import javax.json.JsonWriter;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Response that converts Java object to JSON.
+ * Response decorator that creates JSON responses from Java objects.
+ *
+ * <p>This decorator converts Java objects to JSON format using Jakarta JSON API
+ * and automatically sets the content type to "application/json". It accepts
+ * JsonStructure objects or Source implementations that provide JSON content.
+ * The serialization is performed using standard JSON writers.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -51,12 +38,7 @@ public final class RsJson extends RsWrap {
      */
     public RsJson(final JsonStructure json) throws IOException {
         this(
-            new RsJson.Source() {
-                @Override
-                public JsonStructure toJson() {
-                    return json;
-                }
-            }
+            () -> json
         );
     }
 
@@ -66,7 +48,7 @@ public final class RsJson extends RsWrap {
      * @throws IOException If fails
      */
     public RsJson(final RsJson.Source src) throws IOException {
-        this(new RsWithBody(RsJson.print(src)));
+        this(new RsWithBody(new RsJson.JsonBody(src)));
     }
 
     /**
@@ -86,9 +68,8 @@ public final class RsJson extends RsWrap {
      * Print JSON.
      * @param src Source
      * @return JSON
-     * @throws IOException If fails
      */
-    private static byte[] print(final RsJson.Source src) throws IOException {
+    private static byte[] print(final RsJson.Source src) {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (JsonWriter writer = Json.createWriter(baos)) {
             writer.write(src.toJson());
@@ -100,13 +81,74 @@ public final class RsJson extends RsWrap {
      * Source with JSON.
      * @since 0.1
      */
+    @FunctionalInterface
     public interface Source {
+
         /**
          * Get JSON value.
          * @return JSON
-         * @throws IOException If fails
          */
-        JsonStructure toJson() throws IOException;
+        JsonStructure toJson();
     }
 
+    /**
+     * Lazy InputStream that prints JSON from a {@link Source} on demand.
+     * @since 2.0
+     */
+    private static final class JsonBody extends InputStream {
+
+        /**
+         * JSON source.
+         */
+        private final RsJson.Source src;
+
+        /**
+         * Cached delegate.
+         */
+        private InputStream delegate;
+
+        /**
+         * Ctor.
+         * @param source JSON source
+         */
+        JsonBody(final RsJson.Source source) {
+            this.src = source;
+        }
+
+        @Override
+        public int read() throws IOException {
+            return this.body().read();
+        }
+
+        @Override
+        public int read(final byte[] buf, final int off, final int len)
+            throws IOException {
+            return this.body().read(buf, off, len);
+        }
+
+        @Override
+        public int available() throws IOException {
+            return this.body().available();
+        }
+
+        @Override
+        public void close() throws IOException {
+            if (this.delegate != null) {
+                this.delegate.close();
+            }
+        }
+
+        /**
+         * Lazily resolve the underlying byte stream.
+         * @return Cached InputStream
+         */
+        private InputStream body() {
+            if (this.delegate == null) {
+                this.delegate = new java.io.ByteArrayInputStream(
+                    RsJson.print(this.src)
+                );
+            }
+            return this.delegate;
+        }
+    }
 }

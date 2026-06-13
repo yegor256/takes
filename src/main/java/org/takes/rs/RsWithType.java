@@ -1,28 +1,11 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -30,7 +13,13 @@ import org.takes.Response;
 import org.takes.misc.Opt;
 
 /**
- * Response decorator, with content type.
+ * Response decorator that sets the Content-Type header.
+ *
+ * <p>This decorator adds or replaces the Content-Type header in an HTTP
+ * response with the specified media type and optional charset parameter.
+ * It removes any existing Content-Type headers to avoid duplication.
+ * The class also provides convenient inner classes for common content
+ * types like HTML, JSON, XML, and plain text.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -83,11 +72,11 @@ public final class RsWithType extends RsWrap {
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header if
-     *  present.
+     *  present
      */
     private RsWithType(final Response res, final CharSequence type,
         final Opt<Charset> charset) {
-        super(RsWithType.make(res, type, charset));
+        super(new RsWithType.LazyRs(res, type, charset));
     }
 
     /**
@@ -158,12 +147,11 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Html(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "text/html", charset));
+            super(new RsWithType.LazyRs(res, "text/html", charset));
         }
-
     }
 
     /**
@@ -201,12 +189,11 @@ public final class RsWithType extends RsWrap {
          * charset parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Json(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "application/json", charset));
+            super(new RsWithType.LazyRs(res, "application/json", charset));
         }
-
     }
 
     /**
@@ -244,12 +231,11 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Xml(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "text/xml", charset));
+            super(new RsWithType.LazyRs(res, "text/xml", charset));
         }
-
     }
 
     /**
@@ -287,11 +273,55 @@ public final class RsWithType extends RsWrap {
          * parameter value if present.
          * @param res Original response
          * @param charset The character set to add in the content type header if
-         *  present.
+         *  present
          */
         private Text(final Response res, final Opt<Charset> charset) {
-            super(RsWithType.make(res, "text/plain", charset));
+            super(new RsWithType.LazyRs(res, "text/plain", charset));
+        }
+    }
+
+    /**
+     * Lazily-built typed response.
+     * @since 2.0
+     */
+    private static final class LazyRs implements Response {
+
+        /**
+         * Original response.
+         */
+        private final Response res;
+
+        /**
+         * Content type.
+         */
+        private final CharSequence type;
+
+        /**
+         * Optional charset.
+         */
+        private final Opt<Charset> charset;
+
+        /**
+         * Ctor.
+         * @param origin Original response
+         * @param ctype Content type
+         * @param chr Optional charset
+         */
+        LazyRs(final Response origin, final CharSequence ctype,
+            final Opt<Charset> chr) {
+            this.res = origin;
+            this.type = ctype;
+            this.charset = chr;
         }
 
+        @Override
+        public Iterable<String> head() throws IOException {
+            return RsWithType.make(this.res, this.type, this.charset).head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return RsWithType.make(this.res, this.type, this.charset).body();
+        }
     }
 }

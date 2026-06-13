@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -30,9 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputStreamOf;
-import org.cactoos.io.UncheckedBytes;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -44,16 +24,32 @@ import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
 
 /**
- * Basic back-end.
+ * Basic back-end implementation.
+ *
+ * <p>This is the core back-end implementation that processes HTTP requests
+ * sequentially. It reads HTTP requests from the socket's input stream,
+ * processes them through a {@link Take}, and writes the responses back
+ * to the socket's output stream. It also automatically adds socket-related
+ * headers to each request for debugging and monitoring purposes.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Handles keep-alive connections by processing multiple requests
+ *       on the same socket</li>
+ *   <li>Automatically adds socket information headers (local/remote address
+ *       and port)</li>
+ *   <li>Provides comprehensive exception handling with appropriate HTTP
+ *       status codes</li>
+ *   <li>Handles {@link HttpException} with custom status codes</li>
+ *   <li>Maps {@link IllegalArgumentException} to HTTP 400 Bad Request</li>
+ *   <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
+ * </ul>
  *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @checkstyle IndentationCheck (500 lines)
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.DataClass")
 public final class BkBasic implements Back {
 
     /**
@@ -89,7 +85,6 @@ public final class BkBasic implements Back {
         this.take = tks;
     }
 
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
@@ -106,6 +101,7 @@ public final class BkBasic implements Back {
                     ),
                     output
                 );
+                output.flush();
                 if (input.available() <= 0) {
                     break;
                 }
@@ -119,32 +115,27 @@ public final class BkBasic implements Back {
      * @param output Output
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidCatchingThrowable")
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private void print(final Request req, final OutputStream output)
         throws IOException {
+        Response handled;
         try {
-            output.write(
-                new RsPrint(this.take.act(req)).asBytes()
-            );
+            handled = this.take.act(req);
         } catch (final HttpException ex) {
-            output.write(
-                new UncheckedBytes(
-                    new RsPrint(BkBasic.failure(ex, ex.code()))
-                ).asBytes()
+            handled = BkBasic.failure(ex, ex.code());
+        } catch (final IllegalArgumentException ex) {
+            handled = BkBasic.failure(
+                ex,
+                HttpURLConnection.HTTP_BAD_REQUEST
             );
-            // @checkstyle IllegalCatchCheck (10 lines)
+        // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
-            output.write(
-                new UncheckedBytes(
-                    new RsPrint(
-                        BkBasic.failure(
-                            ex,
-                            HttpURLConnection.HTTP_INTERNAL_ERROR
-                        )
-                    )
-                ).asBytes()
+            handled = BkBasic.failure(
+                ex,
+                HttpURLConnection.HTTP_INTERNAL_ERROR
             );
         }
+        new RsPrint(handled).print(output);
     }
 
     /**
@@ -170,7 +161,6 @@ public final class BkBasic implements Back {
      * @param socket Socket
      * @return Request with custom headers
      */
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(

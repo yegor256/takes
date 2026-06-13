@@ -1,39 +1,24 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.Text;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.list.ListOf;
 
 /**
- * Fake request (for unit tests).
+ * Fake HTTP request implementation for testing purposes.
+ *
+ * <p>This class provides a convenient way to create mock HTTP requests
+ * with custom headers and body content for unit testing. It supports
+ * various constructor overloads to create requests with different
+ * HTTP methods, query strings, headers, and body content.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -54,7 +39,7 @@ public final class RqFake extends RqWrap {
      * @param method HTTP method
      */
     public RqFake(final CharSequence method) {
-        this(method, "/");
+        this(method, "/ HTTP/1.1");
     }
 
     /**
@@ -75,10 +60,7 @@ public final class RqFake extends RqWrap {
     public RqFake(final CharSequence method, final CharSequence query,
         final CharSequence body) {
         this(
-            Arrays.asList(
-                String.format("%s %s", method, query),
-                "Host: www.example.com"
-            ),
+            new RqFake.HeadList(method, query),
             body
         );
     }
@@ -91,9 +73,20 @@ public final class RqFake extends RqWrap {
     public RqFake(final List<String> head, final CharSequence body) {
         this(
             head,
-            new UncheckedBytes(
-                new BytesOf(body.toString())
-            ).asBytes());
+            new InputStreamOf(body)
+        );
+    }
+
+    /**
+     * Ctor.
+     * @param head Head
+     * @param body Body
+     */
+    public RqFake(final List<String> head, final Text body) {
+        this(
+            head,
+            new InputStreamOf(body)
+        );
     }
 
     /**
@@ -104,7 +97,7 @@ public final class RqFake extends RqWrap {
     public RqFake(final List<String> head, final byte[] body) {
         this(
             head,
-            new ByteArrayInputStream(Arrays.copyOf(body, body.length))
+            new ByteArrayInputStream(body)
         );
     }
 
@@ -114,6 +107,51 @@ public final class RqFake extends RqWrap {
      * @param body Body
      */
     public RqFake(final List<String> head, final InputStream body) {
-        super(new RequestOf(Collections.unmodifiableList(head), body));
+        super(new RequestOf(new ListOf<>(head), body));
+    }
+
+    /**
+     * Lazily-built head list with the request line and a dummy Host header.
+     * @since 2.0
+     */
+    private static final class HeadList extends java.util.AbstractList<String> {
+
+        /**
+         * HTTP method.
+         */
+        private final CharSequence method;
+
+        /**
+         * HTTP query.
+         */
+        private final CharSequence query;
+
+        /**
+         * Ctor.
+         * @param mtd Method
+         * @param qry Query
+         */
+        HeadList(final CharSequence mtd, final CharSequence qry) {
+            this.method = mtd;
+            this.query = qry;
+        }
+
+        @Override
+        public String get(final int index) {
+            final String line;
+            if (index == 0) {
+                line = String.format("%s %s", this.method, this.query);
+            } else if (index == 1) {
+                line = "Host: www.example.com";
+            } else {
+                throw new IndexOutOfBoundsException(index);
+            }
+            return line;
+        }
+
+        @Override
+        public int size() {
+            return 2;
+        }
     }
 }

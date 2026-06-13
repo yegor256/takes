@@ -1,28 +1,10 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.codecs;
 
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.security.SecureRandomSpi;
 import java.util.Arrays;
@@ -37,38 +19,42 @@ import org.takes.facets.auth.Identity;
 /**
  * Test case for {@link CcAes}.
  * @since 0.13.8
- * @checkstyle MagicNumber (500 line)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class CcAesTest {
+
     /**
-     * CcAes can encrypt identity.
-     * @throws Exception If fails
+     * Test AES key for encryption tests.
      */
+    private static final byte[] TEST_KEY = {
+        (byte) -25, (byte) 62, (byte) 118, (byte) 92,
+        (byte) -35, (byte) -24, (byte) 92, (byte) 48,
+        (byte) 5, (byte) -4, (byte) -88, (byte) -95,
+        (byte) -110, (byte) -54, (byte) 43, (byte) -1,
+    };
+
+    /**
+     * Test random bytes for IV in encryption tests.
+     */
+    private static final byte[] TEST_RANDOM = {
+        (byte) 63, (byte) -27, (byte) -43, (byte) -52,
+        (byte) -70, (byte) -44, (byte) 86, (byte) -43,
+        (byte) -43, (byte) 116, (byte) -122, (byte) 105,
+        (byte) 108, (byte) -25, (byte) -126, (byte) 90,
+    };
+
     @Test
-    void encryptIdentity() throws Exception {
-        final byte[] key = {
-            (byte) -25, (byte) 62, (byte) 118, (byte) 92,
-            (byte) -35, (byte) -24, (byte) 92, (byte) 48,
-            (byte) 5, (byte) -4, (byte) -88, (byte) -95,
-            (byte) -110, (byte) -54, (byte) 43, (byte) -1,
-        };
-        final byte[] random = {
-            (byte) 63, (byte) -27, (byte) -43, (byte) -52,
-            (byte) -70, (byte) -44, (byte) 86, (byte) -43,
-            (byte) -43, (byte) 116, (byte) -122, (byte) 105,
-            (byte) 108, (byte) -25, (byte) -126, (byte) 90,
-        };
-        final byte[] encrypted = new CcAes(
-            new CcTest(),
-            new CcAesTest.FkRandom(random),
-            new SecretKeySpec(key, "AES")
-        ).encode(new Identity.Simple("urg:github:0000"));
+    void encryptedStartsWithIv() throws Exception {
         MatcherAssert.assertThat(
             "Encrypted identity does not start with IV",
-            Arrays.copyOf(encrypted, 16),
-            Matchers.equalTo(random)
+            Arrays.copyOf(CcAesTest.encrypt(), 16),
+            Matchers.equalTo(CcAesTest.TEST_RANDOM)
         );
+    }
+
+    @Test
+    void encryptedMessageMatches() throws Exception {
+        final byte[] encrypted = CcAesTest.encrypt();
         final byte[] message = new byte[encrypted.length - 16];
         System.arraycopy(encrypted, 16, message, 0, message.length);
         MatcherAssert.assertThat(
@@ -85,10 +71,6 @@ final class CcAesTest {
         );
     }
 
-    /**
-     * CcAes can decrypt identity.
-     * @throws Exception If fails
-     */
     @Test
     void decryptIdentity() throws Exception {
         final byte[] encrypted = {
@@ -112,6 +94,7 @@ final class CcAesTest {
             (byte) 20, (byte) 122, (byte) 92, (byte) -128,
         };
         MatcherAssert.assertThat(
+            "CcAes must decrypt identity correctly to original URN",
             new CcAes(
                 new CcTest(),
                 new SecureRandom(),
@@ -121,10 +104,6 @@ final class CcAesTest {
         );
     }
 
-    /**
-     * CcAES can encode and decode.
-     * @throws Exception any unexpected exception to throw
-     */
     @Test
     void encodesAndDecodes() throws Exception {
         final int length = 128;
@@ -134,25 +113,28 @@ final class CcAesTest {
         final String plain = "This is a test!!@@**";
         final Codec codec = new CcAes(new CcTest(), key);
         MatcherAssert.assertThat(
+            "CcAes must encode and decode identity preserving original value",
             codec.decode(codec.encode(new Identity.Simple(plain))).urn(),
             Matchers.equalTo(plain)
         );
     }
 
-    /**
-     * CcAES can throw the right exception.
-     * @throws Exception any unexpected exception to throw
-     */
     @Test
-    void throwsRightWhenBroken() throws Exception {
+    void throwsRightWhenBroken() {
         Assertions.assertThrows(
             DecodingException.class,
-            () -> {
-                new CcAes(
-                    new CcPlain(), "0123456701234567"
-                ).decode("broken input".getBytes());
-            }
+            () -> new CcAes(
+                new CcPlain(), "0123456701234567"
+            ).decode("broken input".getBytes(StandardCharsets.UTF_8))
         );
+    }
+
+    private static byte[] encrypt() throws Exception {
+        return new CcAes(
+            new CcTest(),
+            new CcAesTest.FkRandom(CcAesTest.TEST_RANDOM),
+            new SecretKeySpec(CcAesTest.TEST_KEY, "AES")
+        ).encode(new Identity.Simple("urg:github:0000"));
     }
 
     /**
@@ -160,6 +142,7 @@ final class CcAesTest {
      * @since 0.13.8
      */
     private static final class FkRandom extends SecureRandom {
+
         /**
          * Serial id.
          */
@@ -195,9 +178,10 @@ final class CcAesTest {
          * Ctor.
          * @param fake Bytes
          */
+        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
         FkRandomSpi(final byte[] fake) {
             super();
-            this.fake = fake.clone();
+            this.fake = fake;
         }
 
         @Override

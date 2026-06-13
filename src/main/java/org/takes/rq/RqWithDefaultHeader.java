@@ -1,33 +1,22 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
 import java.io.IOException;
+import java.io.InputStream;
 import org.takes.Request;
 
 /**
- * Request with default header.
+ * Request decorator that adds a default header if it doesn't already exist.
+ *
+ * <p>This decorator checks if the specified header is present in the original
+ * request. If the header is missing, it adds the header with the provided value.
+ * If the header already exists, the original request is returned unchanged.
+ *
+ * <p>The class is immutable and thread-safe.
+ *
  * @since 0.31
  */
 public final class RqWithDefaultHeader extends RqWrap {
@@ -42,15 +31,15 @@ public final class RqWithDefaultHeader extends RqWrap {
     public RqWithDefaultHeader(final Request req,
         final String hdr,
         final String val) throws IOException {
-        super(RqWithDefaultHeader.build(req, hdr, val));
+        super(new RqWithDefaultHeader.LazyRq(req, hdr, val));
     }
 
     /**
      * Builds the request with the default header if it is not already present.
-     * @param req Original request.
-     * @param hdr Header name.
-     * @param val Header value.
-     * @return The new request.
+     * @param req Original request
+     * @param hdr Header name
+     * @param val Header value
+     * @return The new request
      * @throws IOException in case of request errors
      */
     private static Request build(final Request req,
@@ -64,4 +53,47 @@ public final class RqWithDefaultHeader extends RqWrap {
         return request;
     }
 
+    /**
+     * Lazily-built request that adds a default header on demand.
+     * @since 2.0
+     */
+    private static final class LazyRq implements Request {
+
+        /**
+         * Original request.
+         */
+        private final Request req;
+
+        /**
+         * Header name.
+         */
+        private final String hdr;
+
+        /**
+         * Header value.
+         */
+        private final String val;
+
+        /**
+         * Ctor.
+         * @param request Original request
+         * @param header Header name
+         * @param value Header value
+         */
+        LazyRq(final Request request, final String header, final String value) {
+            this.req = request;
+            this.hdr = header;
+            this.val = value;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return RqWithDefaultHeader.build(this.req, this.hdr, this.val).head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return RqWithDefaultHeader.build(this.req, this.hdr, this.val).body();
+        }
+    }
 }

@@ -1,78 +1,87 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.it.fm;
 
 import com.jcabi.http.request.JdkRequest;
-import com.jcabi.http.response.RestResponse;
 import com.jcabi.http.response.XmlResponse;
 import com.jcabi.http.wire.VerboseWire;
 import java.io.File;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import org.apache.commons.io.FileUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.takes.http.FtRemote;
 
 /**
  * Test case for {@link org.takes.http.FtBasic}.
  * @since 0.1
  */
-public final class AppTest {
+final class AppTest {
 
-    /**
-     * Temp directory.
-     * @checkstyle VisibilityModifierCheck (5 lines)
-     */
-    @Rule
-    public final TemporaryFolder temp = new TemporaryFolder();
-
-    /**
-     * App can work.
-     * @throws Exception If some problem inside
-     */
     @Test
-    public void justWorks() throws Exception {
-        final File dir = this.temp.newFolder();
-        FileUtils.write(new File(dir, "hello.txt"), "hello, world!");
-        new FtRemote(new App(dir)).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(home)
-                        .uri().path("/f").back()
-                        .through(VerboseWire.class)
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_OK)
-                        .as(XmlResponse.class)
-                        .assertXPath("//xhtml:li[.='hello.txt: 13']");
-                }
-            }
+    void justWorks(@TempDir final Path temp) throws Exception {
+        final File dir = temp.toFile();
+        Files.write(
+            new File(dir, "hello.txt").toPath(),
+            "hello, world!".getBytes(StandardCharsets.UTF_8)
         );
+        MatcherAssert.assertThat(
+            "Response must contain expected file listing",
+            new AppTest.Fetcher(dir).result(),
+            Matchers.hasSize(1)
+        );
+    }
+
+    /**
+     * Helper that fetches XPath results from the app.
+     * @since 0.1
+     */
+    private static final class Fetcher implements FtRemote.Script {
+        /**
+         * Target directory.
+         */
+        private final File dir;
+
+        /**
+         * Fetched result.
+         */
+        private java.util.List<String> fetched;
+
+        /**
+         * Ctor.
+         * @param directory Target directory
+         */
+        Fetcher(final File directory) {
+            this.dir = directory;
+        }
+
+        @Override
+        public void exec(final URI home) throws IOException {
+            this.fetched = new JdkRequest(home)
+                .uri().path("/f").back()
+                .through(VerboseWire.class)
+                .fetch()
+                .as(XmlResponse.class)
+                .xml()
+                .xpath("//xhtml:li[.='hello.txt: 13']/text()");
+        }
+
+        /**
+         * Fetch xpath results.
+         * @return XPath matches
+         * @throws Exception On error
+         */
+        java.util.List<String> result() throws Exception {
+            new FtRemote(new App(this.dir)).exec(this);
+            return this.fetched;
+        }
     }
 
 }

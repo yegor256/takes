@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq.multipart;
 
@@ -44,15 +25,16 @@ import org.takes.rq.RqWrap;
  * @since 0.33
  */
 public final class RqMtFake implements RqMultipart {
+
     /**
      * Fake boundary constant.
      */
     private static final String BOUNDARY = "AaB02x";
 
     /**
-     * Carriage return constant.
+     * Carriage return constant (HTTP requires literal CRLF).
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF = new String(new char[]{13, 10});
 
     /**
      * Fake multipart request.
@@ -63,7 +45,6 @@ public final class RqMtFake implements RqMultipart {
      * Fake ctor.
      * @param req Fake request header holder
      * @param dispositions Fake request body parts
-     * @throws IOException If fails
      */
     public RqMtFake(final Request req, final Request... dispositions)
         throws IOException {
@@ -98,6 +79,7 @@ public final class RqMtFake implements RqMultipart {
      * @since 0.33
      */
     private static final class FakeMultipartRequest extends RqWrap {
+
         /**
          * Ctor.
          * @param rqst The Request object
@@ -119,7 +101,7 @@ public final class RqMtFake implements RqMultipart {
             throws IOException {
             super(
                 new RequestOf(
-                    new RqWithHeaders(
+                    () -> new RqWithHeaders(
                         rqst,
                         String.format(
                             "Content-Type: multipart/form-data; boundary=%s",
@@ -127,10 +109,12 @@ public final class RqMtFake implements RqMultipart {
                         ),
                         String.format(
                             "Content-Length: %s",
-                            new LengthOf(new InputOf(body.body())).intValue()
+                            new Unchecked<>(
+                                new LengthOf(new InputOf(body.body()))
+                            ).value()
                         )
-                    ),
-                    body
+                    ).head(),
+                    body::body
                 )
             );
         }
@@ -141,6 +125,7 @@ public final class RqMtFake implements RqMultipart {
      * @since 0.33
      */
     private static final class FakeBody implements Body {
+
         /**
          * The content.
          */
@@ -148,40 +133,47 @@ public final class RqMtFake implements RqMultipart {
 
         /**
          * Ctor.
-         *
-         * @param parts The Body parts.
+         * @param parts The Body parts
          */
         private FakeBody(final Request... parts) {
             this.content = new Sticky<>(
-                () -> {
-                    final StringBuilder builder = new StringBuilder(128);
-                    for (final Request part : parts) {
-                        builder.append(String.format("--%s", RqMtFake.BOUNDARY))
-                            .append(RqMtFake.CRLF)
-                            .append("Content-Disposition: ")
-                            .append(
-                                new RqHeaders.Smart(
-                                    new RqHeaders.Base(part)
-                                ).single("Content-Disposition")
-                            ).append(RqMtFake.CRLF);
-                        final String body = new RqPrint(part).printBody();
-                        if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {
-                            builder.append(RqMtFake.CRLF)
-                                .append(body)
-                                .append(RqMtFake.CRLF);
-                        }
-                    }
-                    builder.append("Content-Transfer-Encoding: utf-8")
-                        .append(RqMtFake.CRLF)
-                        .append(String.format("--%s--", RqMtFake.BOUNDARY));
-                    return builder.toString();
-                }
+                () -> RqMtFake.FakeBody.assemble(parts)
             );
         }
 
         @Override
-        public InputStream body() throws IOException {
+        public InputStream body() {
             return new InputStreamOf(this.content::value);
+        }
+
+        /**
+         * Assembles the multipart body content.
+         * @param parts The body parts
+         * @return Assembled body string
+         * @throws IOException if part headers cannot be read
+         */
+        private static String assemble(final Request... parts)
+            throws IOException {
+            final StringBuilder builder = new StringBuilder(128);
+            for (final Request part : parts) {
+                final String disposition = new RqHeaders.Smart(part)
+                    .single("Content-Disposition");
+                builder.append(String.format("--%s", RqMtFake.BOUNDARY))
+                    .append(RqMtFake.CRLF)
+                    .append("Content-Disposition: ")
+                    .append(disposition)
+                    .append(RqMtFake.CRLF);
+                final String body = new RqPrint(part).printBody();
+                if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {
+                    builder.append(RqMtFake.CRLF)
+                        .append(body)
+                        .append(RqMtFake.CRLF);
+                }
+            }
+            builder.append("Content-Transfer-Encoding: utf-8")
+                .append(RqMtFake.CRLF)
+                .append(String.format("--%s--", RqMtFake.BOUNDARY));
+            return builder.toString();
         }
     }
 }

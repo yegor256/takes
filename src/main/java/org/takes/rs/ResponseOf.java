@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -28,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import org.cactoos.Scalar;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
@@ -38,7 +19,13 @@ import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
 /**
- * Response of head and body.
+ * Response implementation that wraps custom head and body suppliers.
+ *
+ * <p>This class provides a flexible way to create Response instances using
+ * functional interfaces (scalars) for head and body content. It accepts
+ * suppliers that are called when the respective content is needed, enabling
+ * lazy evaluation and custom response construction. This is particularly
+ * useful for building responses dynamically.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -98,14 +85,7 @@ public final class ResponseOf implements Response {
                     () -> {
                         final ResponseOf other = (ResponseOf) that;
                         return new And(
-                            () -> {
-                                final Iterator<String> iter = other.head()
-                                    .iterator();
-                                return new And(
-                                    (String hdr) -> hdr.equals(iter.next()),
-                                    this.head()
-                                ).value();
-                            },
+                            () -> ResponseOf.sameHead(this.head(), other.head()),
                             () -> new Equality<>(
                                 new BytesOf(this.body()),
                                 new BytesOf(other.body())
@@ -120,5 +100,25 @@ public final class ResponseOf implements Response {
     @Override
     public int hashCode() {
         return new HashCode(new Unchecked<>(this.shead).value()).value();
+    }
+
+    /**
+     * Compare two head iterables element by element.
+     * @param mine Head of this response
+     * @param theirs Head of the other response
+     * @return TRUE if both iterables yield identical sequences
+     */
+    private static boolean sameHead(final Iterable<String> mine,
+        final Iterable<String> theirs) {
+        final Iterator<String> first = mine.iterator();
+        final Iterator<String> second = theirs.iterator();
+        boolean equal = true;
+        while (first.hasNext() && second.hasNext()) {
+            if (!first.next().equals(second.next())) {
+                equal = false;
+                break;
+            }
+        }
+        return equal && !first.hasNext() && !second.hasNext();
     }
 }

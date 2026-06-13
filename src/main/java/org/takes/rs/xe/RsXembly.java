@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs.xe;
 
@@ -28,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.Arrays;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -41,6 +21,7 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.io.WriterTo;
+import org.cactoos.list.ListOf;
 import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
@@ -56,18 +37,22 @@ import org.xembly.Xembler;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsXembly extends RsWrap {
 
     /**
+     * Lazily-built empty DOM Document used by the {@link XeSource} ctor.
+     */
+    private static final Node EMPTY_DOM = RsXembly.emptyDocument();
+
+    /**
      * Ctor.
      * @param sources Sources
      */
     public RsXembly(final XeSource... sources) {
-        this(Arrays.asList(sources));
+        this(new ListOf<>(sources));
     }
 
     /**
@@ -76,7 +61,7 @@ public final class RsXembly extends RsWrap {
      * @param sources Sources
      */
     public RsXembly(final Node dom, final XeSource... sources) {
-        this(dom, Arrays.asList(sources));
+        this(dom, new ListOf<>(sources));
     }
 
     /**
@@ -101,7 +86,7 @@ public final class RsXembly extends RsWrap {
      * @param src Source
      */
     public RsXembly(final XeSource src) {
-        this(RsXembly.emptyDocument(), src);
+        this(RsXembly.EMPTY_DOM, src);
     }
 
     /**
@@ -131,19 +116,22 @@ public final class RsXembly extends RsWrap {
      */
     private static InputStream render(final Node dom,
         final XeSource src) throws IOException {
-        final Node copy = cloneNode(dom);
         final ByteArrayOutputStream baos =
             new ByteArrayOutputStream();
-        final Node node = new Xembler(src.toXembly()).applyQuietly(copy);
         try {
             TransformerFactory.newInstance().newTransformer().transform(
-                new DOMSource(node),
+                new DOMSource(
+                    new Xembler(src.toXembly()).applyQuietly(cloneNode(dom))
+                ),
                 new StreamResult(
                     new WriterTo(baos)
                 )
             );
         } catch (final TransformerException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to transform XML via XSLT",
+                ex
+            );
         }
         return new ByteArrayInputStream(baos.toByteArray());
     }
@@ -159,7 +147,6 @@ public final class RsXembly extends RsWrap {
                 .newDocument();
         } catch (final ParserConfigurationException ex) {
             throw new IllegalStateException(
-                // @checkstyle LineLength (1 line)
                 "Could not instantiate DocumentBuilderFactory and build empty Document",
                 ex
             );

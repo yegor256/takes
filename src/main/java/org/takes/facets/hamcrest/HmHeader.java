@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 package org.takes.facets.hamcrest;
@@ -28,14 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import org.cactoos.Text;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.text.IsEqualIgnoringCase;
 import org.takes.Head;
 
 /**
@@ -71,6 +51,15 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     * @param hdr Header name
+     * @param vlm Value matcher
+     */
+    public HmHeader(final String hdr, final Matcher<Iterable<String>> vlm) {
+        this(new IsEqualIgnoringCase(hdr), vlm);
+    }
+
+    /**
+     * Ctor.
      * @param hdrm Header matcher
      * @param vlm Value matcher
      */
@@ -79,28 +68,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
         super();
         this.header = hdrm;
         this.value = vlm;
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param vlm Value matcher
-     */
-    public HmHeader(final String hdr,
-        final Matcher<Iterable<String>> vlm) {
-        this(Matchers.equalToIgnoringCase(hdr), vlm);
-    }
-
-    /**
-     * Ctor.
-     * @param hdr Header name
-     * @param val Header value
-     */
-    public HmHeader(final String hdr, final String val) {
-        this(
-            Matchers.equalToIgnoringCase(hdr),
-            Matchers.hasItems(val)
-        );
     }
 
     @Override
@@ -118,12 +85,12 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
             final Collection<String> values = new ArrayList<>(0);
             while (headers.hasNext()) {
                 final String[] parts = HmHeader.split(headers.next());
-                final UncheckedText first = new UncheckedText(
-                    new Trimmed(new TextOf(parts[0]))
-                );
-                if (this.header.matches(first.asString())) {
-                    final Text second = new Trimmed(new TextOf(parts[1]));
-                    values.add(new UncheckedText(second).asString());
+                if (this.header.matches(
+                    new UncheckedText(new Trimmed(new TextOf(parts[0]))).asString()
+                )) {
+                    values.add(
+                        new UncheckedText(new Trimmed(new TextOf(parts[1]))).asString()
+                    );
                 }
             }
             final boolean result = this.value.matches(values);

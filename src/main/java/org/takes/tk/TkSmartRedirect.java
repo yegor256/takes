@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -29,8 +10,6 @@ import java.net.URI;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.takes.Request;
-import org.takes.Response;
-import org.takes.Take;
 import org.takes.rq.RqRequestLine;
 import org.takes.rs.RsRedirect;
 
@@ -67,17 +46,12 @@ public final class TkSmartRedirect extends TkWrap {
      */
     public TkSmartRedirect(final String location, final int code) {
         super(
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    return new RsRedirect(
-                        new TkSmartRedirect.RedirectParams(
-                            req, location
-                        ).location(),
-                        code
-                    );
-                }
-            }
+            req -> new RsRedirect(
+                new TkSmartRedirect.RedirectParams(
+                    req, location
+                ).location(),
+                code
+            )
         );
     }
 
@@ -86,6 +60,7 @@ public final class TkSmartRedirect extends TkWrap {
      * @since 1.9
      */
     private static final class RedirectParams {
+
         /**
          * Original request.
          */
@@ -98,8 +73,8 @@ public final class TkSmartRedirect extends TkWrap {
 
         /**
          * Ctor.
-         * @param req Original request.
-         * @param origin Original location.
+         * @param req Original request
+         * @param origin Original location
          */
         RedirectParams(final Request req, final String origin) {
             this.req = req;
@@ -108,10 +83,10 @@ public final class TkSmartRedirect extends TkWrap {
 
         /**
          * Get location with composed params.
-         * @return New location.
-         * @throws IOException in case of error.
+         * @return New location
+         * @throws IOException in case of error
          */
-        public String location() throws IOException {
+        String location() throws IOException {
             final StringBuilder loc = new StringBuilder(this.origin);
             final URI target = URI.create(this.origin);
             final URI uri = URI.create(new RqRequestLine.Base(this.req).uri());
@@ -124,11 +99,9 @@ public final class TkSmartRedirect extends TkWrap {
                 loc.append(uri.getQuery());
             }
             if (uri.getFragment() != null) {
-                loc.append('#');
-                loc.append(uri.getFragment());
+                loc.append('#').append(uri.getFragment());
             }
             return loc.toString();
         }
     }
-
 }

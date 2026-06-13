@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -31,7 +12,13 @@ import lombok.ToString;
 import org.takes.Response;
 
 /**
- * Plain text response decorator.
+ * Response decorator that creates plain text responses with proper content type.
+ *
+ * <p>This decorator automatically sets the content type to "text/plain"
+ * and provides multiple constructor overloads for creating text responses
+ * from various sources including strings, byte arrays, input streams,
+ * and URLs. It's ideal for serving plain text content, API responses,
+ * or simple text-based data.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -106,7 +93,7 @@ public final class RsText extends RsWrap {
      * @param body HTML body
      */
     public RsText(final Response res, final InputStream body) {
-        this(new RsWithBody(res, new Body.TempFile(new Body.Stream(body))));
+        this(new RsWithBody(res, new RsBody.TempFile(new RsBody.Stream(body))));
     }
 
     /**
@@ -124,9 +111,6 @@ public final class RsText extends RsWrap {
      * @since 0.10
      */
     public RsText(final Response res) {
-        super(
-            new RsWithType(res, "text/plain")
-        );
+        super(new RsWithType(res, "text/plain"));
     }
-
 }

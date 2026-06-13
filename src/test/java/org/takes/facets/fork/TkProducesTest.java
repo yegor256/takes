@@ -1,33 +1,15 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fork;
 
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.llorllale.cactoos.matchers.IsText;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.Take;
@@ -41,38 +23,35 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link TkProduces}.
  * @since 0.14
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class TkProducesTest {
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class TkProducesTest {
 
-    /**
-     * TkProduces can fail on unsupported Accept header.
-     * @throws Exception If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void failsOnUnsupportedAcceptHeader() throws Exception {
-        final Take produces = new TkProduces(
-            new TkEmpty(),
-            "text/json,application/json"
+    @Test
+    void failsOnUnsupportedAcceptHeader() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> {
+                final Take produces = new TkProduces(
+                    new TkEmpty(),
+                    "text/json,application/json"
+                );
+                produces.act(
+                    new RqFake(
+                        Arrays.asList(
+                            "GET /hz0",
+                            "Host: as0.example.com",
+                            "Accept: text/xml"
+                        ),
+                        ""
+                    )
+                ).head();
+            }
         );
-        produces.act(
-            new RqFake(
-                Arrays.asList(
-                    "GET /hz0",
-                    "Host: as0.example.com",
-                    "Accept: text/xml"
-                ),
-                ""
-            )
-        ).head();
     }
 
-    /**
-     * TkProduce can produce correct type response.
-     * @throws Exception If some problem inside
-     */
     @Test
-    public void producesCorrectContentTypeResponse() throws Exception {
+    void producesCorrectContentTypeResponse() throws Exception {
         final Take produces = new TkProduces(
             new TkFixed(new RsJson(new RsEmpty())),
             "text/json"
@@ -88,10 +67,11 @@ public final class TkProducesTest {
             )
         );
         MatcherAssert.assertThat(
+            "Response must have correct JSON content type when produces JSON",
             new RsPrint(response),
-            new TextIs(
+            new IsText(
                 new Joined(
-                    "\r\n",
+                    String.valueOf((char) 13) + (char) 10,
                     "HTTP/1.1 200 OK",
                     "Content-Type: application/json",
                     "",

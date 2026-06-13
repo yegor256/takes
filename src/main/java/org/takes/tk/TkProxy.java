@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
@@ -50,7 +31,6 @@ import org.takes.rs.RsWithStatus;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.25
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 public final class TkProxy implements Take {
 
@@ -69,24 +49,7 @@ public final class TkProxy implements Take {
      * @param tgt Target to which requests are forwarded
      */
     public TkProxy(final URI tgt) {
-        this(tgt, TkProxy.class.getName());
-    }
-
-    /**
-     * Ctor.
-     * @param tgt Target to which requests are forwarded
-     */
-    public TkProxy(final String tgt) {
-        this(URI.create(tgt), TkProxy.class.getName());
-    }
-
-    /**
-     * Ctor.
-     * @param tgt Target to which requests are forwarded
-     * @param mark Marker (text label) to add to the HTTP header
-     */
-    public TkProxy(final String tgt, final String mark) {
-        this(URI.create(tgt), mark);
+        this(tgt, "org.takes.tk.TkProxy");
     }
 
     /**
@@ -122,17 +85,16 @@ public final class TkProxy implements Take {
 
     /**
      * Creates the request to be forwarded to the target host.
-     *
      * @param req Original request
      * @param dest Destination URL
      * @return Request to be forwarded
      * @throws Exception If some problem inside
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private com.jcabi.http.Request request(final Request req,
         final URI dest) throws Exception {
-        final String method = new RqMethod.Base(req).method();
-        com.jcabi.http.Request proxied = new JdkRequest(dest).method(method);
+        com.jcabi.http.Request proxied = new JdkRequest(dest).method(
+            new RqMethod.Base(req).method()
+        );
         final RqHeaders headers = new RqHeaders.Base(req);
         for (final String name : headers.names()) {
             if ("content-length".equals(
@@ -161,7 +123,6 @@ public final class TkProxy implements Take {
 
     /**
      * Creates the response received from the target host.
-     *
      * @param home Home host
      * @param dest Destination URL
      * @param rsp Response received from the target host

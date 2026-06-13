@@ -1,35 +1,16 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
-import com.jcabi.aspects.Tv;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.takes.Response;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsEmpty;
@@ -38,63 +19,61 @@ import org.takes.rs.RsEmpty;
  * Test of {@link PsAll}.
  * @since 0.22
  */
-public final class PsAllTest {
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class PsAllTest {
 
-    /**
-     * Fails if PsAll with 0 Passes is created.
-     * @throws Exception If fails
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void thereShouldBeAtLeastOnePass() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
-                new ArrayList<Pass>(0),
-                0
-            ).enter(new RqFake()).has(),
-            new IsEqual<>(false)
-        );
-    }
-
-    /**
-     * Fails if index is less then 0.
-     * @throws Exception If fails
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void indexMustBeNonNegative() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
-                Collections.singletonList(new PsFake(true)),
-                -1
-            ).enter(new RqFake()).has(),
-            new IsEqual<>(false)
-        );
-    }
-
-    /**
-     * Fails if index is greater or equal to the number of Passes to enter.
-     * @throws Exception If fails
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void indexMustBeSmallEnough() throws Exception {
-        MatcherAssert.assertThat(
-            new PsAll(
-                Arrays.asList(
-                    new PsFake(true),
-                    new PsFake(false)
-                ),
-                2
-            ).enter(new RqFake()).has(),
-            new IsEqual<>(false)
-        );
-    }
-
-    /**
-     * PsAll with a single Pass that can be entered should succeed.
-     * @throws Exception If fails
-     */
     @Test
-    public void testOneSuccessfull() throws Exception {
+    void thereShouldBeAtLeastOnePass() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> MatcherAssert.assertThat(
+                "Must detect when no pass is available",
+                new PsAll(
+                    new ArrayList<>(0),
+                    0
+                ).enter(new RqFake()).has(),
+                new IsEqual<>(false)
+            )
+        );
+    }
+
+    @Test
+    void indexMustBeNonNegative() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> MatcherAssert.assertThat(
+                "Must reject negative index",
+                new PsAll(
+                    Collections.singletonList(new PsFake(true)),
+                    -1
+                ).enter(new RqFake()).has(),
+                new IsEqual<>(false)
+            )
+        );
+    }
+
+    @Test
+    void indexMustBeSmallEnough() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> MatcherAssert.assertThat(
+                "Must reject index larger than collection size",
+                new PsAll(
+                    Arrays.asList(
+                        new PsFake(true),
+                        new PsFake(false)
+                    ),
+                    2
+                ).enter(new RqFake()).has(),
+                new IsEqual<>(false)
+            )
+        );
+    }
+
+    @Test
+    void passesWhenSinglePassSucceeds() throws Exception {
         MatcherAssert.assertThat(
+            "Single successful pass must return true",
             new PsAll(
                 Collections.singletonList(new PsFake(true)),
                 0
@@ -103,13 +82,10 @@ public final class PsAllTest {
         );
     }
 
-    /**
-     * Fail with only one failure test.
-     * @throws Exception if exception
-     */
     @Test
-    public void testOneFail() throws Exception {
+    void failsWhenSinglePassFails() throws Exception {
         MatcherAssert.assertThat(
+            "Single failed pass must return false",
             new PsAll(
                 Collections.singletonList(new PsFake(false)),
                 0
@@ -118,18 +94,15 @@ public final class PsAllTest {
         );
     }
 
-    /**
-     * PsAll with multiple passes that all can be entered returns the
-     * identity specified by an index.
-     * @throws Exception If fails
-     */
     @Test
-    public void testSuccessfullIdx() throws Exception {
+    void returnsIdentityFromIndex() throws Exception {
+        final int index = 3;
         final Pass resulting = new PsFixed(
             new Identity.Simple("urn:foo:test")
         );
         final RqFake request = new RqFake();
         MatcherAssert.assertThat(
+            "Must return identity from pass at specified index",
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -137,19 +110,16 @@ public final class PsAllTest {
                     new PsFake(true),
                     resulting
                 ),
-                Tv.THREE
+                index
             ).enter(request).get().urn(),
             new IsEqual<>(resulting.enter(request).get().urn())
         );
     }
 
-    /**
-     * Fail if one of Pass fails.
-     * @throws Exception if exception
-     */
     @Test
-    public void testFail() throws Exception {
+    void failsWhenAnyPassFails() throws Exception {
         MatcherAssert.assertThat(
+            "Must return false when any pass fails",
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),
@@ -163,15 +133,12 @@ public final class PsAllTest {
         );
     }
 
-    /**
-     * Exits.
-     * @throws Exception If fails
-     */
     @Test
-    public void exits() throws Exception {
+    void exits() throws Exception {
         final Response response = new RsEmpty();
         final PsFake exiting = new PsFake(true);
         MatcherAssert.assertThat(
+            "Must return same response when exiting",
             new PsAll(
                 Arrays.asList(
                     new PsFake(true),

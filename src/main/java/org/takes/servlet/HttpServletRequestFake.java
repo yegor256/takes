@@ -1,31 +1,25 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.servlet;
 
+import jakarta.servlet.AsyncContext;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConnection;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpUpgradeHandler;
+import jakarta.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.Principal;
@@ -36,38 +30,45 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpUpgradeHandler;
-import javax.servlet.http.Part;
 import org.takes.Request;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rq.RqMethod;
 
 /**
- * Fake HttpServletRequest (for unit tests).
+ * Fake HttpServletRequest implementation for testing.
+ *
+ * <p>This class provides a test double for {@link HttpServletRequest} that
+ * wraps a Takes {@link Request} object. It's designed primarily for unit
+ * testing scenarios where you need to simulate servlet container behavior
+ * without running an actual servlet container.
+ *
+ * <p>The implementation extracts HTTP information from the Takes request
+ * and presents it through the standard servlet API. This allows testing
+ * of servlet-based code using Takes' lightweight request representations.
+ *
+ * <p>Key features:
+ * <ul>
+ *   <li>Converts Takes {@link Request} to servlet {@link HttpServletRequest}</li>
+ *   <li>Supports standard HTTP methods, headers, and URL parameters</li>
+ *   <li>Provides minimal implementation suitable for most testing scenarios</li>
+ *   <li>Throws {@link UnsupportedOperationException} for advanced servlet features</li>
+ *   <li>Thread-safe and immutable where possible</li>
+ * </ul>
+ *
+ * <p>Many methods throw {@link UnsupportedOperationException} as they
+ * represent servlet container features that are not relevant for basic
+ * HTTP request testing (sessions, dispatching, async processing, etc.).
  *
  * @since 1.15
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @SuppressWarnings({
     "PMD.TooManyMethods",
-    "PMD.ExcessiveImports",
     "PMD.ExcessivePublicCount",
-    "PMD.AvoidDuplicateLiterals"
+    "PMD.CouplingBetweenObjects"
 })
 public final class HttpServletRequestFake implements HttpServletRequest {
+
     /**
      * A Takes Request.
      */
@@ -102,7 +103,10 @@ public final class HttpServletRequestFake implements HttpServletRequest {
                 new RqHeaders.Base(this.request).header(key)
             );
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                String.format("Failed to read header '%s'", key),
+                ex
+            );
         }
     }
 
@@ -113,7 +117,10 @@ public final class HttpServletRequestFake implements HttpServletRequest {
                 new RqHeaders.Base(this.request).names()
             );
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                "Failed to parse headers in the request",
+                ex
+            );
         }
     }
 
@@ -122,7 +129,10 @@ public final class HttpServletRequestFake implements HttpServletRequest {
         try {
             return new RqMethod.Base(this.request).method();
         } catch (final IOException ex) {
-            throw new IllegalArgumentException(ex);
+            throw new IllegalArgumentException(
+                "Failed to get method from the request",
+                ex
+            );
         }
     }
 
@@ -140,6 +150,11 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     @Override
     public String getRemoteHost() {
         return "localhost";
+    }
+
+    @Override
+    public String getRequestId() {
+        return "1";
     }
 
     @Override
@@ -163,44 +178,74 @@ public final class HttpServletRequestFake implements HttpServletRequest {
         try {
             return new RqHref.Base(this.request).href().path();
         } catch (final IOException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                "Failed to get HREF from Request",
+                ex
+            );
         }
+    }
+
+    @Override
+    public String getProtocolRequestId() {
+        return "";
     }
 
     @Override
     public String getQueryString() {
+        final String raw = this.getRequestURI();
+        final URI uri;
         try {
-            return new URI(this.getRequestURI()).getQuery();
+            uri = new URI(raw);
         } catch (final URISyntaxException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to parse URI '%s'", raw),
+                ex
+            );
         }
+        return uri.getQuery();
+    }
+
+    @Override
+    public ServletConnection getServletConnection() {
+        return new ServletConnectionFake();
     }
 
     @Override
     public String getServerName() {
+        final String raw = this.getRequestURI();
+        final URI uri;
         try {
-            String host = new URI(this.getRequestURI()).getHost();
-            if (host == null || host.isEmpty()) {
-                host = "localhost";
-            }
-            return host;
+            uri = new URI(raw);
         } catch (final URISyntaxException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to parse URI '%s'", raw),
+                ex
+            );
         }
+        String host = uri.getHost();
+        if (host == null || host.isEmpty()) {
+            host = "localhost";
+        }
+        return host;
     }
 
     @Override
     public int getServerPort() {
+        final String raw = this.getRequestURI();
+        final URI uri;
         try {
-            int port = new URI(this.getRequestURI()).getPort();
-            if (port == -1) {
-                // @checkstyle MagicNumber (1 line)
-                port = 80;
-            }
-            return port;
+            uri = new URI(raw);
         } catch (final URISyntaxException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to parse URI '%s'", raw),
+                ex
+            );
         }
+        int port = uri.getPort();
+        if (port == -1) {
+            port = 80;
+        }
+        return port;
     }
 
     @Override
@@ -305,9 +350,9 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     /**
      * Checks whether the requested session ID came in as part of the request
      * URL.
-     * @deprecated Use isRequestedSessionIdFromURL() instead.
      * @return True, if the requested session ID came in as part of the request
-     *  URL.
+     *  URL
+     * @deprecated Use isRequestedSessionIdFromURL() instead.
      */
     @Deprecated
     public boolean isRequestedSessionIdFromUrl() {
@@ -317,41 +362,32 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public boolean authenticate(
-        final HttpServletResponse resp
-    ) throws IOException, ServletException {
+    public boolean authenticate(final HttpServletResponse resp) {
         throw new UnsupportedOperationException("#authenticate()");
     }
 
     @Override
-    public void login(
-        final String user,
-        final String password
-    ) throws ServletException {
+    public void login(final String user, final String password) {
         throw new UnsupportedOperationException("#login()");
     }
 
     @Override
-    public void logout() throws ServletException {
+    public void logout() {
         throw new UnsupportedOperationException("#logout()");
     }
 
     @Override
-    public Collection<Part> getParts() throws IOException, ServletException {
+    public Collection<Part> getParts() {
         throw new UnsupportedOperationException("#getParts()");
     }
 
     @Override
-    public Part getPart(
-        final String name
-    ) throws IOException, ServletException {
+    public Part getPart(final String name) {
         throw new UnsupportedOperationException("#getPart()");
     }
 
     @Override
-    public <T extends HttpUpgradeHandler> T upgrade(
-        final Class<T> cls
-    ) throws IOException, ServletException {
+    public <T extends HttpUpgradeHandler> T upgrade(final Class<T> cls) {
         throw new UnsupportedOperationException("#upgrade()");
     }
 
@@ -371,9 +407,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public void setCharacterEncoding(
-        final String encoding
-    ) throws UnsupportedEncodingException {
+    public void setCharacterEncoding(final String encoding) {
         throw new UnsupportedOperationException("#setCharacterEncoding()");
     }
 
@@ -423,7 +457,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public BufferedReader getReader() throws IOException {
+    public BufferedReader getReader() {
         throw new UnsupportedOperationException("#getReader()");
     }
 
@@ -459,9 +493,9 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     /**
      * Gets the real path corresponding to the given virtual path.
-     * @param path The path.
-     * @deprecated Use ServletContext.getRealPath(java.lang.String) instead.
-     * @return The real path, or null if the translation cannot be performed.
+     * @param path The path
+     * @return The real path, or null if the translation cannot be performed
+     * @deprecated Use ServletContext.getRealPath(String) instead.
      */
     @Deprecated
     public String getRealPath(final String path) {
@@ -479,7 +513,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     }
 
     @Override
-    public AsyncContext startAsync() throws IllegalStateException {
+    public AsyncContext startAsync() {
         throw new UnsupportedOperationException("#startAsync()");
     }
 
@@ -487,7 +521,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     public AsyncContext startAsync(
         final ServletRequest req,
         final ServletResponse resp
-    ) throws IllegalStateException {
+    ) {
         throw new UnsupportedOperationException("#startAsync(req, resp)");
     }
 

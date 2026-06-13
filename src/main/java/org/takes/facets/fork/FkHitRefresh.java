@@ -1,38 +1,20 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fork;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.OutputTo;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.ScalarOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -44,11 +26,12 @@ import org.takes.rq.RqHeaders;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.9
  * @see TkFork
+ * @since 0.9
  */
 @EqualsAndHashCode
 public final class FkHitRefresh implements Fork {
+
     /**
      * Command to execute.
      */
@@ -68,30 +51,23 @@ public final class FkHitRefresh implements Fork {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tke Target
-     */
-    public FkHitRefresh(final File file, final String cmd, final Take tke) {
-        this(file, Arrays.asList(cmd.split(" ")), tke);
-    }
-
-    /**
-     * Ctor.
-     * @param file Directory to watch
-     * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      */
     public FkHitRefresh(final File file, final List<String> cmd,
-        final Take tke) {
+        final Take that) {
         this(
             file,
             () -> {
                 try {
                     new ProcessBuilder().command(cmd).start();
                 } catch (final IOException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        String.format("Failed to run command '%s'", cmd),
+                        ex
+                    );
                 }
             },
-            tke
+            that
         );
     }
 
@@ -99,26 +75,26 @@ public final class FkHitRefresh implements Fork {
      * Ctor.
      * @param file Directory to watch
      * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      */
-    public FkHitRefresh(final File file, final Runnable cmd, final Take tke) {
+    public FkHitRefresh(final File file, final Runnable cmd, final Take that) {
         this(
             cmd,
-            tke,
-            new HitRefreshHandle(file)
+            that,
+            new FkHitRefresh.HitRefreshHandle(file)
         );
     }
 
     /**
      * Ctor.
      * @param cmd Command to execute
-     * @param tke Target
+     * @param that Target
      * @param handle Hit refresh handle
      */
-    private FkHitRefresh(final Runnable cmd, final Take tke,
+    private FkHitRefresh(final Runnable cmd, final Take that,
         final HitRefreshHandle handle) {
         this.exec = cmd;
-        this.take = tke;
+        this.take = that;
         this.handle = handle;
     }
 
@@ -144,6 +120,7 @@ public final class FkHitRefresh implements Fork {
      * @since 0.9
      */
     private static final class HitRefreshHandle {
+
         /**
          * Directory to watch.
          */
@@ -188,7 +165,7 @@ public final class FkHitRefresh implements Fork {
          * @return The file to touch
          * @throws IOException If fails
          */
-        public File touchedFile() throws IOException {
+        File touchedFile() throws IOException {
             if (this.flag.isEmpty()) {
                 this.lock.writeLock().lock();
                 final File file = File.createTempFile("take", ".txt");
@@ -204,10 +181,14 @@ public final class FkHitRefresh implements Fork {
          * Touch the temporary file.
          * @throws IOException If fails
          */
-        public void touch() throws IOException {
-            try (OutputStream out = Files.newOutputStream(
-                this.touchedFile().toPath()
-            )) {
+        void touch() throws IOException {
+            try (
+                OutputStream out = new IoChecked<>(
+                    new ScalarOf<>(
+                        () -> new OutputTo(this.touchedFile()).stream()
+                    )
+                ).value()
+            ) {
                 out.write('+');
             }
         }
@@ -215,9 +196,8 @@ public final class FkHitRefresh implements Fork {
         /**
          * Expired?
          * @return TRUE if expired
-         * @throws IOException If fails
          */
-        private boolean expired() throws IOException {
+        private boolean expired() {
             final boolean expired;
             if (this.flag.isEmpty()) {
                 expired = true;

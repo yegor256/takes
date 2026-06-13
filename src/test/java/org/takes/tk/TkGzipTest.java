@@ -1,34 +1,28 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.tk;
 
+import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.RestResponse;
+import java.io.ByteArrayInputStream;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.zip.GZIPInputStream;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.StartsWith;
+import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
+import org.takes.rq.RqWithHeader;
+import org.takes.rs.RsGzip;
 import org.takes.rs.RsPrint;
+import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkGzip}.
@@ -36,13 +30,53 @@ import org.takes.rs.RsPrint;
  */
 final class TkGzipTest {
 
-    /**
-     * TkGzip can compress on demand only.
-     * @throws Exception If some problem inside
-     */
+    @Test
+    void compressesExactly() throws Exception {
+        final String body = "hello";
+        MatcherAssert.assertThat(
+            "TkGzip must produce same output as RsGzip for identical content",
+            new BytesOf(
+                new RsPrint(
+                    new TkGzip(new TkText(body)).act(
+                        new RqWithHeader(
+                            new RqFake("GET", "/"),
+                            "Accept-Encoding", "gzip"
+                        )
+                    )
+                ).body()
+            ).asBytes(),
+            Matchers.equalTo(
+                new BytesOf(
+                    new RsGzip(new RsText(body)).body()
+                ).asBytes()
+            )
+        );
+    }
+
+    @Test
+    void compressesCorrectly() throws Exception {
+        MatcherAssert.assertThat(
+            "TkGzip must compress UTF-8 content correctly when decompressed",
+            new TextOf(
+                new GZIPInputStream(
+                    new RsPrint(
+                        new TkGzip(new TkText("привет, world!")).act(
+                            new RqWithHeader(
+                                new RqFake("GET", "/"),
+                                "Accept-Encoding", "gzip"
+                            )
+                        )
+                    ).body()
+                )
+            ),
+            new StartsWith("привет, ")
+        );
+    }
+
     @Test
     void compressesOnDemandOnly() throws Exception {
         MatcherAssert.assertThat(
+            "TkGzip must return HTTP OK status when compression is requested",
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(
                     new RqFake(
@@ -59,13 +93,10 @@ final class TkGzipTest {
         );
     }
 
-    /**
-     * TkGzip can return uncompressed content.
-     * @throws Exception If some problem inside
-     */
     @Test
     void doesntCompressIfNotRequired() throws Exception {
         MatcherAssert.assertThat(
+            "TkGzip must return HTTP OK status without compression when not requested",
             new RsPrint(
                 new TkGzip(new TkClasspath()).act(
                     new RqFake(
@@ -81,4 +112,54 @@ final class TkGzipTest {
         );
     }
 
+    @Test
+    @Tag("deep")
+    void returnsExactlyGzipBody() throws Exception {
+        final String body = "Halo, Siñor!";
+        final AtomicReference<byte[]> result = new AtomicReference<>();
+        new FtRemote(new TkGzip(req -> new RsText(body))).exec(
+            home -> result.set(
+                new JdkRequest(home)
+                    .method("GET")
+                    .header("Accept-Encoding", "gzip")
+                    .fetch()
+                    .as(RestResponse.class)
+                    .binary()
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkGzip must return exactly same compressed content as RsGzip over HTTP",
+            result.get(),
+            Matchers.equalTo(
+                new BytesOf(
+                    new RsPrint(new RsGzip(new RsText(body))).body()
+                ).asBytes()
+            )
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void compressesOverHttp() throws Exception {
+        final AtomicReference<byte[]> result = new AtomicReference<>();
+        new FtRemote(new TkGzip(req -> new RsText("Hi, dude!"))).exec(
+            home -> result.set(
+                new JdkRequest(home)
+                    .method("GET")
+                    .header("Accept-Encoding", "gzip")
+                    .fetch()
+                    .as(RestResponse.class)
+                    .binary()
+            )
+        );
+        MatcherAssert.assertThat(
+            "TkGzip must compress content over HTTP that decompresses to original text",
+            new TextOf(
+                new GZIPInputStream(
+                    new ByteArrayInputStream(result.get())
+                )
+            ).asString(),
+            Matchers.startsWith("Hi, ")
+        );
+    }
 }

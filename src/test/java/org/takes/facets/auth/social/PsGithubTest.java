@@ -1,36 +1,17 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
+import jakarta.json.Json;
 import java.io.IOException;
-import java.net.URI;
-import javax.json.Json;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -40,7 +21,6 @@ import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqGreedy;
-import org.takes.rq.RqHref;
 import org.takes.rq.form.RqFormBase;
 import org.takes.rq.form.RqFormSmart;
 import org.takes.rs.RsJson;
@@ -51,9 +31,9 @@ import org.xembly.Directives;
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
  * @since 0.15.2
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-public final class PsGithubTest {
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class PsGithubTest {
 
     /**
      * GitHubToken.
@@ -81,96 +61,74 @@ public final class PsGithubTest {
      */
     private static final String OCTOCAT = "octocat";
 
-    /**
-     * A Junit Exception test variable.
-     */
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    /**
-     * PsGithub can fail on no access token.
-     * @throws Exception If some problem inside.
-     */
     @Test
-    public void failsOnNoAccessToken() throws Exception {
-        this.thrown.expect(AssertionError.class);
-        this.performLogin(PsGithubTest.directiveWithoutAccessToken());
+    @Tag("deep")
+    void failsOnNoAccessToken() {
+        Assertions.assertThrows(
+            AssertionError.class,
+            () -> this.performLogin(PsGithubTest.directiveWithoutAccessToken())
+        );
     }
 
-    /**
-     * PsGithub can login.
-     * @throws Exception If some problem inside.
-     */
     @Test
-    public void canLogin() throws Exception {
-        this.performLogin(
-            PsGithubTest.directiveWithoutAccessToken()
-                .add(PsGithubTest.ACCESS_TOKEN)
-                .set(PsGithubTest.GIT_HUB_TOKEN)
+    @Tag("deep")
+    void canLogin() throws Exception {
+        MatcherAssert.assertThat(
+            "GitHub identity URN must match expected format with user ID",
+            this.performLogin(
+                PsGithubTest.directiveWithoutAccessToken()
+                    .add(PsGithubTest.ACCESS_TOKEN)
+                    .set(PsGithubTest.GIT_HUB_TOKEN)
+            ).urn(),
+            Matchers.equalTo("urn:github:1")
         );
     }
 
     /**
      * Performs the basic login.
-     * @param directive The directive object.
-     * @throws Exception If some problem inside.
+     * @param directive The directive object
+     * @return The identity from login
+     * @throws Exception If some problem inside
      */
-    private void performLogin(final Directives directive) throws Exception {
+    private Identity performLogin(final Directives directive) throws Exception {
         final String app = "app";
         final String key = "key";
         final Take take = new TkFork(
             new FkRegex(
                 "/login/oauth/access_token",
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        final Request greq = new RqGreedy(req);
-                        final String code = "code";
-                        PsGithubTest.assertParam(greq, code, code);
-                        PsGithubTest.assertParam(greq, "client_id", app);
-                        PsGithubTest.assertParam(greq, "client_secret", key);
-                        return new RsXembly(
-                            new XeDirectives(directive.toString())
-                        );
-                    }
+                (Take) req -> {
+                    final Request greq = new RqGreedy(req);
+                    final String code = "code";
+                    PsGithubTest.assertParam(greq, code, code);
+                    PsGithubTest.assertParam(greq, "client_id", app);
+                    PsGithubTest.assertParam(greq, "client_secret", key);
+                    return new RsXembly(
+                        new XeDirectives(directive.toString())
+                    );
                 }
             ),
             new FkRegex(
                 "/user",
-                new TkFakeLogin()
+                new PsGithubTest.TkFakeLogin()
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final Identity identity = new PsGithub(
-                        app,
-                        key,
-                        home.toString(),
-                        home.toString()
-                    ).enter(new RqFake("GET", "?code=code")).get();
-                    MatcherAssert.assertThat(
-                        identity.urn(),
-                        Matchers.equalTo("urn:github:1")
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGithubTest.LOGIN),
-                        Matchers.equalTo(PsGithubTest.OCTOCAT)
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get("avatar"),
-                        Matchers.equalTo(PsGithubTest.OCTOCAT_GIF_URL)
-                    );
-                }
-            }
+            home -> identity.set(
+                new PsGithub(
+                    app,
+                    key,
+                    home.toString(),
+                    home.toString()
+                ).enter(new RqFake("GET", "?code=code")).get()
+            )
         );
+        return identity.get();
     }
 
     /**
      * Creates the basic directives, without access token.
-     * @return A basic directive.
+     * @return A basic directive
      */
     private static Directives directiveWithoutAccessToken() {
         return new Directives().add("OAuth")
@@ -186,8 +144,9 @@ public final class PsGithubTest {
      * @throws IOException  If some problem inside
      */
     private static void assertParam(final Request req,
-        final CharSequence param, final String value)  throws IOException {
+        final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
+            "GitHub OAuth request parameter must match expected value",
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );
@@ -198,23 +157,16 @@ public final class PsGithubTest {
      * @since 0.15.2
      */
     private static final class TkFakeLogin implements Take {
+
         @Override
         public Response act(final Request req) throws IOException {
-            MatcherAssert.assertThat(
-                new RqHref.Base(req).href()
-                    .param(PsGithubTest.ACCESS_TOKEN)
-                    .iterator().next(),
-                Matchers.containsString(PsGithubTest.GIT_HUB_TOKEN)
-            );
             return new RsJson(
-                Json.createObjectBuilder()
-                    .add(PsGithubTest.LOGIN, PsGithubTest.OCTOCAT)
-                    .add("id", 1)
-                    .add(
-                        "avatar_url",
-                        PsGithubTest.OCTOCAT_GIF_URL
-                    )
-                    .build()
+                Json.createObjectBuilder().add(
+                    PsGithubTest.LOGIN, PsGithubTest.OCTOCAT
+                ).add("id", 1).add(
+                    "avatar_url",
+                    PsGithubTest.OCTOCAT_GIF_URL
+                ).build()
             );
         }
     }

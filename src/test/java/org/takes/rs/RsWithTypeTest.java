@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -28,19 +9,20 @@ import java.nio.charset.StandardCharsets;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.TextIs;
+import org.llorllale.cactoos.matchers.IsText;
 
 /**
  * Test case for {@link RsWithType}.
  * @since 0.16.9
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
+@SuppressWarnings("PMD.TooManyMethods")
 final class RsWithTypeTest {
 
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     /**
      * Content type text/html.
@@ -78,21 +60,18 @@ final class RsWithTypeTest {
     private static final String TYPE_WITH_CHARSET =
         "Content-Type: %s; charset=%s";
 
-    /**
-     * RsWithType can replace an existing type.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void replaceTypeToResponse() throws Exception {
+    void replaceTypeToResponse() {
         final String type = RsWithTypeTest.TYPE_TEXT;
         MatcherAssert.assertThat(
+            "Response must have the latest content type when replaced multiple times",
             new RsPrint(
                 new RsWithType(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     type
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -104,14 +83,11 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType does not replace response code.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void doesNotReplaceResponseCode() throws Exception {
+    void doesNotReplaceResponseCode() {
         final String body = "Error!";
         MatcherAssert.assertThat(
+            "Response must preserve status code when content type is changed",
             new RsPrint(
                 new RsWithType(
                     new RsWithBody(
@@ -121,7 +97,7 @@ final class RsWithTypeTest {
                     RsWithTypeTest.TYPE_HTML
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     "HTTP/1.1 500 Internal Server Error",
@@ -134,19 +110,16 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.HTML can replace an existing type with text/html.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void replacesTypeWithHtml() throws Exception {
+    void replacesTypeWithHtml() {
         MatcherAssert.assertThat(
+            "Html decorator must replace content type with text/html",
             new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -159,14 +132,19 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithHtmlAndCharset() {
         MatcherAssert.assertThat(
+            "Html decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Html(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -182,19 +160,16 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.JSON can replace an existing type with application/json.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void replacesTypeWithJson() throws Exception {
+    void replacesTypeWithJson() {
         MatcherAssert.assertThat(
+            "Json decorator must replace content type with application/json",
             new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -207,14 +182,19 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithJsonAndCharset() {
         MatcherAssert.assertThat(
+            "Json decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Json(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -230,19 +210,16 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.XML can replace an existing type with text/xml.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void replacesTypeWithXml() throws Exception {
+    void replacesTypeWithXml() {
         MatcherAssert.assertThat(
+            "Xml decorator must replace content type with text/xml",
             new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -254,14 +231,19 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithXmlAndCharset() {
         MatcherAssert.assertThat(
+            "Xml decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Xml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -277,19 +259,16 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType.Text can replace an existing type with text/plain.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void replacesTypeWithText() throws Exception {
+    void replacesTypeWithText() {
         MatcherAssert.assertThat(
+            "Text decorator must replace content type with text/plain",
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -301,14 +280,19 @@ final class RsWithTypeTest {
                 )
             )
         );
+    }
+
+    @Test
+    void replacesTypeWithTextAndCharset() {
         MatcherAssert.assertThat(
+            "Text decorator must include charset when specified",
             new RsPrint(
                 new RsWithType.Text(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -324,17 +308,14 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType can add properly the content type to the header.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void addsContentType() throws Exception {
+    void addsContentType() {
         MatcherAssert.assertThat(
+            "Response must have Content-Type header when type is added",
             new RsPrint(
                 new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_TEXT)
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,
@@ -349,14 +330,10 @@ final class RsWithTypeTest {
         );
     }
 
-    /**
-     * RsWithType can add the charset to the content type when it is explicitly
-     * specified.
-     * @throws Exception If a problem occurs.
-     */
     @Test
-    void addsCharsetToContentType() throws Exception {
+    void addsCharsetToContentType() {
         MatcherAssert.assertThat(
+            "Response must include charset in Content-Type when specified",
             new RsPrint(
                 new RsWithType(
                     new RsEmpty(),
@@ -364,7 +341,7 @@ final class RsWithTypeTest {
                     StandardCharsets.ISO_8859_1
                 )
             ),
-            new TextIs(
+            new IsText(
                 new Joined(
                     RsWithTypeTest.CRLF,
                     RsWithTypeTest.HTTP_NO_CONTENT,

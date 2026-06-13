@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -29,29 +10,34 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import lombok.EqualsAndHashCode;
-import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.io.OutputTo;
+import org.cactoos.io.TeeInput;
 import org.cactoos.io.WriterTo;
-import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.IoChecked;
+import org.cactoos.scalar.LengthOf;
+import org.cactoos.text.Sticky;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
 
 /**
- * Request decorator, to print it all.
+ * Request decorator that provides text representation and printing capabilities.
+ *
+ * <p>This decorator converts HTTP requests to their textual representation,
+ * including both headers and body content. It provides methods to print
+ * the complete request, just the headers, or just the body to various
+ * output destinations. The implementation handles proper formatting with
+ * CRLF line endings as required by HTTP specification.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 @EqualsAndHashCode(callSuper = true)
 public final class RqPrint extends RqWrap implements Text {
 
     /**
      * The textual representation.
-     * @todo #1050:30m Text lacks a decorator for caching its value.
-     *  The anonymous implementation here probably belongs to cactoos.
-     *  Extract it as a separate class. After that add a new puzzle to do
-     *  the same for the rest of Text implementing classes (such as RsPrint).
      */
     private final Text text;
 
@@ -62,26 +48,16 @@ public final class RqPrint extends RqWrap implements Text {
      */
     public RqPrint(final Request req) {
         super(req);
-        this.text = new Text() {
-            private final Scalar<String> scalar = new Sticky<>(
-                new Scalar<String>() {
-                    private final ByteArrayOutputStream baos =
-                        new ByteArrayOutputStream();
-
-                    @Override
-                    public String value() throws Exception {
-                        RqPrint.this.printHead(this.baos);
-                        RqPrint.this.printBody(this.baos);
-                        return new TextOf(this.baos.toByteArray()).asString();
-                    }
+        this.text = new Sticky(
+            new TextOf(
+                () -> {
+                    final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    this.printHead(baos);
+                    this.printBody(baos);
+                    return new TextOf(baos.toByteArray()).asString();
                 }
-            );
-
-            @Override
-            public String asString() throws Exception {
-                return this.scalar.value();
-            }
-        };
+            )
+        );
     }
 
     /**
@@ -90,9 +66,10 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public String print() throws IOException {
-        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.print(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            this.print(baos);
+            return new TextOf(baos.toByteArray()).toString();
+        }
     }
 
     /**
@@ -101,8 +78,9 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public void print(final OutputStream output) throws IOException {
-        this.printHead(output);
-        this.printBody(output);
+        new IoChecked<>(
+            new LengthOf(new TeeInput(this.text, new OutputTo(output)))
+        ).value();
     }
 
     /**
@@ -113,7 +91,7 @@ public final class RqPrint extends RqWrap implements Text {
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).toString();
     }
 
     /**
@@ -122,7 +100,9 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     public void printHead(final OutputStream output) throws IOException {
-        final String eol = "\r\n";
+        final String eol = new String(
+            new char[]{(char) 13, (char) 10}
+        );
         try (Writer writer = new WriterTo(output)) {
             for (final String line : this.head()) {
                 writer.append(line);
@@ -141,7 +121,7 @@ public final class RqPrint extends RqWrap implements Text {
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
-        return new TextOf(baos.toByteArray()).asString();
+        return new TextOf(baos.toByteArray()).toString();
     }
 
     /**
@@ -149,9 +129,9 @@ public final class RqPrint extends RqWrap implements Text {
      * @param output Output stream to print to
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.CloseResource")
     public void printBody(final OutputStream output) throws IOException {
         final InputStream input = new RqChunk(new RqLengthAware(this)).body();
-        //@checkstyle MagicNumberCheck (1 line)
         final byte[] buf = new byte[4096];
         while (true) {
             final int bytes = input.read(buf);

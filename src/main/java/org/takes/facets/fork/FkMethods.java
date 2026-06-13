@@ -1,32 +1,12 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.fork;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import lombok.EqualsAndHashCode;
+import org.cactoos.list.ListOf;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -47,8 +27,8 @@ import org.takes.tk.TkFixed;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.4
  * @see TkFork
+ * @since 0.4
  */
 @EqualsAndHashCode
 public final class FkMethods implements Fork {
@@ -76,32 +56,30 @@ public final class FkMethods implements Fork {
     /**
      * Ctor.
      * @param mtd Method
-     * @param tke Take
+     * @param that Take
      */
-    public FkMethods(final String mtd, final Take tke) {
-        this(Arrays.asList(mtd.split(",")), tke);
+    public FkMethods(final String mtd, final Take that) {
+        this(new ListOf<>(mtd), that);
     }
 
     /**
      * Ctor.
      * @param mtds Methods
-     * @param tke Take
+     * @param that Take
      */
-    public FkMethods(final Collection<String> mtds, final Take tke) {
-        this.methods = Collections.unmodifiableCollection(mtds);
-        this.take = tke;
+    public FkMethods(final Collection<String> mtds, final Take that) {
+        this.methods = new ListOf<>(mtds);
+        this.take = that;
     }
 
     @Override
     public Opt<Response> route(final Request req) throws Exception {
-        final String mtd = new RqMethod.Base(req).method();
         final Opt<Response> resp;
-        if (this.methods.contains(mtd)) {
+        if (this.methods.contains(new RqMethod.Base(req).method())) {
             resp = new Opt.Single<>(this.take.act(req));
         } else {
             resp = new Opt.Empty<>();
         }
         return resp;
     }
-
 }

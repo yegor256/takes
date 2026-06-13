@@ -1,35 +1,15 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.FakeRequest;
+import jakarta.json.Json;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.Map;
-import javax.json.Json;
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -40,61 +20,71 @@ import org.takes.rq.RqFake;
 /**
  * Test case for {@link PsTwitter}.
  * @since 1.0
- * @checkstyle MagicNumberCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class PsTwitterTest {
 
-    /**
-     * PsTwitter can login.
-     * @throws Exception If error occurs in the process
-     */
     @Test
-    void logsIn() throws Exception {
-        final int tid = RandomUtils.nextInt(1000);
-        final String randname = RandomStringUtils.randomAlphanumeric(10);
-        final String picture = RandomStringUtils.randomAlphanumeric(10);
+    void identityUrnMatchesTwitterFormat() throws Exception {
+        final int tid = 123;
+        MatcherAssert.assertThat(
+            "Identity URN must match expected Twitter format",
+            PsTwitterTest.login(tid, "testname", "testpic").urn(),
+            CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
+        );
+    }
+
+    @Test
+    void identityNamePropertyMatches() throws Exception {
+        final String randname = "testuser";
+        MatcherAssert.assertThat(
+            "Identity name property must match expected value",
+            PsTwitterTest.login(456, randname, "pic").properties().get("name"),
+            CoreMatchers.equalTo(randname)
+        );
+    }
+
+    @Test
+    void identityPicturePropertyMatches() throws Exception {
+        final String picture = "mypic.jpg";
+        MatcherAssert.assertThat(
+            "Identity picture property must match expected value",
+            PsTwitterTest.login(789, "user", picture).properties().get("picture"),
+            CoreMatchers.equalTo(picture)
+        );
+    }
+
+    private static Identity login(
+        final int tid,
+        final String name,
+        final String picture
+    ) throws Exception {
         final String httpok = "HTTP OK";
-        final String name = "name";
         final Pass pass = new PsTwitter(
             new FakeRequest(
                 200,
                 httpok,
-                Collections.<Map.Entry<String, String>>emptyList(),
+                Collections.emptyList(),
                 String.format(
                     "{\"token_type\":\"bearer\",\"access_token\":\"%s\"}",
                     RandomStringUtils.randomAlphanumeric(10)
-                ).getBytes()
+                ).getBytes(StandardCharsets.UTF_8)
             ),
             new FakeRequest(
                 200,
                 httpok,
-                Collections.<Map.Entry<String, String>>emptyList(),
+                Collections.emptyList(),
                 Json.createObjectBuilder()
                     .add("id", tid)
-                    .add(name, randname)
+                    .add("name", name)
                     .add("profile_image_url", picture)
                     .build()
                     .toString()
-                    .getBytes()
+                    .getBytes(StandardCharsets.UTF_8)
             ),
             RandomStringUtils.randomAlphanumeric(10),
             RandomStringUtils.randomAlphanumeric(10)
         );
-        final Identity identity = pass.enter(
-            new RqFake("GET", "")
-        ).get();
-        MatcherAssert.assertThat(
-            identity.urn(),
-            CoreMatchers.equalTo(String.format("urn:twitter:%d", tid))
-        );
-        MatcherAssert.assertThat(
-            identity.properties().get(name),
-            CoreMatchers.equalTo(randname)
-        );
-        MatcherAssert.assertThat(
-            identity.properties().get("picture"),
-            CoreMatchers.equalTo(picture)
-        );
+        return pass.enter(new RqFake("GET", "")).get();
     }
 }

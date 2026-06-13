@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -29,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
@@ -51,11 +31,17 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
- * Response with properly indented XML body.
+ * Response decorator that formats XML content with proper indentation.
+ *
+ * <p>This decorator transforms XML response bodies to include proper
+ * indentation and formatting for better readability. It uses SAX parsing
+ * and XSLT transformation to create well-formatted XML output while
+ * preserving DOCTYPE declarations and handling HTML5 documents appropriately.
+ * The transformation is cached to avoid repeated processing.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 1.0
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(of = "origin")
 public final class RsPrettyXml implements Response {
@@ -132,6 +118,7 @@ public final class RsPrettyXml implements Response {
      * @return Response just made
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.AvoidSynchronizedStatement")
     private Response make() throws IOException {
         synchronized (this.lock) {
             if (this.transformed.isEmpty()) {
@@ -165,7 +152,6 @@ public final class RsPrettyXml implements Response {
             final String yes = "yes";
             final Transformer transformer = TransformerFactory.newInstance()
                 .newTransformer();
-            // @checkstyle MultipleStringLiteralsCheck (2 line)
             transformer.setOutputProperty(
                 OutputKeys.OMIT_XML_DECLARATION, yes
             );
@@ -183,9 +169,9 @@ public final class RsPrettyXml implements Response {
     /**
      * Parses body to get DOCTYPE and configure Transformer
      * with proper method, public id and system id.
-     * @param body The body to be parsed.
-     * @param transformer Transformer to configure with proper properties.
-     * @throws IOException if something goes wrong.
+     * @param body The body to be parsed
+     * @param transformer Transformer to configure with proper properties
+     * @throws IOException if something goes wrong
      */
     private static void prepareDocType(final InputStream body,
         final Transformer transformer) throws IOException {
@@ -195,7 +181,6 @@ public final class RsPrettyXml implements Response {
             if (null != doctype) {
                 if (null == doctype.getSystemId()
                     && null == doctype.getPublicId()
-                    // @checkstyle MultipleStringLiteralsCheck (3 line)
                     && html.equalsIgnoreCase(doctype.getName())) {
                     transformer.setOutputProperty(OutputKeys.METHOD, html);
                     transformer.setOutputProperty(OutputKeys.VERSION, "5.0");
@@ -222,9 +207,9 @@ public final class RsPrettyXml implements Response {
     /**
      * Parses the input stream and returns DocumentType built without loading
      * any external DTD schemas.
-     * @param body The body to be parsed.
-     * @return The documents DocumentType.
-     * @throws IOException if something goes wrong.
+     * @param body The body to be parsed
+     * @return The documents DocumentType
+     * @throws IOException if something goes wrong
      */
     private static DocumentType getDocType(final InputStream body)
         throws IOException {
@@ -232,8 +217,7 @@ public final class RsPrettyXml implements Response {
             DocumentBuilderFactory.newInstance();
         try {
             factory.setFeature(RsPrettyXml.LOAD_EXTERNAL_DTD, false);
-            final DocumentBuilder builder = factory.newDocumentBuilder();
-            return builder.parse(body).getDoctype();
+            return factory.newDocumentBuilder().parse(body).getDoctype();
         } catch (final ParserConfigurationException | SAXException ex) {
             throw new IOException(ex);
         }

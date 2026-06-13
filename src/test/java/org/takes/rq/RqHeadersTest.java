@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -35,13 +16,10 @@ import org.junit.jupiter.api.Test;
  */
 final class RqHeadersTest {
 
-    /**
-     * RqHeaders can parse headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void parsesHttpHeaders() throws IOException {
         MatcherAssert.assertThat(
+            "HTTP header must be parsed correctly with whitespace trimmed",
             new RqHeaders.Base(
                 new RqFake(
                     Arrays.asList(
@@ -56,13 +34,10 @@ final class RqHeadersTest {
         );
     }
 
-    /**
-     * RqHeaders can find all headers.
-     * @throws IOException If some problem inside
-     */
     @Test
     void findsAllHeaders() throws IOException {
         MatcherAssert.assertThat(
+            "Multiple headers with same name must all be found",
             new RqHeaders.Base(
                 new RqFake(
                     Arrays.asList(
@@ -74,53 +49,42 @@ final class RqHeadersTest {
                     ""
                 )
             ).header("Accept"),
-            Matchers.<String>iterableWithSize(2)
+            Matchers.iterableWithSize(2)
         );
     }
 
-    /**
-     * RqHeaders.Smart can return a single header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnsSingleHeader() throws IOException {
         MatcherAssert.assertThat(
+            "Smart header must return actual header value when present",
             new RqHeaders.Smart(
-                new RqHeaders.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GET /g",
-                            "Host: www.takes.com"
-                        ),
-                        ""
-                    )
+                new RqFake(
+                    Arrays.asList(
+                        "GET /g",
+                        "Host: www.takes.com"
+                    ),
+                    ""
                 )
             ).single("host", "www.takes.net"),
             Matchers.equalTo("www.takes.com")
         );
     }
 
-    /**
-     * RqHeaders.Smart can return a default header.
-     * @throws IOException If some problem inside
-     */
     @Test
     void returnsDefaultHeader() throws IOException {
         final String type = "text/plain";
         MatcherAssert.assertThat(
+            "Smart header must return default value when header is absent",
             new RqHeaders.Smart(
-                new RqHeaders.Base(
-                    new RqFake(
-                        Arrays.asList(
-                            "GET /f",
-                            "Accept: text/json"
-                        ),
-                        ""
-                    )
+                new RqFake(
+                    Arrays.asList(
+                        "GET /f",
+                        "Accept: text/json"
+                    ),
+                    ""
                 )
             ).single("Content-type", type),
             Matchers.equalTo(type)
         );
     }
-
 }

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
@@ -31,6 +12,7 @@ import org.takes.rq.RqHref;
 import org.takes.rs.xe.XeLink;
 import org.takes.rs.xe.XeSource;
 import org.takes.rs.xe.XeWrap;
+import org.xembly.Directive;
 
 /**
  * Xembly source to create a LINK to Google OAuth page.
@@ -50,7 +32,7 @@ public final class XeGoogleLink extends XeWrap {
      */
     public XeGoogleLink(final Request req, final CharSequence app)
         throws IOException {
-        this(req, app, new RqHref.Smart(new RqHref.Base(req)).home());
+        this(req, app, new XeGoogleLink.HomeRedir(req));
     }
 
     /**
@@ -78,34 +60,117 @@ public final class XeGoogleLink extends XeWrap {
      */
     public XeGoogleLink(final Request req, final CharSequence app,
         final CharSequence rel, final CharSequence redir) throws IOException {
-        super(XeGoogleLink.make(req, app, rel, redir));
+        super(new XeGoogleLink.LazyLink(req, app, rel, redir));
     }
 
     /**
-     * Ctor.
-     * @param req Request
-     * @param app Google application ID
-     * @param rel Related
-     * @param redir Redirect URI
-     * @return Source
-     * @throws IOException If fails
-     * @since 0.14
-     * @checkstyle ParameterNumberCheck (4 lines)
+     * CharSequence that lazily resolves to the request's home URI.
+     * @since 2.0
      */
-    private static XeSource make(final Request req, final CharSequence app,
-        final CharSequence rel, final CharSequence redir) throws IOException {
-        return new XeLink(
-            rel,
-            new Href("https://accounts.google.com/o/oauth2/auth")
-                .with("client_id", app)
-                .with("redirect_uri", redir)
-                .with("response_type", "code")
-                .with("state", new RqHref.Base(req).href())
-                .with(
+    private static final class HomeRedir implements CharSequence {
+
+        /**
+         * Request.
+         */
+        private final Request req;
+
+        /**
+         * Ctor.
+         * @param request Request
+         */
+        HomeRedir(final Request request) {
+            this.req = request;
+        }
+
+        @Override
+        public int length() {
+            return this.resolve().length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.resolve().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.resolve().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return this.resolve().toString();
+        }
+
+        /**
+         * Resolve home from request.
+         * @return Home URI
+         */
+        private CharSequence resolve() {
+            try {
+                return new RqHref.Smart(new RqHref.Base(this.req)).home();
+            } catch (final IOException ex) {
+                throw new IllegalStateException(ex);
+            }
+        }
+    }
+
+    /**
+     * Lazy XeSource that builds the Google OAuth link on demand.
+     * @since 2.0
+     * @checkstyle ParameterNumberCheck (10 lines)
+     */
+    private static final class LazyLink implements XeSource {
+
+        /**
+         * Request.
+         */
+        private final Request req;
+
+        /**
+         * Application ID.
+         */
+        private final CharSequence app;
+
+        /**
+         * Relation.
+         */
+        private final CharSequence rel;
+
+        /**
+         * Redirect URI.
+         */
+        private final CharSequence redir;
+
+        /**
+         * Ctor.
+         * @param request HTTP request
+         * @param application App ID
+         * @param relation Relation type
+         * @param redirect Redirect URI
+         * @checkstyle ParameterNumberCheck (4 lines)
+         */
+        LazyLink(final Request request, final CharSequence application,
+            final CharSequence relation, final CharSequence redirect) {
+            this.req = request;
+            this.app = application;
+            this.rel = relation;
+            this.redir = redirect;
+        }
+
+        @Override
+        public Iterable<Directive> toXembly() throws IOException {
+            return new XeLink(
+                this.rel,
+                new Href("https://accounts.google.com/o/oauth2/auth").with(
+                    "client_id", this.app
+                ).with("redirect_uri", this.redir).with(
+                    "response_type", "code"
+                ).with("state", new RqHref.Base(this.req).href()).with(
                     "scope",
                     "https://www.googleapis.com/auth/userinfo.profile"
                 )
-        );
+            ).toXembly();
+        }
     }
-
 }

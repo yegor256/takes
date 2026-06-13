@@ -1,30 +1,12 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
@@ -33,130 +15,172 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqChunk}.
- *
  * @since 0.1
  */
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqChunkTest {
 
-    /**
-     * Chunked message header.
-     */
-    private static final String CHUNKED_HEADER = "Transfer-Encoding: chunked";
-
-    /**
-     * Carriage return.
-     */
-    private static final String CRLF = "\r\n";
-
-    /**
-     * End of chunk byte.
-     */
-    private static final String END_OF_CHUNK = "0";
-
-    /**
-     * RqChunk can read a one-chunk message.
-     * @throws IOException If some problem inside
-     */
     @Test
-    void readsOneChunk() throws IOException {
+    void readsOneChunkContent() throws IOException {
         final String data = "1234567890abcdef";
-        final String length = Integer.toHexString(data.length());
-        final InputStream stream = new RqChunk(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=1",
-                    "Host: www.example.com",
-                    RqChunkTest.CHUNKED_HEADER
-                ),
-                new Joined(
-                    RqChunkTest.CRLF,
-                    length,
-                    data,
-                    RqChunkTest.END_OF_CHUNK,
-                    ""
-                ).asString()
-            )
-        ).body();
-        final byte[] buf = new byte[data.length()];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(data.length())
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
+        try (InputStream stream = RqChunkTest.chunkBody(data)) {
+            final byte[] buf = new byte[data.length()];
+            stream.read(buf);
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
+            );
+        }
     }
 
-    /**
-     * RqChunk can read a chunk message.
-     * @throws IOException If some problem inside
-     */
     @Test
-    void readsManyChunks() throws IOException {
+    void readsOneChunkByteCount() throws IOException {
+        final String data = "1234567890abcdef";
+        try (InputStream stream = RqChunkTest.chunkBody(data)) {
+            MatcherAssert.assertThat(
+                "Number of bytes read must equal the data length",
+                stream.read(new byte[data.length()]),
+                Matchers.equalTo(data.length())
+            );
+        }
+    }
+
+    @Test
+    void exhaustsStreamAfterReadingOneChunk() throws IOException {
+        final String data = "1234567890abcdef";
+        try (InputStream stream = RqChunkTest.chunkBody(data)) {
+            stream.read(new byte[data.length()]);
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
+    }
+
+    @Test
+    void readsManyChunksContent() throws IOException {
         final String first = "Takes is";
         final String second = "a true object-";
         final String third = "oriented framework";
         final String data = first + second + third;
-        final Integer length = data.length();
-        final InputStream stream = new RqChunk(
+        try (InputStream stream = RqChunkTest.multiChunkBody(first, second, third)) {
+            final byte[] buf = new byte[data.length()];
+            stream.read(buf);
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
+            );
+        }
+    }
+
+    @Test
+    void readsManyChunksByteCount() throws IOException {
+        final String first = "Takes is";
+        final String second = "a true object-";
+        final String third = "oriented framework";
+        final int length = (first + second + third).length();
+        try (InputStream stream = RqChunkTest.multiChunkBody(first, second, third)) {
+            MatcherAssert.assertThat(
+                "Number of bytes read must equal the total length of all chunks",
+                stream.read(new byte[length]),
+                Matchers.equalTo(length)
+            );
+        }
+    }
+
+    @Test
+    void exhaustsStreamAfterReadingManyChunks() throws IOException {
+        final String first = "Takes is";
+        final String second = "a true object-";
+        final String third = "oriented framework";
+        final int length = (first + second + third).length();
+        try (InputStream stream = RqChunkTest.multiChunkBody(first, second, third)) {
+            stream.read(new byte[length]);
+            MatcherAssert.assertThat(
+                "Stream must have no bytes available after reading all data",
+                stream.available(),
+                Matchers.equalTo(0)
+            );
+        }
+    }
+
+    @Test
+    void ignoresParameterAfterSemiColon() throws IOException {
+        final String data = "Build and Run";
+        final String ignored = ";ignored-stuff";
+        final String length = Integer.toHexString(data.length());
+        try (
+            InputStream stream = new RqChunk(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /h?a=3",
+                        "Host: c.example.com",
+                        "Transfer-Encoding: chunked"
+                    ),
+                    new Joined(
+                        String.valueOf((char) 13) + (char) 10,
+                        length + ignored,
+                        data,
+                        "0",
+                        ""
+                    ).toString()
+                )
+            ).body()
+        ) {
+            final byte[] buf = new byte[data.length()];
+            stream.read(buf);
+            MatcherAssert.assertThat(
+                "Buffer content must match the expected data bytes",
+                buf,
+                Matchers.equalTo(data.getBytes(StandardCharsets.UTF_8))
+            );
+        }
+    }
+
+    private static InputStream chunkBody(final String data) throws IOException {
+        return new RqChunk(
+            new RqFake(
+                Arrays.asList(
+                    "GET /h?a=1",
+                    "Host: www.example.com",
+                    "Transfer-Encoding: chunked"
+                ),
+                new Joined(
+                    String.valueOf((char) 13) + (char) 10,
+                    Integer.toHexString(data.length()),
+                    data,
+                    "0",
+                    ""
+                ).toString()
+            )
+        ).body();
+    }
+
+    private static InputStream multiChunkBody(
+        final String first, final String second, final String third
+    ) throws IOException {
+        return new RqChunk(
             new RqFake(
                 Arrays.asList(
                     "GET /h?a=2",
                     "Host: b.example.com",
-                    RqChunkTest.CHUNKED_HEADER
+                    "Transfer-Encoding: chunked"
                 ),
                 new Joined(
-                    RqChunkTest.CRLF,
+                    String.valueOf((char) 13) + (char) 10,
                     Integer.toHexString(first.length()),
                     first,
                     Integer.toHexString(second.length()),
                     second,
                     Integer.toHexString(third.length()),
                     third,
-                    RqChunkTest.END_OF_CHUNK,
+                    "0",
                     ""
-                ).asString()
+                ).toString()
             )
         ).body();
-        final byte[] buf = new byte[length];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(length)
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
-    }
-
-    /**
-     * RqChunk accepts semi-colon and ignores parameters after a semi-colon.
-     * @throws IOException If some problem inside
-     */
-    @Test
-    void ignoresParameterAfterSemiColon() throws IOException {
-        final String data = "Build and Run";
-        final String ignored = ";ignored-stuff";
-        final String length = Integer.toHexString(data.length());
-        final InputStream stream = new RqChunk(
-            new RqFake(
-                Arrays.asList(
-                    "GET /h?a=3",
-                    "Host: c.example.com",
-                    RqChunkTest.CHUNKED_HEADER
-                ),
-                new Joined(
-                    RqChunkTest.CRLF,
-                    length + ignored,
-                    data,
-                    RqChunkTest.END_OF_CHUNK,
-                    ""
-                ).asString()
-            )
-        ).body();
-        final byte[] buf = new byte[data.length()];
-        MatcherAssert.assertThat(
-            stream.read(buf),
-            Matchers.equalTo(data.length())
-        );
-        MatcherAssert.assertThat(buf, Matchers.equalTo(data.getBytes()));
-        MatcherAssert.assertThat(stream.available(), Matchers.equalTo(0));
     }
 }

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -27,8 +8,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
-import org.cactoos.io.BytesOf;
-import org.cactoos.io.UncheckedBytes;
+import org.cactoos.bytes.BytesOf;
+import org.cactoos.bytes.UncheckedBytes;
 import org.cactoos.text.TextOf;
 import org.takes.Request;
 import org.takes.Response;
@@ -39,28 +20,29 @@ import org.takes.misc.Expires;
 import org.takes.misc.Opt;
 
 /**
- * Pass via cookie information.
+ * Pass that authenticates users via HTTP cookies.
+ * This implementation stores and retrieves authentication information
+ * in browser cookies, enabling persistent sessions across requests.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class PsCookie implements Pass {
 
     /**
-     * Codec.
+     * Codec for encoding and decoding identity information in cookies.
      */
     private final Codec codec;
 
     /**
-     * Cookie to read.
+     * Name of the cookie containing authentication information.
      */
     private final String cookie;
 
     /**
-     * Max login age, in days.
+     * Maximum age of the authentication cookie, in days.
      */
     private final long age;
 
@@ -69,7 +51,7 @@ public final class PsCookie implements Pass {
      * @param cdc Codec
      */
     public PsCookie(final Codec cdc) {
-        this(cdc, PsCookie.class.getSimpleName());
+        this(cdc, "PsCookie");
     }
 
     /**
@@ -78,7 +60,6 @@ public final class PsCookie implements Pass {
      * @param name Cookie name
      */
     public PsCookie(final Codec cdc, final String name) {
-        // @checkstyle MagicNumber (1 line)
         this(cdc, name, 30L);
     }
 
@@ -119,7 +100,7 @@ public final class PsCookie implements Pass {
         if (idt.equals(Identity.ANONYMOUS)) {
             text = "";
         } else {
-            text = new TextOf(this.codec.encode(idt)).asString();
+            text = new TextOf(this.codec.encode(idt)).toString();
         }
         return new RsWithCookie(
             res, this.cookie, text,

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
@@ -34,93 +15,76 @@ import org.junit.jupiter.api.Test;
  */
 final class PsBasicDefaultTest {
 
-    /**
-     * PsBasic.Default can accept a correct login/password pair.
-     * @throws Exception If fails
-     */
     @Test
-    void acceptsCorrectLoginPasswordPair() throws Exception {
+    void acceptsCorrectLoginPasswordPair() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must authenticate user with correct login/password and return URN",
             new PsBasic.Default(
                 new String[]{
                     "bob qwe%20r%20ty%3A%2B urn:foo:robert",
                     "alice пароль urn:foo:alice",
                 }
-            )
-                .enter(
-                    "bob",
-                    "qwe r ty:+"
-            )
-                .get()
-                .urn(),
-                new IsEqual<>("urn:foo:robert")
+            ).enter(
+                "bob",
+                "qwe r ty:+"
+            ).get().urn(),
+            new IsEqual<>("urn:foo:robert")
         );
     }
 
-    /**
-     * PsBasic.Default can handle both <pre>%20</pre> and <pre>+</pre>
-     * variants of encoding spaces in constructor parameters.
-     * @throws Exception If fails
-     */
     @Test
-    void supportsBothKindsOfSpace() throws Exception {
+    void supportsUrlEncodedSpaces() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support URL-encoded spaces in passwords",
             new PsBasic.Default(
                 new String[]{
                     "yvonne hey%20you urn:foo:z",
                 }
-            )
-                .enter(
-                    "yvonne",
-                    "hey you"
-            )
-                .has(),
+            ).enter(
+                "yvonne",
+                "hey you"
+            ).has(),
             new IsEqual<>(true)
         );
+    }
+
+    @Test
+    void supportsPlusEncodedSpaces() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support plus-encoded spaces in passwords",
             new PsBasic.Default(
                 new String[]{
                     "zak hey+me urn:foo:z",
                 }
-            )
-                .enter(
-                    "zak",
-                    "hey me"
-            )
-                .has(),
+            ).enter(
+                "zak",
+                "hey me"
+            ).has(),
             new IsEqual<>(true)
         );
     }
 
-    /**
-     * PsBasic.Default can be entered by a user with a space in his name.
-     * @throws Exception If fails
-     */
     @Test
-    void supportsUsersWithSpacesInTheirNames() throws Exception {
+    void supportsUsersWithSpacesInTheirNames() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must support users with spaces in their names",
             new PsBasic.Default(
                 new String[]{
                     "abraham+lincoln qwer urn:foo:z",
                 }
-            )
-                .enter(
-                    "abraham lincoln",
-                    "qwer"
-            )
-                .has(),
+            ).enter(
+                "abraham lincoln",
+                "qwer"
+            ).has(),
             new IsEqual<>(true)
         );
     }
 
-    /**
-     * PsBasic.Default can url-decode an urn from its parameter.
-     * @throws Exception If fails
-     */
     @Test
     void supportsUrlencodedUrns() throws Exception {
         final String urn = "urn:a100%25:one-two+";
         MatcherAssert.assertThat(
+            "PsBasic.Default must support URL-encoded URNs and decode them correctly",
             new PsBasic.Default(
                 new String[]{
                     String.format(
@@ -128,51 +92,38 @@ final class PsBasicDefaultTest {
                         URLEncoder.encode(urn, "UTF-8")
                     ),
                 }
-            )
-                .enter(
-                    "login",
-                    "password"
-            )
-                .get()
-                .urn(),
+            ).enter(
+                "login",
+                "password"
+            ).get().urn(),
             new IsEqual<>(urn)
         );
     }
 
-    /**
-     * PsBasic.Default can reject incorrect password.
-     * @throws Exception If fails
-     */
     @Test
-    void rejectsIncorrectPassword() throws Exception {
+    void rejectsIncorrectPassword() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must reject authentication with incorrect password",
             new PsBasic.Default(
                 new String[]{
                     "charlie qwerty urn:foo:charlie",
                     "doreen 123 urn:foo:doreen",
                 }
-            )
-                .enter("charlie", "wrongpassword")
-                .has(),
+            ).enter("charlie", "wrongpassword").has(),
             new IsEqual<>(false)
         );
     }
 
-    /**
-     * PsBasic.Default can reject a non-existing login.
-     * @throws Exception If fails
-     */
     @Test
-    void rejectsIncorrectLogin() throws Exception {
+    void rejectsIncorrectLogin() {
         MatcherAssert.assertThat(
+            "PsBasic.Default must reject authentication with incorrect login",
             new PsBasic.Default(
                 new String[]{
                     "eddie qwerty urn:foo:eddie",
                     "fiona 123 urn:foo:fiona",
                 }
-            )
-                .enter("mike", "anything")
-                .has(),
+            ).enter("mike", "anything").has(),
             new IsEqual<>(false)
         );
     }

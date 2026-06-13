@@ -1,50 +1,30 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 
 package org.takes.misc;
 
 import java.util.Collections;
 import java.util.List;
+import org.cactoos.text.TextOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * Tests for {@link VerboseList}.
- *
  * @since 0.32
  */
 @SuppressWarnings("PMD.TooManyMethods")
-@RunWith(MockitoJUnitRunner.class)
-public class VerboseListTest {
+@ExtendWith(MockitoExtension.class)
+final class VerboseListTest {
 
     /**
      * Custom exception message.
@@ -52,353 +32,287 @@ public class VerboseListTest {
     private static final String MSG = "Error message";
 
     /**
-     * Rule for asserting thrown exceptions.
-     */
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
-
-    /**
      * Decorated List.
      */
     @Mock
     private List<Object> origin;
 
-    /**
-     * Decorator.
-     */
-    private VerboseList<Object> list;
-
-    /**
-     * Creates decorator.
-     * @throws Exception If something goes wrong.
-     */
-    @Before
-    public final void setUp() throws Exception {
-        this.list = new VerboseList<Object>(this.origin, VerboseListTest.MSG);
-    }
-
-    /**
-     * VerboseList should delegate size method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesSize() throws Exception {
-        this.list.size();
-        Mockito.verify(this.origin).size();
-    }
-
-    /**
-     * VerboseList should delegate isEmpty method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
-    @Test
-    public final void delegatesIsEmpty() throws Exception {
-        this.list.isEmpty();
-        Mockito.verify(this.origin).isEmpty();
-    }
-
-    /**
-     * VerboseList should delegate contains method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
-    @Test
-    public final void delegatesContains() throws Exception {
-        final Object obj = new Object();
-        this.list.contains(obj);
-        Mockito.verify(this.origin).contains(obj);
-    }
-
-    /**
-     * VerboseList should return {@link VerboseIterator}.
-     * @throws Exception If something goes wrong.
-     */
-    @Test
-    public final void returnsVerboseIterator() throws Exception {
+    void delegatesSize() {
+        Mockito.when(this.origin.size()).thenReturn(7);
         MatcherAssert.assertThat(
-            this.list.iterator(),
+            "size must be delegated to origin",
+            this.verboseList().size(),
+            Matchers.is(7)
+        );
+    }
+
+    @Test
+    void delegatesIsEmpty() {
+        Mockito.when(this.origin.isEmpty()).thenReturn(true);
+        MatcherAssert.assertThat(
+            "isEmpty must be delegated to origin",
+            this.verboseList().isEmpty(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void delegatesContains() {
+        final Object obj = new Object();
+        Mockito.when(this.origin.contains(obj)).thenReturn(true);
+        MatcherAssert.assertThat(
+            "contains must be delegated to origin",
+            this.verboseList().contains(obj),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void returnsVerboseIterator() {
+        MatcherAssert.assertThat(
+            "List iterator must be wrapped in VerboseIterator",
+            this.verboseList().iterator(),
             Matchers.instanceOf(VerboseIterator.class)
         );
     }
 
-    /**
-     * VerboseList should delegate toArray method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesToArray() throws Exception {
-        this.list.toArray();
-        Mockito.verify(this.origin).toArray();
+    void delegatesToArrayNoArgs() {
+        final Object[] expected = {new Object(), new Object()};
+        Mockito.when(this.origin.toArray()).thenReturn(expected);
+        MatcherAssert.assertThat(
+            "toArray must be delegated to origin",
+            this.verboseList().toArray(),
+            Matchers.is(expected)
+        );
+    }
+
+    @Test
+    void delegatesToArrayWithArg() {
         final Object[] array = new Object[1];
-        this.list.toArray(array);
+        this.verboseList().toArray(array);
         Mockito.verify(this.origin).toArray(array);
     }
 
-    /**
-     * VerboseList should delegate add method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesAdd() throws Exception {
+    void delegatesAddObject() {
+        final Object obj = new Object();
+        this.verboseList().add(obj);
+        Mockito.verify(this.origin).add(obj);
+    }
+
+    @Test
+    void delegatesAddAtIndex() {
         final int index = 5;
         final Object obj = new Object();
-        this.list.add(obj);
-        Mockito.verify(this.origin).add(obj);
-        this.list.add(index, obj);
+        this.verboseList().add(index, obj);
         Mockito.verify(this.origin).add(index, obj);
     }
 
-    /**
-     * VerboseList should delegate remove method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesRemove() throws Exception {
-        final int index = 5;
+    void delegatesRemoveObject() {
         final Object obj = new Object();
-        this.list.remove(obj);
+        this.verboseList().remove(obj);
         Mockito.verify(this.origin).remove(obj);
-        this.list.remove(index);
+    }
+
+    @Test
+    void delegatesRemoveAtIndex() {
+        final int index = 5;
+        this.verboseList().remove(index);
         Mockito.verify(this.origin).remove(index);
     }
 
-    /**
-     * VerboseList should delegate containsAll method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesContainsAll() throws Exception {
+    void delegatesContainsAll() {
         final List<Object> collection = Collections.emptyList();
-        this.list.containsAll(collection);
-        Mockito.verify(this.origin).containsAll(collection);
+        Mockito.when(this.origin.containsAll(collection)).thenReturn(true);
+        MatcherAssert.assertThat(
+            "containsAll must be delegated to origin",
+            this.verboseList().containsAll(collection),
+            Matchers.is(true)
+        );
     }
 
-    /**
-     * VerboseList should delegate addAll method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesAddAll() throws Exception {
+    void delegatesAddAllCollection() {
         final List<Object> collection = Collections.emptyList();
-        this.list.addAll(collection);
+        this.verboseList().addAll(collection);
         Mockito.verify(this.origin).addAll(collection);
+    }
+
+    @Test
+    void delegatesAddAllAtIndex() {
+        final List<Object> collection = Collections.emptyList();
         final int index = 5;
-        this.list.addAll(index, collection);
+        this.verboseList().addAll(index, collection);
         Mockito.verify(this.origin).addAll(index, collection);
     }
 
-    /**
-     * VerboseList should delegate removeAll method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesRemoveAll() throws Exception {
+    void delegatesRemoveAll() {
         final List<Object> collection = Collections.emptyList();
-        this.list.removeAll(collection);
+        this.verboseList().removeAll(collection);
         Mockito.verify(this.origin).removeAll(collection);
     }
 
-    /**
-     * VerboseList should delegate retainAll method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesRetainAll() throws Exception {
+    void delegatesRetainAll() {
         final List<Object> collection = Collections.emptyList();
-        this.list.retainAll(collection);
+        this.verboseList().retainAll(collection);
         Mockito.verify(this.origin).retainAll(collection);
     }
 
-    /**
-     * VerboseList should delegate clear method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesClear() throws Exception {
-        this.list.clear();
+    void delegatesClear() {
+        this.verboseList().clear();
         Mockito.verify(this.origin).clear();
     }
 
-    /**
-     * VerboseList should delegate get method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesGet() throws Exception {
+    void delegatesGet() {
         final int index = 5;
-        this.list.get(index);
+        this.verboseList().get(index);
         Mockito.verify(this.origin).get(index);
     }
 
-    /**
-     * VerboseList should delegate set method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesSet() throws Exception {
+    void delegatesSet() {
         final int index = 5;
         final Object obj = new Object();
-        this.list.set(index, obj);
+        this.verboseList().set(index, obj);
         Mockito.verify(this.origin).set(index, obj);
     }
 
-    /**
-     * VerboseList should delegate indexOf method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesIndexOf() throws Exception {
+    void delegatesIndexOf() {
         final Object obj = new Object();
-        this.list.indexOf(obj);
+        this.verboseList().indexOf(obj);
         Mockito.verify(this.origin).indexOf(obj);
     }
 
-    /**
-     * VerboseList should delegate lastIndexOf method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesLastIndexOf() throws Exception {
+    void delegatesLastIndexOf() {
         final Object obj = new Object();
-        this.list.lastIndexOf(obj);
+        this.verboseList().lastIndexOf(obj);
         Mockito.verify(this.origin).lastIndexOf(obj);
     }
 
-    /**
-     * VerboseList should delegate listIterator method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesListIterator() throws Exception {
-        this.list.listIterator();
+    void delegatesListIteratorNoArgs() {
+        this.verboseList().listIterator();
         Mockito.verify(this.origin).listIterator();
+    }
+
+    @Test
+    void delegatesListIteratorAtIndex() {
         final int index = 5;
-        this.list.listIterator(index);
+        this.verboseList().listIterator(index);
         Mockito.verify(this.origin).listIterator(index);
     }
 
-    /**
-     * VerboseList should delegate subList method to decorated List.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void delegatesSubList() throws Exception {
+    void delegatesSubList() {
         final int from = 3;
         final int toidx = 5;
-        this.list.subList(from, toidx);
+        this.verboseList().subList(from, toidx);
         Mockito.verify(this.origin).subList(from, toidx);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by addAll method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromAddAll()
-        throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromAddAll() {
         final int index = 5;
         final List<Object> collection = Collections.emptyList();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).addAll(index, collection);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.addAll(index, collection);
+        this.assertThat(
+            () -> this.verboseList().addAll(index, collection),
+            cause
+        );
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by get method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromGet() throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromGet() {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).get(index);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.get(index);
+        this.assertThat(() -> this.verboseList().get(index), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by set method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromSet() throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromSet() {
         final int index = 5;
         final Object obj = new Object();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).set(index, obj);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.set(index, obj);
+        this.assertThat(() -> this.verboseList().set(index, obj), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by add method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromAdd() throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromAdd() {
         final int index = 5;
         final Object obj = new Object();
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).add(index, obj);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.add(index, obj);
+        this.assertThat(() -> this.verboseList().add(index, obj), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by remove method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromRemove()
-        throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromRemove() {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).remove(index);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.remove(index);
+        this.assertThat(() -> this.verboseList().remove(index), cause);
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by listIterator
-     * method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromListIterator()
-        throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromListIterator() {
         final int index = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).listIterator(index);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.listIterator(index);
+        this.assertThat(
+            () -> this.verboseList().listIterator(index),
+            cause
+        );
     }
 
-    /**
-     * VerboseList should wraps OutOfBoundsException thrown by subList method.
-     * @throws Exception If something goes wrong.
-     */
     @Test
-    public final void wrapsIndexOutOfBoundsExceptionFromSubList()
-        throws Exception {
+    void wrapsIndexOutOfBoundsExceptionFromSubList() {
         final int from = 2;
         final int toidx = 5;
         final Exception cause = new IndexOutOfBoundsException();
         Mockito.doThrow(cause).when(this.origin).subList(from, toidx);
-        this.thrown.expect(IndexOutOfBoundsException.class);
-        this.thrown.expectMessage(VerboseListTest.MSG);
-        this.thrown.expectCause(Matchers.is(cause));
-        this.list.subList(from, toidx);
+        this.assertThat(
+            () -> this.verboseList().subList(from, toidx),
+            cause
+        );
+    }
+
+    /**
+     * Build a fresh decorated list using the mocked origin.
+     * @return Decorator wrapping the mock origin
+     */
+    private VerboseList<Object> verboseList() {
+        return new VerboseList<>(
+            this.origin,
+            new TextOf(VerboseListTest.MSG)
+        );
+    }
+
+    /**
+     * Assert cause.
+     * @param exec Code block
+     * @param cause Cause
+     */
+    private void assertThat(final Executable exec, final Exception cause) {
+        MatcherAssert.assertThat(
+            "Exception must have expected message and cause",
+            Assertions.assertThrows(IndexOutOfBoundsException.class, exec),
+            Matchers.allOf(
+                Matchers.hasProperty("message", Matchers.is(VerboseListTest.MSG)),
+                Matchers.hasProperty("cause", Matchers.is(cause))
+            )
+        );
     }
 }

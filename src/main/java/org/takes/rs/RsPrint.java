@@ -1,62 +1,52 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.Bytes;
 import org.cactoos.Text;
-import org.cactoos.io.BytesOf;
-import org.cactoos.text.Joined;
-import org.cactoos.text.TextOf;
 import org.takes.Response;
 
 /**
- * Response decorator that can print an entire response in HTTP format.
+ * Response decorator that provides text representation and printing capabilities.
+ *
+ * <p>This decorator converts HTTP responses to their textual representation,
+ * including both headers and body content. It provides methods to print
+ * the complete response, just the headers, or just the body to various
+ * output destinations. The implementation validates HTTP format compliance
+ * and handles proper CRLF line endings as required by HTTP specification.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @todo #1054:30min Continue replacing guava in tests.
- *  Create new todos until guava is removed and Takes is much more Cactoos
- *  oriented as started with #804.
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsPrint extends RsWrap implements Text, Bytes {
+public final class RsPrint extends RsWrap implements Text {
 
     /**
-     * Head print representation.
+     * Pattern for first line.
      */
-    private final HeadPrint head;
+    private static final Pattern FIRST = Pattern.compile(
+        "HTTP/1\\.1 \\d{3} [a-zA-Z- ]+"
+    );
 
     /**
-     * Body print representation.
+     * Pattern for all other lines in the head.
      */
-    private final BodyPrint body;
+    private static final Pattern OTHERS = Pattern.compile(
+        "[a-zA-Z0-9\\-]+:\\p{Print}+"
+    );
 
     /**
      * Ctor.
@@ -64,24 +54,110 @@ public final class RsPrint extends RsWrap implements Text, Bytes {
      */
     public RsPrint(final Response res) {
         super(res);
-        this.head = new HeadPrint(res);
-        this.body = new BodyPrint(res);
     }
 
     @Override
-    public String asString() throws IOException {
-        return new Joined(
-            new TextOf(""),
-            this.head,
-            this.body
-        ).asString();
+    public String asString() throws Exception {
+        return this.print();
     }
 
-    @Override
-    public byte[] asBytes() throws Exception {
-        return new BytesOf(
-            this.asString(),
-            StandardCharsets.UTF_8
-        ).asBytes();
+    /**
+     * Print it into string.
+     * @return Entire HTTP response
+     * @throws IOException If fails
+     */
+    public String print() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.print(baos);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Print body into string.
+     * @return Entire body of HTTP response
+     * @throws IOException If fails
+     */
+    public String printBody() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.printBody(baos);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Print head into string.
+     * @return Entire head of HTTP response
+     * @throws IOException If fails
+     * @since 0.10
+     */
+    public String printHead() throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        this.printHead(baos);
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Print it into output stream.
+     * @param output Output to print into
+     * @throws IOException If fails
+     */
+    public void print(final OutputStream output) throws IOException {
+        this.printHead(output);
+        this.printBody(output);
+    }
+
+    /**
+     * Print it into output stream.
+     * @param output Output to print into
+     * @throws IOException If fails
+     * @since 0.10
+     */
+    public void printHead(final OutputStream output) throws IOException {
+        final String eol = new String(
+            new char[]{(char) 13, (char) 10}
+        );
+        final Writer writer =
+            new OutputStreamWriter(output, StandardCharsets.UTF_8);
+        int pos = 0;
+        for (final String line : this.head()) {
+            if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "First line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        line, RsPrint.FIRST
+                    )
+                );
+            }
+            if (pos > 0 && !RsPrint.OTHERS.matcher(line).matches()) {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "Header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        pos + 1, line, RsPrint.OTHERS
+                    )
+                );
+            }
+            writer.append(line);
+            writer.append(eol);
+            ++pos;
+        }
+        writer.append(eol);
+        writer.flush();
+    }
+
+    /**
+     * Print it into output stream.
+     * @param output Output to print into
+     * @throws IOException If fails
+     */
+    public void printBody(final OutputStream output) throws IOException {
+        try (InputStream body = this.body()) {
+            final byte[] buf = new byte[4096];
+            while (true) {
+                final int bytes = body.read(buf);
+                if (bytes < 0) {
+                    break;
+                }
+                output.write(buf, 0, bytes);
+            }
+        }
     }
 }

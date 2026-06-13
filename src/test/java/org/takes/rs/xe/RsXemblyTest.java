@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs.xe;
 
@@ -32,7 +13,6 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
-import org.xembly.Directive;
 import org.xembly.Directives;
 
 /**
@@ -41,25 +21,17 @@ import org.xembly.Directives;
  */
 final class RsXemblyTest {
 
-    /**
-     * RsXembly can build XML response.
-     * @throws IOException If some problem inside
-     */
     @Test
     void buildsXmlResponse() throws IOException {
         MatcherAssert.assertThat(
+            "XML response must be built correctly",
             IOUtils.toString(
                 new RsXembly(
                     new XeStylesheet("/a.xsl"),
                     new XeAppend(
                         "root",
                         new XeMillis(false),
-                        new XeSource() {
-                            @Override
-                            public Iterable<Directive> toXembly() {
-                                return new Directives().add("hey");
-                            }
-                        },
+                        () -> new Directives().add("hey"),
                         new XeMillis(true)
                     )
                 ).body(),
@@ -73,37 +45,44 @@ final class RsXemblyTest {
         );
     }
 
-    /**
-     * RsXembly can modify XML response.
-     * @throws Exception If some problem inside
-     */
     @Test
-    void modifiesXmlResponse() throws Exception {
-        final Document dom = DocumentBuilderFactory.newInstance()
-            .newDocumentBuilder()
-            .newDocument();
-        final String root = "world";
-        dom.appendChild(dom.createElement(root));
-        final String query = "/world/hi";
+    void modifiesXmlResponseWithDirectives() throws Exception {
         MatcherAssert.assertThat(
+            "XML response from DOM must contain expected XPath",
             IOUtils.toString(
                 new RsXembly(
-                    dom,
+                    RsXemblyTest.worldDom(),
                     new XeDirectives(
-                        new Directives()
-                            .xpath("/world")
-                            .add("hi")
+                        new Directives().xpath("/world").add("hi")
                     )
                 ).body(),
                 StandardCharsets.UTF_8
             ),
-            XhtmlMatchers.hasXPath(query)
+            XhtmlMatchers.hasXPath("/world/hi")
         );
-        MatcherAssert.assertThat(
+    }
+
+    @Test
+    void doesNotModifyOriginalDom() throws Exception {
+        final Document dom = RsXemblyTest.worldDom();
+        new RsXembly(
             dom,
-            Matchers.not(
-                XhtmlMatchers.hasXPath(query)
+            new XeDirectives(
+                new Directives().xpath("/world").add("hi")
             )
+        ).body();
+        MatcherAssert.assertThat(
+            "Original DOM must not be modified",
+            dom,
+            Matchers.not(XhtmlMatchers.hasXPath("/world/hi"))
         );
+    }
+
+    private static Document worldDom() throws Exception {
+        final Document dom = DocumentBuilderFactory.newInstance()
+            .newDocumentBuilder()
+            .newDocument();
+        dom.appendChild(dom.createElement("world"));
+        return dom;
     }
 }

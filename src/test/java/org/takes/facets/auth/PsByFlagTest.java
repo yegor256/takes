@@ -1,39 +1,19 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
-import com.google.common.collect.ImmutableMap;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+import org.cactoos.map.MapEntry;
+import org.cactoos.map.MapOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
 import org.mockito.Mockito;
 import org.takes.Response;
 import org.takes.rq.RqFake;
@@ -44,20 +24,16 @@ import org.takes.rs.RsWithType;
 /**
  * Test case for {@link PsByFlag}.
  * @since 0.10
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class PsByFlagTest {
-    /**
-     * PsByFlag can skip if nothing found.
-     * @throws Exception If some problem inside
-     */
+
     @Test
     void skipsIfNothingFound() throws Exception {
         MatcherAssert.assertThat(
+            "Flag not found must return false",
             new PsByFlag(
                 new PsByFlag.Pair(
-                    "test", new PsFake(true)
+                    Pattern.compile(Pattern.quote("test")), new PsFake(true)
                 )
             ).enter(
                 new RqFake("GET", "/?PsByFlag=x")
@@ -66,16 +42,13 @@ final class PsByFlagTest {
         );
     }
 
-    /**
-     * PsByFlag finds flag and authenticates user.
-     * @throws Exception If some problem inside
-     */
     @Test
     void flagIsFoundUserAuthenticated() throws Exception {
         MatcherAssert.assertThat(
+            "Matching flag must return expected identity URN",
             new PsByFlag(
                 new PsByFlag.Pair(
-                    "some-key", new PsFake(true)
+                    Pattern.compile(Pattern.quote("some-key")), new PsFake(true)
                 )
             ).enter(new RqFake("POST", "/?PsByFlag=some-key")).get()
                 .urn(),
@@ -83,12 +56,9 @@ final class PsByFlagTest {
         );
     }
 
-    /**
-     * PsByFlag wraps response with authenticated user.
-     * @throws IOException If some problem inside
-     */
     @Test
-    void exitTest() throws IOException {
+    @SuppressWarnings("unchecked")
+    void exitTest() {
         final Response response = new RsWithStatus(
             new RsWithType(
                 new RsWithBody("<html>This is test response</html>"),
@@ -97,27 +67,26 @@ final class PsByFlagTest {
             HttpURLConnection.HTTP_OK
         );
         MatcherAssert.assertThat(
+            "Exit must return same response",
             new PsByFlag(
-                ImmutableMap.<Pattern, Pass>of(
-                    Pattern.compile("key"), new PsFake(true)
+                new MapOf<>(
+                    new MapEntry<>(
+                        Pattern.compile("key"), new PsFake(true)
+                    )
                 )
             ).exit(response, Mockito.mock(Identity.class)),
             Matchers.is(response)
         );
     }
 
-    /**
-     * Checks PsByFlag equals method.
-     * @throws Exception If some problem inside
-     */
     @Test
-    void mustEvaluateTrueEqualityTest() throws Exception {
+    void mustEvaluateTrueEqualityTest() {
         final Map<Pattern, Pass> passes = new HashMap<>(1);
         passes.put(Pattern.compile("key"), new PsFake(true));
-        new Assertion<>(
+        MatcherAssert.assertThat(
             "Must evaluate true equality",
             new PsByFlag(passes),
             new IsEqual<>(new PsByFlag(passes))
-        ).affirm();
+        );
     }
 }

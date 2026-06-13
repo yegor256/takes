@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -28,23 +9,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
 /**
  * Test case for {@link RqHref.Base}.
  * @since 0.1
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public final class RqHrefTest {
+@SuppressWarnings("PMD.TooManyMethods") final class RqHrefTest {
 
-    /**
-     * RqHref.Base can parse a query.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void parsesHttpQuery() throws IOException {
+    void parsesHttpQuery() throws IOException {
         MatcherAssert.assertThat(
+            "Request href must include host, path and query parameters",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -59,13 +38,10 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can parse a query with proto.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void takesProtoIntoAccount() throws IOException {
+    void takesProtoIntoAccount() throws IOException {
         MatcherAssert.assertThat(
+            "Request href must use forwarded protocol when available",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -80,13 +56,10 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can parse a query without a Host.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void parsesHttpQueryWithoutHost() throws IOException {
+    void parsesHttpQueryWithoutHost() throws IOException {
         MatcherAssert.assertThat(
+            "Request href must default to localhost when no host header present",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -100,43 +73,36 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base should throw {@link HttpException} when parsing
-     * Request without Request-Line.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void failsOnAbsentRequestLine() throws IOException {
-        new RqHref.Base(
-            new RqSimple(Collections.<String>emptyList(), null)
-        ).href();
-    }
-
-    /**
-     * RqHref.Base should throw {@link HttpException} when parsing
-     * Request with illegal Request-Line.
-     * @throws IOException If some problem inside
-     */
-    @Test(expected = HttpException.class)
-    public void failsOnIllegalRequestLine() throws IOException {
-        new RqHref.Base(
-            new RqFake(
-                Arrays.asList(
-                    "GIVE/contacts",
-                    "Host: 2.example.com"
-                ),
-                ""
-            )
-        ).href();
-    }
-
-    /**
-     * RqHref.Base can extract params.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void extractsParams() throws IOException {
+    void failsOnAbsentRequestLine() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> new RqHref.Base(
+                new RqSimple(Collections.emptyList(), null)
+            ).href()
+        );
+    }
+
+    @Test
+    void failsOnIllegalRequestLine() {
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GIVE/contacts",
+                        "Host: 2.example.com"
+                    ),
+                    ""
+                )
+            ).href()
+        );
+    }
+
+    @Test
+    void extractsParams() throws IOException {
         MatcherAssert.assertThat(
+            "URL-encoded query parameter must be decoded correctly",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -151,13 +117,10 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Base can extract first params.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void extractsFirstParam() throws IOException {
+    void extractsFirstParam() throws IOException {
         MatcherAssert.assertThat(
+            "Single query parameter must be extracted correctly",
             new RqHref.Base(
                 new RqFake(
                     Arrays.asList(
@@ -171,13 +134,10 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Smart can extract home URI.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void extractsHome() throws IOException {
+    void extractsHome() throws IOException {
         MatcherAssert.assertThat(
+            "Smart href must extract home URL correctly",
             new RqHref.Smart(
                 new RqHref.Base(
                     new RqFake(
@@ -193,13 +153,10 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Smart can extract home URI.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void extractsHomeWithProtocol() throws IOException {
+    void extractsHomeWithProtocol() throws IOException {
         MatcherAssert.assertThat(
+            "Smart href must extract HTTPS home URL when forwarded protocol is present",
             new RqHref.Smart(
                 new RqHref.Base(
                     new RqFake(
@@ -216,13 +173,10 @@ public final class RqHrefTest {
         );
     }
 
-    /**
-     * RqHref.Smart can extract param with default value.
-     * @throws IOException If some problem inside
-     */
     @Test
-    public void extractsParamByDefault() throws IOException {
+    void extractsParamByDefault() throws IOException {
         MatcherAssert.assertThat(
+            "Smart href must return default value for absent parameter",
             new RqHref.Smart(
                 new RqHref.Base(
                     new RqFake(
@@ -235,6 +189,32 @@ public final class RqHrefTest {
                 )
             ).single("absent", "def-5"),
             Matchers.startsWith("def-")
+        );
+    }
+
+    /**
+     * Space truncation.
+     * todo: #1440 This test doesn't work because there is a space truncation in request.
+     * The string is being truncated after the space because the URI is not properly encoded.
+     * Let's make it work by doing URI encoding, because URL encoding converts characters into
+     * a format that can be transmitted over the Internet. URL encoding replaces unsafe ASCII
+     * characters with a "%" followed by two hexadecimal digits.
+     */
+    @Disabled
+    @Test
+    void noSpaceTruncationInUri() throws IOException {
+        MatcherAssert.assertThat(
+            "URI with a space is not truncated at the space character and correctly encoded",
+            new RqHref.Base(
+                new RqFake(
+                    Arrays.asList(
+                        "GET /?u=Hello World",
+                        "Host: www.example.com"
+                    ),
+                    ""
+                )
+            ).href().toString(),
+            Matchers.is(Matchers.containsString("Hello%20World"))
         );
     }
 }

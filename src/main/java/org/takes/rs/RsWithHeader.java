@@ -1,52 +1,33 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
 import org.takes.Response;
 
 /**
- * Response decorator, with an additional header.
+ * Response decorator that adds a single header to an HTTP response.
  *
- * <p>Remember, if a header is already present in the response, this
- * decorator will add another one, with the same name. It doesn't check
- * for duplicates. If you want to avoid duplicate headers, use this
- * decorator in combination with {@link org.takes.rs.RsWithoutHeader},
- * for example:
+ * <p>This decorator appends one additional header to an existing response.
+ * It validates header format according to RFC 7230 and provides multiple
+ * constructor overloads for different header specification methods.
+ * The decorator does not check for duplicate headers - it simply adds
+ * the new header to the existing ones.
  *
- * <pre> new RsWithHeader(
- *   new RsWithoutHeader(res, "Host"),
- *   "Host", "www.example.com"
+ * <p><strong>Note:</strong> If you need to replace an existing header
+ * rather than add a duplicate, combine this decorator with
+ * {@link org.takes.rs.RsWithoutHeader}:
+ * <pre>new RsWithHeader(
+ *   new RsWithoutHeader(res, "Content-Type"),
+ *   "Content-Type", "application/json"
  * )</pre>
- *
- * <p>In this example, {@link org.takes.rs.RsWithoutHeader} will remove the
- * {@code Host} header first and {@link org.takes.rs.RsWithHeader} will
- * add a new one.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -90,7 +71,7 @@ public final class RsWithHeader extends RsWrap {
      */
     public RsWithHeader(final Response res, final CharSequence name,
         final CharSequence value) {
-        this(res, String.format("%s: %s", name, value));
+        this(res, new RsWithHeader.HeaderText(name, value));
     }
 
     /**
@@ -99,9 +80,18 @@ public final class RsWithHeader extends RsWrap {
      * @param header Header to add
      */
     public RsWithHeader(final Response res, final CharSequence header) {
+        this(res, () -> header);
+    }
+
+    /**
+     * Ctor.
+     * @param res Original response
+     * @param header Header to add
+     */
+    public RsWithHeader(final Response res, final Scalar<CharSequence> header) {
         super(
             new ResponseOf(
-                () -> RsWithHeader.extend(res.head(), header.toString()),
+                () -> RsWithHeader.extend(res.head(), header.value().toString()),
                 res::body
             )
         );
@@ -118,7 +108,6 @@ public final class RsWithHeader extends RsWrap {
         if (!RsWithHeader.HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
                     header, RsWithHeader.HEADER
                 )
@@ -127,4 +116,50 @@ public final class RsWithHeader extends RsWrap {
         return new Joined<String>(head, new IterableOf<>(header));
     }
 
+    /**
+     * CharSequence that lazily formats a HTTP header line.
+     * @since 2.0
+     */
+    private static final class HeaderText implements CharSequence {
+
+        /**
+         * Header name.
+         */
+        private final CharSequence name;
+
+        /**
+         * Header value.
+         */
+        private final CharSequence value;
+
+        /**
+         * Ctor.
+         * @param hdr Header name
+         * @param val Header value
+         */
+        HeaderText(final CharSequence hdr, final CharSequence val) {
+            this.name = hdr;
+            this.value = val;
+        }
+
+        @Override
+        public int length() {
+            return this.name.length() + 2 + this.value.length();
+        }
+
+        @Override
+        public char charAt(final int index) {
+            return this.toString().charAt(index);
+        }
+
+        @Override
+        public CharSequence subSequence(final int start, final int end) {
+            return this.toString().subSequence(start, end);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s: %s", this.name, this.value);
+        }
+    }
 }

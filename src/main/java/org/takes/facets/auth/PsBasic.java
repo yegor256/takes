@@ -1,28 +1,10 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
+import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -33,11 +15,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
-import javax.xml.bind.DatatypeConverter;
 import lombok.EqualsAndHashCode;
+import org.cactoos.iterable.IterableOf;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
-import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
@@ -48,17 +32,17 @@ import org.takes.rq.RqHref;
 import org.takes.rs.RsWithHeader;
 
 /**
- * Pass that checks the user according RFC-2617.
+ * Pass that authenticates users according to RFC-2617 (HTTP Basic Authentication).
+ * This implementation validates user credentials provided via the HTTP Authorization
+ * header using Base64-encoded username and password pairs.
  *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.20
- * @checkstyle ClassDataAbstractionCouplingCheck (100 lines)
  * @todo #863:30min Continue removing nulls from the code base, there are still
  *  some places that use it and can be replaced with better code constructs.
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.TooManyMethods")
 public final class PsBasic implements Pass {
 
     /**
@@ -88,14 +72,13 @@ public final class PsBasic implements Pass {
 
     @Override
     public Opt<Identity> enter(final Request request) throws IOException {
-        final Iterator<String> headers = new RqHeaders.Smart(
-            new RqHeaders.Base(request)
-        ).header("authorization").iterator();
+        final Iterator<String> headers = new RqHeaders.Smart(request)
+            .header("authorization").iterator();
         if (!headers.hasNext()) {
             throw new RsForward(
                 new RsWithHeader(
                     String.format(
-                        "WWW-Authenticate: Basic ream=\"%s\" ",
+                        "WWW-Authenticate: Basic realm=\"%s\" ",
                         this.realm
                     )
                 ),
@@ -103,7 +86,7 @@ public final class PsBasic implements Pass {
                 new RqHref.Base(request).href()
             );
         }
-        final String decoded = new UncheckedText(
+        final String decoded = new IoCheckedText(
             new Trimmed(
                 new TextOf(
                     DatatypeConverter.parseBase64Binary(
@@ -122,7 +105,7 @@ public final class PsBasic implements Pass {
                 new RsWithHeader(
                     new RsFlash("access denied", Level.WARNING),
                     String.format(
-                        "WWW-Authenticate: Basic ream=\"%s\"",
+                        "WWW-Authenticate: Basic realm=\"%s\"",
                         this.realm
                     )
                 ),
@@ -139,29 +122,34 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Entry interface that is used to check if the received information is
-     * valid.
-     *
+     * Entry interface that validates user credentials.
+     * Implementations of this interface determine whether a given
+     * username and password combination is valid for authentication.
      * @since 0.20
      */
+    @FunctionalInterface
     public interface Entry {
+
         /**
-         * Check if is a valid user.
-         * @param user User
+         * Check if the user credentials are valid.
+         * @param user Username
          * @param pwd Password
-         * @return Identity.
+         * @return Identity if credentials are valid, empty otherwise
          */
         Opt<Identity> enter(String user, String pwd);
     }
 
     /**
-     * Fake implementation of {@link PsBasic.Entry}.
+     * Fake implementation of {@link PsBasic.Entry} for testing purposes.
+     * This implementation returns a predefined authentication result based
+     * on a boolean condition provided during construction.
      *
      * <p>The class is immutable and thread-safe.
      *
      * @since 0.20
      */
     public static final class Fake implements PsBasic.Entry {
+
         /**
          * Should we authenticate a user?
          */
@@ -192,11 +180,13 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Empty check.
-     *
+     * Empty implementation that always denies authentication.
+     * This implementation always returns an empty identity,
+     * effectively rejecting all authentication attempts.
      * @since 0.20
      */
     public static final class Empty implements PsBasic.Entry {
+
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             return new Opt.Empty<>();
@@ -204,11 +194,13 @@ public final class PsBasic implements Pass {
     }
 
     /**
-     * Default entry.
-     *
+     * Default entry implementation that validates credentials against
+     * a predefined set of username, password, and URN combinations.
+     * Credentials are stored as URL-encoded strings separated by spaces.
      * @since 0.22
      */
     public static final class Default implements PsBasic.Entry {
+
         /**
          * How keys in
          * {@link org.takes.facets.auth.PsBasic.Default#usernames} are
@@ -224,17 +216,27 @@ public final class PsBasic implements Pass {
         /**
          * Map from login/password pairs to URNs.
          */
-        private final Map<String, String> usernames;
+        private final Unchecked<Map<String, String>> usernames;
 
         /**
          * Public ctor.
          * @param users Strings with user's login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
-         *  {@code "mike my%20password urn:jcabi-users:michael"}.
+         *  {@code "mike my%20password urn:jcabi-users:michael"}
          */
         public Default(final String... users) {
-            this.usernames = Default.converted(users);
+            this(new IterableOf<>(users));
+        }
+
+        /**
+         * Primary ctor.
+         * @param users Strings with user's login, password and URNs
+         */
+        public Default(final Iterable<String> users) {
+            this.usernames = new Unchecked<>(
+                new Sticky<>(() -> Default.converted(users))
+            );
         }
 
         @Override
@@ -251,7 +253,10 @@ public final class PsBasic implements Pass {
                         )
                     );
                 } catch (final UnsupportedEncodingException ex) {
-                    throw new IllegalStateException(ex);
+                    throw new IllegalStateException(
+                        String.format("Failed to decode URN '%s'", urn.get()),
+                        ex
+                    );
                 }
             } else {
                 identity = new Opt.Empty<>();
@@ -264,11 +269,11 @@ public final class PsBasic implements Pass {
          * @param users Strings with user's login, password and URN with
          *  space characters as separators. Each of login, password and urn
          *  are URL-encoded substrings. For example,
-         *  {@code "mike my%20password urn:jcabi-users:michael"}.
-         * @return Map from login/password pairs to URNs.
+         *  {@code "mike my%20password urn:jcabi-users:michael"}
+         * @return Map from login/password pairs to URNs
          */
-        private static Map<String, String> converted(final String... users) {
-            final Map<String, String> result = new HashMap<>(users.length);
+        private static Map<String, String> converted(final Iterable<String> users) {
+            final Map<String, String> result = new HashMap<>(0);
             for (final String user : users) {
                 final String unified = user.replace("%20", "+");
                 PsBasic.Default.validateUser(unified);
@@ -282,15 +287,15 @@ public final class PsBasic implements Pass {
 
         /**
          * Returns an URN corresponding to a login-password pair.
-         * @param user Login.
-         * @param pwd Password.
+         * @param user Login
+         * @param pwd Password
          * @return Opt with URN or empty if there is no such login-password
-         *  pair.
+         *  pair
          */
         private Opt<String> urn(final String user, final String pwd) {
             final String urn;
             try {
-                urn = this.usernames.get(
+                urn = this.usernames.value().get(
                     String.format(
                         PsBasic.Default.KEY_FORMAT,
                         URLEncoder.encode(
@@ -304,7 +309,10 @@ public final class PsBasic implements Pass {
                     )
                 );
             } catch (final UnsupportedEncodingException ex) {
-                throw new IllegalStateException(ex);
+                throw new IllegalStateException(
+                    "Failed to encode user name or password",
+                    ex
+                );
             }
             final Opt<String> opt;
             if (urn == null) {
@@ -319,9 +327,9 @@ public final class PsBasic implements Pass {
          * Creates a key for
          *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
          * @param unified User string made of 3 urlencoded substrings
-         *  separated with non-urlencoded space characters.
+         *  separated with non-urlencoded space characters
          * @return Login and password parts with <pre>%20</pre> replaced with
-         *  <pre>+</pre>.
+         *  <pre>+</pre>
          */
         private static String key(final String unified) {
             return String.format(
@@ -337,7 +345,7 @@ public final class PsBasic implements Pass {
         /**
          * Checks if a unified user string is correctly formatted.
          * @param unified String with urlencoded user login, password and urn
-         *  separated with spaces.
+         *  separated with spaces
          */
         private static void validateUser(final String unified) {
             final boolean amount = PsBasic.Default.countSpaces(unified) != 2;
@@ -355,8 +363,8 @@ public final class PsBasic implements Pass {
 
         /**
          * Counts spaces in a string.
-         * @param txt Any string.
-         * @return Amount of spaces in string.
+         * @param txt Any string
+         * @return Amount of spaces in string
          */
         private static int countSpaces(final String txt) {
             int spaces = 0;

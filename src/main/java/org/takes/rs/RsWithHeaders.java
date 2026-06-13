@@ -1,36 +1,22 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
 import java.io.IOException;
-import java.util.Arrays;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.list.ListOf;
 import org.takes.Response;
 
 /**
- * Response decorator, with an additional headers.
+ * Response decorator that adds multiple headers to an HTTP response.
+ *
+ * <p>This decorator appends additional headers to an existing response
+ * while preserving the original headers. It accepts multiple headers
+ * either as varargs or as an iterable collection. Headers are processed
+ * sequentially, and each header is added individually using RsWithHeader.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -54,7 +40,7 @@ public final class RsWithHeaders extends RsWrap {
      * @param headers Headers
      */
     public RsWithHeaders(final Response res, final CharSequence... headers) {
-        this(res, Arrays.asList(headers));
+        this(res, new ListOf<>(headers));
     }
 
     /**
@@ -79,7 +65,6 @@ public final class RsWithHeaders extends RsWrap {
      * @return Head with additional headers
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Iterable<String> extend(final Response res,
         final Iterable<? extends CharSequence> headers) throws IOException {
         Response resp = res;

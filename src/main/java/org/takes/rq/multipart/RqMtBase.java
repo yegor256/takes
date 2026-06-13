@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq.multipart;
 
@@ -33,6 +14,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
@@ -70,19 +52,18 @@ import org.takes.rq.RqMultipart;
  *
  * <p>The class is immutable and thread-safe.
  *
- * @since 0.33
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
  * @see org.takes.rq.RqGreedy
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
+ * @since 0.33
  */
 @lombok.EqualsAndHashCode(of = "origin")
-@SuppressWarnings("PMD.ExcessiveImports")
 public final class RqMtBase implements RqMultipart {
+
     /**
      * The encoding used to create the request.
      */
-    private static final Charset ENCODING = Charset.forName("UTF-8");
+    private static final Charset ENCODING = StandardCharsets.UTF_8;
 
     /**
      * Pattern to get boundary from header.
@@ -101,7 +82,7 @@ public final class RqMtBase implements RqMultipart {
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF = new String(new char[]{13, 10});
 
     /**
      * Scalar of Map of params and values.
@@ -127,18 +108,15 @@ public final class RqMtBase implements RqMultipart {
      * Ctor.
      * @param req Original request
      * @throws IOException If fails
-     * @checkstyle ExecutableStatementCountCheck (2 lines)
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
-        this.sstream = new Sticky<>(() -> new RqLengthAware(req).body());
-        this.sbuffer = new Sticky<>(() -> {
-            return ByteBuffer.allocate(
-                // @checkstyle MagicNumberCheck (1 line)
-                Math.min(8192, RqMtBase.this.sstream.value().available())
-            );
-        });
-        this.smap = new Sticky<>(() -> RqMtBase.this.requests(req));
+        // @checkstyle ConstructorsCodeFreeCheck (5 lines)
+        this.stream = new RqLengthAware(req).body();
+        this.buffer = ByteBuffer.allocate(
+            Math.min(8192, this.stream.available())
+        );
+        this.map = this.requests(req);
     }
 
     @Override
@@ -156,8 +134,8 @@ public final class RqMtBase implements RqMultipart {
                 Collections.emptyList(),
                 new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
-                    name, map.size(), map.keySet()
-                ).toString()
+                    name, this.map.size(), this.map.keySet()
+                )
             );
         } else {
             iter = new VerboseIterable<>(
@@ -165,7 +143,7 @@ public final class RqMtBase implements RqMultipart {
                 new FormattedText(
                     "there are just %d parts by name \"%s\"",
                     values.size(), name
-                ).toString()
+                )
             );
         }
         return iter;
@@ -183,7 +161,7 @@ public final class RqMtBase implements RqMultipart {
 
     @Override
     public InputStream body() throws IOException {
-        return new CloseMultipart(this.origin.body());
+        return new RqMtBase.CloseMultipart(this.origin.body());
     }
 
     /**
@@ -192,6 +170,7 @@ public final class RqMtBase implements RqMultipart {
      * @return The requests map that use the part name as a map key
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.CloseResource")
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
         final String header = new RqHeaders.Smart(req).single("Content-Type");
@@ -205,7 +184,6 @@ public final class RqMtBase implements RqMultipart {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 String.format(
-                    // @checkstyle LineLength (1 line)
                     "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
                     header
                 )
@@ -221,10 +199,11 @@ public final class RqMtBase implements RqMultipart {
                 )
             );
         }
-        final ByteBuffer buffer = new Unchecked<>(this.sbuffer).value();
-        final InputStream stream = new Unchecked<>(this.sstream).value();
-        final ReadableByteChannel body = Channels.newChannel(stream);
-        if (body.read(buffer) < 0) {
+        final ReadableByteChannel body = Channels.newChannel(
+            this.stream
+        );
+        final ByteBuffer buf = this.buffer;
+        if (body.read(buf) < 0) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 "failed to read the request body"
@@ -233,15 +212,15 @@ public final class RqMtBase implements RqMultipart {
         final byte[] boundary = String.format(
             "%s--%s", RqMtBase.CRLF, matcher.group(1)
         ).getBytes(RqMtBase.ENCODING);
-        buffer.flip();
-        buffer.position(boundary.length - 2);
+        buf.flip();
+        buf.position(boundary.length - 2);
         final Collection<Request> requests = new LinkedList<>();
-        while (buffer.hasRemaining()) {
-            final byte data = buffer.get();
+        while (buf.hasRemaining()) {
+            final byte data = buf.get();
             if (data == '-') {
                 break;
             }
-            buffer.position(buffer.position() + 1);
+            buf.position(buf.position() + 1);
             requests.add(this.make(boundary, body));
         }
         return RqMtBase.asMap(requests);
@@ -261,11 +240,12 @@ public final class RqMtBase implements RqMultipart {
         final File file = File.createTempFile(
             RqMultipart.class.getName(), ".tmp"
         );
-        try (WritableByteChannel channel = Files.newByteChannel(
-            file.toPath(),
-            StandardOpenOption.READ,
-            StandardOpenOption.WRITE
-        )
+        try (
+            WritableByteChannel channel = Files.newByteChannel(
+                file.toPath(),
+                StandardOpenOption.READ,
+                StandardOpenOption.WRITE
+            )
         ) {
             channel.write(
                 ByteBuffer.wrap(
@@ -275,57 +255,14 @@ public final class RqMtBase implements RqMultipart {
             channel.write(
                 ByteBuffer.wrap(RqMtBase.CRLF.getBytes(RqMtBase.ENCODING))
             );
-            this.copy(channel, boundary, body);
+            new CopyBytesUntilBoundary(
+                channel,
+                boundary,
+                body,
+                this.buffer
+            ).copy();
         }
         return new RqTemp(file);
-    }
-
-    /**
-     * Copy until boundary reached.
-     * @param target Output file channel
-     * @param boundary Boundary
-     * @param body Origin request body
-     * @throws IOException If fails
-     * @checkstyle ExecutableStatementCountCheck (2 lines)
-     */
-    private void copy(final WritableByteChannel target,
-        final byte[] boundary, final ReadableByteChannel body)
-        throws IOException {
-        int match = 0;
-        boolean cont = true;
-        final ByteBuffer buffer = new Unchecked<>(this.sbuffer).value();
-        while (cont) {
-            if (!buffer.hasRemaining()) {
-                buffer.clear();
-                for (int idx = 0; idx < match; ++idx) {
-                    buffer.put(boundary[idx]);
-                }
-                match = 0;
-                if (body.read(buffer) == -1) {
-                    break;
-                }
-                buffer.flip();
-            }
-            final ByteBuffer btarget = buffer.slice();
-            final int offset = buffer.position();
-            btarget.limit(0);
-            while (buffer.hasRemaining()) {
-                final byte data = buffer.get();
-                if (data == boundary[match]) {
-                    ++match;
-                } else if (data == boundary[0]) {
-                    match = 1;
-                } else {
-                    match = 0;
-                    btarget.limit(buffer.position() - offset);
-                }
-                if (match == boundary.length) {
-                    cont = false;
-                    break;
-                }
-            }
-            target.write(btarget);
-        }
     }
 
     /**
@@ -334,7 +271,6 @@ public final class RqMtBase implements RqMultipart {
      * @return Map of them
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
     private static Map<String, List<Request>> asMap(
         final Collection<Request> reqs) throws IOException {
         final Map<String, List<Request>> map = new HashMap<>(reqs.size());
@@ -368,7 +304,7 @@ public final class RqMtBase implements RqMultipart {
 
         /**
          * Creates a {@code CloseParts} with the specified input.
-         * @param input The underlying input stream.
+         * @param input The underlying input stream
          */
         CloseMultipart(final InputStream input) {
             super(input);

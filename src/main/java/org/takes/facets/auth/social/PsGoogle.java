@@ -1,37 +1,18 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
+import jakarta.json.JsonObject;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import javax.json.JsonObject;
 import lombok.EqualsAndHashCode;
 import org.takes.HttpException;
 import org.takes.Request;
@@ -48,7 +29,6 @@ import org.takes.rq.RqHref;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.9
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
 @EqualsAndHashCode(of = { "app", "key", "redir" })
 public final class PsGoogle implements Pass {
@@ -114,8 +94,7 @@ public final class PsGoogle implements Pass {
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
      */
-    public PsGoogle(final String gapp, final String gkey,
-        final String uri) {
+    public PsGoogle(final String gapp, final String gkey, final String uri) {
         this(
             gapp,
             gkey,
@@ -144,8 +123,7 @@ public final class PsGoogle implements Pass {
     }
 
     @Override
-    public Opt<Identity> enter(final Request request)
-        throws IOException {
+    public Opt<Identity> enter(final Request request) throws IOException {
         final Href href = new RqHref.Base(request).href();
         final Iterator<String> code = href.param(PsGoogle.CODE).iterator();
         if (!code.hasNext()) {
@@ -158,25 +136,24 @@ public final class PsGoogle implements Pass {
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
     /**
-     * Get user name from Google, with the token provided.
+     * Get the user name from Google with the provided token.
      * @param token Google access token
      * @return The user found in Google
      * @throws IOException If fails
      */
     private Identity fetch(final String token) throws IOException {
-        // @checkstyle LineLength (1 line)
-        final String uri = new Href(this.gapi).path("plus").path("v1")
-            .path("people")
-            .path("me")
-            .with(PsGoogle.ACCESS_TOKEN, token)
-            .toString();
-        final JsonObject json = new JdkRequest(uri).fetch()
+        final JsonObject json = new JdkRequest(
+            new Href(this.gapi).path("plus").path("v1")
+                .path("people")
+                .path("me")
+                .with(PsGoogle.ACCESS_TOKEN, token)
+                .toString()
+        ).fetch()
             .as(JsonResponse.class).json()
             .readObject();
         if (json.containsKey(PsGoogle.ERROR)) {
@@ -239,5 +216,4 @@ public final class PsGoogle implements Pass {
             String.format("urn:google:%s", json.getString("id")), props
         );
     }
-
 }

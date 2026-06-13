@@ -1,32 +1,15 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq.multipart;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
+import org.takes.Request;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeader;
 import org.takes.rq.RqWrap;
@@ -35,9 +18,9 @@ import org.takes.rq.TempInputStream;
 /**
  * Request with a temporary file as body. The temporary file will be deleted
  * automatically when the body of the request will be closed.
- * @since 0.33
  * @see org.takes.rq.RqLive
  * @see org.takes.rq.TempInputStream
+ * @since 0.33
  */
 @EqualsAndHashCode(callSuper = true)
 final class RqTemp extends RqWrap {
@@ -45,21 +28,66 @@ final class RqTemp extends RqWrap {
     /**
      * Creates a {@code RqTemp} with the specified temporary file.
      * @param file The temporary that will be automatically deleted when the
-     *  body of the request will be closed.
+     *  body of the request will be closed
      * @throws IOException If fails
      */
     RqTemp(final File file) throws IOException {
-        super(
-            new RqWithHeader(
-                new RqLive(
-                    new TempInputStream(
-                        Files.newInputStream(file.toPath()),
-                        file
-                    )
-                ),
-                "Content-Length",
-                String.valueOf(file.length())
-            )
-        );
+        super(new RqTemp.LazyRq(file));
+    }
+
+    /**
+     * Lazily-built file-backed request.
+     * @since 2.0
+     */
+    private static final class LazyRq implements Request {
+
+        /**
+         * Source temporary file.
+         */
+        private final File file;
+
+        /**
+         * Cached decorated request.
+         */
+        private Request cached;
+
+        /**
+         * Ctor.
+         * @param src Source file
+         */
+        LazyRq(final File src) {
+            this.file = src;
+        }
+
+        @Override
+        public Iterable<String> head() throws IOException {
+            return this.delegate().head();
+        }
+
+        @Override
+        public InputStream body() throws IOException {
+            return this.delegate().body();
+        }
+
+        /**
+         * Build the delegate once.
+         * @return Decorated request
+         * @throws IOException If fails
+         */
+        private Request delegate() throws IOException {
+            if (this.cached == null) {
+                this.cached = new RqWithHeader(
+                    new RqLive(
+                        new TempInputStream(
+                            Files.newInputStream(this.file.toPath()),
+                            this.file
+                        )
+                    ),
+                    "Content-Length",
+                    String.valueOf(this.file.length())
+                );
+            }
+            return this.cached;
+        }
     }
 }

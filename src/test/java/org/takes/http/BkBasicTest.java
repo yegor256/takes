@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.http;
 
@@ -30,25 +11,23 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
-import org.cactoos.io.BytesOf;
+import org.cactoos.bytes.BytesOf;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.TextHasString;
 import org.takes.Request;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
-import org.takes.misc.Href;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqPrint;
@@ -58,23 +37,21 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link BkBasic}.
- *
  * @since 0.15.2
  * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  * @checkstyle ClassFanOutComplexityCheck (500 lines)
- * @checkstyle MultipleStringLiteralsCheck (500 lines)
  */
-@SuppressWarnings(
-    {
-        "PMD.ExcessiveImports",
-        "PMD.TooManyMethods"
-    })
+@SuppressWarnings({
+    "PMD.TooManyMethods",
+    "PMD.UnnecessaryLocalRule"
+})
 final class BkBasicTest {
 
     /**
      * Carriage return constant.
      */
-    private static final String CRLF = "\r\n";
+    private static final String CRLF =
+        String.valueOf((char) 13) + (char) 10;
 
     /**
      * POST header constant.
@@ -86,11 +63,6 @@ final class BkBasicTest {
      */
     private static final String HOST = "Host:localhost";
 
-    /**
-     * BkBasic can handle socket data.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
     void handlesSocket() throws Exception {
         final MkSocket socket = BkBasicTest.createMockSocket();
@@ -98,122 +70,118 @@ final class BkBasicTest {
         final String hello = "Hello World";
         new BkBasic(new TkText(hello)).accept(socket);
         MatcherAssert.assertThat(
-            baos.toString(),
+            "Socket output must contain the response text",
+            baos.toString(StandardCharsets.UTF_8),
             Matchers.containsString(hello)
         );
     }
 
-    /**
-     * BkBasic can return HTTP status 404 when accessing invalid URL.
-     *
-     * @throws Exception if any I/O error occurs.
-     */
     @Test
+    @Tag("deep")
     void returnsProperResponseCodeOnInvalidUrl() throws Exception {
+        final AtomicReference<Integer> status = new AtomicReference<>();
         new FtRemote(
             new TkFork(
                 new FkRegex("/path/a", new TkText("a")),
                 new FkRegex("/path/b", new TkText("b"))
             )
         ).exec(
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new JdkRequest(String.format("%s/path/c", home))
-                        .fetch()
-                        .as(RestResponse.class)
-                        .assertStatus(HttpURLConnection.HTTP_NOT_FOUND);
-                }
-            }
+            home -> status.set(
+                new JdkRequest(String.format("%s/path/c", home))
+                    .fetch()
+                    .as(RestResponse.class)
+                    .status()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Request to unregistered path must return HTTP 404 Not Found",
+            status.get(),
+            Matchers.equalTo(HttpURLConnection.HTTP_NOT_FOUND)
         );
     }
 
-    /**
-     * BkBasic produces headers with addresses without slashes.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
-    void addressesInHeadersAddedWithoutSlashes() throws Exception {
-        final Socket socket = BkBasicTest.createMockSocket();
-        final AtomicReference<Request> ref = new AtomicReference<>();
-        new BkBasic(
-            req -> {
-                ref.set(req);
-                return new ResponseOf(
-                    () -> Collections.singletonList("HTTP/1.1 200 OK"),
-                    req::body
-                );
-            }
-        ).accept(socket);
-        final Request request = ref.get();
+    void localAddressHeaderHasNoSlashes() throws Exception {
         final RqHeaders.Smart smart = new RqHeaders.Smart(
-            new RqHeaders.Base(request)
+            BkBasicTest.capturedRequest()
         );
         MatcherAssert.assertThat(
-            smart.single(
-                "X-Takes-LocalAddress",
-                ""
-            ),
-            Matchers.not(
-                Matchers.containsString("/")
-            )
+            "X-Takes-LocalAddress header must not contain slashes",
+            smart.single("X-Takes-LocalAddress", ""),
+            Matchers.not(Matchers.containsString("/"))
+        );
+    }
+
+    @Test
+    void remoteAddressHeaderHasNoSlashes() throws Exception {
+        final RqHeaders.Smart smart = new RqHeaders.Smart(
+            BkBasicTest.capturedRequest()
         );
         MatcherAssert.assertThat(
-            smart.single(
-                "X-Takes-RemoteAddress",
-                ""
-            ),
-            Matchers.not(
-                Matchers.containsString("/")
-            )
+            "X-Takes-RemoteAddress header must not contain slashes",
+            smart.single("X-Takes-RemoteAddress", ""),
+            Matchers.not(Matchers.containsString("/"))
         );
+    }
+
+    @Test
+    void localSocketAddressIsPresent() throws Exception {
         MatcherAssert.assertThat(
-            new RqSocket(request).getLocalAddress(),
+            "Local socket address must be present",
+            new RqSocket(BkBasicTest.capturedRequest()).getLocalAddress(),
             Matchers.notNullValue()
         );
+    }
+
+    @Test
+    void localSocketPortIsZeroForMock() throws Exception {
         MatcherAssert.assertThat(
-            new RqSocket(request).getLocalPort(),
-            Matchers.equalTo(0)
-        );
-        MatcherAssert.assertThat(
-            new RqSocket(request).getRemoteAddress(),
-            Matchers.notNullValue()
-        );
-        MatcherAssert.assertThat(
-            new RqSocket(request).getRemotePort(),
+            "Local socket port must be zero for mock socket",
+            new RqSocket(BkBasicTest.capturedRequest()).getLocalPort(),
             Matchers.equalTo(0)
         );
     }
 
-    /**
-     * BkBasic can handle two requests in one connection.
-     *
-     * @throws Exception If some problem inside
-     */
     @Test
+    void remoteSocketAddressIsPresent() throws Exception {
+        MatcherAssert.assertThat(
+            "Remote socket address must be present",
+            new RqSocket(BkBasicTest.capturedRequest()).getRemoteAddress(),
+            Matchers.notNullValue()
+        );
+    }
+
+    @Test
+    void remoteSocketPortIsZeroForMock() throws Exception {
+        MatcherAssert.assertThat(
+            "Remote socket port must be zero for mock socket",
+            new RqSocket(BkBasicTest.capturedRequest()).getRemotePort(),
+            Matchers.equalTo(0)
+        );
+    }
+
+    @Test
+    @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.CloseResource"})
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new BkBasic(new TkText(text)).accept(
-                                server.accept()
-                            );
-                        } catch (final IOException exception) {
-                            throw new IllegalStateException(exception);
-                        }
+                () -> {
+                    try {
+                        new BkBasic(new TkText(text)).accept(
+                            server.accept()
+                        );
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
-            )
+            try (
+                Socket socket = new Socket(
+                    "127.0.0.1",
+                    server.getLocalPort()
+                )
             ) {
                 socket.getOutputStream().write(
                     new Joined(
@@ -228,19 +196,22 @@ final class BkBasicTest {
                         "Content-Length: 12",
                         "",
                         "Hello Second"
-                    ).asString().getBytes()
+                    ).asString().getBytes(StandardCharsets.UTF_8)
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -1;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
         }
         MatcherAssert.assertThat(
-            output.toString(),
+            "Two responses must be sent in one connection",
+            output.toString(StandardCharsets.UTF_8),
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
             )
@@ -250,33 +221,31 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 411 when a persistent connection request
      * has no Content-Length.
-     *
      * @throws Exception If some problem inside
      */
-    @Ignore
+    @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void returnsProperResponseCodeOnNoContentLength() throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String text = "Say hello!";
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new BkBasic(new TkText("411 Test")).accept(
-                                server.accept()
-                            );
-                        } catch (final IOException exception) {
-                            throw new IllegalStateException(exception);
-                        }
+                () -> {
+                    try {
+                        new BkBasic(new TkText("411 Test")).accept(
+                            server.accept()
+                        );
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
-            )
+            try (
+                Socket socket = new Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
@@ -290,50 +259,51 @@ final class BkBasicTest {
                     ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (1 line)
                 final byte[] buffer = new byte[4096];
-                for (int count = input.read(buffer); count != -1;
-                    count = input.read(buffer)) {
+                for (
+                    int count = input.read(buffer);
+                    count != -1;
+                    count = input.read(buffer)
+                ) {
                     output.write(buffer, 0, count);
                 }
             }
         }
         MatcherAssert.assertThat(
-            output.toString(),
+            "Response must contain 411 status for missing Content-Length",
+            output.toString(StandardCharsets.UTF_8),
             Matchers.containsString("HTTP/1.1 411 Length Required")
         );
     }
 
     /**
      * BkBasic can accept no content-length on closed connection.
-     *
      * @throws Exception If some problem inside
      */
-    @Ignore
+    @Disabled
     @Test
+    @SuppressWarnings("PMD.CloseResource")
     void acceptsNoContentLengthOnClosedConnection() throws Exception {
         final String text = "Close Test";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
         final String greetings = "Hi everyone";
         try (ServerSocket server = new ServerSocket(0)) {
             new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            new BkBasic(new TkText(text)).accept(
-                                server.accept()
-                            );
-                        } catch (final IOException exception) {
-                            throw new IllegalStateException(exception);
-                        }
+                () -> {
+                    try {
+                        new BkBasic(new TkText(text)).accept(
+                            server.accept()
+                        );
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
                     }
                 }
             ).start();
-            try (Socket socket = new Socket(
-                server.getInetAddress(),
-                server.getLocalPort()
-            )
+            try (
+                Socket socket = new Socket(
+                    server.getInetAddress(),
+                    server.getLocalPort()
+                )
             ) {
                 socket.getOutputStream().write(
                     new BytesOf(
@@ -348,7 +318,6 @@ final class BkBasicTest {
                     ).asBytes()
                 );
                 final InputStream input = socket.getInputStream();
-                // @checkstyle MagicNumber (10 line)
                 final byte[] buffer = new byte[4096];
                 for (
                     int count = input.read(buffer);
@@ -360,7 +329,8 @@ final class BkBasicTest {
             }
         }
         MatcherAssert.assertThat(
-            output.toString(),
+            "Response must contain text for closed connection request",
+            output.toString(StandardCharsets.UTF_8),
             Matchers.containsString(text)
         );
     }
@@ -368,73 +338,37 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
      * invalid URI.
-     * @todo #1058:30min This test address the bug reported by issue #1058.
-     *  The problem is {@link Href#createUri} method is recursive and
-     *  isn't working properly (the index doesn't match with the correct
-     *  position). But even fixing it, this leave a other question: should or
-     *  not Takes send a 400 Bad Request response? By the HTTP protocol, the
-     *  answer is yes. So, you should: 1) fix the recursive call in
-     *  {@link Href#createUri} 2) change {@link BkBasic#print} to return a
-     *  400 Bad Request response and finally 3) unignore this test (that should
-     *  pass).
      */
-    @Disabled
     @Test
-    void returnsABadRequestToAnInvalidRequestUri() {
-        final ByteArrayOutputStream output = new ByteArrayOutputStream();
-        new Assertion<>(
+    void returnsABadRequestToAMissingPath() throws Exception {
+        MatcherAssert.assertThat(
             "Must return bad request to an invalid request URI",
-            () -> {
-                try (ServerSocket server = new ServerSocket(0)) {
-                    new Thread(
-                        () -> {
-                            try {
-                                new BkBasic(
-                                    new TkFork(
-                                        new FkRegex("/", new TkText("hello"))
-                                    )
-                                ).accept(
-                                    server.accept()
-                                );
-                            } catch (final IOException exception) {
-                                throw new IllegalStateException(exception);
-                            }
-                        }
-                    ).start();
-                    try (
-                        Socket socket = new Socket(
-                            server.getInetAddress(),
-                            server.getLocalPort()
-                        )
-                    ) {
-                        socket.getOutputStream().write(
-                            new RqPrint(
-                                new RqFake("GET", "\\")
-                            ).asString().getBytes()
-                        );
-                        final InputStream input = socket.getInputStream();
-                        // @checkstyle MagicNumber (1 line)
-                        final byte[] buffer = new byte[4096];
-                        for (
-                            int count = input.read(buffer); count != -1;
-                            count = input.read(buffer)
-                        ) {
-                            output.write(buffer, 0, count);
-                        }
-                    }
-                }
-                return output.toString();
-            },
-            new TextHasString("400 Bad Request")
-        ).affirm();
+            this.responseForPath("GET", "\\"),
+            Matchers.containsString("400 Bad Request")
+        );
     }
 
     /**
-     * Creates Socket mock for reuse.
-     *
-     * @return Prepared Socket mock
-     * @throws Exception If some problem inside
+     * BkBasic can return HTTP status 400 (Bad Request) when a request has an
+     * unencodable URI.
+     * todo: #1058:30min This test address the combination of bugs reported by
+     *  issue #1058 and #1441.
+     *  The problem is {@link BkBasic#accept} method that create
+     *  {@link org.takes.rq.RqLive} (can throw a {@link org.takes.HttpException},
+     *  while initializing) before execution control achieve try/catch
+     *  block in {@link BkBasic#print} with forming a proper error response on
+     *  {@link org.takes.HttpException}
      */
+    @Disabled
+    @Test
+    void returnsABadRequestToAControlCharInPath() throws Exception {
+        MatcherAssert.assertThat(
+            "Must return bad request to an invalid request URI",
+            this.responseForPath("GET", String.format("/%c", (char) 10)),
+            Matchers.containsString("400 Bad Request")
+        );
+    }
+
     private static MkSocket createMockSocket() throws Exception {
         return new MkSocket(
             new ByteArrayInputStream(
@@ -450,5 +384,67 @@ final class BkBasicTest {
                 ).asBytes()
             )
         );
+    }
+
+    private static Request capturedRequest() throws Exception {
+        try (Socket socket = BkBasicTest.createMockSocket()) {
+            final AtomicReference<Request> ref = new AtomicReference<>();
+            new BkBasic(
+                req -> {
+                    ref.set(req);
+                    return new ResponseOf(
+                        () -> Collections.singletonList("HTTP/1.1 200 OK"),
+                        req::body
+                    );
+                }
+            ).accept(socket);
+            return ref.get();
+        }
+    }
+
+    /**
+     * Starts a new clean server with only root path and tries to send a
+     * request.
+     * @param method HTTP method to be called
+     * @param path Endpoint to be called
+     * @return Server textual response
+     * @throws Exception If some problem inside
+     */
+    private String responseForPath(final String method, final String path)
+        throws Exception {
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try (ServerSocket server = new ServerSocket(0)) {
+            new Thread(
+                () -> {
+                    try {
+                        new BkBasic(
+                            new TkFork(
+                                new FkRegex("/", new TkText("hello"))
+                            )
+                        ).accept(server.accept());
+                    } catch (final IOException ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                }
+            ).start();
+            try (
+                Socket socket = new Socket(server.getInetAddress(), server.getLocalPort());
+                OutputStream socketOutBuffer = socket.getOutputStream();
+                InputStream sockerInStream = socket.getInputStream()
+            ) {
+                socketOutBuffer.write(
+                    new RqPrint(new RqFake(method, path))
+                        .asString().getBytes(StandardCharsets.UTF_8)
+                );
+                final byte[] buffer = new byte[4096];
+                for (
+                    int count = sockerInStream.read(buffer); count != -1;
+                    count = sockerInStream.read(buffer)
+                ) {
+                    output.write(buffer, 0, count);
+                }
+            }
+        }
+        return output.toString(StandardCharsets.UTF_8);
     }
 }

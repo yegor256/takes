@@ -1,30 +1,10 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth;
 
 import java.util.AbstractMap;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -36,7 +16,9 @@ import org.takes.misc.Opt;
 import org.takes.rq.RqHref;
 
 /**
- * Passes by flag.
+ * Pass that selects an authentication mechanism based on a request parameter flag.
+ * This implementation examines a specific request parameter and delegates
+ * authentication to the appropriate pass based on pattern matching.
  *
  * <p>The class is immutable and thread-safe.
  *
@@ -46,12 +28,12 @@ import org.takes.rq.RqHref;
 public final class PsByFlag implements Pass {
 
     /**
-     * The flag.
+     * Name of the request parameter to examine for pass selection.
      */
     private final String flag;
 
     /**
-     * Flags and passes.
+     * Map of patterns to passes for authentication delegation.
      */
     private final Map<Pattern, Pass> passes;
 
@@ -61,7 +43,7 @@ public final class PsByFlag implements Pass {
      * @since 0.5.1
      */
     public PsByFlag(final PsByFlag.Pair... pairs) {
-        this(PsByFlag.class.getSimpleName(), pairs);
+        this("PsByFlag", pairs);
     }
 
     /**
@@ -69,7 +51,7 @@ public final class PsByFlag implements Pass {
      * @param map Map
      */
     public PsByFlag(final Map<Pattern, Pass> map) {
-        this(PsByFlag.class.getSimpleName(), map);
+        this("PsByFlag", map);
     }
 
     /**
@@ -79,7 +61,7 @@ public final class PsByFlag implements Pass {
      * @since 0.5.1
      */
     public PsByFlag(final String flg, final PsByFlag.Pair... pairs) {
-        this(flg, PsByFlag.asMap(pairs));
+        this(flg, new PsByFlag.PairsMap(pairs));
     }
 
     /**
@@ -89,7 +71,7 @@ public final class PsByFlag implements Pass {
      */
     public PsByFlag(final String flg, final Map<Pattern, Pass> map) {
         this.flag = flg;
-        this.passes = Collections.unmodifiableMap(map);
+        this.passes = new HashMap<>(map);
     }
 
     @Override
@@ -98,36 +80,70 @@ public final class PsByFlag implements Pass {
             .param(this.flag).iterator();
         Opt<Identity> user = new Opt.Empty<>();
         if (flg.hasNext()) {
-            final String value = flg.next();
-            for (final Map.Entry<Pattern, Pass> ent : this.passes.entrySet()) {
-                if (ent.getKey().matcher(value).matches()) {
-                    user = ent.getValue().enter(req);
-                    break;
-                }
-            }
+            user = PsByFlag.find(flg.next(), this.passes, req);
         }
         return user;
     }
 
     @Override
-    public Response exit(final Response response,
-        final Identity identity) {
+    public Response exit(final Response response, final Identity identity) {
         return response;
     }
 
     /**
-     * Convert entries to map.
-     * @param entries Entries
-     * @return Map
+     * Find matching pass for the given value.
+     * @param value Flag value
+     * @param passes Available passes
+     * @param req Request
+     * @return Identity if found
+     * @throws Exception If fails
      */
-    @SafeVarargs
-    private static Map<Pattern, Pass> asMap(
-        final Map.Entry<Pattern, Pass>... entries) {
-        final Map<Pattern, Pass> map = new HashMap<>(entries.length);
-        for (final Map.Entry<Pattern, Pass> ent : entries) {
-            map.put(ent.getKey(), ent.getValue());
+    private static Opt<Identity> find(
+        final String value,
+        final Map<Pattern, Pass> passes,
+        final Request req
+    ) throws Exception {
+        Opt<Identity> user = new Opt.Empty<>();
+        for (final Map.Entry<Pattern, Pass> ent : passes.entrySet()) {
+            if (ent.getKey().matcher(value).matches()) {
+                user = ent.getValue().enter(req);
+                break;
+            }
         }
-        return map;
+        return user;
+    }
+
+    /**
+     * Map view backed by a varargs entry array.
+     * @since 2.0
+     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    private static final class PairsMap
+        extends java.util.AbstractMap<Pattern, Pass> {
+
+        /**
+         * Source entries.
+         */
+        private final Map.Entry<Pattern, Pass>[] entries;
+
+        /**
+         * Ctor.
+         * @param ents Entries
+         */
+        @SafeVarargs
+        PairsMap(final Map.Entry<Pattern, Pass>... ents) {
+            this.entries = ents;
+        }
+
+        @Override
+        public java.util.Set<Map.Entry<Pattern, Pass>> entrySet() {
+            final java.util.Set<Map.Entry<Pattern, Pass>> set =
+                new java.util.LinkedHashSet<>(this.entries.length);
+            for (final Map.Entry<Pattern, Pass> ent : this.entries) {
+                set.add(ent);
+            }
+            return set;
+        }
     }
 
     /**
@@ -136,6 +152,7 @@ public final class PsByFlag implements Pass {
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<Pattern, Pass> {
+
         /**
          * Serialization marker.
          */
@@ -146,18 +163,8 @@ public final class PsByFlag implements Pass {
          * @param key Key
          * @param pass Pass
          */
-        public Pair(final String key, final Pass pass) {
-            this(Pattern.compile(Pattern.quote(key)), pass);
-        }
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param pass Pass
-         */
         public Pair(final Pattern key, final Pass pass) {
             super(key, pass);
         }
     }
-
 }

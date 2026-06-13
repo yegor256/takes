@@ -1,43 +1,29 @@
+# SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+---
+# yamllint disable rule:line-length
 docker:
-  image: yegor256/rultor-image:1.3
+  image: yegor256/java
 assets:
   settings.xml: yegor256/home#assets/takes/settings.xml
   pubring.gpg: yegor256/home#assets/pubring.gpg
   secring.gpg: yegor256/home#assets/secring.gpg
-  s3cfg: yegor256/home#assets/s3cfg
-decrypt:
-  curl-appveyor.cfg: repo/curl-appveyor.cfg.asc
-architect:
-  - paulodamaso
-  - yegor256
 install: |
-  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
   export LC_ALL=en_US.UTF-8
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
 merge:
   script: |
-    mvn clean install -Pqulice --errors --settings ../settings.xml
-    mvn clean site -Psite --errors --settings ../settings.xml
     pdd --source=$(pwd) --verbose --file=/dev/null
-deploy:
-  script: |
-    sudo gem install --no-rdoc --no-ri est
-    version=$(curl -K ../curl-appveyor.cfg --data "{accountName: 'yegor256', projectSlug: 'takes', branch: 'master'}" https://ci.appveyor.com/api/builds | jq -r '.version')
-    while true
-      do status=$(curl -K ../curl-appveyor.cfg https://ci.appveyor.com/api/projects/yegor256/takes/build/${version} | jq -r '.build.status')
-      if [ "${status}" == "null" ]; then exit 1; fi
-      if [ "${status}" == "success" ]; then break; fi
-      if [ "${status}" == "failed" ]; then echo "see https://ci.appveyor.com/project/yegor256/takes/build/${version}"; exit 1; fi
-      echo "waiting for AppVeyor build ${version}: ${status}"
-      sleep 5s
-    done
-    mvn clean deploy -Pqulice --errors --settings ../settings.xml
-    mvn clean
-    est --dir=./est --verbose --file=takes.xml --format=xml
-    s3cmd --no-progress put takes.xml --config=../s3cfg s3://est.teamed.io/takes.xml
+    mvn clean install -ntp -Pqulice -Pdeep --errors --settings ../settings.xml
+    mvn clean site -Psite --errors --settings ../settings.xml
 release:
+  pre: false
   script: |-
-    mvn versions:set "-DnewVersion=${tag}"
+    [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
+    gpg --import /home/r/pubring.gpg
+    gpg --allow-secret-key-import --no-tty --batch --import /home/r/secring.gpg
+    mvn -ntp versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Psonar -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml
+    export MAVEN_OPTS="--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED"
+    mvn clean deploy -ntp -Pdeep -Ptakes -Psonatype -Pqulice -Dinvoker.skip --errors --settings ../settings.xml

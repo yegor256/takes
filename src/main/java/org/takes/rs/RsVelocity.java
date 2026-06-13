@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rs;
 
@@ -28,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.net.URL;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,15 +22,18 @@ import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
 
 /**
- * Response that converts Velocity template to text.
+ * Response decorator that renders Apache Velocity templates.
  *
- * <p>This response implementation is rendering a page from
- * Apache Velocity template. Here is how you can use it:
+ * <p>This decorator processes Apache Velocity templates with provided
+ * parameters to generate dynamic content. It supports templates from
+ * various sources including strings, URLs, and input streams. Template
+ * parameters can be provided as key-value pairs or maps.
  *
+ * <p>Example usage:
  * <pre>public final class TkHelp implements Take {
  *   &#64;Override
  *   public Response act(final Request req) {
- *     return new RsHTML(
+ *     return new RsHtml(
  *       new RsVelocity(
  *         this.getClass().getResource("help.html.vm"),
  *         new RsVelocity.Pair("name", "Jeffrey")
@@ -62,7 +45,6 @@ import org.cactoos.io.WriterTo;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -85,23 +67,11 @@ public final class RsVelocity extends RsWrap {
     /**
      * Ctor.
      * @param template Template
-     * @param params List of params
-     * @throws IOException If fails
-     * @since 0.11
-     */
-    public RsVelocity(final URL template,
-        final RsVelocity.Pair... params) throws IOException {
-        this(template.openStream(), params);
-    }
-
-    /**
-     * Ctor.
-     * @param template Template
      * @param params Entries
      */
     public RsVelocity(final InputStream template,
         final RsVelocity.Pair... params) {
-        this(template, RsVelocity.asMap(params));
+        this(template, new RsVelocity.PairsMap(params));
     }
 
     /**
@@ -149,6 +119,7 @@ public final class RsVelocity extends RsWrap {
      * @return Page body
      * @throws IOException If fails
      */
+    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     private static InputStream render(final String folder,
         final InputStream template,
         final Map<String, Object> params) throws IOException {
@@ -156,7 +127,7 @@ public final class RsVelocity extends RsWrap {
         try (Writer writer = new WriterTo(baos)) {
             final VelocityEngine engine = new VelocityEngine();
             engine.setProperty(
-                "file.resource.loader.path",
+                "resource.loader.file.path",
                 folder
             );
             engine.evaluate(
@@ -170,24 +141,9 @@ public final class RsVelocity extends RsWrap {
     }
 
     /**
-     * Convert entries to map.
-     * @param entries Entries
-     * @return Map
-     */
-    @SafeVarargs
-    private static Map<CharSequence, Object> asMap(
-        final Map.Entry<CharSequence, Object>... entries) {
-        final Map<CharSequence, Object> map = new HashMap<>(entries.length);
-        for (final Map.Entry<CharSequence, Object> ent : entries) {
-            map.put(ent.getKey(), ent.getValue());
-        }
-        return map;
-    }
-
-    /**
      * Converts Map of CharSequence, Object to Map of String, Object.
      * @param params Parameters in Map of CharSequence, Object
-     * @return Map of String, Object.
+     * @return Map of String, Object
      */
     private static Map<String, Object> convert(
         final Map<CharSequence, Object> params) {
@@ -199,12 +155,45 @@ public final class RsVelocity extends RsWrap {
     }
 
     /**
+     * Map view backed by a varargs entry array.
+     * @since 2.0
+     */
+    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+    private static final class PairsMap
+        extends java.util.AbstractMap<CharSequence, Object> {
+
+        /**
+         * Source entries.
+         */
+        private final Map.Entry<CharSequence, Object>[] entries;
+
+        /**
+         * Ctor.
+         * @param ents Entries
+         */
+        @SafeVarargs
+        PairsMap(final Map.Entry<CharSequence, Object>... ents) {
+            this.entries = ents;
+        }
+
+        @Override
+        public java.util.Set<Map.Entry<CharSequence, Object>> entrySet() {
+            final java.util.Set<Map.Entry<CharSequence, Object>> set =
+                new java.util.LinkedHashSet<>(this.entries.length);
+            for (final Map.Entry<CharSequence, Object> ent : this.entries) {
+                set.add(ent);
+            }
+            return set;
+        }
+    }
+
+    /**
      * Pair of values.
-     *
      * @since 0.1
      */
     public static final class Pair
         extends AbstractMap.SimpleEntry<CharSequence, Object> {
+
         /**
          * Serialization marker.
          */
@@ -219,5 +208,4 @@ public final class RsVelocity extends RsWrap {
             super(key, obj);
         }
     }
-
 }

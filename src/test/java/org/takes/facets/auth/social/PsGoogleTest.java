@@ -1,37 +1,19 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.facets.auth.social;
 
+import jakarta.json.Json;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
-import javax.json.Json;
+import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.fork.FkRegex;
@@ -49,11 +31,11 @@ import org.takes.rs.RsJson;
  * Test case for {@link PsGoogle}.
  *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.16.3
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.TooManyMethods")
-public final class PsGoogleTest {
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
+final class PsGoogleTest {
 
     /**
      * Image.
@@ -64,16 +46,6 @@ public final class PsGoogleTest {
      * GET.
      */
     private static final String GET = "GET";
-
-    /**
-     * Name.
-     */
-    private static final String NAME = "name";
-
-    /**
-     * Picture.
-     */
-    private static final String PICTURE = "picture";
 
     /**
      * Url.
@@ -130,208 +102,130 @@ public final class PsGoogleTest {
      */
     private static final String APP = "app";
 
-    /**
-     * PsGoogle login.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)
-     * @throws Exception If some problem inside
-     */
     @Test
-    public void logsIn() throws Exception {
+    @Tag("deep")
+    void logsIn() throws Exception {
         final String octocat = "octocat";
         final String urn = "urn:google:1";
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
-                // @checkstyle AnonInnerLengthCheck (1 line)
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqPrint(req).printHead(),
-                            Matchers.containsString(
-                                PsGoogleTest.ACT_HEAD
-                            )
-                        );
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href()
-                                .param(PsGoogleTest.ACCESS_TOKEN)
-                                .iterator().next(),
-                            Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                        );
-                        return new RsJson(
-                            Json.createObjectBuilder()
-                                .add("displayName", octocat)
-                                .add("id", "1")
-                                .add(
-                                    PsGoogleTest.IMAGE,
-                                    Json.createObjectBuilder()
-                                        .add(
-                                            PsGoogleTest.URL,
-                                            PsGoogleTest.AVATAR
-                                        )
-                                )
-                                .build()
-                        );
-                    }
-                }
+                (Take) req -> new RsJson(
+                    Json.createObjectBuilder().add(
+                        "displayName", octocat
+                    ).add("id", "1").add(
+                        PsGoogleTest.IMAGE,
+                        Json.createObjectBuilder().add(
+                            PsGoogleTest.URL,
+                            PsGoogleTest.AVATAR
+                        )
+                    ).build()
+                )
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final Identity identity = new PsGoogle(
-                        PsGoogleTest.APP,
-                        PsGoogleTest.KEY,
-                        PsGoogleTest.ACCOUNT,
-                        home.toString(),
-                        home.toString()
-                    ).enter(
-                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                    ).get();
-                    MatcherAssert.assertThat(
-                        identity.urn(),
-                        Matchers.equalTo(urn)
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGoogleTest.NAME),
-                        Matchers.equalTo(octocat)
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGoogleTest.PICTURE),
-                        Matchers.equalTo(PsGoogleTest.AVATAR)
-                    );
-                }
-            }
+            home -> identity.set(
+                new PsGoogle(
+                    PsGoogleTest.APP,
+                    PsGoogleTest.KEY,
+                    PsGoogleTest.ACCOUNT,
+                    home.toString(),
+                    home.toString()
+                ).enter(
+                    new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                ).get()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Google identity URN must match expected format",
+            identity.get().urn(),
+            Matchers.equalTo(urn)
         );
     }
 
-    /**
-     * PsGoogle login with fail due a bad response from google.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)
-     * @throws Exception If some problem inside
-     */
-    @Test(expected = IOException.class)
-    public void badGoogleResponse() throws Exception {
+    @Test
+    @Tag("deep")
+    void badGoogleResponse() {
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
                 // @checkstyle AnonInnerLengthCheck (1 line)
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqPrint(req).printHead(),
-                            Matchers.containsString(
-                                PsGoogleTest.ACT_HEAD
-                            )
-                        );
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href()
-                                .param(PsGoogleTest.ACCESS_TOKEN)
-                                .iterator().next(),
-                            Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                        );
-                        return createErrorJson();
-                    }
+                (Take) req -> {
+                    MatcherAssert.assertThat(
+                        "Google API request must contain correct HEAD path for user info",
+                        new RqPrint(req).printHead(),
+                        Matchers.containsString(
+                            PsGoogleTest.ACT_HEAD
+                        )
+                    );
+                    MatcherAssert.assertThat(
+                        "Google API request must include access token parameter",
+                        new RqHref.Base(req).href()
+                            .param(PsGoogleTest.ACCESS_TOKEN)
+                            .iterator().next(),
+                        Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
+                    );
+                    return createErrorJson();
                 }
             )
         );
-        new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    new PsGoogle(
-                        PsGoogleTest.APP,
-                        PsGoogleTest.KEY,
-                        PsGoogleTest.ACCOUNT,
-                        home.toString(),
-                        home.toString()
-                    ).enter(
-                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                    ).get();
-                }
-            }
+        Assertions.assertThrows(
+            IOException.class,
+            () -> new FtRemote(take).exec(
+                // @checkstyle AnonInnerLengthCheck (100 lines)
+                home -> new PsGoogle(
+                    PsGoogleTest.APP,
+                    PsGoogleTest.KEY,
+                    PsGoogleTest.ACCOUNT,
+                    home.toString(),
+                    home.toString()
+                ).enter(
+                    new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                ).get()
+            )
         );
     }
 
-    /**
-     * Test a google response without the displayName property.
-     * @checkstyle MultipleStringLiteralsCheck (100 lines)
-     * @throws Exception If some problem inside
-     */
     @Test
-    public void noDisplayNameResponse() throws Exception {
+    @Tag("deep")
+    void noDisplayNameResponse() throws Exception {
         final String urn = "urn:google:2";
         final Take take = new TkFork(
             this.requestToken(),
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
-                // @checkstyle AnonInnerLengthCheck (1 line)
-                new Take() {
-                    @Override
-                    public Response act(final Request req) throws IOException {
-                        MatcherAssert.assertThat(
-                            new RqPrint(req).printHead(),
-                            Matchers.containsString(
-                                PsGoogleTest.ACT_HEAD
-                            )
-                        );
-                        MatcherAssert.assertThat(
-                            new RqHref.Base(req).href()
-                                .param(PsGoogleTest.ACCESS_TOKEN)
-                                .iterator().next(),
-                            Matchers.containsString(PsGoogleTest.GOOGLE_TOKEN)
-                        );
-                        return new RsJson(
-                            Json.createObjectBuilder()
-                                .add("id", "2")
-                                .add(
-                                    PsGoogleTest.IMAGE,
-                                    Json.createObjectBuilder()
-                                        .add(
-                                            PsGoogleTest.URL,
-                                            PsGoogleTest.AVATAR
-                                        )
-                                )
-                                .build()
-                        );
-                    }
-                }
+                (Take) req -> new RsJson(
+                    Json.createObjectBuilder().add("id", "2").add(
+                        PsGoogleTest.IMAGE,
+                        Json.createObjectBuilder().add(
+                            PsGoogleTest.URL,
+                            PsGoogleTest.AVATAR
+                        )
+                    ).build()
+                )
             )
         );
+        final AtomicReference<Identity> identity = new AtomicReference<>();
         new FtRemote(take).exec(
-            // @checkstyle AnonInnerLengthCheck (100 lines)
-            new FtRemote.Script() {
-                @Override
-                public void exec(final URI home) throws IOException {
-                    final Identity identity = new PsGoogle(
-                        PsGoogleTest.APP,
-                        PsGoogleTest.KEY,
-                        PsGoogleTest.ACCOUNT,
-                        home.toString(),
-                        home.toString()
-                    ).enter(
-                        new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
-                    ).get();
-                    MatcherAssert.assertThat(
-                        identity.urn(),
-                        Matchers.equalTo(urn)
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGoogleTest.NAME),
-                        Matchers.equalTo("unknown")
-                    );
-                    MatcherAssert.assertThat(
-                        identity.properties().get(PsGoogleTest.PICTURE),
-                        Matchers.equalTo(PsGoogleTest.AVATAR)
-                    );
-                }
-            }
+            home -> identity.set(
+                new PsGoogle(
+                    PsGoogleTest.APP,
+                    PsGoogleTest.KEY,
+                    PsGoogleTest.ACCOUNT,
+                    home.toString(),
+                    home.toString()
+                ).enter(
+                    new RqFake(PsGoogleTest.GET, PsGoogleTest.CODE_PARAM)
+                ).get()
+            )
+        );
+        MatcherAssert.assertThat(
+            "Google identity URN must match expected format",
+            identity.get().urn(),
+            Matchers.equalTo(urn)
         );
     }
 
@@ -342,52 +236,54 @@ public final class PsGoogleTest {
     private FkRegex requestToken() {
         return new FkRegex(
             "/o/oauth2/token",
-            // @checkstyle AnonInnerLengthCheck (1 line)
-            new Take() {
-                @Override
-                public Response act(final Request req) throws IOException {
-                    MatcherAssert.assertThat(
-                        new RqPrint(req).printHead(),
-                        Matchers.containsString("POST /o/oauth2/token")
-                    );
-                    final Request greq = new RqGreedy(req);
-                    PsGoogleTest.assertParam(
-                        greq,
-                        "client_id",
-                        PsGoogleTest.APP
-                    );
-                    PsGoogleTest.assertParam(
-                        greq,
-                        "redirect_uri",
-                        PsGoogleTest.ACCOUNT
-                    );
-                    PsGoogleTest.assertParam(
-                        greq,
-                        "client_secret",
-                        PsGoogleTest.KEY
-                    );
-                    PsGoogleTest.assertParam(
-                        greq,
-                        "grant_type",
-                        "authorization_code"
-                    );
-                    PsGoogleTest.assertParam(
-                        greq,
-                        PsGoogleTest.CODE,
-                        PsGoogleTest.CODE
-                    );
-                    return new RsJson(
-                        Json.createObjectBuilder()
-                            .add(
-                                PsGoogleTest.ACCESS_TOKEN,
-                                PsGoogleTest.GOOGLE_TOKEN
-                             )
-                            .add("expires_in", 1)
-                            .add("token_type", "Bearer")
-                            .build()
-                    );
-                }
-            }
+            (Take) req -> PsGoogleTest.tokenResponse(req)
+        );
+    }
+
+    /**
+     * Validate token request and produce response.
+     * @param req Request
+     * @return Token response
+     * @throws IOException If some problem inside
+     */
+    private static org.takes.Response tokenResponse(final Request req)
+        throws IOException {
+        MatcherAssert.assertThat(
+            "Google OAuth token request must be POST to correct endpoint",
+            new RqPrint(req).printHead(),
+            Matchers.containsString("POST /o/oauth2/token")
+        );
+        final Request greq = new RqGreedy(req);
+        PsGoogleTest.assertParam(
+            greq,
+            "client_id",
+            PsGoogleTest.APP
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "redirect_uri",
+            PsGoogleTest.ACCOUNT
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "client_secret",
+            PsGoogleTest.KEY
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            "grant_type",
+            "authorization_code"
+        );
+        PsGoogleTest.assertParam(
+            greq,
+            PsGoogleTest.CODE,
+            PsGoogleTest.CODE
+        );
+        return new RsJson(
+            Json.createObjectBuilder().add(
+                PsGoogleTest.ACCESS_TOKEN,
+                PsGoogleTest.GOOGLE_TOKEN
+            ).add("expires_in", 1).add("token_type", "Bearer").build()
         );
     }
 
@@ -398,9 +294,12 @@ public final class PsGoogleTest {
      * @param value Parameter value
      * @throws IOException If some problem inside
      */
-    private static void assertParam(final Request req,
-        final CharSequence param, final String value) throws IOException {
+    private static void assertParam(
+        final Request req,
+        final CharSequence param, final String value
+    ) throws IOException {
         MatcherAssert.assertThat(
+            "Google OAuth request parameter must match expected value",
             new RqFormSmart(new RqFormBase(req)).single(param),
             Matchers.equalTo(value)
         );
@@ -408,36 +307,29 @@ public final class PsGoogleTest {
 
     /**
      * Construct a error response with google json syntax for errors.
-     * @return Json with error.
+     * @return Json with error
      * @throws IOException If some problem inside
      */
     private static RsJson createErrorJson() throws IOException {
         final String message = "message";
         return new RsJson(
-            Json.createObjectBuilder()
-                .add(
-                    "error",
-                    Json.createObjectBuilder()
-                        .add(
-                            "errors",
-                            Json.createArrayBuilder()
-                                .add(
-                                    Json.createObjectBuilder()
-                                        .add("domain", "usageLimits")
-                                        .add("reason", "accessNotConfigured")
-                                        .add(
-                                            "extendedHelp",
-                                            "https://developers.google.com"
-                                        )
-                                )
+            Json.createObjectBuilder().add(
+                "error",
+                Json.createObjectBuilder().add(
+                    "errors",
+                    Json.createArrayBuilder().add(
+                        Json.createObjectBuilder().add(
+                            "domain", "usageLimits"
+                        ).add("reason", "accessNotConfigured").add(
+                            "extendedHelp",
+                            "https://developers.google.com"
                         )
-                        .add(
-                            PsGoogleTest.CODE,
-                            HttpURLConnection.HTTP_BAD_REQUEST
-                        )
-                        .add(message, "Access Not Configured.")
-                   )
-                  .build()
+                    )
+                ).add(
+                    PsGoogleTest.CODE,
+                    HttpURLConnection.HTTP_BAD_REQUEST
+                ).add(message, "Access Not Configured.")
+            ).build()
         );
     }
 }

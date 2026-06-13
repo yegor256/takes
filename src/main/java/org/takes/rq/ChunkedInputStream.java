@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq;
 
@@ -27,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import org.cactoos.Text;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.Sub;
@@ -36,12 +16,19 @@ import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
 
 /**
- * Input stream from chunked coded http request body.
+ * Input stream that decodes HTTP chunked transfer encoding.
  *
+ * <p>This input stream implementation reads and decodes HTTP request bodies
+ * that use chunked transfer encoding as specified in RFC 2616. It handles
+ * the chunk size parsing (including hexadecimal format and optional comments),
+ * CRLF validation, and proper end-of-stream detection when the final
+ * zero-length chunk is encountered.
+ *
+ * <p>The implementation includes a finite state machine for robust parsing
+ * of chunk headers and handles quoted strings within chunk extensions.
+ *
+ * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  * @since 0.31.2
- * @checkstyle LineLengthCheck (1 lines)
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
- * @link <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  */
 final class ChunkedInputStream extends InputStream {
 
@@ -111,7 +98,13 @@ final class ChunkedInputStream extends InputStream {
             if (shift == len) {
                 result = len;
             } else {
-                result = shift + this.read(buf, off + shift, len - shift);
+                result = shift + Math.max(
+                    this.read(
+                        buf,
+                        off + shift,
+                    len - shift
+                    ), 0
+                );
             }
         }
         return result;
@@ -162,29 +155,26 @@ final class ChunkedInputStream extends InputStream {
      * Expects the stream to start with a chunksize in hex with optional
      * comments after a semicolon. The line must end with a CRLF: "a3; some
      * comment\r\n" Positions the stream at the start of the next line.
-     * @param stream The new input stream.
+     * @param stream The new input stream
      * @return The chunk size as integer
      * @throws IOException when the chunk size could not be parsed
      */
-    private static int chunkSize(final InputStream stream)
-        throws IOException {
+    private static int chunkSize(final InputStream stream) throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final String data = baos.toString(Charset.defaultCharset().name());
         final int separator = data.indexOf(';');
-        final Text number = new Trimmed(
-            new Unchecked<>(
-                new Ternary<>(
-                    separator > 0,
-                    new Sub(data, 0, separator),
-                    new TextOf(data)
-                )
-            ).value()
-        );
         try {
-            // @checkstyle MagicNumberCheck (10 lines)
             return Integer.parseInt(
                 new UncheckedText(
-                    number
+                    new Trimmed(
+                        new Unchecked<>(
+                            new Ternary<>(
+                                separator > 0,
+                                new Sub(data, 0, separator),
+                                new TextOf(data)
+                            )
+                        ).value()
+                    )
                 ).asString(),
                 16
             );
@@ -203,6 +193,7 @@ final class ChunkedInputStream extends InputStream {
      * Possible states of FSM that used to find chunk size.
      */
     private enum State {
+
         /**
          * Normal.
          */
@@ -223,9 +214,9 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Extract line with chunk size from stream.
-     * @param stream Input stream.
-     * @return Line with chunk size.
-     * @throws IOException If fails.
+     * @param stream Input stream
+     * @return Line with chunk size
+     * @throws IOException If fails
      */
     private static ByteArrayOutputStream sizeLine(final InputStream stream)
         throws IOException {
@@ -239,11 +230,11 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Get next state for FSM.
-     * @param stream Input stream.
-     * @param state Current state.
-     * @param line Current chunk size line.
-     * @return New state.
-     * @throws IOException If fails.
+     * @param stream Input stream
+     * @param state Current state
+     * @param line Current chunk size line
+     * @return New state
+     * @throws IOException If fails
      */
     private static State next(final InputStream stream, final State state,
         final ByteArrayOutputStream line) throws IOException {
@@ -280,10 +271,10 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Maintain next symbol for current state = State.NORMAL.
-     * @param state Current state.
-     * @param line Current chunk size line.
-     * @param next Next symbol.
-     * @return New state.
+     * @param state Current state
+     * @param line Current chunk size line
+     * @param next Next symbol
+     * @return New state
      */
     private static State nextNormal(final State state,
         final ByteArrayOutputStream line, final int next) {
@@ -305,12 +296,12 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Maintain next symbol for current state = State.QUOTED_STRING.
-     * @param stream Input stream.
-     * @param state Current state.
-     * @param line Current chunk size line.
-     * @param next Next symbol.
-     * @return New state.
-     * @throws IOException If fails.
+     * @param stream Input stream
+     * @param state Current state
+     * @param line Current chunk size line
+     * @param next Next symbol
+     * @return New state
+     * @throws IOException If fails
      * @checkstyle ParameterNumberCheck (3 lines)
      */
     private static State nextQuoted(final InputStream stream, final State state,

@@ -1,25 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2019 Yegor Bugayenko
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+ * SPDX-License-Identifier: MIT
  */
 package org.takes.rq.form;
 
@@ -51,9 +32,7 @@ import org.takes.rq.RqWrap;
 /**
  * Base implementation of {@link RqForm}.
  * @since 0.33
- * @checkstyle ClassDataAbstractionCouplingCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidInstantiatingObjectsInLoops")
 @EqualsAndHashCode(callSuper = true)
 public final class RqFormBase extends RqWrap implements RqForm {
 
@@ -78,8 +57,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
     }
 
     @Override
-    public Iterable<String> param(final CharSequence key)
-        throws IOException {
+    public Iterable<String> param(final CharSequence key) throws IOException {
         final List<String> values = this.map().getOrDefault(
             new UncheckedText(
                 new Lowered(key.toString())
@@ -93,7 +71,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 new FormattedText(
                     "there are no params \"%s\" among %d others: %s",
                     key, this.map().size(), this.map().keySet()
-                ).asString()
+                )
             );
         } else {
             iter = new VerboseIterable<>(
@@ -101,7 +79,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
                 new FormattedText(
                     "there are only %d params by name \"%s\"",
                     values.size(), key
-                ).asString()
+                )
             );
         }
         return iter;
@@ -118,19 +96,23 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @return Decoded
      */
     private static String decode(final Text txt) {
+        final String body = new UncheckedText(txt).asString();
         try {
             return URLDecoder.decode(
-                new UncheckedText(txt).asString(),
+                body,
                 Charset.defaultCharset().name()
             );
         } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(ex);
+            throw new IllegalStateException(
+                String.format("Failed to decode '%s'", body),
+                ex
+            );
         }
     }
 
     /**
      * Create map of request parameters.
-     * @return Parameters map or empty map in case of error.
+     * @return Parameters map or empty map in case of error
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> map() throws IOException {
@@ -142,18 +124,16 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Create map of request parameter.
-     * @return Parameters map or empty map in case of error.
+     * @return Parameters map or empty map in case of error
      * @throws IOException If something fails reading or parsing body
      */
     private Map<String, List<String>> freshMap() throws IOException {
         final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);
-        // @checkstyle MultipleStringLiteralsCheck (1 line)
         for (final String pair : body.split("&")) {
             if (pair.isEmpty()) {
                 continue;
             }
-            // @checkstyle MultipleStringLiteralsCheck (1 line)
             final String[] parts = pair.split("=", 2);
             if (parts.length < 2) {
                 throw new HttpException(
