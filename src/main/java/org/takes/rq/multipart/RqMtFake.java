@@ -11,6 +11,7 @@ import org.cactoos.io.InputOf;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.takes.Body;
 import org.takes.Request;
 import org.takes.rq.RequestOf;

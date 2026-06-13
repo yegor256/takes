@@ -111,12 +111,13 @@ public final class RqMtBase implements RqMultipart {
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
-        // @checkstyle ConstructorsCodeFreeCheck (5 lines)
-        this.stream = new RqLengthAware(req).body();
-        this.buffer = ByteBuffer.allocate(
-            Math.min(8192, this.stream.available())
+        this.sstream = new Sticky<>(() -> new RqLengthAware(req).body());
+        this.sbuffer = new Sticky<>(
+            () -> ByteBuffer.allocate(
+                Math.min(8192, new Unchecked<>(this.sstream).value().available())
+            )
         );
-        this.map = this.requests(req);
+        this.smap = new Sticky<>(() -> this.requests(req));
     }
 
     @Override
@@ -134,7 +135,7 @@ public final class RqMtBase implements RqMultipart {
                 Collections.emptyList(),
                 new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
-                    name, this.map.size(), this.map.keySet()
+                    name, map.size(), map.keySet()
                 )
             );
         } else {
@@ -200,9 +201,9 @@ public final class RqMtBase implements RqMultipart {
             );
         }
         final ReadableByteChannel body = Channels.newChannel(
-            this.stream
+            new Unchecked<>(this.sstream).value()
         );
-        final ByteBuffer buf = this.buffer;
+        final ByteBuffer buf = new Unchecked<>(this.sbuffer).value();
         if (body.read(buf) < 0) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -259,7 +260,7 @@ public final class RqMtBase implements RqMultipart {
                 channel,
                 boundary,
                 body,
-                this.buffer
+                new Unchecked<>(this.sbuffer).value()
             ).copy();
         }
         return new RqTemp(file);
