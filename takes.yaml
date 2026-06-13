@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 816.790766716
+  seconds: 855.561464557
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-12 05:36:00.639546756 Z
+  when: 2026-06-13 05:33:33.436020183 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -74822,18 +74822,6 @@
   when: 2026-06-09 04:57:49.000000000 Z
   where: github
   who: 526301
-- _id: 20530
-  _job: 76370
-  _time: 2026-06-09 05:28:21.449525120 Z
-  _version: 0.19.11/0.60.3/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (266.5) is decreasing (R=-0.28).
-    The average number of commits per week (9.5) is increasing (R=0.29).
-    The average number of releases per month (0.4) is decreasing (R=0.15).
-    The average monthly turnover (24.0 developers) is decreasing (R=-0.58).
-  what: assessment
-  when: 2026-06-09 05:28:21.499200821 Z
 - _id: 20533
   _job: 27254965863
   _time: 2026-06-10 05:20:24.087297368 Z
@@ -74892,12 +74880,6 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-11 05:21:54.388645711 Z
-- _id: 20540
-  _job: 76764
-  _time: 2026-06-11 05:34:27.592493831 Z
-  _version: 0.19.11/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-06-11 05:34:27.571123497 Z
 - _id: 20541
   _job: 27396320872
   _time: 2026-06-12 05:22:27.754501817 Z
@@ -75009,23 +74991,6 @@
   when: 2026-06-11 06:27:07.000000000 Z
   where: github
   who: 526301
-- _id: 20547
-  _job: 27396320872
-  _time: 2026-06-12 05:23:53.228768961 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 13193482467
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 711
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20548
   _job: 27396320872
   _time: 2026-06-12 05:24:45.426738805 Z
@@ -75047,5 +75012,72 @@
   _time: 2026-06-12 05:34:44.371085258 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *147
+  some_pull_files_size:
+  - 1
+  - 1
+  - 1
+  some_pull_hoc_size:
+  - 2
+  - 2
+  - 2
+  some_pull_lifetime:
+  - 62921.0
+  - 4035.0
+  - 33350.0
+  - 139069.0
+  - 605017.0
+  - 693655.0
+  - 129686.0
+  - 778434.0
+  - 116714885.0
   what: quality-of-service
   when: 2026-06-12 05:34:44.000000000 Z
+- _id: 20550
+  _job: 76903
+  _time: 2026-06-12 05:36:37.315298564 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (262.4) is decreasing (R=-0.30).
+    The average number of commits per week (9.3) is increasing (R=0.25).
+    The average number of releases per month (0.4) is decreasing (R=0.13).
+    The average monthly turnover (24.0 developers) is decreasing (R=-0.58).
+  what: assessment
+  when: 2026-06-12 05:36:37.360091319 Z
+- _id: 20551
+  _job: 76903
+  _time: 2026-06-12 05:37:08.526341671 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-06-12 05:37:08.504184507 Z
+- _id: 20552
+  _job: 76903
+  _time: 2026-06-12 05:37:08.789954651 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  ac: 24
+  cost_of_qod: 1.9447935698858863
+  ev: 388
+  pv: 9446
+  qod: 200
+  qod_per_day: 18.13402373959668
+  qod_per_sec: 8.651411431198114e-06
+  start: *3
+  what: earned-value
+  when: 2026-06-12 05:37:08.790194993 Z
+- _id: 20553
+  _job: 27457606629
+  _time: 2026-06-13 05:19:47.956641300 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 13209122521
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 714
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
