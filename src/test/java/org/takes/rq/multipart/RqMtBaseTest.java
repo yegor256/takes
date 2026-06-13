@@ -5,6 +5,7 @@
 package org.takes.rq.multipart;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.cactoos.text.Joined;
@@ -100,7 +101,7 @@ final class RqMtBaseTest {
     @Test
     void throwsExceptionOnNoClosingBoundaryFound() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> RqMtBaseTest.parseWithoutClosingBoundary()
         );
     }
@@ -168,6 +169,7 @@ final class RqMtBaseTest {
 
     /**
      * Try to parse a multipart request that has no closing boundary.
+     *  Parsing is lazy, so {@code names()} is called to force it.
      * @throws Exception If fails
      */
     private static void parseWithoutClosingBoundary() throws Exception {
@@ -192,6 +194,6 @@ final class RqMtBaseTest {
                     "Content-Transfer-Encoding: uwf-8"
                 ).asString()
             )
-        );
+        ).names();
     }
 }
