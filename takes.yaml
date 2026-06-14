@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 855.561464557
+  seconds: 862.406306811
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-13 05:33:33.436020183 Z
+  when: 2026-06-14 05:36:47.302750218 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -75012,6 +75012,7 @@
   _time: 2026-06-12 05:34:44.371085258 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *147
+  some_merged_pulls: 9
   some_pull_files_size:
   - 1
   - 1
@@ -75030,6 +75031,7 @@
   - 129686.0
   - 778434.0
   - 116714885.0
+  some_unmerged_pulls: 6
   what: quality-of-service
   when: 2026-06-12 05:34:44.000000000 Z
 - _id: 20550
@@ -75044,12 +75046,6 @@
     The average monthly turnover (24.0 developers) is decreasing (R=-0.58).
   what: assessment
   when: 2026-06-12 05:36:37.360091319 Z
-- _id: 20551
-  _job: 76903
-  _time: 2026-06-12 05:37:08.526341671 Z
-  _version: 0.19.11/0.60.3/0.17.17
-  what: learn-eva
-  when: 2026-06-12 05:37:08.504184507 Z
 - _id: 20552
   _job: 76903
   _time: 2026-06-12 05:37:08.789954651 Z
@@ -75064,20 +75060,83 @@
   start: *3
   what: earned-value
   when: 2026-06-12 05:37:08.790194993 Z
-- _id: 20553
-  _job: 27457606629
-  _time: 2026-06-13 05:19:47.956641300 Z
+- _id: 20554
+  _job: 76995
+  _time: 2026-06-13 05:34:34.295463710 Z
+  _version: 0.19.11/0.60.3/0.17.17
+  what: learn-eva
+  when: 2026-06-13 05:34:34.265644287 Z
+- _id: 20556
+  _job: 27489322240
+  _time: 2026-06-14 05:22:52.467665686 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: '1114'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1686 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 28
+  issue: 1686
+  repository: 28924109
+  review: 2026-05-28 04:03:19.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-06-13 08:17:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 20557
+  _job: 27489322240
+  _time: 2026-06-14 05:23:05.670073532 Z
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 13209122521
+  events_were_scanned: 10655142777
   issues_were_scanned: 1292
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
-  min_pull_was_found: 714
+  min_pull_was_found: 715
   repository: 28924109
   types_were_scanned: 1551
   what: iterate
   where: github
+- _id: 20558
+  _job: 27489322240
+  _time: 2026-06-14 05:23:42.573150910 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 5
+  total_commits: 3859
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 751
+  total_pulls: 952
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 874
+  what: dimensions-of-terrain
+  when: 2026-06-14 05:23:42.587256763 Z
+- _id: 20559
+  _job: 27489322240
+  _time: 2026-06-14 05:31:16.842936107 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 200635707
+  comments: 1
+  details: The pull request yegor256/takes#1686 with 28 HoC created by @ghx5t-sol
+    was reviewed by @akmhatey-ai after 37h39m and 0 comments.
+  hoc: 28
+  issue: 1686
+  repository: 28924109
+  review_comments: 0
+  seconds: 135582
+  what: code-was-reviewed
+  when: 2026-05-28 04:03:19.000000000 Z
+  where: github
+  who: 260399619
