@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 824.303012346
+  seconds: 835.173980575
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-18 05:38:40.758978558 Z
+  when: 2026-06-19 05:47:38.490854780 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -75000,6 +75000,14 @@
   _time: 2026-06-12 05:34:44.371085258 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *147
+  some_backlog_size:
+  - 85
+  - 85
+  - 85
+  - 85
+  - 85
+  - 85
+  - 85
   some_build_duration:
   - 7
   - 7
@@ -75156,7 +75164,7 @@
   - 0
   some_unmerged_pulls: 6
   what: quality-of-service
-  when: 2026-06-12 05:34:44.000000000 Z
+  when: &149 2026-06-12 05:34:44.000000000 Z
 - _id: 20552
   _job: 76903
   _time: 2026-06-12 05:37:08.789954651 Z
@@ -75245,18 +75253,6 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-15 05:37:05.739078028 Z
-- _id: 20564
-  _job: 77278
-  _time: 2026-06-15 05:50:18.023720447 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (262.4) is decreasing (R=-0.30).
-    The average number of commits per week (9.3) is increasing (R=0.25).
-    The average number of releases per month (0.4) is decreasing (R=0.13).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-06-15 05:50:18.045912470 Z
 - _id: 20567
   _job: 27596621756
   _time: 2026-06-16 05:40:03.571962504 Z
@@ -75285,12 +75281,6 @@
     The average monthly turnover (4.0 developers) is staying still.
   what: assessment
   when: 2026-06-16 05:53:30.897544922 Z
-- _id: 20571
-  _job: 77572
-  _time: 2026-06-17 05:44:32.326620149 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  what: learn-eva
-  when: 2026-06-17 05:44:32.309280100 Z
 - _id: 20573
   _job: 27738644011
   _time: 2026-06-18 05:24:59.764782622 Z
@@ -75305,23 +75295,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2026-06-18 05:24:59.000000000 Z
-- _id: 20574
-  _job: 27738644011
-  _time: 2026-06-18 05:25:33.492068186 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 13447120885
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 722
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20575
   _job: 27738644011
   _time: 2026-06-18 05:26:06.515605093 Z
@@ -75338,3 +75311,61 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-18 05:26:06.533995686 Z
+- _id: 20576
+  _job: 77660
+  _time: 2026-06-18 05:39:12.211670967 Z
+  _version: 0.19.13/0.60.4/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (243.9) is decreasing (R=-0.25).
+    The average number of commits per week (8.7) is increasing (R=0.30).
+    The average number of releases per month (0.4) is decreasing (R=0.10).
+    The average monthly turnover (4.0 developers) is increasing (R=0.29).
+  what: assessment
+  when: 2026-06-18 05:39:12.232425510 Z
+- _id: 20577
+  _job: 77660
+  _time: 2026-06-18 05:39:43.781924668 Z
+  _version: 0.19.13/0.60.4/0.17.17
+  what: learn-eva
+  when: 2026-06-18 05:39:43.764187434 Z
+- _id: 20578
+  _job: 27807527930
+  _time: 2026-06-19 05:34:08.986735124 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 10857286692
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 724
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20579
+  _job: 27807527930
+  _time: 2026-06-19 05:34:39.462931358 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 4
+  total_commits: 3860
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 751
+  total_pulls: 953
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 874
+  what: dimensions-of-terrain
+  when: 2026-06-19 05:34:39.471978862 Z
+- _id: 20580
+  _job: 27807527930
+  _time: 2026-06-19 05:42:21.365396758 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  since: *149
+  what: quality-of-service
+  when: 2026-06-19 05:42:21.000000000 Z
