@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 869.338765075
+  seconds: 808.540882924
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-20 05:32:52.412847476 Z
+  when: 2026-06-21 05:42:42.523138863 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -74879,6 +74879,7 @@
     (default branch is "master"), not associated with any pull request.'
   event_id: 13193482467
   event_type: PushEvent
+  is_human: 1
   push_id: 35481752857
   ref: refs/heads/master
   repository: 28924109
@@ -74902,6 +74903,7 @@
   failed_builds: 3
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1175
   repository: 28924109
   succeeded_builds: 9
@@ -74925,6 +74927,7 @@
   failed_builds: 4
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1695
   repository: 28924109
   succeeded_builds: 8
@@ -74948,6 +74951,7 @@
   failed_builds: 1
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1698
   repository: 28924109
   succeeded_builds: 11
@@ -74971,6 +74975,7 @@
   failed_builds: 1
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1699
   repository: 28924109
   succeeded_builds: 11
@@ -75194,6 +75199,7 @@
   failed_builds: 0
   files: 1
   hoc: 28
+  is_human: 1
   issue: 1686
   repository: 28924109
   review: 2026-05-28 04:03:19.000000000 Z
@@ -75229,6 +75235,7 @@
   details: The pull request yegor256/takes#1686 with 28 HoC created by @ghx5t-sol
     was reviewed by @akmhatey-ai after 37h39m and 0 comments.
   hoc: 28
+  is_human: 1
   issue: 1686
   repository: 28924109
   review_comments: 0
@@ -75332,6 +75339,162 @@
   _time: 2026-06-19 05:42:21.365396758 Z
   _version: 0.19.9/0.60.2/0.17.17
   since: *149
+  some_backlog_size:
+  - 85
+  - 84
+  - 84
+  - 84
+  - 84
+  - 84
+  - 84
+  some_build_duration:
+  - 6
+  - 7
+  - 8
+  - 11
+  - 11
+  - 13
+  - 8
+  - 10
+  - 11
+  - 11
+  - 12
+  - 13
+  - 13
+  - 30
+  - 39
+  - 180
+  - 8
+  - 10
+  - 10
+  - 10
+  - 11
+  - 15
+  - 19
+  - 34
+  - 38
+  - 266
+  - 992
+  - 47
+  - 994
+  - 45
+  - 972
+  - 52
+  - 963
+  - 35
+  - 944
+  - 40
+  - 9
+  - 11
+  - 11
+  - 13
+  - 13
+  - 17
+  - 19
+  - 28
+  - 29
+  - 33
+  - 244
+  - 6
+  - 7
+  - 8
+  - 8
+  - 11
+  - 13
+  - 14
+  - 22
+  - 31
+  - 32
+  - 64
+  - 243
+  - 957
+  some_build_mttr: 1604
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_issue_lifetime: 141593020.0
+  some_merged_pulls: 3
+  some_pull_files_size:
+  - 14
+  - 1
+  some_pull_hoc_size:
+  - 28
+  - 28
+  some_pull_lifetime:
+  - 33438.0
+  - 38702.0
+  - 1533250.0
+  some_review_size:
+  - 0
+  - 0
+  some_review_time:
+  - 1715
+  - 1397668
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  some_reviews_per_pull:
+  - 1
+  - 1
+  some_unmerged_pulls: 1
   what: quality-of-service
   when: 2026-06-19 05:42:21.000000000 Z
 - _id: 20581
@@ -75346,26 +75509,42 @@
     The average monthly turnover (4.0 developers) is increasing (R=0.29).
   what: assessment
   when: 2026-06-19 05:48:14.579974553 Z
-- _id: 20582
-  _job: 77817
-  _time: 2026-06-19 05:48:48.529122474 Z
+- _id: 20584
+  _job: 77888
+  _time: 2026-06-20 05:34:01.364339800 Z
   _version: 0.19.13/0.60.4/0.17.17
   what: learn-eva
-  when: 2026-06-19 05:48:48.511915404 Z
-- _id: 20583
-  _job: 27861274044
-  _time: 2026-06-20 05:19:19.621566269 Z
+  when: 2026-06-20 05:34:01.345239340 Z
+- _id: 20585
+  _job: 27894705667
+  _time: 2026-06-21 05:29:38.741436607 Z
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 13564738570
+  events_were_scanned: 13612519105
   issues_were_scanned: 1292
   labels_were_scanned: 1111
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
-  min_pull_was_found: 727
+  min_pull_was_found: 732
   repository: 28924109
   types_were_scanned: 1551
   what: iterate
   where: github
+- _id: 20586
+  _job: 27894705667
+  _time: 2026-06-21 05:30:08.237390745 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 4
+  total_commits: 3860
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 751
+  total_pulls: 953
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 874
+  what: dimensions-of-terrain
+  when: 2026-06-21 05:30:08.246267430 Z

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1327222">
+<fb version="0.19.6" size="1327937">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">869.338765075</seconds>
+    <seconds t="F">808.540882924</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-06-20T05:32:52Z</when>
+    <when t="T">2026-06-21T05:42:42Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -83500,6 +83500,7 @@
     <details t="S">A new Git push #35481752857 has arrived to yegor256/takes, made by @yegor256 (default branch is "master"), not associated with any pull request.</details>
     <event_id t="I">13193482467</event_id>
     <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
     <push_id t="I">35481752857</push_id>
     <ref t="S">refs/heads/master</ref>
     <repository t="I">28924109</repository>
@@ -83525,6 +83526,7 @@
     <failed_builds t="I">3</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1175</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">9</succeeded_builds>
@@ -83550,6 +83552,7 @@
     <failed_builds t="I">4</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1695</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">8</succeeded_builds>
@@ -83575,6 +83578,7 @@
     <failed_builds t="I">1</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1698</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">11</succeeded_builds>
@@ -83600,6 +83604,7 @@
     <failed_builds t="I">1</failed_builds>
     <files t="I">1</files>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1699</issue>
     <repository t="I">28924109</repository>
     <succeeded_builds t="I">11</succeeded_builds>
@@ -83840,6 +83845,7 @@
     <failed_builds t="I">0</failed_builds>
     <files t="I">1</files>
     <hoc t="I">28</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1686</issue>
     <repository t="I">28924109</repository>
     <review t="T">2026-05-28T04:03:19Z</review>
@@ -83878,6 +83884,7 @@
     <comments t="I">1</comments>
     <details t="S">The pull request yegor256/takes#1686 with 28 HoC created by @ghx5t-sol was reviewed by @akmhatey-ai after 37h39m and 0 comments.</details>
     <hoc t="I">28</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1686</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -83994,6 +84001,172 @@ The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
     <_time t="T">2026-06-19T05:42:21Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
     <since t="T">2026-06-12T05:34:44Z</since>
+    <some_backlog_size>
+      <v t="I">85</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+      <v t="I">84</v>
+    </some_backlog_size>
+    <some_build_duration>
+      <v t="I">6</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">13</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">12</v>
+      <v t="I">13</v>
+      <v t="I">13</v>
+      <v t="I">30</v>
+      <v t="I">39</v>
+      <v t="I">180</v>
+      <v t="I">8</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">10</v>
+      <v t="I">11</v>
+      <v t="I">15</v>
+      <v t="I">19</v>
+      <v t="I">34</v>
+      <v t="I">38</v>
+      <v t="I">266</v>
+      <v t="I">992</v>
+      <v t="I">47</v>
+      <v t="I">994</v>
+      <v t="I">45</v>
+      <v t="I">972</v>
+      <v t="I">52</v>
+      <v t="I">963</v>
+      <v t="I">35</v>
+      <v t="I">944</v>
+      <v t="I">40</v>
+      <v t="I">9</v>
+      <v t="I">11</v>
+      <v t="I">11</v>
+      <v t="I">13</v>
+      <v t="I">13</v>
+      <v t="I">17</v>
+      <v t="I">19</v>
+      <v t="I">28</v>
+      <v t="I">29</v>
+      <v t="I">33</v>
+      <v t="I">244</v>
+      <v t="I">6</v>
+      <v t="I">7</v>
+      <v t="I">8</v>
+      <v t="I">8</v>
+      <v t="I">11</v>
+      <v t="I">13</v>
+      <v t="I">14</v>
+      <v t="I">22</v>
+      <v t="I">31</v>
+      <v t="I">32</v>
+      <v t="I">64</v>
+      <v t="I">243</v>
+      <v t="I">957</v>
+    </some_build_duration>
+    <some_build_mttr t="I">1604</some_build_mttr>
+    <some_build_success_rate>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">0</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_build_success_rate>
+    <some_issue_lifetime t="F">141593020.0</some_issue_lifetime>
+    <some_merged_pulls t="I">3</some_merged_pulls>
+    <some_pull_files_size>
+      <v t="I">14</v>
+      <v t="I">1</v>
+    </some_pull_files_size>
+    <some_pull_hoc_size>
+      <v t="I">28</v>
+      <v t="I">28</v>
+    </some_pull_hoc_size>
+    <some_pull_lifetime>
+      <v t="F">33438.0</v>
+      <v t="F">38702.0</v>
+      <v t="F">1533250.0</v>
+    </some_pull_lifetime>
+    <some_review_size>
+      <v t="I">0</v>
+      <v t="I">0</v>
+    </some_review_size>
+    <some_review_time>
+      <v t="I">1715</v>
+      <v t="I">1397668</v>
+    </some_review_time>
+    <some_reviewers_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_reviewers_per_pull>
+    <some_reviews_per_pull>
+      <v t="I">1</v>
+      <v t="I">1</v>
+    </some_reviews_per_pull>
+    <some_unmerged_pulls t="I">1</some_unmerged_pulls>
     <what t="S">quality-of-service</what>
     <when t="T">2026-06-19T05:42:21Z</when>
   </f>
@@ -84011,30 +84184,48 @@ The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
     <when t="T">2026-06-19T05:48:14Z</when>
   </f>
   <f>
-    <_id t="I">20582</_id>
-    <_job t="I">77817</_job>
-    <_time t="T">2026-06-19T05:48:48Z</_time>
+    <_id t="I">20584</_id>
+    <_job t="I">77888</_job>
+    <_time t="T">2026-06-20T05:34:01Z</_time>
     <_version t="S">0.19.13/0.60.4/0.17.17</_version>
     <what t="S">learn-eva</what>
-    <when t="T">2026-06-19T05:48:48Z</when>
+    <when t="T">2026-06-20T05:34:01Z</when>
   </f>
   <f>
-    <_id t="I">20583</_id>
-    <_job t="I">27861274044</_job>
-    <_time t="T">2026-06-20T05:19:19Z</_time>
+    <_id t="I">20585</_id>
+    <_job t="I">27894705667</_job>
+    <_time t="T">2026-06-21T05:29:38Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
     <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">13564738570</events_were_scanned>
+    <events_were_scanned t="I">13612519105</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
     <labels_were_scanned t="I">1111</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1687</min_issue_was_found>
-    <min_pull_was_found t="I">727</min_pull_was_found>
+    <min_pull_was_found t="I">732</min_pull_was_found>
     <repository t="I">28924109</repository>
     <types_were_scanned t="I">1551</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">20586</_id>
+    <_job t="I">27894705667</_job>
+    <_time t="T">2026-06-21T05:30:08Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <total_active_contributors t="I">4</total_active_contributors>
+    <total_commits t="I">3860</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">541</total_files>
+    <total_forks t="I">214</total_forks>
+    <total_issues t="I">751</total_issues>
+    <total_pulls t="I">953</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">874</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-06-21T05:30:08Z</when>
   </f>
 </fb>
