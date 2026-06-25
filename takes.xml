@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1328682">
+<fb version="0.19.6" size="1331171">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">852.772429094</seconds>
+    <seconds t="F">824.857359181</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-06-24T05:25:51Z</when>
+    <when t="T">2026-06-25T05:28:42Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84176,19 +84176,6 @@
     <when t="T">2026-06-21T05:30:08Z</when>
   </f>
   <f>
-    <_id t="I">20587</_id>
-    <_job t="I">78015</_job>
-    <_time t="T">2026-06-21T05:43:14Z</_time>
-    <_version t="S">0.19.13/0.60.4/0.17.17</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (243.9) is decreasing (R=-0.25).
-The average number of commits per week (8.7) is increasing (R=0.30).
-The average number of releases per month (0.4) is decreasing (R=0.10).
-The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-06-21T05:43:14Z</when>
-  </f>
-  <f>
     <_id t="I">20590</_id>
     <_job t="I">27931878379</_job>
     <_time t="T">2026-06-22T05:38:20Z</_time>
@@ -84236,33 +84223,6 @@ The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
     <when t="T">2026-06-22T05:52:04Z</when>
   </f>
   <f>
-    <_id t="I">20595</_id>
-    <_job t="I">78207</_job>
-    <_time t="T">2026-06-23T05:29:31Z</_time>
-    <_version t="S">0.19.13/0.60.4/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-06-23T05:29:31Z</when>
-  </f>
-  <f>
-    <_id t="I">20596</_id>
-    <_job t="I">28076674616</_job>
-    <_time t="T">2026-06-24T05:12:03Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">10926565743</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1687</min_issue_was_found>
-    <min_pull_was_found t="I">743</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1551</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">20597</_id>
     <_job t="I">28076674616</_job>
     <_time t="T">2026-06-24T05:12:35Z</_time>
@@ -84279,5 +84239,179 @@ The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
     <total_stars t="I">874</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-06-24T05:12:35Z</when>
+  </f>
+  <f>
+    <_id t="I">20598</_id>
+    <_job t="I">78349</_job>
+    <_time t="T">2026-06-24T05:26:20Z</_time>
+    <_version t="S">0.19.13/0.60.4/0.17.17</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (233.3) is decreasing (R=-0.17).
+The average number of commits per week (8.4) is increasing (R=0.37).
+The average number of releases per month (0.4) is staying still.
+The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-06-24T05:26:20Z</when>
+  </f>
+  <f>
+    <_id t="I">20599</_id>
+    <_job t="I">78349</_job>
+    <_time t="T">2026-06-24T05:26:50Z</_time>
+    <_version t="S">0.19.13/0.60.4/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-06-24T05:26:50Z</when>
+  </f>
+  <f>
+    <_id t="I">20600</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:15:00Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <comments t="I">3</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1707 has been reviewed by @yegor256 with 4 HoC and 3 comments.</details>
+    <event_id t="I">10945640279</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1707</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2026-06-24T16:57:42Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20602</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:15:20Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/actions-cache-6.x</branch>
+    <details t="S">The pull yegor256/takes#1707 has been opened earlier by @renovate[bot].</details>
+    <issue t="I">1707</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-06-23T18:58:36Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20603</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:15:36Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/actions-cache-6.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1707 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">4</hoc>
+    <issue t="I">1707</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-06-24T16:57:40Z</review>
+    <succeeded_builds t="I">12</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-06-24T17:12:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">20604</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:15:54Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">12366348299</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1687</min_issue_was_found>
+    <min_pull_was_found t="I">745</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1551</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">20605</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:16:27Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <total_active_contributors t="I">4</total_active_contributors>
+    <total_commits t="I">3862</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">541</total_files>
+    <total_forks t="I">214</total_forks>
+    <total_issues t="I">751</total_issues>
+    <total_pulls t="I">955</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">874</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-06-25T05:16:27Z</when>
+  </f>
+  <f>
+    <_id t="I">20606</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:17:08Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/com.restfb-restfb-2026.x</branch>
+    <details t="S">The missing pull yegor256/takes#1703 has been opened by @renovate[bot].</details>
+    <issue t="I">1703</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-06-10T12:58:25Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20607</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:17:12Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/com.jcabi-jcabi-xml-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1704 has been opened by @renovate[bot].</details>
+    <issue t="I">1704</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-06-11T19:36:04Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20608</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:17:13Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/actions-checkout-7.x</branch>
+    <details t="S">The missing pull yegor256/takes#1705 has been opened by @renovate[bot].</details>
+    <issue t="I">1705</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-06-18T18:39:07Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20609</_id>
+    <_job t="I">28148466698</_job>
+    <_time t="T">2026-06-25T05:17:13Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <branch t="S">renovate/hibernate-validator</branch>
+    <details t="S">The missing pull yegor256/takes#1706 has been opened by @renovate[bot].</details>
+    <issue t="I">1706</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-06-22T13:13:03Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
   </f>
 </fb>

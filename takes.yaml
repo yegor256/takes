@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 852.772429094
+  seconds: 824.857359181
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-24 05:25:51.062884863 Z
+  when: 2026-06-25 05:28:42.443096883 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -75501,18 +75501,6 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-21 05:30:08.246267430 Z
-- _id: 20587
-  _job: 78015
-  _time: 2026-06-21 05:43:14.010450689 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (243.9) is decreasing (R=-0.25).
-    The average number of commits per week (8.7) is increasing (R=0.30).
-    The average number of releases per month (0.4) is decreasing (R=0.10).
-    The average monthly turnover (4.0 developers) is increasing (R=0.29).
-  what: assessment
-  when: 2026-06-21 05:43:14.031492740 Z
 - _id: 20590
   _job: 27931878379
   _time: 2026-06-22 05:38:20.755818767 Z
@@ -75555,29 +75543,6 @@
   start: *3
   what: earned-value
   when: 2026-06-22 05:52:04.277045782 Z
-- _id: 20595
-  _job: 78207
-  _time: 2026-06-23 05:29:31.782176066 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  what: learn-eva
-  when: 2026-06-23 05:29:31.760588832 Z
-- _id: 20596
-  _job: 28076674616
-  _time: 2026-06-24 05:12:03.433276080 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 10926565743
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 743
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20597
   _job: 28076674616
   _time: 2026-06-24 05:12:35.286265104 Z
@@ -75594,3 +75559,157 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-24 05:12:35.297015884 Z
+- _id: 20598
+  _job: 78349
+  _time: 2026-06-24 05:26:20.567149862 Z
+  _version: 0.19.13/0.60.4/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (233.3) is decreasing (R=-0.17).
+    The average number of commits per week (8.4) is increasing (R=0.37).
+    The average number of releases per month (0.4) is staying still.
+    The average monthly turnover (4.0 developers) is increasing (R=0.29).
+  what: assessment
+  when: 2026-06-24 05:26:20.590353533 Z
+- _id: 20599
+  _job: 78349
+  _time: 2026-06-24 05:26:50.227121398 Z
+  _version: 0.19.13/0.60.4/0.17.17
+  what: learn-eva
+  when: 2026-06-24 05:26:50.205516810 Z
+- _id: 20600
+  _job: 28148466698
+  _time: 2026-06-25 05:15:00.987311892 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1707 has been reviewed by @yegor256 with
+    4 HoC and 3 comments.
+  event_id: 10945640279
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 4
+  issue: 1707
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-06-24 16:57:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20602
+  _job: 28148466698
+  _time: 2026-06-25 05:15:20.245191171 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/actions-cache-6.x
+  details: The pull yegor256/takes#1707 has been opened earlier by @renovate[bot].
+  issue: 1707
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-23 18:58:36.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20603
+  _job: 28148466698
+  _time: 2026-06-25 05:15:36.950056462 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/actions-cache-6.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1707 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1707
+  repository: 28924109
+  review: 2026-06-24 16:57:40.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-06-24 17:12:01.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20604
+  _job: 28148466698
+  _time: 2026-06-25 05:15:54.921084748 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 12366348299
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 745
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20605
+  _job: 28148466698
+  _time: 2026-06-25 05:16:27.907199531 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 4
+  total_commits: 3862
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 751
+  total_pulls: 955
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 874
+  what: dimensions-of-terrain
+  when: 2026-06-25 05:16:27.919502668 Z
+- _id: 20606
+  _job: 28148466698
+  _time: 2026-06-25 05:17:08.376231826 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  details: The missing pull yegor256/takes#1703 has been opened by @renovate[bot].
+  issue: 1703
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-10 12:58:25.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20607
+  _job: 28148466698
+  _time: 2026-06-25 05:17:12.487456106 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  details: The missing pull yegor256/takes#1704 has been opened by @renovate[bot].
+  issue: 1704
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-11 19:36:04.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20608
+  _job: 28148466698
+  _time: 2026-06-25 05:17:13.257060840 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/actions-checkout-7.x
+  details: The missing pull yegor256/takes#1705 has been opened by @renovate[bot].
+  issue: 1705
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-18 18:39:07.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20609
+  _job: 28148466698
+  _time: 2026-06-25 05:17:13.856314811 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/hibernate-validator
+  details: The missing pull yegor256/takes#1706 has been opened by @renovate[bot].
+  issue: 1706
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-06-22 13:13:03.000000000 Z
+  where: github
+  who: 29139614
