@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 824.857359181
+  seconds: 834.744850579
   version: 0.60.2
   what: judges-summary
-  when: 2026-06-25 05:28:42.443096883 Z
+  when: 2026-06-26 05:31:01.993747534 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -75289,7 +75289,7 @@
   total_releases_published: 0
   total_reviews_submitted: 0
   what: quantity-of-deliverables
-  when: 2026-06-18 05:24:59.000000000 Z
+  when: &150 2026-06-18 05:24:59.000000000 Z
 - _id: 20575
   _job: 27738644011
   _time: 2026-06-18 05:26:06.515605093 Z
@@ -75517,18 +75517,6 @@
   total_stars: 874
   what: dimensions-of-terrain
   when: 2026-06-22 05:38:20.766782257 Z
-- _id: 20591
-  _job: 78119
-  _time: 2026-06-22 05:51:32.925837042 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  analyzers: 18
-  text: |-
-    The average number of builds per week (243.9) is decreasing (R=-0.25).
-    The average number of commits per week (8.7) is increasing (R=0.30).
-    The average number of releases per month (0.4) is decreasing (R=0.10).
-    The average monthly turnover (4.0 developers) is increasing (R=0.29).
-  what: assessment
-  when: 2026-06-22 05:51:32.949140657 Z
 - _id: 20593
   _job: 78119
   _time: 2026-06-22 05:52:04.276832245 Z
@@ -75571,12 +75559,6 @@
     The average monthly turnover (4.0 developers) is increasing (R=0.29).
   what: assessment
   when: 2026-06-24 05:26:20.590353533 Z
-- _id: 20599
-  _job: 78349
-  _time: 2026-06-24 05:26:50.227121398 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  what: learn-eva
-  when: 2026-06-24 05:26:50.205516810 Z
 - _id: 20600
   _job: 28148466698
   _time: 2026-06-25 05:15:00.987311892 Z
@@ -75626,29 +75608,13 @@
   issue: 1707
   repository: 28924109
   review: 2026-06-24 16:57:40.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-06-24 17:12:01.000000000 Z
   where: github
   who: 8086956
-- _id: 20604
-  _job: 28148466698
-  _time: 2026-06-25 05:15:54.921084748 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
-  earliest_issue_was_found: 1
-  events_were_scanned: 12366348299
-  issues_were_scanned: 1292
-  labels_were_scanned: 1111
-  latest_issue_was_found: 1463
-  merges_were_scanned: 0
-  min_issue_was_found: 1687
-  min_pull_was_found: 745
-  repository: 28924109
-  types_were_scanned: 1551
-  what: iterate
-  where: github
 - _id: 20605
   _job: 28148466698
   _time: 2026-06-25 05:16:27.907199531 Z
@@ -75713,3 +75679,213 @@
   when: 2026-06-22 13:13:03.000000000 Z
   where: github
   who: 29139614
+- _id: 20610
+  _job: 78469
+  _time: 2026-06-25 05:29:13.068500959 Z
+  _version: 0.19.13/0.60.4/0.17.17
+  analyzers: 18
+  text: |-
+    The average number of builds per week (233.3) is decreasing (R=-0.17).
+    The average number of commits per week (8.4) is increasing (R=0.37).
+    The average number of releases per month (0.4) is staying still.
+    The average monthly turnover (4.0 developers) is increasing (R=0.49).
+  what: assessment
+  when: 2026-06-25 05:29:13.089686259 Z
+- _id: 20611
+  _job: 78469
+  _time: 2026-06-25 05:29:42.410026135 Z
+  _version: 0.19.13/0.60.4/0.17.17
+  what: learn-eva
+  when: 2026-06-25 05:29:42.389285554 Z
+- _id: 20613
+  _job: 28218741390
+  _time: 2026-06-26 05:17:19.475480766 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  since: *150
+  total_builds_ran: 73
+  total_commits_pushed: 3
+  total_hoc_committed: 34
+  total_issues_created: 3
+  total_pulls_submitted: 3
+  total_releases_published: 0
+  total_reviews_submitted: 3
+  what: quantity-of-deliverables
+  when: 2026-06-26 05:17:19.000000000 Z
+- _id: 20614
+  _job: 28218741390
+  _time: 2026-06-26 05:17:53.146964157 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.restfb-restfb-2026.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1703 has been "pull-was-closed".
+  failed_builds: 1
+  files: 1
+  hoc: 2
+  issue: 1703
+  repository: 28924109
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-11 06:27:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 20615
+  _job: 28218741390
+  _time: 2026-06-26 05:18:00.245149285 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1704 has been "pull-was-closed".
+  failed_builds: 1
+  files: 2
+  hoc: 4
+  issue: 1704
+  repository: 28924109
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-12 06:21:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 20616
+  _job: 28218741390
+  _time: 2026-06-26 05:18:07.399379545 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/actions-checkout-7.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1705 has been "pull-was-merged".
+  failed_builds: 0
+  files: 14
+  hoc: 28
+  issue: 1705
+  repository: 28924109
+  review: 2026-06-19 03:27:50.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-06-19 03:56:25.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20617
+  _job: 28218741390
+  _time: 2026-06-26 05:18:22.208221030 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  branch: renovate/hibernate-validator
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1706 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1706
+  repository: 28924109
+  review: 2026-06-22 17:50:53.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-06-22 18:11:19.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20618
+  _job: 28218741390
+  _time: 2026-06-26 05:18:36.262835735 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  assignees_were_scanned: 1301
+  earliest_issue_was_found: 1
+  events_were_scanned: 13856140363
+  issues_were_scanned: 1292
+  labels_were_scanned: 1111
+  latest_issue_was_found: 1463
+  merges_were_scanned: 0
+  min_issue_was_found: 1687
+  min_pull_was_found: 748
+  repository: 28924109
+  types_were_scanned: 1551
+  what: iterate
+  where: github
+- _id: 20619
+  _job: 28218741390
+  _time: 2026-06-26 05:19:07.269165065 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  total_active_contributors: 4
+  total_commits: 3862
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 751
+  total_pulls: 955
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 874
+  what: dimensions-of-terrain
+  when: 2026-06-26 05:19:07.280760940 Z
+- _id: 20620
+  _job: 28218741390
+  _time: 2026-06-26 05:27:28.032107578 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1707 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 21h59m and 0 comments.
+  hoc: 4
+  issue: 1707
+  repository: 28924109
+  review_comments: 0
+  seconds: 79144
+  what: code-was-reviewed
+  when: 2026-06-24 16:57:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 20621
+  _job: 28218741390
+  _time: 2026-06-26 05:27:29.783768415 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1705 with 28 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 8h48m and 0 comments.
+  hoc: 28
+  issue: 1705
+  repository: 28924109
+  review_comments: 0
+  seconds: 31723
+  what: code-was-reviewed
+  when: 2026-06-19 03:27:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 20622
+  _job: 28218741390
+  _time: 2026-06-26 05:27:30.277688608 Z
+  _version: 0.19.9/0.60.2/0.17.17
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1706 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h37m and 0 comments.
+  hoc: 2
+  issue: 1706
+  repository: 28924109
+  review_comments: 0
+  seconds: 16670
+  what: code-was-reviewed
+  when: 2026-06-22 17:50:53.000000000 Z
+  where: github
+  who: 526301
