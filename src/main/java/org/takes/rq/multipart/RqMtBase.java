@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.cactoos.Scalar;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
@@ -83,19 +85,19 @@ public final class RqMtBase implements RqMultipart {
     private static final String CRLF = new String(new char[]{13, 10});
 
     /**
-     * Map of params and values.
+     * Scalar of Map of params and values.
      */
-    private final Map<String, List<Request>> map;
+    private final Scalar<Map<String, List<Request>>> smap;
 
     /**
-     * Internal buffer.
+     * Scalar of Internal buffer.
      */
-    private final ByteBuffer buffer;
+    private final Scalar<ByteBuffer> sbuffer;
 
     /**
-     * InputStream based on request body.
+     * Scalar of InputStream based on request body.
      */
-    private final InputStream stream;
+    private final Scalar<InputStream> sstream;
 
     /**
      * Original request.
@@ -109,17 +111,19 @@ public final class RqMtBase implements RqMultipart {
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
-        // @checkstyle ConstructorsCodeFreeCheck (5 lines)
-        this.stream = new RqLengthAware(req).body();
-        this.buffer = ByteBuffer.allocate(
-            Math.min(8192, this.stream.available())
+        this.sstream = new Sticky<>(() -> new RqLengthAware(req).body());
+        this.sbuffer = new Sticky<>(
+            () -> ByteBuffer.allocate(
+                Math.min(8192, new Unchecked<>(this.sstream).value().available())
+            )
         );
-        this.map = this.requests(req);
+        this.smap = new Sticky<>(() -> this.requests(req));
     }
 
     @Override
     public Iterable<Request> part(final CharSequence name) {
-        final List<Request> values = this.map.getOrDefault(
+        final Map<String, List<Request>> map = new Unchecked<>(this.smap).value();
+        final List<Request> values = map.getOrDefault(
             new UncheckedText(
                 new Lowered(name.toString())
             ).asString(),
@@ -131,7 +135,7 @@ public final class RqMtBase implements RqMultipart {
                 Collections.emptyList(),
                 new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
-                    name, this.map.size(), this.map.keySet()
+                    name, map.size(), map.keySet()
                 )
             );
         } else {
@@ -148,7 +152,7 @@ public final class RqMtBase implements RqMultipart {
 
     @Override
     public Iterable<String> names() {
-        return this.map.keySet();
+        return new Unchecked<>(this.smap).value().keySet();
     }
 
     @Override
@@ -197,9 +201,9 @@ public final class RqMtBase implements RqMultipart {
             );
         }
         final ReadableByteChannel body = Channels.newChannel(
-            this.stream
+            new Unchecked<>(this.sstream).value()
         );
-        final ByteBuffer buf = this.buffer;
+        final ByteBuffer buf = new Unchecked<>(this.sbuffer).value();
         if (body.read(buf) < 0) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
@@ -256,7 +260,7 @@ public final class RqMtBase implements RqMultipart {
                 channel,
                 boundary,
                 body,
-                this.buffer
+                new Unchecked<>(this.sbuffer).value()
             ).copy();
         }
         return new RqTemp(file);
@@ -313,7 +317,7 @@ public final class RqMtBase implements RqMultipart {
                 super.close();
             } finally {
                 for (final List<Request> requests
-                    : RqMtBase.this.map.values()) {
+                    : new Unchecked<>(RqMtBase.this.smap).value().values()) {
                     for (final Request request : requests) {
                         request.body().close();
                     }
