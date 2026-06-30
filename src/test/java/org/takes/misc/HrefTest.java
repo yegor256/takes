@@ -79,6 +79,15 @@ final class HrefTest {
     }
 
     @Test
+    void preservesSpaceEncoding() {
+        MatcherAssert.assertThat(
+            "Spaces in query parameters must use URI percent-encoding",
+            new Href("http://a.example.com?param=hello world").toString(),
+            Matchers.equalTo("http://a.example.com/?param=hello%20world")
+        );
+    }
+
+    @Test
     void addsPathWithEncoding() {
         Assumptions.assumeTrue("UTF-8".equals(Charset.defaultCharset().name()));
         MatcherAssert.assertThat(

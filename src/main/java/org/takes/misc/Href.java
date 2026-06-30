@@ -309,7 +309,7 @@ public final class Href implements CharSequence {
         try {
             return URLEncoder.encode(
                 txt, Charset.defaultCharset().name()
-            );
+            ).replace("+", "%20");
         } catch (final UnsupportedEncodingException ex) {
             throw new IllegalStateException(
                 String.format("Failed to encode '%s'", txt),

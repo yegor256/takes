@@ -6,6 +6,9 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -79,7 +82,7 @@ public interface RqRequestLine extends Request {
          * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
          */
         private static final Pattern PATTERN = Pattern.compile(
-            "([!-~]+) ([^ ]+)( [^ ]+)?"
+            "([!-~]+) (.+?)( HTTP/\\d+(?:\\.\\d+)?)?"
         );
 
         /**
@@ -133,7 +136,9 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String uri() throws IOException {
-            return this.token(RqRequestLine.Base.Token.URI);
+            return RqRequestLine.Base.Target.encoded(
+                this.token(RqRequestLine.Base.Token.URI)
+            );
         }
 
         @Override
@@ -179,7 +184,25 @@ public interface RqRequestLine extends Request {
          */
         private static Matcher matcher(final String line) throws HttpException {
             final Matcher matcher = RqRequestLine.Base.PATTERN.matcher(line);
-            if (!matcher.matches()) {
+            boolean valid = matcher.matches();
+            if (valid) {
+                final String uri = matcher.group(
+                    RqRequestLine.Base.Token.URI.value
+                );
+                final boolean version = matcher.group(
+                    RqRequestLine.Base.Token.HTTPVERSION.value
+                ) != null;
+                if (uri.startsWith(" ")) {
+                    valid = false;
+                }
+                if (valid && version && uri.endsWith(" ")) {
+                    valid = false;
+                }
+                if (valid && !version && uri.contains(" HTTP/")) {
+                    valid = false;
+                }
+            }
+            if (!valid) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
                     String.format(
@@ -198,15 +221,7 @@ public interface RqRequestLine extends Request {
          * @throws HttpException If fails
          */
         private static String validated(final String line) throws HttpException {
-            if (!RqRequestLine.Base.PATTERN.matcher(line).matches()) {
-                throw new HttpException(
-                    HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        RqRequestLine.Base.BAD_REQUEST_MSG,
-                        line
-                    )
-                );
-            }
+            RqRequestLine.Base.matcher(line);
             return line;
         }
 
@@ -231,6 +246,85 @@ public interface RqRequestLine extends Request {
             return new IoCheckedText(
                 new Trimmed(new TextOf(value))
             ).asString();
+        }
+
+        /**
+         * Request target encoding.
+         * @since 2.0
+         */
+        private static final class Target {
+
+            /**
+             * Utility class.
+             */
+            private Target() {
+                // intentionally empty
+            }
+
+            /**
+             * Encode illegal URI characters without changing encoded octets.
+             * @param value Request URI
+             * @return Encoded request URI
+             * @throws IOException If request target is invalid
+             */
+            private static String encoded(final String value)
+                throws IOException {
+                final StringBuilder uri = new StringBuilder(value);
+                while (true) {
+                    try {
+                        return new URI(uri.toString()).toASCIIString();
+                    } catch (final URISyntaxException err) {
+                        final int index = err.getIndex();
+                        if (
+                            index < 0 || index >= uri.length()
+                                || !RqRequestLine.Base.Target.query(uri, index)
+                        ) {
+                            throw new HttpException(
+                                HttpURLConnection.HTTP_BAD_REQUEST,
+                                String.format(
+                                    RqRequestLine.Base.BAD_REQUEST_MSG,
+                                    value
+                                ),
+                                err
+                            );
+                        }
+                        final int point = uri.codePointAt(index);
+                        uri.replace(
+                            index,
+                            index + Character.charCount(point),
+                            RqRequestLine.Base.Target.encode(point)
+                        );
+                    }
+                }
+            }
+
+            /**
+             * Check whether character at index is inside the query part.
+             * @param uri Request URI
+             * @param index Character index
+             * @return True when index is inside query
+             */
+            private static boolean query(final StringBuilder uri, final int index) {
+                final int start = uri.indexOf("?");
+                return start >= 0 && index > start;
+            }
+
+            /**
+             * Percent-encode a code point using UTF-8.
+             * @param point Code point
+             * @return Encoded code point
+             */
+            private static String encode(final int point) {
+                final StringBuilder text = new StringBuilder();
+                for (final byte octet : new String(
+                    Character.toChars(point)
+                ).getBytes(StandardCharsets.UTF_8)) {
+                    text.append('%').append(
+                        String.format("%02X", octet & 0xff)
+                    );
+                }
+                return text.toString();
+            }
         }
     }
 }
