@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1336432">
+<fb version="0.19.6" size="1336433">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">867.830950161</seconds>
+    <seconds t="F">862.363416681</seconds>
     <version t="S">0.60.2</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-07-06T05:32:38Z</when>
+    <when t="T">2026-07-07T05:23:47Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84721,33 +84721,6 @@ The average monthly turnover (4.0 developers) is increasing (R=0.39).</text>
     <when t="T">2026-07-05T05:48:04Z</when>
   </f>
   <f>
-    <_id t="I">20657</_id>
-    <_job t="I">80411</_job>
-    <_time t="T">2026-07-05T05:48:34Z</_time>
-    <_version t="S">0.19.13/0.60.4/0.17.17</_version>
-    <what t="S">learn-eva</what>
-    <when t="T">2026-07-05T05:48:34Z</when>
-  </f>
-  <f>
-    <_id t="I">20658</_id>
-    <_job t="I">28769507677</_job>
-    <_time t="T">2026-07-06T05:18:56Z</_time>
-    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1301</assignees_were_scanned>
-    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">14359346382</events_were_scanned>
-    <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
-    <latest_issue_was_found t="I">1463</latest_issue_was_found>
-    <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1687</min_issue_was_found>
-    <min_pull_was_found t="I">773</min_pull_was_found>
-    <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1551</types_were_scanned>
-    <what t="S">iterate</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">20659</_id>
     <_job t="I">28769507677</_job>
     <_time t="T">2026-07-06T05:19:56Z</_time>
@@ -84764,5 +84737,32 @@ The average monthly turnover (4.0 developers) is increasing (R=0.39).</text>
     <total_stars t="I">875</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-07-06T05:19:56Z</when>
+  </f>
+  <f>
+    <_id t="I">20660</_id>
+    <_job t="I">80577</_job>
+    <_time t="T">2026-07-06T05:33:47Z</_time>
+    <_version t="S">0.19.13/0.60.4/0.17.17</_version>
+    <what t="S">learn-eva</what>
+    <when t="T">2026-07-06T05:33:47Z</when>
+  </f>
+  <f>
+    <_id t="I">20661</_id>
+    <_job t="I">28843048303</_job>
+    <_time t="T">2026-07-07T05:09:51Z</_time>
+    <_version t="S">0.19.9/0.60.2/0.17.17</_version>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
+    <earliest_issue_was_found t="I">1</earliest_issue_was_found>
+    <events_were_scanned t="I">11439119237</events_were_scanned>
+    <issues_were_scanned t="I">1292</issues_were_scanned>
+    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <latest_issue_was_found t="I">1463</latest_issue_was_found>
+    <merges_were_scanned t="I">0</merges_were_scanned>
+    <min_issue_was_found t="I">1687</min_issue_was_found>
+    <min_pull_was_found t="I">776</min_pull_was_found>
+    <repository t="I">28924109</repository>
+    <types_were_scanned t="I">1551</types_were_scanned>
+    <what t="S">iterate</what>
+    <where t="S">github</where>
   </f>
 </fb>
