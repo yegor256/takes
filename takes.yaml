@@ -1,12 +1,23 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
+  error:
+  - 'each() timed out after 60s (execution expired), fb size is 4477: (and (or (eq
+    what ''pull-was-merged'') (eq what ''pull-was-closed'')) (exists repository) (exists
+    issue) (absent stale) (absent tombstone) (absent done) (eq where ''github'') (unique
+    where repository issue) (empty (and (eq issue $issue) (eq repository $repository)
+    (eq where ''github'') (eq what ''code-was-reviewed''))))'
+  - 'each() timed out after 60s (execution expired), fb size is 4478: (and (or (eq
+    what ''pull-was-merged'') (eq what ''pull-was-closed'')) (exists repository) (exists
+    issue) (absent stale) (absent tombstone) (absent done) (eq where ''github'') (unique
+    where repository issue) (empty (and (eq issue $issue) (eq repository $repository)
+    (eq where ''github'') (eq what ''code-was-reviewed''))))'
   inserted: 8
-  seconds: 810.417225372
-  version: 0.60.2
+  seconds: 282.802270734
+  version: 0.61.0
   what: judges-summary
-  when: 2026-07-08 05:07:05.512483603 Z
+  when: 2026-07-11 04:55:31.887458869 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -75559,6 +75570,7 @@
   event_type: PullRequestReviewEvent
   files: 2
   hoc: 4
+  is_human: 1
   issue: 1707
   repository: 28924109
   review_comments: 0
@@ -75572,6 +75584,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/actions-cache-6.x
   details: The pull yegor256/takes#1707 has been opened earlier by @renovate[bot].
+  is_human: 0
   issue: 1707
   repository: 28924109
   what: pull-was-opened
@@ -75593,6 +75606,7 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 0
   issue: 1707
   repository: 28924109
   review: 2026-06-24 16:57:40.000000000 Z
@@ -75625,6 +75639,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/com.restfb-restfb-2026.x
   details: The missing pull yegor256/takes#1703 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1703
   repository: 28924109
   what: pull-was-opened
@@ -75637,6 +75652,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/com.jcabi-jcabi-xml-0.x
   details: The missing pull yegor256/takes#1704 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1704
   repository: 28924109
   what: pull-was-opened
@@ -75649,6 +75665,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/actions-checkout-7.x
   details: The missing pull yegor256/takes#1705 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1705
   repository: 28924109
   what: pull-was-opened
@@ -75661,6 +75678,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   branch: renovate/hibernate-validator
   details: The missing pull yegor256/takes#1706 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1706
   repository: 28924109
   what: pull-was-opened
@@ -75696,6 +75714,7 @@
   failed_builds: 1
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1703
   repository: 28924109
   succeeded_builds: 11
@@ -75719,6 +75738,7 @@
   failed_builds: 1
   files: 2
   hoc: 4
+  is_human: 1
   issue: 1704
   repository: 28924109
   succeeded_builds: 11
@@ -75742,6 +75762,7 @@
   failed_builds: 0
   files: 14
   hoc: 28
+  is_human: 0
   issue: 1705
   repository: 28924109
   review: 2026-06-19 03:27:50.000000000 Z
@@ -75767,6 +75788,7 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1706
   repository: 28924109
   review: 2026-06-22 17:50:53.000000000 Z
@@ -75802,6 +75824,7 @@
   details: The pull request yegor256/takes#1707 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 21h59m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1707
   repository: 28924109
   review_comments: 0
@@ -75819,6 +75842,7 @@
   details: The pull request yegor256/takes#1705 with 28 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 8h48m and 0 comments.
   hoc: 28
+  is_human: 1
   issue: 1705
   repository: 28924109
   review_comments: 0
@@ -75836,6 +75860,7 @@
   details: The pull request yegor256/takes#1706 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 4h37m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1706
   repository: 28924109
   review_comments: 0
@@ -76016,17 +76041,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 12972849695
+  events_were_scanned: 11642965907
   issues_were_scanned: 1292
-  labels_were_scanned: 1111
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 1551
+  types_were_scanned: 163
   what: iterate
   where: github
 - _id: 20665
@@ -76045,3 +76070,32 @@
   total_stars: 876
   what: dimensions-of-terrain
   when: 2026-07-08 04:54:40.820239793 Z
+- _id: 20666
+  _job: 29140224451
+  _time: 2026-07-11 04:52:05.710177785 Z
+  _version: 0.19.15/0.61.0/0.17.19
+  deadline: 2015-05-14 07:00:00.000000000 Z
+  details: 'The milestone #1 "1.0" was set.'
+  is_human: 1
+  milestone: 1
+  repository: 28924109
+  what: milestone-was-set
+  when: 2015-04-16 00:55:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 20667
+  _job: 29140224451
+  _time: 2026-07-11 04:53:07.183944216 Z
+  _version: 0.19.15/0.61.0/0.17.19
+  total_active_contributors: 2
+  total_commits: 3867
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 752
+  total_pulls: 961
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 876
+  what: dimensions-of-terrain
+  when: 2026-07-11 04:53:07.196484620 Z
