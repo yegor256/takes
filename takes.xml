@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1343999">
+<fb version="0.19.6" size="1344732">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <error>
-      <v t="S">each() timed out after 60s (execution expired), fb size is 4493: (and (or (eq what 'pull-was-merged') (eq what 'pull-was-closed')) (exists repository) (exists issue) (absent stale) (absent tombstone) (absent done) (eq where 'github') (unique where repository issue) (empty (and (eq issue $issue) (eq repository $repository) (eq where 'github') (eq what 'code-was-reviewed'))))</v>
-      <v t="S">each() timed out after 60s (execution expired), fb size is 4497: (and (or (eq what 'pull-was-merged') (eq what 'pull-was-closed')) (exists repository) (exists issue) (absent stale) (absent tombstone) (absent done) (eq where 'github') (unique where repository issue) (empty (and (eq issue $issue) (eq repository $repository) (eq where 'github') (eq what 'code-was-reviewed'))))</v>
+      <v t="S">each() timed out after 60s (execution expired), fb size is 4499: (and (or (eq what 'pull-was-merged') (eq what 'pull-was-closed')) (exists repository) (exists issue) (absent stale) (absent tombstone) (absent done) (eq where 'github') (unique where repository issue) (empty (and (eq issue $issue) (eq repository $repository) (eq where 'github') (eq what 'code-was-reviewed'))))</v>
+      <v t="S">each() timed out after 60s (execution expired), fb size is 4499: (and (or (eq what 'pull-was-merged') (eq what 'pull-was-closed')) (exists repository) (exists issue) (absent stale) (absent tombstone) (absent done) (eq where 'github') (unique where repository issue) (empty (and (eq issue $issue) (eq repository $repository) (eq where 'github') (eq what 'code-was-reviewed'))))</v>
     </error>
     <inserted t="I">8</inserted>
-    <seconds t="F">579.400834223</seconds>
+    <seconds t="F">531.179738542</seconds>
     <version t="S">0.61.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-07-13T05:12:57Z</when>
+    <when t="T">2026-07-14T04:58:10Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84743,17 +84743,17 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">713</assignees_were_scanned>
+    <assignees_were_scanned t="I">924</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">11678803072</events_were_scanned>
+    <events_were_scanned t="I">14920831715</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">1111</labels_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1687</min_issue_was_found>
     <min_pull_was_found t="I">777</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">609</types_were_scanned>
+    <types_were_scanned t="I">826</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -84807,19 +84807,6 @@
     <total_stars t="I">876</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-07-11T04:53:07Z</when>
-  </f>
-  <f>
-    <_id t="I">20668</_id>
-    <_job t="I">81620</_job>
-    <_time t="T">2026-07-11T04:55:59Z</_time>
-    <_version t="S">0.19.15/0.61.0/0.17.19</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (211.8) is decreasing (R=-0.15).
-The average number of commits per week (8.2) is increasing (R=0.28).
-The average number of releases per month (0.4) is staying still.
-The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-07-11T04:55:59Z</when>
   </f>
   <f>
     <_id t="I">20669</_id>
@@ -85161,6 +85148,7 @@ The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
     <_time t="T">2026-07-13T05:10:44Z</_time>
     <_version t="S">0.19.15/0.61.0/0.17.19</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1005.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1005</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -85175,11 +85163,63 @@ The average monthly turnover (4.0 developers) is increasing (R=0.29).</text>
     <_time t="T">2026-07-13T05:10:44Z</_time>
     <_version t="S">0.19.15/0.61.0/0.17.19</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1007.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1007</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
     <what t="S">label-was-attached</what>
     <when t="T">2026-05-07T17:01:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20689</_id>
+    <_job t="I">81978</_job>
+    <_time t="T">2026-07-13T05:13:28Z</_time>
+    <_version t="S">0.19.16/0.61.0/0.17.19</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (208.5) is decreasing (R=-0.17).
+The average number of commits per week (8.0) is increasing (R=0.24).
+The average number of releases per month (0.4) is staying still.
+The average monthly turnover (4.0 developers) is staying still.</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-07-13T05:13:28Z</when>
+  </f>
+  <f>
+    <_id t="I">20690</_id>
+    <_job t="I">29306863760</_job>
+    <_time t="T">2026-07-14T04:49:21Z</_time>
+    <_version t="S">0.19.15/0.61.0/0.17.19</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The pull request yegor256/takes#1716 has been opened by @renovate[bot].</details>
+    <event_id t="I">11733841339</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">1716</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-07-13T21:00:57Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">20691</_id>
+    <_job t="I">29306863760</_job>
+    <_time t="T">2026-07-14T04:49:22Z</_time>
+    <_version t="S">0.19.15/0.61.0/0.17.19</_version>
+    <comments t="I">3</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1715 has been reviewed by @yegor256 with 2 HoC and 3 comments.</details>
+    <event_id t="I">11702871456</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1715</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2026-07-13T09:35:21Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
   </f>
