@@ -1,23 +1,12 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
-  error:
-  - 'each() timed out after 60s (execution expired), fb size is 4499: (and (or (eq
-    what ''pull-was-merged'') (eq what ''pull-was-closed'')) (exists repository) (exists
-    issue) (absent stale) (absent tombstone) (absent done) (eq where ''github'') (unique
-    where repository issue) (empty (and (eq issue $issue) (eq repository $repository)
-    (eq where ''github'') (eq what ''code-was-reviewed''))))'
-  - 'each() timed out after 60s (execution expired), fb size is 4499: (and (or (eq
-    what ''pull-was-merged'') (eq what ''pull-was-closed'')) (exists repository) (exists
-    issue) (absent stale) (absent tombstone) (absent done) (eq where ''github'') (unique
-    where repository issue) (empty (and (eq issue $issue) (eq repository $repository)
-    (eq where ''github'') (eq what ''code-was-reviewed''))))'
   inserted: 8
-  seconds: 531.179738542
+  seconds: 787.59509323
   version: 0.61.0
   what: judges-summary
-  when: 2026-07-14 04:58:10.128562059 Z
+  when: 2026-07-15 05:02:31.852583053 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76017,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 924
+  assignees_were_scanned: 1050
   earliest_issue_was_found: 1
-  events_were_scanned: 14920831715
+  events_were_scanned: 11779760523
   issues_were_scanned: 1292
-  labels_were_scanned: 376
+  labels_were_scanned: 607
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 826
+  types_were_scanned: 933
   what: iterate
   where: github
 - _id: 20665
@@ -76447,3 +76436,57 @@
   when: 2026-07-13 09:35:21.000000000 Z
   where: github
   who: 526301
+- _id: 20692
+  _job: 82359
+  _time: 2026-07-14 04:59:12.576572962 Z
+  _version: 0.19.16/0.61.0/0.17.19!0.17.20
+  ac: 24
+  cost_of_qod: 5.53240232994565
+  ev: 1233
+  pv: 58406
+  qod: 223
+  qod_per_day: 35.2104220177899
+  qod_per_sec: 8.614998316492813e-06
+  start: *3
+  what: earned-value
+  when: 2026-07-14 04:59:12.576809247 Z
+- _id: 20693
+  _job: 29389842929
+  _time: 2026-07-15 04:50:06.079806822 Z
+  _version: 0.19.16/0.61.0/0.17.20
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1716 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1716
+  repository: 28924109
+  review: 2026-07-14 17:02:24.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-07-14 17:17:19.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20694
+  _job: 29389842929
+  _time: 2026-07-15 05:02:11.457612573 Z
+  _version: 0.19.16/0.61.0/0.17.20
+  total_active_contributors: 1
+  total_commits: 3868
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 752
+  total_pulls: 963
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-07-15 05:02:11.468076101 Z
