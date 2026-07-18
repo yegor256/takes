@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1346839">
+<fb version="0.19.6" size="1347114">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">655.771229895</seconds>
+    <seconds t="F">557.011251607</seconds>
     <version t="S">0.61.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-07-17T05:01:41Z</when>
+    <when t="T">2026-07-18T04:57:59Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84739,17 +84739,17 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
+    <assignees_were_scanned t="I">211</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">15076800088</events_were_scanned>
+    <events_were_scanned t="I">15154267424</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">924</labels_were_scanned>
+    <labels_were_scanned t="I">1121</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1687</min_issue_was_found>
     <min_pull_was_found t="I">777</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -85308,6 +85308,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.15).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1711 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 2h30m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1711</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -85326,6 +85327,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.15).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1712 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 14h37m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1712</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -85344,6 +85346,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.15).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1713 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 1h19m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1713</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -85362,6 +85365,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.15).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1714 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 8h47m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1714</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -85380,6 +85384,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.15).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1716 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 20h1m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1716</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -85388,5 +85393,23 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.15).</text>
     <when t="T">2026-07-14T17:02:24Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20703</_id>
+    <_job t="I">29631141860</_job>
+    <_time t="T">2026-07-18T04:57:46Z</_time>
+    <_version t="S">0.19.16/0.61.0/0.17.20</_version>
+    <total_active_contributors t="I">1</total_active_contributors>
+    <total_commits t="I">3868</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">541</total_files>
+    <total_forks t="I">214</total_forks>
+    <total_issues t="I">752</total_issues>
+    <total_pulls t="I">963</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">877</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-07-18T04:57:46Z</when>
   </f>
 </fb>
