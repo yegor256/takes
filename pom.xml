@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
- * SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
- * SPDX-License-Identifier: MIT
+* SPDX-FileCopyrightText: Copyright (c) 2014-2026 Yegor Bugayenko
+* SPDX-License-Identifier: MIT
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -98,11 +98,11 @@
       <artifactId>cactoos</artifactId>
       <!--
       @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
-       remove all references to Files.newXXX static methods and
-       replace them with OO objects such as InputOf or OutputOf
-       depending on the need. See
-       https://github.com/yegor256/takes/pull/886#issuecomment-446030223
-       for details.
+      remove all references to Files.newXXX static methods and
+      replace them with OO objects such as InputOf or OutputOf
+      depending on the need. See
+      https://github.com/yegor256/takes/pull/886#issuecomment-446030223
+      for details.
       -->
       <version>0.61.0</version>
     </dependency>
