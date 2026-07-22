@@ -10,7 +10,6 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
@@ -170,7 +169,6 @@ final class RqRequestLineTest {
      * a format that can be transmitted over the Internet. URL encoding replaces unsafe ASCII
      * characters with a "%" followed by two hexadecimal digits.
      */
-    @Disabled
     @Test
     void noSpaceTruncationInUri() throws IOException {
         MatcherAssert.assertThat(
@@ -178,13 +176,13 @@ final class RqRequestLineTest {
             new RqRequestLine.Base(
                 new RqFake(
                     Arrays.asList(
-                        "GET /?u=Hello World",
+                        "GET /?path=C:\\temp&u=Hello World",
                         "Host: www.example.com"
                     ),
                     ""
                 )
             ).uri(),
-            Matchers.equalTo("/?u=Hello%20World")
+            Matchers.equalTo("/?path=C:%5Ctemp&u=Hello%20World")
         );
     }
 }

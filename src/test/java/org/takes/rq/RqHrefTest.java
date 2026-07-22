@@ -10,7 +10,6 @@ import java.util.Collections;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.takes.HttpException;
 
@@ -200,7 +199,6 @@ import org.takes.HttpException;
      * a format that can be transmitted over the Internet. URL encoding replaces unsafe ASCII
      * characters with a "%" followed by two hexadecimal digits.
      */
-    @Disabled
     @Test
     void noSpaceTruncationInUri() throws IOException {
         MatcherAssert.assertThat(
