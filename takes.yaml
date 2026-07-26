@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 680.72540064
+  seconds: 598.057424861
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-25 05:05:23.171118717 Z
+  when: 2026-07-26 05:12:21.567328766 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1050
+  assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 12280042704
+  events_were_scanned: 15762433321
   issues_were_scanned: 1292
-  labels_were_scanned: 0
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 826
+  types_were_scanned: 933
   what: iterate
   where: github
 - _id: 20665
@@ -76659,18 +76659,6 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-07-22 05:05:47.536644247 Z
-- _id: 20712
-  _job: 83539
-  _time: 2026-07-22 05:06:39.912642610 Z
-  _version: 0.19.16/0.61.0/0.17.20
-  analyzers: 18
-  text: |-
-    The average number of builds per week (195.4) is decreasing (R=-0.13).
-    The average number of commits per week (8.1) is increasing (R=0.16).
-    The average number of releases per month (0.4) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-07-22 05:06:39.928558567 Z
 - _id: 20713
   _job: 29980834020
   _time: 2026-07-23 04:58:45.367423274 Z
@@ -76800,6 +76788,7 @@
   details: The pull request yegor256/takes#1684 with 137 HoC created by @ghx5t-sol
     was reviewed by @akmhatey-ai after 40h44m and 0 comments.
   hoc: 137
+  is_human: 1
   issue: 1684
   repository: 28924109
   review_comments: 0
@@ -76817,6 +76806,7 @@
   details: The pull request yegor256/takes#1710 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 11h59m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1710
   repository: 28924109
   review_comments: 0
@@ -76834,6 +76824,7 @@
   details: The pull request yegor256/takes#1715 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 16h44m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1715
   repository: 28924109
   review_comments: 0
@@ -76858,3 +76849,31 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-07-25 05:05:08.923033963 Z
+- _id: 20723
+  _job: 83936
+  _time: 2026-07-25 05:05:54.681523485 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (195.4) is decreasing (R=-0.13).
+    The average number of commits per week (8.1) is increasing (R=0.16).
+    The average number of releases per month (0.4) is staying still.
+    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-07-25 05:05:54.698538128 Z
+- _id: 20724
+  _job: 30188694634
+  _time: 2026-07-26 05:12:08.247437534 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 3
+  total_commits: 3875
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 753
+  total_pulls: 966
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-07-26 05:12:08.258503433 Z
