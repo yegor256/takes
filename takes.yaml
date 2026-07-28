@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 609.34448742
+  seconds: 776.313315833
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-27 05:15:07.979736288 Z
+  when: 2026-07-28 05:04:10.558890320 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 12331762380
+  events_were_scanned: 12367990054
   issues_were_scanned: 1292
-  labels_were_scanned: 607
+  labels_were_scanned: 751
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 1054
+  types_were_scanned: 1292
   what: iterate
   where: github
 - _id: 20665
@@ -76642,7 +76642,7 @@
   _version: 0.19.16/0.61.0/0.17.20
   since: *157
   what: quality-of-service
-  when: 2026-07-20 05:15:21.858242235 Z
+  when: &159 2026-07-20 05:15:21.858242235 Z
 - _id: 20711
   _job: 29892197557
   _time: 2026-07-22 05:05:47.526882481 Z
@@ -76837,18 +76837,6 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-07-25 05:05:08.923033963 Z
-- _id: 20723
-  _job: 83936
-  _time: 2026-07-25 05:05:54.681523485 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (195.4) is decreasing (R=-0.13).
-    The average number of commits per week (8.1) is increasing (R=0.16).
-    The average number of releases per month (0.4) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-07-25 05:05:54.698538128 Z
 - _id: 20724
   _job: 30188694634
   _time: 2026-07-26 05:12:08.247437534 Z
@@ -76907,3 +76895,309 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-07-27 05:14:55.566030597 Z
+- _id: 20728
+  _job: 84157
+  _time: 2026-07-27 05:15:37.157221093 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (194.9) is decreasing (R=-0.13).
+    The average number of commits per week (8.1) is increasing (R=0.15).
+    The average number of releases per month (0.4) is staying still.
+    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-07-27 05:15:37.174895289 Z
+- _id: 20729
+  _job: 30329832868
+  _time: 2026-07-28 04:51:16.925766842 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: do_not_allow_close_live_stream
+  comments: 9
+  comments_appreciated: 0
+  comments_by_author: 5
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1346 has been closed by @yegor256, with
+    93 HoC and 9 comments.
+  event_id: 12367990054
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 3
+  hoc: 93
+  is_human: 1
+  issue: 1346
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-13 08:08:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 20730
+  _job: 30329832868
+  _time: 2026-07-28 04:51:25.418348705 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: dev
+  comments: 13
+  comments_appreciated: 3
+  comments_by_author: 5
+  comments_by_reviewers: 8
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1367 has been closed by @yegor256, with
+    156 HoC and 13 comments.
+  event_id: 12367974944
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 2
+  hoc: 156
+  is_human: 1
+  issue: 1367
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-13 08:08:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 20731
+  _job: 30329832868
+  _time: 2026-07-28 04:51:29.505613872 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  details: The pull request yegor256/takes#1723 has been opened by @renovate[bot].
+  event_id: 12367972009
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1723
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-07-27 17:35:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20732
+  _job: 30329832868
+  _time: 2026-07-28 04:51:29.764914331 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: refactor_zimin
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1410 has been closed by @yegor256, with
+    13 HoC and 3 comments.
+  event_id: 12367913061
+  event_type: PullRequestEvent
+  failed_builds: 11
+  files: 4
+  hoc: 13
+  is_human: 1
+  issue: 1410
+  repository: 28924109
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-13 08:08:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 20733
+  _job: 30329832868
+  _time: 2026-07-28 04:51:38.807147037 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: tkfallback-coop
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1439 has been closed by @yegor256, with
+    346 HoC and 2 comments.
+  event_id: 12367901759
+  event_type: PullRequestEvent
+  failed_builds: 9
+  files: 1
+  hoc: 346
+  is_human: 1
+  issue: 1439
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-06-13 08:08:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 20734
+  _job: 30329832868
+  _time: 2026-07-28 04:52:09.098653286 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/davidanson-markdownlint-cli2-action-24.x
+  details: The missing pull yegor256/takes#1717 has been opened by @renovate[bot].
+  issue: 1717
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-07-18 21:50:55.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20735
+  _job: 30329832868
+  _time: 2026-07-28 04:52:09.891007778 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1718 has been opened by @renovate[bot].
+  issue: 1718
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-07-21 20:11:04.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20736
+  _job: 30329832868
+  _time: 2026-07-28 04:52:10.813564344 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue yegor256/takes#1719 has been opened by @0pdd.
+  issue: 1719
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-07-22 06:32:14.000000000 Z
+  where: github
+  who: 24456188
+- _id: 20737
+  _job: 30329832868
+  _time: 2026-07-28 04:52:11.316697346 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1720 has been opened by @renovate[bot].
+  issue: 1720
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-07-24 10:34:00.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20738
+  _job: 30329832868
+  _time: 2026-07-28 04:52:12.060394784 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/hibernate-validator
+  details: The missing pull yegor256/takes#1721 has been opened by @renovate[bot].
+  issue: 1721
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-07-26 17:01:46.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20739
+  _job: 30329832868
+  _time: 2026-07-28 04:52:12.884248787 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue yegor256/takes#1722 has been opened by @revive-code-bot[bot].
+  issue: 1722
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-07-27 05:00:04.000000000 Z
+  where: github
+  who: 166734835
+- _id: 20740
+  _job: 30329832868
+  _time: 2026-07-28 04:52:16.545716005 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/davidanson-markdownlint-cli2-action-24.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1717 has been "pull-was-merged".
+  failed_builds: 1
+  files: 1
+  hoc: 2
+  issue: 1717
+  repository: 28924109
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-07-22 06:38:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 20741
+  _job: 30329832868
+  _time: 2026-07-28 04:52:23.946830195 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1718 has been "pull-was-merged".
+  failed_builds: 1
+  files: 1
+  hoc: 2
+  issue: 1718
+  repository: 28924109
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-07-22 06:38:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 20742
+  _job: 30329832868
+  _time: 2026-07-28 04:52:31.697799611 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1720 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1720
+  repository: 28924109
+  review: 2026-07-25 03:35:04.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-07-25 03:54:27.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20743
+  _job: 30329832868
+  _time: 2026-07-28 04:52:46.688270835 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/hibernate-validator
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1721 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  issue: 1721
+  repository: 28924109
+  review: 2026-07-27 03:38:00.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-07-27 03:49:43.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20744
+  _job: 30329832868
+  _time: 2026-07-28 05:03:58.419553524 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  since: *159
+  what: quality-of-service
+  when: 2026-07-28 05:03:58.412398420 Z
