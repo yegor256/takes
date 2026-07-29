@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 776.313315833
+  seconds: 713.619073113
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-28 05:04:10.558890320 Z
+  when: 2026-07-29 05:05:53.903644436 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 211
+  assignees_were_scanned: 341
   earliest_issue_was_found: 1
-  events_were_scanned: 12367990054
+  events_were_scanned: 15990038229
   issues_were_scanned: 1292
-  labels_were_scanned: 751
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -77036,6 +77036,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/davidanson-markdownlint-cli2-action-24.x
   details: The missing pull yegor256/takes#1717 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1717
   repository: 28924109
   what: pull-was-opened
@@ -77048,6 +77049,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/reviewdog-action-actionlint-1.x
   details: The missing pull yegor256/takes#1718 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1718
   repository: 28924109
   what: pull-was-opened
@@ -77059,6 +77061,7 @@
   _time: 2026-07-28 04:52:10.813564344 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The missing issue yegor256/takes#1719 has been opened by @0pdd.
+  is_human: 0
   issue: 1719
   repository: 28924109
   what: issue-was-opened
@@ -77071,6 +77074,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/zerocracy-judges-action-0.x
   details: The missing pull yegor256/takes#1720 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1720
   repository: 28924109
   what: pull-was-opened
@@ -77083,6 +77087,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/hibernate-validator
   details: The missing pull yegor256/takes#1721 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1721
   repository: 28924109
   what: pull-was-opened
@@ -77094,6 +77099,7 @@
   _time: 2026-07-28 04:52:12.884248787 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The missing issue yegor256/takes#1722 has been opened by @revive-code-bot[bot].
+  is_human: 0
   issue: 1722
   repository: 28924109
   what: issue-was-opened
@@ -77115,8 +77121,10 @@
   failed_builds: 1
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1717
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
@@ -77138,8 +77146,10 @@
   failed_builds: 1
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1718
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
@@ -77161,9 +77171,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1720
   repository: 28924109
   review: 2026-07-25 03:35:04.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -77185,9 +77197,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1721
   repository: 28924109
   review: 2026-07-27 03:38:00.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -77201,3 +77215,19 @@
   since: *159
   what: quality-of-service
   when: 2026-07-28 05:03:58.412398420 Z
+- _id: 20745
+  _job: 30423458962
+  _time: 2026-07-29 05:05:38.360111152 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 3
+  total_commits: 3876
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 754
+  total_pulls: 968
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 876
+  what: dimensions-of-terrain
+  when: 2026-07-29 05:05:38.370015526 Z
