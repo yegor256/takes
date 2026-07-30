@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 713.619073113
+  seconds: 684.046442245
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-29 05:05:53.903644436 Z
+  when: 2026-07-30 05:01:29.988830803 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 341
+  assignees_were_scanned: 444
   earliest_issue_was_found: 1
-  events_were_scanned: 15990038229
+  events_were_scanned: 16164776121
   issues_were_scanned: 1292
-  labels_were_scanned: 924
+  labels_were_scanned: 1121
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 163
   what: iterate
   where: github
 - _id: 20665
@@ -76853,18 +76853,6 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-07-26 05:12:08.258503433 Z
-- _id: 20725
-  _job: 84058
-  _time: 2026-07-26 05:12:50.875749868 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (195.4) is decreasing (R=-0.13).
-    The average number of commits per week (8.1) is increasing (R=0.16).
-    The average number of releases per month (0.4) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-07-26 05:12:50.893221795 Z
 - _id: 20726
   _job: 30238715534
   _time: 2026-07-27 05:05:00.977105629 Z
@@ -77231,3 +77219,49 @@
   total_stars: 876
   what: dimensions-of-terrain
   when: 2026-07-29 05:05:38.370015526 Z
+- _id: 20746
+  _job: 84355
+  _time: 2026-07-29 05:07:19.294787021 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (185.2) is staying still.
+    The average number of commits per week (8.3) is increasing (R=0.14).
+    The average number of releases per month (0.4) is staying still.
+    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-07-29 05:07:19.316624999 Z
+- _id: 20747
+  _job: 30514886912
+  _time: 2026-07-30 05:00:44.111975051 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1720 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 17h1m and 0 comments.
+  hoc: 2
+  issue: 1720
+  repository: 28924109
+  review_comments: 0
+  seconds: 61264
+  what: code-was-reviewed
+  when: 2026-07-25 03:35:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 20748
+  _job: 30514886912
+  _time: 2026-07-30 05:00:45.873398846 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1721 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 10h36m and 0 comments.
+  hoc: 2
+  issue: 1721
+  repository: 28924109
+  review_comments: 0
+  seconds: 38174
+  what: code-was-reviewed
+  when: 2026-07-27 03:38:00.000000000 Z
+  where: github
+  who: 526301
