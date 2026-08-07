@@ -320,7 +320,7 @@ public interface RqRequestLine extends Request {
                     Character.toChars(point)
                 ).getBytes(StandardCharsets.UTF_8)) {
                     text.append('%').append(
-                        String.format("%02X", octet & 0xff)
+                        String.format("%02X", octet & 0xFF)
                     );
                 }
                 return text.toString();

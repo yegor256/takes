@@ -40,7 +40,6 @@ public final class TkJoinedCookies extends TkWrap {
     /**
      * Constructor that wraps a take to join Set-Cookie headers.
      * @param take The take to wrap with cookie joining functionality
-     * @checkstyle AnonInnerLengthCheck (100 lines)
      */
     public TkJoinedCookies(final Take take) {
         super(

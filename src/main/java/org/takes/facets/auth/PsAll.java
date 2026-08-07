@@ -35,7 +35,7 @@ public final class PsAll implements Pass {
      *  {@link PsAll#enter(Request)}
      */
     public PsAll(final List<? extends Pass> passes, final int identity) {
-        this.all = new ArrayList<Pass>(passes);
+        this.all = new ArrayList<>(passes);
         this.index = identity;
     }
 

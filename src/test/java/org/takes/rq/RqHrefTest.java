@@ -17,7 +17,7 @@ import org.takes.HttpException;
  * Test case for {@link RqHref.Base}.
  * @since 0.1
  */
-@SuppressWarnings("PMD.TooManyMethods") final class RqHrefTest {
+final class RqHrefTest {
 
     @Test
     void parsesHttpQuery() throws IOException {

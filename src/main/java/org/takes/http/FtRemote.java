@@ -25,7 +25,6 @@ import org.takes.Take;
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
- * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class FtRemote implements Front {

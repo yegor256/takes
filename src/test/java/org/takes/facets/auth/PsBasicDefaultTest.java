@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
@@ -89,7 +90,9 @@ final class PsBasicDefaultTest {
                 new String[]{
                     String.format(
                         "login password %s",
-                        URLEncoder.encode(urn, "UTF-8")
+                        URLEncoder.encode(
+                            urn, StandardCharsets.UTF_8.name()
+                        )
                     ),
                 }
             ).enter(

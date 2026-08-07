@@ -35,7 +35,6 @@ public final class TkReadAlways implements Take {
     }
 
     @Override
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Response act(final Request req) throws Exception {
         final Response res = this.origin.act(req);
         for (int count = req.body().available(); count > 0;

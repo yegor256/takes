@@ -41,7 +41,6 @@ public final class CopyBytesUntilBoundary {
      * @param boundary Boundary
      * @param src Source
      * @param buffer Buffer
-     * @checkstyle ParameterNumberCheck (5 lines)
      */
     @SuppressWarnings("PMD.ArrayIsStoredDirectly")
     public CopyBytesUntilBoundary(
@@ -59,7 +58,6 @@ public final class CopyBytesUntilBoundary {
     /**
      * Run pipeline.
      * @throws IOException If problems found in
-     * @checkstyle ExecutableStatementCountCheck (500 lines)
      */
     @SuppressWarnings("PMD.CognitiveComplexity")
     public void copy() throws IOException {

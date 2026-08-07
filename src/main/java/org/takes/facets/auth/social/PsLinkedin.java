@@ -79,7 +79,6 @@ public final class PsLinkedin implements Pass {
      * @param ahref Linkedin api href
      * @param lapp Linkedin app name
      * @param lkey Linkedin key
-     * @checkstyle ParameterNumberCheck (3 lines)
      */
     public PsLinkedin(final Href thref, final Href ahref,
         final String lapp, final String lkey) {

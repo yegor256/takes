@@ -22,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
  * Tests for {@link VerboseList}.
  * @since 0.32
  */
-@SuppressWarnings("PMD.TooManyMethods")
 @ExtendWith(MockitoExtension.class)
 final class VerboseListTest {
 

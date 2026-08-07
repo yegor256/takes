@@ -63,7 +63,6 @@ import org.takes.rq.RqMethod;
  * @since 1.15
  */
 @SuppressWarnings({
-    "PMD.TooManyMethods",
     "PMD.ExcessivePublicCount",
     "PMD.CouplingBetweenObjects"
 })

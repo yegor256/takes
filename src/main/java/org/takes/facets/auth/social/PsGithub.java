@@ -84,7 +84,6 @@ public final class PsGithub implements Pass {
      * @param gkey Github key
      * @param gurl Github OAuth server
      * @param aurl Github API server
-     * @checkstyle ParameterNumberCheck (2 lines)
      */
     PsGithub(final String gapp, final String gkey,
         final String gurl, final String aurl) {

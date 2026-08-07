@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -65,7 +66,9 @@ public final class RsPrevious extends RsWrap {
                 () -> new RsWithCookie(
                     rsp,
                     "TkPrevious",
-                    URLEncoder.encode(location, "UTF-8"),
+                    URLEncoder.encode(
+                        location, StandardCharsets.UTF_8.name()
+                    ),
                     "Path=/",
                     new Expires.Date(
                         System.currentTimeMillis()

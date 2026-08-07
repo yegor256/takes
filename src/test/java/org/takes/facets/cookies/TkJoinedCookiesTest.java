@@ -16,7 +16,6 @@ import org.takes.tk.TkFixed;
 /**
  * Test case for {@link TkJoinedCookies}.
  * @since 0.11
- * @checkstyle ClassDataAbstractionCouplingCheck (50 lines)
  */
 final class TkJoinedCookiesTest {
 

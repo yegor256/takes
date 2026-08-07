@@ -94,7 +94,7 @@ final class RqLiveTest {
             () -> new RqLive(
                 new ByteArrayInputStream(
                     String.format(
-                        "GET /test HTTP/1.1%sHost: \u20ac",
+                        "GET /test HTTP/1.1%sHost: €",
                         RqLiveTest.CRLF
                     ).getBytes(StandardCharsets.UTF_8)
                 )

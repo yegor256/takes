@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -211,7 +212,8 @@ public final class PsBasic implements Pass {
         /**
          * Encoding for URLEncode#encode.
          */
-        private static final String ENCODING = "UTF-8";
+        private static final String ENCODING =
+            StandardCharsets.UTF_8.name();
 
         /**
          * Map from login/password pairs to URNs.

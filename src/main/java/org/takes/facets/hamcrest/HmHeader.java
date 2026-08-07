@@ -117,7 +117,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
      * @param item To extract headers from
      * @return Header lines
      * @throws IOException If something goes wrong
-     * @checkstyle NonStaticMethodCheck (2 lines)
      */
     private static Iterable<String> headers(final Head item) throws
         IOException {

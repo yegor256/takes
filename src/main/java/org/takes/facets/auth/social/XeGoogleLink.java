@@ -118,7 +118,6 @@ public final class XeGoogleLink extends XeWrap {
     /**
      * Lazy XeSource that builds the Google OAuth link on demand.
      * @since 2.0
-     * @checkstyle ParameterNumberCheck (10 lines)
      */
     private static final class LazyLink implements XeSource {
 
@@ -148,7 +147,6 @@ public final class XeGoogleLink extends XeWrap {
          * @param application App ID
          * @param relation Relation type
          * @param redirect Redirect URI
-         * @checkstyle ParameterNumberCheck (4 lines)
          */
         LazyLink(final Request request, final CharSequence application,
             final CharSequence relation, final CharSequence redirect) {

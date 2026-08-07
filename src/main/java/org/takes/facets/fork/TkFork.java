@@ -54,7 +54,7 @@ public final class TkFork implements Take {
      * Ctor.
      */
     public TkFork() {
-        this(new ArrayList<Fork>(0));
+        this(new ArrayList<>(0));
     }
 
     /**

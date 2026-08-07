@@ -111,7 +111,6 @@ public final class PsGoogle implements Pass {
      * @param uri Redirect URI (exactly as registered in Google console)
      * @param gurl Google OAuth url
      * @param aurl Google API url
-     * @checkstyle ParameterNumberCheck (2 lines)
      */
     PsGoogle(final String gapp, final String gkey,
         final String uri, final String gurl, final String aurl) {

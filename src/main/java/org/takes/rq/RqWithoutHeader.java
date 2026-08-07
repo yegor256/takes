@@ -33,7 +33,6 @@ public final class RqWithoutHeader extends RqWrap {
      */
     public RqWithoutHeader(final Request req, final CharSequence name) {
         super(
-            // @checkstyle AnonInnerLengthCheck (50 lines)
             new RequestOf(
                 () -> new Filtered<>(
                     header -> new Not(

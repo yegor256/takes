@@ -27,7 +27,7 @@ public final class FkChain implements Fork {
      * Ctor.
      */
     public FkChain() {
-        this(new ArrayList<Fork>(0));
+        this(new ArrayList<>(0));
     }
 
     /**

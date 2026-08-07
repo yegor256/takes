@@ -25,7 +25,6 @@ import org.cactoos.text.UncheckedText;
  * @param <T> Type of item
  * @since 0.31.1
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public final class VerboseList<T> implements List<T> {
 
     /**

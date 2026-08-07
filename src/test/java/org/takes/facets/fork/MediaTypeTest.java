@@ -95,7 +95,7 @@ final class MediaTypeTest {
         Assertions.assertDoesNotThrow(
             () -> new MediaType(
                 String.format(
-                    "%c%c\t%c\u20ac00",
+                    "%c%c\t%c€00",
                     (char) 10, (char) 10, (char) 13
                 )
             )

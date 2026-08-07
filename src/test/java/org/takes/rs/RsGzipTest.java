@@ -32,7 +32,7 @@ final class RsGzipTest {
                 new RsGzip(
                     new RsText(
                         String.format(
-                            "some unicode text: \u20ac%c\t",
+                            "some unicode text: €%c\t",
                             (char) 10
                         )
                     )
@@ -45,7 +45,7 @@ final class RsGzipTest {
     @Test
     void decompressesToOriginalText() throws IOException {
         final String text = String.format(
-            "some unicode text: \u20ac%c\t",
+            "some unicode text: €%c\t",
             (char) 10
         );
         MatcherAssert.assertThat(

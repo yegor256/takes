@@ -126,7 +126,6 @@ public final class RsWithStatus extends RsWrap {
     /**
      * Make all reasons.
      * @return Map of status codes and reasons
-     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     private static Map<Integer, String> make() {
         final Map<Integer, String> map = new HashMap<>(0);

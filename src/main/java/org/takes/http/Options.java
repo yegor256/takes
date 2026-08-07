@@ -68,7 +68,6 @@ final class Options {
      * @return Socket
      * @throws IOException If fails
      */
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     ServerSocket socket() throws IOException {
         final String port = this.map.get("port");
         if (port == null) {

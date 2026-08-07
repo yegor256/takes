@@ -108,7 +108,6 @@ final class PsLinkedinTest {
          * @param lapp Linkedin app
          * @param lkey Linkedin key
          * @param tokenpath Request path for token endpoint
-         * @checkstyle ParameterNumber (4 lines)
          */
         TokenTake(
             final String code, final String lapp, final String lkey,
@@ -187,7 +186,6 @@ final class PsLinkedinTest {
          * @param lastname Field name for "Last name"
          * @param frodo Test value for "First name"
          * @param baggins Test value for "Last name"
-         * @checkstyle ParameterNumberCheck (4 lines)
          */
         PeopleTake(
             final String identifier,

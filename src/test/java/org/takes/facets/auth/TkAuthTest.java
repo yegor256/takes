@@ -28,7 +28,7 @@ import org.takes.tk.TkText;
  * Test case for {@link TkAuth}.
  * @since 0.9
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class TkAuthTest {
 
     @Test

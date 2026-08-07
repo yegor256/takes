@@ -44,7 +44,6 @@ public final class RqPrint extends RqWrap implements Text {
     /**
      * Ctor.
      * @param req Original request
-     * @checkstyle AnonInnerLengthCheck (30 lines)
      */
     public RqPrint(final Request req) {
         super(req);

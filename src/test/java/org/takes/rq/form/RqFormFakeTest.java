@@ -5,6 +5,7 @@
 package org.takes.rq.form;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import org.cactoos.list.ListOf;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -67,7 +68,7 @@ final class RqFormFakeTest {
                         "Content-Length: %d",
                         URLEncoder.encode(
                             "key=value&key=a&b&anotherkey=againanothervalue",
-                            "UTF-8"
+                            StandardCharsets.UTF_8.name()
                         ).length()
                     )
                 ),

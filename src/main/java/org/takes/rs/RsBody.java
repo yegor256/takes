@@ -77,7 +77,6 @@ interface RsBody extends Input {
         }
 
         @Override
-        @SuppressWarnings("PMD.UnnecessaryLocalRule")
         public int length() throws IOException {
             try (InputStream input = this.source.openStream()) {
                 return input.available();
@@ -289,9 +288,7 @@ interface RsBody extends Input {
          * @throws IOException In case the content of the underlying
          *  {@code Body} could not be stored into the file
          */
-        @SuppressWarnings(
-            {"PMD.AvoidSynchronizedStatement", "PMD.UnnecessaryLocalRule"}
-        )
+        @SuppressWarnings("PMD.AvoidSynchronizedStatement")
         private File file() throws IOException {
             final File file = this.tmp.value();
             synchronized (file) {

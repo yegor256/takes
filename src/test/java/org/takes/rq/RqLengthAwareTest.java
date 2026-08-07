@@ -18,10 +18,7 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link RqLengthAware}.
  * @since 0.1
  */
-@SuppressWarnings({
-    "PMD.TooManyMethods",
-    "PMD.UnnecessaryLocalRule"
-})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqLengthAwareTest {
 
     @Test

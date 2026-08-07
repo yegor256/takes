@@ -52,7 +52,7 @@ final class RsXsltTest {
             " xmlns:x='http://www.w3.org/1999/xhtml' version='2.0'>",
             "<template match='/'>",
             "<x:html><x:div><value-of select='/page/data'/>",
-            "</x:div><x:p>\u0443</x:p></x:html></template></stylesheet>"
+            "</x:div><x:p>у</x:p></x:html></template></stylesheet>"
         );
         MatcherAssert.assertThat(
             "RsXslt must convert XML to HTML with correct UTF-8 encoding",
@@ -63,7 +63,7 @@ final class RsXsltTest {
                 ).body(),
                 StandardCharsets.UTF_8
             ),
-            XhtmlMatchers.hasXPath("//xhtml:p[.='\u0443']")
+            XhtmlMatchers.hasXPath("//xhtml:p[.='у']")
         );
     }
 
@@ -219,7 +219,7 @@ final class RsXsltTest {
      * Checking XXE vulnerability for XSLT transformer in response class {@link RsXslt}.
      */
     @Test
-    void getRuntime() {
+    void blocksExternalFunctionCalls() {
         final Text xml = new Joined(
             " ",
             "<?xml-stylesheet href='/a.xsl' type='text/xsl'?>",

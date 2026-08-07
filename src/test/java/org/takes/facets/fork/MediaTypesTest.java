@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
  * Test case for {@link MediaTypes}.
  * @since 0.6
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class MediaTypesTest {
 
     @Test
@@ -111,7 +110,7 @@ final class MediaTypesTest {
     void parsesWhitespaceAndSpecialCharsWithoutException() {
         Assertions.assertDoesNotThrow(
             () -> new MediaTypes(
-                String.format("%n%n\t%c00", '\u20ac')
+                String.format("%n%n\t%c00", '€')
             )
         );
     }

@@ -152,7 +152,6 @@ final class PsGoogleTest {
             this.requestToken(),
             new FkRegex(
                 PsGoogleTest.REGEX_PATTERN,
-                // @checkstyle AnonInnerLengthCheck (1 line)
                 (Take) req -> {
                     MatcherAssert.assertThat(
                         "Google API request must contain correct HEAD path for user info",
@@ -175,7 +174,6 @@ final class PsGoogleTest {
         Assertions.assertThrows(
             IOException.class,
             () -> new FtRemote(take).exec(
-                // @checkstyle AnonInnerLengthCheck (100 lines)
                 home -> new PsGoogle(
                     PsGoogleTest.APP,
                     PsGoogleTest.KEY,

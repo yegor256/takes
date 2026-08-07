@@ -90,7 +90,6 @@ public final class PsTwitter implements Pass {
      * @param creds HTTP request for verifying credentials
      * @param name Facebook app
      * @param keys Facebook key
-     * @checkstyle ParameterNumberCheck (3 lines)
      */
     PsTwitter(final com.jcabi.http.Request tkn,
         final com.jcabi.http.Request creds,

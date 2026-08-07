@@ -85,7 +85,6 @@ public final class TkMeasured extends TkWrap {
      * @param take Original take
      * @param header Header to add
      */
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public TkMeasured(final Take take, final String header) {
         super(
             req -> {

@@ -48,11 +48,6 @@ public final class BkTimeable extends Thread implements Back {
     private final Back back;
 
     /**
-     * Maximum latency in milliseconds.
-     */
-    private final long latency;
-
-    /**
      * Threads storage.
      */
     private final ConcurrentMap<Thread, Long> threads;
@@ -63,26 +58,20 @@ public final class BkTimeable extends Thread implements Back {
      * @param msec Execution latency
      */
     public BkTimeable(final Back back, final long msec) {
-        super();
-        this.threads = new ConcurrentHashMap<>(1);
-        this.back = back;
-        this.latency = msec;
+        this(back, msec, new ConcurrentHashMap<>(1));
     }
 
-    @Override
-    public void run() {
-        while (true) {
-            this.check();
-            try {
-                TimeUnit.SECONDS.sleep(1L);
-            } catch (final InterruptedException ex) {
-                Thread.currentThread().interrupt();
-                throw new IllegalStateException(
-                    "Interrupted while waiting",
-                    ex
-                );
-            }
-        }
+    /**
+     * Ctor.
+     * @param back Original back
+     * @param msec Execution latency
+     * @param threads Threads storage
+     */
+    private BkTimeable(final Back back, final long msec,
+        final ConcurrentMap<Thread, Long> threads) {
+        super(new BkTimeable.Monitoring(threads, msec));
+        this.back = back;
+        this.threads = threads;
     }
 
     @Override
@@ -95,18 +84,61 @@ public final class BkTimeable extends Thread implements Back {
     }
 
     /**
-     * Check threads storage and interrupt long-running threads.
+     * Watcher of long-running threads.
+     * @since 2.0
      */
-    private void check() {
-        for (final Map.Entry<Thread, Long> entry
-            : this.threads.entrySet()) {
-            final long time = System.currentTimeMillis();
-            if (time - entry.getValue() > this.latency) {
-                final Thread thread = entry.getKey();
-                if (thread.isAlive()) {
-                    thread.interrupt();
+    private static final class Monitoring implements Runnable {
+
+        /**
+         * Threads storage.
+         */
+        private final ConcurrentMap<Thread, Long> threads;
+
+        /**
+         * Maximum latency in milliseconds.
+         */
+        private final long latency;
+
+        /**
+         * Ctor.
+         * @param map Threads storage
+         * @param msec Execution latency
+         */
+        Monitoring(final ConcurrentMap<Thread, Long> map, final long msec) {
+            this.threads = map;
+            this.latency = msec;
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                this.check();
+                try {
+                    TimeUnit.SECONDS.sleep(1L);
+                } catch (final InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                    throw new IllegalStateException(
+                        "Interrupted while waiting",
+                        ex
+                    );
                 }
-                this.threads.remove(thread);
+            }
+        }
+
+        /**
+         * Check threads storage and interrupt long-running threads.
+         */
+        private void check() {
+            for (final Map.Entry<Thread, Long> entry
+                : this.threads.entrySet()) {
+                final long time = System.currentTimeMillis();
+                if (time - entry.getValue() > this.latency) {
+                    final Thread thread = entry.getKey();
+                    if (thread.isAlive()) {
+                        thread.interrupt();
+                    }
+                    this.threads.remove(thread);
+                }
             }
         }
     }

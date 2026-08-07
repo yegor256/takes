@@ -30,7 +30,6 @@ import org.takes.tk.TkText;
  * Test of {@link PsBasic}.
  * @since 0.20
  */
-@SuppressWarnings("PMD.TooManyMethods")
 final class PsBasicTest {
 
     /**

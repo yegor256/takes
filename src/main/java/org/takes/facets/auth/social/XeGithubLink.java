@@ -52,7 +52,6 @@ public final class XeGithubLink extends XeWrap {
     /**
      * Lazy XeSource that builds the GitHub OAuth link on demand.
      * @since 2.0
-     * @checkstyle ParameterNumberCheck (10 lines)
      */
     private static final class LazyLink implements XeSource {
 
@@ -82,7 +81,6 @@ public final class XeGithubLink extends XeWrap {
          * @param application App ID
          * @param relation Relation type
          * @param fly Flag
-         * @checkstyle ParameterNumberCheck (4 lines)
          */
         LazyLink(final Request request, final CharSequence application,
             final CharSequence relation, final CharSequence fly) {

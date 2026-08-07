@@ -99,9 +99,9 @@ public final class SiHmac implements Signature {
         final byte[] result = this.create().doFinal(bytes);
         final char[] hex = new char[result.length * 2];
         for (int idx = 0; idx < result.length; idx = idx + 1) {
-            final int val = result[idx] & 0xff;
+            final int val = result[idx] & 0xFF;
             hex[idx * 2] = Character.forDigit(val >>> 4, 16);
-            hex[idx * 2 + 1] = Character.forDigit(val & 0x0f, 16);
+            hex[idx * 2 + 1] = Character.forDigit(val & 0x0F, 16);
         }
         return new String(hex).getBytes(StandardCharsets.UTF_8);
     }

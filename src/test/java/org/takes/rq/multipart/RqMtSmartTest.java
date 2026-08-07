@@ -227,7 +227,7 @@ final class RqMtSmartTest {
                 "",
                 ""
             ).asString();
-        final int the = 0x7f;
+        final int the = 0x7F;
         final String foot =
             new Joined(
                 RqMtSmartTest.CRLF,

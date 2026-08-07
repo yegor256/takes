@@ -58,7 +58,6 @@ import org.takes.rs.RsWithoutHeader;
  *
  * @since 1.14
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**

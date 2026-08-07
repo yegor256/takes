@@ -28,14 +28,13 @@ import org.takes.tk.TkFixed;
  * Test case for {@link FtRemote}.
  * @since 0.21
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FtRemoteTest {
 
     @Test
     @Tag("deep")
     void simplyWorks() throws Exception {
         final byte[] data = new byte[4];
-        data[0] = (byte) 0xff;
+        data[0] = (byte) 0xFF;
         final AtomicReference<byte[]> result = new AtomicReference<>();
         new FtRemote(new TkFixed(new RsText(data))).exec(
             home -> result.set(

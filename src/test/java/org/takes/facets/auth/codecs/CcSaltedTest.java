@@ -57,7 +57,7 @@ final class CcSaltedTest {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(
-                "\u0010\u0000\u0000\u0000".getBytes(StandardCharsets.UTF_8)
+                new byte[] {0x10, 0x00, 0x00, 0x00}
             )
         );
     }
@@ -67,7 +67,10 @@ final class CcSaltedTest {
         Assertions.assertThrows(
             DecodingException.class,
             () -> new CcSalted(new CcPlain()).decode(
-                "\u1111\u0000\u0000\u0000".getBytes(StandardCharsets.UTF_8)
+                new byte[] {
+                    (byte) 0xE1, (byte) 0x84, (byte) 0x91,
+                    0x00, 0x00, 0x00,
+                }
             )
         );
     }

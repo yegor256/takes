@@ -5,6 +5,7 @@
 package org.takes.facets.previous;
 
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -51,7 +52,11 @@ public final class TkPrevious implements Take {
         final Response response;
         if (cookies.hasNext()) {
             response = new RsWithCookie(
-                new RsRedirect(URLDecoder.decode(cookies.next(), "UTF-8")),
+                new RsRedirect(
+                    URLDecoder.decode(
+                        cookies.next(), StandardCharsets.UTF_8.name()
+                    )
+                ),
                 TkPrevious.class.getName(),
                 "",
                 "Path=/",

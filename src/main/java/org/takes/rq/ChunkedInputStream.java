@@ -209,7 +209,7 @@ final class ChunkedInputStream extends InputStream {
         /**
          * End.
          */
-        END;
+        END
     }
 
     /**
@@ -243,28 +243,23 @@ final class ChunkedInputStream extends InputStream {
             throw new IOException("chunked stream ended unexpectedly");
         }
         final State result;
-        switch (state) {
-            case NORMAL:
-                result = nextNormal(state, line, next);
-                break;
-            case R:
-                if (next == '\n') {
-                    result = State.END;
-                } else {
-                    throw new IOException(
-                        String.format(
-                            "%s%s",
-                            "Protocol violation: Unexpected",
-                            " single newline character in chunk size"
-                        )
-                    );
-                }
-                break;
-            case QUOTED_STRING:
-                result = nextQuoted(stream, state, line, next);
-                break;
-            default:
-                throw new IllegalStateException("Bad state");
+        if (state == State.NORMAL) {
+            result = nextNormal(state, line, next);
+        } else if (state == State.R) {
+            if (next != '\n') {
+                throw new IOException(
+                    String.format(
+                        "%s%s",
+                        "Protocol violation: Unexpected",
+                        " single newline character in chunk size"
+                    )
+                );
+            }
+            result = State.END;
+        } else if (state == State.QUOTED_STRING) {
+            result = nextQuoted(stream, state, line, next);
+        } else {
+            throw new IllegalStateException("Bad state");
         }
         return result;
     }
@@ -279,17 +274,13 @@ final class ChunkedInputStream extends InputStream {
     private static State nextNormal(final State state,
         final ByteArrayOutputStream line, final int next) {
         final State result;
-        switch (next) {
-            case '\r':
-                result = State.R;
-                break;
-            case '\"':
-                result = State.QUOTED_STRING;
-                break;
-            default:
-                result = state;
-                line.write(next);
-                break;
+        if (next == '\r') {
+            result = State.R;
+        } else if (next == '\"') {
+            result = State.QUOTED_STRING;
+        } else {
+            result = state;
+            line.write(next);
         }
         return result;
     }
@@ -308,18 +299,14 @@ final class ChunkedInputStream extends InputStream {
         final ByteArrayOutputStream line, final int next)
         throws IOException {
         final State result;
-        switch (next) {
-            case '\\':
-                result = state;
-                line.write(stream.read());
-                break;
-            case '\"':
-                result = State.NORMAL;
-                break;
-            default:
-                result = state;
-                line.write(next);
-                break;
+        if (next == '\\') {
+            result = state;
+            line.write(stream.read());
+        } else if (next == '\"') {
+            result = State.NORMAL;
+        } else {
+            result = state;
+            line.write(next);
         }
         return result;
     }

@@ -34,6 +34,16 @@ final class CcAesTest {
     };
 
     /**
+     * Test AES key for decryption tests.
+     */
+    private static final byte[] DECRYPT_KEY = {
+        (byte) 25, (byte) 92, (byte) 9, (byte) -75,
+        (byte) 54, (byte) 20, (byte) -118, (byte) 73,
+        (byte) -2, (byte) 81, (byte) 24, (byte) -5,
+        (byte) 20, (byte) 122, (byte) 92, (byte) -128,
+    };
+
+    /**
      * Test random bytes for IV in encryption tests.
      */
     private static final byte[] TEST_RANDOM = {
@@ -87,18 +97,12 @@ final class CcAesTest {
             (byte) 48, (byte) 47, (byte) 42, (byte) -92,
             (byte) -127, (byte) 16, (byte) -74, (byte) -61,
         };
-        final byte[] key = {
-            (byte) 25, (byte) 92, (byte) 9, (byte) -75,
-            (byte) 54, (byte) 20, (byte) -118, (byte) 73,
-            (byte) -2, (byte) 81, (byte) 24, (byte) -5,
-            (byte) 20, (byte) 122, (byte) 92, (byte) -128,
-        };
         MatcherAssert.assertThat(
             "CcAes must decrypt identity correctly to original URN",
             new CcAes(
                 new CcTest(),
                 new SecureRandom(),
-                new SecretKeySpec(key, "AES")
+                new SecretKeySpec(CcAesTest.DECRYPT_KEY, "AES")
             ).decode(encrypted).urn(),
             Matchers.equalTo("urn:github:29835")
         );
@@ -161,8 +165,11 @@ final class CcAesTest {
      * Fake random SPI.
      * @since 0.13.8
      */
-    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
-    private static final class FkRandomSpi extends SecureRandomSpi {
+    @SuppressWarnings({
+        "PMD.UncommentedEmptyMethodBody",
+        "PMD.JUnitTestClassShouldBeFinal"
+    })
+    private static class FkRandomSpi extends SecureRandomSpi {
 
         /**
          * Serial id.
@@ -185,11 +192,11 @@ final class CcAesTest {
         }
 
         @Override
-        public void engineSetSeed(final byte[] bytes) {
+        protected void engineSetSeed(final byte[] bytes) {
         }
 
         @Override
-        public void engineNextBytes(final byte[] bytes) {
+        protected void engineNextBytes(final byte[] bytes) {
             if (bytes.length > this.fake.length) {
                 throw new UnsupportedOperationException(
                     "Byte-array is too big"
@@ -199,7 +206,7 @@ final class CcAesTest {
         }
 
         @Override
-        public byte[] engineGenerateSeed(final int length) {
+        protected byte[] engineGenerateSeed(final int length) {
             return new byte[length];
         }
     }

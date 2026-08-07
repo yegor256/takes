@@ -53,7 +53,7 @@ public final class CcHex implements Codec {
         -1, -1, -1, -1, -1, -1, -1, -1,
         0, 1, 2, 3, 4, 5, 6, 7,
         8, 9, -1, -1, -1, -1, -1, -1,
-        -1, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf,
+        -1, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF,
     };
 
     /**
@@ -85,8 +85,8 @@ public final class CcHex implements Codec {
             if (idx > 0 && idx % CcHex.CHUNK == 0) {
                 out.write('-');
             }
-            out.write(CcHex.FWD[raw[idx] >> 4 & 0x0f]);
-            out.write(CcHex.FWD[raw[idx] & 0x0f]);
+            out.write(CcHex.FWD[raw[idx] >> 4 & 0x0F]);
+            out.write(CcHex.FWD[raw[idx] & 0x0F]);
         }
         return out.toByteArray();
     }

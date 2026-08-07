@@ -7,7 +7,7 @@ package org.takes.rs.xe;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Func;
-import org.cactoos.func.UncheckedFunc;
+import org.cactoos.iterator.Mapped;
 
 /**
  * Iterable to transform an iterable of some objects
@@ -69,24 +69,6 @@ public final class XeTransform<T> implements Iterable<XeSource> {
 
     @Override
     public Iterator<XeSource> iterator() {
-        final Iterator<T> origin = this.objects.iterator();
-        return new Iterator<XeSource>() {
-            @Override
-            public boolean hasNext() {
-                return origin.hasNext();
-            }
-
-            @Override
-            public XeSource next() {
-                return new UncheckedFunc<>(
-                    XeTransform.this.func
-                ).apply(origin.next());
-            }
-
-            @Override
-            public void remove() {
-                origin.remove();
-            }
-        };
+        return new Mapped<>(this.func, this.objects.iterator());
     }
 }

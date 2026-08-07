@@ -40,7 +40,6 @@ import org.takes.rs.RsJson;
  * The class is immutable and thread-safe.
  *
  * @since 1.4
- * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
 @EqualsAndHashCode
 public final class PsToken implements Pass {
@@ -95,9 +94,7 @@ public final class PsToken implements Pass {
     }
 
     @Override
-    @SuppressWarnings("PMD.UnnecessaryLocalRule")
     public Opt<Identity> enter(final Request req) throws IOException {
-        // @checkstyle ExecutableStatementCount (100 lines)
         Opt<Identity> user = new Opt.Empty<>();
         final UncheckedText head = new Unchecked<>(
             new FirstOf<>(

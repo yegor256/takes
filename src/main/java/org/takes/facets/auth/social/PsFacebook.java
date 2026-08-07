@@ -108,7 +108,6 @@ public final class PsFacebook implements Pass {
      * @param frequestor The Facebook web requestor
      * @param fapp The Facebook application ID
      * @param fkey The Facebook application secret key
-     * @checkstyle ParameterNumberCheck (3 lines)
      */
     PsFacebook(final com.jcabi.http.Request frequest,
         final WebRequestor frequestor, final String fapp, final String fkey) {

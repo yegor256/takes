@@ -24,9 +24,8 @@ import org.takes.rs.RsText;
 /**
  * Test case for {@link BkTimeable}.
  * @since 0.14.2
- * @checkstyle ExecutableStatementCountCheck (500 lines)
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.UnitTestContainsTooManyAsserts"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class BkTimeableTest {
 
     @Test

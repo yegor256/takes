@@ -40,7 +40,6 @@ public final class RqLive extends RqWrap {
      * @throws IOException If fails
      */
     public RqLive(final InputStream input) throws IOException {
-        // @checkstyle ConstructorsCodeFreeCheck (1 line)
         super(RqLive.parse(input));
     }
 
@@ -49,7 +48,6 @@ public final class RqLive extends RqWrap {
      * @param input Input stream
      * @return Request
      * @throws IOException If fails
-     * @checkstyle ExecutableStatementCountCheck (100 lines)
      */
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
@@ -142,7 +140,7 @@ public final class RqLive extends RqWrap {
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
-        if ((data.get() > 0x7f || data.get() < 0x20)
+        if ((data.get() > 0x7F || data.get() < 0x20)
             && data.get() != '\t') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
