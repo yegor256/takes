@@ -36,8 +36,7 @@ import org.takes.rs.RsJson;
  * verifying the signature and extracting the user identity from the payload.
  * It supports token generation and validation using HMAC signatures.
  *
- * <p>
- * The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.
  *
  * @since 1.4
  */
@@ -83,7 +82,7 @@ public final class PsToken implements Pass {
     /**
      * Ctor.
      * @param sign
-     *  A {@see Signature}
+     *  A {@link SiHmac}
      * @param seconds
      *  The life span of the token
      */
@@ -113,7 +112,7 @@ public final class PsToken implements Pass {
             final String jwt = new UncheckedText(
                 new Trimmed(new TextOf(head.asString().split(" ", 2)[1]))
             ).asString();
-            final String[] parts = jwt.split("\\.");
+            final String[] parts = jwt.split("\\.", 3);
             final byte[] jwtheader = parts[0].getBytes(
                 Charset.defaultCharset()
             );

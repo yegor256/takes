@@ -90,9 +90,7 @@ final class PsBasicDefaultTest {
                 new String[]{
                     String.format(
                         "login password %s",
-                        URLEncoder.encode(
-                            urn, StandardCharsets.UTF_8.name()
-                        )
+                        URLEncoder.encode(urn, StandardCharsets.UTF_8)
                     ),
                 }
             ).enter(

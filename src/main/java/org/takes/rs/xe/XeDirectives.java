@@ -5,8 +5,8 @@
 package org.takes.rs.xe;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.list.ListOf;
@@ -75,7 +75,7 @@ public final class XeDirectives implements XeSource {
      * @return Directives
      */
     private static Iterable<Directive> transform(final Iterable<String> texts) {
-        final Collection<Directive> list = new LinkedList<>();
+        final Collection<Directive> list = new ArrayList<>(0);
         for (final String text : texts) {
             try {
                 for (final Directive dir : new Directives(text)) {

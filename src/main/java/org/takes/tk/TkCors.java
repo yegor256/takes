@@ -49,25 +49,25 @@ import org.takes.rs.RsWithStatus;
  *
  * <p>For allowed origins, the response includes:
  * <ul>
- *   <li>Access-Control-Allow-Origin header matching request origin</li>
- *   <li>Access-Control-Allow-Credentials: true for authenticated requests</li>
- *   <li>Access-Control-Allow-Methods with common HTTP methods</li>
+ * <li>Access-Control-Allow-Origin header matching request origin</li>
+ * <li>Access-Control-Allow-Credentials: true for authenticated requests</li>
+ * <li>Access-Control-Allow-Methods with common HTTP methods</li>
  * </ul>
  *
  * <p>For disallowed origins, the response includes:
  * <ul>
- *   <li>HTTP 403 Forbidden status</li>
- *   <li>Access-Control-Allow-Credentials: false</li>
- *   <li>No Access-Control-Allow-Origin header</li>
+ * <li>HTTP 403 Forbidden status</li>
+ * <li>Access-Control-Allow-Credentials: false</li>
+ * <li>No Access-Control-Allow-Origin header</li>
  * </ul>
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>API endpoints accessed by web applications</li>
- *   <li>Microservices with cross-domain communication</li>
- *   <li>Public APIs with controlled access</li>
- *   <li>Development environments with multiple origins</li>
- *   <li>Third-party integrations requiring CORS</li>
+ * <li>API endpoints accessed by web applications</li>
+ * <li>Microservices with cross-domain communication</li>
+ * <li>Public APIs with controlled access</li>
+ * <li>Development environments with multiple origins</li>
+ * <li>Third-party integrations requiring CORS</li>
  * </ul>
  *
  * <p>The take validates the Origin header from incoming requests against

@@ -42,7 +42,9 @@ public final class RsWithType extends RsWrap {
     /**
      * Constructs a {@code RsWithType} that will add the content type header to
      * the response using the specified type as media type.
+     *
      * <p>The resulting header is of type {@code Content-Type: media-type}.
+     *
      * @param res Original response
      * @param type Content type
      */
@@ -54,8 +56,10 @@ public final class RsWithType extends RsWrap {
      * Constructs a {@code RsWithType} that will add the content type header to
      * the response using the specified type as media type and the specified
      * charset as charset parameter value.
+     *
      * <p>The resulting header
      * is of type {@code Content-Type: media-type; charset=charset-value}.
+     *
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header

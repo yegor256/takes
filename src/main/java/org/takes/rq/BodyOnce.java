@@ -36,7 +36,7 @@ public final class BodyOnce extends RqWrap {
     public BodyOnce(final Request req) {
         super(
             new RequestOf(
-                req::head,
+                req,
                 new IoChecked<>(
                     new Scalar<InputStream>() {
                         private final Scalar<String> text = new Sticky<>(

@@ -46,7 +46,7 @@ public final class RqWithoutHeader extends RqWrap {
                     ).value(),
                     req.head()
                 ),
-                req::body
+                req
             )
         );
     }

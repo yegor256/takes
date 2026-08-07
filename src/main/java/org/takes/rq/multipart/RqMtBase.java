@@ -17,10 +17,10 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -211,7 +211,7 @@ public final class RqMtBase implements RqMultipart {
         ).getBytes(RqMtBase.ENCODING);
         buf.flip();
         buf.position(boundary.length - 2);
-        final Collection<Request> requests = new LinkedList<>();
+        final Collection<Request> requests = new ArrayList<>(0);
         while (buf.hasRemaining()) {
             final byte data = buf.get();
             if (data == '-') {
@@ -225,8 +225,8 @@ public final class RqMtBase implements RqMultipart {
 
     /**
      * Make a request.
-     *  Scans the origin request until the boundary reached. Caches
-     *  the  content into a temporary file and returns it as a new request.
+     * Scans the origin request until the boundary reached. Caches
+     * the  content into a temporary file and returns it as a new request.
      * @param boundary Boundary
      * @param body Origin request body
      * @return Request
@@ -286,7 +286,7 @@ public final class RqMtBase implements RqMultipart {
             }
             final String name = matcher.group(1);
             if (!map.containsKey(name)) {
-                map.put(name, new LinkedList<>());
+                map.put(name, new ArrayList<>(0));
             }
             map.get(name).add(req);
         }

@@ -44,13 +44,13 @@ import org.takes.Take;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Unit testing exception handling and error recovery</li>
- *   <li>Integration testing of error reporting systems</li>
- *   <li>Load testing with controlled failure injection</li>
- *   <li>Development environment error simulation</li>
- *   <li>Circuit breaker pattern testing</li>
- *   <li>Fallback mechanism validation</li>
- *   <li>Error monitoring and alerting system testing</li>
+ * <li>Unit testing exception handling and error recovery</li>
+ * <li>Integration testing of error reporting systems</li>
+ * <li>Load testing with controlled failure injection</li>
+ * <li>Development environment error simulation</li>
+ * <li>Circuit breaker pattern testing</li>
+ * <li>Fallback mechanism validation</li>
+ * <li>Error monitoring and alerting system testing</li>
  * </ul>
  *
  * <p>The take immediately throws the configured exception upon any request

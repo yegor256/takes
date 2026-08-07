@@ -33,11 +33,6 @@ import org.takes.tk.TkText;
 final class PsBasicTest {
 
     /**
-     * Basic Auth.
-     */
-    private static final String AUTH_BASIC = "Authorization: Basic %s";
-
-    /**
      * Valid code parameter.
      */
     private static final String VALID_CODE = "?valid_code=%s";
@@ -262,7 +257,7 @@ final class PsBasicTest {
 
     private static String header(final String user, final String pass) {
         return String.format(
-            PsBasicTest.AUTH_BASIC,
+            "Authorization: Basic %s",
             DatatypeConverter.printBase64Binary(
                 String.format("%s:%s", user, pass)
                     .getBytes(StandardCharsets.UTF_8)

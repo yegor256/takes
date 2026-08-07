@@ -28,11 +28,11 @@ import lombok.EqualsAndHashCode;
  *
  * <p>Key features:
  * <ul>
- *   <li>Monitors all active request-processing threads</li>
- *   <li>Interrupts threads that exceed the maximum processing time</li>
- *   <li>Runs as a daemon thread with 1-second monitoring interval</li>
- *   <li>Thread-safe tracking of active requests using {@link ConcurrentMap}</li>
- *   <li>Automatic cleanup of completed or interrupted threads</li>
+ * <li>Monitors all active request-processing threads</li>
+ * <li>Interrupts threads that exceed the maximum processing time</li>
+ * <li>Runs as a daemon thread with 1-second monitoring interval</li>
+ * <li>Thread-safe tracking of active requests using {@link ConcurrentMap}</li>
+ * <li>Automatic cleanup of completed or interrupted threads</li>
  * </ul>
  *
  * <p>The class is immutable and thread-safe.

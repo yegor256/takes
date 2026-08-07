@@ -4,6 +4,7 @@
  */
 package org.takes.facets.fork;
 
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,8 @@ final class FkAuthenticatedTest {
                     new RqFake("PUT", "/hello"),
                     TkAuth.class.getSimpleName(),
                     new String(
-                        new CcPlain().encode(new Identity.Simple("urn:test:1"))
+                        new CcPlain().encode(new Identity.Simple("urn:test:1")),
+                        StandardCharsets.UTF_8
                     )
                 )
             ).has(),

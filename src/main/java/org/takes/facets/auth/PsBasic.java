@@ -6,10 +6,10 @@ package org.takes.facets.auth;
 
 import jakarta.xml.bind.DatatypeConverter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -91,12 +91,12 @@ public final class PsBasic implements Pass {
             new Trimmed(
                 new TextOf(
                     DatatypeConverter.parseBase64Binary(
-                        PsBasic.AUTH.split(headers.next())[1]
+                        PsBasic.AUTH.split(headers.next(), 2)[1]
                     )
                 )
             )
         ).asString();
-        final String user = decoded.split(":")[0];
+        final String user = decoded.split(":", 2)[0];
         final Opt<Identity> identity = this.entry.enter(
             user,
             decoded.substring(user.length() + 1)
@@ -212,8 +212,7 @@ public final class PsBasic implements Pass {
         /**
          * Encoding for URLEncode#encode.
          */
-        private static final String ENCODING =
-            StandardCharsets.UTF_8.name();
+        private static final Charset ENCODING = StandardCharsets.UTF_8;
 
         /**
          * Map from login/password pairs to URNs.
@@ -246,20 +245,11 @@ public final class PsBasic implements Pass {
             final Opt<String> urn = this.urn(user, pwd);
             final Opt<Identity> identity;
             if (urn.has()) {
-                try {
-                    identity = new Opt.Single<>(
-                        new Identity.Simple(
-                            URLDecoder.decode(
-                                urn.get(), PsBasic.Default.ENCODING
-                            )
-                        )
-                    );
-                } catch (final UnsupportedEncodingException ex) {
-                    throw new IllegalStateException(
-                        String.format("Failed to decode URN '%s'", urn.get()),
-                        ex
-                    );
-                }
+                identity = new Opt.Single<>(
+                    new Identity.Simple(
+                        URLDecoder.decode(urn.get(), PsBasic.Default.ENCODING)
+                    )
+                );
             } else {
                 identity = new Opt.Empty<>();
             }
@@ -295,27 +285,13 @@ public final class PsBasic implements Pass {
          *  pair
          */
         private Opt<String> urn(final String user, final String pwd) {
-            final String urn;
-            try {
-                urn = this.usernames.value().get(
-                    String.format(
-                        PsBasic.Default.KEY_FORMAT,
-                        URLEncoder.encode(
-                            user,
-                            PsBasic.Default.ENCODING
-                        ),
-                        URLEncoder.encode(
-                            pwd,
-                            PsBasic.Default.ENCODING
-                        )
-                    )
-                );
-            } catch (final UnsupportedEncodingException ex) {
-                throw new IllegalStateException(
-                    "Failed to encode user name or password",
-                    ex
-                );
-            }
+            final String urn = this.usernames.value().get(
+                String.format(
+                    PsBasic.Default.KEY_FORMAT,
+                    URLEncoder.encode(user, PsBasic.Default.ENCODING),
+                    URLEncoder.encode(pwd, PsBasic.Default.ENCODING)
+                )
+            );
             final Opt<String> opt;
             if (urn == null) {
                 opt = new Opt.Empty<>();
@@ -327,7 +303,7 @@ public final class PsBasic implements Pass {
 
         /**
          * Creates a key for
-         *  {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
+         * {@link org.takes.facets.auth.PsBasic.Default#usernames} map.
          * @param unified User string made of 3 urlencoded substrings
          *  separated with non-urlencoded space characters
          * @return Login and password parts with <pre>%20</pre> replaced with
@@ -370,8 +346,8 @@ public final class PsBasic implements Pass {
          */
         private static int countSpaces(final String txt) {
             int spaces = 0;
-            for (final char character : txt.toCharArray()) {
-                if (character == ' ') {
+            for (int idx = 0; idx < txt.length(); idx += 1) {
+                if (txt.charAt(idx) == ' ') {
                     spaces += 1;
                 }
             }

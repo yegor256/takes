@@ -34,15 +34,15 @@ import org.takes.rs.RsWithStatus;
  *
  * <p>Key features:
  * <ul>
- *   <li>Handles keep-alive connections by processing multiple requests
- *       on the same socket</li>
- *   <li>Automatically adds socket information headers (local/remote address
- *       and port)</li>
- *   <li>Provides comprehensive exception handling with appropriate HTTP
- *       status codes</li>
- *   <li>Handles {@link HttpException} with custom status codes</li>
- *   <li>Maps {@link IllegalArgumentException} to HTTP 400 Bad Request</li>
- *   <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
+ * <li>Handles keep-alive connections by processing multiple requests
+ * on the same socket</li>
+ * <li>Automatically adds socket information headers (local/remote address
+ * and port)</li>
+ * <li>Provides comprehensive exception handling with appropriate HTTP
+ * status codes</li>
+ * <li>Handles {@link HttpException} with custom status codes</li>
+ * <li>Maps {@link IllegalArgumentException} to HTTP 400 Bad Request</li>
+ * <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
  * </ul>
  *
  * <p>The class is immutable and thread-safe.

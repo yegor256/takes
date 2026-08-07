@@ -25,7 +25,7 @@ import org.takes.rs.RsWithHeader;
  * <pre>{@code
  * // Add performance metrics to any endpoint
  * new TkMeasured(
- *     new TkHtml("&lt;html>Content&lt;/html>")
+ *     new TkHtml("<html>Content</html>")
  * );
  * // Response includes: X-Takes-Millis: 42
  *
@@ -45,13 +45,13 @@ import org.takes.rs.RsWithHeader;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Performance monitoring and profiling</li>
- *   <li>SLA compliance tracking</li>
- *   <li>Debugging slow endpoints</li>
- *   <li>Load testing and benchmarking</li>
- *   <li>Real-time performance dashboards</li>
- *   <li>Identifying performance bottlenecks</li>
- *   <li>A/B testing performance impacts</li>
+ * <li>Performance monitoring and profiling</li>
+ * <li>SLA compliance tracking</li>
+ * <li>Debugging slow endpoints</li>
+ * <li>Load testing and benchmarking</li>
+ * <li>Real-time performance dashboards</li>
+ * <li>Identifying performance bottlenecks</li>
+ * <li>A/B testing performance impacts</li>
  * </ul>
  *
  * <p>The measurement includes the complete request processing time from

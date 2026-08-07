@@ -4,6 +4,7 @@
  */
 package org.takes.servlet;
 
+import com.google.errorprone.annotations.DoNotCall;
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.RequestDispatcher;
@@ -49,11 +50,11 @@ import org.takes.rq.RqMethod;
  *
  * <p>Key features:
  * <ul>
- *   <li>Converts Takes {@link Request} to servlet {@link HttpServletRequest}</li>
- *   <li>Supports standard HTTP methods, headers, and URL parameters</li>
- *   <li>Provides minimal implementation suitable for most testing scenarios</li>
- *   <li>Throws {@link UnsupportedOperationException} for advanced servlet features</li>
- *   <li>Thread-safe and immutable where possible</li>
+ * <li>Converts Takes {@link Request} to servlet {@link HttpServletRequest}</li>
+ * <li>Supports standard HTTP methods, headers, and URL parameters</li>
+ * <li>Provides minimal implementation suitable for most testing scenarios</li>
+ * <li>Throws {@link UnsupportedOperationException} for advanced servlet features</li>
+ * <li>Thread-safe and immutable where possible</li>
  * </ul>
  *
  * <p>Many methods throw {@link UnsupportedOperationException} as they
@@ -353,6 +354,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
      *  URL
      * @deprecated Use isRequestedSessionIdFromURL() instead.
      */
+    @DoNotCall("Always throws UnsupportedOperationException")
     @Deprecated
     public boolean isRequestedSessionIdFromUrl() {
         throw new UnsupportedOperationException(
@@ -496,6 +498,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
      * @return The real path, or null if the translation cannot be performed
      * @deprecated Use ServletContext.getRealPath(String) instead.
      */
+    @DoNotCall("Always throws UnsupportedOperationException")
     @Deprecated
     public String getRealPath(final String path) {
         throw new UnsupportedOperationException("#getRealPath()");

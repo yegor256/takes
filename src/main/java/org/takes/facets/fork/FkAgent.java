@@ -5,7 +5,7 @@
 package org.takes.facets.fork;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,7 +73,7 @@ public final class FkAgent implements Fork {
      * @throws IOException If some problems inside.
      */
     private static List<String> tokens(final Request req) throws IOException {
-        final List<String> tokens = new LinkedList<>();
+        final List<String> tokens = new ArrayList<>(0);
         final Iterable<String> headers =
             new RqHeaders.Base(req).header("User-Agent");
         for (final String header : headers) {

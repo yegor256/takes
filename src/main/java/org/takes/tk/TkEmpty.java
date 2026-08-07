@@ -36,11 +36,11 @@ import org.takes.rs.RsEmpty;
  *
  * <p>Common use cases:
  * <ul>
- *   <li>Health check endpoints that just need to return 200 OK</li>
- *   <li>Ping endpoints for service availability testing</li>
- *   <li>Acknowledgment responses after processing POST requests</li>
- *   <li>Placeholder responses during development</li>
- *   <li>Default handlers for unimplemented endpoints</li>
+ * <li>Health check endpoints that just need to return 200 OK</li>
+ * <li>Ping endpoints for service availability testing</li>
+ * <li>Acknowledgment responses after processing POST requests</li>
+ * <li>Placeholder responses during development</li>
+ * <li>Default handlers for unimplemented endpoints</li>
  * </ul>
  *
  * <p>The class is immutable and thread-safe.

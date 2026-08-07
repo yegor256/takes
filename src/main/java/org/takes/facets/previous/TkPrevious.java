@@ -53,9 +53,7 @@ public final class TkPrevious implements Take {
         if (cookies.hasNext()) {
             response = new RsWithCookie(
                 new RsRedirect(
-                    URLDecoder.decode(
-                        cookies.next(), StandardCharsets.UTF_8.name()
-                    )
+                    URLDecoder.decode(cookies.next(), StandardCharsets.UTF_8)
                 ),
                 TkPrevious.class.getName(),
                 "",

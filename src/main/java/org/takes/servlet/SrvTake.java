@@ -33,22 +33,22 @@ import org.takes.Take;
  *
  * <p>Configuration example in web.xml:
  * <pre>{@code
- * &lt;servlet>
- *   &lt;servlet-name>app&lt;/servlet-name>
- *   &lt;servlet-class>org.takes.servlet.SrvTake&lt;/servlet-class>
- *   &lt;init-param>
- *     &lt;param-name>take&lt;/param-name>
- *     &lt;param-value>com.example.MyTake&lt;/param-value>
- *   &lt;/init-param>
- * &lt;/servlet>
+ * <servlet>
+ *   <servlet-name>app</servlet-name>
+ *   <servlet-class>org.takes.servlet.SrvTake</servlet-class>
+ *   <init-param>
+ *     <param-name>take</param-name>
+ *     <param-value>com.example.MyTake</param-value>
+ *   </init-param>
+ * </servlet>
  * }</pre>
  *
  * <p>The servlet handles the complete request/response lifecycle:
  * <ul>
- *   <li>Converts {@link HttpServletRequest} to Takes {@link org.takes.Request}</li>
- *   <li>Processes the request through the configured {@link Take}</li>
- *   <li>Converts Takes {@link org.takes.Response} back to {@link HttpServletResponse}</li>
- *   <li>Handles exceptions and maps them to appropriate HTTP status codes</li>
+ * <li>Converts {@link HttpServletRequest} to Takes {@link org.takes.Request}</li>
+ * <li>Processes the request through the configured {@link Take}</li>
+ * <li>Converts Takes {@link org.takes.Response} back to {@link HttpServletResponse}</li>
+ * <li>Handles exceptions and maps them to appropriate HTTP status codes</li>
  * </ul>
  *
  * @since 2.0

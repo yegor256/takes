@@ -13,11 +13,6 @@ import java.io.IOException;
 public class HttpException extends IOException {
 
     /**
-     * Message format.
-     */
-    private static final String MESSAGE_FORMAT = "[%03d] %s";
-
-    /**
      * Serialization marker.
      */
     private static final long serialVersionUID = -505306086879848229L;
@@ -78,9 +73,7 @@ public class HttpException extends IOException {
         if (this.detail == null) {
             msg = Integer.toString(this.status);
         } else {
-            msg = String.format(
-                HttpException.MESSAGE_FORMAT, this.status, this.detail
-            );
+            msg = String.format("[%03d] %s", this.status, this.detail);
         }
         return msg;
     }

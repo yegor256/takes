@@ -35,7 +35,7 @@ final class RsFlashTest {
                     "Set-Cookie: RsFlash=%s/%s",
                     URLEncoder.encode(
                         msg,
-                        Charset.defaultCharset().name()
+                        Charset.defaultCharset()
                     ),
                     Level.INFO.getName()
                 )

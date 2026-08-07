@@ -46,13 +46,13 @@ import org.takes.rs.RsText;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Static endpoints returning constant data</li>
- *   <li>API stub implementations during development</li>
- *   <li>Default responses and fallback handlers</li>
- *   <li>Testing scenarios requiring predictable responses</li>
- *   <li>Health check endpoints with fixed status</li>
- *   <li>Maintenance mode responses</li>
- *   <li>Configuration endpoints with static data</li>
+ * <li>Static endpoints returning constant data</li>
+ * <li>API stub implementations during development</li>
+ * <li>Default responses and fallback handlers</li>
+ * <li>Testing scenarios requiring predictable responses</li>
+ * <li>Health check endpoints with fixed status</li>
+ * <li>Maintenance mode responses</li>
+ * <li>Configuration endpoints with static data</li>
  * </ul>
  *
  * <p>The take completely ignores incoming request data, making it very

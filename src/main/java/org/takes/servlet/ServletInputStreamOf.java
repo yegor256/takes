@@ -25,11 +25,11 @@ import java.io.InputStream;
  *
  * <p>Key features:
  * <ul>
- *   <li>Adapts standard {@link InputStream} to {@link ServletInputStream}</li>
- *   <li>Determines finished/ready state based on data availability</li>
- *   <li>Delegates all read operations to the wrapped stream</li>
- *   <li>Supports standard stream operations (mark/reset, skip, etc.)</li>
- *   <li>Throws {@link UnsupportedOperationException} for async read listeners</li>
+ * <li>Adapts standard {@link InputStream} to {@link ServletInputStream}</li>
+ * <li>Determines finished/ready state based on data availability</li>
+ * <li>Delegates all read operations to the wrapped stream</li>
+ * <li>Supports standard stream operations (mark/reset, skip, etc.)</li>
+ * <li>Throws {@link UnsupportedOperationException} for async read listeners</li>
  * </ul>
  *
  * <p>The implementation assumes that {@link #isReady()} correlates with

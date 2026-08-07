@@ -14,10 +14,10 @@ package org.takes.http;
  *
  * <p>The interface provides several implementations for common exit scenarios:
  * <ul>
- *   <li>{@link #NEVER} - Server runs indefinitely until externally terminated</li>
- *   <li>{@link Exit.Or} - Logical OR combination of two exit conditions</li>
- *   <li>{@link Exit.And} - Logical AND combination of two exit conditions</li>
- *   <li>{@link Exit.Not} - Logical NOT inversion of an exit condition</li>
+ * <li>{@link #NEVER} - Server runs indefinitely until externally terminated</li>
+ * <li>{@link Exit.Or} - Logical OR combination of two exit conditions</li>
+ * <li>{@link Exit.And} - Logical AND combination of two exit conditions</li>
+ * <li>{@link Exit.Not} - Logical NOT inversion of an exit condition</li>
  * </ul>
  *
  * <p>All implementations of this interface must be immutable and thread-safe.

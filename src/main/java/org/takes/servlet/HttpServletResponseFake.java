@@ -4,6 +4,7 @@
  */
 package org.takes.servlet;
 
+import com.google.errorprone.annotations.DoNotCall;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,11 +46,11 @@ import org.takes.rs.RsWithoutHeader;
  *
  * <p>Key features:
  * <ul>
- *   <li>Wraps Takes {@link Response} to provide servlet {@link HttpServletResponse} API</li>
- *   <li>Supports adding headers, cookies, and setting HTTP status codes</li>
- *   <li>Provides access to response body through {@link ServletOutputStream}</li>
- *   <li>Thread-safe response modification using atomic references</li>
- *   <li>Minimal implementation focused on testing needs</li>
+ * <li>Wraps Takes {@link Response} to provide servlet {@link HttpServletResponse} API</li>
+ * <li>Supports adding headers, cookies, and setting HTTP status codes</li>
+ * <li>Provides access to response body through {@link ServletOutputStream}</li>
+ * <li>Thread-safe response modification using atomic references</li>
+ * <li>Minimal implementation focused on testing needs</li>
  * </ul>
  *
  * <p>Many methods throw {@link UnsupportedOperationException} as they
@@ -181,6 +182,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
      * @return The encoded URL
      * @deprecated It should not be used
      */
+    @DoNotCall("Always throws UnsupportedOperationException")
     @Deprecated
     public String encodeUrl(final String url) {
         throw new UnsupportedOperationException("#encodeUrl()");
@@ -192,6 +194,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
      * @return The encoded redirect URL
      * @deprecated It should not be used
      */
+    @DoNotCall("Always throws UnsupportedOperationException")
     @Deprecated
     public String encodeRedirectUrl(final String url) {
         throw new UnsupportedOperationException("#encodeRedirectUrl()");
@@ -247,6 +250,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
      * @param reason The reason originates this code
      * @deprecated It should not be used
      */
+    @DoNotCall("Always throws UnsupportedOperationException")
     @Deprecated
     public void setStatus(final int code, final String reason) {
         throw new UnsupportedOperationException("#setStatus()");

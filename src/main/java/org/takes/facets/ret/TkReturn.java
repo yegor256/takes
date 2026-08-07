@@ -67,10 +67,7 @@ public final class TkReturn implements Take {
         if (values.hasNext()) {
             response = new RsWithCookie(
                 new RsRedirect(
-                    URLDecoder.decode(
-                        values.next(),
-                        Charset.defaultCharset().name()
-                    )
+                    URLDecoder.decode(values.next(), Charset.defaultCharset())
                 ),
                 this.cookie,
                 ""

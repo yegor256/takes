@@ -14,6 +14,7 @@ import org.takes.Response;
  * Response Status Matcher.
  *
  * <p>This "matcher" tests given response status code.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @since 0.13
@@ -46,7 +47,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
     public Integer featureValueOf(final Response response) {
         try {
             return Integer.parseInt(
-                response.head().iterator().next().split(" ")[1]
+                response.head().iterator().next().split(" ", 3)[1]
             );
         } catch (final IOException ex) {
             throw new IllegalStateException(ex);

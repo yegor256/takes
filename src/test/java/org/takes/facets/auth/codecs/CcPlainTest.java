@@ -29,7 +29,7 @@ final class CcPlainTest {
         );
         MatcherAssert.assertThat(
             "Plain encoded identity must match URL-encoded format",
-            new String(new CcPlain().encode(identity)),
+            new String(new CcPlain().encode(identity), StandardCharsets.UTF_8),
             Matchers.equalTo("urn%3Atest%3A3;name=Jeff+Lebowski")
         );
     }

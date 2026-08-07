@@ -6,7 +6,6 @@ package org.takes.rq.form;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import org.takes.Request;
@@ -89,16 +88,7 @@ public final class RqFormFake implements RqForm {
      * @return Encoded text
      */
     private static String encode(final CharSequence txt) {
-        try {
-            return URLEncoder.encode(
-                txt.toString(), Charset.defaultCharset().name()
-            );
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(
-                String.format("Failed to encode '%s'", txt),
-                ex
-            );
-        }
+        return URLEncoder.encode(txt.toString(), Charset.defaultCharset());
     }
 
     /**

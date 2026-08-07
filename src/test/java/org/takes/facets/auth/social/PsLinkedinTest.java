@@ -80,7 +80,7 @@ final class PsLinkedinTest {
      * Take that returns JSON with the authorization token.
      * @since 1.1
      */
-    private final class TokenTake implements Take {
+    private static final class TokenTake implements Take {
 
         /**
          * Request path pattern for token endpoint.
@@ -152,7 +152,7 @@ final class PsLinkedinTest {
      * Take that returns JSON with test user data.
      * @since 1.1
      */
-    private final class PeopleTake implements Take {
+    private static final class PeopleTake implements Take {
 
         /**
          * Linkedin user identifier.

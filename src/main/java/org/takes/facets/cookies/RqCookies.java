@@ -9,8 +9,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -113,7 +115,8 @@ public interface RqCookies extends Request {
             final Iterable<String> values =
                 new RqHeaders.Base(this).header("Cookie");
             for (final String value : values) {
-                for (final String pair : value.split(";")) {
+                for (final Text txt : new Split(value, ";")) {
+                    final String pair = new UncheckedText(txt).asString();
                     final String[] parts = pair.split("=", 2);
                     final String key =
                         new UncheckedText(

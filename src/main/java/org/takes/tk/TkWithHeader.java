@@ -38,13 +38,13 @@ import org.takes.rs.RsWithHeader;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Adding individual security headers to specific endpoints</li>
- *   <li>Setting content-specific cache control headers</li>
- *   <li>Adding custom API headers for single endpoints</li>
- *   <li>Setting CORS headers for specific resources</li>
- *   <li>Adding debug or tracking headers to responses</li>
- *   <li>Setting content disposition for file downloads</li>
- *   <li>Adding versioning headers to API responses</li>
+ * <li>Adding individual security headers to specific endpoints</li>
+ * <li>Setting content-specific cache control headers</li>
+ * <li>Adding custom API headers for single endpoints</li>
+ * <li>Setting CORS headers for specific resources</li>
+ * <li>Adding debug or tracking headers to responses</li>
+ * <li>Setting content disposition for file downloads</li>
+ * <li>Adding versioning headers to API responses</li>
  * </ul>
  *
  * <p>This decorator is more lightweight than {@link TkWithHeaders} when

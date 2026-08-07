@@ -25,11 +25,11 @@ import java.io.OutputStream;
  *
  * <p>Key features:
  * <ul>
- *   <li>Adapts standard {@link OutputStream} to {@link ServletOutputStream}</li>
- *   <li>Always ready for synchronous writing ({@link #isReady()} returns true)</li>
- *   <li>Delegates all write operations to the wrapped stream</li>
- *   <li>Throws {@link UnsupportedOperationException} for async features</li>
- *   <li>Thread-safe as long as the wrapped stream is thread-safe</li>
+ * <li>Adapts standard {@link OutputStream} to {@link ServletOutputStream}</li>
+ * <li>Always ready for synchronous writing ({@link #isReady()} returns true)</li>
+ * <li>Delegates all write operations to the wrapped stream</li>
+ * <li>Throws {@link UnsupportedOperationException} for async features</li>
+ * <li>Thread-safe as long as the wrapped stream is thread-safe</li>
  * </ul>
  *
  * @since 1.14

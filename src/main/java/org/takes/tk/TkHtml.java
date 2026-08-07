@@ -24,7 +24,7 @@ import org.takes.rs.RsHtml;
  * <p>Example usage:
  * <pre>{@code
  * // Static HTML page
- * new TkHtml("&lt;html>&lt;body>&lt;h1>Welcome&lt;/h1>&lt;/body>&lt;/html>");
+ * new TkHtml("<html><body><h1>Welcome</h1></body></html>");
  *
  * // Dynamic HTML from template
  * new TkHtml(() -> renderTemplate("page.html", data));
@@ -38,23 +38,23 @@ import org.takes.rs.RsHtml;
  *
  * <p>The take supports multiple HTML content sources:
  * <ul>
- *   <li>Static HTML strings for fixed web pages</li>
- *   <li>Dynamic content through {@link Scalar} suppliers for templates</li>
- *   <li>Binary HTML data as byte arrays</li>
- *   <li>External HTML resources via URLs</li>
- *   <li>Streaming HTML content from InputStreams</li>
+ * <li>Static HTML strings for fixed web pages</li>
+ * <li>Dynamic content through {@link Scalar} suppliers for templates</li>
+ * <li>Binary HTML data as byte arrays</li>
+ * <li>External HTML resources via URLs</li>
+ * <li>Streaming HTML content from InputStreams</li>
  * </ul>
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Web page endpoints serving complete HTML documents</li>
- *   <li>API endpoints returning HTML fragments for AJAX requests</li>
- *   <li>Template-based pages with dynamic content injection</li>
- *   <li>Error pages with custom HTML styling</li>
- *   <li>Admin interfaces and dashboards</li>
- *   <li>Form pages for user input and interaction</li>
- *   <li>Static HTML content serving (about pages, help docs)</li>
- *   <li>Widget endpoints returning HTML components</li>
+ * <li>Web page endpoints serving complete HTML documents</li>
+ * <li>API endpoints returning HTML fragments for AJAX requests</li>
+ * <li>Template-based pages with dynamic content injection</li>
+ * <li>Error pages with custom HTML styling</li>
+ * <li>Admin interfaces and dashboards</li>
+ * <li>Form pages for user input and interaction</li>
+ * <li>Static HTML content serving (about pages, help docs)</li>
+ * <li>Widget endpoints returning HTML components</li>
  * </ul>
  *
  * <p>The response includes standard HTTP headers with Content-Type set to

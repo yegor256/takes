@@ -105,7 +105,7 @@ public final class RsReturn extends RsWrap {
                     cookie,
                     URLEncoder.encode(
                         RsReturn.validLocation(loc),
-                        Charset.defaultCharset().name()
+                        Charset.defaultCharset()
                     ),
                     "Path=/",
                     new Expires.Date(

@@ -16,6 +16,7 @@ import org.hamcrest.TypeSafeMatcher;
  * Text body matcher.
  *
  * <p>This "matcher" tests given item body, assuming that it has text content.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @param <T> Item type. Should be able to return own body

@@ -41,22 +41,22 @@ import org.takes.rs.RsText;
  *
  * <p>The take supports multiple input sources for maximum flexibility:
  * <ul>
- *   <li>Static strings for fixed responses</li>
- *   <li>Dynamic content through {@link Scalar} suppliers</li>
- *   <li>Binary data as byte arrays</li>
- *   <li>External resources via URLs</li>
- *   <li>Streaming content from InputStreams</li>
+ * <li>Static strings for fixed responses</li>
+ * <li>Dynamic content through {@link Scalar} suppliers</li>
+ * <li>Binary data as byte arrays</li>
+ * <li>External resources via URLs</li>
+ * <li>Streaming content from InputStreams</li>
  * </ul>
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>API endpoints returning JSON, XML, or CSV data</li>
- *   <li>Status and health check endpoints</li>
- *   <li>Configuration endpoints serving properties or settings</li>
- *   <li>Log endpoints providing application logs</li>
- *   <li>Error message endpoints with detailed diagnostics</li>
- *   <li>Documentation endpoints serving plain text guides</li>
- *   <li>Data export endpoints (TSV, plain text reports)</li>
+ * <li>API endpoints returning JSON, XML, or CSV data</li>
+ * <li>Status and health check endpoints</li>
+ * <li>Configuration endpoints serving properties or settings</li>
+ * <li>Log endpoints providing application logs</li>
+ * <li>Error message endpoints with detailed diagnostics</li>
+ * <li>Documentation endpoints serving plain text guides</li>
+ * <li>Data export endpoints (TSV, plain text reports)</li>
  * </ul>
  *
  * <p>The response includes standard HTTP headers with Content-Type set to

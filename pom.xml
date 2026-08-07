@@ -94,6 +94,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <version>2.50.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
       <!--
@@ -560,6 +566,41 @@
                   <new>method java.lang.String org.takes.facets.forward.RsForward::getMessage()</new>
                   <justification>Override of inherited Throwable.getMessage() made final to satisfy DesignForExtensionCheck</justification>
                 </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.annotation.added</code>
+                  <old>method java.lang.String org.takes.servlet.HttpServletRequestFake::getRealPath(java.lang.String)</old>
+                  <new>method java.lang.String org.takes.servlet.HttpServletRequestFake::getRealPath(java.lang.String)</new>
+                  <justification>Added ErrorProne DoNotCall annotation to satisfy DoNotCallSuggester check on a method that always throws</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.annotation.added</code>
+                  <old>method boolean org.takes.servlet.HttpServletRequestFake::isRequestedSessionIdFromUrl()</old>
+                  <new>method boolean org.takes.servlet.HttpServletRequestFake::isRequestedSessionIdFromUrl()</new>
+                  <justification>Added ErrorProne DoNotCall annotation to satisfy DoNotCallSuggester check on a method that always throws</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.annotation.added</code>
+                  <old>method java.lang.String org.takes.servlet.HttpServletResponseFake::encodeRedirectUrl(java.lang.String)</old>
+                  <new>method java.lang.String org.takes.servlet.HttpServletResponseFake::encodeRedirectUrl(java.lang.String)</new>
+                  <justification>Added ErrorProne DoNotCall annotation to satisfy DoNotCallSuggester check on a method that always throws</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.annotation.added</code>
+                  <old>method java.lang.String org.takes.servlet.HttpServletResponseFake::encodeUrl(java.lang.String)</old>
+                  <new>method java.lang.String org.takes.servlet.HttpServletResponseFake::encodeUrl(java.lang.String)</new>
+                  <justification>Added ErrorProne DoNotCall annotation to satisfy DoNotCallSuggester check on a method that always throws</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.annotation.added</code>
+                  <old>method void org.takes.servlet.HttpServletResponseFake::setStatus(int, java.lang.String)</old>
+                  <new>method void org.takes.servlet.HttpServletResponseFake::setStatus(int, java.lang.String)</new>
+                  <justification>Added ErrorProne DoNotCall annotation to satisfy DoNotCallSuggester check on a method that always throws</justification>
+                </item>
               </differences>
             </revapi.differences>
           </analysisConfiguration>
@@ -681,7 +722,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.30.2</version>
+            <version>0.30.5</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>

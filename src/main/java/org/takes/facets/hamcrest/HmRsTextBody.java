@@ -17,6 +17,7 @@ import org.takes.Response;
  *
  * <p>This "matcher" tests given response body,
  * assuming that it has text content.</p>
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @since 2.0

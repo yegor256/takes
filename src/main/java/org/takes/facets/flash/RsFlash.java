@@ -299,10 +299,7 @@ public final class RsFlash extends RsWrap {
             cookie,
             new FormattedText(
                 RsFlash.TEXT_FORMAT,
-                URLEncoder.encode(
-                    msg.toString(),
-                    Charset.defaultCharset().name()
-                ),
+                URLEncoder.encode(msg.toString(), Charset.defaultCharset()),
                 level.getName()
             ).toString(),
             "Path=/",

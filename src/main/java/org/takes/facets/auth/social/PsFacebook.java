@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.Text;
+import org.cactoos.text.Split;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -194,9 +197,9 @@ public final class PsFacebook implements Pass {
             .fetch()
             .as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK).body();
-        final String[] sectors = response.split("&");
-        for (final String sector : sectors) {
-            final String[] pair = sector.split("=");
+        for (final Text txt : new Split(response, "&")) {
+            final String sector = new UncheckedText(txt).asString();
+            final String[] pair = sector.split("=", 2);
             if (pair.length != 2) {
                 throw new IllegalArgumentException(
                     String.format("Invalid response: '%s'", response)

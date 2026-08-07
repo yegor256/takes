@@ -34,7 +34,7 @@ public final class AmVersion implements AgentMatch {
     @SuppressWarnings("PMD.ConfusingTernary")
     public boolean matches(final String token) {
         boolean result = true;
-        final String[] parts = token.split("/");
+        final String[] parts = token.split("/", 2);
         if (parts.length <= 1) {
             result = false;
         } else if (!this.agent.equalsIgnoreCase(parts[0])) {
@@ -51,7 +51,7 @@ public final class AmVersion implements AgentMatch {
      * @return Parsed major version number
      */
     private static int majorVersion(final String part) {
-        return Integer.parseInt(part.split("\\.")[0]);
+        return Integer.parseInt(part.split("\\.", 2)[0]);
     }
 
     /**

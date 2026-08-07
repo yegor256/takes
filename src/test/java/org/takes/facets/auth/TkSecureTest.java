@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -44,7 +45,8 @@ final class TkSecureTest {
                     new RqFake(),
                     TkAuth.class.getSimpleName(),
                     new String(
-                        new CcPlain().encode(new Identity.Simple("urn:test:2"))
+                        new CcPlain().encode(new Identity.Simple("urn:test:2")),
+                        StandardCharsets.UTF_8
                     )
                 )
             ),

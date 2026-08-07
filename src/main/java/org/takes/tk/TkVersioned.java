@@ -39,13 +39,13 @@ import org.takes.rs.RsWithHeader;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Production debugging and troubleshooting</li>
- *   <li>API versioning and compatibility tracking</li>
- *   <li>Monitoring and observability in microservices</li>
- *   <li>Security auditing and vulnerability assessment</li>
- *   <li>Development and testing environment identification</li>
- *   <li>Client-side framework detection</li>
- *   <li>Support ticket investigation</li>
+ * <li>Production debugging and troubleshooting</li>
+ * <li>API versioning and compatibility tracking</li>
+ * <li>Monitoring and observability in microservices</li>
+ * <li>Security auditing and vulnerability assessment</li>
+ * <li>Development and testing environment identification</li>
+ * <li>Client-side framework detection</li>
+ * <li>Support ticket investigation</li>
  * </ul>
  *
  * <p>The version information is loaded once during class initialization

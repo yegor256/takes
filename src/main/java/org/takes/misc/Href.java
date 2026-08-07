@@ -4,20 +4,22 @@
  */
 package org.takes.misc;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import org.cactoos.Text;
 import org.cactoos.text.FormattedText;
+import org.cactoos.text.Split;
+import org.cactoos.text.UncheckedText;
 
 /**
  * HTTP URI/HREF builder and parser with query parameter manipulation.
@@ -207,12 +209,15 @@ public final class Href implements CharSequence {
     public Href path(final Object suffix) {
         return new Href(
             URI.create(
-                new StringBuilder(
-                    Href.TRAILING_SLASH.matcher(this.uri().toString())
-                        .replaceAll("")
-                )
-                .append('/')
-                .append(Href.encode(suffix.toString())).toString()
+                new UncheckedText(
+                    new FormattedText(
+                        "%s/%s",
+                        Href.TRAILING_SLASH.matcher(
+                            this.uri().toString()
+                        ).replaceAll(""),
+                        Href.encode(suffix.toString())
+                    )
+                ).asString()
             ),
             this.params(),
             this.fragment()
@@ -228,7 +233,7 @@ public final class Href implements CharSequence {
     public Href with(final Object key, final Object value) {
         final SortedMap<String, List<String>> map = new TreeMap<>(this.params());
         if (!map.containsKey(key.toString())) {
-            map.put(key.toString(), new LinkedList<>());
+            map.put(key.toString(), new ArrayList<>(0));
         }
         map.get(key.toString()).add(value.toString());
         return new Href(this.uri(), map, this.fragment());
@@ -301,16 +306,8 @@ public final class Href implements CharSequence {
      * @return Encoded
      */
     private static String encode(final String txt) {
-        try {
-            return URLEncoder.encode(
-                txt, Charset.defaultCharset().name()
-            ).replace("+", "%20");
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(
-                String.format("Failed to encode '%s'", txt),
-                ex
-            );
-        }
+        return URLEncoder.encode(txt, Charset.defaultCharset())
+            .replace("+", "%20");
     }
 
     /**
@@ -319,16 +316,7 @@ public final class Href implements CharSequence {
      * @return Decoded
      */
     private static String decode(final String txt) {
-        try {
-            return URLDecoder.decode(
-                txt, Charset.defaultCharset().name()
-            );
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(
-                String.format("Failed to decode '%s'", txt),
-                ex
-            );
-        }
+        return URLDecoder.decode(txt, Charset.defaultCharset());
     }
 
     /**
@@ -379,7 +367,8 @@ public final class Href implements CharSequence {
     private static SortedMap<String, List<String>> asMap(final String query) {
         final SortedMap<String, List<String>> params = new TreeMap<>();
         if (query != null) {
-            for (final String pair : query.split("&")) {
+            for (final Text txt : new Split(query, "&")) {
+                final String pair = new UncheckedText(txt).asString();
                 final String[] parts = pair.split("=", 2);
                 final String key = Href.decode(parts[0]);
                 final String value;
@@ -389,7 +378,7 @@ public final class Href implements CharSequence {
                     value = "";
                 }
                 if (!params.containsKey(key)) {
-                    params.put(key, new LinkedList<>());
+                    params.put(key, new ArrayList<>(0));
                 }
                 params.get(key).add(value);
             }
@@ -399,7 +388,7 @@ public final class Href implements CharSequence {
 
     /**
      * Remove query and fragment parts from the provided URI and
-     *   return the resulting URI.
+     * return the resulting URI.
      * @param link The link from which parts need to be removed
      * @return The URI corresponding to the same provided URI but without
      *  query and fragment parts

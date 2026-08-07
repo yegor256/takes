@@ -21,10 +21,10 @@ import jakarta.servlet.ServletConnection;
  *
  * <p>Key features:
  * <ul>
- *   <li>Configurable connection ID, protocol, and security flag</li>
- *   <li>Default configuration for simple testing scenarios</li>
- *   <li>Immutable once constructed</li>
- *   <li>Returns empty string for protocol connection ID (not commonly used)</li>
+ * <li>Configurable connection ID, protocol, and security flag</li>
+ * <li>Default configuration for simple testing scenarios</li>
+ * <li>Immutable once constructed</li>
+ * <li>Returns empty string for protocol connection ID (not commonly used)</li>
  * </ul>
  *
  * <p>This is primarily used in conjunction with {@link HttpServletRequestFake}

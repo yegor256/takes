@@ -21,11 +21,11 @@ import java.io.IOException;
  *
  * <p>Key responsibilities:
  * <ul>
- *   <li>Bind to network interface and port</li>
- *   <li>Accept incoming TCP connections</li>
- *   <li>Dispatch connections to back-end processors</li>
- *   <li>Monitor exit conditions for graceful shutdown</li>
- *   <li>Clean up network resources on termination</li>
+ * <li>Bind to network interface and port</li>
+ * <li>Accept incoming TCP connections</li>
+ * <li>Dispatch connections to back-end processors</li>
+ * <li>Monitor exit conditions for graceful shutdown</li>
+ * <li>Clean up network resources on termination</li>
  * </ul>
  *
  * <p>All implementations of this interface must be thread-safe.

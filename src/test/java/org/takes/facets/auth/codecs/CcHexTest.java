@@ -23,7 +23,7 @@ final class CcHexTest {
         final Identity identity = new Identity.Simple("urn:test:3");
         MatcherAssert.assertThat(
             "Hex encoded identity must match expected format",
-            new String(new CcHex(new CcPlain()).encode(identity)),
+            new String(new CcHex(new CcPlain()).encode(identity), StandardCharsets.UTF_8),
             Matchers.equalTo("75726E25-33417465-73742533-4133")
         );
     }

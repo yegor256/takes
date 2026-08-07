@@ -33,7 +33,7 @@ public final class HeadOnce extends RqWrap {
         super(
             new RequestOf(
                 new IoChecked<>(new Sticky<>(req::head))::value,
-                req::body
+                req
             )
         );
     }

@@ -8,8 +8,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import lombok.EqualsAndHashCode;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.TextOf;
@@ -51,7 +51,7 @@ public final class RqLive extends RqWrap {
      */
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
-        final Collection<String> head = new LinkedList<>();
+        final Collection<String> head = new ArrayList<>(0);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<>();
         data = RqLive.data(input, data, false);
@@ -85,8 +85,10 @@ public final class RqLive extends RqWrap {
 
     /**
      * Checks whether or not the next byte to read is a Line Feed.
+     *
      * <p><i>Please note that this method assumes that the previous byte read
      * was a Carriage Return.</i>
+     *
      * @param input The input stream to read
      * @param baos Current read header
      * @param position Header line number

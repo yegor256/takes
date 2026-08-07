@@ -4,7 +4,7 @@
  */
 package org.takes.rq;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import org.cactoos.list.ListOf;
@@ -47,7 +47,7 @@ public final class RqWithHeaders extends RqWrap {
         super(
             new RequestOf(
                 () -> {
-                    final List<String> head = new LinkedList<>();
+                    final List<String> head = new ArrayList<>(0);
                     for (final String hdr : req.head()) {
                         head.add(hdr);
                     }
@@ -60,7 +60,7 @@ public final class RqWithHeaders extends RqWrap {
                     }
                     return head;
                 },
-                req::body
+                req
             )
         );
     }

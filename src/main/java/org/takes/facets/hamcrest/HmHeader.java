@@ -22,6 +22,7 @@ import org.takes.Head;
  * Header Matcher.
  *
  * <p>This "matcher" tests given item headers.
+ *
  * <p>The class is immutable and thread-safe.
  *
  * @param <T> Item type. Should be able to return own headers

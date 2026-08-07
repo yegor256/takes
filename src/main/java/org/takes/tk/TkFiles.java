@@ -37,21 +37,21 @@ import org.takes.rs.RsWithBody;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Static asset serving (CSS, JavaScript, images)</li>
- *   <li>Document repositories and file downloads</li>
- *   <li>Media file serving (videos, audio, documents)</li>
- *   <li>Template and resource file serving</li>
- *   <li>Public file directories and archives</li>
- *   <li>Static website hosting</li>
- *   <li>Development asset serving during testing</li>
+ * <li>Static asset serving (CSS, JavaScript, images)</li>
+ * <li>Document repositories and file downloads</li>
+ * <li>Media file serving (videos, audio, documents)</li>
+ * <li>Template and resource file serving</li>
+ * <li>Public file directories and archives</li>
+ * <li>Static website hosting</li>
+ * <li>Development asset serving during testing</li>
  * </ul>
  *
  * <p>Security considerations:
  * <ul>
- *   <li>Only files within the base directory are accessible</li>
- *   <li>Directory traversal attempts (../) are handled safely</li>
- *   <li>Non-existent files return HTTP 404 Not Found</li>
- *   <li>File permissions are respected by the underlying filesystem</li>
+ * <li>Only files within the base directory are accessible</li>
+ * <li>Directory traversal attempts (../) are handled safely</li>
+ * <li>Non-existent files return HTTP 404 Not Found</li>
+ * <li>File permissions are respected by the underlying filesystem</li>
  * </ul>
  *
  * <p>The response includes appropriate HTTP headers including Content-Length

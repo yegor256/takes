@@ -5,7 +5,6 @@
 package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -52,7 +51,7 @@ public final class CcPlain implements Codec {
 
     @Override
     public byte[] encode(final Identity identity) throws IOException {
-        final String encoding = Charset.defaultCharset().name();
+        final Charset encoding = Charset.defaultCharset();
         final StringBuilder text = new StringBuilder(
             URLEncoder.encode(identity.urn(), encoding)
         );
@@ -100,12 +99,10 @@ public final class CcPlain implements Codec {
      * Decode from URL.
      * @param text The text
      * @return Decoded
-     * @throws UnsupportedEncodingException If fails
      */
-    private static String decode(final String text)
-        throws UnsupportedEncodingException {
+    private static String decode(final String text) {
         try {
-            return URLDecoder.decode(text, Charset.defaultCharset().name());
+            return URLDecoder.decode(text, Charset.defaultCharset());
         } catch (final IllegalArgumentException ex) {
             throw new DecodingException(ex);
         }

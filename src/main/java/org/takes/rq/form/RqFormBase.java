@@ -5,13 +5,12 @@
 package org.takes.rq.form;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -19,6 +18,7 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
+import org.cactoos.text.Split;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -96,18 +96,10 @@ public final class RqFormBase extends RqWrap implements RqForm {
      * @return Decoded
      */
     private static String decode(final Text txt) {
-        final String body = new UncheckedText(txt).asString();
-        try {
-            return URLDecoder.decode(
-                body,
-                Charset.defaultCharset().name()
-            );
-        } catch (final UnsupportedEncodingException ex) {
-            throw new IllegalStateException(
-                String.format("Failed to decode '%s'", body),
-                ex
-            );
-        }
+        return URLDecoder.decode(
+            new UncheckedText(txt).asString(),
+            Charset.defaultCharset()
+        );
     }
 
     /**
@@ -130,7 +122,8 @@ public final class RqFormBase extends RqWrap implements RqForm {
     private Map<String, List<String>> freshMap() throws IOException {
         final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);
-        for (final String pair : body.split("&")) {
+        for (final Text txt : new Split(body, "&")) {
+            final String pair = new UncheckedText(txt).asString();
             if (pair.isEmpty()) {
                 continue;
             }
@@ -145,7 +138,7 @@ public final class RqFormBase extends RqWrap implements RqForm {
             }
             final String key = RqFormBase.decode(new Lowered(parts[0]));
             if (!map.containsKey(key)) {
-                map.put(key, new LinkedList<>());
+                map.put(key, new ArrayList<>(0));
             }
             map.get(key).add(
                 RqFormBase.decode(

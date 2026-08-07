@@ -19,8 +19,7 @@ import org.cactoos.scalar.Unchecked;
  * This interface defines the contract for token generation, supporting
  * JSON Web Token (JWT) and JSON Object Signing and Encryption (JOSE) standards.
  *
- * <p>
- * All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 1.4
  */

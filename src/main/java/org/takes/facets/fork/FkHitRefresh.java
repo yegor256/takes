@@ -168,10 +168,13 @@ public final class FkHitRefresh implements Fork {
         File touchedFile() throws IOException {
             if (this.flag.isEmpty()) {
                 this.lock.writeLock().lock();
-                final File file = File.createTempFile("take", ".txt");
-                file.deleteOnExit();
-                this.flag.add(file);
-                this.lock.writeLock().unlock();
+                try {
+                    final File file = File.createTempFile("take", ".txt");
+                    file.deleteOnExit();
+                    this.flag.add(file);
+                } finally {
+                    this.lock.writeLock().unlock();
+                }
                 this.touch();
             }
             return this.flag.get(0);
@@ -213,8 +216,8 @@ public final class FkHitRefresh implements Fork {
          */
         private boolean directoryUpdated() {
             final long recent;
+            this.lock.readLock().lock();
             try {
-                this.lock.readLock().lock();
                 recent = this.flag.get(0).lastModified();
             } finally {
                 this.lock.readLock().unlock();

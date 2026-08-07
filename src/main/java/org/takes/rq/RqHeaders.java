@@ -7,10 +7,10 @@ package org.takes.rq;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -140,7 +140,7 @@ public interface RqHeaders extends Request {
                     new Lowered(new Trimmed(new TextOf(parts[0])))
                 ).asString();
                 if (!map.containsKey(key)) {
-                    map.put(key, new LinkedList<>());
+                    map.put(key, new ArrayList<>(0));
                 }
                 map.get(key).add(
                     new UncheckedText(

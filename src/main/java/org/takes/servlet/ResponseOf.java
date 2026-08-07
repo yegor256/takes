@@ -33,10 +33,10 @@ import org.takes.misc.Equality;
  * <p>The adapter extracts HTTP information from the Takes response and
  * applies it to the servlet response, including:
  * <ul>
- *   <li>HTTP status code from the response status line</li>
- *   <li>HTTP headers (excluding cookies which are handled separately)</li>
- *   <li>Set-Cookie headers converted to servlet Cookie objects</li>
- *   <li>Response body content streamed to the servlet output stream</li>
+ * <li>HTTP status code from the response status line</li>
+ * <li>HTTP headers (excluding cookies which are handled separately)</li>
+ * <li>Set-Cookie headers converted to servlet Cookie objects</li>
+ * <li>Response body content streamed to the servlet output stream</li>
  * </ul>
  *
  * <p>The implementation handles the complete response conversion process,

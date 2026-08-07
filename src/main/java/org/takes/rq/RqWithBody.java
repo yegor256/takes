@@ -33,7 +33,7 @@ public final class RqWithBody extends RqWrap {
     public RqWithBody(final Request req, final CharSequence bdy) {
         super(
             new RequestOf(
-                req::head,
+                req,
                 () -> new ByteArrayInputStream(
                     new UncheckedBytes(
                         new BytesOf(bdy.toString())

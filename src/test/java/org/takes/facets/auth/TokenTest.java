@@ -69,8 +69,8 @@ final class TokenTest {
             "Token must not expire after it was issued",
             format.parse(
                 jose.getString(Token.Jwt.ISSUED)
-            ).before(
-                format.parse(jose.getString(Token.Jwt.EXPIRATION))
+            ).toInstant().isBefore(
+                format.parse(jose.getString(Token.Jwt.EXPIRATION)).toInstant()
             ),
             Matchers.is(true)
         );

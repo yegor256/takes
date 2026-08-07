@@ -68,7 +68,7 @@ final class RqFormFakeTest {
                         "Content-Length: %d",
                         URLEncoder.encode(
                             "key=value&key=a&b&anotherkey=againanothervalue",
-                            StandardCharsets.UTF_8.name()
+                            StandardCharsets.UTF_8
                         ).length()
                     )
                 ),

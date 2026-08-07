@@ -40,21 +40,21 @@ import org.takes.rq.RqGreedy;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Form processing requiring validation and data extraction</li>
- *   <li>JSON/XML parsing with error handling and retry logic</li>
- *   <li>File upload processing with size validation</li>
- *   <li>Request logging and debugging scenarios</li>
- *   <li>Content transformation and filtering</li>
- *   <li>Multi-step request processing pipelines</li>
- *   <li>Request body caching and replay scenarios</li>
+ * <li>Form processing requiring validation and data extraction</li>
+ * <li>JSON/XML parsing with error handling and retry logic</li>
+ * <li>File upload processing with size validation</li>
+ * <li>Request logging and debugging scenarios</li>
+ * <li>Content transformation and filtering</li>
+ * <li>Multi-step request processing pipelines</li>
+ * <li>Request body caching and replay scenarios</li>
  * </ul>
  *
  * <p>Performance considerations:
  * <ul>
- *   <li>Entire request body is loaded into memory</li>
- *   <li>Memory usage increases with request body size</li>
- *   <li>Not suitable for large file uploads without size limits</li>
- *   <li>Eliminates streaming benefits for large payloads</li>
+ * <li>Entire request body is loaded into memory</li>
+ * <li>Memory usage increases with request body size</li>
+ * <li>Not suitable for large file uploads without size limits</li>
+ * <li>Eliminates streaming benefits for large payloads</li>
  * </ul>
  *
  * <p>The decorator preserves all request metadata including headers,

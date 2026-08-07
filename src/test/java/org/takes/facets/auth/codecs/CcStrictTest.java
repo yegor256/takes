@@ -58,7 +58,8 @@ final class CcStrictTest {
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test:1")
-                )
+                ),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo("urn%3Atest%3A1")
         );
@@ -71,7 +72,8 @@ final class CcStrictTest {
             new String(
                 new CcStrict(new CcPlain()).encode(
                     new Identity.Simple("urn:test-domain-org:valid:1")
-                )
+                ),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo("urn%3Atest-domain-org%3Avalid%3A1")
         );

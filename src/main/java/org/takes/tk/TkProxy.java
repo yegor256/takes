@@ -7,8 +7,8 @@ package org.takes.tk;
 import com.jcabi.http.request.JdkRequest;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.cactoos.text.Lowered;
@@ -59,10 +59,10 @@ public final class TkProxy implements Take {
      * to which requests are proxied. Some valid examples:</p>
      *
      * <ul>
-     *  <li>{@code http://example.com}</li>
-     *  <li>{@code http://www.example.com}</li>
-     *  <li>{@code https://example.com:8080}</li>
-     *  <li>{@code https://example.com/x/y}</li>
+     * <li>{@code http://example.com}</li>
+     * <li>{@code http://www.example.com}</li>
+     * <li>{@code https://example.com:8080}</li>
+     * <li>{@code https://example.com/x/y}</li>
      * </ul>
      *
      * @param tgt Target to which requests are forwarded
@@ -130,7 +130,7 @@ public final class TkProxy implements Take {
      */
     private Response response(final String home, final URI dest,
         final com.jcabi.http.Response rsp) {
-        final Collection<String> hdrs = new LinkedList<>();
+        final Collection<String> hdrs = new ArrayList<>(0);
         hdrs.add(
             String.format(
                 "X-Takes-TkProxy: from %s to %s by %s",

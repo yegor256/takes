@@ -7,9 +7,9 @@ package org.takes.servlet;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import org.takes.Request;
 
 /**
@@ -23,11 +23,11 @@ import org.takes.Request;
  * <p>The adapter extracts all HTTP information from the servlet request
  * and formats it according to Takes' request structure, including:
  * <ul>
- *   <li>HTTP method, URI, and query parameters in the first line</li>
- *   <li>All HTTP headers from the original request</li>
- *   <li>Host header (reconstructed if missing from servlet request)</li>
- *   <li>Takes-specific headers for local and remote addresses</li>
- *   <li>Direct access to the request body input stream</li>
+ * <li>HTTP method, URI, and query parameters in the first line</li>
+ * <li>All HTTP headers from the original request</li>
+ * <li>Host header (reconstructed if missing from servlet request)</li>
+ * <li>Takes-specific headers for local and remote addresses</li>
+ * <li>Direct access to the request body input stream</li>
  * </ul>
  *
  * <p>This conversion allows Takes applications to run inside servlet
@@ -53,7 +53,7 @@ final class RqFrom implements Request {
 
     @Override
     public Iterable<String> head() {
-        final Collection<String> head = new LinkedList<>();
+        final Collection<String> head = new ArrayList<>(0);
         head.add(new RqFrom.HttpHead(this.sreq).toString());
         final Collection<String> names = Collections.list(
             this.sreq.getHeaderNames()

@@ -23,9 +23,9 @@ import lombok.EqualsAndHashCode;
  *
  * <p>Common use cases:
  * <ul>
- *   <li>Production servers that must stay running despite client errors</li>
- *   <li>Load testing scenarios where individual failures are expected</li>
- *   <li>Wrapper around other back-ends that might throw unexpected exceptions</li>
+ * <li>Production servers that must stay running despite client errors</li>
+ * <li>Load testing scenarios where individual failures are expected</li>
+ * <li>Wrapper around other back-ends that might throw unexpected exceptions</li>
  * </ul>
  *
  * <p>The class is immutable and thread-safe.

@@ -32,10 +32,7 @@ final class RsReturnTest {
             new HasString(
                 new FormattedText(
                     "Set-Cookie: RsReturn=%s;Path=/",
-                    URLEncoder.encode(
-                        destination,
-                        Charset.defaultCharset().name()
-                    )
+                    URLEncoder.encode(destination, Charset.defaultCharset())
                 )
             )
         );

@@ -30,7 +30,7 @@ import org.takes.rs.RsGzip;
  * <pre>{@code
  * // Compress HTML pages for better performance
  * new TkGzip(
- *     new TkHtml("&lt;html>&lt;body>Large content here...&lt;/body>&lt;/html>")
+ *     new TkHtml("<html><body>Large content here...</body></html>")
  * );
  *
  * // Compress API responses
@@ -46,21 +46,21 @@ import org.takes.rs.RsGzip;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Web page compression for faster loading times</li>
- *   <li>API response compression to reduce bandwidth</li>
- *   <li>Static asset compression (CSS, JavaScript, HTML)</li>
- *   <li>Large data payload optimization</li>
- *   <li>Mobile application performance enhancement</li>
- *   <li>High-traffic endpoint optimization</li>
- *   <li>Bandwidth-limited network optimization</li>
+ * <li>Web page compression for faster loading times</li>
+ * <li>API response compression to reduce bandwidth</li>
+ * <li>Static asset compression (CSS, JavaScript, HTML)</li>
+ * <li>Large data payload optimization</li>
+ * <li>Mobile application performance enhancement</li>
+ * <li>High-traffic endpoint optimization</li>
+ * <li>Bandwidth-limited network optimization</li>
  * </ul>
  *
  * <p>Performance benefits:
  * <ul>
- *   <li>Reduces response size by 60-80% for text content</li>
- *   <li>Decreases network transfer time</li>
- *   <li>Improves user experience with faster loading</li>
- *   <li>Reduces bandwidth costs and server load</li>
+ * <li>Reduces response size by 60-80% for text content</li>
+ * <li>Decreases network transfer time</li>
+ * <li>Improves user experience with faster loading</li>
+ * <li>Reduces bandwidth costs and server load</li>
  * </ul>
  *
  * <p>The decorator automatically handles compression headers including

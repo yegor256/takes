@@ -15,7 +15,9 @@ import org.takes.tk.TkWrap;
 
 /**
  * Take that acts on request with specified methods only.
+ *
  * <p>The class is immutable and thread-safe.
+ *
  * @since 0.16.1
  */
 @ToString(callSuper = true)

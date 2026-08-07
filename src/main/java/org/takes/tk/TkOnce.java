@@ -42,12 +42,12 @@ import org.takes.rq.RqGreedy;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Stream processing that must read content sequentially</li>
- *   <li>Large file uploads with single-pass validation</li>
- *   <li>Request body transformation and filtering</li>
- *   <li>Security scanning of request content</li>
- *   <li>Audit logging of complete requests</li>
- *   <li>Content type detection and routing</li>
+ * <li>Stream processing that must read content sequentially</li>
+ * <li>Large file uploads with single-pass validation</li>
+ * <li>Request body transformation and filtering</li>
+ * <li>Security scanning of request content</li>
+ * <li>Audit logging of complete requests</li>
+ * <li>Content type detection and routing</li>
  * </ul>
  *
  * <p>The decorator ensures that the request body is fully available
@@ -56,10 +56,10 @@ import org.takes.rq.RqGreedy;
  *
  * <p>Performance considerations:
  * <ul>
- *   <li>Entire request body is loaded into memory</li>
- *   <li>Not suitable for very large uploads without memory limits</li>
- *   <li>Provides predictable memory usage patterns</li>
- *   <li>Eliminates network I/O during request processing</li>
+ * <li>Entire request body is loaded into memory</li>
+ * <li>Not suitable for very large uploads without memory limits</li>
+ * <li>Provides predictable memory usage patterns</li>
+ * <li>Eliminates network I/O during request processing</li>
  * </ul>
  *
  * <p>The class is immutable and thread-safe.

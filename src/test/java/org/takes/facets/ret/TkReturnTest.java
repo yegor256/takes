@@ -32,10 +32,7 @@ final class TkReturnTest {
                     new RqFake(),
                     String.format(
                         "Cookie: RsReturn=%s;",
-                        URLEncoder.encode(
-                            destination,
-                            Charset.defaultCharset().name()
-                        )
+                        URLEncoder.encode(destination, Charset.defaultCharset())
                     )
                 )
             ).head(),

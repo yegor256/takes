@@ -29,7 +29,7 @@ public final class RqBuffered extends RqWrap {
     public RqBuffered(final Request req) {
         super(
             new RequestOf(
-                req::head,
+                req,
                 () -> new BufferedInputStream(req.body())
             )
         );

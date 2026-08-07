@@ -43,22 +43,22 @@ import org.takes.rs.RsWithBody;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Serving bundled web assets (CSS, JavaScript, images)</li>
- *   <li>Template and configuration file serving</li>
- *   <li>Embedded documentation and help files</li>
- *   <li>Default resource fallbacks in web applications</li>
- *   <li>Plugin resource serving from JAR files</li>
- *   <li>Development and testing resource access</li>
- *   <li>Microservice resource bundling</li>
+ * <li>Serving bundled web assets (CSS, JavaScript, images)</li>
+ * <li>Template and configuration file serving</li>
+ * <li>Embedded documentation and help files</li>
+ * <li>Default resource fallbacks in web applications</li>
+ * <li>Plugin resource serving from JAR files</li>
+ * <li>Development and testing resource access</li>
+ * <li>Microservice resource bundling</li>
  * </ul>
  *
  * <p>Advantages over filesystem serving:
  * <ul>
- *   <li>Resources are packaged within application JAR files</li>
- *   <li>No external file dependencies or directory structures</li>
- *   <li>Resources are available regardless of working directory</li>
- *   <li>Supports serving from multiple JAR files in classpath</li>
- *   <li>Ideal for containerized and cloud deployments</li>
+ * <li>Resources are packaged within application JAR files</li>
+ * <li>No external file dependencies or directory structures</li>
+ * <li>Resources are available regardless of working directory</li>
+ * <li>Supports serving from multiple JAR files in classpath</li>
+ * <li>Ideal for containerized and cloud deployments</li>
  * </ul>
  *
  * <p>The response includes appropriate HTTP headers with Content-Length

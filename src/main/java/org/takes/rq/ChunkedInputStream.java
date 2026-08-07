@@ -161,7 +161,7 @@ final class ChunkedInputStream extends InputStream {
      */
     private static int chunkSize(final InputStream stream) throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
-        final String data = baos.toString(Charset.defaultCharset().name());
+        final String data = baos.toString(Charset.defaultCharset());
         final int separator = data.indexOf(';');
         try {
             return Integer.parseInt(
@@ -182,7 +182,7 @@ final class ChunkedInputStream extends InputStream {
             throw new IOException(
                 String.format(
                     "Bad chunk size: %s",
-                    baos.toString(Charset.defaultCharset().name())
+                    baos.toString(Charset.defaultCharset())
                 ),
                 ex
             );

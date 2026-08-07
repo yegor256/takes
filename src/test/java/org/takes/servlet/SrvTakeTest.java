@@ -80,7 +80,7 @@ final class SrvTakeTest {
      * Fake TkApp (for {@link SrvTake} test only).
      * @since 1.16
      */
-    final class TkApp implements Take {
+    static final class TkApp implements Take {
 
         /**
          * ServletContext.

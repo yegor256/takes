@@ -27,7 +27,8 @@ final class CcBase64Test {
             new String(
                 new CcBase64(new CcPlain()).encode(
                     new Identity.Simple("urn:test:3")
-                )
+                ),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo("dXJuJTNBdGVzdCUzQTM=")
         );
@@ -75,7 +76,8 @@ final class CcBase64Test {
             new String(
                 new CcBase64(new CcPlain()).encode(
                     new Identity.Simple("")
-                )
+                ),
+                StandardCharsets.UTF_8
             ),
             Matchers.equalTo("")
         );

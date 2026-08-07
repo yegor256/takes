@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -156,7 +157,7 @@ final class BkBasicTest {
     }
 
     @Test
-    @SuppressWarnings({"PMD.AvoidUsingHardCodedIP", "PMD.CloseResource"})
+    @SuppressWarnings("PMD.CloseResource")
     void handlesTwoRequestInOneConnection() throws Exception {
         final String text = "Hello Twice!";
         final ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -174,7 +175,7 @@ final class BkBasicTest {
             ).start();
             try (
                 Socket socket = new Socket(
-                    "127.0.0.1",
+                    InetAddress.getLoopbackAddress(),
                     server.getLocalPort()
                 )
             ) {
@@ -347,12 +348,12 @@ final class BkBasicTest {
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
      * unencodable URI.
      * todo: #1058:30min This test address the combination of bugs reported by
-     *  issue #1058 and #1441.
-     *  The problem is {@link BkBasic#accept} method that create
-     *  {@link org.takes.rq.RqLive} (can throw a {@link org.takes.HttpException},
-     *  while initializing) before execution control achieve try/catch
-     *  block in {@link BkBasic#print} with forming a proper error response on
-     *  {@link org.takes.HttpException}
+     * issue #1058 and #1441.
+     * The problem is {@link BkBasic#accept} method that create
+     * {@link org.takes.rq.RqLive} (can throw a {@link org.takes.HttpException},
+     * while initializing) before execution control achieve try/catch
+     * block in {@link BkBasic#print} with forming a proper error response on
+     * {@link org.takes.HttpException}
      */
     @Disabled
     @Test

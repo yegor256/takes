@@ -45,13 +45,13 @@ import org.takes.rs.RsWithHeaders;
  *
  * <p>Common use cases include:
  * <ul>
- *   <li>Security headers (CORS, CSP, X-Frame-Options)</li>
- *   <li>Caching and performance headers (Cache-Control, ETag)</li>
- *   <li>API versioning and metadata headers</li>
- *   <li>Cross-origin resource sharing configuration</li>
- *   <li>Content security policy enforcement</li>
- *   <li>Custom application headers for debugging</li>
- *   <li>Server identification and version headers</li>
+ * <li>Security headers (CORS, CSP, X-Frame-Options)</li>
+ * <li>Caching and performance headers (Cache-Control, ETag)</li>
+ * <li>API versioning and metadata headers</li>
+ * <li>Cross-origin resource sharing configuration</li>
+ * <li>Content security policy enforcement</li>
+ * <li>Custom application headers for debugging</li>
+ * <li>Server identification and version headers</li>
  * </ul>
  *
  * <p>The decorator preserves all aspects of the original response including

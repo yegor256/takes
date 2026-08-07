@@ -5,6 +5,7 @@
 package org.takes.facets.auth;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ final class RqAuthTest {
                 new RqWithHeader(
                     new RqFake(),
                     TkAuth.class.getSimpleName(),
-                    new String(new CcPlain().encode(identity))
+                    new String(new CcPlain().encode(identity), StandardCharsets.UTF_8)
                 )
             ).identity().urn(),
             Matchers.equalTo(identity.urn())

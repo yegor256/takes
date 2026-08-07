@@ -117,7 +117,7 @@ public final class RqMtFake implements RqMultipart {
                             ).value()
                         )
                     ).head(),
-                    body::body
+                    body
                 )
             );
         }

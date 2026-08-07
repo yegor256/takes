@@ -77,7 +77,7 @@ public final class XeFlash implements XeSource {
                     .add("message").set(
                         URLDecoder.decode(
                             matcher.group(1),
-                            Charset.defaultCharset().name()
+                            Charset.defaultCharset()
                         )
                     ).up()
                     .add("level").set(matcher.group(2));

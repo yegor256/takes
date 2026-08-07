@@ -28,10 +28,10 @@ import lombok.EqualsAndHashCode;
  *
  * <p>Key features:
  * <ul>
- *   <li>Executes each socket connection in a separate thread</li>
- *   <li>Uses custom thread factory with meaningful thread names</li>
- *   <li>Configurable thread pool size</li>
- *   <li>Wraps exceptions as {@link IllegalStateException}</li>
+ * <li>Executes each socket connection in a separate thread</li>
+ * <li>Uses custom thread factory with meaningful thread names</li>
+ * <li>Configurable thread pool size</li>
+ * <li>Wraps exceptions as {@link IllegalStateException}</li>
  * </ul>
  *
  * <p>The class is immutable and thread-safe.

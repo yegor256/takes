@@ -66,9 +66,7 @@ public final class RsPrevious extends RsWrap {
                 () -> new RsWithCookie(
                     rsp,
                     "TkPrevious",
-                    URLEncoder.encode(
-                        location, StandardCharsets.UTF_8.name()
-                    ),
+                    URLEncoder.encode(location, StandardCharsets.UTF_8),
                     "Path=/",
                     new Expires.Date(
                         System.currentTimeMillis()

@@ -46,12 +46,12 @@ import org.takes.Take;
  *
  * <p>Common decorator patterns built on TkWrap:
  * <ul>
- *   <li>Request modification (headers, body transformation)</li>
- *   <li>Response enhancement (compression, headers, caching)</li>
- *   <li>Cross-cutting concerns (logging, metrics, security)</li>
- *   <li>Error handling and retry logic</li>
- *   <li>Content negotiation and format conversion</li>
- *   <li>Performance optimization (caching, pooling)</li>
+ * <li>Request modification (headers, body transformation)</li>
+ * <li>Response enhancement (compression, headers, caching)</li>
+ * <li>Cross-cutting concerns (logging, metrics, security)</li>
+ * <li>Error handling and retry logic</li>
+ * <li>Content negotiation and format conversion</li>
+ * <li>Performance optimization (caching, pooling)</li>
  * </ul>
  *
  * <p>The class maintains a reference to the wrapped take and delegates
