@@ -97,8 +97,8 @@ public final class FtBasic implements Front {
     private void loop(final ServerSocket server) throws IOException {
         try {
             this.back.accept(server.accept());
-            // @checkstyle EmptyCatchBlock (1 line)
         } catch (final SocketTimeoutException ignored) {
+            // timeout is expected, the loop continues
         }
     }
 }

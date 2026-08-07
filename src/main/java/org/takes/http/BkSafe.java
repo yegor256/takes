@@ -44,9 +44,9 @@ public final class BkSafe extends BkWrap {
         super(socket -> {
             try {
                 back.accept(socket);
-                // @checkstyle IllegalCatchCheck (2 lines)
-                // @checkstyle EmptyCatchBlock (1 line)
+                // @checkstyle IllegalCatchCheck (1 line)
             } catch (final Throwable ignored) {
+                // any failure of the back must not break the loop
             }
         });
     }
