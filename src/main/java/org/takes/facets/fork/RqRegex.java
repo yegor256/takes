@@ -17,7 +17,6 @@ import org.takes.Request;
  * @see org.takes.facets.fork.FkRegex
  * @since 0.1
  */
-@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface RqRegex extends Request {
 
     /**

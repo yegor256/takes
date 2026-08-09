@@ -21,7 +21,6 @@ import org.takes.Request;
  *
  * @since 0.13.7
  */
-@SuppressWarnings("PMD.ImplicitFunctionalInterface")
 public interface RqMethod extends Request {
 
     /**
