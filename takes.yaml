@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 692.262487329
+  seconds: 723.878565186
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-09 04:29:41.816722604 Z
+  when: 2026-08-10 04:32:48.558253394 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 444
+  assignees_were_scanned: 578
   earliest_issue_was_found: 1
-  events_were_scanned: 17140249876
+  events_were_scanned: 17164880083
   issues_were_scanned: 1292
-  labels_were_scanned: 751
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 1417
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -77355,18 +77355,6 @@
   since: *161
   what: quality-of-service
   when: 2026-08-05 05:05:02.135571403 Z
-- _id: 20760
-  _job: 85187
-  _time: 2026-08-05 05:05:25.036885369 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (180.7) is staying still.
-    The average number of commits per week (8.3) is staying still.
-    The average number of releases per month (0.4) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-08-05 05:05:25.056931414 Z
 - _id: 20761
   _job: 31147828517
   _time: 2026-08-07 04:46:48.755575578 Z
@@ -77462,6 +77450,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/org.cactoos-cactoos-0.x
   details: The missing pull yegor256/takes#1724 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1724
   repository: 28924109
   what: pull-was-opened
@@ -77474,6 +77463,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/com.jcabi-parent-0.x
   details: The missing pull yegor256/takes#1725 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1725
   repository: 28924109
   what: pull-was-opened
@@ -77486,6 +77476,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/davidanson-markdownlint-cli2-action-24.x
   details: The missing pull yegor256/takes#1726 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1726
   repository: 28924109
   what: pull-was-opened
@@ -77498,6 +77489,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/crate-ci-typos-1.x
   details: The missing pull yegor256/takes#1727 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1727
   repository: 28924109
   what: pull-was-opened
@@ -77510,6 +77502,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/reviewdog-action-actionlint-1.x
   details: The missing pull yegor256/takes#1728 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1728
   repository: 28924109
   what: pull-was-opened
@@ -77521,6 +77514,7 @@
   _time: 2026-08-09 04:18:37.120114108 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The missing issue yegor256/takes#1729 has been opened by @0pdd.
+  is_human: 0
   issue: 1729
   repository: 28924109
   what: issue-was-opened
@@ -77533,6 +77527,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/com.qulice-qulice-maven-plugin-0.x
   details: The missing pull yegor256/takes#1730 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1730
   repository: 28924109
   what: pull-was-opened
@@ -77545,6 +77540,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/junit-framework-monorepo
   details: The missing pull yegor256/takes#1731 has been opened by @renovate[bot].
+  is_human: 0
   issue: 1731
   repository: 28924109
   what: pull-was-opened
@@ -77566,9 +77562,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1724
   repository: 28924109
   review: 2026-07-29 16:58:54.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -77590,9 +77588,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1726
   repository: 28924109
   review: 2026-08-03 09:42:43.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -77614,9 +77614,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1727
   repository: 28924109
   review: 2026-08-03 17:25:29.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -77638,9 +77640,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1728
   repository: 28924109
   review: 2026-08-07 08:45:07.000000000 Z
+  review_comments: 0
   succeeded_builds: 0
   suggestions: 0
   what: pull-was-merged
@@ -77662,9 +77666,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1731
   repository: 28924109
   review: 2026-08-08 02:57:53.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -77680,6 +77686,7 @@
   details: The pull request yegor256/takes#1723 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 255h10m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1723
   repository: 28924109
   review_comments: 0
@@ -77697,6 +77704,7 @@
   details: The pull request yegor256/takes#1724 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 3h8m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1724
   repository: 28924109
   review_comments: 0
@@ -77714,6 +77722,7 @@
   details: The pull request yegor256/takes#1726 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 4h25m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1726
   repository: 28924109
   review_comments: 0
@@ -77731,6 +77740,7 @@
   details: The pull request yegor256/takes#1727 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 0h48m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1727
   repository: 28924109
   review_comments: 0
@@ -77748,6 +77758,7 @@
   details: The pull request yegor256/takes#1728 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 11h17m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1728
   repository: 28924109
   review_comments: 0
@@ -77765,6 +77776,7 @@
   details: The pull request yegor256/takes#1731 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 12h49m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1731
   repository: 28924109
   review_comments: 0
@@ -77789,3 +77801,31 @@
   total_stars: 876
   what: dimensions-of-terrain
   when: 2026-08-09 04:29:29.865246707 Z
+- _id: 20786
+  _job: 85891
+  _time: 2026-08-09 04:30:02.498250118 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (180.7) is staying still.
+    The average number of commits per week (8.3) is staying still.
+    The average number of releases per month (0.4) is staying still.
+    The average monthly turnover (3.0 developers) is staying still.
+  what: assessment
+  when: 2026-08-09 04:30:02.512141878 Z
+- _id: 20787
+  _job: 31355121272
+  _time: 2026-08-10 04:32:31.140010340 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 4
+  total_commits: 3888
+  total_contributors: 89
+  total_files: 541
+  total_forks: 214
+  total_issues: 755
+  total_pulls: 976
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 876
+  what: dimensions-of-terrain
+  when: 2026-08-10 04:32:31.150235029 Z
