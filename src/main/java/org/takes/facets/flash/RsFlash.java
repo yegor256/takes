@@ -290,7 +290,6 @@ public final class RsFlash extends RsWrap {
      * @return A response with the Set-Cookie header containing the flash
      *  message
      * @throws UnsupportedEncodingException If URL encoding fails
-     * @checkstyle ParameterNumberCheck (5 lines)
      */
     private static Response make(final CharSequence msg, final Level level,
         final String cookie, final Expires expires)

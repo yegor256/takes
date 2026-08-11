@@ -112,7 +112,6 @@ public final class TkFallback extends TkWrap {
      * @param code Error code
      * @return Fallback request
      * @throws IOException In case of error
-     * @checkstyle ParameterNumber (3 lines)
      */
     private static RqFallback.Fake fallback(final Request req, final long start,
         final Throwable throwable, final int code) throws IOException {

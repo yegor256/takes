@@ -293,7 +293,6 @@ final class ChunkedInputStream extends InputStream {
      * @param next Next symbol
      * @return New state
      * @throws IOException If fails
-     * @checkstyle ParameterNumberCheck (3 lines)
      */
     private static State nextQuoted(final InputStream stream, final State state,
         final ByteArrayOutputStream line, final int next)

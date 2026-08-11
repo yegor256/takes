@@ -244,7 +244,6 @@ final class TkProxyTest {
      * @param captured Captured URI holder
      * @param result Result holder
      * @throws Exception If fails
-     * @checkstyle ParameterNumberCheck (4 lines)
      */
     private static void captureModifyHost(final URI home, final String method,
         final AtomicReference<URI> captured,
@@ -278,7 +277,6 @@ final class TkProxyTest {
      * @param captured Captured URI holder
      * @param result Result holder
      * @throws Exception If fails
-     * @checkstyle ParameterNumberCheck (4 lines)
      */
     private static void captureSpecificHeader(final URI home, final String method,
         final String mark, final AtomicReference<URI> captured,
