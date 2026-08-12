@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
+import org.takes.Printable;
 import org.takes.Response;
 
 /**
@@ -32,7 +33,7 @@ import org.takes.Response;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public final class RsPrint extends RsWrap implements Text {
+public final class RsPrint extends RsWrap implements Text, Printable {
 
     /**
      * Pattern for first line.
@@ -66,6 +67,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @return Entire HTTP response
      * @throws IOException If fails
      */
+    @Override
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.print(baos);
@@ -77,6 +79,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @return Entire body of HTTP response
      * @throws IOException If fails
      */
+    @Override
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
@@ -89,6 +92,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @throws IOException If fails
      * @since 0.10
      */
+    @Override
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
@@ -100,6 +104,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @param output Output to print into
      * @throws IOException If fails
      */
+    @Override
     public void print(final OutputStream output) throws IOException {
         this.printHead(output);
         this.printBody(output);
@@ -111,6 +116,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @throws IOException If fails
      * @since 0.10
      */
+    @Override
     public void printHead(final OutputStream output) throws IOException {
         final String eol = new String(
             new char[]{(char) 13, (char) 10}
@@ -148,6 +154,7 @@ public final class RsPrint extends RsWrap implements Text {
      * @param output Output to print into
      * @throws IOException If fails
      */
+    @Override
     public void printBody(final OutputStream output) throws IOException {
         try (InputStream body = this.body()) {
             final byte[] buf = new byte[4096];

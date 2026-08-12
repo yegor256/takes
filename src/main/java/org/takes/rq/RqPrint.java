@@ -18,6 +18,7 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.Sticky;
 import org.cactoos.text.TextOf;
+import org.takes.Printable;
 import org.takes.Request;
 
 /**
@@ -34,7 +35,7 @@ import org.takes.Request;
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
-public final class RqPrint extends RqWrap implements Text {
+public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * The textual representation.
@@ -64,6 +65,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @return Text form of request
      * @throws IOException If fails
      */
+    @Override
     public String print() throws IOException {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             this.print(baos);
@@ -76,6 +78,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @param output Output stream
      * @throws IOException If fails
      */
+    @Override
     public void print(final OutputStream output) throws IOException {
         new IoChecked<>(
             new LengthOf(new TeeInput(this.text, new OutputTo(output)))
@@ -87,6 +90,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @return Text form of request
      * @throws IOException If fails
      */
+    @Override
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printHead(baos);
@@ -98,6 +102,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @param output Output stream
      * @throws IOException If fails
      */
+    @Override
     public void printHead(final OutputStream output) throws IOException {
         final String eol = new String(
             new char[]{(char) 13, (char) 10}
@@ -117,6 +122,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @return Text form of request
      * @throws IOException If fails
      */
+    @Override
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.printBody(baos);
@@ -129,6 +135,7 @@ public final class RqPrint extends RqWrap implements Text {
      * @throws IOException If fails
      */
     @SuppressWarnings("PMD.CloseResource")
+    @Override
     public void printBody(final OutputStream output) throws IOException {
         final InputStream input = new RqChunk(new RqLengthAware(this)).body();
         final byte[] buf = new byte[4096];
