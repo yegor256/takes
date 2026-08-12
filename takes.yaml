@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 645.445210005
+  seconds: 810.248365368
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-11 04:29:12.043516189 Z
+  when: 2026-08-12 04:41:18.021654442 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 713
+  assignees_were_scanned: 820
   earliest_issue_was_found: 1
-  events_were_scanned: 17316681278
+  events_were_scanned: 17432359098
   issues_were_scanned: 1292
-  labels_were_scanned: 1121
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 163
+  types_were_scanned: 251
   what: iterate
   where: github
 - _id: 20665
@@ -77331,7 +77331,7 @@
   total_releases_published: 0
   total_reviews_submitted: 4
   what: quantity-of-deliverables
-  when: 2026-08-04 04:50:58.271052674 Z
+  when: &162 2026-08-04 04:50:58.271052674 Z
 - _id: 20758
   _job: 30976254676
   _time: 2026-08-05 05:05:02.121817105 Z
@@ -77829,3 +77829,58 @@
     The average monthly turnover (3.0 developers) is staying still.
   what: assessment
   when: 2026-08-10 04:33:12.783240219 Z
+- _id: 20789
+  _job: 31563244570
+  _time: 2026-08-12 04:27:52.191731491 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  since: *162
+  total_builds_ran: 212
+  total_commits_pushed: 12
+  total_hoc_committed: 1442
+  total_issues_created: 5
+  total_pulls_submitted: 4
+  total_releases_published: 0
+  total_reviews_submitted: 3
+  what: quantity-of-deliverables
+  when: 2026-08-12 04:27:52.185659390 Z
+- _id: 20790
+  _job: 31563244570
+  _time: 2026-08-12 04:28:54.203912982 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1730 has been "pull-was-closed".
+  failed_builds: 3
+  files: 2
+  hoc: 4
+  issue: 1730
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-08-11 06:18:19.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20791
+  _job: 31563244570
+  _time: 2026-08-12 04:31:40.858489329 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @0pdd to the issue yegor256/takes#1729.
+  issue: 1729
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-07 07:18:00.000000000 Z
+  where: github
+  who: 24456188
+- _id: 20792
+  _job: 31563244570
+  _time: 2026-08-12 04:41:17.969908258 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  what: dimensions-of-terrain
+  when: 2026-08-12 04:41:17.976884067 Z
