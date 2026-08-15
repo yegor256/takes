@@ -722,7 +722,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.30.11</version>
+            <version>0.30.12</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>
