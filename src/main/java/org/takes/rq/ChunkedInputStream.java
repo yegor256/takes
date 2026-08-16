@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import org.cactoos.scalar.Ternary;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Sub;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
@@ -124,13 +125,15 @@ final class ChunkedInputStream extends InputStream {
         final int lfsymbol = this.origin.read();
         if (crsymbol != '\r' || lfsymbol != '\n') {
             throw new IOException(
-                String.format(
-                    "%s %d%s%d",
-                    "CRLF expected at end of chunk: ",
-                    crsymbol,
-                    "/",
-                    lfsymbol
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s %d%s%d",
+                        "CRLF expected at end of chunk: ",
+                        crsymbol,
+                        "/",
+                        lfsymbol
+                    )
+                ).asString()
             );
         }
     }
@@ -180,10 +183,12 @@ final class ChunkedInputStream extends InputStream {
             );
         } catch (final NumberFormatException ex) {
             throw new IOException(
-                String.format(
-                    "Bad chunk size: %s",
-                    baos.toString(Charset.defaultCharset())
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Bad chunk size: %s",
+                        baos.toString(Charset.defaultCharset())
+                    )
+                ).asString(),
                 ex
             );
         }
@@ -248,11 +253,13 @@ final class ChunkedInputStream extends InputStream {
         } else if (state == State.R) {
             if (next != '\n') {
                 throw new IOException(
-                    String.format(
-                        "%s%s",
-                        "Protocol violation: Unexpected",
-                        " single newline character in chunk size"
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "%s%s",
+                            "Protocol violation: Unexpected",
+                            " single newline character in chunk size"
+                        )
+                    ).asString()
                 );
             }
             result = State.END;

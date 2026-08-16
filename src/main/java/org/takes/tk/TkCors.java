@@ -10,6 +10,8 @@ import java.util.Set;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -113,10 +115,12 @@ public final class TkCors implements Take {
                 this.origin.act(req),
                 "Access-Control-Allow-Credentials: true",
                 "Access-Control-Allow-Methods: OPTIONS, GET, PUT, POST, DELETE, HEAD",
-                String.format(
-                    "Access-Control-Allow-Origin: %s",
-                    domain
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Access-Control-Allow-Origin: %s",
+                        domain
+                    )
+                ).asString()
             );
         } else {
             response = new RsWithHeaders(

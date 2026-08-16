@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
@@ -60,11 +62,13 @@ public final class RqLengthAware extends RqWrap {
                 result = new CapInputStream(req.body(), Long.parseLong(value));
             } catch (final NumberFormatException ex) {
                 throw new IOException(
-                    String.format(
-                        "Invalid %s header: %s",
-                        RqLengthAware.CONTENT_LENGTH,
-                        value
-                    ),
+                    new UncheckedText(
+                        new FormattedText(
+                            "Invalid %s header: %s",
+                            RqLengthAware.CONTENT_LENGTH,
+                            value
+                        )
+                    ).asString(),
                     ex
                 );
             }

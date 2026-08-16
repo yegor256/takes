@@ -18,6 +18,7 @@ import org.cactoos.scalar.Constant;
 import org.cactoos.scalar.FirstOf;
 import org.cactoos.scalar.Not;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.IsBlank;
 import org.cactoos.text.StartsWith;
 import org.cactoos.text.TextOf;
@@ -165,12 +166,14 @@ public final class PsToken implements Pass {
         tosign.put(jwtpayload);
         final byte[] sign = this.signature.sign(tosign.array());
         try (JsonReader reader = Json.createReader(res.body())) {
-            final String jwt = String.format(
-                "%s.%s.%s",
-                new String(jwtheader, Charset.defaultCharset()),
-                new String(jwtpayload, Charset.defaultCharset()),
-                new String(sign, Charset.defaultCharset())
-            );
+            final String jwt = new UncheckedText(
+                new FormattedText(
+                    "%s.%s.%s",
+                    new String(jwtheader, Charset.defaultCharset()),
+                    new String(jwtpayload, Charset.defaultCharset()),
+                    new String(sign, Charset.defaultCharset())
+                )
+            ).asString();
             return new RsJson(
                 Json.createObjectBuilder()
                     .add("response", reader.read())

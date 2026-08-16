@@ -19,6 +19,7 @@ import org.cactoos.scalar.Not;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.StartsWith;
 import org.cactoos.text.TextOf;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 
 /**
@@ -89,10 +90,12 @@ public final class RsWithStatus extends RsWrap {
         final int status, final CharSequence reason) throws IOException {
         if (status < 100 || status > 999) {
             throw new IllegalArgumentException(
-                String.format(
-                    "According to RFC 7230 HTTP status code must have three digits: %d",
-                    status
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "According to RFC 7230 HTTP status code must have three digits: %d",
+                        status
+                    )
+                ).asString()
             );
         }
         return new Mapped<>(

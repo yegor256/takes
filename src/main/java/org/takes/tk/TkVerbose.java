@@ -6,6 +6,8 @@ package org.takes.tk;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Take;
 import org.takes.rq.RqHref;
@@ -34,11 +36,13 @@ public final class TkVerbose extends TkWrap {
                 } catch (final HttpException ex) {
                     throw new HttpException(
                         ex.code(),
-                        String.format(
-                            "%s %s",
-                            new RqMethod.Base(request).method(),
-                            new RqHref.Base(request).href()
-                        ),
+                        new UncheckedText(
+                            new FormattedText(
+                                "%s %s",
+                                new RqMethod.Base(request).method(),
+                                new RqHref.Base(request).href()
+                            )
+                        ).asString(),
                         ex
                     );
                 }

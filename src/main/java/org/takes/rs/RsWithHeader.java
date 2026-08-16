@@ -10,6 +10,8 @@ import lombok.ToString;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.iterable.Joined;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 
 /**
@@ -107,10 +109,12 @@ public final class RsWithHeader extends RsWrap {
         final String header) {
         if (!RsWithHeader.HEADER.matcher(header).matches()) {
             throw new IllegalArgumentException(
-                String.format(
-                    "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                    header, RsWithHeader.HEADER
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "header line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                        header, RsWithHeader.HEADER
+                    )
+                ).asString()
             );
         }
         return new Joined<String>(head, new IterableOf<>(header));
@@ -159,7 +163,7 @@ public final class RsWithHeader extends RsWrap {
 
         @Override
         public String toString() {
-            return String.format("%s: %s", this.name, this.value);
+            return new UncheckedText(new FormattedText("%s: %s", this.name, this.value)).asString();
         }
     }
 }

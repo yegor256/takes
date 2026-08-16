@@ -5,6 +5,8 @@
 package org.takes;
 
 import java.io.IOException;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * HTTP-aware exception.
@@ -73,7 +75,11 @@ public class HttpException extends IOException {
         if (this.detail == null) {
             msg = Integer.toString(this.status);
         } else {
-            msg = String.format("[%03d] %s", this.status, this.detail);
+            msg = new UncheckedText(
+                new FormattedText(
+                    "[%03d] %s", this.status, this.detail
+                )
+            ).asString();
         }
         return msg;
     }

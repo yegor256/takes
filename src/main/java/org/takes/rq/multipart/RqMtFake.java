@@ -13,6 +13,8 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Body;
 import org.takes.Request;
 import org.takes.rq.RequestOf;
@@ -106,16 +108,20 @@ public final class RqMtFake implements RqMultipart {
                 new RequestOf(
                     () -> new RqWithHeaders(
                         rqst,
-                        String.format(
-                            "Content-Type: multipart/form-data; boundary=%s",
-                            RqMtFake.BOUNDARY
-                        ),
-                        String.format(
-                            "Content-Length: %s",
-                            new Unchecked<>(
-                                new LengthOf(new InputOf(body.body()))
-                            ).value()
-                        )
+                        new UncheckedText(
+                            new FormattedText(
+                                "Content-Type: multipart/form-data; boundary=%s",
+                                RqMtFake.BOUNDARY
+                            )
+                        ).asString(),
+                        new UncheckedText(
+                            new FormattedText(
+                                "Content-Length: %s",
+                                new Unchecked<>(
+                                    new LengthOf(new InputOf(body.body()))
+                                ).value()
+                            )
+                        ).asString()
                     ).head(),
                     body
                 )
@@ -157,11 +163,17 @@ public final class RqMtFake implements RqMultipart {
          */
         private static String assemble(final Request... parts)
             throws IOException {
+            final String opening = new UncheckedText(
+                new FormattedText("--%s", RqMtFake.BOUNDARY)
+            ).asString();
+            final String closing = new UncheckedText(
+                new FormattedText("--%s--", RqMtFake.BOUNDARY)
+            ).asString();
             final StringBuilder builder = new StringBuilder(128);
             for (final Request part : parts) {
                 final String disposition = new RqHeaders.Smart(part)
                     .single("Content-Disposition");
-                builder.append(String.format("--%s", RqMtFake.BOUNDARY))
+                builder.append(opening)
                     .append(RqMtFake.CRLF)
                     .append("Content-Disposition: ")
                     .append(disposition)
@@ -175,7 +187,7 @@ public final class RqMtFake implements RqMultipart {
             }
             builder.append("Content-Transfer-Encoding: utf-8")
                 .append(RqMtFake.CRLF)
-                .append(String.format("--%s--", RqMtFake.BOUNDARY));
+                .append(closing);
             return builder.toString();
         }
     }

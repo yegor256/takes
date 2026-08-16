@@ -11,6 +11,8 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * An HMAC signature implementation that supports 256, 384, and 512-bit hash variants.
@@ -112,7 +114,11 @@ public final class SiHmac implements Signature {
      * @throws IOException If MAC creation fails
      */
     private Mac create() throws IOException {
-        final String algo = String.format("HmacSHA%s", this.bitlength());
+        final String algo = new UncheckedText(
+            new FormattedText(
+                "HmacSHA%s", this.bitlength()
+            )
+        ).asString();
         try {
             final Mac mac = Mac.getInstance(algo);
             mac.init(new SecretKeySpec(this.key, algo));

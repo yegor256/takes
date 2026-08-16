@@ -7,6 +7,8 @@ package org.takes.tk;
 import java.util.ResourceBundle;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Take;
 import org.takes.rs.RsWithHeader;
 
@@ -100,11 +102,13 @@ public final class TkVersioned extends TkWrap {
     private static String make() {
         final ResourceBundle res =
             ResourceBundle.getBundle("org.takes.version");
-        return String.format(
-            "%s %s %s",
-            res.getString("version"),
-            res.getString("revision"),
-            res.getString("date")
-        );
+        return new UncheckedText(
+            new FormattedText(
+                "%s %s %s",
+                res.getString("version"),
+                res.getString("revision"),
+                res.getString("date")
+            )
+        ).asString();
     }
 }

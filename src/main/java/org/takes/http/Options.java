@@ -17,6 +17,8 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Command-line options.
@@ -156,7 +158,11 @@ final class Options {
             final Matcher matcher = ptn.matcher(arg);
             if (!matcher.matches()) {
                 throw new IllegalStateException(
-                    String.format("Can't parse this argument: '%s'", arg)
+                    new UncheckedText(
+                        new FormattedText(
+                            "Can't parse this argument: '%s'", arg
+                        )
+                    ).asString()
                 );
             }
             final String value = matcher.group(2);

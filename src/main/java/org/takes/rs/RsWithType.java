@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.misc.Opt;
 
@@ -99,12 +101,14 @@ public final class RsWithType extends RsWrap {
             response = new RsWithHeader(
                 new RsWithoutHeader(res, RsWithType.HEADER),
                 RsWithType.HEADER,
-                String.format(
-                    "%s; %s=%s",
-                    type,
-                    RsWithType.CHARSET,
-                    charset.get().name()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s; %s=%s",
+                        type,
+                        RsWithType.CHARSET,
+                        charset.get().name()
+                    )
+                ).asString()
             );
         } else {
             response = new RsWithHeader(

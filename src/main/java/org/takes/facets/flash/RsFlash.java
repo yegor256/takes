@@ -273,12 +273,14 @@ public final class RsFlash extends RsWrap {
 
     @Override
     public String toString() {
-        return String.format(
-            "%s(super=%s, text=%s)",
-            RsFlash.class.getSimpleName(),
-            super.toString(),
-            new UncheckedText(this.text).asString()
-        );
+        return new UncheckedText(
+            new FormattedText(
+                "%s(super=%s, text=%s)",
+                RsFlash.class.getSimpleName(),
+                super.toString(),
+                new UncheckedText(this.text).asString()
+            )
+        ).asString();
     }
 
     /**
