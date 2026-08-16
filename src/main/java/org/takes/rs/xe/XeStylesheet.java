@@ -5,6 +5,8 @@
 package org.takes.rs.xe;
 
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.xembly.Directives;
 
 /**
@@ -38,7 +40,7 @@ public final class XeStylesheet extends XeWrap {
         super(
             () -> new Directives().pi(
                 "xml-stylesheet",
-                String.format("href='%s' type='text/xsl'", xsl)
+                new UncheckedText(new FormattedText("href='%s' type='text/xsl'", xsl)).asString()
             )
         );
     }

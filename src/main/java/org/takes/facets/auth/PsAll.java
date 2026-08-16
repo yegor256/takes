@@ -6,6 +6,8 @@ package org.takes.facets.auth;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.misc.Opt;
@@ -64,16 +66,22 @@ public final class PsAll implements Pass {
     private void checkIndex() {
         if (this.index < 0) {
             throw new IllegalArgumentException(
-                String.format("Index %d must be >= 0.", this.index)
+                new UncheckedText(
+                    new FormattedText(
+                        "Index %d must be >= 0.", this.index
+                    )
+                ).asString()
             );
         }
         if (this.index >= this.all.size()) {
             throw new IllegalArgumentException(
-                String.format(
-                    "Trying to return index %d from a list of %d passes",
-                    this.index,
-                    this.all.size()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Trying to return index %d from a list of %d passes",
+                        this.index,
+                        this.all.size()
+                    )
+                ).asString()
             );
         }
     }

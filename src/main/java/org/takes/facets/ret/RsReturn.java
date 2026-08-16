@@ -14,6 +14,8 @@ import lombok.ToString;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.misc.Expires;
@@ -72,10 +74,12 @@ public final class RsReturn extends RsWrap {
     private static String validLocation(final String loc) throws IOException {
         if (!RsReturn.LOC_PTRN.matcher(loc).matches()) {
             throw new IOException(
-                String.format(
-                    "Location \"%s\" should complain RFC 3987",
-                    loc
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Location \"%s\" should complain RFC 3987",
+                        loc
+                    )
+                ).asString()
             );
         }
         return loc;

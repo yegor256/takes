@@ -17,6 +17,8 @@ import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.bytes.UncheckedBytes;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.auth.Identity;
@@ -144,7 +146,7 @@ public final class PsTwitter implements Pass {
         props.put(PsTwitter.NAME, json.getString(PsTwitter.NAME));
         props.put("picture", json.getString("profile_image_url"));
         return new Identity.Simple(
-            String.format("urn:twitter:%d", json.getInt("id")),
+            new UncheckedText(new FormattedText("urn:twitter:%d", json.getInt("id"))).asString(),
             props
         );
     }
@@ -160,15 +162,21 @@ public final class PsTwitter implements Pass {
             "application/x-www-form-urlencoded;charset=UTF-8"
         ).header(
             "Authorization",
-            String.format(
-                "Basic %s", DatatypeConverter.printBase64Binary(
-                    new UncheckedBytes(
-                        new BytesOf(
-                            String.format("%s:%s", this.app, this.key)
+            new UncheckedText(
+                new FormattedText(
+                    "Basic %s", DatatypeConverter.printBase64Binary(
+                        new UncheckedBytes(
+                            new BytesOf(
+                                new UncheckedText(
+                                    new FormattedText(
+                                        "%s:%s", this.app, this.key
+                                    )
+                                ).asString()
+                            )
+                        ).asBytes()
                         )
-                    ).asBytes()
-                    )
                 )
+            ).asString()
             )
             .fetch().as(RestResponse.class)
             .assertStatus(HttpURLConnection.HTTP_OK)

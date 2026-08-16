@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.rq.RqMultipart;
@@ -51,9 +53,11 @@ public final class RqMtSmart implements RqMultipart {
         if (!parts.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "form param \"%s\" is mandatory", name
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "form param \"%s\" is mandatory", name
+                    )
+                ).asString()
             );
         }
         return parts.next();

@@ -7,6 +7,8 @@ package org.takes.facets.auth.codecs;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -119,13 +121,13 @@ public final class CcHex implements Codec {
     private static int decode(final int hex) {
         if (hex >= CcHex.BACK.length) {
             throw new DecodingException(
-                String.format("invalid hex char: 0x%2x", hex)
+                new UncheckedText(new FormattedText("invalid hex char: 0x%2x", hex)).asString()
             );
         }
         final int dec = CcHex.BACK[hex];
         if (dec < 0) {
             throw new DecodingException(
-                String.format("invalid hex character: 0x%2x", hex)
+                new UncheckedText(new FormattedText("invalid hex character: 0x%2x", hex)).asString()
             );
         }
         return dec;

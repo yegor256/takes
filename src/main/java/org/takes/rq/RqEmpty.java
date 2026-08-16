@@ -6,6 +6,8 @@ package org.takes.rq;
 
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Empty HTTP request implementation for testing purposes.
@@ -82,7 +84,11 @@ public final class RqEmpty extends RqWrap {
             if (index != 0) {
                 throw new IndexOutOfBoundsException(index);
             }
-            return String.format("%s %s", this.method, this.query);
+            return new UncheckedText(
+                new FormattedText(
+                    "%s %s", this.method, this.query
+                )
+            ).asString();
         }
 
         @Override

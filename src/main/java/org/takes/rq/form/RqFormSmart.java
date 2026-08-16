@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.rq.RqForm;
@@ -76,9 +78,11 @@ public final class RqFormSmart implements RqForm {
         if (!params.hasNext()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "form param \"%s\" is mandatory", name
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "form param \"%s\" is mandatory", name
+                    )
+                ).asString()
             );
         }
         return params.next();

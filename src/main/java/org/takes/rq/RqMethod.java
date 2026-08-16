@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
@@ -106,7 +108,11 @@ public interface RqMethod extends Request {
                 .method();
             if (Base.SEPARATORS.matcher(method).find()) {
                 throw new IOException(
-                    String.format("Invalid HTTP method: %s", method)
+                    new UncheckedText(
+                        new FormattedText(
+                            "Invalid HTTP method: %s", method
+                        )
+                    ).asString()
                 );
             }
             return method.toUpperCase(Locale.ENGLISH);

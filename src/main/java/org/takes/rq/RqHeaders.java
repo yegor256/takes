@@ -130,10 +130,12 @@ public interface RqHeaders extends Request {
                 if (parts.length < 2) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_BAD_REQUEST,
-                        String.format(
-                            "Invalid HTTP header on line #%d: \"%s\"",
-                            pos, line
-                        )
+                        new UncheckedText(
+                            new FormattedText(
+                                "Invalid HTTP header on line #%d: \"%s\"",
+                                pos, line
+                            )
+                        ).asString()
                     );
                 }
                 final String key = new UncheckedText(
@@ -215,10 +217,12 @@ public interface RqHeaders extends Request {
             if (!params.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        "Header \"%s\" is mandatory, not found among %s",
-                        name, this.names()
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "Header \"%s\" is mandatory, not found among %s",
+                            name, this.names()
+                        )
+                    ).asString()
                 );
             }
             return params.next();

@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * JSON Token interface for creating and encoding authentication tokens.
@@ -68,7 +70,7 @@ public interface Token {
             this.joseo = new Unchecked<>(
                 new Sticky<>(
                     () -> Json.createObjectBuilder()
-                        .add(Token.Jose.ALGORITHM, String.format("HS%s", bitlength))
+                        .add(Token.Jose.ALGORITHM, Token.Jose.algo(bitlength))
                         .add(Token.Jose.TYPE, "JWT")
                         .build()
                 )
@@ -85,6 +87,17 @@ public interface Token {
             return Base64.getEncoder().encode(
                 this.joseo.value().toString().getBytes(Charset.defaultCharset())
             );
+        }
+
+        /**
+         * Name of the HMAC algorithm of the given strength.
+         * @param bitlength Of encryption bits
+         * @return The name, like {@code HS256}
+         */
+        private static String algo(final int bitlength) {
+            return new UncheckedText(
+                new FormattedText("HS%s", bitlength)
+            ).asString();
         }
     }
 

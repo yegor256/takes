@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Split;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
@@ -144,7 +145,7 @@ public final class PsFacebook implements Pass {
         );
         return new Opt.Single<>(
             new Identity.Simple(
-                String.format("urn:facebook:%s", user.getId()),
+                new UncheckedText(new FormattedText("urn:facebook:%s", user.getId())).asString(),
                 props
             )
         );
@@ -202,7 +203,11 @@ public final class PsFacebook implements Pass {
             final String[] pair = sector.split("=", 2);
             if (pair.length != 2) {
                 throw new IllegalArgumentException(
-                    String.format("Invalid response: '%s'", response)
+                    new UncheckedText(
+                        new FormattedText(
+                            "Invalid response: '%s'", response
+                        )
+                    ).asString()
                 );
             }
             if ("access_token".equals(pair[0])) {
@@ -210,10 +215,12 @@ public final class PsFacebook implements Pass {
             }
         }
         throw new IllegalArgumentException(
-            String.format(
-                "Access token not found in response: '%s'",
-                response
-            )
+            new UncheckedText(
+                new FormattedText(
+                    "Access token not found in response: '%s'",
+                    response
+                )
+            ).asString()
         );
     }
 }

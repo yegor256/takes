@@ -12,9 +12,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 
@@ -205,10 +207,12 @@ public interface RqRequestLine extends Request {
             if (!valid) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        RqRequestLine.Base.BAD_REQUEST_MSG,
-                        line
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            RqRequestLine.Base.BAD_REQUEST_MSG,
+                            line
+                        )
+                    ).asString()
                 );
             }
             return matcher;
@@ -237,10 +241,12 @@ public interface RqRequestLine extends Request {
             final RqRequestLine.Base.Token token) throws IOException {
             if (value == null) {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "There is no token %s in Request-Line header",
-                        token.toString()
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "There is no token %s in Request-Line header",
+                            token.toString()
+                        )
+                    ).asString()
                 );
             }
             return new IoCheckedText(
@@ -281,10 +287,12 @@ public interface RqRequestLine extends Request {
                         ) {
                             throw new HttpException(
                                 HttpURLConnection.HTTP_BAD_REQUEST,
-                                String.format(
-                                    RqRequestLine.Base.BAD_REQUEST_MSG,
-                                    value
-                                ),
+                                new UncheckedText(
+                                    new FormattedText(
+                                        RqRequestLine.Base.BAD_REQUEST_MSG,
+                                        value
+                                    )
+                                ).asString(),
                                 err
                             );
                         }
@@ -320,7 +328,7 @@ public interface RqRequestLine extends Request {
                     Character.toChars(point)
                 ).getBytes(StandardCharsets.UTF_8)) {
                     text.append('%').append(
-                        String.format("%02X", octet & 0xFF)
+                        new UncheckedText(new FormattedText("%02X", octet & 0xFF)).asString()
                     );
                 }
                 return text.toString();

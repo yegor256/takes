@@ -10,6 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
@@ -248,10 +250,12 @@ public class RsForward extends HttpException implements Response {
 
         @Override
         public String toString() {
-            return String.format(
-                "[%3d] %s %s",
-                this.code, this.loc, this.res
-            );
+            return new UncheckedText(
+                new FormattedText(
+                    "[%3d] %s %s",
+                    this.code, this.loc, this.res
+                )
+            ).asString();
         }
     }
 }

@@ -6,6 +6,8 @@ package org.takes.facets.auth.codecs;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -78,7 +80,7 @@ public final class CcStrict implements Codec {
             }
             if (!CcStrict.PTN.matcher(urn).matches()) {
                 throw new DecodingException(
-                    String.format("urn isn't valid: \"%s\"", urn)
+                    new UncheckedText(new FormattedText("urn isn't valid: \"%s\"", urn)).asString()
                 );
             }
         }

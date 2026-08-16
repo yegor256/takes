@@ -12,6 +12,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Parallel back-end decorator.
@@ -110,11 +112,13 @@ public final class BkParallel extends BkWrap {
         public Thread newThread(final Runnable runnable) {
             final Thread thread = new Thread(runnable);
             thread.setName(
-                String.format(
-                    "%s-%d",
-                    BkParallel.class.getSimpleName(),
-                    this.total.getAndAdd(1)
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s-%d",
+                        BkParallel.class.getSimpleName(),
+                        this.total.getAndAdd(1)
+                    )
+                ).asString()
             );
             return thread;
         }

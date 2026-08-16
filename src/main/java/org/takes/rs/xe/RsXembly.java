@@ -22,6 +22,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.io.WriterTo;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.rs.ResponseOf;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithStatus;
@@ -175,11 +177,13 @@ public final class RsXembly extends RsWrap {
             return result.getNode();
         } catch (final TransformerException ex) {
             throw new IllegalArgumentException(
-                String.format(
-                    "Could not clone Node %s with Transformer %s",
-                    source,
-                    transformer
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Could not clone Node %s with Transformer %s",
+                        source,
+                        transformer
+                    )
+                ).asString(),
                 ex
             );
         }

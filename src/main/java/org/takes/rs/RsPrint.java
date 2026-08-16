@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Text;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 
 /**
@@ -121,18 +123,22 @@ public final class RsPrint extends RsWrap implements Text {
         for (final String line : this.head()) {
             if (pos == 0 && !RsPrint.FIRST.matcher(line).matches()) {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "First line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                        line, RsPrint.FIRST
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "First line of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                            line, RsPrint.FIRST
+                        )
+                    ).asString()
                 );
             }
             if (pos > 0 && !RsPrint.OTHERS.matcher(line).matches()) {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "Header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
-                        pos + 1, line, RsPrint.OTHERS
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "Header line #%d of HTTP response \"%s\" doesn't match \"%s\" regular expression, but it should, according to RFC 7230",
+                            pos + 1, line, RsPrint.OTHERS
+                        )
+                    ).asString()
                 );
             }
             writer.append(line);

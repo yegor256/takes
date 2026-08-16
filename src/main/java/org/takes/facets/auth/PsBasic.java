@@ -20,9 +20,11 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.IoCheckedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.facets.flash.RsFlash;
@@ -78,10 +80,12 @@ public final class PsBasic implements Pass {
         if (!headers.hasNext()) {
             throw new RsForward(
                 new RsWithHeader(
-                    String.format(
-                        "WWW-Authenticate: Basic realm=\"%s\" ",
-                        this.realm
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "WWW-Authenticate: Basic realm=\"%s\" ",
+                            this.realm
+                        )
+                    ).asString()
                 ),
                 HttpURLConnection.HTTP_UNAUTHORIZED,
                 new RqHref.Base(request).href()
@@ -105,10 +109,12 @@ public final class PsBasic implements Pass {
             throw new RsForward(
                 new RsWithHeader(
                     new RsFlash("access denied", Level.WARNING),
-                    String.format(
-                        "WWW-Authenticate: Basic realm=\"%s\"",
-                        this.realm
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "WWW-Authenticate: Basic realm=\"%s\"",
+                            this.realm
+                        )
+                    ).asString()
                 ),
                 HttpURLConnection.HTTP_UNAUTHORIZED,
                 new RqHref.Base(request).href()
@@ -170,7 +176,7 @@ public final class PsBasic implements Pass {
             if (this.condition) {
                 user = new Opt.Single<>(
                     new Identity.Simple(
-                        String.format("urn:basic:%s", usr)
+                        new UncheckedText(new FormattedText("urn:basic:%s", usr)).asString()
                     )
                 );
             } else {
@@ -286,11 +292,13 @@ public final class PsBasic implements Pass {
          */
         private Opt<String> urn(final String user, final String pwd) {
             final String urn = this.usernames.value().get(
-                String.format(
-                    PsBasic.Default.KEY_FORMAT,
-                    URLEncoder.encode(user, PsBasic.Default.ENCODING),
-                    URLEncoder.encode(pwd, PsBasic.Default.ENCODING)
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        PsBasic.Default.KEY_FORMAT,
+                        URLEncoder.encode(user, PsBasic.Default.ENCODING),
+                        URLEncoder.encode(pwd, PsBasic.Default.ENCODING)
+                    )
+                ).asString()
             );
             final Opt<String> opt;
             if (urn == null) {
@@ -310,14 +318,16 @@ public final class PsBasic implements Pass {
          *  <pre>+</pre>
          */
         private static String key(final String unified) {
-            return String.format(
-                PsBasic.Default.KEY_FORMAT,
-                unified.substring(0, unified.indexOf(' ')),
-                unified.substring(
-                    unified.indexOf(' ') + 1,
-                    unified.lastIndexOf(' ')
+            return new UncheckedText(
+                new FormattedText(
+                    PsBasic.Default.KEY_FORMAT,
+                    unified.substring(0, unified.indexOf(' ')),
+                    unified.substring(
+                        unified.indexOf(' ') + 1,
+                        unified.lastIndexOf(' ')
+                    )
                 )
-            );
+            ).asString();
         }
 
         /**
@@ -331,10 +341,12 @@ public final class PsBasic implements Pass {
                 unified.indexOf(' ') + 1 == unified.lastIndexOf(' ');
             if (amount || nearby) {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "One of users was incorrectly formatted: %s",
-                        unified
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "One of users was incorrectly formatted: %s",
+                            unified
+                        )
+                    ).asString()
                 );
             }
         }

@@ -11,6 +11,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Take;
 
 /**
@@ -137,10 +139,12 @@ public final class FtRemote implements Front {
         }
         script.exec(
             URI.create(
-                String.format(
-                    "%s://localhost:%d",
-                    protocol, this.socket.getLocalPort()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s://localhost:%d",
+                        protocol, this.socket.getLocalPort()
+                    )
+                ).asString()
             )
         );
         exit.set(true);

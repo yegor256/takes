@@ -13,6 +13,8 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -165,18 +167,30 @@ public final class BkBasic implements Back {
         final Socket socket) {
         return new RqWithHeaders(
             req,
-            String.format(
-                "%s: %s",
-                BkBasic.LOCALADDR,
-                socket.getLocalAddress().getHostAddress()
-            ),
-            String.format("%s: %d", BkBasic.LOCALPORT, socket.getLocalPort()),
-            String.format(
-                "%s: %s",
-                BkBasic.REMOTEADDR,
-                socket.getInetAddress().getHostAddress()
-            ),
-            String.format("%s: %d", BkBasic.REMOTEPORT, socket.getPort())
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %s",
+                    BkBasic.LOCALADDR,
+                    socket.getLocalAddress().getHostAddress()
+                )
+            ).asString(),
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %d", BkBasic.LOCALPORT, socket.getLocalPort()
+                )
+            ).asString(),
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %s",
+                    BkBasic.REMOTEADDR,
+                    socket.getInetAddress().getHostAddress()
+                )
+            ).asString(),
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %d", BkBasic.REMOTEPORT, socket.getPort()
+                )
+            ).asString()
         );
     }
 }

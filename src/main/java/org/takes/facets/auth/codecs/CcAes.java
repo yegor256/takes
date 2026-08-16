@@ -21,6 +21,8 @@ import javax.crypto.spec.SecretKeySpec;
 import lombok.EqualsAndHashCode;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -200,10 +202,12 @@ public final class CcAes implements Codec {
     private static byte[] withCorrectBlockSize(final byte[] key) {
         if (key.length != CcAes.BLOCK) {
             throw new IllegalArgumentException(
-                String.format(
-                    "the length of the AES key must be exactly %d bytes",
-                    CcAes.BLOCK
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "the length of the AES key must be exactly %d bytes",
+                        CcAes.BLOCK
+                    )
+                ).asString()
             );
         }
         return key;

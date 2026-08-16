@@ -183,20 +183,24 @@ public final class RqMtBase implements RqMultipart {
         if (!multipart.value()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
-                    header
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
+                        header
+                    )
+                ).asString()
             );
         }
         final Matcher matcher = RqMtBase.BOUNDARY.matcher(header);
         if (!matcher.matches()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "boundary is not specified in Content-Type header: \"%s\"",
-                    header
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "boundary is not specified in Content-Type header: \"%s\"",
+                        header
+                    )
+                ).asString()
             );
         }
         final ReadableByteChannel body = Channels.newChannel(
@@ -209,9 +213,11 @@ public final class RqMtBase implements RqMultipart {
                 "failed to read the request body"
             );
         }
-        final byte[] boundary = String.format(
-            "%s--%s", RqMtBase.CRLF, matcher.group(1)
-        ).getBytes(RqMtBase.ENCODING);
+        final byte[] boundary = new UncheckedText(
+            new FormattedText(
+                "%s--%s", RqMtBase.CRLF, matcher.group(1)
+            )
+        ).asString().getBytes(RqMtBase.ENCODING);
         buf.flip();
         buf.position(boundary.length - 2);
         final Collection<Request> requests = new ArrayList<>(0);
@@ -279,10 +285,12 @@ public final class RqMtBase implements RqMultipart {
             if (!matcher.matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        "\"name\" not found in Content-Disposition header: %s",
-                        header
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "\"name\" not found in Content-Disposition header: %s",
+                            header
+                        )
+                    ).asString()
                 );
             }
             final String name = matcher.group(1);
