@@ -75,6 +75,11 @@ public final class BkBasic implements Back {
     public static final String REMOTEPORT = "X-Takes-RemotePort";
 
     /**
+     * How many bytes of a broken request to read away before closing.
+     */
+    private static final long LINGER = 64L * 1024L;
+
+    /**
      * Take.
      */
     private final Take take;
@@ -135,10 +140,39 @@ public final class BkBasic implements Back {
             );
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
+            output.flush();
+            BkBasic.linger(input);
             reusable = false;
         }
         output.flush();
         return reusable;
+    }
+
+    /**
+     * Read away what is left of a request that couldn't be parsed.
+     *
+     * <p>Closing a socket that still has unread bytes in its receive buffer
+     * makes TCP send RST instead of FIN, and then the client sees a reset
+     * connection instead of the response we have just written for it.
+     * Reading the leftovers away first lets the close be graceful.
+     *
+     * <p>Only the bytes that have already arrived are read, and no more than
+     * {@link BkBasic#LINGER} of them, so this can neither block nor be used
+     * to keep a connection busy.
+     *
+     * @param input The stream to drain
+     * @throws IOException If fails
+     */
+    private static void linger(final InputStream input) throws IOException {
+        final byte[] buf = new byte[8192];
+        long total = 0L;
+        while (total < BkBasic.LINGER && input.available() > 0) {
+            final int read = input.read(buf);
+            if (read < 0) {
+                break;
+            }
+            total += read;
+        }
     }
 
     /**
