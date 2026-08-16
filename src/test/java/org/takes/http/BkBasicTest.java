@@ -347,15 +347,8 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
      * unencodable URI.
-     * todo: #1058:30min This test address the combination of bugs reported by
-     * issue #1058 and #1441.
-     * The problem is {@link BkBasic#accept} method that create
-     * {@link org.takes.rq.RqLive} (can throw a {@link org.takes.HttpException},
-     * while initializing) before execution control achieve try/catch
-     * block in {@link BkBasic#print} with forming a proper error response on
-     * {@link org.takes.HttpException}
+     * @throws Exception If some problem inside
      */
-    @Disabled
     @Test
     void returnsABadRequestToAControlCharInPath() throws Exception {
         MatcherAssert.assertThat(
