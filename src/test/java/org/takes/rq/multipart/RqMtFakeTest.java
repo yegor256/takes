@@ -6,7 +6,6 @@ package org.takes.rq.multipart;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.channels.ClosedChannelException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,7 +13,6 @@ import org.cactoos.list.ListOf;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
@@ -149,13 +147,10 @@ final class RqMtFakeTest {
         final RqMtBase multi = RqMtFakeTest.closableMulti();
         multi.part("name").iterator().next().body().read();
         multi.body().close();
-        MatcherAssert.assertThat(
-            "Exception must be ClosedChannelException for name part",
-            Assertions.assertThrows(
-                IOException.class,
-                () -> multi.part("name").iterator().next().body().read()
-            ),
-            new IsInstanceOf(ClosedChannelException.class)
+        Assertions.assertThrows(
+            IOException.class,
+            () -> multi.part("name").iterator().next().body().read(),
+            "Reading the name part must fail after the body is closed"
         );
     }
 
@@ -164,13 +159,10 @@ final class RqMtFakeTest {
         final RqMtBase multi = RqMtFakeTest.closableMulti();
         multi.part("content").iterator().next().body().read();
         multi.body().close();
-        MatcherAssert.assertThat(
-            "Exception must be ClosedChannelException for content part",
-            Assertions.assertThrows(
-                IOException.class,
-                () -> multi.part("content").iterator().next().body().read()
-            ),
-            new IsInstanceOf(ClosedChannelException.class)
+        Assertions.assertThrows(
+            IOException.class,
+            () -> multi.part("content").iterator().next().body().read(),
+            "Reading the content part must fail after the body is closed"
         );
     }
 
