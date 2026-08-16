@@ -4,11 +4,12 @@
  */
 package org.takes.rq;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
+import java.io.Writer;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.io.WriterTo;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -22,12 +23,12 @@ final class TempInputStreamTest {
     @Test
     void isAvailableForReading() throws IOException {
         final File file = File.createTempFile("tempfile-avail", ".tmp");
-        try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
+        try (Writer out = new WriterTo(file)) {
             out.write("Temp file reading test");
         }
         try (
             InputStream body = new TempInputStream(
-                Files.newInputStream(file.toPath()), file
+                new InputStreamOf(file), file
             )
         ) {
             MatcherAssert.assertThat(
@@ -41,10 +42,10 @@ final class TempInputStreamTest {
     @Test
     void deletesTempFileOnClose() throws IOException {
         final File file = File.createTempFile("tempfile-delete", ".tmp");
-        try (BufferedWriter out = Files.newBufferedWriter(file.toPath())) {
+        try (Writer out = new WriterTo(file)) {
             out.write("Temp file deletion test");
         }
-        new TempInputStream(Files.newInputStream(file.toPath()), file).close();
+        new TempInputStream(new InputStreamOf(file), file).close();
         MatcherAssert.assertThat(
             "File exists after stream closure",
             file.exists(),

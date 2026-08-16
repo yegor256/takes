@@ -15,8 +15,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -26,6 +24,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.cactoos.Scalar;
+import org.cactoos.io.OutputStreamTo;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.FormattedText;
@@ -242,10 +241,8 @@ public final class RqMtBase implements RqMultipart {
             RqMultipart.class.getName(), ".tmp"
         );
         try (
-            WritableByteChannel channel = Files.newByteChannel(
-                file.toPath(),
-                StandardOpenOption.READ,
-                StandardOpenOption.WRITE
+            WritableByteChannel channel = Channels.newChannel(
+                new OutputStreamTo(file)
             )
         ) {
             channel.write(
