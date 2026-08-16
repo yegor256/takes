@@ -11,12 +11,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.lang.StringUtils;
 import org.cactoos.Text;
+import org.cactoos.io.InputStreamOf;
+import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.Joined;
 import org.cactoos.text.UncheckedText;
@@ -236,7 +237,7 @@ final class RqMtSmartTest {
                 ""
             ).asString();
         final byte[] expected = new byte[length];
-        try (BufferedWriter bwr = Files.newBufferedWriter(file)) {
+        try (BufferedWriter bwr = new BufferedWriter(new WriterTo(file))) {
             bwr.write(head);
             for (int idx = 0; idx < length; ++idx) {
                 bwr.write(idx % the);
@@ -254,7 +255,7 @@ final class RqMtSmartTest {
                 ),
                 "Content-Type: multipart/form-data; boundary=zzz1"
             ),
-            new TempInputStream(Files.newInputStream(file), file.toFile())
+            new TempInputStream(new InputStreamOf(file), file.toFile())
         );
         try (
             InputStream stream = new RqMtSmart(
@@ -275,7 +276,7 @@ final class RqMtSmartTest {
         final Path temp, final int length, final String part
     ) throws IOException {
         final File file = temp.resolve("handlesRequestInTime.tmp").toFile();
-        try (BufferedWriter bwr = Files.newBufferedWriter(file.toPath())) {
+        try (BufferedWriter bwr = new BufferedWriter(new WriterTo(file))) {
             bwr.write(
                 new Joined(
                     RqMtSmartTest.CRLF,
@@ -303,7 +304,7 @@ final class RqMtSmartTest {
                 RqMtSmartTest.CONTENT_TYPE,
                 String.format("Content-Length:%s", file.length())
             ),
-            new TempInputStream(Files.newInputStream(file.toPath()), file)
+            new TempInputStream(new InputStreamOf(file), file)
         );
     }
 
