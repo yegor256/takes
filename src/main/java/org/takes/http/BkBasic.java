@@ -95,20 +95,50 @@ public final class BkBasic implements Back {
                 socket.getOutputStream()
             )
         ) {
-            while (true) {
-                this.print(
-                    BkBasic.addSocketHeaders(
-                        new RqLive(input),
-                        socket
-                    ),
-                    output
-                );
-                output.flush();
+            while (this.exchange(input, socket, output)) {
                 if (input.available() <= 0) {
                     break;
                 }
             }
         }
+    }
+
+    /**
+     * Read one request and print the response to the output.
+     *
+     * <p>The request is built here, and not by the caller, because
+     * {@link RqLive} throws {@link HttpException} on a malformed request
+     * line and that exception has to be turned into a response, instead of
+     * killing the thread.
+     *
+     * <p>A request that can't be parsed leaves the input stream in an
+     * unpredictable state, so the connection can't carry another request
+     * after it and FALSE is returned. This is what RFC 7230, section 3.5,
+     * recommends for a malformed request line.
+     *
+     * @param input Stream to read the request from
+     * @param socket Socket the request arrived through
+     * @param output Stream to print the response to
+     * @return TRUE if the connection may carry one more request
+     * @throws IOException If fails
+     */
+    private boolean exchange(final InputStream input, final Socket socket,
+        final OutputStream output) throws IOException {
+        boolean reusable = true;
+        try {
+            this.print(
+                BkBasic.addSocketHeaders(
+                    new RqLive(input),
+                    socket
+                ),
+                output
+            );
+        } catch (final HttpException ex) {
+            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
+            reusable = false;
+        }
+        output.flush();
+        return reusable;
     }
 
     /**
