@@ -169,7 +169,7 @@ final class RqMtBaseTest {
 
     /**
      * Try to parse a multipart request that has no closing boundary.
-     *  Parsing is lazy, so {@code names()} is called to force it.
+     * Parsing is lazy, so {@code names()} is called to force it.
      * @throws Exception If fails
      */
     private static void parseWithoutClosingBoundary() throws Exception {
