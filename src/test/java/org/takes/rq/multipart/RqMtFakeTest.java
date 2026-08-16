@@ -5,6 +5,7 @@
 package org.takes.rq.multipart;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -44,7 +45,7 @@ final class RqMtFakeTest {
     @Test
     void throwsExceptionOnNoNameAtContentDispositionHeader() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> new RqMtFake(
                 new RqWithHeader(
                     new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
@@ -52,14 +53,14 @@ final class RqMtFakeTest {
                         RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
                     ).asString()
                 )
-            ).body()
+            ).names()
         );
     }
 
     @Test
     void throwsExceptionOnNoBoundaryAtContentTypeHeader() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> {
                 final int len = 100_005;
                 new RqMtBase(
@@ -74,7 +75,7 @@ final class RqMtFakeTest {
                         ),
                         ""
                     )
-                );
+                ).names();
             }
         );
     }
@@ -82,7 +83,7 @@ final class RqMtFakeTest {
     @Test
     void throwsExceptionOnInvalidContentTypeHeader() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> {
                 final int len = 100_004;
                 new RqMtBase(
@@ -97,7 +98,7 @@ final class RqMtFakeTest {
                         ),
                         ""
                     )
-                );
+                ).names();
             }
         );
     }
