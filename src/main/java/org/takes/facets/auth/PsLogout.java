@@ -21,6 +21,12 @@ import org.takes.misc.Opt;
 @EqualsAndHashCode
 public final class PsLogout implements Pass {
 
+    /**
+     * Ctor.
+     */
+    public PsLogout() {
+    }
+
     @Override
     public Opt<Identity> enter(final Request request) {
         return new Opt.Single<>(Identity.ANONYMOUS);

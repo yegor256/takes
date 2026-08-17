@@ -89,6 +89,12 @@ public interface Opt<T> {
      */
     final class Empty<T> implements Opt<T> {
 
+        /**
+         * Ctor.
+         */
+        public Empty() {
+        }
+
         @Override
         public T get() {
             throw new UnsupportedOperationException(

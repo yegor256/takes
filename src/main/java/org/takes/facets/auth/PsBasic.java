@@ -194,6 +194,12 @@ public final class PsBasic implements Pass {
      */
     public static final class Empty implements PsBasic.Entry {
 
+        /**
+         * Ctor.
+         */
+        public Empty() {
+        }
+
         @Override
         public Opt<Identity> enter(final String user, final String pwd) {
             return new Opt.Empty<>();

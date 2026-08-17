@@ -13,7 +13,7 @@
  *
  * <p>The main components include:
  *
- * <h3>Production Components</h3>
+ * <h2>Production Components</h2>
  * <ul>
  * <li>{@link org.takes.servlet.SrvTake} - Main servlet adapter that
  * allows Takes applications to run in servlet containers</li>
@@ -23,7 +23,7 @@
  * objects to HttpServletResponse</li>
  * </ul>
  *
- * <h3>Testing Components</h3>
+ * <h2>Testing Components</h2>
  * <ul>
  * <li>{@link org.takes.servlet.HttpServletRequestFake} - Test double
  * for HttpServletRequest</li>

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.Scalar;
 import org.takes.Response;
+import org.takes.Take;
 import org.takes.rs.RsText;
 
 /**

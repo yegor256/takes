@@ -12,6 +12,7 @@ import org.cactoos.io.InputOf;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
+import org.takes.Take;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
 

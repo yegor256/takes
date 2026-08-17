@@ -38,6 +38,12 @@ import org.takes.facets.auth.Identity;
 @EqualsAndHashCode
 public final class CcCompact implements Codec {
 
+    /**
+     * Ctor.
+     */
+    public CcCompact() {
+    }
+
     @Override
     public byte[] encode(final Identity identity) {
         final ByteArrayOutputStream data = new ByteArrayOutputStream();

@@ -50,6 +50,12 @@ import org.takes.rs.RsEmpty;
 @ToString
 public final class TkEmpty implements Take {
 
+    /**
+     * Ctor.
+     */
+    public TkEmpty() {
+    }
+
     @Override
     public Response act(final Request req) {
         return new RsEmpty();
