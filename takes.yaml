@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 804.138378872
+  seconds: 810.18581004
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-16 04:19:02.291712475 Z
+  when: 2026-08-17 04:21:11.517039473 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 13335984144
+  events_were_scanned: 13373071070
   issues_were_scanned: 1292
-  labels_were_scanned: 924
+  labels_were_scanned: 1121
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 695
+  types_were_scanned: 802
   what: iterate
   where: github
 - _id: 20665
@@ -77872,18 +77872,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-12 04:41:17.976884067 Z
-- _id: 20793
-  _job: 86501
-  _time: 2026-08-12 04:41:43.588651336 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (173.2) is staying still.
-    The average number of commits per week (8.4) is staying still.
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is decreasing (R=-0.15).
-  what: assessment
-  when: 2026-08-12 04:41:43.605122056 Z
 - _id: 20794
   _job: 31667071880
   _time: 2026-08-13 04:40:27.625773619 Z
@@ -78164,9 +78152,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 1736
   repository: 28924109
   review: 2026-08-15 08:36:36.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -78189,3 +78179,1178 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-16 04:18:42.738160963 Z
+- _id: 20812
+  _job: 87198
+  _time: 2026-08-16 04:19:26.374684013 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (173.2) is staying still.
+    The average number of commits per week (8.4) is staying still.
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-08-16 04:19:26.421775287 Z
+- _id: 20813
+  _job: 31993302269
+  _time: 2026-08-17 04:07:45.806439620 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1741 has been reviewed by @yegor256 with
+    4 HoC and 3 comments.
+  event_id: 13372344001
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 4
+  is_human: 1
+  issue: 1741
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-08-17 02:41:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 20814
+  _job: 31993302269
+  _time: 2026-08-17 04:07:46.852966439 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1744 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 13372341924
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1744
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-08-17 02:41:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 20815
+  _job: 31993302269
+  _time: 2026-08-17 04:07:47.608634005 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1744 has been opened by @renovate[bot].
+  event_id: 13366030599
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1744
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 21:50:06.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20816
+  _job: 31993302269
+  _time: 2026-08-17 04:07:48.186925677 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/org.codehaus.mojo-exec-maven-plugin-3.x
+  details: The pull request yegor256/takes#1743 has been opened by @renovate[bot].
+  event_id: 13366029103
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1743
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 21:50:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20817
+  _job: 31993302269
+  _time: 2026-08-17 04:07:48.479515200 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/xml-apis-xml-apis-1.x
+  details: The pull request yegor256/takes#1742 has been opened by @renovate[bot].
+  event_id: 13361340640
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1742
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 17:59:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20818
+  _job: 31993302269
+  _time: 2026-08-17 04:07:48.943659699 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  details: The pull request yegor256/takes#1741 has been opened by @renovate[bot].
+  event_id: 13361339171
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1741
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 17:59:09.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20819
+  _job: 31993302269
+  _time: 2026-08-17 04:07:50.406601080 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1441 has been closed by @yegor256.
+  event_id: 13361322701
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1441
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 17:58:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 20820
+  _job: 31993302269
+  _time: 2026-08-17 04:07:51.206577716 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  details: The pull request yegor256/takes#1740 has been opened by @yegor256.
+  event_id: 13359887467
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1740
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 16:52:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 20821
+  _job: 31993302269
+  _time: 2026-08-17 04:07:51.800505260 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1603 has been closed by @yegor256.
+  event_id: 13358665635
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1603
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 15:54:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 20822
+  _job: 31993302269
+  _time: 2026-08-17 04:07:52.529362332 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  details: The pull request yegor256/takes#1739 has been opened by @yegor256.
+  event_id: 13358376783
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1739
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 15:41:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 20823
+  _job: 31993302269
+  _time: 2026-08-17 04:07:53.125684525 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1729 has been closed by @yegor256.
+  event_id: 13357627463
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1729
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 15:07:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 20824
+  _job: 31993302269
+  _time: 2026-08-17 04:07:54.229645005 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  details: The pull request yegor256/takes#1738 has been opened by @yegor256.
+  event_id: 13356427416
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1738
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-16 14:10:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 20825
+  _job: 31993302269
+  _time: 2026-08-17 04:07:57.951603646 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1106 has been closed by @yegor256.
+  event_id: 13355384241
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1106
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:19:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 20826
+  _job: 31993302269
+  _time: 2026-08-17 04:07:58.238436384 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1358 has been closed by @yegor256.
+  event_id: 13355375178
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1358
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:19:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 20827
+  _job: 31993302269
+  _time: 2026-08-17 04:07:58.480783782 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1143 has been closed by @yegor256.
+  event_id: 13355373543
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1143
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:19:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 20828
+  _job: 31993302269
+  _time: 2026-08-17 04:07:58.841657764 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1138 has been closed by @yegor256.
+  event_id: 13355371413
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1138
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:19:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 20829
+  _job: 31993302269
+  _time: 2026-08-17 04:07:59.203946465 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1137 has been closed by @yegor256.
+  event_id: 13355369696
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1137
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 20830
+  _job: 31993302269
+  _time: 2026-08-17 04:07:59.540601704 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1133 has been closed by @yegor256.
+  event_id: 13355368159
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1133
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 20831
+  _job: 31993302269
+  _time: 2026-08-17 04:07:59.645671907 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1091 has been closed by @yegor256.
+  event_id: 13355366400
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1091
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 20832
+  _job: 31993302269
+  _time: 2026-08-17 04:08:00.024772614 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1031 has been closed by @yegor256.
+  event_id: 13355364561
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1031
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 20833
+  _job: 31993302269
+  _time: 2026-08-17 04:08:00.358640530 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#933 has been closed by @yegor256.
+  event_id: 13355362766
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 933
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 20834
+  _job: 31993302269
+  _time: 2026-08-17 04:08:00.744417732 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#927 has been closed by @yegor256.
+  event_id: 13355360951
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 927
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 20835
+  _job: 31993302269
+  _time: 2026-08-17 04:08:01.020851755 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#240 has been closed by @yegor256.
+  event_id: 13355359446
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 240
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:18:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 20836
+  _job: 31993302269
+  _time: 2026-08-17 04:08:01.239158857 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1225 has been closed by @yegor256.
+  event_id: 13355337850
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1225
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:17:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 20837
+  _job: 31993302269
+  _time: 2026-08-17 04:08:01.337347788 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1141 has been closed by @yegor256.
+  event_id: 13355336799
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1141
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:17:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 20838
+  _job: 31993302269
+  _time: 2026-08-17 04:08:01.754479379 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#906 has been closed by @yegor256.
+  event_id: 13355335582
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 906
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:17:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 20839
+  _job: 31993302269
+  _time: 2026-08-17 04:08:01.976631243 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1048 has been closed by @yegor256.
+  event_id: 13355329575
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1048
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 20840
+  _job: 31993302269
+  _time: 2026-08-17 04:08:02.083858656 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#994 has been closed by @yegor256.
+  event_id: 13355328586
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 994
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 20841
+  _job: 31993302269
+  _time: 2026-08-17 04:08:02.280177809 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#978 has been closed by @yegor256.
+  event_id: 13355327683
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 978
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 20842
+  _job: 31993302269
+  _time: 2026-08-17 04:08:02.363005576 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#949 has been closed by @yegor256.
+  event_id: 13355326723
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 949
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 20843
+  _job: 31993302269
+  _time: 2026-08-17 04:08:02.630650868 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#928 has been closed by @yegor256.
+  event_id: 13355325881
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 928
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20844
+  _job: 31993302269
+  _time: 2026-08-17 04:08:02.761844196 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#926 has been closed by @yegor256.
+  event_id: 13355324970
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 926
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 20845
+  _job: 31993302269
+  _time: 2026-08-17 04:08:02.909388318 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#910 has been closed by @yegor256.
+  event_id: 13355323991
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 910
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 20846
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.006894684 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#909 has been closed by @yegor256.
+  event_id: 13355322724
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 909
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 20847
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.111417746 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1708 has been closed by @yegor256.
+  event_id: 13355316403
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1708
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 20848
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.272413546 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1687 has been closed by @yegor256.
+  event_id: 13355314322
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1687
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 20849
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.398776309 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1588 has been closed by @yegor256.
+  event_id: 13355312422
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1588
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:16:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 20850
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.502304340 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1561 has been closed by @yegor256.
+  event_id: 13355310751
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1561
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 20851
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.714050112 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1551 has been closed by @yegor256.
+  event_id: 13355309197
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1551
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 20852
+  _job: 31993302269
+  _time: 2026-08-17 04:08:03.842695000 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1537 has been closed by @yegor256.
+  event_id: 13355307543
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1537
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 20853
+  _job: 31993302269
+  _time: 2026-08-17 04:08:04.179436887 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1509 has been closed by @yegor256.
+  event_id: 13355305769
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1509
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20854
+  _job: 31993302269
+  _time: 2026-08-17 04:08:04.288137578 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1486 has been closed by @yegor256.
+  event_id: 13355303969
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1486
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 20855
+  _job: 31993302269
+  _time: 2026-08-17 04:08:04.415196959 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1463 has been closed by @yegor256.
+  event_id: 13355301970
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1463
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 20856
+  _job: 31993302269
+  _time: 2026-08-17 04:08:04.560782883 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1448 has been closed by @yegor256.
+  event_id: 13355299887
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1448
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 20857
+  _job: 31993302269
+  _time: 2026-08-17 04:08:04.707953051 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1443 has been closed by @yegor256.
+  event_id: 13355298057
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1443
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 20858
+  _job: 31993302269
+  _time: 2026-08-17 04:08:04.858363908 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1408 has been closed by @yegor256.
+  event_id: 13355296170
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1408
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 20859
+  _job: 31993302269
+  _time: 2026-08-17 04:08:05.009808270 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1407 has been closed by @yegor256.
+  event_id: 13355294411
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1407
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20860
+  _job: 31993302269
+  _time: 2026-08-17 04:08:05.165991342 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1405 has been closed by @yegor256.
+  event_id: 13355292378
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1405
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:15:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 20861
+  _job: 31993302269
+  _time: 2026-08-17 04:08:05.294679219 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1404 has been closed by @yegor256.
+  event_id: 13355290466
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1404
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:14:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 20862
+  _job: 31993302269
+  _time: 2026-08-17 04:08:05.456630094 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1402 has been closed by @yegor256.
+  event_id: 13355288724
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1402
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:14:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 20863
+  _job: 31993302269
+  _time: 2026-08-17 04:08:05.591667587 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue yegor256/takes#1380 has been closed by @yegor256.
+  event_id: 13355286777
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1380
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-08-16 13:14:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 20864
+  _job: 31993302269
+  _time: 2026-08-17 04:08:20.542287574 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  by_owner: 1
+  commit: aea495dcecd7b0c604137dfe70daf23b8342c2ab
+  default_branch: master
+  details: 'A new Git push #40155012012 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 17830766452
+  event_type: PushEvent
+  is_human: 1
+  push_id: 40155012012
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-08-16 13:02:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 20865
+  _job: 31993302269
+  _time: 2026-08-17 04:08:21.130664785 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1737 has been closed by @github-actions[bot],
+    with 0 HoC and 0 comments.
+  event_id: 13346641552
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 0
+  hoc: 0
+  is_human: 0
+  issue: 1737
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-08-15 18:07:39.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20866
+  _job: 31993302269
+  _time: 2026-08-17 04:08:30.875868564 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  by_owner: 1
+  commit: 23a0166b98b1464c83286670eeaf35bf2f41ed13
+  default_branch: master
+  details: 'A new Git push #40119078831 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 17795059191
+  event_type: PushEvent
+  is_human: 1
+  push_id: 40119078831
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-08-16 04:49:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 20867
+  _job: 31993302269
+  _time: 2026-08-17 04:09:00.185405860 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: remove_code_from_ctor
+  comments: 7
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1098 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 59
+  issue: 1098
+  repository: 28924109
+  review: 2021-04-01 16:41:14.000000000 Z
+  succeeded_builds: 12
+  suggestions: 2
+  what: pull-was-merged
+  when: 2026-08-16 14:01:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 20868
+  _job: 31993302269
+  _time: 2026-08-17 04:09:12.117375704 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/com.jcabi-parent-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1725 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1725
+  repository: 28924109
+  review: 2026-07-31 03:32:42.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-16 14:01:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 20869
+  _job: 31993302269
+  _time: 2026-08-17 04:09:23.232772514 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1738 has been "pull-was-merged".
+  failed_builds: 0
+  files: 7
+  hoc: 71
+  issue: 1738
+  repository: 28924109
+  review: 2026-08-16 15:06:57.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-16 15:07:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 20870
+  _job: 31993302269
+  _time: 2026-08-17 04:09:32.262612551 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1739 has been "pull-was-merged".
+  failed_builds: 0
+  files: 69
+  hoc: 1493
+  issue: 1739
+  repository: 28924109
+  review: 2026-08-16 15:54:49.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-16 15:54:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 20871
+  _job: 31993302269
+  _time: 2026-08-17 04:09:41.428204942 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1740 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 91
+  issue: 1740
+  repository: 28924109
+  review: 2026-08-16 17:57:57.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-16 17:58:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 20872
+  _job: 31993302269
+  _time: 2026-08-17 04:11:04.920384808 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#927.
+  issue: 927
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 20873
+  _job: 31993302269
+  _time: 2026-08-17 04:11:05.628368300 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#929.
+  issue: 929
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 20874
+  _job: 31993302269
+  _time: 2026-08-17 04:11:06.107220209 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#933.
+  issue: 933
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 20875
+  _job: 31993302269
+  _time: 2026-08-17 04:11:06.919030372 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#944.
+  issue: 944
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 20876
+  _job: 31993302269
+  _time: 2026-08-17 04:11:07.778253818 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#946.
+  issue: 946
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 20877
+  _job: 31993302269
+  _time: 2026-08-17 04:11:11.022994429 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#965.
+  issue: 965
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 20878
+  _job: 31993302269
+  _time: 2026-08-17 04:11:13.845752944 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#983.
+  issue: 983
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:19:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 20879
+  _job: 31993302269
+  _time: 2026-08-17 04:11:15.396418864 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#993.
+  issue: 993
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 20880
+  _job: 31993302269
+  _time: 2026-08-17 04:11:17.948961089 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1004.
+  issue: 1004
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 20881
+  _job: 31993302269
+  _time: 2026-08-17 04:11:18.404618153 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1021.
+  issue: 1021
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:19:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 20882
+  _job: 31993302269
+  _time: 2026-08-17 04:11:20.955420571 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1029.
+  issue: 1029
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:19:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 20883
+  _job: 31993302269
+  _time: 2026-08-17 04:11:21.487044114 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1031.
+  issue: 1031
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 20884
+  _job: 31993302269
+  _time: 2026-08-17 04:11:22.144078963 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1035.
+  issue: 1035
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 20885
+  _job: 31993302269
+  _time: 2026-08-17 04:11:24.290057957 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1051.
+  issue: 1051
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:20:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 20886
+  _job: 31993302269
+  _time: 2026-08-17 04:11:24.713017588 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1057.
+  issue: 1057
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:20:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 20887
+  _job: 31993302269
+  _time: 2026-08-17 04:11:30.692579950 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1091.
+  issue: 1091
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20888
+  _job: 31993302269
+  _time: 2026-08-17 04:11:31.409208361 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1100.
+  issue: 1100
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:20:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20889
+  _job: 31993302269
+  _time: 2026-08-17 04:11:32.084477180 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1106.
+  issue: 1106
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:19:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 20890
+  _job: 31993302269
+  _time: 2026-08-17 04:11:34.313443657 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1121.
+  issue: 1121
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 20891
+  _job: 31993302269
+  _time: 2026-08-17 04:21:08.787354652 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 5
+  total_contributors: 89
+  total_files: 541
+  total_forks: 215
+  total_issues: 755
+  total_pulls: 988
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-08-17 04:21:08.794523912 Z
