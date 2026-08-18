@@ -25,6 +25,7 @@ public final class PsLogout implements Pass {
      * Ctor.
      */
     public PsLogout() {
+        // there is nothing to initialize here
     }
 
     @Override
