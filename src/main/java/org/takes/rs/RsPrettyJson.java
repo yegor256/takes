@@ -93,7 +93,7 @@ public final class RsPrettyJson implements Response {
                 Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
             ).createWriter(res)
         ) {
-            wrt.writeObject(Json.createReader(body).readObject());
+            wrt.write(Json.createReader(body).readValue());
         } catch (final JsonException ex) {
             throw new IOException(ex);
         }

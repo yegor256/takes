@@ -54,6 +54,7 @@ public final class TkEmpty implements Take {
      * Ctor.
      */
     public TkEmpty() {
+        // there is nothing to initialize here
     }
 
     @Override
