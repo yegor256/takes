@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 810.18581004
+  seconds: 747.296880034
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-17 04:21:11.517039473 Z
+  when: 2026-08-18 04:17:08.710071170 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 211
+  assignees_were_scanned: 341
   earliest_issue_was_found: 1
-  events_were_scanned: 13373071070
+  events_were_scanned: 17923055750
   issues_were_scanned: 1292
-  labels_were_scanned: 1121
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 802
+  types_were_scanned: 905
   what: iterate
   where: github
 - _id: 20665
@@ -77921,18 +77921,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-14 04:39:29.367628901 Z
-- _id: 20797
-  _job: 86839
-  _time: 2026-08-14 04:40:03.277545149 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (173.2) is staying still.
-    The average number of commits per week (8.4) is staying still.
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is decreasing (R=-0.14).
-  what: assessment
-  when: 2026-08-14 04:40:03.294080913 Z
 - _id: 20798
   _job: 86839
   _time: 2026-08-14 04:40:26.800005216 Z
@@ -79006,9 +78994,11 @@
   failed_builds: 0
   files: 3
   hoc: 59
+  is_human: 1
   issue: 1098
   repository: 28924109
   review: 2021-04-01 16:41:14.000000000 Z
+  review_comments: 2
   succeeded_builds: 12
   suggestions: 2
   what: pull-was-merged
@@ -79030,9 +79020,11 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 1
   issue: 1725
   repository: 28924109
   review: 2026-07-31 03:32:42.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -79054,9 +79046,11 @@
   failed_builds: 0
   files: 7
   hoc: 71
+  is_human: 1
   issue: 1738
   repository: 28924109
   review: 2026-08-16 15:06:57.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -79078,9 +79072,11 @@
   failed_builds: 0
   files: 69
   hoc: 1493
+  is_human: 1
   issue: 1739
   repository: 28924109
   review: 2026-08-16 15:54:49.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -79102,9 +79098,11 @@
   failed_builds: 0
   files: 2
   hoc: 91
+  is_human: 1
   issue: 1740
   repository: 28924109
   review: 2026-08-16 17:57:57.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -79116,6 +79114,7 @@
   _time: 2026-08-17 04:11:04.920384808 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#927.
+  is_human: 1
   issue: 927
   label: question
   repository: 28924109
@@ -79128,6 +79127,7 @@
   _time: 2026-08-17 04:11:05.628368300 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#929.
+  is_human: 1
   issue: 929
   label: enhancement
   repository: 28924109
@@ -79140,6 +79140,7 @@
   _time: 2026-08-17 04:11:06.107220209 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#933.
+  is_human: 1
   issue: 933
   label: question
   repository: 28924109
@@ -79152,6 +79153,7 @@
   _time: 2026-08-17 04:11:06.919030372 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#944.
+  is_human: 1
   issue: 944
   label: enhancement
   repository: 28924109
@@ -79164,6 +79166,7 @@
   _time: 2026-08-17 04:11:07.778253818 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#946.
+  is_human: 1
   issue: 946
   label: enhancement
   repository: 28924109
@@ -79176,6 +79179,7 @@
   _time: 2026-08-17 04:11:11.022994429 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#965.
+  is_human: 1
   issue: 965
   label: enhancement
   repository: 28924109
@@ -79188,6 +79192,7 @@
   _time: 2026-08-17 04:11:13.845752944 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#983.
+  is_human: 1
   issue: 983
   label: bug
   repository: 28924109
@@ -79200,6 +79205,7 @@
   _time: 2026-08-17 04:11:15.396418864 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#993.
+  is_human: 1
   issue: 993
   label: enhancement
   repository: 28924109
@@ -79212,6 +79218,7 @@
   _time: 2026-08-17 04:11:17.948961089 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1004.
+  is_human: 1
   issue: 1004
   label: enhancement
   repository: 28924109
@@ -79224,6 +79231,7 @@
   _time: 2026-08-17 04:11:18.404618153 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1021.
+  is_human: 1
   issue: 1021
   label: bug
   repository: 28924109
@@ -79236,6 +79244,7 @@
   _time: 2026-08-17 04:11:20.955420571 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1029.
+  is_human: 1
   issue: 1029
   label: bug
   repository: 28924109
@@ -79248,6 +79257,7 @@
   _time: 2026-08-17 04:11:21.487044114 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1031.
+  is_human: 1
   issue: 1031
   label: question
   repository: 28924109
@@ -79260,6 +79270,7 @@
   _time: 2026-08-17 04:11:22.144078963 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1035.
+  is_human: 1
   issue: 1035
   label: enhancement
   repository: 28924109
@@ -79272,6 +79283,7 @@
   _time: 2026-08-17 04:11:24.290057957 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1051.
+  is_human: 1
   issue: 1051
   label: bug
   repository: 28924109
@@ -79284,6 +79296,7 @@
   _time: 2026-08-17 04:11:24.713017588 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1057.
+  is_human: 1
   issue: 1057
   label: bug
   repository: 28924109
@@ -79296,6 +79309,7 @@
   _time: 2026-08-17 04:11:30.692579950 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1091.
+  is_human: 1
   issue: 1091
   label: question
   repository: 28924109
@@ -79308,6 +79322,7 @@
   _time: 2026-08-17 04:11:31.409208361 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1100.
+  is_human: 1
   issue: 1100
   label: bug
   repository: 28924109
@@ -79320,6 +79335,7 @@
   _time: 2026-08-17 04:11:32.084477180 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1106.
+  is_human: 1
   issue: 1106
   label: question
   repository: 28924109
@@ -79332,6 +79348,7 @@
   _time: 2026-08-17 04:11:34.313443657 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1121.
+  is_human: 1
   issue: 1121
   label: enhancement
   repository: 28924109
@@ -79344,6 +79361,7 @@
   _time: 2026-08-17 04:21:08.787354652 Z
   _version: 0.19.16/0.61.1/0.17.21
   total_active_contributors: 5
+  total_commits: 3904
   total_contributors: 89
   total_files: 541
   total_forks: 215
@@ -79354,3 +79372,167 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-17 04:21:08.794523912 Z
+- _id: 20892
+  _job: 87394
+  _time: 2026-08-17 04:21:34.967472359 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (173.2) is staying still.
+    The average number of commits per week (8.4) is staying still.
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-08-17 04:21:34.988444709 Z
+- _id: 20893
+  _job: 32097732755
+  _time: 2026-08-18 04:04:45.443018589 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  by_owner: 1
+  commit: 8fdfc1213b322b587bb3533709bb8cdbc66cb223
+  default_branch: master
+  details: 'A new Git push #40247106872 has arrived to yegor256/takes, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 17923055750
+  event_type: PushEvent
+  is_human: 1
+  push_id: 40247106872
+  ref: refs/heads/master
+  repository: 28924109
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-08-17 10:48:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 20894
+  _job: 32097732755
+  _time: 2026-08-18 04:05:20.171105153 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1741 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  issue: 1741
+  repository: 28924109
+  review: 2026-08-17 02:41:55.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-17 09:42:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 20895
+  _job: 32097732755
+  _time: 2026-08-18 04:05:41.296683827 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#224 was assigned to @yegor256 by @yegor256.
+  issue: 224
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 20896
+  _job: 32097732755
+  _time: 2026-08-18 04:06:54.159662053 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1133.
+  issue: 1133
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 20897
+  _job: 32097732755
+  _time: 2026-08-18 04:06:55.267088641 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1137.
+  issue: 1137
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 20898
+  _job: 32097732755
+  _time: 2026-08-18 04:06:55.695291313 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1138.
+  issue: 1138
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 20899
+  _job: 32097732755
+  _time: 2026-08-18 04:07:00.926585551 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1299.
+  issue: 1299
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:20:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 20900
+  _job: 32097732755
+  _time: 2026-08-18 04:07:03.140049258 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1358.
+  issue: 1358
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:19:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20901
+  _job: 32097732755
+  _time: 2026-08-18 04:07:07.742255429 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1434.
+  issue: 1434
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:23:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 20902
+  _job: 32097732755
+  _time: 2026-08-18 04:07:08.281646222 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1435.
+  issue: 1435
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:23:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 20903
+  _job: 32097732755
+  _time: 2026-08-18 04:07:09.089072922 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1441.
+  issue: 1441
+  label: bug
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:20:26.000000000 Z
+  where: github
+  who: 526301
