@@ -15,6 +15,8 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.io.OutputTo;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.ScalarOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -62,7 +64,11 @@ public final class FkHitRefresh implements Fork {
                     new ProcessBuilder().command(cmd).start();
                 } catch (final IOException ex) {
                     throw new IllegalStateException(
-                        String.format("Failed to run command '%s'", cmd),
+                        new UncheckedText(
+                            new FormattedText(
+                                "Failed to run command '%s'", cmd
+                            )
+                        ).asString(),
                         ex
                     );
                 }

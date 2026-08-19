@@ -11,6 +11,8 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Fake HTTP request implementation for testing purposes.
@@ -140,7 +142,11 @@ public final class RqFake extends RqWrap {
         public String get(final int index) {
             final String line;
             if (index == 0) {
-                line = String.format("%s %s", this.method, this.query);
+                line = new UncheckedText(
+                    new FormattedText(
+                        "%s %s", this.method, this.query
+                    )
+                ).asString();
             } else if (index == 1) {
                 line = "Host: www.example.com";
             } else {

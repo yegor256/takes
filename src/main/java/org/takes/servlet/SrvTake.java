@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.HttpURLConnection;
 import java.util.concurrent.atomic.AtomicReference;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Take;
 
@@ -87,10 +89,12 @@ public final class SrvTake extends HttpServlet {
             cls = Class.forName(cname);
         } catch (final ClassNotFoundException err) {
             throw new ServletException(
-                String.format(
-                    "Class %s was not found",
-                    cname
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Class %s was not found",
+                        cname
+                    )
+                ).asString(),
                 err
             );
         }
@@ -100,34 +104,42 @@ public final class SrvTake extends HttpServlet {
                 .newInstance(this.getServletContext());
         } catch (final InstantiationException err) {
             throw new ServletException(
-                String.format(
-                    "Can't construct %s class",
-                    cls.getCanonicalName()
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Can't construct %s class",
+                        cls.getCanonicalName()
+                    )
+                ).asString(),
                 err
             );
         } catch (final IllegalAccessException err) {
             throw new ServletException(
-                String.format(
-                    "Constructor %s(ServletContext) is private",
-                    cls.getCanonicalName()
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Constructor %s(ServletContext) is private",
+                        cls.getCanonicalName()
+                    )
+                ).asString(),
                 err
             );
         } catch (final InvocationTargetException err) {
             throw new ServletException(
-                String.format(
-                    "Error during instantiating %s",
-                    cls.getCanonicalName()
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Error during instantiating %s",
+                        cls.getCanonicalName()
+                    )
+                ).asString(),
                 err
             );
         } catch (final NoSuchMethodException err) {
             throw new ServletException(
-                String.format(
-                    "Constructor %s(ServletContext) was not found",
-                    cls.getCanonicalName()
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Constructor %s(ServletContext) was not found",
+                        cls.getCanonicalName()
+                    )
+                ).asString(),
                 err
             );
         }

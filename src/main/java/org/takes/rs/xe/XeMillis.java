@@ -5,6 +5,8 @@
 package org.takes.rs.xe;
 
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.xembly.Directive;
 import org.xembly.Directives;
 
@@ -80,10 +82,12 @@ public final class XeMillis implements XeSource {
         final Directives dirs = new Directives();
         if (this.finish) {
             dirs.xpath(this.name.toString()).strict(1).xset(
-                String.format(
-                    "%d - number(text())",
-                    System.currentTimeMillis()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%d - number(text())",
+                        System.currentTimeMillis()
+                    )
+                ).asString()
             );
         } else {
             dirs.add(this.name.toString())

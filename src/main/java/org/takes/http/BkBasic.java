@@ -13,6 +13,8 @@ import java.net.Socket;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputStreamOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -73,6 +75,11 @@ public final class BkBasic implements Back {
     public static final String REMOTEPORT = "X-Takes-RemotePort";
 
     /**
+     * How many bytes of a broken request to read away before closing.
+     */
+    private static final long LINGER = 64L * 1024L;
+
+    /**
      * Take.
      */
     private final Take take;
@@ -93,19 +100,78 @@ public final class BkBasic implements Back {
                 socket.getOutputStream()
             )
         ) {
-            while (true) {
-                this.print(
-                    BkBasic.addSocketHeaders(
-                        new RqLive(input),
-                        socket
-                    ),
-                    output
-                );
-                output.flush();
+            while (this.exchange(input, socket, output)) {
                 if (input.available() <= 0) {
                     break;
                 }
             }
+        }
+    }
+
+    /**
+     * Read one request and print the response to the output.
+     *
+     * <p>The request is built here, and not by the caller, because
+     * {@link RqLive} throws {@link HttpException} on a malformed request
+     * line and that exception has to be turned into a response, instead of
+     * killing the thread.
+     *
+     * <p>A request that can't be parsed leaves the input stream in an
+     * unpredictable state, so the connection can't carry another request
+     * after it and FALSE is returned. This is what RFC 7230, section 3.5,
+     * recommends for a malformed request line.
+     *
+     * @param input Stream to read the request from
+     * @param socket Socket the request arrived through
+     * @param output Stream to print the response to
+     * @return TRUE if the connection may carry one more request
+     * @throws IOException If fails
+     */
+    private boolean exchange(final InputStream input, final Socket socket,
+        final OutputStream output) throws IOException {
+        boolean reusable = true;
+        try {
+            this.print(
+                BkBasic.addSocketHeaders(
+                    new RqLive(input),
+                    socket
+                ),
+                output
+            );
+        } catch (final HttpException ex) {
+            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
+            output.flush();
+            BkBasic.linger(input);
+            reusable = false;
+        }
+        output.flush();
+        return reusable;
+    }
+
+    /**
+     * Read away what is left of a request that couldn't be parsed.
+     *
+     * <p>Closing a socket that still has unread bytes in its receive buffer
+     * makes TCP send RST instead of FIN, and then the client sees a reset
+     * connection instead of the response we have just written for it.
+     * Reading the leftovers away first lets the close be graceful.
+     *
+     * <p>Only the bytes that have already arrived are read, and no more than
+     * {@link BkBasic#LINGER} of them, so this can neither block nor be used
+     * to keep a connection busy.
+     *
+     * @param input The stream to drain
+     * @throws IOException If fails
+     */
+    private static void linger(final InputStream input) throws IOException {
+        final byte[] buf = new byte[8192];
+        long total = 0L;
+        while (total < BkBasic.LINGER && input.available() > 0) {
+            final int read = input.read(buf);
+            if (read < 0) {
+                break;
+            }
+            total += read;
         }
     }
 
@@ -165,18 +231,30 @@ public final class BkBasic implements Back {
         final Socket socket) {
         return new RqWithHeaders(
             req,
-            String.format(
-                "%s: %s",
-                BkBasic.LOCALADDR,
-                socket.getLocalAddress().getHostAddress()
-            ),
-            String.format("%s: %d", BkBasic.LOCALPORT, socket.getLocalPort()),
-            String.format(
-                "%s: %s",
-                BkBasic.REMOTEADDR,
-                socket.getInetAddress().getHostAddress()
-            ),
-            String.format("%s: %d", BkBasic.REMOTEPORT, socket.getPort())
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %s",
+                    BkBasic.LOCALADDR,
+                    socket.getLocalAddress().getHostAddress()
+                )
+            ).asString(),
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %d", BkBasic.LOCALPORT, socket.getLocalPort()
+                )
+            ).asString(),
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %s",
+                    BkBasic.REMOTEADDR,
+                    socket.getInetAddress().getHostAddress()
+                )
+            ).asString(),
+            new UncheckedText(
+                new FormattedText(
+                    "%s: %d", BkBasic.REMOTEPORT, socket.getPort()
+                )
+            ).asString()
         );
     }
 }

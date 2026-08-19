@@ -21,9 +21,9 @@ import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.StartsWith;
-import org.cactoos.text.TextOf;
 import org.takes.Response;
 import org.takes.facets.cookies.RsWithCookie;
 import org.takes.rs.RsWithHeader;
@@ -135,7 +135,7 @@ public final class HttpServletResponseFake implements HttpServletResponse {
             new Filtered<>(
                 hdr -> new StartsWith(
                     new Lowered(hdr),
-                    new TextOf(String.format("%s", new Lowered(header)))
+                    new FormattedText("%s", new Lowered(header))
                 ).value(),
                 head
             )

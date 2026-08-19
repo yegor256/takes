@@ -11,6 +11,7 @@ import java.net.URI;
 import java.util.Iterator;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
 import org.cactoos.text.UncheckedText;
@@ -76,12 +77,14 @@ public interface RqHref extends Request {
                 proto = new TextOf("http");
             }
             return new Href(
-                String.format(
-                    "%s://%s%s",
-                    new UncheckedText(proto).asString(),
-                    new UncheckedText(host).asString(),
-                    new RqRequestLine.Base(this).uri()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s://%s%s",
+                        new UncheckedText(proto).asString(),
+                        new UncheckedText(host).asString(),
+                        new RqRequestLine.Base(this).uri()
+                    )
+                ).asString()
             );
         }
     }
@@ -142,11 +145,13 @@ public interface RqHref extends Request {
         public Href home() throws IOException {
             final URI full = URI.create(this.href().toString());
             return new Href(
-                String.format(
-                    "%s://%s/",
-                    full.getScheme(),
-                    full.getHost()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s://%s/",
+                        full.getScheme(),
+                        full.getHost()
+                    )
+                ).asString()
             );
         }
 
@@ -161,9 +166,11 @@ public interface RqHref extends Request {
             if (!params.hasNext()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        "query param \"%s\" is mandatory", name
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "query param \"%s\" is mandatory", name
+                        )
+                    ).asString()
                 );
             }
             return params.next();

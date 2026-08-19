@@ -15,8 +15,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.cactoos.Scalar;
+import org.cactoos.io.OutputStreamTo;
+import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
@@ -83,19 +84,19 @@ public final class RqMtBase implements RqMultipart {
     private static final String CRLF = new String(new char[]{13, 10});
 
     /**
-     * Map of params and values.
+     * Scalar of Map of params and values.
      */
-    private final Map<String, List<Request>> map;
+    private final Scalar<Map<String, List<Request>>> smap;
 
     /**
-     * Internal buffer.
+     * Scalar of Internal buffer.
      */
-    private final ByteBuffer buffer;
+    private final Scalar<ByteBuffer> sbuffer;
 
     /**
-     * InputStream based on request body.
+     * Scalar of InputStream based on request body.
      */
-    private final InputStream stream;
+    private final Scalar<InputStream> sstream;
 
     /**
      * Original request.
@@ -109,17 +110,19 @@ public final class RqMtBase implements RqMultipart {
      */
     public RqMtBase(final Request req) throws IOException {
         this.origin = req;
-        // @checkstyle ConstructorsCodeFreeCheck (5 lines)
-        this.stream = new RqLengthAware(req).body();
-        this.buffer = ByteBuffer.allocate(
-            Math.min(8192, this.stream.available())
+        this.sstream = new Sticky<>(() -> new RqLengthAware(req).body());
+        this.sbuffer = new Sticky<>(
+            () -> ByteBuffer.allocate(
+                Math.min(8192, new Unchecked<>(this.sstream).value().available())
+            )
         );
-        this.map = this.requests(req);
+        this.smap = new Sticky<>(() -> this.requests(req));
     }
 
     @Override
     public Iterable<Request> part(final CharSequence name) {
-        final List<Request> values = this.map.getOrDefault(
+        final Map<String, List<Request>> map = new Unchecked<>(this.smap).value();
+        final List<Request> values = map.getOrDefault(
             new UncheckedText(
                 new Lowered(name.toString())
             ).asString(),
@@ -131,7 +134,7 @@ public final class RqMtBase implements RqMultipart {
                 Collections.emptyList(),
                 new FormattedText(
                     "there are no parts by name \"%s\" among %d others: %s",
-                    name, this.map.size(), this.map.keySet()
+                    name, map.size(), map.keySet()
                 )
             );
         } else {
@@ -148,7 +151,7 @@ public final class RqMtBase implements RqMultipart {
 
     @Override
     public Iterable<String> names() {
-        return this.map.keySet();
+        return new Unchecked<>(this.smap).value().keySet();
     }
 
     @Override
@@ -180,35 +183,41 @@ public final class RqMtBase implements RqMultipart {
         if (!multipart.value()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
-                    header
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "RqMtBase can only parse multipart/form-data, while Content-Type specifies a different type: \"%s\"",
+                        header
+                    )
+                ).asString()
             );
         }
         final Matcher matcher = RqMtBase.BOUNDARY.matcher(header);
         if (!matcher.matches()) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "boundary is not specified in Content-Type header: \"%s\"",
-                    header
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "boundary is not specified in Content-Type header: \"%s\"",
+                        header
+                    )
+                ).asString()
             );
         }
         final ReadableByteChannel body = Channels.newChannel(
-            this.stream
+            new Unchecked<>(this.sstream).value()
         );
-        final ByteBuffer buf = this.buffer;
+        final ByteBuffer buf = new Unchecked<>(this.sbuffer).value();
         if (body.read(buf) < 0) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 "failed to read the request body"
             );
         }
-        final byte[] boundary = String.format(
-            "%s--%s", RqMtBase.CRLF, matcher.group(1)
-        ).getBytes(RqMtBase.ENCODING);
+        final byte[] boundary = new UncheckedText(
+            new FormattedText(
+                "%s--%s", RqMtBase.CRLF, matcher.group(1)
+            )
+        ).asString().getBytes(RqMtBase.ENCODING);
         buf.flip();
         buf.position(boundary.length - 2);
         final Collection<Request> requests = new ArrayList<>(0);
@@ -238,10 +247,8 @@ public final class RqMtBase implements RqMultipart {
             RqMultipart.class.getName(), ".tmp"
         );
         try (
-            WritableByteChannel channel = Files.newByteChannel(
-                file.toPath(),
-                StandardOpenOption.READ,
-                StandardOpenOption.WRITE
+            WritableByteChannel channel = Channels.newChannel(
+                new OutputStreamTo(file)
             )
         ) {
             channel.write(
@@ -256,7 +263,7 @@ public final class RqMtBase implements RqMultipart {
                 channel,
                 boundary,
                 body,
-                this.buffer
+                new Unchecked<>(this.sbuffer).value()
             ).copy();
         }
         return new RqTemp(file);
@@ -278,10 +285,12 @@ public final class RqMtBase implements RqMultipart {
             if (!matcher.matches()) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        "\"name\" not found in Content-Disposition header: %s",
-                        header
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "\"name\" not found in Content-Disposition header: %s",
+                            header
+                        )
+                    ).asString()
                 );
             }
             final String name = matcher.group(1);
@@ -313,7 +322,7 @@ public final class RqMtBase implements RqMultipart {
                 super.close();
             } finally {
                 for (final List<Request> requests
-                    : RqMtBase.this.map.values()) {
+                    : new Unchecked<>(RqMtBase.this.smap).value().values()) {
                     for (final Request request : requests) {
                         request.body().close();
                     }

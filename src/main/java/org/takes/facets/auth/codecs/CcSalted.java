@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -103,18 +105,22 @@ public final class CcSalted implements Codec {
         final int size = text[0];
         if (size < 0) {
             throw new DecodingException(
-                String.format(
-                    "Length of salt %+d is negative, something is wrong",
-                    size
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Length of salt %+d is negative, something is wrong",
+                        size
+                    )
+                ).asString()
             );
         }
         if (text.length < size + 2) {
             throw new DecodingException(
-                String.format(
-                    "Not enough bytes for salt, length is %d while %d required",
-                    text.length, size + 2
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Not enough bytes for salt, length is %d while %d required",
+                        text.length, size + 2
+                    )
+                ).asString()
             );
         }
         byte sum = (byte) 0;
@@ -123,10 +129,12 @@ public final class CcSalted implements Codec {
         }
         if (text[text.length - 1] != sum) {
             throw new DecodingException(
-                String.format(
-                    "Checksum %d failure, while %d expected",
-                    text[text.length - 1], sum
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Checksum %d failure, while %d expected",
+                        text[text.length - 1], sum
+                    )
+                ).asString()
             );
         }
         final byte[] output = new byte[text.length - size - 2];

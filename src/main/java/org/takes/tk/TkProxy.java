@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.Lowered;
 import org.cactoos.text.UncheckedText;
 import org.takes.Request;
@@ -132,10 +133,12 @@ public final class TkProxy implements Take {
         final com.jcabi.http.Response rsp) {
         final Collection<String> hdrs = new ArrayList<>(0);
         hdrs.add(
-            String.format(
-                "X-Takes-TkProxy: from %s to %s by %s",
-                home, dest, this.label
-            )
+            new UncheckedText(
+                new FormattedText(
+                    "X-Takes-TkProxy: from %s to %s by %s",
+                    home, dest, this.label
+                )
+            ).asString()
         );
         for (final Map.Entry<String, List<String>> entry
             : rsp.headers().entrySet()) {
@@ -146,7 +149,11 @@ public final class TkProxy implements Take {
                 } else {
                     val = value;
                 }
-                hdrs.add(String.format("%s: %s", entry.getKey(), val));
+                hdrs.add(
+                    new UncheckedText(
+                        new FormattedText("%s: %s", entry.getKey(), val)
+                    ).asString()
+                );
             }
         }
         return new RsWithStatus(

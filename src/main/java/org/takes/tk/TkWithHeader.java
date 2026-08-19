@@ -6,6 +6,8 @@ package org.takes.tk;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Take;
 import org.takes.rs.RsWithHeader;
 
@@ -127,7 +129,7 @@ public final class TkWithHeader extends TkWrap {
 
         @Override
         public String toString() {
-            return String.format("%s: %s", this.name, this.value);
+            return new UncheckedText(new FormattedText("%s: %s", this.name, this.value)).asString();
         }
     }
 }

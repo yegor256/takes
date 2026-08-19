@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
@@ -63,24 +65,30 @@ final class RqFrom implements Request {
         }
         names.forEach(
             header -> head.add(
-                String.format(
-                    "%s: %s",
-                    header,
-                    this.sreq.getHeader(header)
+                new UncheckedText(
+                    new FormattedText(
+                        "%s: %s",
+                        header,
+                        this.sreq.getHeader(header)
+                    )
+                ).asString()
+            )
+        );
+        head.add(
+            new UncheckedText(
+                new FormattedText(
+                    "X-Takes-LocalAddress: %s",
+                    this.sreq.getLocalAddr()
                 )
-            )
+            ).asString()
         );
         head.add(
-            String.format(
-                "X-Takes-LocalAddress: %s",
-                this.sreq.getLocalAddr()
-            )
-        );
-        head.add(
-            String.format(
-                "X-Takes-RemoteAddress: %s",
-                this.sreq.getRemoteAddr()
-            )
+            new UncheckedText(
+                new FormattedText(
+                    "X-Takes-RemoteAddress: %s",
+                    this.sreq.getRemoteAddr()
+                )
+            ).asString()
         );
         return head;
     }

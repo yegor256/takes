@@ -73,6 +73,12 @@ public interface Expires {
      */
     final class Expired implements Expires {
 
+        /**
+         * Ctor.
+         */
+        public Expired() {
+        }
+
         @Override
         public String print() {
             return "Expires=0";

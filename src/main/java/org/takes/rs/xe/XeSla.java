@@ -7,6 +7,8 @@ package org.takes.rs.xe;
 import java.lang.management.ManagementFactory;
 import java.util.Locale;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.xembly.Directives;
 
 /**
@@ -51,12 +53,14 @@ public final class XeSla extends XeWrap {
         super(
             () -> new Directives().attr(
                 attr.toString(),
-                String.format(
-                    Locale.US,
-                    "%.3f",
-                    ManagementFactory.getOperatingSystemMXBean()
-                        .getSystemLoadAverage()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%.3f",
+                        Locale.US,
+                        ManagementFactory.getOperatingSystemMXBean()
+                            .getSystemLoadAverage()
+                    )
+                ).asString()
             )
         );
     }

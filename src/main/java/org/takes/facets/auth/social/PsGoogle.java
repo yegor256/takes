@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -158,10 +160,12 @@ public final class PsGoogle implements Pass {
         if (json.containsKey(PsGoogle.ERROR)) {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "could not retrieve id from Google, possible cause: %s.",
-                    json.getJsonObject(PsGoogle.ERROR).get("message")
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "could not retrieve id from Google, possible cause: %s.",
+                        json.getJsonObject(PsGoogle.ERROR).get("message")
+                    )
+                ).asString()
             );
         }
         return PsGoogle.parse(json);
@@ -212,7 +216,11 @@ public final class PsGoogle implements Pass {
             PsGoogle.NAME, json.getString(PsGoogle.DISPLAY_NAME, "unknown")
         );
         return new Identity.Simple(
-            String.format("urn:google:%s", json.getString("id")), props
+            new UncheckedText(
+                new FormattedText(
+                    "urn:google:%s", json.getString("id")
+                )
+            ).asString(), props
         );
     }
 }

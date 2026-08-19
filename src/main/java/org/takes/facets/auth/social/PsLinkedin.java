@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -166,7 +168,11 @@ public final class PsLinkedin implements Pass {
         props.put(fname, json.getString(fname, unknown));
         props.put(lname, json.getString(lname, unknown));
         return new Identity.Simple(
-            String.format("urn:linkedin:%s", json.getString("id")), props
+            new UncheckedText(
+                new FormattedText(
+                    "urn:linkedin:%s", json.getString("id")
+                )
+            ).asString(), props
         );
     }
 }

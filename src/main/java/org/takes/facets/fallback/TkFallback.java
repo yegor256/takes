@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -70,10 +72,12 @@ public final class TkFallback extends TkWrap {
             );
             if (!fbres.has()) {
                 throw new IOException(
-                    String.format(
-                        "There is no fallback available in %s",
-                        fbk.getClass().getCanonicalName()
-                    ),
+                    new UncheckedText(
+                        new FormattedText(
+                            "There is no fallback available in %s",
+                            fbk.getClass().getCanonicalName()
+                        )
+                    ).asString(),
                     TkFallback.error(ex, req, start)
                 );
             }
@@ -88,11 +92,13 @@ public final class TkFallback extends TkWrap {
             );
             if (!fbres.has()) {
                 throw new IOException(
-                    String.format(
-                        "There is no fallback available for %s in %s",
-                        ex.getClass().getCanonicalName(),
-                        fbk.getClass().getCanonicalName()
-                    ),
+                    new UncheckedText(
+                        new FormattedText(
+                            "There is no fallback available for %s in %s",
+                            ex.getClass().getCanonicalName(),
+                            fbk.getClass().getCanonicalName()
+                        )
+                    ).asString(),
                     TkFallback.error(ex, req, start)
                 );
             }
@@ -226,20 +232,24 @@ public final class TkFallback extends TkWrap {
         final String time;
         final long msec = System.currentTimeMillis() - start;
         if (msec < TimeUnit.SECONDS.toMillis(1L)) {
-            time = String.format("%dms", msec);
+            time = new UncheckedText(new FormattedText("%dms", msec)).asString();
         } else {
-            time = String.format(
-                "%ds",
-                msec / TimeUnit.SECONDS.toMillis(1L)
-            );
+            time = new UncheckedText(
+                new FormattedText(
+                    "%ds",
+                    msec / TimeUnit.SECONDS.toMillis(1L)
+                )
+            ).asString();
         }
         return new IllegalStateException(
-            String.format(
-                "[%s %s] failed in %s: %s",
-                new RqMethod.Base(req).method(),
-                new RqHref.Base(req).href(),
-                time, TkFallback.msg(exp)
-            ),
+            new UncheckedText(
+                new FormattedText(
+                    "[%s %s] failed in %s: %s",
+                    new RqMethod.Base(req).method(),
+                    new RqHref.Base(req).href(),
+                    time, TkFallback.msg(exp)
+                )
+            ).asString(),
             exp
         );
     }

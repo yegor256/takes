@@ -5,7 +5,7 @@
 package org.takes.rq.multipart;
 
 import java.io.IOException;
-import java.nio.channels.ClosedChannelException;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,7 +13,6 @@ import org.cactoos.list.ListOf;
 import org.cactoos.text.FormattedText;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqFake;
@@ -44,7 +43,7 @@ final class RqMtFakeTest {
     @Test
     void throwsExceptionOnNoNameAtContentDispositionHeader() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> new RqMtFake(
                 new RqWithHeader(
                     new RqFake("", "", "340 N Wolfe Rd, Sunnyvale, CA 94085"),
@@ -52,14 +51,14 @@ final class RqMtFakeTest {
                         RqMtFakeTest.CONTENT_DISP, "fake=\"t-3\""
                     ).asString()
                 )
-            ).body()
+            ).names()
         );
     }
 
     @Test
     void throwsExceptionOnNoBoundaryAtContentTypeHeader() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> {
                 final int len = 100_005;
                 new RqMtBase(
@@ -74,7 +73,7 @@ final class RqMtFakeTest {
                         ),
                         ""
                     )
-                );
+                ).names();
             }
         );
     }
@@ -82,7 +81,7 @@ final class RqMtFakeTest {
     @Test
     void throwsExceptionOnInvalidContentTypeHeader() {
         Assertions.assertThrows(
-            IOException.class,
+            UncheckedIOException.class,
             () -> {
                 final int len = 100_004;
                 new RqMtBase(
@@ -97,7 +96,7 @@ final class RqMtFakeTest {
                         ),
                         ""
                     )
-                );
+                ).names();
             }
         );
     }
@@ -148,13 +147,10 @@ final class RqMtFakeTest {
         final RqMtBase multi = RqMtFakeTest.closableMulti();
         multi.part("name").iterator().next().body().read();
         multi.body().close();
-        MatcherAssert.assertThat(
-            "Exception must be ClosedChannelException for name part",
-            Assertions.assertThrows(
-                IOException.class,
-                () -> multi.part("name").iterator().next().body().read()
-            ),
-            new IsInstanceOf(ClosedChannelException.class)
+        Assertions.assertThrows(
+            IOException.class,
+            () -> multi.part("name").iterator().next().body().read(),
+            "Reading the name part must fail after the body is closed"
         );
     }
 
@@ -163,13 +159,10 @@ final class RqMtFakeTest {
         final RqMtBase multi = RqMtFakeTest.closableMulti();
         multi.part("content").iterator().next().body().read();
         multi.body().close();
-        MatcherAssert.assertThat(
-            "Exception must be ClosedChannelException for content part",
-            Assertions.assertThrows(
-                IOException.class,
-                () -> multi.part("content").iterator().next().body().read()
-            ),
-            new IsInstanceOf(ClosedChannelException.class)
+        Assertions.assertThrows(
+            IOException.class,
+            () -> multi.part("content").iterator().next().body().read(),
+            "Reading the content part must fail after the body is closed"
         );
     }
 

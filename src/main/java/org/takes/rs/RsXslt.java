@@ -25,6 +25,8 @@ import org.cactoos.io.InputStreamOf;
 import org.cactoos.io.ReaderOf;
 import org.cactoos.io.WriterTo;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 
 /**
@@ -96,10 +98,12 @@ public final class RsXslt extends RsWrap {
                     rsp::head,
                     () -> RsXslt.transform(rsp.body(), resolver)
                 ),
-                () -> String.format(
-                    "X-Takes-RsXslt-TransformerFactory: %s",
-                    RsXslt.factory(resolver).getClass().getCanonicalName()
-                )
+                () -> new UncheckedText(
+                    new FormattedText(
+                        "X-Takes-RsXslt-TransformerFactory: %s",
+                        RsXslt.factory(resolver).getClass().getCanonicalName()
+                    )
+                ).asString()
             )
         );
     }
@@ -143,10 +147,12 @@ public final class RsXslt extends RsWrap {
             return RsXslt.transform(fct, origin);
         } catch (final TransformerException ex) {
             throw new IOException(
-                String.format(
-                    "Can't transform via %s",
-                    fct.getClass().getName()
-                ),
+                new UncheckedText(
+                    new FormattedText(
+                        "Can't transform via %s",
+                        fct.getClass().getName()
+                    )
+                ).asString(),
                 ex
             );
         }
@@ -239,11 +245,13 @@ public final class RsXslt extends RsWrap {
         final Transformer tnfr = factory.newTransformer(stylesheet);
         if (tnfr == null) {
             throw new TransformerConfigurationException(
-                String.format(
-                    "%s failed to create new XSL transformer for '%s'",
-                    factory.getClass(),
-                    stylesheet.getSystemId()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "%s failed to create new XSL transformer for '%s'",
+                        factory.getClass(),
+                        stylesheet.getSystemId()
+                    )
+                ).asString()
             );
         }
         return tnfr;
@@ -270,7 +278,11 @@ public final class RsXslt extends RsWrap {
                     input = uri.toURL().openStream();
                 } catch (final IOException ex) {
                     throw new IllegalStateException(
-                        String.format("Failed to open URL '%s'", uri),
+                        new UncheckedText(
+                            new FormattedText(
+                                "Failed to open URL '%s'", uri
+                            )
+                        ).asString(),
                         ex
                     );
                 }
@@ -278,10 +290,12 @@ public final class RsXslt extends RsWrap {
                 input = this.getClass().getResourceAsStream(uri.getPath());
                 if (input == null) {
                     throw new TransformerException(
-                        String.format(
-                            "\"%s\" not found in classpath, base=\"%s\"",
-                            href, base
-                        )
+                        new UncheckedText(
+                            new FormattedText(
+                                "\"%s\" not found in classpath, base=\"%s\"",
+                                href, base
+                            )
+                        ).asString()
                     );
                 }
             }

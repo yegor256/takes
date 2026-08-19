@@ -49,6 +49,12 @@ import org.takes.facets.auth.Identity;
 @EqualsAndHashCode
 public final class CcPlain implements Codec {
 
+    /**
+     * Ctor.
+     */
+    public CcPlain() {
+    }
+
     @Override
     public byte[] encode(final Identity identity) throws IOException {
         final Charset encoding = Charset.defaultCharset();

@@ -19,6 +19,8 @@ import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.ScalarOf;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Interface for response body content used by {@link RsWithBody}.
@@ -253,11 +255,13 @@ interface RsBody extends Input {
                     () -> {
                         final File file = new File(
                             System.getProperty("java.io.tmpdir"),
-                            String.format(
-                                "%s-%s.tmp",
-                                RsBody.TempFile.class.getName(),
-                                UUID.randomUUID().toString()
-                            )
+                            new UncheckedText(
+                                new FormattedText(
+                                    "%s-%s.tmp",
+                                    RsBody.TempFile.class.getName(),
+                                    UUID.randomUUID().toString()
+                                )
+                            ).asString()
                         );
                         file.deleteOnExit();
                         return file;

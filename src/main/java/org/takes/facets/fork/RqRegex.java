@@ -7,6 +7,8 @@ package org.takes.facets.fork;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Matcher;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
@@ -63,11 +65,13 @@ public interface RqRegex extends Request {
         public Matcher matcher() {
             if (!this.mtr.matches()) {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "%s doesn't match %s",
-                        this.request,
-                        this.mtr.pattern()
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "%s doesn't match %s",
+                            this.request,
+                            this.mtr.pattern()
+                        )
+                    ).asString()
                 );
             }
             return this.mtr;

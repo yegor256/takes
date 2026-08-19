@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -124,7 +126,7 @@ public final class PsGithub implements Pass {
         return PsGithub.parse(
             new JdkRequest(new Href(this.api).path("user").toString())
                 .header("accept", "application/json")
-                .header("Authorization", String.format("token %s", token))
+                .header("Authorization", PsGithub.authorization(token))
                 .fetch().as(RestResponse.class)
                 .assertStatus(HttpURLConnection.HTTP_OK)
                 .as(JsonResponse.class)
@@ -164,6 +166,17 @@ public final class PsGithub implements Pass {
     }
 
     /**
+     * Value of the {@code Authorization} header for the given token.
+     * @param token GitHub access token
+     * @return The header value
+     */
+    private static String authorization(final String token) {
+        return new UncheckedText(
+            new FormattedText("token %s", token)
+        ).asString();
+    }
+
+    /**
      * Make identity from JSON object.
      * @param json JSON received from Github
      * @return Identity found
@@ -173,7 +186,11 @@ public final class PsGithub implements Pass {
         props.put(PsGithub.LOGIN, json.getString(PsGithub.LOGIN, "unknown"));
         props.put("avatar", json.getString("avatar_url", "#"));
         return new Identity.Simple(
-            String.format("urn:github:%d", json.getInt("id")), props
+            new UncheckedText(
+                new FormattedText(
+                    "urn:github:%d", json.getInt("id")
+                )
+            ).asString(), props
         );
     }
 }

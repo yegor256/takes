@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.73.1</version>
+    <version>0.73.4</version>
   </parent>
   <groupId>org.takes.test</groupId>
   <artifactId>file-manager</artifactId>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-xml</artifactId>
-      <version>0.37.0</version>
+      <version>0.37.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -194,7 +194,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.30.7</version>
+            <version>0.30.13</version>
             <configuration>
               <skip>true</skip>
             </configuration>

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 
 /**
@@ -67,9 +69,11 @@ public interface RsStatus extends Response {
             final Matcher matcher = RsStatus.Base.LINE.matcher(line);
             if (!matcher.matches()) {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "Invalid status line: '%s'", line
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "Invalid status line: '%s'", line
+                        )
+                    ).asString()
                 );
             }
             return Integer.parseInt(matcher.group(1));

@@ -146,12 +146,14 @@ public final class RqLive extends RqWrap {
             && data.get() != '\t') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
-                String.format(
-                    "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
-                    data.get(),
-                    position,
-                    new TextOf(baos.toByteArray())
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "illegal character 0x%02X in HTTP header line #%d: \"%s\"",
+                        data.get(),
+                        position,
+                        new TextOf(baos.toByteArray())
+                    )
+                ).asString()
             );
         }
         return data.get();

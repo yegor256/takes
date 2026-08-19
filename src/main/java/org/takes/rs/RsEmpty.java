@@ -27,6 +27,12 @@ import org.takes.Response;
 @EqualsAndHashCode
 public final class RsEmpty implements Response {
 
+    /**
+     * Ctor.
+     */
+    public RsEmpty() {
+    }
+
     @Override
     public Iterable<String> head() {
         return new ListOf<>("HTTP/1.1 204 No Content");

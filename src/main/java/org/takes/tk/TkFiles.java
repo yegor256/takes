@@ -9,7 +9,10 @@ import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.cactoos.io.InputOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
+import org.takes.Take;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsWithBody;
 
@@ -92,9 +95,11 @@ public final class TkFiles extends TkWrap {
                 if (!file.exists()) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_NOT_FOUND,
-                        String.format(
-                            "%s not found", file.getAbsolutePath()
-                        )
+                        new UncheckedText(
+                            new FormattedText(
+                                "%s not found", file.getAbsolutePath()
+                            )
+                        ).asString()
                     );
                 }
                 return new RsWithBody(new InputOf(file).stream());

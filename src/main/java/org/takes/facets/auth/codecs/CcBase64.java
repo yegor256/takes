@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
 import lombok.EqualsAndHashCode;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.facets.auth.Identity;
 
 /**
@@ -67,10 +69,12 @@ public final class CcBase64 implements Codec {
         final byte[] illegal = CcBase64.checkIllegalCharacters(bytes);
         if (illegal.length > 0) {
             throw new DecodingException(
-                String.format(
-                    "Illegal character in Base64 encoded data. %s",
-                    Arrays.toString(illegal)
+                new UncheckedText(
+                    new FormattedText(
+                        "Illegal character in Base64 encoded data. %s",
+                        Arrays.toString(illegal)
                     )
+                ).asString()
                 );
         }
         return this.origin.decode(Base64.getDecoder().decode(bytes));

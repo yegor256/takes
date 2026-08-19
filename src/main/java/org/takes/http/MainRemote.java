@@ -15,8 +15,10 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputOf;
 import org.cactoos.number.NumberOf;
+import org.cactoos.text.FormattedText;
 import org.cactoos.text.TextOf;
 import org.cactoos.text.Trimmed;
+import org.cactoos.text.UncheckedText;
 
 /**
  * Main method remote control.
@@ -72,14 +74,20 @@ public final class MainRemote {
         final File file = File.createTempFile("takes-", ".txt");
         if (!file.delete()) {
             throw new IOException(
-                String.format(
-                    "The temporary file '%s' could not be deleted before calling the exec method",
-                    file.getAbsolutePath()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "The temporary file '%s' could not be deleted before calling the exec method",
+                        file.getAbsolutePath()
+                    )
+                ).asString()
             );
         }
         final String[] passed = new String[1 + this.args.length];
-        passed[0] = String.format("--port=%s", file.getAbsoluteFile());
+        passed[0] = new UncheckedText(
+            new FormattedText(
+                "--port=%s", file.getAbsoluteFile()
+            )
+        ).asString();
         for (int idx = 0; idx < this.args.length; ++idx) {
             passed[idx + 1] = this.args[idx];
         }
@@ -93,20 +101,24 @@ public final class MainRemote {
         try {
             script.exec(
                 URI.create(
-                    String.format(
-                        "http://localhost:%d",
-                        MainRemote.port(file)
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "http://localhost:%d",
+                            MainRemote.port(file)
+                        )
+                    ).asString()
                 )
             );
         } catch (final IOException ex) {
             if (!file.delete()) {
                 ex.addSuppressed(
                     new IOException(
-                        String.format(
-                            "The temporary file '%s' could not be deleted while catching the error",
-                            file.getAbsolutePath()
-                        )
+                        new UncheckedText(
+                            new FormattedText(
+                                "The temporary file '%s' could not be deleted while catching the error",
+                                file.getAbsolutePath()
+                            )
+                        ).asString()
                     )
                 );
             }
@@ -116,10 +128,12 @@ public final class MainRemote {
         }
         if (!file.delete()) {
             throw new IOException(
-                String.format(
-                    "The temporary file '%s' could not be deleted after calling the exec method",
-                    file.getAbsolutePath()
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "The temporary file '%s' could not be deleted after calling the exec method",
+                        file.getAbsolutePath()
+                    )
+                ).asString()
             );
         }
     }
@@ -197,17 +211,21 @@ public final class MainRemote {
                 this.method.invoke(null, (Object) this.passed);
             } catch (final InvocationTargetException ex) {
                 throw new IllegalStateException(
-                    String.format(
-                        "The %s method has been invoked at an illegal time.",
-                        this.method.getName()
-                    ), ex
+                    new UncheckedText(
+                        new FormattedText(
+                            "The %s method has been invoked at an illegal time.",
+                            this.method.getName()
+                        )
+                    ).asString(), ex
                 );
             } catch (final IllegalAccessException ex) {
                 throw new IllegalStateException(
-                    String.format(
-                        "The visibility of the %s method do not allow access.",
-                        this.method.getName()
-                    ), ex
+                    new UncheckedText(
+                        new FormattedText(
+                            "The visibility of the %s method do not allow access.",
+                            this.method.getName()
+                        )
+                    ).asString(), ex
                 );
             }
         }

@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.jcabi</groupId>
     <artifactId>parent</artifactId>
-    <version>0.73.1</version>
+    <version>0.73.4</version>
   </parent>
   <groupId>org.takes</groupId>
   <artifactId>takes</artifactId>
@@ -102,14 +102,6 @@
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
-      <!--
-      @todo #880:30min Once Cactoos is updated to qulice >=0.18.5
-      remove all references to Files.newXXX static methods and
-      replace them with OO objects such as InputOf or OutputOf
-      depending on the need. See
-      https://github.com/yegor256/takes/pull/886#issuecomment-446030223
-      for details.
-      -->
       <version>0.61.1</version>
     </dependency>
     <dependency>
@@ -145,7 +137,7 @@
     <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-xml</artifactId>
-      <version>0.37.0</version>
+      <version>0.37.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -171,7 +163,7 @@
     <dependency>
       <groupId>com.restfb</groupId>
       <artifactId>restfb</artifactId>
-      <version>2026.7.1</version>
+      <version>2026.9.0</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -722,7 +714,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.30.7</version>
+            <version>0.30.13</version>
             <configuration>
               <excludes>
                 <exclude>checkstyle:/src/site/resources/.*</exclude>

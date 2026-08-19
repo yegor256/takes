@@ -6,6 +6,8 @@ package org.takes.rq;
 
 import lombok.EqualsAndHashCode;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 
 /**
@@ -86,7 +88,7 @@ public final class RqWithHeader extends RqWrap {
 
         @Override
         public String toString() {
-            return String.format("%s: %s", this.name, this.value);
+            return new UncheckedText(new FormattedText("%s: %s", this.name, this.value)).asString();
         }
     }
 }

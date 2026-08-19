@@ -21,6 +21,12 @@ import org.takes.misc.Opt;
 @EqualsAndHashCode
 public final class PsEmpty implements Pass {
 
+    /**
+     * Ctor.
+     */
+    public PsEmpty() {
+    }
+
     @Override
     public Opt<Identity> enter(final Request request) {
         return new Opt.Empty<>();

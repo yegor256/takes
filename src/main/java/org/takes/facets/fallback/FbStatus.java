@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import org.cactoos.Scalar;
 import org.cactoos.iterable.Filtered;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.misc.Opt;
@@ -53,12 +55,14 @@ public final class FbStatus extends FbWrap {
                 new RsWithType(
                     new RsWithBody(
                         res,
-                        String.format(
-                            "%s: %s", FbStatus.WHITESPACE.split(
-                                res.head().iterator().next(),
-                                2
-                            )[1], req.throwable().getLocalizedMessage()
-                        )
+                        new UncheckedText(
+                            new FormattedText(
+                                "%s: %s", FbStatus.WHITESPACE.split(
+                                    res.head().iterator().next(),
+                                    2
+                                )[1], req.throwable().getLocalizedMessage()
+                            )
+                        ).asString()
                     ), "text/plain"
                 )
             );

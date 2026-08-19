@@ -7,8 +7,8 @@ package org.takes.rq.multipart;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import lombok.EqualsAndHashCode;
+import org.cactoos.io.InputStreamOf;
 import org.takes.Request;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeader;
@@ -79,7 +79,7 @@ final class RqTemp extends RqWrap {
                 this.cached = new RqWithHeader(
                     new RqLive(
                         new TempInputStream(
-                            Files.newInputStream(this.file.toPath()),
+                            new InputStreamOf(this.file),
                             this.file
                         )
                     ),

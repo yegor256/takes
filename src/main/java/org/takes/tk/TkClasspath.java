@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -95,20 +97,45 @@ public final class TkClasspath extends TkWrap {
             new Take() {
                 @Override
                 public Response act(final Request request) throws IOException {
-                    final String name = String.format(
-                        "%s%s", prefix, new RqHref.Base(request).href().path()
-                    );
+                    final String name = TkClasspath.resource(prefix, request);
                     final InputStream input = this.getClass()
                         .getResourceAsStream(name);
                     if (input == null) {
                         throw new HttpException(
                             HttpURLConnection.HTTP_NOT_FOUND,
-                            String.format("%s not found in classpath", name)
+                            TkClasspath.missing(name)
                         );
                     }
                     return new RsWithBody(input);
                 }
             }
         );
+    }
+
+    /**
+     * Name of the classpath resource the request asks for.
+     * @param prefix Classpath prefix
+     * @param request The request
+     * @return The name
+     * @throws IOException If fails
+     */
+    private static String resource(final String prefix, final Request request)
+        throws IOException {
+        return new UncheckedText(
+            new FormattedText(
+                "%s%s", prefix, new RqHref.Base(request).href().path()
+            )
+        ).asString();
+    }
+
+    /**
+     * Message about a resource that is absent in the classpath.
+     * @param name Name of the resource
+     * @return The message
+     */
+    private static String missing(final String name) {
+        return new UncheckedText(
+            new FormattedText("%s not found in classpath", name)
+        ).asString();
     }
 }

@@ -12,6 +12,8 @@ import lombok.ToString;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.IoChecked;
 import org.cactoos.scalar.Sticky;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
 import org.takes.rs.RsWithHeader;
@@ -101,7 +103,7 @@ public final class RsWithCookie extends RsWrap {
     private static String make(final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
         final StringBuilder text = new StringBuilder(
-            String.format("%s=%s;", name, value)
+            new UncheckedText(new FormattedText("%s=%s;", name, value)).asString()
         );
         for (final CharSequence attr : attrs) {
             text.append(attr).append(';');
@@ -117,10 +119,12 @@ public final class RsWithCookie extends RsWrap {
     private static CharSequence validValue(final CharSequence value) {
         if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
             throw new IllegalArgumentException(
-                String.format(
-                    "Cookie value \"%s\" contains invalid characters",
-                    value
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Cookie value \"%s\" contains invalid characters",
+                        value
+                    )
+                ).asString()
             );
         }
         return value;
@@ -134,10 +138,12 @@ public final class RsWithCookie extends RsWrap {
     private static CharSequence validName(final CharSequence name) {
         if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {
             throw new IllegalArgumentException(
-                String.format(
-                    "Cookie name \"%s\" contains invalid characters",
-                    name
-                )
+                new UncheckedText(
+                    new FormattedText(
+                        "Cookie name \"%s\" contains invalid characters",
+                        name
+                    )
+                ).asString()
             );
         }
         return name;

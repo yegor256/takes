@@ -131,9 +131,11 @@ public final class RqFormBase extends RqWrap implements RqForm {
             if (parts.length < 2) {
                 throw new HttpException(
                     HttpURLConnection.HTTP_BAD_REQUEST,
-                    String.format(
-                        "invalid form body pair: %s", pair
-                    )
+                    new UncheckedText(
+                        new FormattedText(
+                            "invalid form body pair: %s", pair
+                        )
+                    ).asString()
                 );
             }
             final String key = RqFormBase.decode(new Lowered(parts[0]));

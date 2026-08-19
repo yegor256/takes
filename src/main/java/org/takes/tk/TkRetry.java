@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.cactoos.iterable.Mapped;
 import org.cactoos.list.ListOf;
+import org.cactoos.text.FormattedText;
+import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
@@ -69,16 +71,18 @@ public final class TkRetry implements Take {
             }
         }
         throw new IOException(
-            String.format(
-                "failed after %d attempts: %s",
-                failures.size(),
-                new ListOf<>(
-                    new Mapped<>(
-                        Exception::getMessage,
-                        failures
+            new UncheckedText(
+                new FormattedText(
+                    "failed after %d attempts: %s",
+                    failures.size(),
+                    new ListOf<>(
+                        new Mapped<>(
+                            Exception::getMessage,
+                            failures
+                        )
                     )
                 )
-            ),
+            ).asString(),
             failures.get(failures.size() - 1)
         );
     }
