@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1402468">
+<fb version="0.19.6" size="1403357">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">747.296880034</seconds>
+    <seconds t="F">772.959398228</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-08-18T04:17:08Z</when>
+    <when t="T">2026-08-19T04:18:14Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84739,17 +84739,17 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">341</assignees_were_scanned>
+    <assignees_were_scanned t="I">444</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">17923055750</events_were_scanned>
+    <events_were_scanned t="I">18094278611</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <labels_were_scanned t="I">376</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1687</min_issue_was_found>
     <min_pull_was_found t="I">777</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">905</types_were_scanned>
+    <types_were_scanned t="I">1015</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -88533,9 +88533,11 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <failed_builds t="I">0</failed_builds>
     <files t="I">2</files>
     <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1741</issue>
     <repository t="I">28924109</repository>
     <review t="T">2026-08-17T02:41:55Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">12</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -88550,6 +88552,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#224 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">224</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -88563,6 +88566,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:06:54Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "question" label was attached by @yegor256 to the issue yegor256/takes#1133.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1133</issue>
     <label t="S">question</label>
     <repository t="I">28924109</repository>
@@ -88577,6 +88581,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:06:55Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "question" label was attached by @yegor256 to the issue yegor256/takes#1137.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1137</issue>
     <label t="S">question</label>
     <repository t="I">28924109</repository>
@@ -88591,6 +88596,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:06:55Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "question" label was attached by @yegor256 to the issue yegor256/takes#1138.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1138</issue>
     <label t="S">question</label>
     <repository t="I">28924109</repository>
@@ -88605,6 +88611,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:07:00Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1299.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1299</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -88619,6 +88626,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:07:03Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "question" label was attached by @yegor256 to the issue yegor256/takes#1358.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1358</issue>
     <label t="S">question</label>
     <repository t="I">28924109</repository>
@@ -88633,6 +88641,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:07:07Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1434.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1434</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -88647,6 +88656,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:07:08Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1435.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1435</issue>
     <label t="S">enhancement</label>
     <repository t="I">28924109</repository>
@@ -88661,6 +88671,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_time t="T">2026-08-18T04:07:09Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <details t="S">The "bug" label was attached by @yegor256 to the issue yegor256/takes#1441.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1441</issue>
     <label t="S">bug</label>
     <repository t="I">28924109</repository>
@@ -88668,5 +88679,51 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <when t="T">2026-08-16T13:20:26Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20904</_id>
+    <_job t="I">32214396664</_job>
+    <_time t="T">2026-08-19T04:07:47Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <details t="S">The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#224.</details>
+    <issue t="I">224</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2026-08-16T13:21:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20905</_id>
+    <_job t="I">32214396664</_job>
+    <_time t="T">2026-08-19T04:07:51Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <details t="S">The "question" label was attached by @yegor256 to the issue yegor256/takes#240.</details>
+    <issue t="I">240</issue>
+    <label t="S">question</label>
+    <repository t="I">28924109</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2026-08-16T13:18:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20906</_id>
+    <_job t="I">32214396664</_job>
+    <_time t="T">2026-08-19T04:17:55Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <total_active_contributors t="I">5</total_active_contributors>
+    <total_commits t="I">3904</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">541</total_files>
+    <total_forks t="I">215</total_forks>
+    <total_issues t="I">755</total_issues>
+    <total_pulls t="I">990</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">878</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-08-19T04:17:55Z</when>
   </f>
 </fb>

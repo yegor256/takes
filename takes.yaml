@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 747.296880034
+  seconds: 772.959398228
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-18 04:17:08.710071170 Z
+  when: 2026-08-19 04:18:14.355861807 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 341
+  assignees_were_scanned: 444
   earliest_issue_was_found: 1
-  events_were_scanned: 17923055750
+  events_were_scanned: 18094278611
   issues_were_scanned: 1292
-  labels_were_scanned: 0
+  labels_were_scanned: 376
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 905
+  types_were_scanned: 1015
   what: iterate
   where: github
 - _id: 20665
@@ -79419,9 +79419,11 @@
   failed_builds: 0
   files: 2
   hoc: 4
+  is_human: 1
   issue: 1741
   repository: 28924109
   review: 2026-08-17 02:41:55.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -79434,6 +79436,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#224 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 224
   repository: 28924109
   what: issue-was-assigned
@@ -79445,6 +79448,7 @@
   _time: 2026-08-18 04:06:54.159662053 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1133.
+  is_human: 1
   issue: 1133
   label: question
   repository: 28924109
@@ -79457,6 +79461,7 @@
   _time: 2026-08-18 04:06:55.267088641 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1137.
+  is_human: 1
   issue: 1137
   label: question
   repository: 28924109
@@ -79469,6 +79474,7 @@
   _time: 2026-08-18 04:06:55.695291313 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1138.
+  is_human: 1
   issue: 1138
   label: question
   repository: 28924109
@@ -79481,6 +79487,7 @@
   _time: 2026-08-18 04:07:00.926585551 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1299.
+  is_human: 1
   issue: 1299
   label: bug
   repository: 28924109
@@ -79493,6 +79500,7 @@
   _time: 2026-08-18 04:07:03.140049258 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "question" label was attached by @yegor256 to the issue yegor256/takes#1358.
+  is_human: 1
   issue: 1358
   label: question
   repository: 28924109
@@ -79505,6 +79513,7 @@
   _time: 2026-08-18 04:07:07.742255429 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1434.
+  is_human: 1
   issue: 1434
   label: enhancement
   repository: 28924109
@@ -79517,6 +79526,7 @@
   _time: 2026-08-18 04:07:08.281646222 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#1435.
+  is_human: 1
   issue: 1435
   label: enhancement
   repository: 28924109
@@ -79529,6 +79539,7 @@
   _time: 2026-08-18 04:07:09.089072922 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/takes#1441.
+  is_human: 1
   issue: 1441
   label: bug
   repository: 28924109
@@ -79536,3 +79547,43 @@
   when: 2026-08-16 13:20:26.000000000 Z
   where: github
   who: 526301
+- _id: 20904
+  _job: 32214396664
+  _time: 2026-08-19 04:07:47.263966118 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#224.
+  issue: 224
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 20905
+  _job: 32214396664
+  _time: 2026-08-19 04:07:51.071502998 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "question" label was attached by @yegor256 to the issue yegor256/takes#240.
+  issue: 240
+  label: question
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:18:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 20906
+  _job: 32214396664
+  _time: 2026-08-19 04:17:55.365758751 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 5
+  total_commits: 3904
+  total_contributors: 89
+  total_files: 541
+  total_forks: 215
+  total_issues: 755
+  total_pulls: 990
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-08-19 04:17:55.381546890 Z
