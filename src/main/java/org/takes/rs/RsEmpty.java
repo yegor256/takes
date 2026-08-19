@@ -31,6 +31,7 @@ public final class RsEmpty implements Response {
      * Ctor.
      */
     public RsEmpty() {
+        // nothing to initialize
     }
 
     @Override

@@ -53,6 +53,7 @@ public final class CcPlain implements Codec {
      * Ctor.
      */
     public CcPlain() {
+        // nothing to initialize
     }
 
     @Override

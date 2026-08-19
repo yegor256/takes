@@ -93,6 +93,7 @@ public interface Opt<T> {
          * Ctor.
          */
         public Empty() {
+            // nothing to initialize
         }
 
         @Override

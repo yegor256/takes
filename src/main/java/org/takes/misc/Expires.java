@@ -77,6 +77,7 @@ public interface Expires {
          * Ctor.
          */
         public Expired() {
+            // nothing to initialize
         }
 
         @Override

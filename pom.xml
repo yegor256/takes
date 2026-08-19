@@ -715,14 +715,6 @@
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
             <version>0.30.13</version>
-            <configuration>
-              <excludes>
-                <exclude>checkstyle:/src/site/resources/.*</exclude>
-                <exclude>duplicatefinder:javax.json:javax.json-api:1.1.4</exclude>
-                <exclude>duplicatefinder:javax.xml.bind:jaxb-api:2.3.1</exclude>
-                <exclude>dependencies:.*</exclude>
-              </excludes>
-            </configuration>
           </plugin>
         </plugins>
       </build>

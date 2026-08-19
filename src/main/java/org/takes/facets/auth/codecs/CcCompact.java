@@ -42,6 +42,7 @@ public final class CcCompact implements Codec {
      * Ctor.
      */
     public CcCompact() {
+        // nothing to initialize
     }
 
     @Override

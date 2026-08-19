@@ -198,6 +198,7 @@ public final class PsBasic implements Pass {
          * Ctor.
          */
         public Empty() {
+            // nothing to initialize
         }
 
         @Override

@@ -25,6 +25,7 @@ public final class PsEmpty implements Pass {
      * Ctor.
      */
     public PsEmpty() {
+        // nothing to initialize
     }
 
     @Override
