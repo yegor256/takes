@@ -12,7 +12,6 @@ import org.cactoos.bytes.BytesOf;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
-import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Body;
 import org.takes.Head;
@@ -74,23 +73,20 @@ public final class RequestOf implements Request {
     @Override
     @SuppressFBWarnings("EQ_UNUSUAL")
     public boolean equals(final Object that) {
-        return new Unchecked<>(
-            new Or(
-                () -> this == that,
-                new And(
-                    () -> that != null,
-                    () -> RequestOf.class.equals(that.getClass()),
-                    () -> {
-                        final RequestOf other = (RequestOf) that;
-                        return new And(
-                            () -> RequestOf.sameHead(this.head(), other.head()),
-                            () -> new Equality<>(
-                                new BytesOf(this.body()),
-                                new BytesOf(other.body())
-                            ).value() == 0
-                        ).value();
-                    }
-                )
+        return this == that || new Unchecked<>(
+            new And(
+                () -> that != null,
+                () -> RequestOf.class.equals(that.getClass()),
+                () -> {
+                    final RequestOf other = (RequestOf) that;
+                    return new And(
+                        () -> RequestOf.sameHead(this.head(), other.head()),
+                        () -> new Equality<>(
+                            new BytesOf(this.body()),
+                            new BytesOf(other.body())
+                        ).value() == 0
+                    ).value();
+                }
             )
         ).value();
     }
@@ -100,12 +96,6 @@ public final class RequestOf implements Request {
         return new HashCode(new Unchecked<>(this.shead::head).value()).value();
     }
 
-    /**
-     * Compare two head iterables element by element.
-     * @param mine Head of this request
-     * @param theirs Head of the other request
-     * @return TRUE if both iterables yield identical sequences
-     */
     private static boolean sameHead(final Iterable<String> mine,
         final Iterable<String> theirs) {
         final Iterator<String> first = mine.iterator();

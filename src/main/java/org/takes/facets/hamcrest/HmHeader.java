@@ -113,23 +113,11 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
             .appendValue(this.failed);
     }
 
-    /**
-     * Returns item's headers.
-     * @param item To extract headers from
-     * @return Header lines
-     * @throws IOException If something goes wrong
-     */
     private static Iterable<String> headers(final Head item) throws
         IOException {
         return item.head();
     }
 
-    /**
-     * Splits the given header to [name, value] array.
-     * @param header Header
-     * @return Array in which the first element is header name,
-     *  the second is header value
-     */
     private static String[] split(final String header) {
         return header.split(":", 2);
     }

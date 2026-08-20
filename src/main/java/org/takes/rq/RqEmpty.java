@@ -6,8 +6,6 @@ package org.takes.rq;
 
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.InputStreamOf;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
 
 /**
  * Empty HTTP request implementation for testing purposes.
@@ -47,53 +45,9 @@ public final class RqEmpty extends RqWrap {
     public RqEmpty(final CharSequence method, final CharSequence query) {
         super(
             new RequestOf(
-                new RqEmpty.HeadList(method, query),
+                new EmptyHeadList(method, query),
                 new InputStreamOf("")
             )
         );
-    }
-
-    /**
-     * Lazily-built single-element head list with the request line.
-     * @since 2.0
-     */
-    private static final class HeadList extends java.util.AbstractList<String> {
-
-        /**
-         * HTTP method.
-         */
-        private final CharSequence method;
-
-        /**
-         * HTTP query.
-         */
-        private final CharSequence query;
-
-        /**
-         * Ctor.
-         * @param mtd Method
-         * @param qry Query
-         */
-        HeadList(final CharSequence mtd, final CharSequence qry) {
-            this.method = mtd;
-            this.query = qry;
-        }
-
-        @Override
-        public String get(final int index) {
-            if (index != 0) {
-                throw new IndexOutOfBoundsException(index);
-            }
-            return new UncheckedText(
-                new FormattedText(
-                    "%s %s", this.method, this.query
-                )
-            ).asString();
-        }
-
-        @Override
-        public int size() {
-            return 1;
-        }
     }
 }

@@ -135,11 +135,6 @@ final class TkHtmlTest {
         );
     }
 
-    /**
-     * Creates text matcher for HTML response.
-     * @param body Response body
-     * @return Text matcher
-     */
     private IsText textMatcher(final String body) {
         return new IsText(
             new Joined(

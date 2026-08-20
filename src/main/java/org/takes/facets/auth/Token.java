@@ -89,11 +89,6 @@ public interface Token {
             );
         }
 
-        /**
-         * Name of the HMAC algorithm of the given strength.
-         * @param bitlength Of encryption bits
-         * @return The name, like {@code HS256}
-         */
         private static String algo(final int bitlength) {
             return new UncheckedText(
                 new FormattedText("HS%s", bitlength)

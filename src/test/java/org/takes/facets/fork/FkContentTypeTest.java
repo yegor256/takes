@@ -124,10 +124,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * Create a Take instance with empty response.
-     * @return Take
-     */
     private static Take emptyResponse() {
         return req -> new RsEmpty();
     }

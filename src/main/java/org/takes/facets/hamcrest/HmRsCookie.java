@@ -120,12 +120,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
         }
     }
 
-    /**
-     * Tries to match a single name=value pair against this matcher, storing
-     * the observed value if the name is a match.
-     * @param crumb Name/value pair as "name=value"
-     * @return True if both name and value match
-     */
     private boolean matchCrumb(final String crumb) {
         final int sign = crumb.indexOf('=');
         boolean matched = false;
@@ -138,11 +132,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
         return matched;
     }
 
-    /**
-     * Checks whether a header line is a {@code Set-Cookie} header.
-     * @param header Raw header line ("Name: value")
-     * @return True if the header name equals "Set-Cookie" ignoring case
-     */
     private static boolean isSetCookie(final String header) {
         final int colon = header.indexOf(':');
         return colon >= 0
@@ -151,12 +140,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
             );
     }
 
-    /**
-     * Extracts the first {@code name=value} crumb from a Set-Cookie header,
-     * stripping off any {@code ;}-separated attributes.
-     * @param header Raw header line ("Set-Cookie: name=value; Path=/")
-     * @return The first crumb ("name=value")
-     */
     private static String firstCrumb(final String header) {
         return header.substring(header.indexOf(':') + 1)
             .trim().split(";", 2)[0].trim();

@@ -58,13 +58,6 @@ public final class RsWithHeaders extends RsWrap {
         );
     }
 
-    /**
-     * Add to head additional headers.
-     * @param res Original response
-     * @param headers Values witch will be added to head
-     * @return Head with additional headers
-     * @throws IOException If fails
-     */
     private static Iterable<String> extend(final Response res,
         final Iterable<? extends CharSequence> headers) throws IOException {
         Response resp = res;

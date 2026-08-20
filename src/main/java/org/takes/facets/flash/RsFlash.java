@@ -7,7 +7,6 @@ package org.takes.facets.flash;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import lombok.EqualsAndHashCode;
 import org.cactoos.Text;
@@ -244,7 +243,7 @@ public final class RsFlash extends RsWrap {
      */
     public RsFlash(final CharSequence msg, final Level level,
         final String cookie) throws UnsupportedEncodingException {
-        this(msg, level, cookie, new RsFlash.HourFromNow());
+        this(msg, level, cookie, new HourFromNow());
     }
 
     /**
@@ -283,16 +282,6 @@ public final class RsFlash extends RsWrap {
         ).asString();
     }
 
-    /**
-     * Creates a response with flash message cookie.
-     * @param msg The flash message text
-     * @param level The logging level for message severity
-     * @param cookie The cookie name to use
-     * @param expires The cookie expiration date
-     * @return A response with the Set-Cookie header containing the flash
-     *  message
-     * @throws UnsupportedEncodingException If URL encoding fails
-     */
     private static Response make(final CharSequence msg, final Level level,
         final String cookie, final Expires expires)
         throws UnsupportedEncodingException {
@@ -306,20 +295,5 @@ public final class RsFlash extends RsWrap {
             "Path=/",
             expires.print()
         );
-    }
-
-    /**
-     * Default expiration set to one hour from "now" (now is determined at
-     * the time {@link #print()} is called).
-     * @since 2.0
-     */
-    private static final class HourFromNow implements Expires {
-
-        @Override
-        public String print() {
-            return new Expires.Date(
-                System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1L)
-            ).print();
-        }
     }
 }

@@ -10,8 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
@@ -144,7 +142,7 @@ public class RsForward extends HttpException implements Response {
     public RsForward(final Response res, final int code,
         final CharSequence loc) {
         super(code);
-        this.msg = new RsForward.LazyMsg(res, code, loc);
+        this.msg = new LazyMsg(res, code, loc);
         this.origin = new RsWithHeader(
             new RsWithoutHeader(
                 new RsWithStatus(res, code),
@@ -175,87 +173,15 @@ public class RsForward extends HttpException implements Response {
         return super.toString();
     }
 
-    /**
-     * Writes object data for serialization.
-     * @param stream The output stream to write to
-     * @throws IOException If serialization fails
-     */
     private static void writeObject(
         final ObjectOutputStream stream
     ) throws IOException {
         stream.defaultWriteObject();
     }
 
-    /**
-     * Reads object data for deserialization.
-     * @param stream The input stream to read from
-     * @throws IOException If deserialization fails
-     * @throws ClassNotFoundException If class cannot be found
-     */
     private static void readObject(
         final ObjectInputStream stream
     ) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-    }
-
-    /**
-     * CharSequence that lazily formats the detail message of an RsForward.
-     * @since 2.0
-     */
-    private static final class LazyMsg implements CharSequence {
-
-        /**
-         * Original response.
-         */
-        private final Response res;
-
-        /**
-         * HTTP status code.
-         */
-        private final int code;
-
-        /**
-         * Location.
-         */
-        private final CharSequence loc;
-
-        /**
-         * Ctor.
-         * @param origin Original response
-         * @param status HTTP status code
-         * @param location Location
-         */
-        LazyMsg(final Response origin, final int status,
-            final CharSequence location) {
-            this.res = origin;
-            this.code = status;
-            this.loc = location;
-        }
-
-        @SuppressWarnings("PMD.UseStringBufferLength")
-        @Override
-        public int length() {
-            return this.toString().length();
-        }
-
-        @Override
-        public char charAt(final int index) {
-            return this.toString().charAt(index);
-        }
-
-        @Override
-        public CharSequence subSequence(final int start, final int end) {
-            return this.toString().subSequence(start, end);
-        }
-
-        @Override
-        public String toString() {
-            return new UncheckedText(
-                new FormattedText(
-                    "[%3d] %s %s",
-                    this.code, this.loc, this.res
-                )
-            ).asString();
-        }
     }
 }

@@ -159,10 +159,6 @@ interface RsBody extends Input {
             return this.bytes().length;
         }
 
-        /**
-         * Encode the text into bytes.
-         * @return Bytes
-         */
         private byte[] bytes() {
             if (this.content == null) {
                 throw new IllegalStateException(
@@ -210,10 +206,6 @@ interface RsBody extends Input {
             return this.len.get();
         }
 
-        /**
-         * Estimates the length of the {@code InputStream}.
-         * @throws IOException in case the length could not be estimated
-         */
         private void estimate() throws IOException {
             if (this.len.get() == -1) {
                 this.len.compareAndSet(-1, this.input.available());
@@ -284,14 +276,6 @@ interface RsBody extends Input {
             return (int) this.file().length();
         }
 
-        /**
-         * Gives the {@code File} that contains the content of the underlying
-         * {@code  Body}.
-         * @return The {@code File} in which we stored the content of the
-         *  underlying {@code  Body}
-         * @throws IOException In case the content of the underlying
-         *  {@code Body} could not be stored into the file
-         */
         @SuppressWarnings("PMD.AvoidSynchronizedStatement")
         private File file() throws IOException {
             final File file = this.tmp.value();

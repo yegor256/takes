@@ -114,11 +114,6 @@ public interface RsHeaders extends Response {
             return this.map().keySet();
         }
 
-        /**
-         * Parse them all in a map.
-         * @return Map of them
-         * @throws IOException If fails
-         */
         private Map<String, List<String>> map() throws IOException {
             final Iterator<String> head = this.head().iterator();
             if (!head.hasNext()) {

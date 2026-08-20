@@ -39,12 +39,6 @@ public final class RqChunk extends RqWrap {
         );
     }
 
-    /**
-     * Cap the steam.
-     * @param req Request
-     * @return Stream with a cap
-     * @throws IOException If fails
-     */
     private static InputStream cap(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Transfer-Encoding").iterator();

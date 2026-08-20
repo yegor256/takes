@@ -83,12 +83,6 @@ final class PsGithubTest {
         );
     }
 
-    /**
-     * Performs the basic login.
-     * @param directive The directive object
-     * @return The identity from login
-     * @throws Exception If some problem inside
-     */
     private Identity performLogin(final Directives directive) throws Exception {
         final String app = "app";
         final String key = "key";
@@ -125,23 +119,12 @@ final class PsGithubTest {
         return identity.get();
     }
 
-    /**
-     * Creates the basic directives, without access token.
-     * @return A basic directive
-     */
     private static Directives directiveWithoutAccessToken() {
         return new Directives().add("OAuth")
             .add("token_type").set("bearer").up()
             .add("scope").set("repo,gist").up();
     }
 
-    /**
-     * Checks the parameter value for the expected value.
-     * @param req Request
-     * @param param Parameter name
-     * @param value Parameter value
-     * @throws IOException  If some problem inside
-     */
     private static void assertParam(final Request req,
         final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(

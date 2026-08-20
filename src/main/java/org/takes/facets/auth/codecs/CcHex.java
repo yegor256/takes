@@ -113,11 +113,6 @@ public final class CcHex implements Codec {
         return this.origin.decode(out.toByteArray());
     }
 
-    /**
-     * Convert hex to number.
-     * @param hex Hex number
-     * @return Decoded
-     */
     private static int decode(final int hex) {
         if (hex >= CcHex.BACK.length) {
             throw new DecodingException(

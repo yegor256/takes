@@ -69,11 +69,6 @@ public final class XeDirectives implements XeSource {
         return this.directives.value();
     }
 
-    /**
-     * Transform strings to directives.
-     * @param texts Texts
-     * @return Directives
-     */
     private static Iterable<Directive> transform(final Iterable<String> texts) {
         final Collection<Directive> list = new ArrayList<>(0);
         for (final String text : texts) {

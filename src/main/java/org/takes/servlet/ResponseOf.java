@@ -100,11 +100,6 @@ final class ResponseOf {
         }
     }
 
-    /**
-     * Apply header to servlet response.
-     * @param sresp Response
-     * @param header Header
-     */
     private static void applyHeader(final HttpServletResponse sresp,
         final String header) {
         final Iterator<Text> split = new Split(header, ":").iterator();

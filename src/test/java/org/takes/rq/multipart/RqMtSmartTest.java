@@ -308,11 +308,6 @@ final class RqMtSmartTest {
         );
     }
 
-    /**
-     * Format Content-Length header.
-     * @param length Body length
-     * @return Content-Length header
-     */
     private static String contentLengthHeader(final long length) {
         return String.format("Content-Length: %d", length);
     }

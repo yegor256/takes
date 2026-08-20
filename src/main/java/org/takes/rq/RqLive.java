@@ -43,12 +43,6 @@ public final class RqLive extends RqWrap {
         super(RqLive.parse(input));
     }
 
-    /**
-     * Parse input stream.
-     * @param input Input stream
-     * @return Request
-     * @throws IOException If fails
-     */
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
         final Collection<String> head = new ArrayList<>(0);
@@ -83,17 +77,6 @@ public final class RqLive extends RqWrap {
         return new RequestOf(head, input);
     }
 
-    /**
-     * Checks whether or not the next byte to read is a Line Feed.
-     *
-     * <p><i>Please note that this method assumes that the previous byte read
-     * was a Carriage Return.</i>
-     *
-     * @param input The input stream to read
-     * @param baos Current read header
-     * @param position Header line number
-     * @throws IOException If the next byte is not a Line Feed as expected
-     */
     private static void checkLineFeed(final InputStream input,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
@@ -109,12 +92,6 @@ public final class RqLive extends RqWrap {
         }
     }
 
-    /**
-     * Builds current read header.
-     * @param data Current read character
-     * @param baos Current read header
-     * @return Read header
-     */
     private static Opt<String> newHeader(final Opt<Integer> data,
         final ByteArrayOutputStream baos) {
         Opt<String> header = new Opt.Empty<>();
@@ -131,14 +108,6 @@ public final class RqLive extends RqWrap {
         return header;
     }
 
-    /**
-     * Returns a legal character based n the read character.
-     * @param data Character read
-     * @param baos Byte stream containing read header
-     * @param position Header line number
-     * @return A legal character
-     * @throws IOException if character is illegal
-     */
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
@@ -159,15 +128,6 @@ public final class RqLive extends RqWrap {
         return data.get();
     }
 
-    /**
-     * Obtains new byte if hasn't.
-     * @param input Stream
-     * @param data Empty or current data
-     * @param available Indicates whether or not it should check first if there
-     *  are available bytes
-     * @return Next or current data
-     * @throws IOException if input.read() fails
-     */
     private static Opt<Integer> data(final InputStream input,
         final Opt<Integer> data, final boolean available) throws IOException {
         final Opt<Integer> ret;

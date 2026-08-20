@@ -22,7 +22,6 @@ import javax.xml.transform.stream.StreamResult;
 import lombok.ToString;
 import org.cactoos.scalar.And;
 import org.cactoos.scalar.HashCode;
-import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 import org.w3c.dom.DocumentType;
@@ -90,20 +89,17 @@ public final class RsPrettyXml implements Response {
     @Override
     @SuppressFBWarnings("EQ_UNUSUAL")
     public boolean equals(final Object that) {
-        return new Unchecked<>(
-            new Or(
-                () -> this == that,
-                new And(
-                    () -> that != null,
-                    () -> RsPrettyXml.class.equals(that.getClass()),
-                    () -> {
-                        final RsPrettyXml other = (RsPrettyXml) that;
-                        return new And(
-                            () -> this.origin.equals(other.origin),
-                            () -> this.transformed.equals(other.transformed)
-                        ).value();
-                    }
-                )
+        return this == that || new Unchecked<>(
+            new And(
+                () -> that != null,
+                () -> RsPrettyXml.class.equals(that.getClass()),
+                () -> {
+                    final RsPrettyXml other = (RsPrettyXml) that;
+                    return new And(
+                        () -> this.origin.equals(other.origin),
+                        () -> this.transformed.equals(other.transformed)
+                    ).value();
+                }
             )
         ).value();
     }
@@ -113,11 +109,6 @@ public final class RsPrettyXml implements Response {
         return new HashCode(this.origin, this.transformed).value();
     }
 
-    /**
-     * Make a response.
-     * @return Response just made
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidSynchronizedStatement")
     private Response make() throws IOException {
         synchronized (this.lock) {
@@ -133,12 +124,6 @@ public final class RsPrettyXml implements Response {
         return this.transformed.get(0);
     }
 
-    /**
-     * Format body with proper indents using SAX.
-     * @param body Response body
-     * @return New properly formatted body
-     * @throws IOException If fails
-     */
     private static byte[] transform(final InputStream body) throws IOException {
         final SAXSource source = new SAXSource(new InputSource(body));
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -166,13 +151,6 @@ public final class RsPrettyXml implements Response {
         return result.toByteArray();
     }
 
-    /**
-     * Parses body to get DOCTYPE and configure Transformer
-     * with proper method, public id and system id.
-     * @param body The body to be parsed
-     * @param transformer Transformer to configure with proper properties
-     * @throws IOException if something goes wrong
-     */
     private static void prepareDocType(final InputStream body,
         final Transformer transformer) throws IOException {
         try {
@@ -204,13 +182,6 @@ public final class RsPrettyXml implements Response {
         }
     }
 
-    /**
-     * Parses the input stream and returns DocumentType built without loading
-     * any external DTD schemas.
-     * @param body The body to be parsed
-     * @return The documents DocumentType
-     * @throws IOException if something goes wrong
-     */
     private static DocumentType getDocType(final InputStream body)
         throws IOException {
         final DocumentBuilderFactory factory =

@@ -4,8 +4,6 @@
  */
 package org.takes.facets.fork;
 
-import java.util.AbstractCollection;
-import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import lombok.EqualsAndHashCode;
@@ -44,7 +42,7 @@ final class MediaTypes {
      * @param text Text to parse
      */
     MediaTypes(final String text) {
-        this(new TreeSet<>(new MediaTypes.Bag(text)));
+        this(new TreeSet<>(new Bag(text)));
     }
 
     /**
@@ -107,12 +105,7 @@ final class MediaTypes {
         return this.list.isEmpty();
     }
 
-    /**
-     * Ctor.
-     * @param text Text to parse
-     * @return List of media types
-     */
-    private static SortedSet<MediaType> parse(final String text) {
+    static SortedSet<MediaType> parse(final String text) {
         final SortedSet<MediaType> list = new TreeSet<>();
         final Iterable<Text> parts = new Split(
             new UncheckedText(new Lowered(text)),
@@ -125,51 +118,5 @@ final class MediaTypes {
             }
         }
         return list;
-    }
-
-    /**
-     * Lazy collection that parses the source text only when iterated.
-     * @since 2.0
-     */
-    private static final class Bag extends AbstractCollection<MediaType> {
-
-        /**
-         * Source text.
-         */
-        private final String src;
-
-        /**
-         * Cached parsed set.
-         */
-        private SortedSet<MediaType> cached;
-
-        /**
-         * Ctor.
-         * @param src Source text
-         */
-        Bag(final String src) {
-            this.src = src;
-        }
-
-        @Override
-        public Iterator<MediaType> iterator() {
-            return this.parsed().iterator();
-        }
-
-        @Override
-        public int size() {
-            return this.parsed().size();
-        }
-
-        /**
-         * Parse and cache the result.
-         * @return Parsed set
-         */
-        private SortedSet<MediaType> parsed() {
-            if (this.cached == null) {
-                this.cached = MediaTypes.parse(this.src);
-            }
-            return this.cached;
-        }
     }
 }

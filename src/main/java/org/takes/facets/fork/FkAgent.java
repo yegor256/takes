@@ -66,12 +66,6 @@ public final class FkAgent implements Fork {
         return resp;
     }
 
-    /**
-     * Extract tokens from request.
-     * @param req Request
-     * @return List of user agent tokens
-     * @throws IOException If some problems inside.
-     */
     private static List<String> tokens(final Request req) throws IOException {
         final List<String> tokens = new ArrayList<>(0);
         final Iterable<String> headers =

@@ -250,10 +250,6 @@ public final class Href implements CharSequence {
         return new Href(this.uri(), map, this.fragment());
     }
 
-    /**
-     * Append parameters to StringBuilder.
-     * @param text StringBuilder to append to
-     */
     private void appendParams(final StringBuilder text) {
         if (!this.params().isEmpty()) {
             boolean first = true;
@@ -264,13 +260,6 @@ public final class Href implements CharSequence {
         }
     }
 
-    /**
-     * Append single parameter to StringBuilder.
-     * @param text StringBuilder to append to
-     * @param ent Parameter entry
-     * @param first Whether this is the first parameter
-     * @return Whether next parameter will be first
-     */
     private static boolean appendParam(final StringBuilder text,
         final Map.Entry<String, List<String>> ent, final boolean first) {
         boolean result = first;
@@ -289,10 +278,6 @@ public final class Href implements CharSequence {
         return result;
     }
 
-    /**
-     * Append fragment to StringBuilder.
-     * @param text StringBuilder to append to
-     */
     private void appendFragment(final StringBuilder text) {
         if (this.fragment().has()) {
             text.append('#');
@@ -300,34 +285,15 @@ public final class Href implements CharSequence {
         }
     }
 
-    /**
-     * Encode into URL.
-     * @param txt Text
-     * @return Encoded
-     */
     private static String encode(final String txt) {
         return URLEncoder.encode(txt, Charset.defaultCharset())
             .replace("+", "%20");
     }
 
-    /**
-     * Decode from URL.
-     * @param txt Text
-     * @return Decoded
-     */
     private static String decode(final String txt) {
         return URLDecoder.decode(txt, Charset.defaultCharset());
     }
 
-    /**
-     * Parses the specified content to create the corresponding {@code URI}
-     * instance. In case of an {@code URISyntaxException}, it will automatically
-     * encode the character that causes the issue then it will try again
-     * if it is possible otherwise an {@code IllegalArgumentException} will
-     * be thrown.
-     * @param txt The content to parse
-     * @return The {@code URI} corresponding to the specified content
-     */
     private static URI createUri(final String txt) {
         final StringBuilder value = new StringBuilder(txt);
         while (true) {
@@ -359,11 +325,6 @@ public final class Href implements CharSequence {
         }
     }
 
-    /**
-     * Convert the provided query into a Map.
-     * @param query The query to parse
-     * @return A map containing all the query arguments and their values
-     */
     private static SortedMap<String, List<String>> asMap(final String query) {
         final SortedMap<String, List<String>> params = new TreeMap<>();
         if (query != null) {
@@ -386,13 +347,6 @@ public final class Href implements CharSequence {
         return params;
     }
 
-    /**
-     * Remove query and fragment parts from the provided URI and
-     * return the resulting URI.
-     * @param link The link from which parts need to be removed
-     * @return The URI corresponding to the same provided URI but without
-     *  query and fragment parts
-     */
     private static URI createBare(final URI link) {
         final URI uri;
         if (link.getRawQuery() == null && link.getRawFragment() == null) {
@@ -410,11 +364,6 @@ public final class Href implements CharSequence {
         return uri;
     }
 
-    /**
-     * Read fragment part from the given URI.
-     * @param link The link from which the fragment needs to be returned
-     * @return Opt with fragment or empty if there is no fragment
-     */
     private static Opt<String> readFragment(final URI link) {
         final Opt<String> fragment;
         if (link.getRawFragment() == null) {
@@ -425,26 +374,14 @@ public final class Href implements CharSequence {
         return fragment;
     }
 
-    /**
-     * Get the URI.
-     * @return URI
-     */
     private URI uri() {
         return new org.cactoos.scalar.Unchecked<>(this.link).value();
     }
 
-    /**
-     * Get the params map.
-     * @return Map
-     */
     private SortedMap<String, List<String>> params() {
         return new org.cactoos.scalar.Unchecked<>(this.params).value();
     }
 
-    /**
-     * Get the fragment.
-     * @return Fragment
-     */
     private Opt<String> fragment() {
         return new org.cactoos.scalar.Unchecked<>(this.frag).value();
     }

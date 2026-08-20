@@ -73,13 +73,6 @@ public final class TkAuth implements Take {
         return response;
     }
 
-    /**
-     * Process the request with the authenticated identity.
-     * @param req Request to process
-     * @param identity Authenticated identity
-     * @return Response from the wrapped take
-     * @throws Exception If processing fails
-     */
     private Response act(final Request req, final Identity identity)
         throws Exception {
         Request wrap = new RqWithoutHeader(req, this.header);

@@ -165,12 +165,6 @@ public final class CcAes implements Codec {
         return this.origin.decode(this.decrypt(bytes));
     }
 
-    /**
-     * Encrypt the given bytes using AES.
-     * @param bytes Bytes to encrypt
-     * @return Encrypted byte using AES algorithm
-     * @throws IOException for all unexpected exceptions
-     */
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try {
             final byte[] vector = new byte[CcAes.BLOCK];
@@ -194,11 +188,6 @@ public final class CcAes implements Codec {
         }
     }
 
-    /**
-     * Check the block size of the key.
-     * @param key The encryption key
-     * @return The verified encryption key
-     */
     private static byte[] withCorrectBlockSize(final byte[] key) {
         if (key.length != CcAes.BLOCK) {
             throw new IllegalArgumentException(
@@ -213,12 +202,6 @@ public final class CcAes implements Codec {
         return key;
     }
 
-    /**
-     * Decrypt the given bytes using AES.
-     * @param bytes Bytes to decrypt
-     * @return Decrypted bytes
-     * @throws IOException for all unexpected exceptions
-     */
     private byte[] decrypt(final byte[] bytes) throws IOException {
         if (bytes.length < CcAes.BLOCK << 1) {
             throw new DecodingException("Invalid encrypted message format");
@@ -243,13 +226,6 @@ public final class CcAes implements Codec {
         }
     }
 
-    /**
-     * Create new cipher based on the valid mode from {@link Cipher} class.
-     * @param mode Either Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
-     * @param spec Param spec (IV)
-     * @return The cipher
-     * @throws IOException For any unexpected exceptions
-     */
     private Cipher cipher(final int mode, final AlgorithmParameterSpec spec)
         throws IOException {
         try {

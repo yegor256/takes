@@ -112,13 +112,6 @@ public final class TkClasspath extends TkWrap {
         );
     }
 
-    /**
-     * Name of the classpath resource the request asks for.
-     * @param prefix Classpath prefix
-     * @param request The request
-     * @return The name
-     * @throws IOException If fails
-     */
     private static String resource(final String prefix, final Request request)
         throws IOException {
         return new UncheckedText(
@@ -128,11 +121,6 @@ public final class TkClasspath extends TkWrap {
         ).asString();
     }
 
-    /**
-     * Message about a resource that is absent in the classpath.
-     * @param name Name of the resource
-     * @return The message
-     */
     private static String missing(final String name) {
         return new UncheckedText(
             new FormattedText("%s not found in classpath", name)

@@ -108,11 +108,6 @@ public final class CcSigned implements Codec {
         return this.cdc.decode(encoded);
     }
 
-    /**
-     * Obtain MAC instance.
-     * @return Initialized MAC
-     * @throws IOException If algorithm missed or invalid key
-     */
     private Mac mac() throws IOException {
         try {
             final Mac mac = Mac.getInstance(this.alg);

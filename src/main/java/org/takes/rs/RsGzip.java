@@ -61,11 +61,6 @@ public final class RsGzip implements Response {
         return this.make().body();
     }
 
-    /**
-     * Make a response.
-     * @return Response just made
-     * @throws IOException If fails
-     */
     private Response make() throws IOException {
         if (this.zipped.isEmpty()) {
             this.zipped.add(
@@ -82,12 +77,6 @@ public final class RsGzip implements Response {
         return this.zipped.get(0);
     }
 
-    /**
-     * Gzip input stream.
-     * @param input Input stream
-     * @return New input stream
-     * @throws IOException If fails
-     */
     private static byte[] gzip(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] buf = new byte[4096];

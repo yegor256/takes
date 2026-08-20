@@ -90,11 +90,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
         return this.map().keySet();
     }
 
-    /**
-     * Decode from URL.
-     * @param txt Text
-     * @return Decoded
-     */
     private static String decode(final Text txt) {
         return URLDecoder.decode(
             new UncheckedText(txt).asString(),
@@ -102,11 +97,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
         );
     }
 
-    /**
-     * Create map of request parameters.
-     * @return Parameters map or empty map in case of error
-     * @throws IOException If something fails reading or parsing body
-     */
     private Map<String, List<String>> map() throws IOException {
         if (this.saved.isEmpty()) {
             this.saved.add(this.freshMap());
@@ -114,11 +104,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
         return this.saved.get(0);
     }
 
-    /**
-     * Create map of request parameter.
-     * @return Parameters map or empty map in case of error
-     * @throws IOException If something fails reading or parsing body
-     */
     private Map<String, List<String>> freshMap() throws IOException {
         final String body = new RqPrint(this.req).printBody();
         final Map<String, List<String>> map = new HashMap<>(1);

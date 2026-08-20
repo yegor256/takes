@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -36,7 +35,7 @@ import org.cactoos.io.WriterTo;
  *     return new RsHtml(
  *       new RsVelocity(
  *         this.getClass().getResource("help.html.vm"),
- *         new RsVelocity.Pair("name", "Jeffrey")
+ *         new RsVelocityPair("name", "Jeffrey")
  *       )
  *     );
  *   }
@@ -57,7 +56,7 @@ public final class RsVelocity extends RsWrap {
      * @since 0.11
      */
     public RsVelocity(final CharSequence template,
-        final RsVelocity.Pair... params) {
+        final RsVelocityPair... params) {
         this(
             new InputStreamOf(template),
             params
@@ -70,8 +69,8 @@ public final class RsVelocity extends RsWrap {
      * @param params Entries
      */
     public RsVelocity(final InputStream template,
-        final RsVelocity.Pair... params) {
-        this(template, new RsVelocity.PairsMap(params));
+        final RsVelocityPair... params) {
+        this(template, new PairsMap(params));
     }
 
     /**
@@ -111,14 +110,6 @@ public final class RsVelocity extends RsWrap {
         );
     }
 
-    /**
-     * Render it.
-     * @param folder Template folder
-     * @param template Page template
-     * @param params Params for velocity
-     * @return Page body
-     * @throws IOException If fails
-     */
     private static InputStream render(final String folder,
         final InputStream template,
         final Map<String, Object> params) throws IOException {
@@ -139,11 +130,6 @@ public final class RsVelocity extends RsWrap {
         return new ByteArrayInputStream(baos.toByteArray());
     }
 
-    /**
-     * Converts Map of CharSequence, Object to Map of String, Object.
-     * @param params Parameters in Map of CharSequence, Object
-     * @return Map of String, Object
-     */
     private static Map<String, Object> convert(
         final Map<CharSequence, Object> params) {
         final Map<String, Object> map = new HashMap<>(params.size());
@@ -151,60 +137,5 @@ public final class RsVelocity extends RsWrap {
             map.put(ent.getKey().toString(), ent.getValue());
         }
         return map;
-    }
-
-    /**
-     * Map view backed by a varargs entry array.
-     * @since 2.0
-     */
-    @SuppressWarnings("PMD.ArrayIsStoredDirectly")
-    private static final class PairsMap
-        extends java.util.AbstractMap<CharSequence, Object> {
-
-        /**
-         * Source entries.
-         */
-        private final Map.Entry<CharSequence, Object>[] entries;
-
-        /**
-         * Ctor.
-         * @param ents Entries
-         */
-        @SafeVarargs
-        PairsMap(final Map.Entry<CharSequence, Object>... ents) {
-            this.entries = ents;
-        }
-
-        @Override
-        public java.util.Set<Map.Entry<CharSequence, Object>> entrySet() {
-            final java.util.Set<Map.Entry<CharSequence, Object>> set =
-                new java.util.LinkedHashSet<>(this.entries.length);
-            for (final Map.Entry<CharSequence, Object> ent : this.entries) {
-                set.add(ent);
-            }
-            return set;
-        }
-    }
-
-    /**
-     * Pair of values.
-     * @since 0.1
-     */
-    public static final class Pair
-        extends AbstractMap.SimpleEntry<CharSequence, Object> {
-
-        /**
-         * Serialization marker.
-         */
-        private static final long serialVersionUID = 7362489770169963015L;
-
-        /**
-         * Ctor.
-         * @param key Key
-         * @param obj Pass
-         */
-        public Pair(final CharSequence key, final Object obj) {
-            super(key, obj);
-        }
     }
 }

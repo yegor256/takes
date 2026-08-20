@@ -110,12 +110,6 @@ public final class PsLinkedin implements Pass {
         return response;
     }
 
-    /**
-     * Get the user name from LinkedIn with the provided token.
-     * @param token LinkedIn access token
-     * @return The user found in LinkedIn
-     * @throws IOException If fails
-     */
     private Identity fetch(final String token) throws IOException {
         return PsLinkedin.parse(
             new JdkRequest(
@@ -130,13 +124,6 @@ public final class PsLinkedin implements Pass {
         );
     }
 
-    /**
-     * Retrieve PsLinkedin access token.
-     * @param home Home of this page
-     * @param code PsLinkedin "authorization code"
-     * @return The token
-     * @throws IOException If failed
-     */
     private String token(final String home, final String code)
         throws IOException {
         return new JdkRequest(this.tkhref.toString())
@@ -155,11 +142,6 @@ public final class PsLinkedin implements Pass {
             .json().readObject().getString("access_token");
     }
 
-    /**
-     * Make identity from JSON object.
-     * @param json JSON received from Github
-     * @return Identity found
-     */
     private static Identity parse(final JsonObject json) {
         final String fname = "firstName";
         final String lname = "lastName";

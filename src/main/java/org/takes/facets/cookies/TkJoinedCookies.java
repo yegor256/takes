@@ -47,12 +47,6 @@ public final class TkJoinedCookies extends TkWrap {
         );
     }
 
-    /**
-     * Joins multiple Set-Cookie headers into a single comma-separated header.
-     * @param response The response containing Set-Cookie headers
-     * @return A new response with joined Set-Cookie headers
-     * @throws Exception If response processing fails
-     */
     private static Response join(final Response response) throws Exception {
         final StringBuilder cookies = new StringBuilder();
         for (final String header : response.head()) {

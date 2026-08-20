@@ -190,11 +190,6 @@ public final class VerboseList<T> implements List<T> {
         }
     }
 
-    /**
-     * Wraps {@link IndexOutOfBoundsException} with custom message.
-     * @param cause Original exception
-     * @return Wrapped exception
-     */
     private IndexOutOfBoundsException wrapException(
         final IndexOutOfBoundsException cause) {
         final IndexOutOfBoundsException exc =

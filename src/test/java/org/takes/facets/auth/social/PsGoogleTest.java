@@ -227,10 +227,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Build a token request fork.
-     * @return Returns the token request
-     */
     private FkRegex requestToken() {
         return new FkRegex(
             "/o/oauth2/token",
@@ -238,12 +234,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Validate token request and produce response.
-     * @param req Request
-     * @return Token response
-     * @throws IOException If some problem inside
-     */
     private static org.takes.Response tokenResponse(final Request req)
         throws IOException {
         MatcherAssert.assertThat(
@@ -285,13 +275,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Checks the parameter value for the expected value.
-     * @param req Request
-     * @param param Parameter name
-     * @param value Parameter value
-     * @throws IOException If some problem inside
-     */
     private static void assertParam(
         final Request req,
         final CharSequence param, final String value
@@ -303,11 +286,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Construct a error response with google json syntax for errors.
-     * @return Json with error
-     * @throws IOException If some problem inside
-     */
     private static RsJson createErrorJson() throws IOException {
         final String message = "message";
         return new RsJson(

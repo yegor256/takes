@@ -54,7 +54,7 @@ final class Options {
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
-        this.map = new Options.LazyMap(args);
+        this.map = new LazyMap(args);
     }
 
     /**
@@ -146,12 +146,7 @@ final class Options {
         );
     }
 
-    /**
-     * Convert the provided arguments into a Map.
-     * @param args Arguments to parse
-     * @return Map A map containing all the arguments and their values
-     */
-    private static Map<String, String> asMap(final Iterable<String> args) {
+    static Map<String, String> asMap(final Iterable<String> args) {
         final Map<String, String> map = new HashMap<>(0);
         final Pattern ptn = Pattern.compile("--([a-z\\-]+)(=.+)?");
         for (final String arg : args) {
@@ -173,61 +168,5 @@ final class Options {
             }
         }
         return map;
-    }
-
-    /**
-     * Map view that lazily parses the command-line arguments on first access.
-     * @since 2.0
-     */
-    private static final class LazyMap extends java.util.AbstractMap<String, String> {
-
-        /**
-         * Source arguments.
-         */
-        private final Iterable<String> args;
-
-        /**
-         * Cached parsed map.
-         */
-        private Map<String, String> cached;
-
-        /**
-         * Ctor.
-         * @param source Source arguments
-         */
-        LazyMap(final Iterable<String> source) {
-            this.args = source;
-        }
-
-        @Override
-        public java.util.Set<Map.Entry<String, String>> entrySet() {
-            return this.parsed().entrySet();
-        }
-
-        @Override
-        public boolean containsKey(final Object key) {
-            return this.parsed().containsKey(key);
-        }
-
-        @Override
-        public String get(final Object key) {
-            return this.parsed().get(key);
-        }
-
-        @Override
-        public String getOrDefault(final Object key, final String def) {
-            return this.parsed().getOrDefault(key, def);
-        }
-
-        /**
-         * Parse and cache the result.
-         * @return Parsed map
-         */
-        private Map<String, String> parsed() {
-            if (this.cached == null) {
-                this.cached = Options.asMap(this.args);
-            }
-            return this.cached;
-        }
     }
 }

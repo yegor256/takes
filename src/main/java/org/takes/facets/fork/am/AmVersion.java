@@ -45,37 +45,7 @@ public final class AmVersion implements AgentMatch {
         return result;
     }
 
-    /**
-     * Parse major version number.
-     * @param part Token part
-     * @return Parsed major version number
-     */
     private static int majorVersion(final String part) {
         return Integer.parseInt(part.split("\\.", 2)[0]);
-    }
-
-    /**
-     * Matches specified version when it greater than specified one.
-     * @since 1.7.2
-     */
-    public static final class VmGreater implements VersionMatch {
-
-        /**
-         * Version.
-         */
-        private final int ver;
-
-        /**
-         * Ctor.
-         * @param ver Version
-         */
-        public VmGreater(final int ver) {
-            this.ver = ver;
-        }
-
-        @Override
-        public boolean matches(final int version) {
-            return version > this.ver;
-        }
     }
 }

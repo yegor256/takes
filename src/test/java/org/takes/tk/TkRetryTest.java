@@ -107,10 +107,6 @@ final class TkRetryTest {
         );
     }
 
-    /**
-     * Retry on exception till count and assert minimum spent time.
-     * @throws Exception If fails
-     */
     private static void retryAndAssertSpent() throws Exception {
         final Take take = Mockito.mock(Take.class);
         Mockito

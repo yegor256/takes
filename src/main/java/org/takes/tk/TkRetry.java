@@ -87,9 +87,6 @@ public final class TkRetry implements Take {
         );
     }
 
-    /**
-     * Sleep.
-     */
     private void sleep() {
         try {
             TimeUnit.MILLISECONDS.sleep(this.delay);

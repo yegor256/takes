@@ -67,11 +67,6 @@ public final class CcStrict implements Codec {
         return CcStrict.applyRules(this.origin.decode(bytes));
     }
 
-    /**
-     * Apply validation rules to identity.
-     * @param identity Identity
-     * @return Identity
-     */
     private static Identity applyRules(final Identity identity) {
         if (!identity.equals(Identity.ANONYMOUS)) {
             final String urn = identity.urn();

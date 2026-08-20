@@ -391,14 +391,6 @@ final class BkBasicTest {
         }
     }
 
-    /**
-     * Starts a new clean server with only root path and tries to send a
-     * request.
-     * @param method HTTP method to be called
-     * @param path Endpoint to be called
-     * @return Server textual response
-     * @throws Exception If some problem inside
-     */
     private String responseForPath(final String method, final String path)
         throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();

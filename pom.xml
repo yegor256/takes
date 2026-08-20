@@ -356,6 +356,94 @@
               <differences>
                 <item>
                   <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsBasic.Default</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsBasic.Empty</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsBasic.Fake</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsByFlag.Pair</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.fork.am.AmVersion.VmGreater</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsVelocity.Pair</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Html</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Json</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Text</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Xml</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(===org.takes.facets.auth.PsByFlag.Pair[]===)</old>
+                  <new>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(===org.takes.facets.auth.PsByFlagPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(java.lang.String, ===org.takes.facets.auth.PsByFlag.Pair[]===)</old>
+                  <new>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(java.lang.String, ===org.takes.facets.auth.PsByFlagPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.io.InputStream, ===org.takes.rs.RsVelocity.Pair[]===)</old>
+                  <new>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.io.InputStream, ===org.takes.rs.RsVelocityPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.lang.CharSequence, ===org.takes.rs.RsVelocity.Pair[]===)</old>
+                  <new>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.lang.CharSequence, ===org.takes.rs.RsVelocityPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
                   <code>java.method.varargOverloadsOnlyDifferInVarargParameter</code>
                   <old>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(java.lang.String[])</old>
                   <new>method void org.takes.rs.xe.XeDirectives::&lt;init&gt;(java.lang.String[])</new>
@@ -714,7 +802,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.30.13</version>
+            <version>0.31.1</version>
           </plugin>
         </plugins>
       </build>

@@ -94,11 +94,6 @@ public final class TkVersioned extends TkWrap {
         );
     }
 
-    /**
-     * Make a version.
-     * Creates version string from resource bundle information.
-     * @return Version string containing version, revision, and date
-     */
     private static String make() {
         final ResourceBundle res =
             ResourceBundle.getBundle("org.takes.version");

@@ -21,8 +21,6 @@ import jakarta.servlet.http.HttpUpgradeHandler;
 import jakarta.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.security.Principal;
 import java.security.SecureRandom;
 import java.util.Collection;
@@ -30,9 +28,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
 import org.takes.Request;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
@@ -86,12 +81,12 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     @Override
     public String getHeader(final String key) {
-        return new HttpServletRequestFake.Header(this.request, key).first();
+        return new Header(this.request, key).first();
     }
 
     @Override
     public Enumeration<String> getHeaders(final String key) {
-        return new HttpServletRequestFake.Header(this.request, key).all();
+        return new Header(this.request, key).all();
     }
 
     @Override
@@ -176,7 +171,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     @Override
     public String getQueryString() {
-        return new HttpServletRequestFake.Address(
+        return new Address(
             this.getRequestURI()
         ).query();
     }
@@ -188,14 +183,14 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     @Override
     public String getServerName() {
-        return new HttpServletRequestFake.Address(
+        return new Address(
             this.getRequestURI()
         ).host();
     }
 
     @Override
     public int getServerPort() {
-        return new HttpServletRequestFake.Address(
+        return new Address(
             this.getRequestURI()
         ).port();
     }
@@ -497,142 +492,5 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     @Override
     public DispatcherType getDispatcherType() {
         throw new UnsupportedOperationException("#getDispatcherType()");
-    }
-
-    /**
-     * A single header of the request, by its name.
-     * @since 2.0
-     */
-    private static final class Header {
-
-        /**
-         * The request to read from.
-         */
-        private final Request request;
-
-        /**
-         * Name of the header.
-         */
-        private final String key;
-
-        /**
-         * Ctor.
-         * @param req The request
-         * @param name Name of the header
-         */
-        Header(final Request req, final String name) {
-            this.request = req;
-            this.key = name;
-        }
-
-        /**
-         * All values of it.
-         * @return The values
-         */
-        Enumeration<String> all() {
-            try {
-                return Collections.enumeration(
-                    new RqHeaders.Base(this.request).header(this.key)
-                );
-            } catch (final IOException ex) {
-                throw new IllegalArgumentException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "Failed to read header '%s'", this.key
-                        )
-                    ).asString(),
-                    ex
-                );
-            }
-        }
-
-        /**
-         * The first value of it.
-         * @return The value
-         */
-        String first() {
-            final Enumeration<String> values = this.all();
-            if (!values.hasMoreElements()) {
-                throw new NoSuchElementException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "Value of header %s not found", this.key
-                        )
-                    ).asString()
-                );
-            }
-            return values.nextElement();
-        }
-    }
-
-    /**
-     * The URI of the request, parsed from its raw form.
-     * @since 2.0
-     */
-    private static final class Address {
-
-        /**
-         * Raw URI, as it arrived in the request line.
-         */
-        private final String raw;
-
-        /**
-         * Ctor.
-         * @param uri Raw URI
-         */
-        Address(final String uri) {
-            this.raw = uri;
-        }
-
-        /**
-         * Query string of it.
-         * @return The query, may be NULL
-         */
-        String query() {
-            return this.value().getQuery();
-        }
-
-        /**
-         * Host of it.
-         * @return The host, {@code localhost} if absent
-         */
-        String host() {
-            String host = this.value().getHost();
-            if (host == null || host.isEmpty()) {
-                host = "localhost";
-            }
-            return host;
-        }
-
-        /**
-         * Port of it.
-         * @return The port, {@code 80} if absent
-         */
-        int port() {
-            int port = this.value().getPort();
-            if (port == -1) {
-                port = 80;
-            }
-            return port;
-        }
-
-        /**
-         * Parse it.
-         * @return The URI
-         */
-        private URI value() {
-            try {
-                return new URI(this.raw);
-            } catch (final URISyntaxException ex) {
-                throw new IllegalStateException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "Failed to parse URI '%s'", this.raw
-                        )
-                    ).asString(),
-                    ex
-                );
-            }
-        }
     }
 }

@@ -64,11 +64,6 @@ public final class CcXor implements Codec {
         return this.origin.decode(this.xor(bytes));
     }
 
-    /**
-     * XOR array of bytes.
-     * @param input The input to XOR
-     * @return Encrypted output
-     */
     private byte[] xor(final byte[] input) {
         final byte[] output = new byte[input.length];
         if (this.secret.length == 0) {

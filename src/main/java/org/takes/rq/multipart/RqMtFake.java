@@ -7,22 +7,11 @@ package org.takes.rq.multipart;
 import java.io.IOException;
 import java.io.InputStream;
 import org.cactoos.Scalar;
-import org.cactoos.io.InputOf;
-import org.cactoos.io.InputStreamOf;
 import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.LengthOf;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
-import org.takes.Body;
 import org.takes.Request;
-import org.takes.rq.RequestOf;
-import org.takes.rq.RqHeaders;
 import org.takes.rq.RqMultipart;
-import org.takes.rq.RqPrint;
-import org.takes.rq.RqWithHeaders;
-import org.takes.rq.RqWrap;
 
 /**
  * Fake decorator.
@@ -33,12 +22,12 @@ public final class RqMtFake implements RqMultipart {
     /**
      * Fake boundary constant.
      */
-    private static final String BOUNDARY = "AaB02x";
+    static final String BOUNDARY = "AaB02x";
 
     /**
      * Carriage return constant (HTTP requires literal CRLF).
      */
-    private static final String CRLF = new String(new char[]{13, 10});
+    static final String CRLF = new String(new char[]{13, 10});
 
     /**
      * Fake multipart request.
@@ -53,7 +42,7 @@ public final class RqMtFake implements RqMultipart {
     public RqMtFake(final Request req, final Request... dispositions) {
         this.fake = new Sticky<>(
             () -> new RqMtBase(
-                new RqMtFake.FakeMultipartRequest(req, dispositions)
+                new FakeMultipartRequest(req, dispositions)
             )
         );
     }
@@ -76,119 +65,5 @@ public final class RqMtFake implements RqMultipart {
     @Override
     public InputStream body() throws IOException {
         return new IoChecked<>(this.fake).value().body();
-    }
-
-    /**
-     * This class is using a decorator pattern for representing a fake HTTP
-     * multipart request.
-     * @since 0.33
-     */
-    private static final class FakeMultipartRequest extends RqWrap {
-
-        /**
-         * Ctor.
-         * @param rqst The Request object
-         * @param list The sequence of dispositions
-         * @throws IOException if can't process requests
-         */
-        FakeMultipartRequest(final Request rqst, final Request... list)
-            throws IOException {
-            this(rqst, new RqMtFake.FakeBody(list));
-        }
-
-        /**
-         * Ctor.
-         * @param rqst The Request object
-         * @param body The body of dispositions
-         * @throws IOException if can't process requests
-         */
-        FakeMultipartRequest(final Request rqst, final Body body)
-            throws IOException {
-            super(
-                new RequestOf(
-                    () -> new RqWithHeaders(
-                        rqst,
-                        new UncheckedText(
-                            new FormattedText(
-                                "Content-Type: multipart/form-data; boundary=%s",
-                                RqMtFake.BOUNDARY
-                            )
-                        ).asString(),
-                        new UncheckedText(
-                            new FormattedText(
-                                "Content-Length: %s",
-                                new Unchecked<>(
-                                    new LengthOf(new InputOf(body.body()))
-                                ).value()
-                            )
-                        ).asString()
-                    ).head(),
-                    body
-                )
-            );
-        }
-    }
-
-    /**
-     * Fake body .
-     * @since 0.33
-     */
-    private static final class FakeBody implements Body {
-
-        /**
-         * The content.
-         */
-        private final Scalar<String> content;
-
-        /**
-         * Ctor.
-         * @param parts The Body parts
-         */
-        private FakeBody(final Request... parts) {
-            this.content = new Sticky<>(
-                () -> RqMtFake.FakeBody.assemble(parts)
-            );
-        }
-
-        @Override
-        public InputStream body() {
-            return new InputStreamOf(this.content::value);
-        }
-
-        /**
-         * Assembles the multipart body content.
-         * @param parts The body parts
-         * @return Assembled body string
-         * @throws IOException if part headers cannot be read
-         */
-        private static String assemble(final Request... parts)
-            throws IOException {
-            final String opening = new UncheckedText(
-                new FormattedText("--%s", RqMtFake.BOUNDARY)
-            ).asString();
-            final String closing = new UncheckedText(
-                new FormattedText("--%s--", RqMtFake.BOUNDARY)
-            ).asString();
-            final StringBuilder builder = new StringBuilder(128);
-            for (final Request part : parts) {
-                final String disposition = new RqHeaders.Smart(part)
-                    .single("Content-Disposition");
-                builder.append(opening)
-                    .append(RqMtFake.CRLF)
-                    .append("Content-Disposition: ")
-                    .append(disposition)
-                    .append(RqMtFake.CRLF);
-                final String body = new RqPrint(part).printBody();
-                if (!(RqMtFake.CRLF.equals(body) || body.isEmpty())) {
-                    builder.append(RqMtFake.CRLF)
-                        .append(body)
-                        .append(RqMtFake.CRLF);
-                }
-            }
-            builder.append("Content-Transfer-Encoding: utf-8")
-                .append(RqMtFake.CRLF)
-                .append(closing);
-            return builder.toString();
-        }
     }
 }

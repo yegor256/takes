@@ -114,7 +114,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Html decorator must replace content type with text/html",
             new RsPrint(
-                new RsWithType.Html(
+                new RsWithTypeHtml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ),
@@ -138,7 +138,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Html decorator must include charset when specified",
             new RsPrint(
-                new RsWithType.Html(
+                new RsWithTypeHtml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
@@ -164,7 +164,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Json decorator must replace content type with application/json",
             new RsPrint(
-                new RsWithType.Json(
+                new RsWithTypeJson(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML)
                 )
             ),
@@ -188,7 +188,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Json decorator must include charset when specified",
             new RsPrint(
-                new RsWithType.Json(
+                new RsWithTypeJson(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_XML),
                     StandardCharsets.ISO_8859_1
                 )
@@ -214,7 +214,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Xml decorator must replace content type with text/xml",
             new RsPrint(
-                new RsWithType.Xml(
+                new RsWithTypeXml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ),
@@ -237,7 +237,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Xml decorator must include charset when specified",
             new RsPrint(
-                new RsWithType.Xml(
+                new RsWithTypeXml(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )
@@ -263,7 +263,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Text decorator must replace content type with text/plain",
             new RsPrint(
-                new RsWithType.Text(
+                new RsWithTypeText(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML)
                 )
             ),
@@ -286,7 +286,7 @@ final class RsWithTypeTest {
         MatcherAssert.assertThat(
             "Text decorator must include charset when specified",
             new RsPrint(
-                new RsWithType.Text(
+                new RsWithTypeText(
                     new RsWithType(new RsEmpty(), RsWithTypeTest.TYPE_HTML),
                     StandardCharsets.ISO_8859_1
                 )

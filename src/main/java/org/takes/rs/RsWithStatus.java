@@ -59,7 +59,7 @@ public final class RsWithStatus extends RsWrap {
      * @param code Status code
      */
     public RsWithStatus(final Response res, final int code) {
-        this(res, code, new RsWithStatus.LazyReason(code));
+        this(res, code, new LazyReason(code));
     }
 
     /**
@@ -78,14 +78,10 @@ public final class RsWithStatus extends RsWrap {
         );
     }
 
-    /**
-     * Make head.
-     * @param origin Original response
-     * @param status Status
-     * @param reason Reason
-     * @return Head
-     * @throws IOException If fails
-     */
+    static String best(final int code) {
+        return RsWithStatus.REASONS.getOrDefault(code, "Unknown");
+    }
+
     private static Iterable<String> head(final Response origin,
         final int status, final CharSequence reason) throws IOException {
         if (status < 100 || status > 999) {
@@ -117,19 +113,6 @@ public final class RsWithStatus extends RsWrap {
         );
     }
 
-    /**
-     * Find the best reason for this status code.
-     * @param code The code
-     * @return Reason
-     */
-    private static String best(final int code) {
-        return RsWithStatus.REASONS.getOrDefault(code, "Unknown");
-    }
-
-    /**
-     * Make all reasons.
-     * @return Map of status codes and reasons
-     */
     private static Map<Integer, String> make() {
         final Map<Integer, String> map = new HashMap<>(0);
         map.put(HttpURLConnection.HTTP_OK, "OK");
@@ -175,54 +158,5 @@ public final class RsWithStatus extends RsWrap {
         map.put(HttpURLConnection.HTTP_GATEWAY_TIMEOUT, "Gateway Timeout");
         map.put(HttpURLConnection.HTTP_VERSION, "HTTP Version Not Supported");
         return map;
-    }
-
-    /**
-     * CharSequence that lazily resolves to the best reason phrase
-     * for an HTTP status code.
-     * @since 2.0
-     */
-    private static final class LazyReason implements CharSequence {
-
-        /**
-         * HTTP status code.
-         */
-        private final int code;
-
-        /**
-         * Ctor.
-         * @param status HTTP status code
-         */
-        LazyReason(final int status) {
-            this.code = status;
-        }
-
-        @Override
-        public int length() {
-            return this.resolve().length();
-        }
-
-        @Override
-        public char charAt(final int index) {
-            return this.resolve().charAt(index);
-        }
-
-        @Override
-        public CharSequence subSequence(final int start, final int end) {
-            return this.resolve().subSequence(start, end);
-        }
-
-        @Override
-        public String toString() {
-            return this.resolve();
-        }
-
-        /**
-         * Resolve the reason phrase.
-         * @return Reason phrase
-         */
-        private String resolve() {
-            return RsWithStatus.best(this.code);
-        }
     }
 }

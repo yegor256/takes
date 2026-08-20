@@ -102,11 +102,6 @@ public final class CcPlain implements Codec {
         );
     }
 
-    /**
-     * Decode from URL.
-     * @param text The text
-     * @return Decoded
-     */
     private static String decode(final String text) {
         try {
             return URLDecoder.decode(text, Charset.defaultCharset());

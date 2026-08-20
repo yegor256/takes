@@ -84,12 +84,6 @@ public final class FkTypes implements Fork {
         return resp;
     }
 
-    /**
-     * Get all types accepted by the client.
-     * @param req Request
-     * @return Media types
-     * @throws IOException If fails
-     */
     private static MediaTypes accepted(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
         final Iterable<String> headers = new RqHeaders.Base(req)

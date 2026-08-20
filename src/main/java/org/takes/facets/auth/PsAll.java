@@ -60,9 +60,6 @@ public final class PsAll implements Pass {
         return this.all.get(this.index).exit(response, identity);
     }
 
-    /**
-     * Validate the configured index.
-     */
     private void checkIndex() {
         if (this.index < 0) {
             throw new IllegalArgumentException(
@@ -86,12 +83,6 @@ public final class PsAll implements Pass {
         }
     }
 
-    /**
-     * Checks if all passes can be successfully entered with the given request.
-     * @param request Request used for authentication
-     * @return True if all passes accept the request, false otherwise
-     * @throws Exception If any authentication attempt fails
-     */
     private boolean allMatch(final Request request) throws Exception {
         boolean success = true;
         for (final Pass pass : this.all) {

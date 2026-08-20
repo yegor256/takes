@@ -62,11 +62,6 @@ public final class XeMemory extends XeWrap {
         );
     }
 
-    /**
-     * Format memory.
-     * @param bytes Bytes
-     * @return Mbytes
-     */
     private static long mbs(final long bytes) {
         return bytes >> 20;
     }

@@ -7,13 +7,9 @@ package org.takes.http;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import lombok.EqualsAndHashCode;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
 
 /**
  * Parallel back-end decorator.
@@ -69,7 +65,7 @@ public final class BkParallel extends BkWrap {
                 threads, threads, 0L,
                 TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(),
-                new BkParallel.Threads()
+                new Threads()
             )
         );
     }
@@ -95,32 +91,5 @@ public final class BkParallel extends BkWrap {
                 }
             )
         );
-    }
-
-    /**
-     * Thread factory.
-     * @since 0.1
-     */
-    private static final class Threads implements ThreadFactory {
-
-        /**
-         * Total threads created so far.
-         */
-        private final AtomicInteger total = new AtomicInteger();
-
-        @Override
-        public Thread newThread(final Runnable runnable) {
-            final Thread thread = new Thread(runnable);
-            thread.setName(
-                new UncheckedText(
-                    new FormattedText(
-                        "%s-%d",
-                        BkParallel.class.getSimpleName(),
-                        this.total.getAndAdd(1)
-                    )
-                ).asString()
-            );
-            return thread;
-        }
     }
 }

@@ -249,11 +249,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * Mocked ServerSocket so that Socket will throw SocketException.
-     * @return Mocked instance of ServerSocket
-     * @throws IOException If some problem inside
-     */
     @SuppressWarnings("PMD.CloseResource")
     private static ServerSocket server() throws IOException {
         final ServerSocket server = Mockito.mock(ServerSocket.class);

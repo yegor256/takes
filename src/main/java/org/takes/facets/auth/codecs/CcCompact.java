@@ -80,13 +80,6 @@ public final class CcCompact implements Codec {
         }
     }
 
-    /**
-     * Read properties from stream into map.
-     * @param stream Data stream
-     * @param map Map to populate
-     * @return The populated map
-     * @throws IOException If reading fails
-     */
     private static Map<String, String> props(
         final DataInputStream stream,
         final Map<String, String> map

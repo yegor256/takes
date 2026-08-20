@@ -84,13 +84,6 @@ public final class TkProxy implements Take {
         );
     }
 
-    /**
-     * Creates the request to be forwarded to the target host.
-     * @param req Original request
-     * @param dest Destination URL
-     * @return Request to be forwarded
-     * @throws Exception If some problem inside
-     */
     private com.jcabi.http.Request request(final Request req,
         final URI dest) throws Exception {
         com.jcabi.http.Request proxied = new JdkRequest(dest).method(
@@ -122,13 +115,6 @@ public final class TkProxy implements Take {
         return proxied;
     }
 
-    /**
-     * Creates the response received from the target host.
-     * @param home Home host
-     * @param dest Destination URL
-     * @param rsp Response received from the target host
-     * @return Response
-     */
     private Response response(final String home, final URI dest,
         final com.jcabi.http.Response rsp) {
         final Collection<String> hdrs = new ArrayList<>(0);
@@ -166,12 +152,6 @@ public final class TkProxy implements Take {
         );
     }
 
-    /**
-     * Checks whether the provided argument is a "Host" header name.
-     * @param header Header name
-     * @return Returns {@code true} if {@code header} parameter is a "Host"
-     *  header name, {@code false} otherwise
-     */
     private static boolean isHost(final String header) {
         return "host".equals(
             new UncheckedText(

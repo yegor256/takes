@@ -119,12 +119,6 @@ final class FtSecureTest {
         );
     }
 
-    /**
-     * Creates an instance of secure Front.
-     * @param take Take
-     * @return Secure Front
-     * @throws IOException If some problem inside
-     */
     private static FtRemote secure(final Take take) throws IOException {
         ServerSocket skt = null;
         try {

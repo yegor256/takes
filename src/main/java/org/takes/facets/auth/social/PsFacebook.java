@@ -156,11 +156,6 @@ public final class PsFacebook implements Pass {
         return response;
     }
 
-    /**
-     * Retrieves user information from Facebook using the access token.
-     * @param token The Facebook access token
-     * @return The user object from Facebook
-     */
     private User fetch(final String token) {
         try {
             return new DefaultFacebookClient(
@@ -177,13 +172,6 @@ public final class PsFacebook implements Pass {
         }
     }
 
-    /**
-     * Retrieves the Facebook access token using the authorization code.
-     * @param home The home URL of this application
-     * @param code The Facebook authorization code
-     * @return The access token
-     * @throws IOException If token retrieval fails
-     */
     private String token(final String home, final String code)
         throws IOException {
         final String response = this.request.uri().set(

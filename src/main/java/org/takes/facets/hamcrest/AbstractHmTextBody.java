@@ -78,12 +78,6 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
      */
     protected abstract InputStream itemBody(T item) throws IOException;
 
-    /**
-     * Text from item.
-     * @param item Item
-     * @return Text contents of item
-     * @throws IOException If some problem inside
-     */
     @SuppressWarnings("PMD.AssignmentInOperand")
     private String text(final T item) throws IOException {
         final String text;

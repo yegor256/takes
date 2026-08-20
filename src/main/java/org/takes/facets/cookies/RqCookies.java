@@ -105,11 +105,6 @@ public interface RqCookies extends Request {
             return this.map().keySet();
         }
 
-        /**
-         * Parses all cookies into a map of name-value pairs.
-         * @return A map containing all cookies with lowercased names as keys
-         * @throws IOException If cookie parsing fails
-         */
         private Map<String, String> map() throws IOException {
             final Map<String, String> map = new HashMap<>(0);
             final Iterable<String> values =

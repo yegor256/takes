@@ -49,7 +49,7 @@ public final class RsRedirect extends RsWrap {
             new RsWithHeader(
                 new RsWithStatus(new RsEmpty(), code),
                 "Location", location
-        )
+            )
         );
     }
 }

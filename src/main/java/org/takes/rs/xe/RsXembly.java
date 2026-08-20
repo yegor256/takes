@@ -109,13 +109,6 @@ public final class RsXembly extends RsWrap {
         );
     }
 
-    /**
-     * Render source as XML.
-     * @param dom DOM node to build upon
-     * @param src Source
-     * @return XML
-     * @throws IOException If fails
-     */
     private static InputStream render(final Node dom,
         final XeSource src) throws IOException {
         final ByteArrayOutputStream baos =
@@ -138,10 +131,6 @@ public final class RsXembly extends RsWrap {
         return new ByteArrayInputStream(baos.toByteArray());
     }
 
-    /**
-     * Create empty DOM Document.
-     * @return Document
-     */
     private static Document emptyDocument() {
         try {
             return DocumentBuilderFactory.newInstance()
@@ -155,11 +144,6 @@ public final class RsXembly extends RsWrap {
         }
     }
 
-    /**
-     * Create Node clone.
-     * @param dom Node to clone
-     * @return Cloned Node
-     */
     private static Node cloneNode(final Node dom) {
         final Transformer transformer;
         try {

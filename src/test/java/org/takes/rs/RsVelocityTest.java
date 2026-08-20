@@ -27,7 +27,7 @@ final class RsVelocityTest {
             IOUtils.toString(
                 new RsVelocity(
                     "hello, ${name}!",
-                    new RsVelocity.Pair("name", "Jeffrey")
+                    new RsVelocityPair("name", "Jeffrey")
                 ).body(),
                 StandardCharsets.UTF_8
             ),

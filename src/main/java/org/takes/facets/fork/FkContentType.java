@@ -64,12 +64,6 @@ public final class FkContentType implements Fork {
         return resp;
     }
 
-    /**
-     * Get Content-Type type provided by the client.
-     * @param req Request
-     * @return Media type
-     * @throws IOException If fails
-     */
     private static MediaTypes getType(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
         final Iterable<String> headers = new RqHeaders.Base(req)

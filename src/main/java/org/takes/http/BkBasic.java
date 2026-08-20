@@ -108,25 +108,6 @@ public final class BkBasic implements Back {
         }
     }
 
-    /**
-     * Read one request and print the response to the output.
-     *
-     * <p>The request is built here, and not by the caller, because
-     * {@link RqLive} throws {@link HttpException} on a malformed request
-     * line and that exception has to be turned into a response, instead of
-     * killing the thread.
-     *
-     * <p>A request that can't be parsed leaves the input stream in an
-     * unpredictable state, so the connection can't carry another request
-     * after it and FALSE is returned. This is what RFC 7230, section 3.5,
-     * recommends for a malformed request line.
-     *
-     * @param input Stream to read the request from
-     * @param socket Socket the request arrived through
-     * @param output Stream to print the response to
-     * @return TRUE if the connection may carry one more request
-     * @throws IOException If fails
-     */
     private boolean exchange(final InputStream input, final Socket socket,
         final OutputStream output) throws IOException {
         boolean reusable = true;
@@ -148,21 +129,6 @@ public final class BkBasic implements Back {
         return reusable;
     }
 
-    /**
-     * Read away what is left of a request that couldn't be parsed.
-     *
-     * <p>Closing a socket that still has unread bytes in its receive buffer
-     * makes TCP send RST instead of FIN, and then the client sees a reset
-     * connection instead of the response we have just written for it.
-     * Reading the leftovers away first lets the close be graceful.
-     *
-     * <p>Only the bytes that have already arrived are read, and no more than
-     * {@link BkBasic#LINGER} of them, so this can neither block nor be used
-     * to keep a connection busy.
-     *
-     * @param input The stream to drain
-     * @throws IOException If fails
-     */
     private static void linger(final InputStream input) throws IOException {
         final byte[] buf = new byte[8192];
         long total = 0L;
@@ -175,12 +141,6 @@ public final class BkBasic implements Back {
         }
     }
 
-    /**
-     * Print response to output stream, safely.
-     * @param req Request
-     * @param output Output
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private void print(final Request req, final OutputStream output)
         throws IOException {
@@ -204,12 +164,6 @@ public final class BkBasic implements Back {
         new RsPrint(handled).print(output);
     }
 
-    /**
-     * Make a failure response.
-     * @param err Error
-     * @param code HTTP error code
-     * @return Response
-     */
     private static Response failure(final Throwable err, final int code) {
         return new RsWithStatus(
             new RsText(
@@ -221,12 +175,6 @@ public final class BkBasic implements Back {
         );
     }
 
-    /**
-     * Adds custom headers with information about socket.
-     * @param req Request
-     * @param socket Socket
-     * @return Request with custom headers
-     */
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(

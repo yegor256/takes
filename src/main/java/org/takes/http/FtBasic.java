@@ -89,11 +89,6 @@ public final class FtBasic implements Front {
         }
     }
 
-    /**
-     * Make a loop cycle.
-     * @param server Server socket
-     * @throws IOException If fails
-     */
     private void loop(final ServerSocket server) throws IOException {
         try {
             this.back.accept(server.accept());

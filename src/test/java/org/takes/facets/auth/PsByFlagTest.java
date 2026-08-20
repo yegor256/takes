@@ -32,7 +32,7 @@ final class PsByFlagTest {
         MatcherAssert.assertThat(
             "Flag not found must return false",
             new PsByFlag(
-                new PsByFlag.Pair(
+                new PsByFlagPair(
                     Pattern.compile(Pattern.quote("test")), new PsFake(true)
                 )
             ).enter(
@@ -47,7 +47,7 @@ final class PsByFlagTest {
         MatcherAssert.assertThat(
             "Matching flag must return expected identity URN",
             new PsByFlag(
-                new PsByFlag.Pair(
+                new PsByFlagPair(
                     Pattern.compile(Pattern.quote("some-key")), new PsFake(true)
                 )
             ).enter(new RqFake("POST", "/?PsByFlag=some-key")).get()

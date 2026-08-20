@@ -113,12 +113,6 @@ public final class PsTwitter implements Pass {
         return response;
     }
 
-    /**
-     * Get the user name from Twitter with the provided token.
-     * @param tkn Twitter access token
-     * @return The user found in Twitter
-     * @throws IOException If fails
-     */
     private Identity identity(final String tkn) throws IOException {
         return parse(
             this.user.uri().set(
@@ -136,11 +130,6 @@ public final class PsTwitter implements Pass {
         );
     }
 
-    /**
-     * Make identity from JSON object.
-     * @param json JSON received from Twitter
-     * @return Identity found
-     */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
         props.put(PsTwitter.NAME, json.getString(PsTwitter.NAME));
@@ -151,11 +140,6 @@ public final class PsTwitter implements Pass {
         );
     }
 
-    /**
-     * Retrieve Twitter access token.
-     * @return The Twitter access token
-     * @throws IOException If failed
-     */
     private String fetch() throws IOException {
         return this.token.method("POST").header(
             "Content-Type",

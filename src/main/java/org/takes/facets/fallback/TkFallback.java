@@ -49,14 +49,6 @@ public final class TkFallback extends TkWrap {
         );
     }
 
-    /**
-     * Route this request.
-     * @param take The take
-     * @param fbk Fallback
-     * @param req Request
-     * @return Response
-     * @throws Exception If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response route(final Take take, final Fallback fbk,
         final Request req) throws Exception {
@@ -110,15 +102,6 @@ public final class TkFallback extends TkWrap {
         return res;
     }
 
-    /**
-     * Fallback request.
-     * @param req Request
-     * @param start Start time of request processing
-     * @param throwable Exception thrown
-     * @param code Error code
-     * @return Fallback request
-     * @throws IOException In case of error
-     */
     private static RqFallback.Fake fallback(final Request req, final long start,
         final Throwable throwable, final int code) throws IOException {
         return new RqFallback.Fake(
@@ -126,13 +109,6 @@ public final class TkFallback extends TkWrap {
         );
     }
 
-    /**
-     * Wrap response.
-     * @param res Response to wrap
-     * @param fbk Fallback
-     * @param req Request
-     * @return Response
-     */
     private static Response wrap(final Response res, final Fallback fbk,
         final Request req) {
         return new ResponseOf(
@@ -141,14 +117,6 @@ public final class TkFallback extends TkWrap {
         );
     }
 
-    /**
-     * Get head from response with fallback.
-     * @param res Response to read head from
-     * @param fbk Fallback
-     * @param req Request
-     * @return Head iterable
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Iterable<String> head(final Response res, final Fallback fbk,
         final Request req) throws IOException {
@@ -180,14 +148,6 @@ public final class TkFallback extends TkWrap {
         return head;
     }
 
-    /**
-     * Get body from response with fallback.
-     * @param res Response to read body from
-     * @param fbk Fallback
-     * @param req Request
-     * @return Body stream
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static InputStream body(final Response res, final Fallback fbk,
         final Request req) throws IOException {
@@ -219,14 +179,6 @@ public final class TkFallback extends TkWrap {
         return body;
     }
 
-    /**
-     * Create an error.
-     * @param exp Exception original
-     * @param req Request we're processing
-     * @param start When started
-     * @return Error
-     * @throws IOException If fails
-     */
     private static Throwable error(final Throwable exp, final Request req,
         final long start) throws IOException {
         final String time;
@@ -254,11 +206,6 @@ public final class TkFallback extends TkWrap {
         );
     }
 
-    /**
-     * Get full error message from the exception and all its kids.
-     * @param exp Exception original
-     * @return Error message
-     */
     private static String msg(final Throwable exp) {
         final StringBuilder txt = new StringBuilder(6);
         final String localized = exp.getLocalizedMessage();

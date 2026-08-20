@@ -50,13 +50,6 @@ public final class RsFork extends RsWrap {
         );
     }
 
-    /**
-     * Pick the right one.
-     * @param req Request
-     * @param forks List of forks
-     * @return Response
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response pick(final Request req,
         final Iterable<Fork> forks) throws IOException {

@@ -11,7 +11,7 @@ import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for {@link org.takes.facets.auth.PsBasic.Default}.
+ * Unit tests for {@link org.takes.facets.auth.PsBasicDefault}.
  * @since 0.22
  */
 final class PsBasicDefaultTest {
@@ -19,8 +19,8 @@ final class PsBasicDefaultTest {
     @Test
     void acceptsCorrectLoginPasswordPair() {
         MatcherAssert.assertThat(
-            "PsBasic.Default must authenticate user with correct login/password and return URN",
-            new PsBasic.Default(
+            "PsBasicDefault must authenticate user with correct login/password and return URN",
+            new PsBasicDefault(
                 new String[]{
                     "bob qwe%20r%20ty%3A%2B urn:foo:robert",
                     "alice пароль urn:foo:alice",
@@ -36,8 +36,8 @@ final class PsBasicDefaultTest {
     @Test
     void supportsUrlEncodedSpaces() {
         MatcherAssert.assertThat(
-            "PsBasic.Default must support URL-encoded spaces in passwords",
-            new PsBasic.Default(
+            "PsBasicDefault must support URL-encoded spaces in passwords",
+            new PsBasicDefault(
                 new String[]{
                     "yvonne hey%20you urn:foo:z",
                 }
@@ -52,8 +52,8 @@ final class PsBasicDefaultTest {
     @Test
     void supportsPlusEncodedSpaces() {
         MatcherAssert.assertThat(
-            "PsBasic.Default must support plus-encoded spaces in passwords",
-            new PsBasic.Default(
+            "PsBasicDefault must support plus-encoded spaces in passwords",
+            new PsBasicDefault(
                 new String[]{
                     "zak hey+me urn:foo:z",
                 }
@@ -68,8 +68,8 @@ final class PsBasicDefaultTest {
     @Test
     void supportsUsersWithSpacesInTheirNames() {
         MatcherAssert.assertThat(
-            "PsBasic.Default must support users with spaces in their names",
-            new PsBasic.Default(
+            "PsBasicDefault must support users with spaces in their names",
+            new PsBasicDefault(
                 new String[]{
                     "abraham+lincoln qwer urn:foo:z",
                 }
@@ -85,8 +85,8 @@ final class PsBasicDefaultTest {
     void supportsUrlencodedUrns() throws Exception {
         final String urn = "urn:a100%25:one-two+";
         MatcherAssert.assertThat(
-            "PsBasic.Default must support URL-encoded URNs and decode them correctly",
-            new PsBasic.Default(
+            "PsBasicDefault must support URL-encoded URNs and decode them correctly",
+            new PsBasicDefault(
                 new String[]{
                     String.format(
                         "login password %s",
@@ -104,8 +104,8 @@ final class PsBasicDefaultTest {
     @Test
     void rejectsIncorrectPassword() {
         MatcherAssert.assertThat(
-            "PsBasic.Default must reject authentication with incorrect password",
-            new PsBasic.Default(
+            "PsBasicDefault must reject authentication with incorrect password",
+            new PsBasicDefault(
                 new String[]{
                     "charlie qwerty urn:foo:charlie",
                     "doreen 123 urn:foo:doreen",
@@ -118,8 +118,8 @@ final class PsBasicDefaultTest {
     @Test
     void rejectsIncorrectLogin() {
         MatcherAssert.assertThat(
-            "PsBasic.Default must reject authentication with incorrect login",
-            new PsBasic.Default(
+            "PsBasicDefault must reject authentication with incorrect login",
+            new PsBasicDefault(
                 new String[]{
                     "eddie qwerty urn:foo:eddie",
                     "fiona 123 urn:foo:fiona",

@@ -110,47 +110,10 @@ public final class FtCli implements Front {
         }
     }
 
-    /**
-     * Create exit.
-     * @param exit Original exit
-     * @return New exit
-     */
     private Exit exit(final Exit exit) {
         return new Exit.Or(
             exit,
-            new FtCli.Lifetime(System.currentTimeMillis(), this.options.lifetime())
+            new Lifetime(System.currentTimeMillis(), this.options.lifetime())
         );
-    }
-
-    /**
-     * Lifetime exceeded exit.
-     * @since 0.32.5
-     */
-    private static final class Lifetime implements Exit {
-
-        /**
-         * Start time.
-         */
-        private final long start;
-
-        /**
-         * Max lifetime.
-         */
-        private final long max;
-
-        /**
-         * Ctor.
-         * @param start Start time
-         * @param max Max lifetime
-         */
-        Lifetime(final long start, final long max) {
-            this.start = start;
-            this.max = max;
-        }
-
-        @Override
-        public boolean ready() {
-            return System.currentTimeMillis() - this.start > this.max;
-        }
     }
 }

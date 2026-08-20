@@ -56,12 +56,12 @@ final class RqFrom implements Request {
     @Override
     public Iterable<String> head() {
         final Collection<String> head = new ArrayList<>(0);
-        head.add(new RqFrom.HttpHead(this.sreq).toString());
+        head.add(new HttpHead(this.sreq).toString());
         final Collection<String> names = Collections.list(
             this.sreq.getHeaderNames()
         );
         if (!names.stream().anyMatch("host"::equalsIgnoreCase)) {
-            head.add(new RqFrom.HttpHost(this.sreq).toString());
+            head.add(new HttpHost(this.sreq).toString());
         }
         names.forEach(
             header -> head.add(
@@ -96,100 +96,5 @@ final class RqFrom implements Request {
     @Override
     public InputStream body() throws IOException {
         return this.sreq.getInputStream();
-    }
-
-    /**
-     * HTTP request first line builder.
-     *
-     * <p>Constructs the HTTP request line in the format "METHOD URI HTTP/1.1"
-     * from servlet request information. This represents the first line of
-     * an HTTP request as defined by RFC 7230.
-     *
-     * @since 2.0
-     */
-    private static final class HttpHead {
-
-        /**
-         * Initial buffer capacity.
-         */
-        private static final int BUFF_SIZE = 20;
-
-        /**
-         * Servlet request.
-         */
-        private final HttpServletRequest req;
-
-        /**
-         * Ctor.
-         * @param request Servlet request
-         */
-        HttpHead(final HttpServletRequest request) {
-            this.req = request;
-        }
-
-        @Override
-        public String toString() {
-            final StringBuilder bld = new StringBuilder(HttpHead.BUFF_SIZE)
-                .append(this.req.getMethod())
-                .append(' ');
-            final String uri = this.req.getRequestURI();
-            if (uri == null) {
-                bld.append('/');
-            } else {
-                bld.append(uri);
-            }
-            final String query = this.req.getQueryString();
-            if (query != null) {
-                bld.append('?').append(query);
-            }
-            return bld.toString();
-        }
-    }
-
-    /**
-     * Host header builder from servlet request.
-     *
-     * <p>Constructs the HTTP Host header from servlet request server
-     * information. The Host header is required by HTTP/1.1 and indicates
-     * the target host and port for the request. If the port is the default
-     * HTTP port (80), it's omitted from the header value.
-     *
-     * @since 2.0
-     */
-    private static final class HttpHost {
-
-        /**
-         * Default http port.
-         */
-        private static final int PORT_DEFAULT = 80;
-
-        /**
-         * Initial buffer capacity.
-         */
-        private static final int BUFF_SIZE = 100;
-
-        /**
-         * Servlet request.
-         */
-        private final HttpServletRequest req;
-
-        /**
-         * Ctor.
-         * @param request Servlet request
-         */
-        private HttpHost(final HttpServletRequest request) {
-            this.req = request;
-        }
-
-        @Override
-        public String toString() {
-            final StringBuilder bld = new StringBuilder(HttpHost.BUFF_SIZE);
-            bld.append("Host: ").append(this.req.getServerName());
-            final int port = this.req.getServerPort();
-            if (port != HttpHost.PORT_DEFAULT) {
-                bld.append(':').append(port);
-            }
-            return bld.toString();
-        }
     }
 }

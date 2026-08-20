@@ -41,11 +41,6 @@ public final class FbSlf4j extends FbWrap {
         );
     }
 
-    /**
-     * Log this request.
-     * @param req Request
-     * @throws IOException If fails
-     */
     private static void log(final RqFallback req) throws IOException {
         FbSlf4j.LOGGER.error(
             "{} {} failed with {}: {}",

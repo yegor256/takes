@@ -121,11 +121,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
         }
     }
 
-    /**
-     * Tries to match any of the supplied {@code name=value} crumbs.
-     * @param crumbs Name/value pairs from one Cookie header
-     * @return True once one pair fully matches
-     */
     private boolean matchAny(final Iterable<String> crumbs) {
         boolean matched = false;
         for (final String crumb : crumbs) {
@@ -137,12 +132,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
         return matched;
     }
 
-    /**
-     * Tries to match a single {@code name=value} pair, storing the observed
-     * value if the name is a match.
-     * @param crumb Name/value pair as "name=value"
-     * @return True if both name and value match
-     */
     private boolean matchCrumb(final String crumb) {
         final int sign = crumb.indexOf('=');
         boolean matched = false;
@@ -155,11 +144,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
         return matched;
     }
 
-    /**
-     * Checks whether a header line is a {@code Cookie} header.
-     * @param header Raw header line ("Name: value")
-     * @return True if the header name equals "Cookie" ignoring case
-     */
     private static boolean isCookie(final String header) {
         final int colon = header.indexOf(':');
         return colon >= 0
@@ -168,11 +152,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
             );
     }
 
-    /**
-     * Splits a Cookie header into its individual {@code name=value} crumbs.
-     * @param header Raw header line ("Cookie: a=1; b=2; c=3")
-     * @return The crumbs ("a=1", "b=2", "c=3")
-     */
     private static Iterable<String> crumbs(final String header) {
         return Arrays.asList(
             header.substring(header.indexOf(':') + 1).split(";")

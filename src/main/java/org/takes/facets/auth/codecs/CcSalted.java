@@ -74,11 +74,6 @@ public final class CcSalted implements Codec {
         return this.origin.decode(CcSalted.unsalt(bytes));
     }
 
-    /**
-     * Salt the string.
-     * @param text Original text to salt
-     * @return Salted string
-     */
     private static byte[] salt(final byte[] text) {
         final byte size = (byte) CcSalted.RND.nextInt(CcSalted.RND_MAX_SIZE);
         final byte[] output = new byte[text.length + size + 2];
@@ -93,11 +88,6 @@ public final class CcSalted implements Codec {
         return output;
     }
 
-    /**
-     * Un-salt the string.
-     * @param text Salted text
-     * @return Original text
-     */
     private static byte[] unsalt(final byte[] text) {
         if (text.length == 0) {
             throw new DecodingException("empty input");

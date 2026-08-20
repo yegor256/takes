@@ -96,22 +96,10 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
         return result;
     }
 
-    /**
-     * Item's body.
-     * @param item Item to retrieve body from
-     * @return InputStream of body
-     * @throws IOException If some problem inside
-     */
     private static InputStream itemBody(final Body item) throws IOException {
         return item.body();
     }
 
-    /**
-     * InputStream as bytes.
-     * @param input Input
-     * @return Bytes
-     * @throws IOException If some problem inside
-     */
     @SuppressWarnings("PMD.AssignmentInOperand")
     private static byte[] asBytes(final InputStream input) throws IOException {
         input.reset();

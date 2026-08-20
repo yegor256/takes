@@ -149,29 +149,14 @@ final class RqMtBaseTest {
         }
     }
 
-    /**
-     * Format Content-Disposition header.
-     * @param dsp Disposition
-     * @return Content-Disposition header
-     */
     private static String contentDispositionHeader(final String dsp) {
         return String.format("Content-Disposition: %s", dsp);
     }
 
-    /**
-     * Format Content-Length header.
-     * @param length Body length
-     * @return Content-Length header
-     */
     private static String contentLengthHeader(final long length) {
         return String.format("Content-Length: %d", length);
     }
 
-    /**
-     * Try to parse a multipart request that has no closing boundary.
-     * Parsing is lazy, so {@code names()} is called to force it.
-     * @throws Exception If fails
-     */
     private static void parseWithoutClosingBoundary() throws Exception {
         final String host = "Host: rtw.example.com";
         final String length = "Content-Length: 100007";

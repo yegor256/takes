@@ -6,9 +6,6 @@ package org.takes.rq;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -75,7 +72,7 @@ public interface RqRequestLine extends Request {
         /**
          * Bad request message.
          */
-        private static final String BAD_REQUEST_MSG =
+        static final String BAD_REQUEST_MSG =
             "Invalid HTTP Request-Line header: '%s'";
 
         /**
@@ -138,7 +135,7 @@ public interface RqRequestLine extends Request {
 
         @Override
         public String uri() throws IOException {
-            return RqRequestLine.Base.Target.encoded(
+            return Target.encoded(
                 this.token(RqRequestLine.Base.Token.URI)
             );
         }
@@ -148,12 +145,6 @@ public interface RqRequestLine extends Request {
             return this.token(RqRequestLine.Base.Token.HTTPVERSION);
         }
 
-        /**
-         * Get Request-Line header token.
-         * @param token Token
-         * @return HTTP Request-Line header token
-         * @throws IOException If fails
-         */
         private String token(final RqRequestLine.Base.Token token)
             throws IOException {
             return RqRequestLine.Base.trimmed(
@@ -162,11 +153,6 @@ public interface RqRequestLine extends Request {
             );
         }
 
-        /**
-         * Get Request-Line header.
-         * @return Valid Request-Line header
-         * @throws IOException If fails
-         */
         private String line() throws IOException {
             if (!this.head().iterator().hasNext()) {
                 throw new HttpException(
@@ -177,13 +163,6 @@ public interface RqRequestLine extends Request {
             return this.head().iterator().next();
         }
 
-        /**
-         * Validate Request-Line according to PATTERN
-         * and return matcher.
-         * @param line Request-Line header
-         * @return Matcher that can be used to extract tokens
-         * @throws HttpException If fails
-         */
         private static Matcher matcher(final String line) throws HttpException {
             final Matcher matcher = RqRequestLine.Base.PATTERN.matcher(line);
             boolean valid = matcher.matches();
@@ -218,25 +197,11 @@ public interface RqRequestLine extends Request {
             return matcher;
         }
 
-        /**
-         * Validate Request-Line according to PATTERN.
-         * @param line Request-Line header
-         * @return Validated Request-Line header
-         * @throws HttpException If fails
-         */
         private static String validated(final String line) throws HttpException {
             RqRequestLine.Base.matcher(line);
             return line;
         }
 
-        /**
-         * Check that token value is not null and
-         * return trimmed value.
-         * @param value Token value
-         * @param token Token
-         * @return Trimmed token value
-         * @throws IOException If fails
-         */
         private static String trimmed(final String value,
             final RqRequestLine.Base.Token token) throws IOException {
             if (value == null) {
@@ -252,87 +217,6 @@ public interface RqRequestLine extends Request {
             return new IoCheckedText(
                 new Trimmed(new TextOf(value))
             ).asString();
-        }
-
-        /**
-         * Request target encoding.
-         * @since 2.0
-         */
-        private static final class Target {
-
-            /**
-             * Utility class.
-             */
-            private Target() {
-                // intentionally empty
-            }
-
-            /**
-             * Encode illegal URI characters without changing encoded octets.
-             * @param value Request URI
-             * @return Encoded request URI
-             * @throws IOException If request target is invalid
-             */
-            private static String encoded(final String value)
-                throws IOException {
-                final StringBuilder uri = new StringBuilder(value);
-                while (true) {
-                    try {
-                        return new URI(uri.toString()).toASCIIString();
-                    } catch (final URISyntaxException err) {
-                        final int index = err.getIndex();
-                        if (
-                            index < 0 || index >= uri.length()
-                                || !RqRequestLine.Base.Target.query(uri, index)
-                        ) {
-                            throw new HttpException(
-                                HttpURLConnection.HTTP_BAD_REQUEST,
-                                new UncheckedText(
-                                    new FormattedText(
-                                        RqRequestLine.Base.BAD_REQUEST_MSG,
-                                        value
-                                    )
-                                ).asString(),
-                                err
-                            );
-                        }
-                        final int point = uri.codePointAt(index);
-                        uri.replace(
-                            index,
-                            index + Character.charCount(point),
-                            RqRequestLine.Base.Target.encode(point)
-                        );
-                    }
-                }
-            }
-
-            /**
-             * Check whether character at index is inside the query part.
-             * @param uri Request URI
-             * @param index Character index
-             * @return True when index is inside query
-             */
-            private static boolean query(final StringBuilder uri, final int index) {
-                final int start = uri.indexOf("?");
-                return start >= 0 && index > start;
-            }
-
-            /**
-             * Percent-encode a code point using UTF-8.
-             * @param point Code point
-             * @return Encoded code point
-             */
-            private static String encode(final int point) {
-                final StringBuilder text = new StringBuilder();
-                for (final byte octet : new String(
-                    Character.toChars(point)
-                ).getBytes(StandardCharsets.UTF_8)) {
-                    text.append('%').append(
-                        new UncheckedText(new FormattedText("%02X", octet & 0xFF)).asString()
-                    );
-                }
-                return text.toString();
-            }
         }
     }
 }

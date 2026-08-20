@@ -63,11 +63,6 @@ public final class RsPrettyJson implements Response {
         return this.make().body();
     }
 
-    /**
-     * Make a response.
-     * @return Response just made
-     * @throws IOException If fails
-     */
     private Response make() throws IOException {
         if (this.transformed.isEmpty()) {
             this.transformed.add(
@@ -80,12 +75,6 @@ public final class RsPrettyJson implements Response {
         return this.transformed.get(0);
     }
 
-    /**
-     * Format body with proper indents.
-     * @param body Response body
-     * @return New properly formatted body
-     * @throws IOException If fails
-     */
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
         try (
