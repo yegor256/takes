@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 764.24211019
+  seconds: 690.199259876
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-21 04:19:13.025099551 Z
+  when: 2026-08-22 04:15:55.682599255 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 713
+  assignees_were_scanned: 820
   earliest_issue_was_found: 1
-  events_were_scanned: 18307569454
+  events_were_scanned: 18428302683
   issues_were_scanned: 1292
-  labels_were_scanned: 751
+  labels_were_scanned: 924
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 1561
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -79360,18 +79360,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-17 04:21:08.794523912 Z
-- _id: 20892
-  _job: 87394
-  _time: 2026-08-17 04:21:34.967472359 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (173.2) is staying still.
-    The average number of commits per week (8.4) is staying still.
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-08-17 04:21:34.988444709 Z
 - _id: 20893
   _job: 32097732755
   _time: 2026-08-18 04:04:45.443018589 Z
@@ -79646,3 +79634,194 @@
   since: *165
   what: quality-of-service
   when: 2026-08-21 04:18:56.397628069 Z
+- _id: 20912
+  _job: 87965
+  _time: 2026-08-21 04:19:41.155630311 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (179.6) is increasing (R=0.20).
+    The average number of commits per week (8.4) is increasing (R=0.11).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-08-21 04:19:41.177280553 Z
+- _id: 20913
+  _job: 32550659295
+  _time: 2026-08-22 04:04:57.577640604 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: patch-1
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1406 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 21
+  issue: 1406
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-08-21 08:37:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 20914
+  _job: 32550659295
+  _time: 2026-08-22 04:06:31.163522429 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#871.
+  issue: 871
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 20915
+  _job: 32550659295
+  _time: 2026-08-22 04:06:34.034844366 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#898.
+  issue: 898
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 20916
+  _job: 32550659295
+  _time: 2026-08-22 04:06:34.540486233 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#899.
+  issue: 899
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 20917
+  _job: 32550659295
+  _time: 2026-08-22 04:06:35.341067095 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#900.
+  issue: 900
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 20918
+  _job: 32550659295
+  _time: 2026-08-22 04:06:35.747640884 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#901.
+  issue: 901
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 20919
+  _job: 32550659295
+  _time: 2026-08-22 04:06:36.737590958 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#905.
+  issue: 905
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 20920
+  _job: 32550659295
+  _time: 2026-08-22 04:06:38.004382264 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#912.
+  issue: 912
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20921
+  _job: 32550659295
+  _time: 2026-08-22 04:06:38.391226180 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#914.
+  issue: 914
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 20922
+  _job: 32550659295
+  _time: 2026-08-22 04:06:38.790510082 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#915.
+  issue: 915
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 20923
+  _job: 32550659295
+  _time: 2026-08-22 04:06:39.183659650 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#916.
+  issue: 916
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 20924
+  _job: 32550659295
+  _time: 2026-08-22 04:06:40.857967757 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#920.
+  issue: 920
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:21:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 20925
+  _job: 32550659295
+  _time: 2026-08-22 04:06:41.675608917 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#923.
+  issue: 923
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 20926
+  _job: 32550659295
+  _time: 2026-08-22 04:06:42.054877135 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#924.
+  issue: 924
+  label: enhancement
+  repository: 28924109
+  what: label-was-attached
+  when: 2026-08-16 13:22:06.000000000 Z
+  where: github
+  who: 526301
