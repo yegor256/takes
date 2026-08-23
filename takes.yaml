@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 690.199259876
+  seconds: 710.548029914
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-22 04:15:55.682599255 Z
+  when: 2026-08-23 04:18:27.667240875 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76007,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 820
+  assignees_were_scanned: 924
   earliest_issue_was_found: 1
-  events_were_scanned: 18428302683
+  events_were_scanned: 18470141649
   issues_were_scanned: 1292
-  labels_were_scanned: 924
+  labels_were_scanned: 1307
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 163
   what: iterate
   where: github
 - _id: 20665
@@ -79661,6 +79662,7 @@
   failed_builds: 0
   files: 1
   hoc: 21
+  is_human: 1
   issue: 1406
   repository: 28924109
   succeeded_builds: 0
@@ -79674,6 +79676,7 @@
   _time: 2026-08-22 04:06:31.163522429 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#871.
+  is_human: 1
   issue: 871
   label: enhancement
   repository: 28924109
@@ -79686,6 +79689,7 @@
   _time: 2026-08-22 04:06:34.034844366 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#898.
+  is_human: 1
   issue: 898
   label: enhancement
   repository: 28924109
@@ -79698,6 +79702,7 @@
   _time: 2026-08-22 04:06:34.540486233 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#899.
+  is_human: 1
   issue: 899
   label: enhancement
   repository: 28924109
@@ -79710,6 +79715,7 @@
   _time: 2026-08-22 04:06:35.341067095 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#900.
+  is_human: 1
   issue: 900
   label: enhancement
   repository: 28924109
@@ -79722,6 +79728,7 @@
   _time: 2026-08-22 04:06:35.747640884 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#901.
+  is_human: 1
   issue: 901
   label: enhancement
   repository: 28924109
@@ -79734,6 +79741,7 @@
   _time: 2026-08-22 04:06:36.737590958 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#905.
+  is_human: 1
   issue: 905
   label: enhancement
   repository: 28924109
@@ -79746,6 +79754,7 @@
   _time: 2026-08-22 04:06:38.004382264 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#912.
+  is_human: 1
   issue: 912
   label: enhancement
   repository: 28924109
@@ -79758,6 +79767,7 @@
   _time: 2026-08-22 04:06:38.391226180 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#914.
+  is_human: 1
   issue: 914
   label: enhancement
   repository: 28924109
@@ -79770,6 +79780,7 @@
   _time: 2026-08-22 04:06:38.790510082 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#915.
+  is_human: 1
   issue: 915
   label: enhancement
   repository: 28924109
@@ -79782,6 +79793,7 @@
   _time: 2026-08-22 04:06:39.183659650 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#916.
+  is_human: 1
   issue: 916
   label: enhancement
   repository: 28924109
@@ -79794,6 +79806,7 @@
   _time: 2026-08-22 04:06:40.857967757 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#920.
+  is_human: 1
   issue: 920
   label: enhancement
   repository: 28924109
@@ -79806,6 +79819,7 @@
   _time: 2026-08-22 04:06:41.675608917 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#923.
+  is_human: 1
   issue: 923
   label: enhancement
   repository: 28924109
@@ -79818,6 +79832,7 @@
   _time: 2026-08-22 04:06:42.054877135 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue yegor256/takes#924.
+  is_human: 1
   issue: 924
   label: enhancement
   repository: 28924109
@@ -79825,3 +79840,187 @@
   when: 2026-08-16 13:22:06.000000000 Z
   where: github
   who: 526301
+- _id: 20927
+  _job: 32616992282
+  _time: 2026-08-23 04:07:18.870076270 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#871 was assigned to @yegor256 by @yegor256.
+  issue: 871
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 20928
+  _job: 32616992282
+  _time: 2026-08-23 04:07:21.091646454 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#884 was assigned to @yegor256 by @yegor256.
+  issue: 884
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:22:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 20929
+  _job: 32616992282
+  _time: 2026-08-23 04:07:23.121528719 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#898 was assigned to @yegor256 by @yegor256.
+  issue: 898
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 20930
+  _job: 32616992282
+  _time: 2026-08-23 04:07:23.491208931 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#899 was assigned to @yegor256 by @yegor256.
+  issue: 899
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 20931
+  _job: 32616992282
+  _time: 2026-08-23 04:07:23.883890326 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#900 was assigned to @yegor256 by @yegor256.
+  issue: 900
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 20932
+  _job: 32616992282
+  _time: 2026-08-23 04:07:24.263304339 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#901 was assigned to @yegor256 by @yegor256.
+  issue: 901
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 20933
+  _job: 32616992282
+  _time: 2026-08-23 04:07:25.211880273 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#905 was assigned to @yegor256 by @yegor256.
+  issue: 905
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 20934
+  _job: 32616992282
+  _time: 2026-08-23 04:07:26.555748839 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#912 was assigned to @yegor256 by @yegor256.
+  issue: 912
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20935
+  _job: 32616992282
+  _time: 2026-08-23 04:07:26.870086081 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#914 was assigned to @yegor256 by @yegor256.
+  issue: 914
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 20936
+  _job: 32616992282
+  _time: 2026-08-23 04:07:27.360112574 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#915 was assigned to @yegor256 by @yegor256.
+  issue: 915
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 20937
+  _job: 32616992282
+  _time: 2026-08-23 04:07:27.699065258 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#916 was assigned to @yegor256 by @yegor256.
+  issue: 916
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 20938
+  _job: 32616992282
+  _time: 2026-08-23 04:07:29.089039177 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#920 was assigned to @yegor256 by @yegor256.
+  issue: 920
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:21:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 20939
+  _job: 32616992282
+  _time: 2026-08-23 04:07:29.701054978 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#923 was assigned to @yegor256 by @yegor256.
+  issue: 923
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:22:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 20940
+  _job: 32616992282
+  _time: 2026-08-23 04:07:30.048929268 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#924 was assigned to @yegor256 by @yegor256.
+  issue: 924
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:22:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 20941
+  _job: 32616992282
+  _time: 2026-08-23 04:18:13.055440298 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 4
+  total_commits: 3906
+  total_contributors: 89
+  total_files: 594
+  total_forks: 215
+  total_issues: 755
+  total_pulls: 990
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-08-23 04:18:13.066277774 Z
