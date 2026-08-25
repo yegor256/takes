@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 702.364711668
+  seconds: 755.496207519
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-24 04:20:34.045936925 Z
+  when: 2026-08-25 04:18:39.941681334 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1050
+  assignees_were_scanned: 1301
   earliest_issue_was_found: 1
-  events_were_scanned: 18573303961
+  events_were_scanned: 13797362259
   issues_were_scanned: 1292
-  labels_were_scanned: 0
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 277
+  types_were_scanned: 387
   what: iterate
   where: github
 - _id: 20665
@@ -79622,18 +79622,6 @@
   since: *165
   what: quality-of-service
   when: 2026-08-21 04:18:56.397628069 Z
-- _id: 20912
-  _job: 87965
-  _time: 2026-08-21 04:19:41.155630311 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (179.6) is increasing (R=0.20).
-    The average number of commits per week (8.4) is increasing (R=0.11).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-08-21 04:19:41.177280553 Z
 - _id: 20913
   _job: 32550659295
   _time: 2026-08-22 04:04:57.577640604 Z
@@ -80043,6 +80031,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#929 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 929
   repository: 28924109
   what: issue-was-assigned
@@ -80055,6 +80044,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#944 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 944
   repository: 28924109
   what: issue-was-assigned
@@ -80067,6 +80057,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#946 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 946
   repository: 28924109
   what: issue-was-assigned
@@ -80079,6 +80070,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#955 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 955
   repository: 28924109
   what: issue-was-assigned
@@ -80091,6 +80083,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#965 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 965
   repository: 28924109
   what: issue-was-assigned
@@ -80103,6 +80096,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#983 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 983
   repository: 28924109
   what: issue-was-assigned
@@ -80115,6 +80109,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#993 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 993
   repository: 28924109
   what: issue-was-assigned
@@ -80127,6 +80122,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1000 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1000
   repository: 28924109
   what: issue-was-assigned
@@ -80139,6 +80135,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1004 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1004
   repository: 28924109
   what: issue-was-assigned
@@ -80151,6 +80148,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1007 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1007
   repository: 28924109
   what: issue-was-assigned
@@ -80163,6 +80161,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1021 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1021
   repository: 28924109
   what: issue-was-assigned
@@ -80175,6 +80174,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1029 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1029
   repository: 28924109
   what: issue-was-assigned
@@ -80187,6 +80187,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1035 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1035
   repository: 28924109
   what: issue-was-assigned
@@ -80199,6 +80200,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1041 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1041
   repository: 28924109
   what: issue-was-assigned
@@ -80221,3 +80223,111 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-24 04:20:09.519544564 Z
+- _id: 20958
+  _job: 88477
+  _time: 2026-08-24 04:21:12.673284032 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (179.6) is increasing (R=0.20).
+    The average number of commits per week (8.4) is increasing (R=0.11).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
+  what: assessment
+  when: 2026-08-24 04:21:12.690985658 Z
+- _id: 20959
+  _job: 32807566451
+  _time: 2026-08-25 04:06:56.307017863 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1051 was assigned to @yegor256 by @yegor256.
+  issue: 1051
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 20960
+  _job: 32807566451
+  _time: 2026-08-25 04:06:57.457431918 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1057 was assigned to @yegor256 by @yegor256.
+  issue: 1057
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 20961
+  _job: 32807566451
+  _time: 2026-08-25 04:07:03.475995084 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1100 was assigned to @yegor256 by @yegor256.
+  issue: 1100
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 20962
+  _job: 32807566451
+  _time: 2026-08-25 04:07:06.706967279 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1116 was assigned to @yegor256 by @yegor256.
+  issue: 1116
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 20963
+  _job: 32807566451
+  _time: 2026-08-25 04:07:07.944880698 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1121 was assigned to @yegor256 by @yegor256.
+  issue: 1121
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:22:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 20964
+  _job: 32807566451
+  _time: 2026-08-25 04:07:15.711238510 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1207 was assigned to @yegor256 by @yegor256.
+  issue: 1207
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 20965
+  _job: 32807566451
+  _time: 2026-08-25 04:07:17.778252408 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1227 was assigned to @yegor256 by @yegor256.
+  issue: 1227
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 20966
+  _job: 32807566451
+  _time: 2026-08-25 04:07:19.222206867 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1299 was assigned to @yegor256 by @yegor256.
+  issue: 1299
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:23.000000000 Z
+  where: github
+  who: 526301

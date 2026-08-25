@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1415976">
+<fb version="0.19.6" size="1418021">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">702.364711668</seconds>
+    <seconds t="F">755.496207519</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-08-24T04:20:34Z</when>
+    <when t="T">2026-08-25T04:18:39Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84739,17 +84739,17 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">1050</assignees_were_scanned>
+    <assignees_were_scanned t="I">1301</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">18573303961</events_were_scanned>
+    <events_were_scanned t="I">13797362259</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <labels_were_scanned t="I">388</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1687</min_issue_was_found>
     <min_pull_was_found t="I">777</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">277</types_were_scanned>
+    <types_were_scanned t="I">387</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -88767,19 +88767,6 @@
     <when t="T">2026-08-21T04:18:56Z</when>
   </f>
   <f>
-    <_id t="I">20912</_id>
-    <_job t="I">87965</_job>
-    <_time t="T">2026-08-21T04:19:41Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (179.6) is increasing (R=0.20).
-The average number of commits per week (8.4) is increasing (R=0.11).
-The average number of releases per month (0.2) is staying still.
-The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-08-21T04:19:41Z</when>
-  </f>
-  <f>
     <_id t="I">20913</_id>
     <_job t="I">32550659295</_job>
     <_time t="T">2026-08-22T04:04:57Z</_time>
@@ -89248,6 +89235,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#929 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">929</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89262,6 +89250,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#944 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">944</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89276,6 +89265,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#946 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">946</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89290,6 +89280,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#955 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">955</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89304,6 +89295,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#965 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">965</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89318,6 +89310,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#983 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">983</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89332,6 +89325,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#993 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">993</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89346,6 +89340,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1000 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1000</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89360,6 +89355,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1004 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1004</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89374,6 +89370,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1007 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1007</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89388,6 +89385,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1021 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1021</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89402,6 +89400,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1029 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1029</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89416,6 +89415,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1035 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1035</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89430,6 +89430,7 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <_version t="S">0.19.16/0.61.1/0.17.21</_version>
     <assigner t="I">526301</assigner>
     <details t="S">yegor256/takes#1041 was assigned to @yegor256 by @yegor256.</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1041</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-assigned</what>
@@ -89454,5 +89455,130 @@ The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
     <total_stars t="I">878</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-08-24T04:20:09Z</when>
+  </f>
+  <f>
+    <_id t="I">20958</_id>
+    <_job t="I">88477</_job>
+    <_time t="T">2026-08-24T04:21:12Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (179.6) is increasing (R=0.20).
+The average number of commits per week (8.4) is increasing (R=0.11).
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (3.0 developers) is decreasing (R=0.15).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-08-24T04:21:12Z</when>
+  </f>
+  <f>
+    <_id t="I">20959</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:06:56Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1051 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1051</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20960</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:06:57Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1057 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1057</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20961</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:07:03Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1100 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1100</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:09Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20962</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:07:06Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1116 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1116</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20963</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:07:07Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1121 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1121</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:22:38Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20964</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:07:15Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1207 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1207</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20965</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:07:17Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1227 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1227</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">20966</_id>
+    <_job t="I">32807566451</_job>
+    <_time t="T">2026-08-25T04:07:19Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <assigner t="I">526301</assigner>
+    <details t="S">yegor256/takes#1299 was assigned to @yegor256 by @yegor256.</details>
+    <issue t="I">1299</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-assigned</what>
+    <when t="T">2026-08-16T13:20:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
   </f>
 </fb>
