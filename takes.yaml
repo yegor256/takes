@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 755.496207519
+  seconds: 702.064049553
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-25 04:18:39.941681334 Z
+  when: 2026-08-26 04:19:03.528895809 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1301
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 13797362259
+  events_were_scanned: 18830573118
   issues_were_scanned: 1292
-  labels_were_scanned: 388
+  labels_were_scanned: 609
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 491
   what: iterate
   where: github
 - _id: 20665
@@ -80241,6 +80241,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1051 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1051
   repository: 28924109
   what: issue-was-assigned
@@ -80253,6 +80254,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1057 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1057
   repository: 28924109
   what: issue-was-assigned
@@ -80265,6 +80267,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1100 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1100
   repository: 28924109
   what: issue-was-assigned
@@ -80277,6 +80280,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1116 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1116
   repository: 28924109
   what: issue-was-assigned
@@ -80289,6 +80293,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1121 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1121
   repository: 28924109
   what: issue-was-assigned
@@ -80301,6 +80306,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1207 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1207
   repository: 28924109
   what: issue-was-assigned
@@ -80313,6 +80319,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1227 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1227
   repository: 28924109
   what: issue-was-assigned
@@ -80325,9 +80332,378 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1299 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1299
   repository: 28924109
   what: issue-was-assigned
   when: 2026-08-16 13:20:23.000000000 Z
   where: github
   who: 526301
+- _id: 20967
+  _job: 88668
+  _time: 2026-08-25 04:19:27.307322258 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  ac: 24
+  cost_of_qod: 3.4216095294263997
+  ev: 865
+  pv: 94585
+  qod: 253
+  qod_per_day: 80.87564797387066
+  qod_per_sec: 8.571585810884822e-06
+  start: *3
+  what: earned-value
+  when: 2026-08-25 04:19:27.307546965 Z
+- _id: 20968
+  _job: 32928945686
+  _time: 2026-08-26 04:07:25.264494640 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1747 has been reviewed by @yegor256 with
+    6 HoC and 3 comments.
+  event_id: 13813964901
+  event_type: PullRequestReviewEvent
+  files: 3
+  hoc: 6
+  is_human: 1
+  issue: 1747
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-08-25 08:38:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 20969
+  _job: 32928945686
+  _time: 2026-08-26 04:07:53.765790995 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: claude/assigned-issues-hx11pd
+  details: The missing pull yegor256/takes#1745 has been opened by @yegor256.
+  issue: 1745
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-18 08:58:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 20970
+  _job: 32928945686
+  _time: 2026-08-26 04:07:54.567299199 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: up
+  details: The missing pull yegor256/takes#1746 has been opened by @github-actions[bot].
+  issue: 1746
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-18 22:49:18.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20971
+  _job: 32928945686
+  _time: 2026-08-26 04:07:56.224697132 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/actions-setup-java-6.x
+  details: The pull yegor256/takes#1747 has been opened earlier by @renovate[bot].
+  issue: 1747
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-25 01:22:19.000000000 Z
+  where: github
+  who: 29139614
+- _id: 20972
+  _job: 32928945686
+  _time: 2026-08-26 04:08:00.194303171 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1746 has been "pull-was-closed".
+  failed_builds: 0
+  files: 0
+  hoc: 0
+  issue: 1746
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-08-19 08:58:24.000000000 Z
+  where: github
+  who: 41898282
+- _id: 20973
+  _job: 32928945686
+  _time: 2026-08-26 04:08:13.041520034 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/actions-setup-java-6.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1747 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 6
+  issue: 1747
+  repository: 28924109
+  review: 2026-08-25 08:38:41.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-25 08:53:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 20974
+  _job: 32928945686
+  _time: 2026-08-26 04:08:28.578759613 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1357 was assigned to @yegor256 by @yegor256.
+  issue: 1357
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:22:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 20975
+  _job: 32928945686
+  _time: 2026-08-26 04:08:33.353465283 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1441 was assigned to @yegor256 by @yegor256.
+  issue: 1441
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 20976
+  _job: 32928945686
+  _time: 2026-08-26 04:08:36.183944197 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1603 was assigned to @yegor256 by @yegor256.
+  issue: 1603
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 20977
+  _job: 32928945686
+  _time: 2026-08-26 04:08:37.282467365 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  assigner: 526301
+  details: yegor256/takes#1729 was assigned to @yegor256 by @yegor256.
+  issue: 1729
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-08-16 13:20:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20978
+  _job: 32928945686
+  _time: 2026-08-26 04:18:00.939119756 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 2
+  details: The pull request yegor256/takes#1730 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 157h16m and 0 comments.
+  hoc: 4
+  issue: 1730
+  repository: 28924109
+  review_comments: 0
+  seconds: 566173
+  what: code-was-reviewed
+  when: 2026-08-14 03:24:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 20979
+  _job: 32928945686
+  _time: 2026-08-26 04:18:03.056648245 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1732 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 130h8m and 0 comments.
+  hoc: 2
+  issue: 1732
+  repository: 28924109
+  review_comments: 0
+  seconds: 468495
+  what: code-was-reviewed
+  when: 2026-08-14 03:24:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 20980
+  _job: 32928945686
+  _time: 2026-08-26 04:18:05.156688627 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1735 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 13h9m and 0 comments.
+  hoc: 2
+  issue: 1735
+  repository: 28924109
+  review_comments: 0
+  seconds: 47340
+  what: code-was-reviewed
+  when: 2026-08-14 16:49:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 20981
+  _job: 32928945686
+  _time: 2026-08-26 04:18:06.776543423 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1736 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 15h32m and 0 comments.
+  hoc: 2
+  issue: 1736
+  repository: 28924109
+  review_comments: 0
+  seconds: 55963
+  what: code-was-reviewed
+  when: 2026-08-15 08:36:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 20982
+  _job: 32928945686
+  _time: 2026-08-26 04:18:10.222940471 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 7813046
+  comments: 5
+  details: The pull request yegor256/takes#1098 with 59 HoC created by @baudoliver7
+    was reviewed by @andreoss after 5h40m and 2 comments.
+  hoc: 59
+  issue: 1098
+  repository: 28924109
+  review_comments: 2
+  seconds: 20448
+  what: code-was-reviewed
+  when: 2021-04-01 16:41:14.000000000 Z
+  where: github
+  who: 49783909
+- _id: 20983
+  _job: 32928945686
+  _time: 2026-08-26 04:18:14.487732734 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1725 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 8h40m and 0 comments.
+  hoc: 4
+  issue: 1725
+  repository: 28924109
+  review_comments: 0
+  seconds: 31255
+  what: code-was-reviewed
+  when: 2026-07-31 03:32:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 20984
+  _job: 32928945686
+  _time: 2026-08-26 04:18:15.946054458 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1738 with 71 HoC created by @yegor256 was
+    reviewed by @copilot after 0h56m and 0 comments.
+  hoc: 71
+  issue: 1738
+  repository: 28924109
+  review_comments: 0
+  seconds: 3377
+  what: code-was-reviewed
+  when: 2026-08-16 15:06:57.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20985
+  _job: 32928945686
+  _time: 2026-08-26 04:18:17.758067054 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1739 with 1493 HoC created by @yegor256
+    was reviewed by @copilot after 0h13m and 0 comments.
+  hoc: 1493
+  issue: 1739
+  repository: 28924109
+  review_comments: 0
+  seconds: 785
+  what: code-was-reviewed
+  when: 2026-08-16 15:54:49.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20986
+  _job: 32928945686
+  _time: 2026-08-26 04:18:21.420442109 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 526301
+  comments: 0
+  details: The pull request yegor256/takes#1740 with 91 HoC created by @yegor256 was
+    reviewed by @copilot after 1h5m and 0 comments.
+  hoc: 91
+  issue: 1740
+  repository: 28924109
+  review_comments: 0
+  seconds: 3902
+  what: code-was-reviewed
+  when: 2026-08-16 17:57:57.000000000 Z
+  where: github
+  who: 175728472
+- _id: 20987
+  _job: 32928945686
+  _time: 2026-08-26 04:18:23.310315652 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1741 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 8h42m and 0 comments.
+  hoc: 4
+  issue: 1741
+  repository: 28924109
+  review_comments: 0
+  seconds: 31366
+  what: code-was-reviewed
+  when: 2026-08-17 02:41:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 20988
+  _job: 32928945686
+  _time: 2026-08-26 04:18:25.311011645 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/takes#1747 with 6 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 7h16m and 0 comments.
+  hoc: 6
+  issue: 1747
+  repository: 28924109
+  review_comments: 0
+  seconds: 26182
+  what: code-was-reviewed
+  when: 2026-08-25 08:38:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 20989
+  _job: 32928945686
+  _time: 2026-08-26 04:18:54.665613890 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 4
+  total_commits: 3907
+  total_contributors: 89
+  total_files: 594
+  total_forks: 215
+  total_issues: 755
+  total_pulls: 991
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-08-26 04:18:54.676404309 Z
