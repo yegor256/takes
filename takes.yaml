@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 702.064049553
+  seconds: 653.846785154
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-26 04:19:03.528895809 Z
+  when: 2026-08-27 06:00:42.472477826 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76006,17 +76006,17 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 211
   earliest_issue_was_found: 1
-  events_were_scanned: 18830573118
+  events_were_scanned: 13937272072
   issues_were_scanned: 1292
-  labels_were_scanned: 609
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
   min_issue_was_found: 1687
   min_pull_was_found: 777
   repository: 28924109
-  types_were_scanned: 491
+  types_were_scanned: 609
   what: iterate
   where: github
 - _id: 20665
@@ -79578,7 +79578,7 @@
   total_releases_published: 0
   total_reviews_submitted: 9
   what: quantity-of-deliverables
-  when: 2026-08-20 04:05:04.781647729 Z
+  when: &166 2026-08-20 04:05:04.781647729 Z
 - _id: 20909
   _job: 32445677082
   _time: 2026-08-21 04:06:33.256564149 Z
@@ -80013,18 +80013,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-23 04:18:13.066277774 Z
-- _id: 20942
-  _job: 88332
-  _time: 2026-08-23 04:18:51.411435314 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (179.6) is increasing (R=0.20).
-    The average number of commits per week (8.4) is increasing (R=0.11).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is decreasing (R=0.15).
-  what: assessment
-  when: 2026-08-23 04:18:51.431591201 Z
 - _id: 20943
   _job: 32688856793
   _time: 2026-08-24 04:09:27.489468623 Z
@@ -80379,6 +80367,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: claude/assigned-issues-hx11pd
   details: The missing pull yegor256/takes#1745 has been opened by @yegor256.
+  is_human: 1
   issue: 1745
   repository: 28924109
   what: pull-was-opened
@@ -80391,6 +80380,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: up
   details: The missing pull yegor256/takes#1746 has been opened by @github-actions[bot].
+  is_human: 0
   issue: 1746
   repository: 28924109
   what: pull-was-opened
@@ -80403,6 +80393,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/actions-setup-java-6.x
   details: The pull yegor256/takes#1747 has been opened earlier by @renovate[bot].
+  is_human: 0
   issue: 1747
   repository: 28924109
   what: pull-was-opened
@@ -80424,6 +80415,7 @@
   failed_builds: 0
   files: 0
   hoc: 0
+  is_human: 0
   issue: 1746
   repository: 28924109
   succeeded_builds: 0
@@ -80447,9 +80439,11 @@
   failed_builds: 0
   files: 3
   hoc: 6
+  is_human: 0
   issue: 1747
   repository: 28924109
   review: 2026-08-25 08:38:41.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -80462,6 +80456,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1357 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1357
   repository: 28924109
   what: issue-was-assigned
@@ -80474,6 +80469,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1441 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1441
   repository: 28924109
   what: issue-was-assigned
@@ -80486,6 +80482,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1603 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1603
   repository: 28924109
   what: issue-was-assigned
@@ -80498,6 +80495,7 @@
   _version: 0.19.16/0.61.1/0.17.21
   assigner: 526301
   details: yegor256/takes#1729 was assigned to @yegor256 by @yegor256.
+  is_human: 1
   issue: 1729
   repository: 28924109
   what: issue-was-assigned
@@ -80513,6 +80511,7 @@
   details: The pull request yegor256/takes#1730 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 157h16m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1730
   repository: 28924109
   review_comments: 0
@@ -80530,6 +80529,7 @@
   details: The pull request yegor256/takes#1732 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 130h8m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1732
   repository: 28924109
   review_comments: 0
@@ -80547,6 +80547,7 @@
   details: The pull request yegor256/takes#1735 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 13h9m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1735
   repository: 28924109
   review_comments: 0
@@ -80564,6 +80565,7 @@
   details: The pull request yegor256/takes#1736 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 15h32m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1736
   repository: 28924109
   review_comments: 0
@@ -80581,6 +80583,7 @@
   details: The pull request yegor256/takes#1098 with 59 HoC created by @baudoliver7
     was reviewed by @andreoss after 5h40m and 2 comments.
   hoc: 59
+  is_human: 1
   issue: 1098
   repository: 28924109
   review_comments: 2
@@ -80598,6 +80601,7 @@
   details: The pull request yegor256/takes#1725 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 8h40m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1725
   repository: 28924109
   review_comments: 0
@@ -80615,6 +80619,7 @@
   details: The pull request yegor256/takes#1738 with 71 HoC created by @yegor256 was
     reviewed by @copilot after 0h56m and 0 comments.
   hoc: 71
+  is_human: 0
   issue: 1738
   repository: 28924109
   review_comments: 0
@@ -80632,6 +80637,7 @@
   details: The pull request yegor256/takes#1739 with 1493 HoC created by @yegor256
     was reviewed by @copilot after 0h13m and 0 comments.
   hoc: 1493
+  is_human: 0
   issue: 1739
   repository: 28924109
   review_comments: 0
@@ -80649,6 +80655,7 @@
   details: The pull request yegor256/takes#1740 with 91 HoC created by @yegor256 was
     reviewed by @copilot after 1h5m and 0 comments.
   hoc: 91
+  is_human: 0
   issue: 1740
   repository: 28924109
   review_comments: 0
@@ -80666,6 +80673,7 @@
   details: The pull request yegor256/takes#1741 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 8h42m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1741
   repository: 28924109
   review_comments: 0
@@ -80683,6 +80691,7 @@
   details: The pull request yegor256/takes#1747 with 6 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 7h16m and 0 comments.
   hoc: 6
+  is_human: 1
   issue: 1747
   repository: 28924109
   review_comments: 0
@@ -80707,3 +80716,45 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-08-26 04:18:54.676404309 Z
+- _id: 20990
+  _job: 88820
+  _time: 2026-08-26 04:19:25.689987101 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average number of builds per week (173.6) is increasing (R=0.28).
+    The average number of commits per week (8.2) is increasing (R=0.14).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is increasing (R=0.25).
+  what: assessment
+  when: 2026-08-26 04:19:25.715011814 Z
+- _id: 20991
+  _job: 33043695527
+  _time: 2026-08-27 05:49:53.956755022 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  since: *166
+  total_builds_ran: 83
+  total_commits_pushed: 2
+  total_hoc_committed: 7456
+  total_issues_created: 3
+  total_pulls_submitted: 1
+  total_releases_published: 0
+  total_reviews_submitted: 1
+  what: quantity-of-deliverables
+  when: 2026-08-27 05:49:53.946685274 Z
+- _id: 20992
+  _job: 33043695527
+  _time: 2026-08-27 06:00:33.847595079 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 4
+  total_commits: 3907
+  total_contributors: 89
+  total_files: 594
+  total_forks: 215
+  total_issues: 757
+  total_pulls: 991
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-08-27 06:00:33.859017621 Z
