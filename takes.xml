@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1426305">
+<fb version="0.19.6" size="1426307">
   <f>
     <added t="I">8</added>
     <cycles t="I">1</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">748.357483084</seconds>
+    <seconds t="F">699.405458357</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-08-28T06:36:01Z</when>
+    <when t="T">2026-08-29T04:05:52Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -84739,17 +84739,17 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">342</assignees_were_scanned>
+    <assignees_were_scanned t="I">445</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">19032557214</events_were_scanned>
+    <events_were_scanned t="I">14043763926</events_were_scanned>
     <issues_were_scanned t="I">1292</issues_were_scanned>
-    <labels_were_scanned t="I">991</labels_were_scanned>
+    <labels_were_scanned t="I">1443</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
     <min_issue_was_found t="I">1687</min_issue_was_found>
     <min_pull_was_found t="I">777</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">735</types_were_scanned>
+    <types_were_scanned t="I">826</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -89987,19 +89987,6 @@
     <when t="T">2026-08-26T04:18:54Z</when>
   </f>
   <f>
-    <_id t="I">20990</_id>
-    <_job t="I">88820</_job>
-    <_time t="T">2026-08-26T04:19:25Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (173.6) is increasing (R=0.28).
-The average number of commits per week (8.2) is increasing (R=0.14).
-The average number of releases per month (0.2) is staying still.
-The average monthly turnover (3.0 developers) is increasing (R=0.25).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-08-26T04:19:25Z</when>
-  </f>
-  <f>
     <_id t="I">20991</_id>
     <_job t="I">33043695527</_job>
     <_time t="T">2026-08-27T05:49:53Z</_time>
@@ -90072,5 +90059,18 @@ The average monthly turnover (3.0 developers) is increasing (R=0.25).</text>
     <since t="T">2026-08-21T04:18:56Z</since>
     <what t="S">quality-of-service</what>
     <when t="T">2026-08-28T06:35:52Z</when>
+  </f>
+  <f>
+    <_id t="I">20996</_id>
+    <_job t="I">88977</_job>
+    <_time t="T">2026-08-28T06:36:25Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (170.9) is increasing (R=0.24).
+The average number of commits per week (8.0) is increasing (R=0.10).
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (3.0 developers) is increasing (R=0.35).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-08-28T06:36:25Z</when>
   </f>
 </fb>
