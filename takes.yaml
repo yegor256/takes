@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 515.125427857
+  seconds: 474.427509623
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-01 04:02:45.988830338 Z
+  when: 2026-09-02 04:02:16.352658594 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -57498,29 +57498,6 @@
   total_reviews_submitted: 4
   what: quantity-of-deliverables
   when: &96 2025-11-27 16:57:25.954375772 Z
-- _id: 19244
-  _job: 19753658799
-  _time: 2025-11-28 04:01:24.605311621 Z
-  _version: 0.16.8/0.57.2/0.16.2
-  branch: renovate/zerocracy-judges-action-0.x
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1505 has been "pull-was-closed".
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  is_human: 0
-  issue: 1505
-  repository: 28924109
-  succeeded_builds: 15
-  what: pull-was-closed
-  when: 2025-11-25 06:39:09.000000000 Z
-  where: github
-  who: 29139614
 - _id: 19245
   _job: 19753658799
   _time: 2025-11-28 04:01:32.983311356 Z
@@ -76006,18 +75983,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 953
-  closures_were_checked: 1346
+  assignees_were_scanned: 1687
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14178845318
+  events_were_scanned: 14252969587
   issues_were_scanned: 1292
-  labels_were_scanned: 754
+  labels_were_scanned: 1443
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1719
-  min_pull_was_found: 785
+  min_issue_was_found: 1729
+  min_pull_was_found: 792
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 277
   what: iterate
   where: github
 - _id: 20665
@@ -77820,30 +77797,6 @@
   total_reviews_submitted: 3
   what: quantity-of-deliverables
   when: &164 2026-08-12 04:27:52.185659390 Z
-- _id: 20790
-  _job: 31563244570
-  _time: 2026-08-12 04:28:54.203912982 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: renovate/com.qulice-qulice-maven-plugin-0.x
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/takes#1730 has been "pull-was-closed".
-  failed_builds: 3
-  files: 2
-  hoc: 4
-  is_human: 0
-  issue: 1730
-  repository: 28924109
-  succeeded_builds: 9
-  suggestions: 0
-  what: pull-was-closed
-  when: 2026-08-11 06:18:19.000000000 Z
-  where: github
-  who: 29139614
 - _id: 20791
   _job: 31563244570
   _time: 2026-08-12 04:31:40.858489329 Z
@@ -80758,18 +80711,6 @@
   since: *167
   what: quality-of-service
   when: 2026-08-28 06:35:52.061932596 Z
-- _id: 20996
-  _job: 88977
-  _time: 2026-08-28 06:36:25.640646901 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average number of builds per week (170.9) is increasing (R=0.24).
-    The average number of commits per week (8.0) is increasing (R=0.10).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is increasing (R=0.35).
-  what: assessment
-  when: 2026-08-28 06:36:25.654312604 Z
 - _id: 20997
   _job: 33291275802
   _time: 2026-08-30 04:08:23.291542529 Z
@@ -80849,3 +80790,236 @@
   when: 2026-09-01 04:00:49.920544840 Z
   where: github
   who: 63979569
+- _id: 21003
+  _job: 89777
+  _time: 2026-09-01 04:03:23.206666235 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  analyzers: 18
+  text: |-
+    The average number of builds per week (170.8) is increasing (R=0.25).
+    The average number of commits per week (7.9) is increasing (R=0.13).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (4.0 developers) is increasing (R=0.57).
+  what: assessment
+  when: 2026-09-01 04:03:23.225607220 Z
+- _id: 21004
+  _job: 33588716323
+  _time: 2026-09-02 03:54:26.319247481 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  comments: 1
+  commits: 1
+  details: The pull request yegor256/takes#1752 has been reviewed by @yegor256 with
+    2 HoC and 1 comments.
+  event_id: 14252060859
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1752
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-09-02 03:02:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 21005
+  _job: 33588716323
+  _time: 2026-09-02 03:54:27.538807182 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  comments: 1
+  commits: 1
+  details: The pull request yegor256/takes#1753 has been reviewed by @yegor256 with
+    2 HoC and 1 comments.
+  event_id: 14252058683
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1753
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-09-02 03:02:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 21006
+  _job: 33588716323
+  _time: 2026-09-02 03:54:28.283259923 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  comments: 2
+  commits: 1
+  details: The pull request yegor256/takes#1754 has been reviewed by @yegor256 with
+    4 HoC and 2 comments.
+  event_id: 14252057033
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 1754
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-09-02 03:02:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 21007
+  _job: 33588716323
+  _time: 2026-09-02 03:54:28.902331239 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/org.projectlombok-lombok-1.x
+  details: The pull request yegor256/takes#1754 has been opened by @renovate[bot].
+  event_id: 14250679922
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1754
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-02 02:26:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21008
+  _job: 33588716323
+  _time: 2026-09-02 03:54:29.307386638 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/takes#1753 has been opened by @renovate[bot].
+  event_id: 14232486075
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1753
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-01 20:30:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21009
+  _job: 33588716323
+  _time: 2026-09-02 03:54:29.600292363 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The pull request yegor256/takes#1752 has been opened by @renovate[bot].
+  event_id: 14205668233
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1752
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-01 13:14:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21010
+  _job: 33588716323
+  _time: 2026-09-02 03:57:00.521083505 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1750 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1750
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-28 06:37:44.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21011
+  _job: 33588716323
+  _time: 2026-09-02 03:57:01.592905108 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1751 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1751
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-08-31 17:47:32.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21012
+  _job: 33588716323
+  _time: 2026-09-02 03:58:59.941326831 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1505 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1505
+  repository: 28924109
+  succeeded_builds: 15
+  suggestions: 0
+  what: pull-was-merged
+  when: 2025-12-01 17:25:35.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21013
+  _job: 33588716323
+  _time: 2026-09-02 03:59:16.476754913 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1750 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1750
+  repository: 28924109
+  review: 2026-08-28 20:17:08.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-28 20:34:25.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21014
+  _job: 33588716323
+  _time: 2026-09-02 03:59:37.931421658 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1751 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1751
+  repository: 28924109
+  review: 2026-09-01 02:39:08.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-01 02:53:32.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21015
+  _job: 33588716323
+  _time: 2026-09-02 04:00:42.791219383 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  total_active_contributors: 4
+  total_commits: 3909
+  total_contributors: 89
+  total_files: 594
+  total_forks: 215
+  total_issues: 757
+  total_pulls: 996
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-09-02 04:00:42.736944292 Z
