@@ -13,14 +13,14 @@ import lombok.EqualsAndHashCode;
  *
  * <p>This front provides HTTPS support by using SSL/TLS server sockets.
  * It wraps the basic front functionality with SSL encryption, allowing
- * secure communication between clients and the server.
+ * secure communication between clients and the server.</p>
  *
  * <p>Make sure that a valid keystore and certificates are available
  * to the underlying JSSE infrastructure. You can configure these through
  * system properties such as {@code javax.net.ssl.keyStore} and
- * {@code javax.net.ssl.keyStorePassword}.
+ * {@code javax.net.ssl.keyStorePassword}.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.25
  */
@@ -34,6 +34,7 @@ public final class FtSecure implements Front {
 
     /**
      * Ctor.
+     *
      * @param that Back
      * @param skt Server socket
      */

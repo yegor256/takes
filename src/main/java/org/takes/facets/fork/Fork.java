@@ -11,7 +11,7 @@ import org.takes.misc.Opt;
 /**
  * Fork.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 0.4
  */
@@ -20,6 +20,7 @@ public interface Fork {
 
     /**
      * Process this request or ignore it.
+     *
      * @param req Request
      * @return Non-empty list of responses if it was processed
      * @throws Exception If fails

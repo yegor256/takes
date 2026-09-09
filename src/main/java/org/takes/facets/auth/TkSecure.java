@@ -19,7 +19,7 @@ import org.takes.facets.forward.RsForward;
  * This decorator ensures that only authenticated users can access
  * the wrapped take, redirecting anonymous users to a specified location.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -39,6 +39,7 @@ public final class TkSecure implements Take {
 
     /**
      * Ctor.
+     *
      * @param take Original
      * @since 0.10
      */
@@ -48,6 +49,7 @@ public final class TkSecure implements Take {
 
     /**
      * Ctor.
+     *
      * @param take Original
      * @param location Where to forward
      */

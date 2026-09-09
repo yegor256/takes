@@ -8,6 +8,7 @@ import java.util.AbstractMap;
 
 /**
  * Pair of values.
+ *
  * @since 0.1
  */
 public final class RsVelocityPair
@@ -20,6 +21,7 @@ public final class RsVelocityPair
 
     /**
      * Ctor.
+     *
      * @param key Key
      * @param obj Pass
      */

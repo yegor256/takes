@@ -19,9 +19,9 @@ import org.takes.misc.Opt;
  * response with the specified media type and optional charset parameter.
  * It removes any existing Content-Type headers to avoid duplication.
  * The class also provides convenient inner classes for common content
- * types like HTML, JSON, XML, and plain text.
+ * types like HTML, JSON, XML, and plain text.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -35,15 +35,10 @@ public final class RsWithType extends RsWrap {
     private static final String HEADER = "Content-Type";
 
     /**
-     * The name of the parameter allowing to define the character set.
-     */
-    private static final String CHARSET = "charset";
-
-    /**
      * Constructs a {@code RsWithType} that will add the content type header to
      * the response using the specified type as media type.
      *
-     * <p>The resulting header is of type {@code Content-Type: media-type}.
+     * <p>The resulting header is of type {@code Content-Type: media-type}.</p>
      *
      * @param res Original response
      * @param type Content type
@@ -58,7 +53,7 @@ public final class RsWithType extends RsWrap {
      * charset as charset parameter value.
      *
      * <p>The resulting header
-     * is of type {@code Content-Type: media-type; charset=charset-value}.
+     * is of type {@code Content-Type: media-type; charset=charset-value}.</p>
      *
      * @param res Original response
      * @param type Content type
@@ -73,6 +68,7 @@ public final class RsWithType extends RsWrap {
      * Constructs a {@code RsWithType} that will add the content type header to
      * the response using the specified type as media type and the specified
      * charset as charset parameter value if present.
+     *
      * @param res Original response
      * @param type Content type
      * @param charset The character set to add in the content type header if
@@ -94,7 +90,7 @@ public final class RsWithType extends RsWrap {
                     new FormattedText(
                         "%s; %s=%s",
                         type,
-                        RsWithType.CHARSET,
+                        "charset",
                         charset.get().name()
                     )
                 ).asString()

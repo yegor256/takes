@@ -14,7 +14,7 @@ import org.takes.misc.Opt;
  * This implementation always authenticates with a predetermined identity,
  * useful for testing or scenarios requiring a fixed user context.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.9
  */
@@ -28,6 +28,7 @@ public final class PsFixed implements Pass {
 
     /**
      * Ctor.
+     *
      * @param identity Identity to return for all requests
      */
     public PsFixed(final Identity identity) {

@@ -12,6 +12,7 @@ import org.takes.misc.Opt;
 
 /**
  * Lazily-built typed response.
+ *
  * @since 2.0
  */
 final class LazyRs implements Response {
@@ -33,6 +34,7 @@ final class LazyRs implements Response {
 
     /**
      * Ctor.
+     *
      * @param origin Original response
      * @param ctype Content type
      * @param chr Optional charset

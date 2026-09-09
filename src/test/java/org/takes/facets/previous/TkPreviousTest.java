@@ -14,6 +14,7 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link TkPrevious}.
+ *
  * @since 0.2
  */
 final class TkPreviousTest {

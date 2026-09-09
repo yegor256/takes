@@ -31,9 +31,9 @@ import org.takes.misc.VerboseList;
  * from responses. It supports case-insensitive header name lookup and
  * handles multiple values for the same header name. The interface includes
  * both basic parsing functionality and enhanced smart decorator capabilities
- * for convenient header access.
+ * for convenient header access.</p>
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -41,6 +41,7 @@ public interface RsHeaders extends Response {
 
     /**
      * Get single header.
+     *
      * @param key Header name
      * @return List of values (can be empty)
      * @throws IOException If fails
@@ -49,6 +50,7 @@ public interface RsHeaders extends Response {
 
     /**
      * Get all header names.
+     *
      * @return All names
      * @throws IOException If fails
      */
@@ -60,9 +62,9 @@ public interface RsHeaders extends Response {
      * <p>This implementation parses HTTP response headers from the status
      * line onward, building a case-insensitive map of header names to values.
      * It validates header format and provides detailed error messages for
-     * malformed headers. Multiple values for the same header are supported.
+     * malformed headers. Multiple values for the same header are supported.</p>
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      *
      * @since 0.13.8
      */
@@ -71,6 +73,7 @@ public interface RsHeaders extends Response {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         public Base(final Response req) {
@@ -159,7 +162,7 @@ public interface RsHeaders extends Response {
     /**
      * Smart decorator, with extra features.
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      *
      * @since 0.16
      */
@@ -173,6 +176,7 @@ public interface RsHeaders extends Response {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         public Smart(final Response req) {
@@ -181,6 +185,7 @@ public interface RsHeaders extends Response {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         public Smart(final RsHeaders req) {
@@ -209,6 +214,7 @@ public interface RsHeaders extends Response {
 
         /**
          * Get single header or throw an HTTP exception.
+         *
          * @param name Name of header
          * @return Value of it
          * @throws IOException If fails
@@ -232,6 +238,7 @@ public interface RsHeaders extends Response {
         /**
          * If header is present, returns the first header value.
          * If not, returns a default value.
+         *
          * @param name Name of header key
          * @param def Default value
          * @return Header Value or default value

@@ -18,13 +18,13 @@ import org.takes.Request;
  * <p>This decorator examines the Content-Length header and wraps the request
  * body with a CapInputStream that enforces the specified byte limit. This
  * prevents reading beyond the declared content length and handles cases where
- * the underlying stream doesn't properly indicate end-of-stream.
+ * the underlying stream doesn't properly indicate end-of-stream.</p>
  *
  * <p>This is particularly useful when working with HTTP clients that keep
  * connections open and don't close the request stream, requiring applications
- * to respect the Content-Length header to determine when the request body ends.
+ * to respect the Content-Length header to determine when the request body ends.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see org.takes.rq.RqMultipart
  * @see org.takes.rq.RqPrint
@@ -40,6 +40,7 @@ public final class RqLengthAware extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     public RqLengthAware(final Request req) {

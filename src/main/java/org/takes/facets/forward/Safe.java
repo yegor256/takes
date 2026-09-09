@@ -14,6 +14,7 @@ import org.takes.rs.RsSimple;
 
 /**
  * A safe response wrapper that handles RsForward exceptions during response processing.
+ *
  * @since 0.1
  */
 @ToString(of = { "origin", "saved" })
@@ -31,6 +32,7 @@ final class Safe implements Response {
 
     /**
      * Constructor for safe response wrapper.
+     *
      * @param res The original response to wrap safely
      */
     Safe(final Response res) {

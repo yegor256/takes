@@ -12,6 +12,7 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkAnonymous}.
+ *
  * @since 0.9
  */
 final class FkAnonymousTest {

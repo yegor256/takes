@@ -10,9 +10,9 @@
  * and decorating HTTP responses in the Takes framework. It provides a
  * comprehensive set of response decorators following the decorator pattern
  * to add various functionalities such as content type handling, status
- * codes, headers, body content, formatting, and transformation.
+ * codes, headers, body content, formatting, and transformation.</p>
  *
- * <p>Key components include:
+ * <p>Key components include:</p>
  * <ul>
  * <li>Core classes: RsWrap (base decorator), ResponseOf (basic implementation)</li>
  * <li>Content decorators: RsWithBody, RsHtml, RsText, RsJson</li>

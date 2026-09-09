@@ -18,13 +18,14 @@ import org.cactoos.list.ListOf;
  * <p>This class provides a convenient way to create mock HTTP requests
  * with custom headers and body content for unit testing. It supports
  * various constructor overloads to create requests with different
- * HTTP methods, query strings, headers, and body content.
+ * HTTP methods, query strings, headers, and body content.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RqFake extends RqWrap {
 
     /**
@@ -36,6 +37,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param method HTTP method
      */
     public RqFake(final CharSequence method) {
@@ -44,6 +46,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param method HTTP method
      * @param query HTTP query
      */
@@ -53,6 +56,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param method HTTP method
      * @param query HTTP query
      * @param body HTTP body
@@ -67,6 +71,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param head Head
      * @param body Body
      */
@@ -79,6 +84,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param head Head
      * @param body Body
      */
@@ -91,6 +97,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param head Head
      * @param body Body
      */
@@ -103,6 +110,7 @@ public final class RqFake extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param head Head
      * @param body Body
      */

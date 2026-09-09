@@ -22,7 +22,7 @@ import org.takes.tk.TkText;
  * Fork by regular expression pattern.
  *
  * <p>Use this class in combination with {@link TkFork},
- * for example:
+ * for example:</p>
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex("/home", new TkHome()),
@@ -33,12 +33,12 @@ import org.takes.tk.TkText;
  * asked only once by {@link TkFork} whether the
  * request is good enough to be processed. If the request is suitable
  * for this particular fork, it will return the relevant
- * {@link org.takes.Take}.
+ * {@link org.takes.Take}.</p>
  *
  * <p>Also, keep in mind that the second argument of the constructor may
  * be of type {@link TkRegex} and accept an
  * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
- * convenient to reuse regular expression matcher, for example:
+ * convenient to reuse regular expression matcher, for example:</p>
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex(
@@ -55,7 +55,7 @@ import org.takes.tk.TkText;
  *   )
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see TkFork
  * @see TkRegex
@@ -86,6 +86,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param text Text
      */
@@ -95,6 +96,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param rsp Response
      * @since 0.16
@@ -105,6 +107,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param rsp Response
      * @since 0.16
@@ -115,6 +118,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -124,6 +128,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -133,6 +138,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -142,6 +148,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -151,6 +158,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      * @since 1.4
@@ -161,6 +169,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern (lazy)
      * @param that Take
      */
@@ -170,6 +179,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern (lazy)
      * @param that Take
      */
@@ -181,6 +191,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Allows disabling the standard way for handling trailing slashes.
+     *
      * @param enabled Enables/Disables the removal of a trailing slash
      * @return FkRegex
      */

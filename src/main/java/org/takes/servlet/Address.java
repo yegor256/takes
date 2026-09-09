@@ -11,6 +11,7 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * The URI of the request, parsed from its raw form.
+ *
  * @since 2.0
  */
 final class Address {
@@ -22,6 +23,7 @@ final class Address {
 
     /**
      * Ctor.
+     *
      * @param uri Raw URI
      */
     Address(final String uri) {
@@ -30,6 +32,7 @@ final class Address {
 
     /**
      * Query string of it.
+     *
      * @return The query, may be NULL
      */
     String query() {
@@ -38,6 +41,7 @@ final class Address {
 
     /**
      * Host of it.
+     *
      * @return The host, {@code localhost} if absent
      */
     String host() {
@@ -50,6 +54,7 @@ final class Address {
 
     /**
      * Port of it.
+     *
      * @return The port, {@code 80} if absent
      */
     int port() {

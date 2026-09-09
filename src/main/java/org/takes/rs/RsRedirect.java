@@ -14,9 +14,9 @@ import lombok.ToString;
  * <p>This response implementation creates HTTP redirects by setting the
  * Location header and an appropriate redirect status code. It defaults
  * to 303 See Other status but allows customization of the status code.
- * Common use cases include post-redirect-get patterns and URL forwarding.
+ * Common use cases include post-redirect-get patterns and URL forwarding.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.6
  */
@@ -33,6 +33,7 @@ public final class RsRedirect extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param location Where to redirect
      */
     public RsRedirect(final CharSequence location) {
@@ -41,6 +42,7 @@ public final class RsRedirect extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param location Location
      * @param code HTTP redirect status code
      */

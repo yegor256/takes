@@ -11,6 +11,7 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * Thread factory.
+ *
  * @since 0.1
  */
 final class Threads implements ThreadFactory {

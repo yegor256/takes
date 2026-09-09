@@ -36,9 +36,10 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link RqMtSmart}.
+ *
  * @since 0.33
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class RqMtSmartTest {
 
     /**
@@ -59,15 +60,10 @@ final class RqMtSmartTest {
         String.valueOf((char) 13) + (char) 10;
 
     /**
-     * Content disposition.
-     */
-    private static final String DISPOSITION = "Content-Disposition";
-
-    /**
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", RqMtSmartTest.DISPOSITION, "form-data; name=\"%s\""
+        "%s: %s", "Content-Disposition", "form-data; name=\"%s\""
     );
 
     @Test

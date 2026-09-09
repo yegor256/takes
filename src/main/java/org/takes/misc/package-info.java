@@ -10,9 +10,9 @@
  * functionality of the Takes framework but don't fit into specific
  * categories like requests or responses. These utilities provide common
  * functionality for URL handling, error reporting, date formatting,
- * and optional value management.
+ * and optional value management.</p>
  *
- * <p>Key components include:
+ * <p>Key components include:</p>
  * <ul>
  * <li>URL utilities: Href for URL construction and parameter manipulation</li>
  * <li>Verbose utilities: VerboseIterable, VerboseList,

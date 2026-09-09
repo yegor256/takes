@@ -4,16 +4,20 @@
  */
 package org.takes.facets.auth;
 
+import java.util.AbstractMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
  * Map view backed by a varargs entry array.
+ *
  * @since 2.0
  */
 @SuppressWarnings("PMD.ArrayIsStoredDirectly")
 final class PairsMap
-    extends java.util.AbstractMap<Pattern, Pass> {
+    extends AbstractMap<Pattern, Pass> {
 
     /**
      * Source entries.
@@ -22,6 +26,7 @@ final class PairsMap
 
     /**
      * Ctor.
+     *
      * @param ents Entries
      */
     @SafeVarargs
@@ -30,9 +35,9 @@ final class PairsMap
     }
 
     @Override
-    public java.util.Set<Map.Entry<Pattern, Pass>> entrySet() {
-        final java.util.Set<Map.Entry<Pattern, Pass>> set =
-            new java.util.LinkedHashSet<>(this.entries.length);
+    public Set<Map.Entry<Pattern, Pass>> entrySet() {
+        final Set<Map.Entry<Pattern, Pass>> set =
+            new LinkedHashSet<>(this.entries.length);
         for (final Map.Entry<Pattern, Pass> ent : this.entries) {
             set.add(ent);
         }

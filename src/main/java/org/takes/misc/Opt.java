@@ -14,9 +14,9 @@ import lombok.EqualsAndHashCode;
  * similar to Java's Optional but designed specifically for the Takes framework.
  * It offers two implementations: Single for containing a value, and Empty
  * for representing the absence of a value. This approach helps prevent
- * NullPointerException and makes null-checking explicit.
+ * NullPointerException and makes null-checking explicit.</p>
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @param <T> Type of optional item
  * @since 0.14
@@ -25,12 +25,14 @@ public interface Opt<T> {
 
     /**
      * Returns the contained instance.
+     *
      * @return Instance
      */
     T get();
 
     /**
      * Returns true if contains instance.
+     *
      * @return True if present
      */
     boolean has();
@@ -40,9 +42,9 @@ public interface Opt<T> {
      *
      * <p>This implementation always returns true for has() and provides
      * the contained value via get(). It represents the presence of a value
-     * in the optional container and ensures the value is never null.
+     * in the optional container and ensures the value is never null.</p>
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      *
      * @param <T> Type of contained item
      * @since 0.14
@@ -57,6 +59,7 @@ public interface Opt<T> {
 
         /**
          * Ctor.
+         *
          * @param orgn Origin
          */
         public Single(final T orgn) {
@@ -80,9 +83,9 @@ public interface Opt<T> {
      * <p>This implementation always returns false for has() and throws
      * UnsupportedOperationException when get() is called. It represents
      * the absence of a value in the optional container and should be
-     * checked with has() before attempting to retrieve a value.
+     * checked with has() before attempting to retrieve a value.</p>
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      *
      * @param <T> Type of absent item
      * @since 0.14

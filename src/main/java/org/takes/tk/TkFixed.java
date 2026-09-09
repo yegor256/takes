@@ -17,13 +17,13 @@ import org.takes.rs.RsText;
  * <p>This {@link Take} implementation always returns an identical response
  * regardless of the incoming request content, parameters, or headers. It's
  * designed for scenarios where a constant response is needed, such as
- * static endpoints, stub implementations, or testing scenarios.
+ * static endpoints, stub implementations, or testing scenarios.</p>
  *
  * <p>The take supports multiple response formats including simple text
  * strings, pre-constructed Response objects, and lazy response suppliers
- * for dynamic response generation that is evaluated once and cached.
+ * for dynamic response generation that is evaluated once and cached.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Fixed text response
  * new TkFixed("Hello, World!");
@@ -45,7 +45,7 @@ import org.takes.rs.RsText;
  * );
  * }</pre>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>Static endpoints returning constant data</li>
  * <li>API stub implementations during development</li>
@@ -59,14 +59,14 @@ import org.takes.rs.RsText;
  * <p>The take completely ignores incoming request data, making it very
  * efficient for scenarios where request processing is unnecessary. This
  * also makes it suitable for high-performance use cases where response
- * generation overhead should be minimized.
+ * generation overhead should be minimized.</p>
  *
  * <p>For the Scalar constructor variant, the response is generated once
  * when the first request is processed, then cached and reused for all
  * subsequent requests, providing a balance between dynamic generation
- * and performance.
+ * and performance.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -76,6 +76,7 @@ public final class TkFixed extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param text Fixed text response to return for all requests
      * @since 0.23
      */
@@ -85,6 +86,7 @@ public final class TkFixed extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param res Fixed response object to return for all requests
      */
     public TkFixed(final Response res) {
@@ -93,6 +95,7 @@ public final class TkFixed extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param res Scalar supplier of response for lazy generation
      * @since 1.4
      */

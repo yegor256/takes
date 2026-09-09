@@ -16,13 +16,13 @@ import org.takes.rq.RqGreedy;
  * the request body is fully consumed and materialized before processing.
  * It uses {@link RqGreedy} to read the entire request body into memory,
  * making it available for single-pass processing while preventing
- * multiple reads of the underlying input stream.
+ * multiple reads of the underlying input stream.</p>
  *
  * <p>This decorator is useful for takes that process streaming request
  * bodies in a single pass, ensuring that the entire content is available
- * immediately and preventing accidental re-reads of already consumed streams.
+ * immediately and preventing accidental re-reads of already consumed streams.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Ensure request is read only once for processing
  * new TkOnce(
@@ -40,7 +40,7 @@ import org.takes.rq.RqGreedy;
  * new TkOnce(new TkJsonProcessor());
  * }</pre>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>Stream processing that must read content sequentially</li>
  * <li>Large file uploads with single-pass validation</li>
@@ -52,9 +52,9 @@ import org.takes.rq.RqGreedy;
  *
  * <p>The decorator ensures that the request body is fully available
  * before the wrapped take processes it, eliminating issues with
- * partially read streams or connection timeouts during processing.
+ * partially read streams or connection timeouts during processing.</p>
  *
- * <p>Performance considerations:
+ * <p>Performance considerations:</p>
  * <ul>
  * <li>Entire request body is loaded into memory</li>
  * <li>Not suitable for very large uploads without memory limits</li>
@@ -62,7 +62,7 @@ import org.takes.rq.RqGreedy;
  * <li>Eliminates network I/O during request processing</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.26
  */
@@ -72,6 +72,7 @@ public final class TkOnce extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Original take
      */
     public TkOnce(final Take take) {

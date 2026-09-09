@@ -30,9 +30,9 @@ import org.takes.misc.VerboseList;
  * <p>This interface provides methods to parse and retrieve HTTP headers
  * from requests. It supports case-insensitive header name lookup and
  * handles multiple values for the same header name. The interface includes
- * both basic parsing functionality and enhanced smart decorator capabilities.
+ * both basic parsing functionality and enhanced smart decorator capabilities.</p>
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -40,6 +40,7 @@ public interface RqHeaders extends Request {
 
     /**
      * Get single header.
+     *
      * @param key Header name
      * @return List of values (can be empty)
      * @throws IOException If fails
@@ -48,6 +49,7 @@ public interface RqHeaders extends Request {
 
     /**
      * Get all header names.
+     *
      * @return All names
      * @throws IOException If fails
      */
@@ -56,7 +58,7 @@ public interface RqHeaders extends Request {
     /**
      * Request decorator, for HTTP headers parsing.
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      *
      * @since 0.13.8
      */
@@ -65,6 +67,7 @@ public interface RqHeaders extends Request {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         public Base(final Request req) {
@@ -153,7 +156,7 @@ public interface RqHeaders extends Request {
     /**
      * Smart decorator, with extra features.
      *
-     * <p>The class is immutable and thread-safe.
+     * <p>The class is immutable and thread-safe.</p>
      *
      * @since 0.16
      */
@@ -167,6 +170,7 @@ public interface RqHeaders extends Request {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         public Smart(final Request req) {
@@ -175,6 +179,7 @@ public interface RqHeaders extends Request {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         public Smart(final RqHeaders req) {
@@ -203,6 +208,7 @@ public interface RqHeaders extends Request {
 
         /**
          * Get single header or throw an HTTP exception.
+         *
          * @param name Name of header
          * @return Value of it
          * @throws IOException If fails
@@ -226,6 +232,7 @@ public interface RqHeaders extends Request {
         /**
          * If header is present, returns the first header value.
          * If not, returns a default value.
+         *
          * @param name Name of header key
          * @param def Default value
          * @return Header Value or default value

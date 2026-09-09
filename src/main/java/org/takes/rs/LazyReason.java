@@ -7,6 +7,7 @@ package org.takes.rs;
 /**
  * CharSequence that lazily resolves to the best reason phrase
  * for an HTTP status code.
+ *
  * @since 2.0
  */
 final class LazyReason implements CharSequence {
@@ -18,6 +19,7 @@ final class LazyReason implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param status HTTP status code
      */
     LazyReason(final int status) {

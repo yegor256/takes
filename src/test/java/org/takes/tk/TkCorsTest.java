@@ -16,6 +16,7 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkCors}.
+ *
  * @since 0.20
  */
 final class TkCorsTest {

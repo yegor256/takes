@@ -4,11 +4,13 @@
  */
 package org.takes.rs;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * Lazy InputStream that prints JSON from a {@link RsJson.Source} on demand.
+ *
  * @since 2.0
  */
 final class JsonBody extends InputStream {
@@ -25,6 +27,7 @@ final class JsonBody extends InputStream {
 
     /**
      * Ctor.
+     *
      * @param source JSON source
      */
     JsonBody(final RsJson.Source source) {
@@ -56,7 +59,7 @@ final class JsonBody extends InputStream {
 
     private InputStream body() {
         if (this.delegate == null) {
-            this.delegate = new java.io.ByteArrayInputStream(
+            this.delegate = new ByteArrayInputStream(
                 RsJson.print(this.src)
             );
         }

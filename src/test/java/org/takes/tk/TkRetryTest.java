@@ -22,6 +22,7 @@ import org.takes.rs.RsText;
 
 /**
  * TkRetry can retry till success or retry count is reached.
+ *
  * @since 0.28.3
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

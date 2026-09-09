@@ -18,7 +18,7 @@ import org.xembly.SyntaxException;
 /**
  * Chain of directives.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -32,6 +32,7 @@ public final class XeDirectives implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param dirs Directives
      */
     public XeDirectives(final String... dirs) {
@@ -40,6 +41,7 @@ public final class XeDirectives implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param dirs Directives
      */
     public XeDirectives(final Directive... dirs) {
@@ -48,6 +50,7 @@ public final class XeDirectives implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param dirs Directives
      */
     public XeDirectives(final Iterable<Directive> dirs) {
@@ -58,6 +61,7 @@ public final class XeDirectives implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param dirs Directives
      */
     public XeDirectives(final Scalar<Iterable<Directive>> dirs) {

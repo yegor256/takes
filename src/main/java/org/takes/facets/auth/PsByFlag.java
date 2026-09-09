@@ -19,7 +19,7 @@ import org.takes.rq.RqHref;
  * This implementation examines a specific request parameter and delegates
  * authentication to the appropriate pass based on pattern matching.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -38,6 +38,7 @@ public final class PsByFlag implements Pass {
 
     /**
      * Ctor.
+     *
      * @param pairs Map entries
      * @since 0.5.1
      */
@@ -47,6 +48,7 @@ public final class PsByFlag implements Pass {
 
     /**
      * Ctor.
+     *
      * @param map Map
      */
     public PsByFlag(final Map<Pattern, Pass> map) {
@@ -55,6 +57,7 @@ public final class PsByFlag implements Pass {
 
     /**
      * Ctor.
+     *
      * @param flg Flag
      * @param pairs Map entries
      * @since 0.5.1
@@ -65,6 +68,7 @@ public final class PsByFlag implements Pass {
 
     /**
      * Ctor.
+     *
      * @param flg Flag
      * @param map Map
      */

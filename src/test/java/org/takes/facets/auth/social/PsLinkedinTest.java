@@ -30,6 +30,7 @@ import org.takes.rs.RsJson;
 
 /**
  * Test case for {@link PsLinkedin}.
+ *
  * @since 0.16
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -78,6 +79,7 @@ final class PsLinkedinTest {
 
     /**
      * Take that returns JSON with the authorization token.
+     *
      * @since 1.1
      */
     private static final class TokenTake implements Take {
@@ -104,6 +106,7 @@ final class PsLinkedinTest {
 
         /**
          * Ctor.
+         *
          * @param code Linkedin authorization code
          * @param lapp Linkedin app
          * @param lkey Linkedin key
@@ -150,6 +153,7 @@ final class PsLinkedinTest {
 
     /**
      * Take that returns JSON with test user data.
+     *
      * @since 1.1
      */
     private static final class PeopleTake implements Take {
@@ -181,6 +185,7 @@ final class PsLinkedinTest {
 
         /**
          * Ctor.
+         *
          * @param identifier Linkedin user identifier
          * @param firstname Field name for "First name"
          * @param lastname Field name for "Last name"

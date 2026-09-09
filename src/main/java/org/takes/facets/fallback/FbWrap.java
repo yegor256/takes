@@ -11,7 +11,7 @@ import org.takes.misc.Opt;
 /**
  * Fallback wrap.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.13
  */
@@ -25,6 +25,7 @@ public class FbWrap implements Fallback {
 
     /**
      * Ctor.
+     *
      * @param fbk Fallback
      */
     public FbWrap(final Fallback fbk) {

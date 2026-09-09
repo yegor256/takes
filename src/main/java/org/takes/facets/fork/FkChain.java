@@ -14,6 +14,7 @@ import org.takes.misc.Opt;
 /**
  * A Fork chain. Routes to each given Fork in order, until one of them returns
  * a response or until none are left.
+ *
  * @since 0.33
  */
 public final class FkChain implements Fork {
@@ -32,6 +33,7 @@ public final class FkChain implements Fork {
 
     /**
      * Ctor.
+     *
      * @param forks Forks
      */
     public FkChain(final Fork... forks) {
@@ -40,6 +42,7 @@ public final class FkChain implements Fork {
 
     /**
      * Ctor.
+     *
      * @param forks Forks
      */
     public FkChain(final Collection<Fork> forks) {

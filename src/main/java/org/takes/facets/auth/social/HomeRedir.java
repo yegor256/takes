@@ -10,6 +10,7 @@ import org.takes.rq.RqHref;
 
 /**
  * CharSequence that lazily resolves to the request's home URI.
+ *
  * @since 2.0
  */
 final class HomeRedir implements CharSequence {
@@ -21,6 +22,7 @@ final class HomeRedir implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param request Request
      */
     HomeRedir(final Request request) {

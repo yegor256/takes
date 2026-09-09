@@ -10,6 +10,7 @@ import java.util.SortedSet;
 
 /**
  * Lazy collection that parses the source text only when iterated.
+ *
  * @since 2.0
  */
 final class Bag extends AbstractCollection<MediaType> {
@@ -26,6 +27,7 @@ final class Bag extends AbstractCollection<MediaType> {
 
     /**
      * Ctor.
+     *
      * @param src Source text
      */
     Bag(final String src) {

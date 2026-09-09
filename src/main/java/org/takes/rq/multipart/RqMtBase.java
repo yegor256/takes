@@ -44,12 +44,12 @@ import org.takes.rq.RqMultipart;
  * {@code multipart/form-data} format (RFC 2045).
  *
  * <p>For {@code application/x-www-form-urlencoded}
- * format use {@link org.takes.rq.RqForm}.
+ * format use {@link org.takes.rq.RqForm}.</p>
  *
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
- * decorator before passing request to this class.
+ * decorator before passing request to this class.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
@@ -105,6 +105,7 @@ public final class RqMtBase implements RqMultipart {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @throws IOException If fails
      */
@@ -283,12 +284,14 @@ public final class RqMtBase implements RqMultipart {
 
     /**
      * Decorator allowing to close all the parts of the request.
+     *
      * @since 0.33
      */
     private class CloseMultipart extends FilterInputStream {
 
         /**
          * Creates a {@code CloseParts} with the specified input.
+         *
          * @param input The underlying input stream
          */
         CloseMultipart(final InputStream input) {

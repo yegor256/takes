@@ -14,7 +14,7 @@ import org.takes.rs.xe.XeWrap;
  * This class generates a link that, when accessed, will trigger
  * the logout process by directing the user to the appropriate logout handler.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.8
  */
@@ -23,6 +23,7 @@ public final class XeLogoutLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @throws IOException If fails
      */
@@ -32,6 +33,7 @@ public final class XeLogoutLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param rel Related
      * @param flag Flag to add

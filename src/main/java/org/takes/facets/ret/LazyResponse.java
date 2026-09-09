@@ -18,6 +18,7 @@ import org.takes.misc.Expires;
 
 /**
  * Lazily-built return-cookie response.
+ *
  * @since 2.0
  */
 final class LazyResponse implements Response {
@@ -29,6 +30,7 @@ final class LazyResponse implements Response {
 
     /**
      * Ctor.
+     *
      * @param res Wrapped response
      * @param loc Return location URL
      * @param cookie Cookie name

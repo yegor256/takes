@@ -18,6 +18,7 @@ import org.takes.facets.auth.Token.Jose;
 
 /**
  * Test case for {@link Token}.
+ *
  * @since 1.5
  */
 final class TokenTest {

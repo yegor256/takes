@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeLink}.
+ *
  * @since 0.3
  */
 final class XeLinkTest {

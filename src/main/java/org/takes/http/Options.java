@@ -26,13 +26,14 @@ import org.cactoos.text.UncheckedText;
  * <p>This class parses and provides access to command-line options
  * for configuring the HTTP server. It supports options such as port
  * specification, daemon mode, thread count, hit-refresh mode, and
- * maximum latency settings.
+ * maximum latency settings.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.2
  */
 @EqualsAndHashCode
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class Options {
 
     /**
@@ -42,6 +43,7 @@ final class Options {
 
     /**
      * Constructs an {@code Options} with the specified arguments.
+     *
      * @param args Arguments
      * @since 0.9
      */
@@ -51,6 +53,7 @@ final class Options {
 
     /**
      * Constructs an {@code Options} with the specified arguments.
+     *
      * @param args Arguments
      */
     Options(final Iterable<String> args) {
@@ -59,6 +62,7 @@ final class Options {
 
     /**
      * Is it a daemon?
+     *
      * @return TRUE if yes
      */
     boolean isDaemon() {
@@ -67,6 +71,7 @@ final class Options {
 
     /**
      * Get the socket to listen to.
+     *
      * @return Socket
      * @throws IOException If fails
      */
@@ -101,6 +106,7 @@ final class Options {
 
     /**
      * Are we in hit-refresh mode?
+     *
      * @return TRUE if this mode is ON
      * @since 0.9
      */
@@ -110,6 +116,7 @@ final class Options {
 
     /**
      * Get the lifetime in milliseconds.
+     *
      * @return Port number
      */
     long lifetime() {
@@ -122,6 +129,7 @@ final class Options {
 
     /**
      * Get the threads.
+     *
      * @return Threads
      */
     int threads() {
@@ -135,6 +143,7 @@ final class Options {
 
     /**
      * Get the max latency in milliseconds.
+     *
      * @return Latency
      */
     long maxLatency() {

@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Watcher of long-running threads.
+ *
  * @since 2.0
  */
 final class Monitoring implements Runnable {
@@ -26,6 +27,7 @@ final class Monitoring implements Runnable {
 
     /**
      * Ctor.
+     *
      * @param map Threads storage
      * @param msec Execution latency
      */

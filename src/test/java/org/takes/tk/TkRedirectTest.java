@@ -16,6 +16,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkRedirect}.
+ *
  * @since 0.10
  */
 final class TkRedirectTest {

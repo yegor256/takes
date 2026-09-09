@@ -13,12 +13,12 @@ import java.io.InputStream;
  * <p>This input stream decorator wraps another input stream and enforces
  * a maximum read limit. Once the specified number of bytes has been read,
  * all subsequent read operations will return -1 (end of stream), even if
- * the underlying stream has more data available.
+ * the underlying stream has more data available.</p>
  *
  * <p>This is useful for handling Content-Length limited streams or
- * preventing excessive memory consumption from large input streams.
+ * preventing excessive memory consumption from large input streams.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16
  */
@@ -36,6 +36,7 @@ final class CapInputStream extends InputStream {
 
     /**
      * Ctor.
+     *
      * @param stream Original stream
      * @param length Max length
      */

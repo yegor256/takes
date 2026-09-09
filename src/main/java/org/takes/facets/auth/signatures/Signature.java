@@ -11,7 +11,7 @@ import java.io.IOException;
  *
  * <p>This interface defines the contract for signature implementations that can
  * create cryptographic signatures from byte arrays. All implementations of this
- * interface must be immutable and thread-safe.
+ * interface must be immutable and thread-safe.</p>
  *
  * @since 1.4
  */
@@ -20,6 +20,7 @@ public interface Signature {
 
     /**
      * Creates a signature for the given data bytes.
+     *
      * @param data The data to be signed
      * @return The signature as a byte array
      * @throws IOException If signature creation fails

@@ -35,18 +35,18 @@ import org.takes.Response;
  * processing instructions and transforms them into HTML or other formats.
  * The stylesheet location is resolved using a configurable URIResolver,
  * with classpath resolution as the default. Transformer factories are
- * cached for performance.
+ * cached for performance.</p>
  *
- * <p>Expected XML format:
+ * <p>Expected XML format:</p>
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page/&gt;
  * </pre>
  *
  * <p>The stylesheet {@code /xsl/home.xsl} will be resolved on the classpath.
- * If not found, a runtime exception is thrown.
+ * If not found, a runtime exception is thrown.</p>
  *
- * <p>Example usage with RsXembly:
+ * <p>Example usage with RsXembly:</p>
  * <pre>new RsXslt(
  *   new RsXembly(
  *     new XeStylesheet("/xsl/home.xsl"),
@@ -60,15 +60,16 @@ import org.takes.Response;
  * )</pre>
  *
  * <p><strong>Note:</strong> Saxon is recommended as the XSL transformer
- * for best compatibility and performance.
+ * for best compatibility and performance.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see org.takes.rs.xe.RsXembly
  * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsXslt extends RsWrap {
 
     /**
@@ -79,6 +80,7 @@ public final class RsXslt extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param rsp Original response
      */
     public RsXslt(final Response rsp) {
@@ -87,6 +89,7 @@ public final class RsXslt extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param rsp Original response
      * @param resolver URI resolver
      */

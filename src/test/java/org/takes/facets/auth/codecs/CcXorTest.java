@@ -14,6 +14,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcXor}.
+ *
  * @since 0.13.7
  */
 final class CcXorTest {

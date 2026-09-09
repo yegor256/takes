@@ -16,6 +16,7 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqSocket}.
+ *
  * @since 1.0
  */
 @SuppressWarnings("PMD.AvoidUsingHardCodedIP")

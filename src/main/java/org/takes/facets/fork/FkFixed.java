@@ -11,7 +11,7 @@ import org.takes.misc.Opt;
 /**
  * Fork fixed.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see TkFork
  * @since 0.9
@@ -21,6 +21,7 @@ public final class FkFixed extends FkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Take
      */
     public FkFixed(final Take take) {

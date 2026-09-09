@@ -24,12 +24,15 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkHtml}.
+ *
  * @since 0.10
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TkHtmlTest {
 
     /**
      * Input Bodies for testing.
+     *
      * @return The testing data
      */
     static Iterable<Arguments> cases() {

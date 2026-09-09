@@ -20,13 +20,13 @@ import org.takes.facets.auth.Identity;
  * bytes to the encoded data and appending a checksum. The salt makes
  * identical inputs produce different outputs, preventing precomputed
  * hash attacks. The checksum ensures data integrity during transmission
- * or storage.
+ * or storage.</p>
  *
  * <p>The format is: [salt_size][salt_bytes][original_data][checksum]
  * where salt_size is 1 byte, salt_bytes are random, and checksum is
- * the sum of all salt bytes.
+ * the sum of all salt bytes.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Codec codec = new CcSalted(new CcPlain());
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -34,7 +34,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded); // verified and unsalted
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -47,17 +47,13 @@ public final class CcSalted implements Codec {
     private static final Random RND = new SecureRandom();
 
     /**
-     * Maximum random size.
-     */
-    private static final int RND_MAX_SIZE = 10;
-
-    /**
      * Original codec.
      */
     private final Codec origin;
 
     /**
      * Ctor.
+     *
      * @param codec Original
      */
     public CcSalted(final Codec codec) {
@@ -75,7 +71,7 @@ public final class CcSalted implements Codec {
     }
 
     private static byte[] salt(final byte[] text) {
-        final byte size = (byte) CcSalted.RND.nextInt(CcSalted.RND_MAX_SIZE);
+        final byte size = (byte) CcSalted.RND.nextInt(10);
         final byte[] output = new byte[text.length + size + 2];
         output[0] = size;
         byte sum = (byte) 0;

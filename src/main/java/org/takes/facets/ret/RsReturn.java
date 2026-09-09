@@ -19,7 +19,7 @@ import org.takes.rs.RsWrap;
  * location. The location is validated against RFC 3987 and URL-encoded before
  * being stored in the cookie. This mechanism allows applications to remember
  * where users came from and redirect them back after completing an action.
- * The class is immutable and thread-safe.
+ * The class is immutable and thread-safe.</p>
  *
  * @since 0.20
  */
@@ -28,6 +28,7 @@ public final class RsReturn extends RsWrap {
 
     /**
      * Location value validation regex.
+     *
      * @see <a href="https://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url">SO thread about URI check</a>
      */
     private static final Pattern LOC_PTRN = Pattern.compile(
@@ -36,6 +37,7 @@ public final class RsReturn extends RsWrap {
 
     /**
      * Constructor with default cookie name.
+     *
      * @param res The response to decorate
      * @param loc The location URL to store as return location
      * @throws IOException If location validation or encoding fails
@@ -46,6 +48,7 @@ public final class RsReturn extends RsWrap {
 
     /**
      * Constructor with custom cookie name.
+     *
      * @param res The response to decorate
      * @param loc The location URL to store as return location
      * @param cookie The name of the cookie to use

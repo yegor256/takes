@@ -12,7 +12,7 @@ import org.takes.rs.RsRedirect;
 /**
  * Take that redirects, passing all query arguments and the fragment through.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 1.9
  */
@@ -29,6 +29,7 @@ public final class TkSmartRedirect extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param location Location to redirect to
      */
     public TkSmartRedirect(final String location) {
@@ -37,6 +38,7 @@ public final class TkSmartRedirect extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param location Location to redirect to
      * @param code Redirection status code
      */

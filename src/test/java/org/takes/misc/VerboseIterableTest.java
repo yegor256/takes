@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link VerboseIterable}.
+ *
  * @since 0.15.1
  */
 final class VerboseIterableTest {

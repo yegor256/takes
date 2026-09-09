@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
+ *
  * @since 0.9.1
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

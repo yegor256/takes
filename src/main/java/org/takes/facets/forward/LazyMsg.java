@@ -10,6 +10,7 @@ import org.takes.Response;
 
 /**
  * CharSequence that lazily formats the detail message of an RsForward.
+ *
  * @since 2.0
  */
 final class LazyMsg implements CharSequence {
@@ -31,6 +32,7 @@ final class LazyMsg implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param origin Original response
      * @param status HTTP status code
      * @param location Location

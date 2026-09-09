@@ -16,13 +16,14 @@ import org.takes.Take;
  *
  * <p>This front accepts incoming HTTP connections on a server socket
  * and dispatches them to a back-end for processing. It runs a loop
- * that continuously accepts connections until the exit condition is met.
+ * that continuously accepts connections until the exit condition is met.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @EqualsAndHashCode
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class FtBasic implements Front {
 
     /**
@@ -37,6 +38,7 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
+     *
      * @param tks Take
      * @throws IOException If fails
      * @since 0.24
@@ -47,6 +49,7 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
+     *
      * @param tks Take
      * @param prt Port
      * @throws IOException If fails
@@ -57,6 +60,7 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
+     *
      * @param that Back
      * @param port Port
      * @throws IOException If fails
@@ -67,6 +71,7 @@ public final class FtBasic implements Front {
 
     /**
      * Ctor.
+     *
      * @param that Back
      * @param skt Server socket
      * @since 0.22

@@ -9,7 +9,7 @@
  * <p>Exception handling in the framework is very simple and very
  * intuitive. All you need to do is to wrap your "take" into
  * {@link org.takes.facets.fallback.TkFallback} decorator and create
- * a fallback that dispatches exceptions, for example:
+ * a fallback that dispatches exceptions, for example:</p>
  *
  * <pre> Take take = new TkFallback(
  *   original_take,
@@ -27,7 +27,7 @@
  * {@link org.takes.facets.fallback.Fallback}. It is recommended to use
  * {@link org.takes.facets.fallback.FbChain} to dispatch a request
  * through a series of fallbacks. The first of them who will return
- * some response will stop the chain.
+ * some response will stop the chain.</p>
  *
  * @since 0.1
  */

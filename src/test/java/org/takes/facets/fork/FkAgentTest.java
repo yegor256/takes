@@ -15,6 +15,7 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkAgent}.
+ *
  * @since 1.7.2
  */
 final class FkAgentTest {

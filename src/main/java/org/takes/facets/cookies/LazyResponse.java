@@ -14,6 +14,7 @@ import org.takes.rs.RsWithHeader;
 
 /**
  * Lazily-built cookie response.
+ *
  * @since 2.0
  */
 final class LazyResponse implements Response {
@@ -25,6 +26,7 @@ final class LazyResponse implements Response {
 
     /**
      * Ctor.
+     *
      * @param res Wrapped response
      * @param name Cookie name
      * @param value Cookie value

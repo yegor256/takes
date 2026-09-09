@@ -14,6 +14,7 @@ import org.xembly.Directive;
 
 /**
  * Lazy XeSource that builds the Google OAuth link on demand.
+ *
  * @since 2.0
  */
 final class LazyGoogleLink implements XeSource {
@@ -40,6 +41,7 @@ final class LazyGoogleLink implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param request HTTP request
      * @param application App ID
      * @param relation Relation type

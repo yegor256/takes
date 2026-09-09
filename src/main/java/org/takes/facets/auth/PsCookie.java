@@ -24,7 +24,7 @@ import org.takes.misc.Opt;
  * This implementation stores and retrieves authentication information
  * in browser cookies, enabling persistent sessions across requests.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -48,6 +48,7 @@ public final class PsCookie implements Pass {
 
     /**
      * Ctor.
+     *
      * @param cdc Codec
      */
     public PsCookie(final Codec cdc) {
@@ -56,6 +57,7 @@ public final class PsCookie implements Pass {
 
     /**
      * Ctor.
+     *
      * @param cdc Codec
      * @param name Cookie name
      */
@@ -65,6 +67,7 @@ public final class PsCookie implements Pass {
 
     /**
      * Ctor.
+     *
      * @param cdc Codec
      * @param name Cookie name
      * @param days Max age in days

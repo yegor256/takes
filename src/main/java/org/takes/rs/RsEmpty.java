@@ -17,9 +17,9 @@ import org.takes.Response;
  * <p>This response implementation returns an HTTP 204 status code
  * with an empty body. It's typically used for successful operations
  * that don't need to return any content to the client, such as
- * DELETE operations or successful form submissions.
+ * DELETE operations or successful form submissions.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */

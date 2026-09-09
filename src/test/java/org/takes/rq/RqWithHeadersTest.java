@@ -15,6 +15,7 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqWithHeaders}.
+ *
  * @since 1.0
  */
 final class RqWithHeadersTest {

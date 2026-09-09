@@ -12,9 +12,9 @@ import org.takes.Request;
  *
  * <p>This decorator checks if the specified header is present in the original
  * request. If the header is missing, it adds the header with the provided value.
- * If the header already exists, the original request is returned unchanged.
+ * If the header already exists, the original request is returned unchanged.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.31
  */
@@ -22,6 +22,7 @@ public final class RqWithDefaultHeader extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @param hdr Header name
      * @param val Header value

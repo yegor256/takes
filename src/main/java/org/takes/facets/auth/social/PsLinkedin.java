@@ -29,7 +29,7 @@ import org.takes.rq.RqHref;
 /**
  * Linkedin OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.11.3
  */
@@ -63,6 +63,7 @@ public final class PsLinkedin implements Pass {
 
     /**
      * Ctor.
+     *
      * @param lapp Linkedin app
      * @param lkey Linkedin key
      */
@@ -77,6 +78,7 @@ public final class PsLinkedin implements Pass {
 
     /**
      * Ctor with custom hrefs for test purposes.
+     *
      * @param thref Linkedin token href
      * @param ahref Linkedin api href
      * @param lapp Linkedin app name

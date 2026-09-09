@@ -16,9 +16,9 @@ import org.takes.Request;
  * <p>This decorator preserves the original request headers while replacing
  * the body content with the provided character sequence. The new body content
  * is converted to bytes using the default character encoding and wrapped
- * in a ByteArrayInputStream.
+ * in a ByteArrayInputStream.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.22
  */
@@ -27,6 +27,7 @@ public final class RqWithBody extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req The request
      * @param bdy The body
      */

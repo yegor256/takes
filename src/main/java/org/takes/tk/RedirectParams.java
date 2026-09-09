@@ -11,6 +11,7 @@ import org.takes.rq.RqRequestLine;
 
 /**
  * Extract params from original query.
+ *
  * @since 1.9
  */
 final class RedirectParams {
@@ -27,6 +28,7 @@ final class RedirectParams {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @param origin Original location
      */
@@ -37,6 +39,7 @@ final class RedirectParams {
 
     /**
      * Get location with composed params.
+     *
      * @return New location
      * @throws IOException in case of error
      */

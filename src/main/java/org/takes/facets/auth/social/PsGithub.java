@@ -29,17 +29,12 @@ import org.takes.rq.RqHref;
 /**
  * Github OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
-
-    /**
-     * Access token.
-     */
-    private static final String ACCESS_TOKEN = "access_token";
 
     /**
      * Code.
@@ -73,6 +68,7 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Github app
      * @param gkey Github key
      */
@@ -82,6 +78,7 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Github app
      * @param gkey Github key
      * @param gurl Github OAuth server
@@ -132,7 +129,7 @@ public final class PsGithub implements Pass {
         throws IOException {
         return new JdkRequest(
             new Href(this.github)
-                .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
+                .path(PsGithub.LOGIN).path("oauth").path("access_token")
                 .toString()
         ).method("POST")
             .header("Accept", "application/xml")

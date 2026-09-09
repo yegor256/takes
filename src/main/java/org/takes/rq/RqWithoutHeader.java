@@ -17,9 +17,9 @@ import org.takes.Request;
  *
  * <p>This decorator filters out all headers with the specified name from
  * the original request. The comparison is case-insensitive, following
- * HTTP header naming conventions.
+ * HTTP header naming conventions.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.8
  */
@@ -28,6 +28,7 @@ public final class RqWithoutHeader extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @param name Header name
      */

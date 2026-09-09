@@ -11,16 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
  *
  * <p>Constructs the HTTP request line in the format "METHOD URI HTTP/1.1"
  * from servlet request information. This represents the first line of
- * an HTTP request as defined by RFC 7230.
+ * an HTTP request as defined by RFC 7230.</p>
  *
  * @since 2.0
  */
 final class HttpHead {
-
-    /**
-     * Initial buffer capacity.
-     */
-    private static final int BUFF_SIZE = 20;
 
     /**
      * Servlet request.
@@ -29,6 +24,7 @@ final class HttpHead {
 
     /**
      * Ctor.
+     *
      * @param request Servlet request
      */
     HttpHead(final HttpServletRequest request) {
@@ -37,7 +33,7 @@ final class HttpHead {
 
     @Override
     public String toString() {
-        final StringBuilder bld = new StringBuilder(HttpHead.BUFF_SIZE)
+        final StringBuilder bld = new StringBuilder(20)
             .append(this.req.getMethod())
             .append(' ');
         final String uri = this.req.getRequestURI();

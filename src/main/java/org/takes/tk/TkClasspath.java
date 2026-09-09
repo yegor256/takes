@@ -24,13 +24,13 @@ import org.takes.rs.RsWithBody;
  * <p>This {@link Take} implementation serves static resources bundled within
  * JAR files or available on the Java classpath. It provides a convenient way
  * to serve packaged resources such as web assets, configuration files, or
- * templates that are included as part of the application deployment.
+ * templates that are included as part of the application deployment.</p>
  *
  * <p>The take resolves resource paths by combining a configured prefix
  * with the path component of the request URL. Resources are loaded using
- * the standard Java resource loading mechanism through {@code getResourceAsStream()}.
+ * the standard Java resource loading mechanism through {@code getResourceAsStream()}.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Serve resources from /static classpath location
  * new TkClasspath("/static");
@@ -43,7 +43,7 @@ import org.takes.rs.RsWithBody;
  * // Uses package path: /com/example/mypackage/
  * }</pre>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>Serving bundled web assets (CSS, JavaScript, images)</li>
  * <li>Template and configuration file serving</li>
@@ -54,7 +54,7 @@ import org.takes.rs.RsWithBody;
  * <li>Microservice resource bundling</li>
  * </ul>
  *
- * <p>Advantages over filesystem serving:
+ * <p>Advantages over filesystem serving:</p>
  * <ul>
  * <li>Resources are packaged within application JAR files</li>
  * <li>No external file dependencies or directory structures</li>
@@ -65,14 +65,14 @@ import org.takes.rs.RsWithBody;
  *
  * <p>The response includes appropriate HTTP headers with Content-Length
  * calculated from resource size. Binary resources are served efficiently
- * using stream-based responses to minimize memory usage.
+ * using stream-based responses to minimize memory usage.</p>
  *
  * <p>If a requested resource is not found on the classpath, an
  * {@link org.takes.HttpException} with HTTP 404 status is thrown,
  * providing clear error information including the resource path that
- * was attempted.
+ * was attempted.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -90,6 +90,7 @@ public final class TkClasspath extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param prefix Classpath prefix for resource resolution
      */
     public TkClasspath(final String prefix) {

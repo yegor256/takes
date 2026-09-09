@@ -10,9 +10,9 @@
  * to enable content negotiation and browser-specific behavior. It allows
  * applications to serve different content or apply different logic based
  * on the client's user agent string, supporting responsive design and
- * browser compatibility handling.
+ * browser compatibility handling.</p>
  *
- * <p>Key components include:
+ * <p>Key components include:</p>
  * <ul>
  * <li>AmAgent interface for user agent matching strategies</li>
  * <li>FkAgent for routing based on user agent patterns</li>

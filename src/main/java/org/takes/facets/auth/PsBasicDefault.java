@@ -21,6 +21,7 @@ import org.takes.misc.Opt;
  * Default entry implementation that validates credentials against
  * a predefined set of username, password, and URN combinations.
  * Credentials are stored as URL-encoded strings separated by spaces.
+ *
  * @since 0.22
  */
 public final class PsBasicDefault implements PsBasic.Entry {
@@ -44,6 +45,7 @@ public final class PsBasicDefault implements PsBasic.Entry {
 
     /**
      * Public ctor.
+     *
      * @param users Strings with user's login, password and URN with
      *  space characters as separators. Each of login, password and urn
      *  are URL-encoded substrings. For example,
@@ -55,6 +57,7 @@ public final class PsBasicDefault implements PsBasic.Entry {
 
     /**
      * Primary ctor.
+     *
      * @param users Strings with user's login, password and URNs
      */
     public PsBasicDefault(final Iterable<String> users) {

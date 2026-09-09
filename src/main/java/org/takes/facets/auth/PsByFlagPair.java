@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 /**
  * Pair of values.
+ *
  * @since 0.1
  */
 public final class PsByFlagPair
@@ -21,6 +22,7 @@ public final class PsByFlagPair
 
     /**
      * Ctor.
+     *
      * @param key Key
      * @param pass Pass
      */

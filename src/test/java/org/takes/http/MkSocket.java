@@ -12,6 +12,7 @@ import java.net.Socket;
 
 /**
  * Socket mock for reuse.
+ *
  * @since 0.32
  */
 public final class MkSocket extends Socket {
@@ -38,6 +39,7 @@ public final class MkSocket extends Socket {
 
     /**
      * Constructs a {@code MkSocket} with the specified input stream.
+     *
      * @param input The input stream of the socket
      */
     public MkSocket(final InputStream input) {
@@ -80,6 +82,7 @@ public final class MkSocket extends Socket {
     /**
      * Gives the output stream in {@link ByteArrayOutputStream} to be
      * able to test it.
+     *
      * @return The output in {@link ByteArrayOutputStream}
      */
     public ByteArrayOutputStream bufferedOutput() {

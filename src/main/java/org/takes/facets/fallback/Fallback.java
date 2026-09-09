@@ -10,7 +10,7 @@ import org.takes.misc.Opt;
 /**
  * Fallback to dispatch an exceptional situation.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @see org.takes.facets.fallback.TkFallback
  * @since 0.1
@@ -20,6 +20,7 @@ public interface Fallback {
 
     /**
      * Dispatch this request and either swallow it or ignore.
+     *
      * @param req Request
      * @return An iterator of responses or an empty iterator
      * @throws Exception If fails

@@ -8,6 +8,7 @@ import java.io.IOException;
 
 /**
  * Head abstraction for {@link Request} and {@link Response}.
+ *
  * @since 2.0
  */
 @FunctionalInterface
@@ -15,6 +16,7 @@ public interface Head {
 
     /**
      * All lines above the body.
+     *
      * @return List of lines
      * @throws IOException If something goes wrong
      */

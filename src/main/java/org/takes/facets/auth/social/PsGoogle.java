@@ -28,7 +28,7 @@ import org.takes.rq.RqHref;
 /**
  * Google OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.9
  */
@@ -46,19 +46,9 @@ public final class PsGoogle implements Pass {
     private static final String PICTURE = "picture";
 
     /**
-     * Display name.
-     */
-    private static final String DISPLAY_NAME = "displayName";
-
-    /**
      * Access token.
      */
     private static final String ACCESS_TOKEN = "access_token";
-
-    /**
-     * Name.
-     */
-    private static final String NAME = "name";
 
     /**
      * Code.
@@ -92,6 +82,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Google app
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
@@ -108,6 +99,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Google app
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
@@ -195,9 +187,7 @@ public final class PsGoogle implements Pass {
         } else {
             props.put(PsGoogle.PICTURE, "#");
         }
-        props.put(
-            PsGoogle.NAME, json.getString(PsGoogle.DISPLAY_NAME, "unknown")
-        );
+        props.put("name", json.getString("displayName", "unknown"));
         return new Identity.Simple(
             new UncheckedText(
                 new FormattedText(

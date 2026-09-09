@@ -20,9 +20,9 @@ import org.takes.Request;
  * subsequent calls to {@code body()} produce input streams over the same
  * cached content. The head is delegated to the original request without
  * caching. This is useful when the underlying body stream can only be read
- * once, but multiple components need to access it.
+ * once, but multiple components need to access it.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
@@ -31,6 +31,7 @@ public final class BodyOnce extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     public BodyOnce(final Request req) {
