@@ -42,6 +42,7 @@ import org.xembly.Xembler;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsXembly extends RsWrap {
 
     /**

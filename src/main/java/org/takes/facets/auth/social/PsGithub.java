@@ -37,11 +37,6 @@ import org.takes.rq.RqHref;
 public final class PsGithub implements Pass {
 
     /**
-     * Access token.
-     */
-    private static final String ACCESS_TOKEN = "access_token";
-
-    /**
      * Code.
      */
     private static final String CODE = "code";
@@ -134,7 +129,7 @@ public final class PsGithub implements Pass {
         throws IOException {
         return new JdkRequest(
             new Href(this.github)
-                .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
+                .path(PsGithub.LOGIN).path("oauth").path("access_token")
                 .toString()
         ).method("POST")
             .header("Accept", "application/xml")

@@ -20,6 +20,7 @@ import org.takes.rs.RsPrint;
  *
  * @since 0.4
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TkTextTest {
 
     @Test

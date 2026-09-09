@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -138,7 +139,7 @@ interface RsBody extends Input {
         /**
          * Charset used to encode the text.
          */
-        private final java.nio.charset.Charset charset;
+        private final Charset charset;
 
         /**
          * Ctor.
@@ -146,7 +147,7 @@ interface RsBody extends Input {
          * @param body The content of the body
          * @param chr Charset to encode with
          */
-        Text(final CharSequence body, final java.nio.charset.Charset chr) {
+        Text(final CharSequence body, final Charset chr) {
             if (body == null) {
                 throw new IllegalStateException(
                     "Body content is null, cannot encode to bytes"

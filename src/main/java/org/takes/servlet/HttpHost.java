@@ -19,16 +19,6 @@ import jakarta.servlet.http.HttpServletRequest;
 final class HttpHost {
 
     /**
-     * Default http port.
-     */
-    private static final int PORT_DEFAULT = 80;
-
-    /**
-     * Initial buffer capacity.
-     */
-    private static final int BUFF_SIZE = 100;
-
-    /**
      * Servlet request.
      */
     private final HttpServletRequest req;
@@ -44,10 +34,10 @@ final class HttpHost {
 
     @Override
     public String toString() {
-        final StringBuilder bld = new StringBuilder(HttpHost.BUFF_SIZE);
+        final StringBuilder bld = new StringBuilder(100);
         bld.append("Host: ").append(this.req.getServerName());
         final int port = this.req.getServerPort();
-        if (port != HttpHost.PORT_DEFAULT) {
+        if (port != 80) {
             bld.append(':').append(port);
         }
         return bld.toString();

@@ -41,12 +41,6 @@ import org.takes.facets.auth.Identity;
 public final class CcBase64 implements Codec {
 
     /**
-     * All legal Base64 chars.
-     */
-    private static final String BASE64CHARS =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-    /**
      * Original codec.
      */
     private final Codec origin;
@@ -84,7 +78,10 @@ public final class CcBase64 implements Codec {
     private static byte[] checkIllegalCharacters(final byte[] bytes) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         for (final byte the : bytes) {
-            if (CcBase64.BASE64CHARS.indexOf(the) < 0) {
+            final int idx =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+                    .indexOf(the);
+            if (idx < 0) {
                 out.write(the);
             }
         }

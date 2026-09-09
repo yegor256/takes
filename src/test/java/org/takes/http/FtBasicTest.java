@@ -41,7 +41,7 @@ import org.takes.tk.TkText;
  *
  * @since 0.1
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class FtBasicTest {
 
     /**

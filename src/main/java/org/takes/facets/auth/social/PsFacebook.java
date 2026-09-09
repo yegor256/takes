@@ -47,16 +47,6 @@ import org.takes.rq.RqHref;
 public final class PsFacebook implements Pass {
 
     /**
-     * Client id.
-     */
-    private static final String CLIENT_ID = "client_id";
-
-    /**
-     * Client secret.
-     */
-    private static final String CLIENT_SECRET = "client_secret";
-
-    /**
      * Code.
      */
     private static final String CODE = "code";
@@ -179,9 +169,9 @@ public final class PsFacebook implements Pass {
         final String response = this.request.uri().set(
             URI.create(
                 new Href(PsFacebook.ACCESS_TOKEN_URL).with(
-                    PsFacebook.CLIENT_ID, this.app
+                    "client_id", this.app
                 ).with("redirect_uri", home).with(
-                    PsFacebook.CLIENT_SECRET, this.key
+                    "client_secret", this.key
                 ).with(PsFacebook.CODE, code).toString()
             )
         ).back()

@@ -47,11 +47,6 @@ public final class CcSalted implements Codec {
     private static final Random RND = new SecureRandom();
 
     /**
-     * Maximum random size.
-     */
-    private static final int RND_MAX_SIZE = 10;
-
-    /**
      * Original codec.
      */
     private final Codec origin;
@@ -76,7 +71,7 @@ public final class CcSalted implements Codec {
     }
 
     private static byte[] salt(final byte[] text) {
-        final byte size = (byte) CcSalted.RND.nextInt(CcSalted.RND_MAX_SIZE);
+        final byte size = (byte) CcSalted.RND.nextInt(10);
         final byte[] output = new byte[text.length + size + 2];
         output[0] = size;
         byte sum = (byte) 0;

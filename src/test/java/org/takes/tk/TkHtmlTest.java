@@ -27,6 +27,7 @@ import org.takes.rs.RsPrint;
  *
  * @since 0.10
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TkHtmlTest {
 
     /**

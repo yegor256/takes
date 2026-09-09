@@ -33,6 +33,7 @@ import org.cactoos.text.UncheckedText;
  * @since 0.2
  */
 @EqualsAndHashCode
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class Options {
 
     /**

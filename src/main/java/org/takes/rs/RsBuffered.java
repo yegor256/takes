@@ -23,6 +23,7 @@ import org.takes.Response;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsBuffered extends RsWrap {
 
     /**

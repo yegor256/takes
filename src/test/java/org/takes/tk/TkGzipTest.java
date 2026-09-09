@@ -29,6 +29,7 @@ import org.takes.rs.RsText;
  *
  * @since 0.17
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TkGzipTest {
 
     @Test

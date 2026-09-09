@@ -9,6 +9,7 @@ import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
 import org.cactoos.text.Randomized;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.hamcrest.core.IsEqual;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
@@ -51,7 +52,7 @@ final class BodyOnceTest {
         MatcherAssert.assertThat(
             "the head must NOT be cached by BodyOnce",
             new RqPrint(req).printHead(),
-            org.hamcrest.Matchers.not(
+            Matchers.not(
                 new IsEqual<>(new RqPrint(req).printHead())
             )
         );

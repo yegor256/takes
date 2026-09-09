@@ -39,11 +39,6 @@ import org.takes.facets.auth.Identity;
 public final class CcHex implements Codec {
 
     /**
-     * Length of chunk.
-     */
-    private static final int CHUNK = 4;
-
-    /**
      * Backward mapping table.
      */
     private static final byte[] BACK = {
@@ -85,7 +80,7 @@ public final class CcHex implements Codec {
         final byte[] raw = this.origin.encode(identity);
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         for (int idx = 0; idx < raw.length; ++idx) {
-            if (idx > 0 && idx % CcHex.CHUNK == 0) {
+            if (idx > 0 && idx % 4 == 0) {
                 out.write('-');
             }
             out.write(CcHex.FWD[raw[idx] >> 4 & 0x0F]);

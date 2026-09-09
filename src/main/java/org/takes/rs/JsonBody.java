@@ -4,6 +4,7 @@
  */
 package org.takes.rs;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -58,7 +59,7 @@ final class JsonBody extends InputStream {
 
     private InputStream body() {
         if (this.delegate == null) {
-            this.delegate = new java.io.ByteArrayInputStream(
+            this.delegate = new ByteArrayInputStream(
                 RsJson.print(this.src)
             );
         }

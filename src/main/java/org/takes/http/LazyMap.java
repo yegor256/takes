@@ -4,14 +4,16 @@
  */
 package org.takes.http;
 
+import java.util.AbstractMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Map view that lazily parses the command-line arguments on first access.
  *
  * @since 2.0
  */
-final class LazyMap extends java.util.AbstractMap<String, String> {
+final class LazyMap extends AbstractMap<String, String> {
 
     /**
      * Source arguments.
@@ -33,7 +35,7 @@ final class LazyMap extends java.util.AbstractMap<String, String> {
     }
 
     @Override
-    public java.util.Set<Map.Entry<String, String>> entrySet() {
+    public Set<Map.Entry<String, String>> entrySet() {
         return this.parsed().entrySet();
     }
 

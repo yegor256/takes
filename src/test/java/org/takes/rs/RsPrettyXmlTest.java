@@ -20,7 +20,7 @@ import org.takes.Response;
  *
  * @since 1.0
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class RsPrettyXmlTest {
 
     /**

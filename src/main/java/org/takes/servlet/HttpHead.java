@@ -18,11 +18,6 @@ import jakarta.servlet.http.HttpServletRequest;
 final class HttpHead {
 
     /**
-     * Initial buffer capacity.
-     */
-    private static final int BUFF_SIZE = 20;
-
-    /**
      * Servlet request.
      */
     private final HttpServletRequest req;
@@ -38,7 +33,7 @@ final class HttpHead {
 
     @Override
     public String toString() {
-        final StringBuilder bld = new StringBuilder(HttpHead.BUFF_SIZE)
+        final StringBuilder bld = new StringBuilder(20)
             .append(this.req.getMethod())
             .append(' ');
         final String uri = this.req.getRequestURI();

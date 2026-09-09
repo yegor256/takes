@@ -4,6 +4,7 @@
  */
 package org.takes.rq;
 
+import java.util.AbstractList;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.UncheckedText;
 
@@ -12,7 +13,7 @@ import org.cactoos.text.UncheckedText;
  *
  * @since 2.0
  */
-final class FakeHeadList extends java.util.AbstractList<String> {
+final class FakeHeadList extends AbstractList<String> {
 
     /**
      * HTTP method.

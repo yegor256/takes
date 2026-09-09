@@ -48,11 +48,6 @@ import org.takes.misc.Equality;
 final class ResponseOf {
 
     /**
-     * Buffer size.
-     */
-    private static final int BUFSIZE = 8192;
-
-    /**
      * Http response first line head pattern.
      */
     private static final Pattern HTTP_MATCHER = Pattern.compile(
@@ -92,7 +87,7 @@ final class ResponseOf {
                 InputStream body = this.rsp.body();
                 OutputStream out = sresp.getOutputStream()
             ) {
-                final byte[] buff = new byte[ResponseOf.BUFSIZE];
+                final byte[] buff = new byte[8192];
                 for (int read = body.read(buff); read >= 0; read = body.read(buff)) {
                     out.write(buff, 0, read);
                 }

@@ -47,6 +47,7 @@ import org.cactoos.io.WriterTo;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsVelocity extends RsWrap {
 
     /**

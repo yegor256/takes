@@ -20,6 +20,7 @@ import org.takes.Request;
  * @since 0.16
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RqBuffered extends RqWrap {
 
     /**

@@ -31,11 +31,6 @@ import org.takes.Response;
 public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
-     * Set-Cookie header name.
-     */
-    private static final String SET_COOKIE = "set-cookie";
-
-    /**
      * Cookie name matcher.
      */
     private final Matcher<String> name;
@@ -138,7 +133,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
     private static boolean isSetCookie(final String header) {
         final int colon = header.indexOf(':');
         return colon >= 0
-            && HmRsCookie.SET_COOKIE.equalsIgnoreCase(
+            && "set-cookie".equalsIgnoreCase(
                 header.substring(0, colon).trim()
             );
     }

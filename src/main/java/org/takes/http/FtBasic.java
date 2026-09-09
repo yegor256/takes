@@ -23,6 +23,7 @@ import org.takes.Take;
  * @since 0.1
  */
 @EqualsAndHashCode
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class FtBasic implements Front {
 
     /**

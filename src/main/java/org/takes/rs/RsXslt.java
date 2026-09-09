@@ -69,6 +69,7 @@ import org.takes.Response;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsXslt extends RsWrap {
 
     /**

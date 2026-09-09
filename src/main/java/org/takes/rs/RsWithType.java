@@ -35,11 +35,6 @@ public final class RsWithType extends RsWrap {
     private static final String HEADER = "Content-Type";
 
     /**
-     * The name of the parameter allowing to define the character set.
-     */
-    private static final String CHARSET = "charset";
-
-    /**
      * Constructs a {@code RsWithType} that will add the content type header to
      * the response using the specified type as media type.
      *
@@ -95,7 +90,7 @@ public final class RsWithType extends RsWrap {
                     new FormattedText(
                         "%s; %s=%s",
                         type,
-                        RsWithType.CHARSET,
+                        "charset",
                         charset.get().name()
                     )
                 ).asString()

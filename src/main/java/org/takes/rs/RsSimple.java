@@ -23,6 +23,7 @@ import org.cactoos.io.InputStreamOf;
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsSimple extends RsWrap {
 
     /**

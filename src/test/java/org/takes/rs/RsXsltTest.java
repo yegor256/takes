@@ -27,7 +27,7 @@ import org.takes.misc.StateAwareInputStream;
  *
  * @since 0.1
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class RsXsltTest {
 
     /**

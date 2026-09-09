@@ -35,32 +35,6 @@ import org.xembly.Directives;
  */
 final class PsGithubTest {
 
-    /**
-     * GitHubToken.
-     */
-    private static final String GIT_HUB_TOKEN = "GitHubToken";
-
-    /**
-     * XPath access_token string.
-     */
-    private static final String ACCESS_TOKEN = "access_token";
-
-    /**
-     * XPath login string.
-     */
-    private static final String LOGIN = "login";
-
-    /**
-     * Octocat URL string.
-     */
-    private static final String OCTOCAT_GIF_URL =
-        "https://github.com/img/octocat.gif";
-
-    /**
-     * XPath octocat string.
-     */
-    private static final String OCTOCAT = "octocat";
-
     @Test
     @Tag("deep")
     void failsOnNoAccessToken() {
@@ -77,8 +51,8 @@ final class PsGithubTest {
             "GitHub identity URN must match expected format with user ID",
             this.performLogin(
                 PsGithubTest.directiveWithoutAccessToken()
-                    .add(PsGithubTest.ACCESS_TOKEN)
-                    .set(PsGithubTest.GIT_HUB_TOKEN)
+                    .add("access_token")
+                    .set("GitHubToken")
             ).urn(),
             Matchers.equalTo("urn:github:1")
         );
@@ -146,10 +120,10 @@ final class PsGithubTest {
         public Response act(final Request req) throws IOException {
             return new RsJson(
                 Json.createObjectBuilder().add(
-                    PsGithubTest.LOGIN, PsGithubTest.OCTOCAT
+                    "login", "octocat"
                 ).add("id", 1).add(
                     "avatar_url",
-                    PsGithubTest.OCTOCAT_GIF_URL
+                    "https://github.com/img/octocat.gif"
                 ).build()
             );
         }

@@ -18,6 +18,7 @@ import org.takes.rq.TempInputStream;
  *
  * @since 2.0
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class LazyRq implements Request {
 
     /**

@@ -52,6 +52,7 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  */
 @EqualsAndHashCode
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class BkBasic implements Back {
 
     /**
@@ -73,11 +74,6 @@ public final class BkBasic implements Back {
      * Remote port header name.
      */
     public static final String REMOTEPORT = "X-Takes-RemotePort";
-
-    /**
-     * How many bytes of a broken request to read away before closing.
-     */
-    private static final long LINGER = 64L * 1024L;
 
     /**
      * Take.
@@ -133,7 +129,7 @@ public final class BkBasic implements Back {
     private static void linger(final InputStream input) throws IOException {
         final byte[] buf = new byte[8192];
         long total = 0L;
-        while (total < BkBasic.LINGER && input.available() > 0) {
+        while (total < 64L * 1024L && input.available() > 0) {
             final int read = input.read(buf);
             if (read < 0) {
                 break;

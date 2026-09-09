@@ -7,6 +7,7 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import org.takes.Request;
 
 /**
@@ -41,7 +42,7 @@ final class Greedy implements Request {
     }
 
     @Override
-    public java.io.InputStream body() throws IOException {
+    public InputStream body() throws IOException {
         return new ByteArrayInputStream(this.consumed());
     }
 

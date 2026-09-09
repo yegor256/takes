@@ -20,6 +20,7 @@ import org.cactoos.io.InputStreamOf;
  * @since 0.25
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RqEmpty extends RqWrap {
 
     /**

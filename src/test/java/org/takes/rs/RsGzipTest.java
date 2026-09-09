@@ -22,7 +22,7 @@ import org.takes.Response;
  *
  * @since 0.10
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class RsGzipTest {
 
     @Test

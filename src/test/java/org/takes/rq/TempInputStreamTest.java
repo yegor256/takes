@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 0.31
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TempInputStreamTest {
 
     @Test

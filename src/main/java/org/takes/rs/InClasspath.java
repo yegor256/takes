@@ -20,6 +20,7 @@ import org.cactoos.text.UncheckedText;
  *
  * @since 0.1
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class InClasspath implements URIResolver {
 
     @Override

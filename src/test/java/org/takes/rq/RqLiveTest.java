@@ -20,7 +20,7 @@ import org.takes.Request;
  *
  * @since 0.9
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class RqLiveTest {
 
     /**
