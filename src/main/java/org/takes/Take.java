@@ -10,7 +10,7 @@ package org.takes;
  * <p>Take is a momentary snapshot of in-server reality, visible to the
  * end user via printable {@link Response}.
  * For example, this is a simple web server
- * that returns "hello, world!" plain text web page:
+ * that returns "hello, world!" plain text web page:</p>
  *
  * <pre> new FtBasic(
  *   new Take() {
@@ -25,7 +25,7 @@ package org.takes;
  *
  * <p>There are a few classes that implement this interface, and you
  * can create your own. But the best way is to start with
- * {@link org.takes.facets.fork.TkFork}, for example:
+ * {@link org.takes.facets.fork.TkFork}, for example:</p>
  *
  * <pre> new FtBasic(
  *   new TkFork(new FkRegex("/", "hello, world!")), 8080
@@ -37,9 +37,9 @@ package org.takes;
  * {@link org.takes.facets.fork.TkFork}.
  * That object will try to find the best suitable "fork" amongst all
  * encapsulated objects. There is only one in the example above &mdash;
- * an instance of {@link org.takes.facets.fork.FkRegex}.
+ * an instance of {@link org.takes.facets.fork.FkRegex}.</p>
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @see <a href="http://www.yegor256.com/2015/03/22/takes-java-web-framework.html">Java Web App Architecture In Takes Framework</a>
  * @since 0.1
@@ -49,6 +49,7 @@ public interface Take {
 
     /**
      * Convert request to response.
+     *
      * @param req Request to process
      * @return Response
      * @throws Exception If fails

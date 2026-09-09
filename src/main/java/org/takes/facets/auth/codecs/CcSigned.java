@@ -20,13 +20,13 @@ import org.takes.facets.auth.Identity;
  * using HMAC or other MAC algorithms. During encoding, it appends a MAC
  * signature to the encoded data. During decoding, it verifies the signature
  * before returning the decoded identity, throwing an IOException if the
- * signature is invalid.
+ * signature is invalid.</p>
  *
  * <p>The resulting format is: [encoded_data][mac_signature] where the
  * MAC signature length depends on the algorithm used (e.g., 32 bytes for
- * HMAC-SHA256).
+ * HMAC-SHA256).</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Key key = new SecretKeySpec("secret".getBytes(), "HmacSHA256");
  * final Codec codec = new CcSigned(new CcPlain(), "HmacSHA256", key);
@@ -56,6 +56,7 @@ public final class CcSigned implements Codec {
 
     /**
      * Ctor.
+     *
      * @param origin Origin codec
      * @param algorithm Algorithm name
      * @param secret Secret key

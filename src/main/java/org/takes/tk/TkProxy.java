@@ -29,7 +29,7 @@ import org.takes.rs.RsWithStatus;
 /**
  * Take that proxies requests to another destination.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.25
  */
@@ -47,6 +47,7 @@ public final class TkProxy implements Take {
 
     /**
      * Ctor.
+     *
      * @param tgt Target to which requests are forwarded
      */
     public TkProxy(final URI tgt) {

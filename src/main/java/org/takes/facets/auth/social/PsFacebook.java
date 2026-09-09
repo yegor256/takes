@@ -39,7 +39,7 @@ import org.takes.rq.RqHref;
  * <p>This class implements the Facebook OAuth authentication flow by handling
  * the callback from Facebook's authorization server. It exchanges the authorization
  * code for an access token, retrieves user information, and creates an identity.
- * The class is immutable and thread-safe.
+ * The class is immutable and thread-safe.</p>
  *
  * @since 0.5
  */
@@ -94,6 +94,7 @@ public final class PsFacebook implements Pass {
 
     /**
      * Constructor with Facebook application credentials.
+     *
      * @param fapp The Facebook application ID
      * @param fkey The Facebook application secret key
      */
@@ -108,6 +109,7 @@ public final class PsFacebook implements Pass {
 
     /**
      * Constructor with custom requestor for testing purposes.
+     *
      * @param frequest The HTTP request for obtaining access token
      * @param frequestor The Facebook web requestor
      * @param fapp The Facebook application ID

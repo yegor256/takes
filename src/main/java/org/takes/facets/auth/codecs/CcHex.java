@@ -18,12 +18,12 @@ import org.takes.facets.auth.Identity;
  * <p>This codec decorator converts binary data to hexadecimal representation
  * using uppercase letters (A-F) for digits 10-15. It automatically inserts
  * hyphens every 4 bytes (8 hex characters) to improve readability of long
- * hex strings, similar to UUID formatting.
+ * hex strings, similar to UUID formatting.</p>
  *
  * <p>The format produces strings like: {@code 48656C6C-6F20576F-726C6421}
- * where hyphens separate every 4 bytes of the original data.
+ * where hyphens separate every 4 bytes of the original data.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Codec codec = new CcHex(new CcPlain());
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -31,7 +31,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded); // hyphen-aware decoding
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -73,6 +73,7 @@ public final class CcHex implements Codec {
 
     /**
      * Ctor.
+     *
      * @param codec Original codec
      */
     public CcHex(final Codec codec) {

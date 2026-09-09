@@ -12,6 +12,7 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link RqRegex}.
+ *
  * @since 0.9
  */
 final class RqRegexTest {

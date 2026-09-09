@@ -10,12 +10,12 @@ package org.takes;
  * <p>An object implementing this interface can be "parsed" using one
  * of the decorators available in {@link org.takes.rq} package. For example,
  * in order to fetch a query parameter you can use
- * {@link org.takes.rq.RqHref}:
+ * {@link org.takes.rq.RqHref}:</p>
  *
  * <pre> final Iterable&lt;String&gt; params =
  *   new RqHref(request).href().param("name");</pre>
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @see Response
  * @see Take

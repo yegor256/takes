@@ -9,6 +9,7 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * Lazily-built head list with the request line and a dummy Host header.
+ *
  * @since 2.0
  */
 final class FakeHeadList extends java.util.AbstractList<String> {
@@ -25,6 +26,7 @@ final class FakeHeadList extends java.util.AbstractList<String> {
 
     /**
      * Ctor.
+     *
      * @param mtd Method
      * @param qry Query
      */

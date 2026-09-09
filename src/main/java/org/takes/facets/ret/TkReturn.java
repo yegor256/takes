@@ -23,7 +23,7 @@ import org.takes.rs.RsRedirect;
  * If a return cookie is present, it redirects the user to the stored location
  * and clears the cookie. If no return cookie exists, it delegates to the
  * original take for normal processing. This enables "return to previous page"
- * functionality in web applications. The class is immutable and thread-safe.
+ * functionality in web applications. The class is immutable and thread-safe.</p>
  *
  * @since 0.20
  */
@@ -43,6 +43,7 @@ public final class TkReturn implements Take {
 
     /**
      * Constructor with default cookie name.
+     *
      * @param take The original take to decorate
      */
     public TkReturn(final Take take) {
@@ -51,6 +52,7 @@ public final class TkReturn implements Take {
 
     /**
      * Constructor with custom cookie name.
+     *
      * @param take The original take to decorate
      * @param name The name of the return location cookie
      */

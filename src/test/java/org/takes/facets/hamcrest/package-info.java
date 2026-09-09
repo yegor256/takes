@@ -5,6 +5,7 @@
 
 /**
  * Matcher, tests.
+ *
  * @since 0.13
  */
 package org.takes.facets.hamcrest;

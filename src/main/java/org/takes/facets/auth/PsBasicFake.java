@@ -13,7 +13,7 @@ import org.takes.misc.Opt;
  * This implementation returns a predefined authentication result based
  * on a boolean condition provided during construction.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.20
  */
@@ -26,6 +26,7 @@ public final class PsBasicFake implements PsBasic.Entry {
 
     /**
      * Ctor.
+     *
      * @param cond Condition
      */
     public PsBasicFake(final boolean cond) {

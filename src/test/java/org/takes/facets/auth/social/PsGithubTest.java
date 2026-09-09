@@ -30,6 +30,7 @@ import org.xembly.Directives;
 
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
+ *
  * @since 0.15.2
  */
 final class PsGithubTest {
@@ -136,6 +137,7 @@ final class PsGithubTest {
 
     /**
      * An inner class for the Take implementation testing.
+     *
      * @since 0.15.2
      */
     private static final class TkFakeLogin implements Take {

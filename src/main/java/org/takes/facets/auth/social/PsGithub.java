@@ -29,7 +29,7 @@ import org.takes.rq.RqHref;
 /**
  * Github OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -73,6 +73,7 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Github app
      * @param gkey Github key
      */
@@ -82,6 +83,7 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Github app
      * @param gkey Github key
      * @param gurl Github OAuth server

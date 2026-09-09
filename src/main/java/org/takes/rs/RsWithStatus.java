@@ -29,9 +29,9 @@ import org.takes.Response;
  * to use the specified status code and reason phrase. It validates
  * that status codes follow RFC 7230 requirements (three digits between
  * 100-999) and provides standard reason phrases for common status codes.
- * Custom reason phrases can also be specified.
+ * Custom reason phrases can also be specified.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -47,6 +47,7 @@ public final class RsWithStatus extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param code Status code
      */
     public RsWithStatus(final int code) {
@@ -55,6 +56,7 @@ public final class RsWithStatus extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param code Status code
      */
@@ -64,6 +66,7 @@ public final class RsWithStatus extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param code Status code
      * @param rsn Reason

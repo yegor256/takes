@@ -15,6 +15,7 @@ import org.takes.rq.RqWithHeader;
 
 /**
  * Test case for {@link RqAuth}.
+ *
  * @since 0.9.12
  */
 final class RqAuthTest {

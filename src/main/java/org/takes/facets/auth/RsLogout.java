@@ -15,7 +15,7 @@ import org.takes.rs.RsWrap;
  * This implementation removes the authentication cookie from the response,
  * effectively logging out the user on the client side.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -25,6 +25,7 @@ public final class RsLogout extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      */
     public RsLogout(final Response res) {
@@ -33,6 +34,7 @@ public final class RsLogout extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param cookie The cookie
      */

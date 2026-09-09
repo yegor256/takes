@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Map view backed by a varargs entry array.
+ *
  * @since 2.0
  */
 @SuppressWarnings("PMD.ArrayIsStoredDirectly")
@@ -21,6 +22,7 @@ final class PairsMap
 
     /**
      * Ctor.
+     *
      * @param ents Entries
      */
     @SafeVarargs

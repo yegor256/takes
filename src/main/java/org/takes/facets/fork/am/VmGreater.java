@@ -6,6 +6,7 @@ package org.takes.facets.fork.am;
 
 /**
  * Matches specified version when it greater than specified one.
+ *
  * @since 1.7.2
  */
 public final class VmGreater implements VersionMatch {
@@ -17,6 +18,7 @@ public final class VmGreater implements VersionMatch {
 
     /**
      * Ctor.
+     *
      * @param ver Version
      */
     public VmGreater(final int ver) {

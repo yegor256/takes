@@ -15,7 +15,7 @@ import org.takes.rq.RqHeaders;
 /**
  * Fork by types accepted by "Accept" HTTP header.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see RsFork
  * @since 0.6
@@ -40,6 +40,7 @@ public final class FkTypes implements Fork {
 
     /**
      * Ctor.
+     *
      * @param list List of types
      * @param resp Response to return
      */
@@ -49,6 +50,7 @@ public final class FkTypes implements Fork {
 
     /**
      * Ctor.
+     *
      * @param list List of types
      * @param that The take to use to build the response to return
      */
@@ -58,6 +60,7 @@ public final class FkTypes implements Fork {
 
     /**
      * Ctor.
+     *
      * @param list List of types
      * @param resp Response to return
      * @param that The take to use to build the response to return

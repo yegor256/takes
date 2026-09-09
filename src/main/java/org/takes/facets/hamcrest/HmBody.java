@@ -32,6 +32,7 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     *
      * @param value Value to test against
      */
     public HmBody(final byte[] value) {
@@ -40,6 +41,7 @@ public final class HmBody<T extends Body> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     *
      * @param value Value to test against
      */
     public HmBody(final InputStream value) {

@@ -18,6 +18,7 @@ import org.takes.rq.RqPrint;
 
 /**
  * Fake body .
+ *
  * @since 0.33
  */
 final class FakeBody implements Body {
@@ -29,6 +30,7 @@ final class FakeBody implements Body {
 
     /**
      * Ctor.
+     *
      * @param parts The Body parts
      */
     FakeBody(final Request... parts) {

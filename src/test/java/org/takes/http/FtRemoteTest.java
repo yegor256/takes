@@ -26,6 +26,7 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link FtRemote}.
+ *
  * @since 0.21
  */
 final class FtRemoteTest {

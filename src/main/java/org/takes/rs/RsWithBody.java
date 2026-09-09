@@ -19,12 +19,12 @@ import org.takes.Response;
  * including strings, byte arrays, input streams, and URLs. It automatically
  * handles Content-Length header updates and provides multiple constructor
  * overloads for different content types. Character encoding can be specified
- * for text content.
+ * for text content.</p>
  *
  * <p>This implementation requires that the {@link Response#head()} method
- * be invoked before reading from the {@link Response#body()} input stream.
+ * be invoked before reading from the {@link Response#body()} input stream.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -35,6 +35,7 @@ public final class RsWithBody extends RsWrap {
     /**
      * Constructs a {@code RsWithBody} with the specified body that will be
      * encoded into UTF-8 by default.
+     *
      * @param body Body
      */
     public RsWithBody(final CharSequence body) {
@@ -43,6 +44,7 @@ public final class RsWithBody extends RsWrap {
 
     /**
      * Constructs a {@code RsWithBody} with the specified body.
+     *
      * @param body Body
      */
     public RsWithBody(final byte[] body) {
@@ -51,6 +53,7 @@ public final class RsWithBody extends RsWrap {
 
     /**
      * Constructs a {@code RsWithBody} with the specified body.
+     *
      * @param body Body
      */
     public RsWithBody(final InputStream body) {
@@ -60,6 +63,7 @@ public final class RsWithBody extends RsWrap {
     /**
      * Constructs a {@code RsWithBody} with the content located at the specified
      * url as body.
+     *
      * @param url URL with body
      */
     public RsWithBody(final URL url) {
@@ -69,6 +73,7 @@ public final class RsWithBody extends RsWrap {
     /**
      * Constructs a {@code RsWithBody} with the specified response and body. The
      * body will be encoded into UTF-8 by default.
+     *
      * @param res Original response
      * @param body Body
      */
@@ -79,6 +84,7 @@ public final class RsWithBody extends RsWrap {
     /**
      * Constructs a {@code RsWithBody} with the specified response and body. The
      * body will be encoded using the specified character set.
+     *
      * @param res Original response
      * @param body Body
      * @param charset The character set to use to serialize the body
@@ -90,6 +96,7 @@ public final class RsWithBody extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param url URL with body
      */
@@ -99,6 +106,7 @@ public final class RsWithBody extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param body Body
      */
@@ -108,6 +116,7 @@ public final class RsWithBody extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param body Body
      */
@@ -118,6 +127,7 @@ public final class RsWithBody extends RsWrap {
     /**
      * Constructs a {@code RsWithBody} with the specified response and body
      * content.
+     *
      * @param res Original response
      * @param body The content of the body
      */

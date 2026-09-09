@@ -5,6 +5,7 @@
 
 /**
  * Cookies, tests.
+ *
  * @since 0.11
  */
 package org.takes.facets.cookies;

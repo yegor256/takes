@@ -28,9 +28,9 @@ import org.cactoos.text.UncheckedText;
  * and manipulating HTTP URIs and HREFs. It supports automatic URL encoding/decoding,
  * query parameter management, path construction, and fragment handling.
  * The implementation handles malformed URIs by automatically encoding problematic
- * characters and provides a fluent interface for URI construction.
+ * characters and provides a fluent interface for URI construction.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Automatic URL encoding and decoding</li>
  * <li>Query parameter addition, removal, and retrieval</li>
@@ -39,7 +39,7 @@ import org.cactoos.text.UncheckedText;
  * <li>Verbose error messages for missing parameters</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.7
  */
@@ -75,6 +75,7 @@ public final class Href implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param txt Text of the link
      */
     public Href(final CharSequence txt) {
@@ -93,6 +94,7 @@ public final class Href implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param link The link
      * @param map Map of params
      * @param frgmnt Fragment part
@@ -109,6 +111,7 @@ public final class Href implements CharSequence {
 
     /**
      * Primary constructor with lazy holders.
+     *
      * @param uri URI scalar
      * @param map Params scalar
      * @param frg Fragment scalar
@@ -149,6 +152,7 @@ public final class Href implements CharSequence {
 
     /**
      * Get path part of the HREF.
+     *
      * @return Path
      * @since 0.9
      */
@@ -158,6 +162,7 @@ public final class Href implements CharSequence {
 
     /**
      * Get URI without params.
+     *
      * @return Bare URI
      * @since 0.14
      */
@@ -171,6 +176,7 @@ public final class Href implements CharSequence {
 
     /**
      * Get query param.
+     *
      * @param key Param name
      * @return Values (could be empty)
      * @since 0.9
@@ -203,6 +209,7 @@ public final class Href implements CharSequence {
 
     /**
      * Add this path to the URI.
+     *
      * @param suffix The suffix
      * @return New HREF
      */
@@ -226,6 +233,7 @@ public final class Href implements CharSequence {
 
     /**
      * Add this extra param.
+     *
      * @param key Key of the param
      * @param value The value
      * @return New HREF
@@ -241,6 +249,7 @@ public final class Href implements CharSequence {
 
     /**
      * Without this query param.
+     *
      * @param key Key of the param
      * @return New HREF
      */

@@ -11,7 +11,7 @@
  * particularly useful during authentication flows. When a user attempts to access
  * pages requiring credentials, you can redirect them to the login page while
  * storing their original destination using {@link org.takes.facets.forward.RsForward}
- * with the original URL:
+ * with the original URL:</p>
  *
  * <pre> if (not_logged_in) {
  *   throw new RsForward(
@@ -22,7 +22,7 @@
  * }</pre>
  *
  * <p>Then, you decorate your application with
- * {@link org.takes.facets.previous.TkPrevious} and that's it.
+ * {@link org.takes.facets.previous.TkPrevious} and that's it.</p>
  *
  * @since 0.10
  */

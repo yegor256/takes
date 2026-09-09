@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
  * <p>Constructs the HTTP Host header from servlet request server
  * information. The Host header is required by HTTP/1.1 and indicates
  * the target host and port for the request. If the port is the default
- * HTTP port (80), it's omitted from the header value.
+ * HTTP port (80), it's omitted from the header value.</p>
  *
  * @since 2.0
  */
@@ -35,6 +35,7 @@ final class HttpHost {
 
     /**
      * Ctor.
+     *
      * @param request Servlet request
      */
     HttpHost(final HttpServletRequest request) {

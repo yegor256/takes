@@ -9,6 +9,7 @@ import java.io.InputStream;
 
 /**
  * Lazy InputStream that prints JSON from a {@link RsJson.Source} on demand.
+ *
  * @since 2.0
  */
 final class JsonBody extends InputStream {
@@ -25,6 +26,7 @@ final class JsonBody extends InputStream {
 
     /**
      * Ctor.
+     *
      * @param source JSON source
      */
     JsonBody(final RsJson.Source source) {

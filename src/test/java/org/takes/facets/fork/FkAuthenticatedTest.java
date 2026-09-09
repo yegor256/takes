@@ -17,6 +17,7 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkAuthenticated}.
+ *
  * @since 0.9
  */
 final class FkAuthenticatedTest {

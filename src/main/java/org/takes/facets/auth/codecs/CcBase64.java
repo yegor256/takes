@@ -19,13 +19,13 @@ import org.takes.facets.auth.Identity;
  * <p>This codec decorator applies Base64 encoding to make binary data
  * safe for transmission over text-based protocols. It wraps another codec
  * and converts its binary output to Base64-encoded strings, which can be
- * safely transmitted via HTTP headers, URLs, or stored in text formats.
+ * safely transmitted via HTTP headers, URLs, or stored in text formats.</p>
  *
  * <p>During decoding, it validates that all input characters are legal
  * Base64 characters before attempting to decode, throwing a
- * {@link DecodingException} if illegal characters are found.
+ * {@link DecodingException} if illegal characters are found.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Codec codec = new CcBase64(new CcCompact());
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -33,7 +33,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded); // validated and decoded
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.13
  */
@@ -53,6 +53,7 @@ public final class CcBase64 implements Codec {
 
     /**
      * Ctor.
+     *
      * @param codec Original codec
      */
     public CcBase64(final Codec codec) {

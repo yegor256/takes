@@ -14,9 +14,9 @@ import org.takes.Request;
  * <p>This decorator appends one additional header to an existing request.
  * It provides convenient constructor overloads for adding headers either
  * as separate name and value parameters or as a complete header string.
- * The implementation delegates to RqWithHeaders for the actual processing.
+ * The implementation delegates to RqWithHeaders for the actual processing.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -25,6 +25,7 @@ public final class RqWithHeader extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @param name Header name
      * @param value Header value
@@ -36,6 +37,7 @@ public final class RqWithHeader extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @param header Header to add
      */

@@ -18,6 +18,7 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test case for {@link TkSecure}.
+ *
  * @since 0.11
  */
 final class TkSecureTest {

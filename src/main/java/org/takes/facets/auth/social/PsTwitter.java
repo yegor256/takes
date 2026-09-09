@@ -29,7 +29,7 @@ import org.takes.misc.Opt;
 /**
  * Twitter OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16
  */
@@ -74,6 +74,7 @@ public final class PsTwitter implements Pass {
 
     /**
      * Ctor.
+     *
      * @param name Twitter app
      * @param keys Twitter key
      */
@@ -88,6 +89,7 @@ public final class PsTwitter implements Pass {
 
     /**
      * Ctor with proper requestor for testing purposes.
+     *
      * @param tkn HTTP request for getting token
      * @param creds HTTP request for verifying credentials
      * @param name Facebook app

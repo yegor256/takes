@@ -32,9 +32,9 @@ import org.takes.rs.RsWithStatus;
  * sequentially. It reads HTTP requests from the socket's input stream,
  * processes them through a {@link Take}, and writes the responses back
  * to the socket's output stream. It also automatically adds socket-related
- * headers to each request for debugging and monitoring purposes.
+ * headers to each request for debugging and monitoring purposes.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Handles keep-alive connections by processing multiple requests
  * on the same socket</li>
@@ -47,7 +47,7 @@ import org.takes.rs.RsWithStatus;
  * <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -86,6 +86,7 @@ public final class BkBasic implements Back {
 
     /**
      * Ctor.
+     *
      * @param tks Take
      */
     public BkBasic(final Take tks) {

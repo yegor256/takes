@@ -19,12 +19,14 @@ import org.takes.rq.RqWrap;
 /**
  * This class is using a decorator pattern for representing a fake HTTP
  * multipart request.
+ *
  * @since 0.33
  */
 final class FakeMultipartRequest extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param rqst The Request object
      * @param list The sequence of dispositions
      * @throws IOException if can't process requests
@@ -36,6 +38,7 @@ final class FakeMultipartRequest extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param rqst The Request object
      * @param body The body of dispositions
      * @throws IOException if can't process requests

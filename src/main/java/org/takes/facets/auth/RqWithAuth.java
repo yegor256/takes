@@ -15,9 +15,9 @@ import org.takes.rq.RqWrap;
  *
  * <p>This class is particularly useful for unit testing, when you need to
  * test a take that requires a request to contain an already
- * authenticated user. It adds the identity information to the request headers.
+ * authenticated user. It adds the identity information to the request headers.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.18
  */
@@ -26,6 +26,7 @@ public final class RqWithAuth extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param urn URN of the tester
      * @throws IOException If fails
      */
@@ -35,6 +36,7 @@ public final class RqWithAuth extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param identity Identity
      * @throws IOException If fails
      */
@@ -44,6 +46,7 @@ public final class RqWithAuth extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param urn URN of the tester
      * @param req Request
      * @throws IOException If fails
@@ -54,6 +57,7 @@ public final class RqWithAuth extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param identity Identity
      * @param req Request
      * @throws IOException If fails
@@ -65,6 +69,7 @@ public final class RqWithAuth extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param identity Identity
      * @param header Header name
      * @param req Request

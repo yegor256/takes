@@ -30,7 +30,7 @@ import org.takes.rs.RsWithHeader;
  * This implementation validates user credentials provided via the HTTP Authorization
  * header using Base64-encoded username and password pairs.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.20
  * @todo #863:30min Continue removing nulls from the code base, there are still
@@ -56,6 +56,7 @@ public final class PsBasic implements Pass {
 
     /**
      * Ctor.
+     *
      * @param rlm Realm
      * @param basic Entry
      */
@@ -123,6 +124,7 @@ public final class PsBasic implements Pass {
      * Entry interface that validates user credentials.
      * Implementations of this interface determine whether a given
      * username and password combination is valid for authentication.
+     *
      * @since 0.20
      */
     @FunctionalInterface
@@ -130,6 +132,7 @@ public final class PsBasic implements Pass {
 
         /**
          * Check if the user credentials are valid.
+         *
          * @param user Username
          * @param pwd Password
          * @return Identity if credentials are valid, empty otherwise

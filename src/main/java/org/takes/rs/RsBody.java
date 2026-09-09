@@ -29,9 +29,9 @@ import org.cactoos.text.UncheckedText;
  * body sources including URLs, byte arrays, input streams, and temporary files.
  * Each implementation handles content length calculation and stream provision
  * according to its specific source type. The interface extends Input to
- * provide Cactoos integration.
+ * provide Cactoos integration.</p>
  *
- * <p>Implementations include:
+ * <p>Implementations include:</p>
  * <ul>
  * <li>Url - content from URL sources</li>
  * <li>ByteArray - content from byte arrays</li>
@@ -48,6 +48,7 @@ interface RsBody extends Input {
 
     /**
      * Gives the length of the stream.
+     *
      * @return The length of the stream
      * @throws IOException in case the length of the stream could not be
      *  retrieved
@@ -56,6 +57,7 @@ interface RsBody extends Input {
 
     /**
      * Content of a body based on an {@link java.net.URL}.
+     *
      * @since 0.32
      */
     final class Url implements RsBody {
@@ -67,6 +69,7 @@ interface RsBody extends Input {
 
         /**
          * Constructs an {@code URL} with the specified {@link java.net.URL}.
+         *
          * @param content The {@link java.net.URL} of the content
          */
         Url(final java.net.URL content) {
@@ -88,6 +91,7 @@ interface RsBody extends Input {
 
     /**
      * Content of a body based on a byte array.
+     *
      * @since 0.32
      */
     final class ByteArray implements RsBody {
@@ -99,6 +103,7 @@ interface RsBody extends Input {
 
         /**
          * Constructs an {@code ByteArray} with the specified byte array.
+         *
          * @param content The content of the body
          */
         ByteArray(final byte[] content) {
@@ -120,6 +125,7 @@ interface RsBody extends Input {
 
     /**
      * Content of a body based on a CharSequence and a Charset.
+     *
      * @since 2.0
      */
     final class Text implements RsBody {
@@ -136,6 +142,7 @@ interface RsBody extends Input {
 
         /**
          * Ctor.
+         *
          * @param body The content of the body
          * @param chr Charset to encode with
          */
@@ -171,6 +178,7 @@ interface RsBody extends Input {
 
     /**
      * The content of the body based on an {@link InputStream}.
+     *
      * @since 0.32
      */
     final class Stream implements RsBody {
@@ -187,6 +195,7 @@ interface RsBody extends Input {
 
         /**
          * Constructs an {@code Stream} with the specified {@link InputStream}.
+         *
          * @param input The content of the body as stream
          */
         Stream(final InputStream input) {
@@ -220,7 +229,7 @@ interface RsBody extends Input {
      * <p><b>The content of the Body will be stored into a temporary
      * file to be able to read it as many times as we want so use it only
      * for large content, for small content use {@link RsBody.ByteArray}
-     * instead.</b>
+     * instead.</b></p>
      *
      * @since 0.32
      */
@@ -238,6 +247,7 @@ interface RsBody extends Input {
 
         /**
          * Constructs a {@code TempFile} with the specified {@link RsBody}.
+         *
          * @param content The content of the body to store into a temporary file
          */
         TempFile(final RsBody content) {

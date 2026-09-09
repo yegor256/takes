@@ -11,6 +11,7 @@ import org.takes.Request;
 
 /**
  * Request that lazily consumes the body of another request once.
+ *
  * @since 2.0
  */
 final class Greedy implements Request {
@@ -27,6 +28,7 @@ final class Greedy implements Request {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     Greedy(final Request req) {

@@ -12,7 +12,7 @@ import org.takes.rs.xe.XeWrap;
 /**
  * Xembly source to create a LINK to Google OAuth page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.9
  */
@@ -21,6 +21,7 @@ public final class XeGoogleLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param app Facebook application ID
      * @throws IOException If fails
@@ -32,6 +33,7 @@ public final class XeGoogleLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param app Google application ID
      * @param redir Redirect URI
@@ -45,6 +47,7 @@ public final class XeGoogleLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param app Google application ID
      * @param rel Related

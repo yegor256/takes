@@ -39,13 +39,13 @@ import org.takes.rq.RqMethod;
  * <p>This class provides a test double for {@link HttpServletRequest} that
  * wraps a Takes {@link Request} object. It's designed primarily for unit
  * testing scenarios where you need to simulate servlet container behavior
- * without running an actual servlet container.
+ * without running an actual servlet container.</p>
  *
  * <p>The implementation extracts HTTP information from the Takes request
  * and presents it through the standard servlet API. This allows testing
- * of servlet-based code using Takes' lightweight request representations.
+ * of servlet-based code using Takes' lightweight request representations.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Converts Takes {@link Request} to servlet {@link HttpServletRequest}</li>
  * <li>Supports standard HTTP methods, headers, and URL parameters</li>
@@ -56,7 +56,7 @@ import org.takes.rq.RqMethod;
  *
  * <p>Many methods throw {@link UnsupportedOperationException} as they
  * represent servlet container features that are not relevant for basic
- * HTTP request testing (sessions, dispatching, async processing, etc.).
+ * HTTP request testing (sessions, dispatching, async processing, etc.).</p>
  *
  * @since 1.15
  */
@@ -73,6 +73,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     /**
      * Ctor.
+     *
      * @param req A Takes Request object
      */
     public HttpServletRequestFake(final Request req) {
@@ -297,6 +298,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
     /**
      * Checks whether the requested session ID came in as part of the request
      * URL.
+     *
      * @return True, if the requested session ID came in as part of the request
      *  URL
      * @deprecated Use isRequestedSessionIdFromURL() instead.
@@ -441,6 +443,7 @@ public final class HttpServletRequestFake implements HttpServletRequest {
 
     /**
      * Gets the real path corresponding to the given virtual path.
+     *
      * @param path The path
      * @return The real path, or null if the translation cannot be performed
      * @deprecated Use ServletContext.getRealPath(String) instead.

@@ -16,7 +16,7 @@ import org.takes.rq.RqMethod;
 /**
  * Take that makes all not-found exceptions location aware.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.10
  */
@@ -26,6 +26,7 @@ public final class TkVerbose extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Original take
      */
     public TkVerbose(final Take take) {

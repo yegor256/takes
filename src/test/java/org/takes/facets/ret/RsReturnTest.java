@@ -17,6 +17,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsReturn}.
+ *
  * @since 0.20
  */
 final class RsReturnTest {

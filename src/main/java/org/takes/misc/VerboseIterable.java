@@ -13,9 +13,9 @@ import org.cactoos.Text;
  * <p>This decorator wraps an existing iterable and provides custom error messages
  * when iteration fails or when attempting to access elements that don't exist.
  * It delegates to VerboseIterator for the actual verbose error handling during
- * iteration operations.
+ * iteration operations.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @param <T> Type of item
  * @since 0.10
@@ -34,6 +34,7 @@ public final class VerboseIterable<T> implements Iterable<T> {
 
     /**
      * Ctor.
+     *
      * @param iter Original iterator
      * @param msg Error message
      */

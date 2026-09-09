@@ -11,6 +11,7 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * Runnable main method.
+ *
  * @since 0.32.5
  */
 final class MainMethod implements Runnable {
@@ -27,6 +28,7 @@ final class MainMethod implements Runnable {
 
     /**
      * Ctor.
+     *
      * @param method Main method
      * @param passed Additional arguments to be passed to the main method
      */

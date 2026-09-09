@@ -16,7 +16,7 @@ import org.takes.tk.TkFixed;
 /**
  * Fork by Content-type accepted by "Content-Type" HTTP header.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see RsFork
  * @since 1.0
@@ -36,6 +36,7 @@ public final class FkContentType implements Fork {
 
     /**
      * Ctor.
+     *
      * @param atype Accepted type
      * @param response Response to return
      */
@@ -45,6 +46,7 @@ public final class FkContentType implements Fork {
 
     /**
      * Ctor.
+     *
      * @param atype Accepted type
      * @param take Take to handle the request dynamically
      */

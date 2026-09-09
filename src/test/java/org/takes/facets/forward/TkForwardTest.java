@@ -15,6 +15,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkForward}.
+ *
  * @since 0.2
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

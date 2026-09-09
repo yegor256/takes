@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Identity}.
+ *
  * @since 0.17
  */
 final class IdentityTest {

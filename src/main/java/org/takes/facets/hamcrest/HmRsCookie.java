@@ -17,14 +17,14 @@ import org.takes.Response;
  * <p>Verifies only the cookie's name and value, ignoring attributes such as
  * {@code Path}, {@code Domain}, {@code HttpOnly}, {@code Secure}, or
  * {@code Expires}. Use it instead of a hand-rolled {@link HmHeader}
- * assertion against {@code Set-Cookie}:
+ * assertion against {@code Set-Cookie}:</p>
  *
  * <pre> MatcherAssert.assertThat(
  *     response,
  *     new HmRsCookie("session", "abc")
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
@@ -52,6 +52,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
+     *
      * @param cookie Exact cookie name
      * @param val Exact cookie value
      */
@@ -61,6 +62,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
+     *
      * @param cookie Exact cookie name
      * @param val Cookie value matcher
      */
@@ -70,6 +72,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
+     *
      * @param cookie Cookie name matcher
      * @param val Cookie value matcher
      */

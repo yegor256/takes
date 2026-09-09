@@ -15,7 +15,7 @@ import org.takes.misc.Opt;
  * This implementation tries each pass in sequence until one succeeds,
  * providing a fallback mechanism for authentication.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -29,6 +29,7 @@ public final class PsChain implements Pass {
 
     /**
      * Ctor.
+     *
      * @param list Passes
      */
     public PsChain(final Pass... list) {
@@ -37,6 +38,7 @@ public final class PsChain implements Pass {
 
     /**
      * Ctor.
+     *
      * @param list Passes
      */
     public PsChain(final Iterable<Pass> list) {

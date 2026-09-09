@@ -15,6 +15,7 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqGreedy}.
+ *
  * @since 0.16
  */
 final class RqGreedyTest {

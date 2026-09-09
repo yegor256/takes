@@ -30,7 +30,7 @@ import org.takes.rs.RsJson;
 /**
  * Test case for {@link PsGoogle}.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16.3
  */

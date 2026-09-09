@@ -26,9 +26,9 @@ import org.takes.Response;
  * including both headers and body content. It provides methods to print
  * the complete response, just the headers, or just the body to various
  * output destinations. The implementation validates HTTP format compliance
- * and handles proper CRLF line endings as required by HTTP specification.
+ * and handles proper CRLF line endings as required by HTTP specification.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -52,6 +52,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      */
     public RsPrint(final Response res) {
@@ -65,6 +66,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Print it into string.
+     *
      * @return Entire HTTP response
      * @throws IOException If fails
      */
@@ -76,6 +78,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Print body into string.
+     *
      * @return Entire body of HTTP response
      * @throws IOException If fails
      */
@@ -87,6 +90,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Print head into string.
+     *
      * @return Entire head of HTTP response
      * @throws IOException If fails
      * @since 0.10
@@ -99,6 +103,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Print it into output stream.
+     *
      * @param output Output to print into
      * @throws IOException If fails
      */
@@ -109,6 +114,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Print it into output stream.
+     *
      * @param output Output to print into
      * @throws IOException If fails
      * @since 0.10
@@ -151,6 +157,7 @@ public final class RsPrint extends RsWrap implements Text {
 
     /**
      * Print it into output stream.
+     *
      * @param output Output to print into
      * @throws IOException If fails
      */

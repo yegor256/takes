@@ -11,7 +11,7 @@ import org.xembly.Directive;
 /**
  * Wrap of Xembly source.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.4
  */
@@ -25,6 +25,7 @@ public class XeWrap implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param src Original source
      */
     public XeWrap(final XeSource src) {

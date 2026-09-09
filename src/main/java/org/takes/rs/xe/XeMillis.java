@@ -13,7 +13,7 @@ import org.xembly.Directives;
 /**
  * Xembly source to create "millis" element at the root.
  *
- * <p>Add this Xembly source to your page like this:
+ * <p>Add this Xembly source to your page like this:</p>
  *
  * <pre> new RsXembly(
  *   new XeStylesheet("/xsl/home.xsl"),
@@ -25,7 +25,7 @@ import org.xembly.Directives;
  *   )
  * )</pre>
  *
- * <p>And expect this attribute in the XML:
+ * <p>And expect this attribute in the XML:</p>
  *
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
@@ -34,7 +34,7 @@ import org.xembly.Directives;
  * &lt;/page&gt;
  * </pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -53,6 +53,7 @@ public final class XeMillis implements XeSource {
 
     /**
      * Ctor.
+     *
      * @since 1.4
      */
     public XeMillis() {
@@ -61,6 +62,7 @@ public final class XeMillis implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param fin Is it the finish?
      */
     public XeMillis(final boolean fin) {
@@ -69,6 +71,7 @@ public final class XeMillis implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param elm Element name
      * @param fin Is it the finish?
      */

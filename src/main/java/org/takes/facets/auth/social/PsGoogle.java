@@ -28,7 +28,7 @@ import org.takes.rq.RqHref;
 /**
  * Google OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.9
  */
@@ -92,6 +92,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Google app
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
@@ -108,6 +109,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Google app
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)

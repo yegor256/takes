@@ -21,17 +21,17 @@ import org.takes.Response;
  * It validates header format according to RFC 7230 and provides multiple
  * constructor overloads for different header specification methods.
  * The decorator does not check for duplicate headers - it simply adds
- * the new header to the existing ones.
+ * the new header to the existing ones.</p>
  *
  * <p><strong>Note:</strong> If you need to replace an existing header
  * rather than add a duplicate, combine this decorator with
- * {@link org.takes.rs.RsWithoutHeader}:
+ * {@link org.takes.rs.RsWithoutHeader}:</p>
  * <pre>new RsWithHeader(
  *   new RsWithoutHeader(res, "Content-Type"),
  *   "Content-Type", "application/json"
  * )</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -48,6 +48,7 @@ public final class RsWithHeader extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param hdr Header
      * @since 0.8
      */
@@ -57,6 +58,7 @@ public final class RsWithHeader extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param name Header name
      * @param value Header value
      * @since 0.8
@@ -67,6 +69,7 @@ public final class RsWithHeader extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param name Header name
      * @param value Header value
@@ -78,6 +81,7 @@ public final class RsWithHeader extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param header Header to add
      */
@@ -87,6 +91,7 @@ public final class RsWithHeader extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param header Header to add
      */

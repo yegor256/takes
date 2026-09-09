@@ -13,6 +13,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcSigned}.
+ *
  * @since 1.11.1
  */
 final class CcSignedTest {

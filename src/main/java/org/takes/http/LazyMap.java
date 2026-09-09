@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Map view that lazily parses the command-line arguments on first access.
+ *
  * @since 2.0
  */
 final class LazyMap extends java.util.AbstractMap<String, String> {
@@ -24,6 +25,7 @@ final class LazyMap extends java.util.AbstractMap<String, String> {
 
     /**
      * Ctor.
+     *
      * @param source Source arguments
      */
     LazyMap(final Iterable<String> source) {

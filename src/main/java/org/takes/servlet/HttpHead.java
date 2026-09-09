@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
  *
  * <p>Constructs the HTTP request line in the format "METHOD URI HTTP/1.1"
  * from servlet request information. This represents the first line of
- * an HTTP request as defined by RFC 7230.
+ * an HTTP request as defined by RFC 7230.</p>
  *
  * @since 2.0
  */
@@ -29,6 +29,7 @@ final class HttpHead {
 
     /**
      * Ctor.
+     *
      * @param request Servlet request
      */
     HttpHead(final HttpServletRequest request) {

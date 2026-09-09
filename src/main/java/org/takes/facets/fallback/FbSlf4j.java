@@ -17,7 +17,7 @@ import org.takes.rq.RqMethod;
 /**
  * Fallback that logs all problems through SFL4J.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.25
  */

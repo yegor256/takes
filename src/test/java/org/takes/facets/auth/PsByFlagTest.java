@@ -23,6 +23,7 @@ import org.takes.rs.RsWithType;
 
 /**
  * Test case for {@link PsByFlag}.
+ *
  * @since 0.10
  */
 final class PsByFlagTest {

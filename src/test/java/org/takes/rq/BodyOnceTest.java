@@ -15,6 +15,7 @@ import org.takes.Request;
 
 /**
  * Test case for {@link BodyOnce}.
+ *
  * @since 2.0
  */
 final class BodyOnceTest {

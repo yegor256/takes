@@ -13,6 +13,7 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test case for {@link PsChain}.
+ *
  * @since 0.11
  */
 final class PsChainTest {

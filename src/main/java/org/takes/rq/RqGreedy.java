@@ -14,9 +14,9 @@ import org.takes.Request;
  * <p>This decorator reads and stores the complete request body upon construction,
  * allowing the body to be read multiple times. This is useful when the request
  * body needs to be processed by multiple components or when working with
- * input streams that don't support mark/reset operations.
+ * input streams that don't support mark/reset operations.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.10
  */
@@ -25,6 +25,7 @@ public final class RqGreedy extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @throws IOException If fails
      */

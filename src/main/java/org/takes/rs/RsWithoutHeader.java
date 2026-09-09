@@ -19,9 +19,9 @@ import org.takes.Response;
  * <p>This decorator filters out all headers with the specified name
  * from the original response. The header name comparison is performed
  * case-insensitively, following HTTP header naming conventions.
- * The body content remains unchanged.
+ * The body content remains unchanged.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.9
  */
@@ -31,6 +31,7 @@ public final class RsWithoutHeader extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param name Header name
      */

@@ -7,7 +7,7 @@
  * Hamcrest matchers for testing Takes components.
  *
  * <p>This package contains Hamcrest matchers for all key interfaces
- * in the framework. Use them as shown in this example:
+ * in the framework. Use them as shown in this example:</p>
  *
  * <pre> public class FooTest {
  *   &#64;Test

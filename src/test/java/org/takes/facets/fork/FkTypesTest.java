@@ -14,6 +14,7 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkTypes}.
+ *
  * @since 0.9
  */
 final class FkTypesTest {

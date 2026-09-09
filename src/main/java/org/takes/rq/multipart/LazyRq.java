@@ -15,6 +15,7 @@ import org.takes.rq.TempInputStream;
 
 /**
  * Lazily-built file-backed request.
+ *
  * @since 2.0
  */
 final class LazyRq implements Request {
@@ -31,6 +32,7 @@ final class LazyRq implements Request {
 
     /**
      * Ctor.
+     *
      * @param src Source file
      */
     LazyRq(final File src) {

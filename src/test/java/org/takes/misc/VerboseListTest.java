@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * Tests for {@link VerboseList}.
+ *
  * @since 0.32
  */
 @ExtendWith(MockitoExtension.class)

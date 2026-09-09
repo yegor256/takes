@@ -16,12 +16,12 @@ import org.takes.rs.RsEmpty;
  * <p>This {@link Take} implementation always returns an empty HTTP response
  * with status 200 OK and no body content. It is useful for endpoints that
  * need to respond successfully but do not need to return any data, such as
- * health checks, pings, or acknowledgment endpoints.
+ * health checks, pings, or acknowledgment endpoints.</p>
  *
  * <p>The response includes standard HTTP headers but no body content.
- * This is equivalent to returning HTTP 200 OK with Content-Length: 0.
+ * This is equivalent to returning HTTP 200 OK with Content-Length: 0.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Health check endpoint
  * new TkFork(
@@ -34,7 +34,7 @@ import org.takes.rs.RsEmpty;
  * );
  * }</pre>
  *
- * <p>Common use cases:
+ * <p>Common use cases:</p>
  * <ul>
  * <li>Health check endpoints that just need to return 200 OK</li>
  * <li>Ping endpoints for service availability testing</li>
@@ -43,7 +43,7 @@ import org.takes.rs.RsEmpty;
  * <li>Default handlers for unimplemented endpoints</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */

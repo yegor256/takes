@@ -18,7 +18,7 @@ import org.takes.Response;
  * <p>This "matcher" tests given response body,
  * assuming that it has text content.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
@@ -26,6 +26,7 @@ public final class HmRsTextBody extends AbstractHmTextBody<Response> {
 
     /**
      * Ctor with equalTo matcher and default charset.
+     *
      * @param expected String to test against
      */
     public HmRsTextBody(final String expected) {
@@ -34,6 +35,7 @@ public final class HmRsTextBody extends AbstractHmTextBody<Response> {
 
     /**
      * Ctor with charset set to default one.
+     *
      * @param bdm Text body matcher
      */
     public HmRsTextBody(final Matcher<String> bdm) {
@@ -42,6 +44,7 @@ public final class HmRsTextBody extends AbstractHmTextBody<Response> {
 
     /**
      * Ctor.
+     *
      * @param bdm Text body matcher
      * @param charset Text body charset
      */

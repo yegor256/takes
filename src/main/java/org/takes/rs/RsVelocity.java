@@ -26,9 +26,9 @@ import org.cactoos.io.WriterTo;
  * <p>This decorator processes Apache Velocity templates with provided
  * parameters to generate dynamic content. It supports templates from
  * various sources including strings, URLs, and input streams. Template
- * parameters can be provided as key-value pairs or maps.
+ * parameters can be provided as key-value pairs or maps.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>public final class TkHelp implements Take {
  *   &#64;Override
  *   public Response act(final Request req) {
@@ -41,7 +41,7 @@ import org.cactoos.io.WriterTo;
  *   }
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -51,6 +51,7 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param template Template
      * @param params List of params
      * @since 0.11
@@ -65,6 +66,7 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param template Template
      * @param params Entries
      */
@@ -75,6 +77,7 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param template Template
      * @param params Map of params
      */
@@ -85,6 +88,7 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param folder Template folder
      * @param template Template
      * @param params Map of params
@@ -96,6 +100,7 @@ public final class RsVelocity extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param folder Template folder
      * @param template Template
      * @param params Map of params

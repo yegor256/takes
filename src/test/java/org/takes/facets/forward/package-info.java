@@ -5,6 +5,7 @@
 
 /**
  * Forward, tests.
+ *
  * @since 0.2
  */
 package org.takes.facets.forward;

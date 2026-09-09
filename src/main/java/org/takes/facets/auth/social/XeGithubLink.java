@@ -12,7 +12,7 @@ import org.takes.rs.xe.XeWrap;
 /**
  * Xembly source to create a LINK to GitHub OAuth page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -21,6 +21,7 @@ public final class XeGithubLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param app GitHub application ID
      * @throws IOException If fails
@@ -32,6 +33,7 @@ public final class XeGithubLink extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param app GitHub application ID
      * @param rel Related

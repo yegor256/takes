@@ -24,9 +24,9 @@ import org.takes.Response;
  * functional interfaces (scalars) for head and body content. It accepts
  * suppliers that are called when the respective content is needed, enabling
  * lazy evaluation and custom response construction. This is particularly
- * useful for building responses dynamically.
+ * useful for building responses dynamically.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
@@ -44,6 +44,7 @@ public final class ResponseOf implements Response {
 
     /**
      * Ctor.
+     *
      * @param head Iterable head value
      * @param body InputStream body value
      */
@@ -53,6 +54,7 @@ public final class ResponseOf implements Response {
 
     /**
      * Ctor.
+     *
      * @param head Scalar to provide head value
      * @param body Scalar to provide body value
      */

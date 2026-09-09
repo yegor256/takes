@@ -13,6 +13,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsWithCookie}.
+ *
  * @since 0.9.6
  */
 final class RsWithCookieTest {

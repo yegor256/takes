@@ -13,9 +13,9 @@ import org.takes.Request;
  *
  * <p>This decorator wraps the request body's input stream with a
  * BufferedInputStream, which can improve performance when the body
- * is read in small chunks by providing internal buffering.
+ * is read in small chunks by providing internal buffering.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16
  */
@@ -24,6 +24,7 @@ public final class RqBuffered extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     public RqBuffered(final Request req) {
