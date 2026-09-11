@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 477.547525791
+  seconds: 590.303130994
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-10 04:02:25.317733689 Z
+  when: 2026-09-11 04:04:13.981385915 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -75983,18 +75983,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 445
-  closures_were_checked: 1346
+  assignees_were_scanned: 718
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20576083528
+  events_were_scanned: 20732496991
   issues_were_scanned: 1292
-  labels_were_scanned: 388
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1117
-  min_pull_was_found: 844
+  min_issue_was_found: 1133
+  min_pull_was_found: 846
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 826
   what: iterate
   where: github
 - _id: 20665
@@ -81292,18 +81292,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-09-07 04:01:41.810347690 Z
-- _id: 21035
-  _job: 91039
-  _time: 2026-09-07 04:04:55.035567345 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  analyzers: 18
-  text: |-
-    The average number of builds per week (171.8) is increasing (R=0.25).
-    The average number of commits per week (7.9) is increasing (R=0.12).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is increasing (R=0.41).
-  what: assessment
-  when: 2026-09-07 04:04:55.048504093 Z
 - _id: 21036
   _job: 34308830691
   _time: 2026-09-09 03:55:06.363737325 Z
@@ -81348,3 +81336,56 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-09-10 03:55:59.379439510 Z
+- _id: 21039
+  _job: 91675
+  _time: 2026-09-10 04:02:46.055697816 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (172.0) is increasing (R=0.26).
+    The average number of commits per week (8.0) is increasing (R=0.11).
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is increasing (R=0.48).
+  what: assessment
+  when: 2026-09-10 04:02:46.070926733 Z
+- _id: 21040
+  _job: 34560134937
+  _time: 2026-09-11 03:55:16.804988619 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1730 has been "pull-was-closed".
+  failed_builds: 3
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1730
+  repository: 28924109
+  review: 2026-08-14 03:24:43.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-09-10 04:04:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21041
+  _job: 34560134937
+  _time: 2026-09-11 03:56:35.355102921 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3920
+  total_contributors: 89
+  total_files: 594
+  total_forks: 215
+  total_issues: 757
+  total_pulls: 1002
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-09-11 03:56:35.257132588 Z
