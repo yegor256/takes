@@ -16,7 +16,6 @@ import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsVelocity}.
- *
  * @since 0.1
  */
 final class RsVelocityTest {

@@ -10,7 +10,7 @@
  * functionality using cookies. It includes response decorators for storing
  * return locations and take decorators for handling return navigation,
  * enabling seamless user experience in web applications where users need
- * to return to their previous location after completing an action.</p>
+ * to return to their previous location after completing an action.
  *
  * @since 0.20
  */

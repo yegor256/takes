@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqWithBody}.
- *
  * @since 0.22
  */
 final class RqWithRsBodyTest {

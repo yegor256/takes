@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link AbstractHmTextBody}.
- *
  * @since 2.0
  */
 final class HmTextRsBodyTest {
@@ -56,14 +55,12 @@ final class HmTextRsBodyTest {
 
     /**
      * Fake child of {@link AbstractHmTextBody} for the test.
-     *
      * @since 2.0
      */
     private static final class HmTextBodyFake extends AbstractHmTextBody<Text> {
 
         /**
          * Ctor.
-         *
          * @param body Body matcher
          * @param charset Charset of the text
          */

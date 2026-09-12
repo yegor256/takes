@@ -23,7 +23,7 @@ import org.takes.rs.RsWithoutHeader;
  * <p>This class creates HTTP redirect responses using status codes like 303 (See Other)
  * and adds appropriate Location headers. It combines the functionality of an HTTP
  * response with that of an exception, allowing it to be thrown and caught by
- * {@link TkForward} decorators. The class is immutable and thread-safe.</p>
+ * {@link TkForward} decorators. The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -60,7 +60,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Constructor with response and default home location.
-     *
      * @param res The original response to decorate
      */
     public RsForward(final Response res) {
@@ -69,7 +68,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Constructor that copies from another RsForward response.
-     *
      * @param res The RsForward response to copy from
      * @since 0.14
      */
@@ -79,7 +77,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Constructor with response and custom location.
-     *
      * @param res The original response to decorate
      * @param loc The location URL for redirection
      */
@@ -89,7 +86,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Constructor that copies RsForward response with new location.
-     *
      * @param res The RsForward response to copy from
      * @param loc The location URL for redirection
      * @since 0.14
@@ -100,7 +96,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Ctor.
-     *
      * @param loc Location
      */
     public RsForward(final CharSequence loc) {
@@ -109,7 +104,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param loc Location
      */
@@ -119,7 +113,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Ctor.
-     *
      * @param res Original
      * @param code HTTP status code
      * @since 0.17
@@ -130,7 +123,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Ctor.
-     *
      * @param res Original
      * @param code HTTP status code
      * @param loc Location
@@ -143,7 +135,6 @@ public class RsForward extends HttpException implements Response {
 
     /**
      * Ctor.
-     *
      * @param res Original
      * @param code HTTP status code
      * @param loc Location

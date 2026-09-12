@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link VerboseIterator}.
- *
  * @since 0.15.1
  */
 final class VerboseIteratorTest {

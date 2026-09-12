@@ -10,9 +10,9 @@
  * Xembly library. Xembly is an imperative language for XML manipulation
  * that allows building XML documents through a series of directives.
  * The classes in this package implement the XeSource interface to generate
- * Xembly directives that are then converted to XML responses.</p>
+ * Xembly directives that are then converted to XML responses.
  *
- * <p>Key components include:</p>
+ * <p>Key components include:
  * <ul>
  * <li>Core interfaces: XeSource for generating Xembly directives</li>
  * <li>Response builders: RsXembly for creating XML responses from sources</li>

@@ -6,7 +6,6 @@ package org.takes.rq.form;
 
 /**
  * CharSequence whose value is computed lazily from URL-encoded parameters.
- *
  * @since 2.0
  */
 @SuppressWarnings("PMD.ArrayIsStoredDirectly")
@@ -19,7 +18,6 @@ final class FakeFormBody implements CharSequence {
 
     /**
      * Ctor.
-     *
      * @param all Parameters
      */
     FakeFormBody(final String... all) {

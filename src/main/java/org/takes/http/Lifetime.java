@@ -6,7 +6,6 @@ package org.takes.http;
 
 /**
  * Lifetime exceeded exit.
- *
  * @since 0.32.5
  */
 final class Lifetime implements Exit {
@@ -23,7 +22,6 @@ final class Lifetime implements Exit {
 
     /**
      * Ctor.
-     *
      * @param start Start time
      * @param max Max lifetime
      */

@@ -14,7 +14,6 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link TkVerbose}.
- *
  * @since 0.10
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

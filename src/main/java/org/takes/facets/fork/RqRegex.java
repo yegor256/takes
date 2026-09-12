@@ -14,7 +14,7 @@ import org.takes.Request;
 /**
  * Request with a matcher of URI.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @see org.takes.facets.fork.FkRegex
  * @since 0.1
@@ -23,7 +23,6 @@ public interface RqRegex extends Request {
 
     /**
      * Get matcher of query string.
-     *
      * @return Matcher
      */
     Matcher matcher();
@@ -32,7 +31,7 @@ public interface RqRegex extends Request {
      * Fake implementation, for unit tests mostly.
      *
      * <p>Use this class in unit tests, when you need to create a fake
-     * version of a request with a matcher inside. For example:</p>
+     * version of a request with a matcher inside. For example:
      *
      * <pre> new TkIndex().act(
      *   new RqRegex.Fake("/(.*)", "/hello")
@@ -54,7 +53,6 @@ public interface RqRegex extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Request
          * @param matcher Matcher
          */

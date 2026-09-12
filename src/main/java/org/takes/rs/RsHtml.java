@@ -18,9 +18,9 @@ import org.takes.Response;
  * and provides multiple constructor overloads for creating HTML responses
  * from various sources including strings, byte arrays, input streams,
  * and URLs. It ensures proper HTTP status codes and handles body content
- * appropriately for HTML delivery.</p>
+ * appropriately for HTML delivery.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -30,7 +30,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @since 0.10
      */
     public RsHtml() {
@@ -39,7 +38,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param body HTML body
      */
     public RsHtml(final CharSequence body) {
@@ -48,7 +46,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param body HTML body
      */
     public RsHtml(final byte[] body) {
@@ -57,7 +54,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param url URL with body
      * @since 0.10
      */
@@ -67,7 +63,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param body HTML body
      */
     public RsHtml(final InputStream body) {
@@ -76,7 +71,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @param body HTML body
      */
@@ -86,7 +80,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @param body HTML body
      */
@@ -96,7 +89,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @param body HTML body
      */
@@ -106,7 +98,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @param url URL with body
      */
@@ -116,7 +107,6 @@ public final class RsHtml extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @since 0.10
      */

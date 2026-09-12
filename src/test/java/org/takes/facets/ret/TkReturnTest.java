@@ -16,7 +16,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkReturn}.
- *
  * @since 0.20
  */
 final class TkReturnTest {

@@ -13,7 +13,6 @@ import org.llorllale.cactoos.matchers.StartsWith;
 
 /**
  * Test case for {@link RqWithDefaultHeader}.
- *
  * @since 0.31
  */
 final class RqWithDefaultHeaderTest {

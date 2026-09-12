@@ -6,7 +6,6 @@ package org.takes.misc;
 
 /**
  * Marker interface for performance tests.
- *
  * @since 0.24
  */
 public interface PerformanceTests {

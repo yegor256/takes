@@ -7,12 +7,10 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import org.takes.Request;
 
 /**
  * Request that lazily consumes the body of another request once.
- *
  * @since 2.0
  */
 final class Greedy implements Request {
@@ -29,7 +27,6 @@ final class Greedy implements Request {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      */
     Greedy(final Request req) {
@@ -42,7 +39,7 @@ final class Greedy implements Request {
     }
 
     @Override
-    public InputStream body() throws IOException {
+    public java.io.InputStream body() throws IOException {
         return new ByteArrayInputStream(this.consumed());
     }
 

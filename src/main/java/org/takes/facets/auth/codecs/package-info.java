@@ -10,7 +10,7 @@
  * Identity objects to and from different representations such as plain text,
  * binary formats, encrypted data, compressed data, and encoded formats.
  * The codecs follow the decorator pattern allowing them to be chained
- * together for layered functionality.</p>
+ * together for layered functionality.
  *
  * @since 0.5
  */

@@ -32,9 +32,9 @@ import org.takes.rs.RsWithStatus;
  * sequentially. It reads HTTP requests from the socket's input stream,
  * processes them through a {@link Take}, and writes the responses back
  * to the socket's output stream. It also automatically adds socket-related
- * headers to each request for debugging and monitoring purposes.</p>
+ * headers to each request for debugging and monitoring purposes.
  *
- * <p>Key features:</p>
+ * <p>Key features:
  * <ul>
  * <li>Handles keep-alive connections by processing multiple requests
  * on the same socket</li>
@@ -47,12 +47,11 @@ import org.takes.rs.RsWithStatus;
  * <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class BkBasic implements Back {
 
     /**
@@ -76,13 +75,17 @@ public final class BkBasic implements Back {
     public static final String REMOTEPORT = "X-Takes-RemotePort";
 
     /**
+     * How many bytes of a broken request to read away before closing.
+     */
+    private static final long LINGER = 64L * 1024L;
+
+    /**
      * Take.
      */
     private final Take take;
 
     /**
      * Ctor.
-     *
      * @param tks Take
      */
     public BkBasic(final Take tks) {
@@ -129,7 +132,7 @@ public final class BkBasic implements Back {
     private static void linger(final InputStream input) throws IOException {
         final byte[] buf = new byte[8192];
         long total = 0L;
-        while (total < 64L * 1024L && input.available() > 0) {
+        while (total < BkBasic.LINGER && input.available() > 0) {
             final int read = input.read(buf);
             if (read < 0) {
                 break;

@@ -15,7 +15,7 @@ import org.xembly.Directives;
  * This class extracts the identity from the request and converts it to XML
  * format using Xembly directives, including the URN and all properties.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.4
  */
@@ -24,7 +24,6 @@ public final class XeIdentity extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param req Request
      */
     public XeIdentity(final Request req) {

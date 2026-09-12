@@ -21,9 +21,9 @@ import org.takes.Head;
 /**
  * Header Matcher.
  *
- * <p>This "matcher" tests given item headers.</p>
+ * <p>This "matcher" tests given item headers.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @param <T> Item type. Should be able to return own headers
  * @since 0.31.2
@@ -52,7 +52,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
-     *
      * @param hdr Header name
      * @param vlm Value matcher
      */
@@ -62,7 +61,6 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
-     *
      * @param hdrm Header matcher
      * @param vlm Value matcher
      */

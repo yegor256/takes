@@ -16,15 +16,15 @@ import org.takes.Take;
  * <p>This abstract base class provides a foundation for creating
  * {@link Take} decorators that add functionality to existing takes
  * through composition. It implements the Decorator pattern, allowing
- * new behaviors to be added to takes without modifying their code.</p>
+ * new behaviors to be added to takes without modifying their code.
  *
  * <p>TkWrap serves as the base class for many decorators in the
  * Takes framework, providing a consistent way to wrap and extend
  * take functionality. Decorators can intercept requests before
  * forwarding them, modify responses after processing, or add
- * cross-cutting concerns like logging, caching, or security.</p>
+ * cross-cutting concerns like logging, caching, or security.
  *
- * <p>Example usage for creating custom decorators:</p>
+ * <p>Example usage for creating custom decorators:
  * <pre>{@code
  * // Custom decorator that adds a header to all responses
  * public class TkWithCustomHeader extends TkWrap {
@@ -44,7 +44,7 @@ import org.takes.Take;
  * }
  * }</pre>
  *
- * <p>Common decorator patterns built on TkWrap:</p>
+ * <p>Common decorator patterns built on TkWrap:
  * <ul>
  * <li>Request modification (headers, body transformation)</li>
  * <li>Response enhancement (compression, headers, caching)</li>
@@ -57,9 +57,9 @@ import org.takes.Take;
  * <p>The class maintains a reference to the wrapped take and delegates
  * all request processing to it. Subclasses can override the act method
  * to add pre-processing or post-processing logic, or use constructor
- * injection to provide modified take behavior.</p>
+ * injection to provide modified take behavior.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.4
  */
@@ -74,7 +74,6 @@ public class TkWrap implements Take {
 
     /**
      * Ctor.
-     *
      * @param take Original take
      */
     public TkWrap(final Take take) {

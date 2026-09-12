@@ -17,7 +17,7 @@ import org.takes.rq.RqWithoutHeader;
  * This decorator wraps an existing take and ensures that requests
  * are authenticated before being processed by the underlying take.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -42,7 +42,6 @@ public final class TkAuth implements Take {
 
     /**
      * Ctor.
-     *
      * @param take Original
      * @param pss Pass
      */
@@ -52,7 +51,6 @@ public final class TkAuth implements Take {
 
     /**
      * Ctor.
-     *
      * @param take Original
      * @param pss Pass
      * @param hdr Header to set

@@ -17,7 +17,6 @@ import org.takes.rs.RsHeadPrint;
 
 /**
  * Test case for {@link TkClasspath}.
- *
  * @since 0.1
  */
 final class TkClasspathTest {

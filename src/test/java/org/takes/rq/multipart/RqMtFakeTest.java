@@ -24,7 +24,6 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link RqMtFake}.
- *
  * @since 0.33
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

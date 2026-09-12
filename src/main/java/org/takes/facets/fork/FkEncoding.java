@@ -25,7 +25,7 @@ import org.takes.rq.RqHeaders;
  * <p>Use this fork in order to deliver responses with different
  * encoding, depending on user preferences. For example, you want
  * to deliver GZIP-compressed response when "Accept-Encoding" request
- * header contains "gzip". Here is how:</p>
+ * header contains "gzip". Here is how:
  *
  * <pre> new TkFork(
  *   new FkEncoding("gzip", new RsGzip(response)),
@@ -33,9 +33,9 @@ import org.takes.rq.RqHeaders;
  * )</pre>
  *
  * <p>Empty string as an encoding means that the fork should match
- * in any case.</p>
+ * in any case.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see org.takes.facets.fork.RsFork
  * @since 0.10
@@ -60,7 +60,6 @@ public final class FkEncoding implements Fork {
 
     /**
      * Ctor.
-     *
      * @param enc Encoding we accept
      * @param response Response to return
      */

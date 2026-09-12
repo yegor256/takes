@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link  ServletConnectionFake}.
- *
  * @since 2.0
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

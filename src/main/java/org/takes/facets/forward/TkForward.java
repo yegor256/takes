@@ -16,7 +16,7 @@ import org.takes.Take;
  * <p>This decorator catches {@link RsForward} exceptions thrown by wrapped takes
  * and converts them into proper HTTP redirect responses. It enables the use of
  * exception-based flow control for redirects, making error handling and navigation
- * logic more convenient. The class is immutable and thread-safe.</p>
+ * logic more convenient. The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -31,7 +31,6 @@ public final class TkForward implements Take {
 
     /**
      * Constructor that wraps a take to handle RsForward exceptions.
-     *
      * @param take The original take to wrap
      */
     public TkForward(final Take take) {

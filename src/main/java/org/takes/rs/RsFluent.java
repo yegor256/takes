@@ -15,15 +15,15 @@ import org.takes.Response;
  * <p>This class provides a fluent API for constructing HTTP responses
  * by chaining method calls. It allows setting status codes, headers,
  * content types, and body content in a readable and convenient way.
- * Each method returns a new RsFluent instance, maintaining immutability.</p>
+ * Each method returns a new RsFluent instance, maintaining immutability.
  *
- * <p>Example usage:</p>
+ * <p>Example usage:
  * <pre>new RsFluent()
  *   .withStatus(200)
  *   .withType("application/json")
  *   .withBody("{\"message\":\"success\"}")</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -40,7 +40,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      */
     public RsFluent(final Response res) {
@@ -49,7 +48,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this status code.
-     *
      * @param code Status code
      * @return New fluent response
      */
@@ -59,7 +57,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this header.
-     *
      * @param header The header
      * @return New fluent response
      */
@@ -69,7 +66,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this header.
-     *
      * @param key Key
      * @param value Value
      * @return New fluent response
@@ -81,7 +77,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this content type.
-     *
      * @param ctype Content type
      * @return New fluent response
      */
@@ -91,7 +86,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this body.
-     *
      * @param body Body
      * @return New fluent response
      */
@@ -101,7 +95,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this body.
-     *
      * @param body Body
      * @return New fluent response
      */
@@ -111,7 +104,6 @@ public final class RsFluent extends RsWrap {
 
     /**
      * With this body.
-     *
      * @param body Body
      * @return New fluent response
      */

@@ -13,7 +13,7 @@ import org.takes.misc.Opt;
  * This interface defines the contract for authentication mechanisms that
  * handle both user authentication (enter) and session management (exit).
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -21,7 +21,6 @@ public interface Pass {
 
     /**
      * Authenticate the user based on the request.
-     *
      * @param request The request containing authentication information
      * @return Identity of the authenticated user, or empty if authentication fails
      * @throws Exception If the authentication process fails
@@ -30,7 +29,6 @@ public interface Pass {
 
     /**
      * Wrap the response with user authentication information.
-     *
      * @param response Response to be wrapped
      * @param identity Identity of the authenticated user
      * @return New response with authentication information added

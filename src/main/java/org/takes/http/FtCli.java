@@ -29,7 +29,7 @@ import org.takes.rq.RqWithHeader;
  * work in the foreground. The server will be started at a random TCP
  * port and its number will be saved to the {@code /tmp/port.txt} file.</p>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -48,7 +48,6 @@ public final class FtCli implements Front {
 
     /**
      * Ctor.
-     *
      * @param tks Take
      * @param args Arguments
      */
@@ -58,7 +57,6 @@ public final class FtCli implements Front {
 
     /**
      * Ctor.
-     *
      * @param tks Take
      * @param args Arguments
      */

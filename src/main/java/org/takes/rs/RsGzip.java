@@ -22,9 +22,9 @@ import org.takes.Response;
  * according to RFC 1952 and adds the appropriate Content-Encoding header.
  * The compression is performed lazily when the response is first accessed
  * and cached for subsequent requests. This can significantly reduce
- * bandwidth usage for text-based responses.</p>
+ * bandwidth usage for text-based responses.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.10
  */
@@ -44,7 +44,6 @@ public final class RsGzip implements Response {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      */
     public RsGzip(final Response res) {

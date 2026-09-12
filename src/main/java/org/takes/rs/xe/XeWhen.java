@@ -13,7 +13,7 @@ import org.xembly.Directive;
  * Xembly source that could be empty of could return an encapsulated
  * other Xembly source.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.13
  */
@@ -22,7 +22,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param source Xembly source
      */
@@ -35,7 +34,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param source Xembly source
      */
@@ -49,7 +47,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param source Xembly source
      * @since 1.5
@@ -64,7 +61,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param positive Xembly source when condition is positive
      * @param negative Xembly source when condition is negative
@@ -81,7 +77,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param positive Xembly source when condition is positive
      * @param negative Xembly source when condition is negative
@@ -98,7 +93,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param positive Xembly source when condition is positive
      * @param negative Xembly source when condition is negative
@@ -116,7 +110,6 @@ public final class XeWhen extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param condition Condition
      * @param positive Xembly source when condition is positive
      * @param negative Xembly source when condition is negative

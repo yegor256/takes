@@ -11,9 +11,9 @@
  * are commonly used for file uploads and form submissions containing both text
  * fields and binary data. The classes in this package provide functionality
  * to parse multipart request bodies, extract individual parts, and access
- * their headers and content.</p>
+ * their headers and content.
  *
- * <p>Key components include:</p>
+ * <p>Key components include:
  * <ul>
  * <li>RqMtBase: Base implementation for parsing multipart requests</li>
  * <li>RqMtFake: Test implementation for creating fake multipart requests</li>

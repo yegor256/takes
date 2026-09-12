@@ -13,19 +13,17 @@ import org.takes.Request;
  *
  * <p>This decorator wraps the request body's input stream with a
  * BufferedInputStream, which can improve performance when the body
- * is read in small chunks by providing internal buffering.</p>
+ * is read in small chunks by providing internal buffering.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.16
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RqBuffered extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      */
     public RqBuffered(final Request req) {

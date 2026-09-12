@@ -16,9 +16,9 @@ import org.takes.Response;
  * <p>This decorator appends additional headers to an existing response
  * while preserving the original headers. It accepts multiple headers
  * either as varargs or as an iterable collection. Headers are processed
- * sequentially, and each header is added individually using RsWithHeader.</p>
+ * sequentially, and each header is added individually using RsWithHeader.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -28,7 +28,6 @@ public final class RsWithHeaders extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param headers Headers
      */
     public RsWithHeaders(final Iterable<? extends CharSequence> headers) {
@@ -37,7 +36,6 @@ public final class RsWithHeaders extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @param headers Headers
      */
@@ -47,7 +45,6 @@ public final class RsWithHeaders extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      * @param headers Headers
      */

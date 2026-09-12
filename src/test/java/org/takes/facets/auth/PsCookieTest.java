@@ -14,7 +14,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link PsCookie}.
- *
  * @since 0.10
  */
 final class PsCookieTest {

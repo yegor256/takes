@@ -13,7 +13,6 @@ import org.takes.facets.flash.RsFlash;
 
 /**
  * Test case for {@link RsForward}.
- *
  * @since 0.17
  */
 final class RsForwardTest {

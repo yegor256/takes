@@ -38,10 +38,9 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link FtBasic}.
- *
  * @since 0.1
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class FtBasicTest {
 
     /**

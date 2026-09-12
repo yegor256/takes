@@ -24,14 +24,14 @@ import org.takes.rs.RsWrap;
  * <p>This class implements the flash message mechanism by adding Set-Cookie headers
  * containing temporary messages that persist between HTTP requests. The flash concept,
  * borrowed from Ruby on Rails, enables passing temporary variables between requests,
- * which is particularly useful for redirect scenarios.</p>
+ * which is particularly useful for redirect scenarios.
  *
  * <p>Flash messages are ideal for displaying success or error notifications after
  * form submissions or other user actions. The mechanism uses cookies to maintain
  * state temporarily, making it unsuitable for stateless components like RESTful
- * services.</p>
+ * services.
  *
- * <p>Basic usage example:</p>
+ * <p>Basic usage example:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
@@ -41,7 +41,7 @@ import org.takes.rs.RsWrap;
  * }</pre>
  *
  * <p>The decorator adds a Set-Cookie header with the message in URL-encoded format,
- * combined with a logging level for severity indication:</p>
+ * combined with a logging level for severity indication:
  *
  * <pre>public final class TkDiscussion implements Take {
  *   &#64;Override
@@ -55,16 +55,16 @@ import org.takes.rs.RsWrap;
  *   }
  * }</pre>
  *
- * <p>The resulting HTTP response will contain:</p>
+ * <p>The resulting HTTP response will contain:
  *
  * <pre> HTTP/1.1 303 See Other
  * Set-Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
  * <p>The default cookie name is {@code RsFlash}, but it can be customized using
  * appropriate constructors. To clean up cookies after consumption, decorate your
- * {@code Take} with {@link TkFlash}.</p>
+ * {@code Take} with {@link TkFlash}.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -89,7 +89,7 @@ public final class RsFlash extends RsWrap {
     /**
      * Constructs a {@code RsFlash} with the specified message.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param msg Message to show
      * @throws UnsupportedEncodingException In case the default encoding is not
@@ -103,7 +103,7 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified message and expiration
      * date of the cookie.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param msg Message
      * @param expires Date of the cookie
@@ -119,10 +119,10 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified error.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
      * <p>By default it will use {@code RsFlash} as cookie name and expiration
-     * date of the cookie will be 1 hour after instance creation.</p>
+     * date of the cookie will be 1 hour after instance creation.
      *
      * @param err Error
      * @throws UnsupportedEncodingException In case the default encoding is not
@@ -137,9 +137,9 @@ public final class RsFlash extends RsWrap {
      * expiration date.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param err Error
      * @param expires Date of the cookie
@@ -156,10 +156,10 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified error and logging level.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
      * <p>By default it will use {@code RsFlash} as cookie name and expiration
-     * date of the cookie will be 1 hour after instance creation.</p>
+     * date of the cookie will be 1 hour after instance creation.
      *
      * @param err Error
      * @param level Level
@@ -177,9 +177,9 @@ public final class RsFlash extends RsWrap {
      * and cookie expiration date.
      *
      * <p>The error is converted into a flash message by calling
-     * {@link Throwable#getLocalizedMessage()}.</p>
+     * {@link Throwable#getLocalizedMessage()}.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param err Error
      * @param level Level
@@ -198,7 +198,7 @@ public final class RsFlash extends RsWrap {
      * level.
      *
      * <p>By default it will use {@code RsFlash} as cookie name and default
-     * cookie expiration date will be 1 hour after instance creation.</p>
+     * cookie expiration date will be 1 hour after instance creation.
      *
      * @param msg Message
      * @param level Level
@@ -214,7 +214,7 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified message, logging level
      * and cookie expiration date.
      *
-     * <p>By default it will use {@code RsFlash} as cookie name.</p>
+     * <p>By default it will use {@code RsFlash} as cookie name.
      *
      * @param msg Message
      * @param level Level
@@ -232,7 +232,7 @@ public final class RsFlash extends RsWrap {
      * Constructs a {@code RsFlash} with the specified message, logging level
      * and cookie name.
      *
-     * <p>By default cookie expiration will be 1 hour after object creation.</p>
+     * <p>By default cookie expiration will be 1 hour after object creation.
      *
      * @param msg Message
      * @param level Level
@@ -249,7 +249,6 @@ public final class RsFlash extends RsWrap {
     /**
      * Constructs a {@code RsFlash} with the specified message, logging level
      * and cookie name.
-     *
      * @param msg Message
      * @param level Level
      * @param cookie Cookie name

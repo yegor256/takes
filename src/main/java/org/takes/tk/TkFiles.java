@@ -22,14 +22,14 @@ import org.takes.rs.RsWithBody;
  * <p>This {@link Take} implementation serves static files from a specified
  * base directory on the filesystem. It maps HTTP request paths to file system
  * paths and returns the file content as HTTP responses with appropriate
- * Content-Type headers automatically determined by file extension.</p>
+ * Content-Type headers automatically determined by file extension.
  *
  * <p>The take resolves file paths by combining the configured base directory
  * with the path component of the request URL. Query parameters in the URL
  * are ignored during file resolution to prevent directory traversal attacks
- * and maintain clean file serving semantics.</p>
+ * and maintain clean file serving semantics.
  *
- * <p>Example usage:</p>
+ * <p>Example usage:
  * <pre>{@code
  * // Serve files from /var/www/static
  * new TkFiles("/var/www/static");
@@ -38,7 +38,7 @@ import org.takes.rs.RsWithBody;
  * // Resolves to: /var/www/static/css/style.css
  * }</pre>
  *
- * <p>Common use cases include:</p>
+ * <p>Common use cases include:
  * <ul>
  * <li>Static asset serving (CSS, JavaScript, images)</li>
  * <li>Document repositories and file downloads</li>
@@ -49,7 +49,7 @@ import org.takes.rs.RsWithBody;
  * <li>Development asset serving during testing</li>
  * </ul>
  *
- * <p>Security considerations:</p>
+ * <p>Security considerations:
  * <ul>
  * <li>Only files within the base directory are accessible</li>
  * <li>Directory traversal attempts (../) are handled safely</li>
@@ -60,13 +60,13 @@ import org.takes.rs.RsWithBody;
  * <p>The response includes appropriate HTTP headers including Content-Length
  * calculated from file size and Content-Type determined from file extension.
  * Binary files are served efficiently using stream-based responses to minimize
- * memory usage for large files.</p>
+ * memory usage for large files.
  *
  * <p>If a requested file does not exist, an {@link HttpException} with
  * HTTP 404 status is thrown, providing clear error information including
- * the absolute path that was attempted.</p>
+ * the absolute path that was attempted.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -76,7 +76,6 @@ public final class TkFiles extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param base Base directory path for serving files
      */
     public TkFiles(final String base) {
@@ -85,7 +84,6 @@ public final class TkFiles extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param base Base directory file object for serving files
      */
     public TkFiles(final File base) {

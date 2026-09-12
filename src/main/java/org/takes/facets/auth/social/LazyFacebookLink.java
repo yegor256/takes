@@ -14,7 +14,6 @@ import org.xembly.Directive;
 
 /**
  * Lazy XeSource that builds the Facebook OAuth link on demand.
- *
  * @since 2.0
  */
 final class LazyFacebookLink implements XeSource {
@@ -41,7 +40,6 @@ final class LazyFacebookLink implements XeSource {
 
     /**
      * Ctor.
-     *
      * @param request HTTP request
      * @param application App ID
      * @param relation Relation type

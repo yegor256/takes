@@ -38,7 +38,6 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link BkBasic}.
- *
  * @since 0.15.2
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -218,7 +217,6 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 411 when a persistent connection request
      * has no Content-Length.
-     *
      * @throws Exception If some problem inside
      */
     @Disabled
@@ -276,7 +274,6 @@ final class BkBasicTest {
 
     /**
      * BkBasic can accept no content-length on closed connection.
-     *
      * @throws Exception If some problem inside
      */
     @Disabled
@@ -350,7 +347,6 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
      * unencodable URI.
-     *
      * @throws Exception If some problem inside
      */
     @Test

@@ -23,9 +23,9 @@ import org.takes.Request;
  * <p>This interface provides methods to parse and extract components from
  * the HTTP Request-Line (the first line of an HTTP request), including
  * the HTTP method, request URI, and protocol version. It ensures proper
- * format validation according to HTTP specifications.</p>
+ * format validation according to HTTP specifications.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.29.1
  */
@@ -33,7 +33,6 @@ public interface RqRequestLine extends Request {
 
     /**
      * Get Request-Line header.
-     *
      * @return HTTP Request-Line header
      * @throws IOException If fails
      */
@@ -41,7 +40,6 @@ public interface RqRequestLine extends Request {
 
     /**
      * Get Request-Line method token.
-     *
      * @return HTTP Request-Line method token
      * @throws IOException If fails
      */
@@ -49,7 +47,6 @@ public interface RqRequestLine extends Request {
 
     /**
      * Get Request-Line Request-URI token.
-     *
      * @return HTTP Request-Line method token
      * @throws IOException If fails
      */
@@ -57,7 +54,6 @@ public interface RqRequestLine extends Request {
 
     /**
      * Get Request-Line HTTP-Version token.
-     *
      * @return HTTP Request-Line method token
      * @throws IOException If fails
      */
@@ -66,7 +62,7 @@ public interface RqRequestLine extends Request {
     /**
      * Request decorator for Request-Line header validation
      *
-     * <p>The class is immutable and thread-safe.</p>
+     * <p>The class is immutable and thread-safe.
      *
      * @since 1.0
      */
@@ -82,7 +78,6 @@ public interface RqRequestLine extends Request {
         /**
          * HTTP Request-line pattern.
          * [!-~] is for method or extension-method token (octets 33 - 126).
-         *
          * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html#sec5.1">RFC 2616</a>
          */
         private static final Pattern PATTERN = Pattern.compile(
@@ -113,7 +108,6 @@ public interface RqRequestLine extends Request {
 
             /**
              * Ctor.
-             *
              * @param val Value
              */
             Token(final int val) {
@@ -123,7 +117,6 @@ public interface RqRequestLine extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         public Base(final Request req) {

@@ -13,7 +13,7 @@ import org.takes.rq.RqFake;
 /**
  * Request with an error inside.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @see TkFallback
  * @since 0.1
@@ -22,7 +22,6 @@ public interface RqFallback extends Request {
 
     /**
      * Get HTTP status code suggested.
-     *
      * @return HTTP status code
      * @since 0.13
      */
@@ -30,7 +29,6 @@ public interface RqFallback extends Request {
 
     /**
      * Get throwable that occurred.
-     *
      * @return Throwable
      */
     Throwable throwable();
@@ -39,7 +37,7 @@ public interface RqFallback extends Request {
      * Fake implementation, for unit tests mostly.
      *
      * <p>Use this class in unit tests, when you need to create a fake
-     * version of a request with an exception inside. For example:</p>
+     * version of a request with an exception inside. For example:
      *
      * <pre> new TkIndex().act(
      *   new RqFallback.Fake("/(.*)", "/hello")
@@ -66,7 +64,6 @@ public interface RqFallback extends Request {
 
         /**
          * Ctor.
-         *
          * @param code HTTP status code
          */
         public Fake(final int code) {
@@ -75,7 +72,6 @@ public interface RqFallback extends Request {
 
         /**
          * Ctor.
-         *
          * @param code HTTP status code
          * @param error Exception
          */
@@ -85,7 +81,6 @@ public interface RqFallback extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Request
          * @param code HTTP status code
          * @param error Exception

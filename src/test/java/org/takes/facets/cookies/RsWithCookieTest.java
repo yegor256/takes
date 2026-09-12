@@ -6,7 +6,6 @@ package org.takes.facets.cookies;
 
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.StringContains;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.llorllale.cactoos.matchers.HasString;
@@ -14,7 +13,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsWithCookie}.
- *
  * @since 0.9.6
  */
 final class RsWithCookieTest {
@@ -79,7 +77,7 @@ final class RsWithCookieTest {
                 IllegalArgumentException.class,
                 () -> new RsWithCookie("f oo", "works").head().iterator().next()
             ).getMessage(),
-            new StringContains("Cookie name \"f oo\" contains invalid characters")
+            new org.hamcrest.core.StringContains("Cookie name \"f oo\" contains invalid characters")
         );
     }
 
@@ -91,7 +89,7 @@ final class RsWithCookieTest {
                 IllegalArgumentException.class,
                 () -> new RsWithCookie("cookiename", "wo\"rks").head().iterator().next()
             ).getMessage(),
-            new StringContains(
+            new org.hamcrest.core.StringContains(
                 "Cookie value \"wo\"rks\" contains invalid characters"
             )
         );

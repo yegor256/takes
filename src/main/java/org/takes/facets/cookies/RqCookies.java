@@ -27,7 +27,7 @@ import org.takes.rq.RqWrap;
  * <p>This interface provides methods to extract cookie values and names from
  * HTTP requests. It parses the Cookie header and makes individual cookies
  * accessible by name. All implementations of this interface must be immutable
- * and thread-safe.</p>
+ * and thread-safe.
  *
  * @since 0.14
  */
@@ -35,7 +35,6 @@ public interface RqCookies extends Request {
 
     /**
      * Retrieves the value of a single cookie by name.
-     *
      * @param name The cookie name to look for
      * @return An iterable of cookie values (can be empty if not found)
      * @throws IOException If cookie parsing fails
@@ -44,7 +43,6 @@ public interface RqCookies extends Request {
 
     /**
      * Retrieves all cookie names present in the request.
-     *
      * @return An iterable of all cookie names
      * @throws IOException If cookie parsing fails
      */
@@ -56,7 +54,7 @@ public interface RqCookies extends Request {
      * <p>This class decorates HTTP requests to provide cookie parsing capabilities.
      * It extracts cookies from the Cookie header, normalizes cookie names to
      * lowercase, and provides access to individual cookie values and names.
-     * The class is immutable and thread-safe.</p>
+     * The class is immutable and thread-safe.
      *
      * @since 0.14
      */
@@ -65,7 +63,6 @@ public interface RqCookies extends Request {
 
         /**
          * Constructor that decorates the given request with cookie parsing.
-         *
          * @param req The original HTTP request to decorate
          */
         public Base(final Request req) {

@@ -9,7 +9,6 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * CharSequence that lazily formats a HTTP header line.
- *
  * @since 2.0
  */
 final class HeaderText implements CharSequence {
@@ -26,7 +25,6 @@ final class HeaderText implements CharSequence {
 
     /**
      * Ctor.
-     *
      * @param hdr Header name
      * @param val Header value
      */

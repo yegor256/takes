@@ -16,14 +16,14 @@ import java.io.InputStream;
  * as a {@link ServletInputStream}, which is required by the servlet API.
  * It's used internally by {@link HttpServletRequestFake} to provide
  * servlet-compatible input stream functionality while working with
- * Takes' standard stream-based request handling.</p>
+ * Takes' standard stream-based request handling.
  *
  * <p>The adapter provides basic functionality for reading request bodies
  * and delegates all read operations to the wrapped input stream.
  * It implements the servlet API's stream state methods by checking
- * the availability of data in the underlying stream.</p>
+ * the availability of data in the underlying stream.
  *
- * <p>Key features:</p>
+ * <p>Key features:
  * <ul>
  * <li>Adapts standard {@link InputStream} to {@link ServletInputStream}</li>
  * <li>Determines finished/ready state based on data availability</li>
@@ -34,7 +34,7 @@ import java.io.InputStream;
  *
  * <p>The implementation assumes that {@link #isReady()} correlates with
  * {@link #isFinished()} for simplicity in testing scenarios, which may
- * not be suitable for production async servlet processing.</p>
+ * not be suitable for production async servlet processing.
  *
  * @since 1.15
  */
@@ -47,7 +47,6 @@ public final class ServletInputStreamOf extends ServletInputStream {
 
     /**
      * Ctor.
-     *
      * @param input The encapsulated InputStream
      */
     public ServletInputStreamOf(final InputStream input) {

@@ -12,9 +12,9 @@ package org.takes.facets.flash;
  * {@link Throwable} without invoking {@link Throwable#getLocalizedMessage()}
  * inside the constructor body, which is forbidden by the
  * {@code ConstructorsCodeFreeCheck} qulice rule. The localized message is
- * computed on demand whenever the wrapper is converted to a string.</p>
+ * computed on demand whenever the wrapper is converted to a string.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
@@ -27,7 +27,6 @@ final class ThrowableMsg implements CharSequence {
 
     /**
      * Ctor.
-     *
      * @param err Throwable to wrap
      */
     ThrowableMsg(final Throwable err) {

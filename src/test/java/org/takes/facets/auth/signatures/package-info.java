@@ -5,7 +5,6 @@
 
 /**
  * Signatures, tests.
- *
  * @since 1.3
  */
 package org.takes.facets.auth.signatures;

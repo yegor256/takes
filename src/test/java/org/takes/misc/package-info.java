@@ -5,7 +5,6 @@
 
 /**
  * Miscellaneous classes, tests.
- *
  * @since 0.10
  */
 package org.takes.misc;

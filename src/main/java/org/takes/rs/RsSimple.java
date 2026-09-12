@@ -15,20 +15,18 @@ import org.cactoos.io.InputStreamOf;
  * <p>This class provides a straightforward way to create Response instances
  * from an iterable of header strings and body content (either as string
  * or input stream). It serves as a convenient wrapper around ResponseOf
- * for basic response construction needs.</p>
+ * for basic response construction needs.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.17
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsSimple extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param head Head
      * @param body Body
      */
@@ -41,7 +39,6 @@ public final class RsSimple extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param head Head
      * @param body Body
      */

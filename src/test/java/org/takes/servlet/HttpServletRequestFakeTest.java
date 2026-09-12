@@ -21,7 +21,6 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link  HttpServletRequestFake}.
- *
  * @since 1.15
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

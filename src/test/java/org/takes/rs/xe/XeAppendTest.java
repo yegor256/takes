@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeAppend}.
- *
  * @since 0.13
  */
 final class XeAppendTest {

@@ -6,7 +6,6 @@ package org.takes.facets.fork.am;
 
 /**
  * Matches specified version.
- *
  * @since 1.7.2
  */
 public final class AmVersion implements AgentMatch {
@@ -23,7 +22,6 @@ public final class AmVersion implements AgentMatch {
 
     /**
      * Ctor.
-     *
      * @param agent Uer agent name
      * @param version Version matcher
      */

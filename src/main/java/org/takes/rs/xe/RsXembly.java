@@ -36,13 +36,12 @@ import org.xembly.Xembler;
 /**
  * Response that converts Xembly object to XML.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsXembly extends RsWrap {
 
     /**
@@ -52,7 +51,6 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param sources Sources
      */
     public RsXembly(final XeSource... sources) {
@@ -61,7 +59,6 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param dom DOM node to build upon
      * @param sources Sources
      */
@@ -71,7 +68,6 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param sources Sources
      */
     public RsXembly(final Iterable<XeSource> sources) {
@@ -80,7 +76,6 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param dom DOM node to build upon
      * @param sources Sources
      */
@@ -90,7 +85,6 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param src Source
      */
     public RsXembly(final XeSource src) {
@@ -99,7 +93,6 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param dom DOM node to build upon
      * @param src Source
      */

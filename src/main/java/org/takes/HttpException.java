@@ -10,7 +10,6 @@ import org.cactoos.text.UncheckedText;
 
 /**
  * HTTP-aware exception.
- *
  * @since 0.13
  */
 public class HttpException extends IOException {
@@ -32,7 +31,6 @@ public class HttpException extends IOException {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      */
     public HttpException(final int code) {
@@ -41,7 +39,6 @@ public class HttpException extends IOException {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param cause Cause of the problem
      */
@@ -51,7 +48,6 @@ public class HttpException extends IOException {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param cause Cause of the problem
      */
@@ -61,7 +57,6 @@ public class HttpException extends IOException {
 
     /**
      * Primary ctor.
-     *
      * @param code HTTP status code
      * @param msg Exception message
      * @param cause Cause of the problem
@@ -91,7 +86,6 @@ public class HttpException extends IOException {
 
     /**
      * HTTP status code.
-     *
      * @return Code
      */
     public final int code() {

@@ -13,7 +13,7 @@ import org.xembly.Directives;
 /**
  * Xembly source to create SLA attribute with current date/time in ISO 8601.
  *
- * <p>Add this Xembly source to your page like this:</p>
+ * <p>Add this Xembly source to your page like this:
  *
  * <pre> new RsXembly(
  *   new XsStylesheet("/xsl/home.xsl"),
@@ -23,14 +23,14 @@ import org.xembly.Directives;
  *   )
  * )</pre>
  *
- * <p>And expect this attribute in the XML:</p>
+ * <p>And expect this attribute in the XML:
  *
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page date="2015-03-09T00:49:17Z"/&gt;
  * </pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.3
  */
@@ -46,7 +46,6 @@ public final class XeDate extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param attr Attribute name
      */
     public XeDate(final CharSequence attr) {

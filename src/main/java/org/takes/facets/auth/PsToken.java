@@ -37,7 +37,7 @@ import org.takes.rs.RsJson;
  * verifying the signature and extracting the user identity from the payload.
  * It supports token generation and validation using HMAC signatures.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 1.4
  */
@@ -62,7 +62,6 @@ public final class PsToken implements Pass {
     /**
      * Ctor. This is equivalent to {@code PsToken(key, 3600)}, signing with 256
      * bit.
-     *
      * @param key
      *  The secret key to sign with
      */
@@ -72,7 +71,6 @@ public final class PsToken implements Pass {
 
     /**
      * Ctor. This uses a 256-bit HMAC signature.
-     *
      * @param key
      *  The secret key to sign with
      * @param seconds
@@ -84,7 +82,6 @@ public final class PsToken implements Pass {
 
     /**
      * Ctor.
-     *
      * @param sign
      *  A {@link SiHmac}
      * @param seconds

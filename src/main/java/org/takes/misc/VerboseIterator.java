@@ -15,9 +15,9 @@ import org.cactoos.text.UncheckedText;
  * <p>This decorator wraps an existing iterator and provides custom error messages
  * when attempting to call next() on an exhausted iterator. Instead of the generic
  * NoSuchElementException, it throws an exception with a meaningful message that
- * can help with debugging. The remove() operation is not supported.</p>
+ * can help with debugging. The remove() operation is not supported.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @param <T> Type of item
  * @since 0.10
@@ -36,7 +36,6 @@ public final class VerboseIterator<T> implements Iterator<T> {
 
     /**
      * Ctor.
-     *
      * @param iter Original iterator
      * @param msg Error message
      */

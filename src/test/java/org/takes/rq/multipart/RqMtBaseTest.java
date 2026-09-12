@@ -20,7 +20,6 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link RqMtBase}.
- *
  * @since 0.33
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
@@ -50,10 +49,15 @@ final class RqMtBaseTest {
         String.valueOf((char) 13) + (char) 10;
 
     /**
+     * Content disposition.
+     */
+    private static final String DISPOSITION = "Content-Disposition";
+
+    /**
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", "Content-Disposition", RqMtBaseTest.FORM_DATA
+        "%s: %s", RqMtBaseTest.DISPOSITION, RqMtBaseTest.FORM_DATA
     );
 
     @Test

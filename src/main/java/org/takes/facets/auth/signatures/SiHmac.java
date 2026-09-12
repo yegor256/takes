@@ -19,7 +19,7 @@ import org.cactoos.text.UncheckedText;
  *
  * <p>This class provides HMAC (Hash-based Message Authentication Code) signature
  * functionality using SHA-256, SHA-384, or SHA-512 algorithms. It creates hex-encoded
- * signatures from input data using a secret key. The class is immutable and thread-safe.</p>
+ * signatures from input data using a secret key. The class is immutable and thread-safe.
  *
  * @since 1.4
  */
@@ -53,7 +53,6 @@ public final class SiHmac implements Signature {
 
     /**
      * Primary constructor with byte array key and specified bit length.
-     *
      * @param key The encryption key as a byte array
      * @param bits The signature bit length (256, 384, or 512)
      */
@@ -65,7 +64,6 @@ public final class SiHmac implements Signature {
 
     /**
      * Returns the corrected signature bit length.
-     *
      * @return The bit length used for HMAC signature, normalised to 256
      *  if the configured value is not 256, 384 or 512
      */

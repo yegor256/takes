@@ -10,7 +10,6 @@ import org.takes.misc.Expires;
 /**
  * Default expiration set to one hour from "now" (now is determined at
  * the time {@link #print()} is called).
- *
  * @since 2.0
  */
 final class HourFromNow implements Expires {

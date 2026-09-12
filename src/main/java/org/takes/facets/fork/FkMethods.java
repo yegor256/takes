@@ -18,14 +18,14 @@ import org.takes.tk.TkFixed;
  * Fork by method matching.
  *
  * <p>Use this class in combination with {@link TkFork},
- * for example:</p>
+ * for example:
  *
  * <pre> Take take = new TkFork(
  *   new FkMethods("GET", new TkLoad()),
  *   new FkMethods("PUT", new TkSave())
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see TkFork
  * @since 0.4
@@ -45,7 +45,6 @@ public final class FkMethods implements Fork {
 
     /**
      * Ctor.
-     *
      * @param mtd Method
      * @param rsp Response
      * @since 0.22
@@ -56,7 +55,6 @@ public final class FkMethods implements Fork {
 
     /**
      * Ctor.
-     *
      * @param mtd Method
      * @param that Take
      */
@@ -66,7 +64,6 @@ public final class FkMethods implements Fork {
 
     /**
      * Ctor.
-     *
      * @param mtds Methods
      * @param that Take
      */

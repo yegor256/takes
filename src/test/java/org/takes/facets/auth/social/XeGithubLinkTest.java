@@ -16,7 +16,6 @@ import org.takes.rs.xe.XeAppend;
 
 /**
  * Test case for {@link XeGithubLink}.
- *
  * @since 0.4
  */
 final class XeGithubLinkTest {

@@ -15,7 +15,7 @@ import org.takes.rs.xe.XeWrap;
  * <p>This class generates XML elements for Facebook OAuth authentication links,
  * allowing users to authenticate through Facebook's OAuth flow. The generated
  * links include the necessary parameters for redirecting users to Facebook's
- * authorization endpoint. The class is immutable and thread-safe.</p>
+ * authorization endpoint. The class is immutable and thread-safe.
  *
  * @since 0.5
  */
@@ -24,7 +24,6 @@ public final class XeFacebookLink extends XeWrap {
 
     /**
      * Constructor with request and Facebook application ID.
-     *
      * @param req The HTTP request
      * @param app The Facebook application ID
      * @throws IOException If link creation fails
@@ -36,7 +35,6 @@ public final class XeFacebookLink extends XeWrap {
 
     /**
      * Constructor with full customization options.
-     *
      * @param req The HTTP request
      * @param app The Facebook application ID
      * @param rel The relation type for the link

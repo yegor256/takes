@@ -12,7 +12,7 @@ import org.xembly.Directives;
 /**
  * Xembly source to create SLA attribute with server IP address.
  *
- * <p>Add this Xembly source to your page like this:</p>
+ * <p>Add this Xembly source to your page like this:
  *
  * <pre> new RsXembly(
  *   new XsStylesheet("/xsl/home.xsl"),
@@ -22,14 +22,14 @@ import org.xembly.Directives;
  *   )
  * )</pre>
  *
- * <p>And expect this attribute in the XML:</p>
+ * <p>And expect this attribute in the XML:
  *
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page ip="172.18.183.14"/&gt;
  * </pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.3
  */
@@ -45,7 +45,6 @@ public final class XeLocalhost extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param attr Attribute name
      */
     public XeLocalhost(final CharSequence attr) {

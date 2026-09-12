@@ -5,7 +5,6 @@
 
 /**
  * Xembly responses, tests.
- *
  * @since 0.1
  */
 package org.takes.rs.xe;

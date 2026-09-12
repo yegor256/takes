@@ -21,7 +21,7 @@ import org.cactoos.text.UncheckedText;
  * This interface defines the contract for token generation, supporting
  * JSON Web Token (JWT) and JSON Object Signing and Encryption (JOSE) standards.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 1.4
  */
@@ -29,14 +29,12 @@ public interface Token {
 
     /**
      * Get the token as a JSON object.
-     *
      * @return The token in JSON notation
      */
     JsonObject json();
 
     /**
      * Get the Base64-encoded representation of the token.
-     *
      * @return The token in JSON notation, Base64-encoded
      */
     byte[] encoded();
@@ -45,7 +43,6 @@ public interface Token {
      * JSON Object Signing and Encryption (JOSE) header implementation.
      * This class creates the standard JOSE header containing algorithm
      * and token type information for JWT signing.
-     *
      * @since 1.4
      */
     final class Jose implements Token {
@@ -67,7 +64,6 @@ public interface Token {
 
         /**
          * JSON Object Signing and Encryption Header.
-         *
          * @param bitlength Of encryption bits
          */
         public Jose(final int bitlength) {
@@ -104,7 +100,6 @@ public interface Token {
      * JSON Web Token (JWT) payload implementation.
      * This class creates JWT payloads containing subject, issued time,
      * and expiration information for secure token-based authentication.
-     *
      * @since 1.4
      */
     final class Jwt implements Token {
@@ -138,7 +133,6 @@ public interface Token {
 
         /**
          * JSON Web Token.
-         *
          * @param idt Identity
          * @param age Lifetime of token
          */

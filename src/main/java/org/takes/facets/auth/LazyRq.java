@@ -13,7 +13,6 @@ import org.takes.rq.RqWithHeader;
 
 /**
  * Lazily-built authenticated request.
- *
  * @since 2.0
  */
 final class LazyRq implements Request {
@@ -35,7 +34,6 @@ final class LazyRq implements Request {
 
     /**
      * Ctor.
-     *
      * @param ident Identity
      * @param hdr Header name
      * @param request Original request

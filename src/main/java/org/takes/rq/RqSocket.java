@@ -15,9 +15,9 @@ import org.takes.Request;
  * <p>This decorator extracts network connection information from special
  * X-Takes headers that contain local and remote IP addresses and ports.
  * These headers are typically added by the server infrastructure to
- * provide socket information to the application layer.</p>
+ * provide socket information to the application layer.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 1.0
  */
@@ -26,7 +26,6 @@ public final class RqSocket extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      */
     public RqSocket(final Request req) {
@@ -35,7 +34,6 @@ public final class RqSocket extends RqWrap {
 
     /**
      * Returns IP address from the X-Takes-LocalAddress header.
-     *
      * @return Local InetAddress
      * @throws IOException If fails
      */
@@ -47,7 +45,6 @@ public final class RqSocket extends RqWrap {
 
     /**
      * Returns IP address from the X-Takes-RemoteAddress header.
-     *
      * @return Remote InetAddress
      * @throws IOException If fails
      */
@@ -59,7 +56,6 @@ public final class RqSocket extends RqWrap {
 
     /**
      * Returns port from the X-Takes-LocalPort header.
-     *
      * @return Local Port
      * @throws IOException If fails
      */
@@ -71,7 +67,6 @@ public final class RqSocket extends RqWrap {
 
     /**
      * Returns port from the X-Takes-RemotePort header.
-     *
      * @return Remote Port
      * @throws IOException If fails
      */

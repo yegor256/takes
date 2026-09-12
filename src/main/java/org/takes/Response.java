@@ -13,7 +13,7 @@ import java.io.InputStream;
  * response, that consists of a few headers and a body. To construct
  * a response, use one of the composable decorators from
  * {@link org.takes.rs} package. For example, this code will create
- * a response with HTML inside:</p>
+ * a response with HTML inside:
  *
  * <pre> final Response response = new RsWithHeader(
  *   new RsWithBody(
@@ -27,9 +27,9 @@ import java.io.InputStream;
  * {@link Response#head()} method has to be invoked before reading from the
  * {@code InputStream} obtained from the {@link Response#body()} method,
  * but they must NOT require that the {@link InputStream} has to be read
- * from before the {@link Response#head()} method invocation.</p>
+ * from before the {@link Response#head()} method invocation.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @see Take
  * @see org.takes.rs.RsWithBody

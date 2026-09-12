@@ -14,7 +14,6 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test case for {@link FkEncoding}.
- *
  * @since 0.10
  */
 final class FkEncodingTest {

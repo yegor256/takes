@@ -13,7 +13,6 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormSmart}.
- *
  * @since 0.33
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

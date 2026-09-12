@@ -16,7 +16,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkSslOnly}.
- *
  * @since 1.9
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

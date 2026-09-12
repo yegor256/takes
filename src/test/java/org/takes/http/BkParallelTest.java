@@ -19,7 +19,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link BkParallel}.
- *
  * @since 0.15.2
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

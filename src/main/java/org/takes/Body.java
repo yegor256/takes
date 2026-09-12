@@ -9,7 +9,6 @@ import java.io.InputStream;
 
 /**
  * Body abstraction for {@link Request} and {@link Response}.
- *
  * @since 2.0
  */
 @FunctionalInterface
@@ -17,7 +16,6 @@ public interface Body {
 
     /**
      * Body.
-     *
      * @return Stream with body
      * @throws IOException If something goes wrong
      */

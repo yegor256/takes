@@ -19,9 +19,9 @@ import org.takes.Request;
  * <p>This decorator appends additional headers to an existing request.
  * The new headers are added to the end of the header list while
  * preserving the original headers. Header values are trimmed of
- * whitespace during the addition process.</p>
+ * whitespace during the addition process.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 1.0
  */
@@ -30,7 +30,6 @@ public final class RqWithHeaders extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      * @param headers Headers to add
      */
@@ -40,7 +39,6 @@ public final class RqWithHeaders extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      * @param headers Headers to add
      */

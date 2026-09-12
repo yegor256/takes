@@ -14,7 +14,7 @@ import org.xembly.Directives;
 /**
  * Xembly source to append something to an existing element.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -23,7 +23,6 @@ public final class XeAppend extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param target Name of XML element
      * @param value Value to set
      */
@@ -40,7 +39,6 @@ public final class XeAppend extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param target Name of XML element
      * @param src Source
      */
@@ -50,7 +48,6 @@ public final class XeAppend extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param target Name of XML element
      * @param src Source
      * @since 0.13
@@ -61,7 +58,6 @@ public final class XeAppend extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param target Name of XML element
      * @param src Source
      * @since 1.4

@@ -12,7 +12,6 @@ import org.takes.rq.RqWrap;
 /**
  * Request with a temporary file as body. The temporary file will be deleted
  * automatically when the body of the request will be closed.
- *
  * @see org.takes.rq.RqLive
  * @see org.takes.rq.TempInputStream
  * @since 0.33
@@ -22,7 +21,6 @@ final class RqTemp extends RqWrap {
 
     /**
      * Creates a {@code RqTemp} with the specified temporary file.
-     *
      * @param file The temporary that will be automatically deleted when the
      *  body of the request will be closed
      * @throws IOException If fails

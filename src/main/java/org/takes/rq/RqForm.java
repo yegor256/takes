@@ -13,15 +13,15 @@ import org.takes.Request;
  * <p>This interface provides methods to decode form data from requests
  * with {@code application/x-www-form-urlencoded} content type as specified
  * in RFC 1738. It allows access to form parameters by name and retrieval
- * of all parameter names.</p>
+ * of all parameter names.
  *
  * <p>For {@code multipart/form-data} format use
- * {@link org.takes.rq.multipart.RqMtBase}.</p>
+ * {@link org.takes.rq.multipart.RqMtBase}.
  *
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
- * decorator before passing request to this class.</p>
+ * decorator before passing request to this class.
  *
- * <p>All implementations must be immutable and thread-safe.</p>
+ * <p>All implementations must be immutable and thread-safe.
  *
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *     Forms in HTML</a>
@@ -32,7 +32,6 @@ public interface RqForm extends Request {
 
     /**
      * Get a single parameter.
-     *
      * @param name Parameter name
      * @return List of values (can be empty)
      * @throws IOException if something fails reading parameters
@@ -41,7 +40,6 @@ public interface RqForm extends Request {
 
     /**
      * Get all parameter names.
-     *
      * @return All names
      * @throws IOException if something fails reading parameters
      */

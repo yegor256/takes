@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqHeaders}.
- *
  * @since 0.1
  */
 final class RqHeadersTest {

@@ -18,13 +18,13 @@ import lombok.EqualsAndHashCode;
  * socket connections in parallel using a thread pool. Instead of processing
  * requests sequentially, each incoming socket connection is submitted to an
  * {@link ExecutorService} for concurrent processing. This significantly
- * improves server throughput and response times under high load.</p>
+ * improves server throughput and response times under high load.
  *
  * <p>By default, it creates a thread pool with 4 times the number of
  * available processors (using bit shift for efficiency). This heuristic
- * provides good performance for I/O-bound HTTP request processing.</p>
+ * provides good performance for I/O-bound HTTP request processing.
  *
- * <p>Key features:</p>
+ * <p>Key features:
  * <ul>
  * <li>Executes each socket connection in a separate thread</li>
  * <li>Uses custom thread factory with meaningful thread names</li>
@@ -32,12 +32,11 @@ import lombok.EqualsAndHashCode;
  * <li>Wraps exceptions as {@link IllegalStateException}</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class BkParallel extends BkWrap {
 
     /**
@@ -48,7 +47,6 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      */
     public BkParallel(final Back back) {
@@ -57,7 +55,6 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      * @param threads Threads total
      */
@@ -75,7 +72,6 @@ public final class BkParallel extends BkWrap {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      * @param svc Executor service
      * @since 0.9

@@ -11,7 +11,7 @@
  * POST request, returning a 303 (See Other) response instructs the browser to
  * navigate to a different page immediately. This technique prevents duplicate
  * form submissions when users click the browser's refresh button. This is how to implement it
- * in your "take":</p>
+ * in your "take":
  *
  * <pre> public class TkSaveFile implements Take {
  *   &#64;Override
@@ -26,10 +26,10 @@
  * <p>When the file is saved, this "take" will return an instance of
  * {@link org.takes.facets.forward.RsForward}, which will contain the URI
  * to be placed into {@code Location} header. The browser will use
- * this URI as a destination point of the next page to render.</p>
+ * this URI as a destination point of the next page to render.
  *
  * <p>Sometimes it is convenient to throw an exception instead of returning
- * a response, especially in input checking situations, for example:</p>
+ * a response, especially in input checking situations, for example:
  *
  * <pre> public class TkLoadFile implements Take {
  *   &#64;Override
@@ -48,13 +48,13 @@
  * }</pre>
  *
  * <p>This example will work only if you wrap your entire "take" into
- * {@link org.takes.facets.forward.TkForward} decorator:</p>
+ * {@link org.takes.facets.forward.TkForward} decorator:
  *
  * <pre>Take take = new TkForward(take);</pre>
  *
  * <p>This {@link org.takes.facets.forward.TkForward} decorator will catch
  * all exceptions of type {@link org.takes.facets.forward.RsForward} and
- * convert them to responses.</p>
+ * convert them to responses.
  *
  * @since 0.1
  */

@@ -10,7 +10,6 @@ import org.takes.misc.Opt;
  * Empty implementation that always denies authentication.
  * This implementation always returns an empty identity,
  * effectively rejecting all authentication attempts.
- *
  * @since 0.20
  */
 public final class PsBasicEmpty implements PsBasic.Entry {

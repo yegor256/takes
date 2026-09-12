@@ -18,18 +18,23 @@ import org.takes.Request;
  * <p>Verifies only the cookie's name and value. Multiple cookies packed
  * into one {@code Cookie} header (separated by {@code ;}) or spread across
  * several {@code Cookie} headers are all searched. Use it instead of a
- * hand-rolled {@link HmHeader} assertion against {@code Cookie}:</p>
+ * hand-rolled {@link HmHeader} assertion against {@code Cookie}:
  *
  * <pre> MatcherAssert.assertThat(
  *     request,
  *     new HmRqCookie("session", "abc")
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
 public final class HmRqCookie extends TypeSafeMatcher<Request> {
+
+    /**
+     * Cookie header name.
+     */
+    private static final String COOKIE = "cookie";
 
     /**
      * Cookie name matcher.
@@ -48,7 +53,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
 
     /**
      * Ctor.
-     *
      * @param cookie Exact cookie name
      * @param val Exact cookie value
      */
@@ -58,7 +62,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
 
     /**
      * Ctor.
-     *
      * @param cookie Exact cookie name
      * @param val Cookie value matcher
      */
@@ -68,7 +71,6 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
 
     /**
      * Ctor.
-     *
      * @param cookie Cookie name matcher
      * @param val Cookie value matcher
      */
@@ -145,7 +147,7 @@ public final class HmRqCookie extends TypeSafeMatcher<Request> {
     private static boolean isCookie(final String header) {
         final int colon = header.indexOf(':');
         return colon >= 0
-            && "cookie".equalsIgnoreCase(
+            && HmRqCookie.COOKIE.equalsIgnoreCase(
                 header.substring(0, colon).trim()
             );
     }

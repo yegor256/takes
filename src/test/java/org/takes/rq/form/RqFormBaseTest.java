@@ -17,7 +17,6 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormBase}.
- *
  * @since 0.33
  */
 final class RqFormBaseTest {

@@ -13,7 +13,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link RsPrevious}.
- *
  * @since 0.2
  */
 final class RsPreviousTest {

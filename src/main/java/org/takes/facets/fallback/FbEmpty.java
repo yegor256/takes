@@ -10,7 +10,7 @@ import org.takes.misc.Opt;
 /**
  * Empty fallback.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.13
  */

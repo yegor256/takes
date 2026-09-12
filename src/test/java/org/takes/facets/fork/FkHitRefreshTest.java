@@ -19,7 +19,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkHitRefresh}.
- *
  * @since 0.9
  */
 final class FkHitRefreshTest {

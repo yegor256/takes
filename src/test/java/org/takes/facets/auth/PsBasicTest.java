@@ -28,7 +28,6 @@ import org.takes.tk.TkText;
 
 /**
  * Test of {@link PsBasic}.
- *
  * @since 0.20
  */
 final class PsBasicTest {

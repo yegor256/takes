@@ -31,7 +31,6 @@ import org.takes.rq.RqWrap;
 
 /**
  * Base implementation of {@link RqForm}.
- *
  * @since 0.33
  */
 @EqualsAndHashCode(callSuper = true)
@@ -49,7 +48,6 @@ public final class RqFormBase extends RqWrap implements RqForm {
 
     /**
      * Ctor.
-     *
      * @param request Original request
      */
     public RqFormBase(final Request request) {

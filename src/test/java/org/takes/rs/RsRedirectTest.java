@@ -10,7 +10,6 @@ import org.llorllale.cactoos.matchers.HasString;
 
 /**
  * Test case for {@link RsRedirect}.
- *
  * @since 0.12
  */
 final class RsRedirectTest {

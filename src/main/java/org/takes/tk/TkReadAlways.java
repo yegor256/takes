@@ -13,7 +13,7 @@ import org.takes.Take;
 /**
  * A Take decorator which reads and ignores the request body.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.30
  */
@@ -28,7 +28,6 @@ public final class TkReadAlways implements Take {
 
     /**
      * Ctor.
-     *
      * @param take Original take
      */
     public TkReadAlways(final Take take) {

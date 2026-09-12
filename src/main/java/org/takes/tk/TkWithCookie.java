@@ -13,9 +13,9 @@ import org.takes.facets.cookies.RsWithCookie;
  * Take that headers.
  *
  * <p>This take wraps all responses of another take, adding
- * cookies to them, through {@link RsWithCookie}.</p>
+ * cookies to them, through {@link RsWithCookie}.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -25,7 +25,6 @@ public final class TkWithCookie extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param take Original
      * @param key Cookie name
      * @param value Cookie value

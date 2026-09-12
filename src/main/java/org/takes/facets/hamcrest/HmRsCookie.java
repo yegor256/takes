@@ -17,18 +17,23 @@ import org.takes.Response;
  * <p>Verifies only the cookie's name and value, ignoring attributes such as
  * {@code Path}, {@code Domain}, {@code HttpOnly}, {@code Secure}, or
  * {@code Expires}. Use it instead of a hand-rolled {@link HmHeader}
- * assertion against {@code Set-Cookie}:</p>
+ * assertion against {@code Set-Cookie}:
  *
  * <pre> MatcherAssert.assertThat(
  *     response,
  *     new HmRsCookie("session", "abc")
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
 public final class HmRsCookie extends TypeSafeMatcher<Response> {
+
+    /**
+     * Set-Cookie header name.
+     */
+    private static final String SET_COOKIE = "set-cookie";
 
     /**
      * Cookie name matcher.
@@ -47,7 +52,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
-     *
      * @param cookie Exact cookie name
      * @param val Exact cookie value
      */
@@ -57,7 +61,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
-     *
      * @param cookie Exact cookie name
      * @param val Cookie value matcher
      */
@@ -67,7 +70,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
-     *
      * @param cookie Cookie name matcher
      * @param val Cookie value matcher
      */
@@ -133,7 +135,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
     private static boolean isSetCookie(final String header) {
         final int colon = header.indexOf(':');
         return colon >= 0
-            && "set-cookie".equalsIgnoreCase(
+            && HmRsCookie.SET_COOKIE.equalsIgnoreCase(
                 header.substring(0, colon).trim()
             );
     }

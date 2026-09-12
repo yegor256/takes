@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link SiHmac}.
- *
  * @since 1.3
  */
 final class SiHmacTest {

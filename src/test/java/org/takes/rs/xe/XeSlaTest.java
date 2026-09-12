@@ -14,7 +14,6 @@ import org.takes.rs.RsXslt;
 
 /**
  * Test case for {@link XeSla}.
- *
  * @since 0.3
  */
 final class XeSlaTest {

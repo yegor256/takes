@@ -11,9 +11,9 @@ import org.takes.Request;
  *
  * <p>This interface provides methods to parse multipart/form-data requests,
  * typically used for file uploads and form submissions with binary data.
- * It allows access to individual parts by name and retrieval of all part names.</p>
+ * It allows access to individual parts by name and retrieval of all part names.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.9
  */
@@ -21,7 +21,6 @@ public interface RqMultipart extends Request {
 
     /**
      * Get single part.
-     *
      * @param name Name of the part to get
      * @return List of parts (can be empty)
      */
@@ -29,7 +28,6 @@ public interface RqMultipart extends Request {
 
     /**
      * Get all part names.
-     *
      * @return All names
      */
     Iterable<String> names();

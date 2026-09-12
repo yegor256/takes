@@ -15,7 +15,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcCompact}.
- *
  * @since 0.5
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

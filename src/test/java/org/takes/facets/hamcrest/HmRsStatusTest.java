@@ -14,7 +14,6 @@ import org.takes.tk.TkHtml;
 
 /**
  * Test case for {@link HmRsStatus}.
- *
  * @since 0.13
  */
 final class HmRsStatusTest {

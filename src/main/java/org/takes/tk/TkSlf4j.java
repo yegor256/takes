@@ -24,7 +24,7 @@ import org.takes.rq.RqMethod;
 /**
  * Logs Take.act() calls.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.11.2
  */
@@ -44,7 +44,6 @@ public final class TkSlf4j implements Take {
 
     /**
      * Ctor.
-     *
      * @param take Original
      */
     public TkSlf4j(final Take take) {
@@ -53,7 +52,6 @@ public final class TkSlf4j implements Take {
 
     /**
      * Ctor.
-     *
      * @param take Original
      * @param tgt Log target
      */

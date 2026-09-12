@@ -18,9 +18,9 @@ import org.cactoos.scalar.Unchecked;
  * for HTTP headers, particularly for cache control and cookie expiration.
  * All dates are formatted in GMT timezone according to HTTP specifications.
  * The interface includes several implementations for common expiration
- * scenarios including never expiring, already expired, and timed expiration.</p>
+ * scenarios including never expiring, already expired, and timed expiration.
  *
- * <p>All implementations must be immutable and thread-safe.</p>
+ * <p>All implementations must be immutable and thread-safe.
  *
  * @since 2.0
  */
@@ -29,7 +29,6 @@ public interface Expires {
 
     /**
      * String representation of expiration time.
-     *
      * @return Representation of expiration time
      */
     String print();
@@ -39,7 +38,7 @@ public interface Expires {
      *
      * <p>This implementation creates an expiration date set to epoch (0L)
      * which effectively means the content never expires according to HTTP
-     * caching semantics.</p>
+     * caching semantics.
      *
      * @since 2.0
      */
@@ -68,7 +67,7 @@ public interface Expires {
      *
      * <p>This implementation returns "Expires=0" which indicates that
      * the content has already expired according to RFC 7234. This is
-     * useful for immediate cache invalidation.</p>
+     * useful for immediate cache invalidation.
      *
      * @since 2.0
      */
@@ -92,7 +91,7 @@ public interface Expires {
      *
      * <p>This implementation wraps another Expires instance and represents
      * content that expires one hour from the given base time. It delegates
-     * to the wrapped instance for the actual expiration formatting.</p>
+     * to the wrapped instance for the actual expiration formatting.
      *
      * @since 2.0
      */
@@ -105,7 +104,6 @@ public interface Expires {
 
         /**
          * Constructor.
-         *
          * @param origin Original time
          */
         Hour(final Expires origin) {
@@ -124,7 +122,7 @@ public interface Expires {
      * <p>This implementation formats expiration dates using configurable
      * date format patterns, locales, and specific expiration times.
      * It uses DateTimeFormatter with GMT timezone for HTTP-compliant
-     * date formatting. DateTimeFormatter is thread-safe by design.</p>
+     * date formatting. DateTimeFormatter is thread-safe by design.
      *
      * @since 2.0
      */
@@ -153,7 +151,6 @@ public interface Expires {
 
         /**
          * Ctor.
-         *
          * @param ptn Date format pattern
          * @param expiration Expiration in millis
          */
@@ -163,7 +160,6 @@ public interface Expires {
 
         /**
          * Ctor.
-         *
          * @param ptn Date format pattern
          * @param locale Locale
          * @param expiration Expiration in millis
@@ -181,7 +177,6 @@ public interface Expires {
 
         /**
          * Ctor.
-         *
          * @param ptn Date format pattern
          * @param locale Locale
          * @param expires Instant when expires
@@ -197,7 +192,6 @@ public interface Expires {
 
         /**
          * Ctor.
-         *
          * @param ptn Date format pattern
          * @param locale Locale
          * @param expires Lazy expires

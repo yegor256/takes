@@ -14,7 +14,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link FkChain}.
- *
  * @since 0.33
  */
 final class FkChainTest {

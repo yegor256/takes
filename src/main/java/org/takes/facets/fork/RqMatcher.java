@@ -11,7 +11,6 @@ import org.takes.Request;
 
 /**
  * Request with a matcher inside.
- *
  * @since 0.32.5
  */
 final class RqMatcher implements RqRegex {
@@ -28,7 +27,6 @@ final class RqMatcher implements RqRegex {
 
     /**
      * Ctor.
-     *
      * @param matcher Matcher
      * @param request Request
      */

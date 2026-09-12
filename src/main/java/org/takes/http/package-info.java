@@ -8,7 +8,7 @@
  *
  * <p>This package provides the core HTTP server implementation for the Takes
  * framework. It includes front-end components that handle incoming connections
- * and back-end components that process requests. The main components are:</p>
+ * and back-end components that process requests. The main components are:
  *
  * <ul>
  * <li>{@link org.takes.http.Front} - Interface for server front-ends that

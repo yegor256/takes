@@ -21,10 +21,10 @@ import org.takes.rs.RsWrap;
  * and cookie values according to
  * <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>.
  * It adds a Set-Cookie header to responses with the specified cookie name,
- * value, and optional attributes.</p>
+ * value, and optional attributes.
  *
  * <p>Use this decorator to return a response with a "Set-Cookie"
- * header, for example:</p>
+ * header, for example:
  *
  * <pre> return new RsWithCookie(
  *   new RsText("hello, world!"),
@@ -32,11 +32,11 @@ import org.takes.rs.RsWrap;
  *   "Path=/", "Expires=Wed, 13 Jan 2021 22:23:01 GMT"
  * );</pre>
  *
- * <p>This response will contain this header:</p>
+ * <p>This response will contain this header:
  *
  * <pre> Set-Cookie: u=Jeff;Path=/;Expires=Wed, 13 Jan 2021 22:23:01 GMT</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -65,7 +65,6 @@ public final class RsWithCookie extends RsWrap {
 
     /**
      * Constructor with cookie name, value, and optional attributes.
-     *
      * @param name The cookie name
      * @param value The cookie value
      * @param attrs Optional cookie attributes such as "Path=/" or "Secure"
@@ -77,7 +76,6 @@ public final class RsWithCookie extends RsWrap {
 
     /**
      * Constructor that decorates an existing response with a cookie.
-     *
      * @param res The original response to decorate
      * @param name The cookie name
      * @param value The cookie value

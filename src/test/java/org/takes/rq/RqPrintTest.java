@@ -11,7 +11,6 @@ import org.llorllale.cactoos.matchers.HasString;
 
 /**
  * Test case for {@link RqPrint}.
- *
  * @since 0.1
  */
 final class RqPrintTest {

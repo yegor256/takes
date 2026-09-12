@@ -20,7 +20,7 @@ import org.takes.rq.RqHeaders;
 /**
  * Fork by hit-refresh header.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see TkFork
  * @since 0.9
@@ -45,7 +45,6 @@ public final class FkHitRefresh implements Fork {
 
     /**
      * Ctor.
-     *
      * @param file Directory to watch
      * @param cmd Command to execute
      * @param that Target
@@ -74,7 +73,6 @@ public final class FkHitRefresh implements Fork {
 
     /**
      * Ctor.
-     *
      * @param file Directory to watch
      * @param cmd Command to execute
      * @param that Target
@@ -89,7 +87,6 @@ public final class FkHitRefresh implements Fork {
 
     /**
      * Ctor.
-     *
      * @param cmd Command to execute
      * @param that Target
      * @param handle Hit refresh handle

@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 
 /**
  * Back wrapper.
- *
  * @since 0.28
  */
 @EqualsAndHashCode
@@ -23,7 +22,6 @@ public class BkWrap implements Back {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      */
     public BkWrap(final Back back) {

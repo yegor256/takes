@@ -16,7 +16,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkReadAlways}.
- *
  * @since 0.30
  */
 final class TkReadAlwaysTest {

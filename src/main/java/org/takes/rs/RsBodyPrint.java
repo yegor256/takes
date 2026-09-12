@@ -14,13 +14,13 @@ import org.takes.Response;
  * <p>This decorator extracts and converts the response body to a string
  * format, primarily designed for testing and debugging purposes. It should
  * only be used with textual content as it will corrupt binary data.
- * The implementation delegates to RsPrint for the actual body extraction.</p>
+ * The implementation delegates to RsPrint for the actual body extraction.
  *
  * <p><strong>Warning:</strong> This class is not suitable for binary content
  * and should primarily be used in testing scenarios where you need to
- * inspect the response body as text.</p>
+ * inspect the response body as text.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
@@ -33,7 +33,6 @@ public final class RsBodyPrint implements Text {
 
     /**
      * Ctor.
-     *
      * @param res Original response
      */
     public RsBodyPrint(final Response res) {

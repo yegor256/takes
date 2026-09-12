@@ -39,12 +39,22 @@ import org.takes.rq.RqHref;
  * <p>This class implements the Facebook OAuth authentication flow by handling
  * the callback from Facebook's authorization server. It exchanges the authorization
  * code for an access token, retrieves user information, and creates an identity.
- * The class is immutable and thread-safe.</p>
+ * The class is immutable and thread-safe.
  *
  * @since 0.5
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsFacebook implements Pass {
+
+    /**
+     * Client id.
+     */
+    private static final String CLIENT_ID = "client_id";
+
+    /**
+     * Client secret.
+     */
+    private static final String CLIENT_SECRET = "client_secret";
 
     /**
      * Code.
@@ -84,7 +94,6 @@ public final class PsFacebook implements Pass {
 
     /**
      * Constructor with Facebook application credentials.
-     *
      * @param fapp The Facebook application ID
      * @param fkey The Facebook application secret key
      */
@@ -99,7 +108,6 @@ public final class PsFacebook implements Pass {
 
     /**
      * Constructor with custom requestor for testing purposes.
-     *
      * @param frequest The HTTP request for obtaining access token
      * @param frequestor The Facebook web requestor
      * @param fapp The Facebook application ID
@@ -169,9 +177,9 @@ public final class PsFacebook implements Pass {
         final String response = this.request.uri().set(
             URI.create(
                 new Href(PsFacebook.ACCESS_TOKEN_URL).with(
-                    "client_id", this.app
+                    PsFacebook.CLIENT_ID, this.app
                 ).with("redirect_uri", home).with(
-                    "client_secret", this.key
+                    PsFacebook.CLIENT_SECRET, this.key
                 ).with(PsFacebook.CODE, code).toString()
             )
         ).back()

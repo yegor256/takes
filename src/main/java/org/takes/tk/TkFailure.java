@@ -17,14 +17,14 @@ import org.takes.Take;
  * <p>This {@link Take} implementation is designed to always fail with
  * a specified exception when processing any request. It's primarily used
  * for testing error handling, simulating failure scenarios, and creating
- * intentional failure points in application routing.</p>
+ * intentional failure points in application routing.
  *
  * <p>The take supports multiple types of exceptions including runtime
  * exceptions, checked IOException instances, and lazy exception suppliers
  * for dynamic error generation. This flexibility enables comprehensive
- * testing of different failure modes and exception handling paths.</p>
+ * testing of different failure modes and exception handling paths.
  *
- * <p>Example usage:</p>
+ * <p>Example usage:
  * <pre>{@code
  * // Default failure with generic message
  * new TkFailure();
@@ -42,7 +42,7 @@ import org.takes.Take;
  * new TkFailure(() -> new IOException("Current time: " + System.currentTimeMillis()));
  * }</pre>
  *
- * <p>Common use cases include:</p>
+ * <p>Common use cases include:
  * <ul>
  * <li>Unit testing exception handling and error recovery</li>
  * <li>Integration testing of error reporting systems</li>
@@ -55,13 +55,13 @@ import org.takes.Take;
  *
  * <p>The take immediately throws the configured exception upon any request
  * without processing request content or generating any response. This ensures
- * consistent failure behavior regardless of request parameters or timing.</p>
+ * consistent failure behavior regardless of request parameters or timing.
  *
  * <p>Different constructors support various exception types to match specific
  * testing requirements, from simple runtime exceptions to complex I/O errors
- * and dynamic exception generation scenarios.</p>
+ * and dynamic exception generation scenarios.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -79,7 +79,6 @@ public final class TkFailure extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param err Error message to include in thrown exception
      */
     public TkFailure(final String err) {
@@ -88,7 +87,6 @@ public final class TkFailure extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param err Runtime exception to throw on each request
      */
     public TkFailure(final RuntimeException err) {
@@ -101,7 +99,6 @@ public final class TkFailure extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param err Scalar supplier of IOException for dynamic exception generation
      * @since 1.4
      */
@@ -115,7 +112,6 @@ public final class TkFailure extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param err IOException to throw on each request
      * @since 0.27
      */
@@ -129,7 +125,6 @@ public final class TkFailure extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param take Origin take that always fails
      */
     public TkFailure(final Take take) {

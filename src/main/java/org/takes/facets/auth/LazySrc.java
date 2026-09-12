@@ -13,7 +13,6 @@ import org.xembly.Directive;
 
 /**
  * Lazy XeSource that builds the logout link on demand.
- *
  * @since 2.0
  */
 final class LazySrc implements XeSource {
@@ -35,7 +34,6 @@ final class LazySrc implements XeSource {
 
     /**
      * Ctor.
-     *
      * @param request Request
      * @param relation Relation
      * @param fly Flag

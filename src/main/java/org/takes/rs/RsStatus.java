@@ -18,9 +18,9 @@ import org.takes.Response;
  * <p>This interface provides functionality to parse and extract HTTP
  * status codes from response status lines. It includes validation
  * of status line format and proper parsing of the three-digit status
- * code according to HTTP specifications.</p>
+ * code according to HTTP specifications.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 1.22
  */
@@ -28,7 +28,6 @@ public interface RsStatus extends Response {
 
     /**
      * Get status.
-     *
      * @return Status
      * @throws IOException If fails
      */
@@ -40,9 +39,9 @@ public interface RsStatus extends Response {
      * <p>This implementation parses the HTTP status line using regex
      * pattern matching to extract the three-digit status code. It validates
      * the status line format and throws appropriate exceptions for malformed
-     * status lines.</p>
+     * status lines.
      *
-     * <p>The class is immutable and thread-safe.</p>
+     * <p>The class is immutable and thread-safe.
      *
      * @since 1.22
      */
@@ -58,7 +57,6 @@ public interface RsStatus extends Response {
 
         /**
          * Ctor.
-         *
          * @param res Original response
          */
         public Base(final Response res) {

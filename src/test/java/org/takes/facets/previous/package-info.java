@@ -5,7 +5,6 @@
 
 /**
  * Previous, tests.
- *
  * @since 0.10
  */
 package org.takes.facets.previous;

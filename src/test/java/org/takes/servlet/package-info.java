@@ -5,7 +5,6 @@
 
 /**
  * Servlet, tests.
- *
  * @since 1.14
  */
 package org.takes.servlet;

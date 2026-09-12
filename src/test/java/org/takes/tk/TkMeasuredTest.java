@@ -12,7 +12,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkMeasured}.
- *
  * @since 0.10
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

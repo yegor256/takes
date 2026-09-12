@@ -4,19 +4,15 @@
  */
 package org.takes.rs;
 
-import java.util.AbstractMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Map view backed by a varargs entry array.
- *
  * @since 2.0
  */
 @SuppressWarnings("PMD.ArrayIsStoredDirectly")
 final class PairsMap
-    extends AbstractMap<CharSequence, Object> {
+    extends java.util.AbstractMap<CharSequence, Object> {
 
     /**
      * Source entries.
@@ -25,7 +21,6 @@ final class PairsMap
 
     /**
      * Ctor.
-     *
      * @param ents Entries
      */
     @SafeVarargs
@@ -34,9 +29,9 @@ final class PairsMap
     }
 
     @Override
-    public Set<Map.Entry<CharSequence, Object>> entrySet() {
-        final Set<Map.Entry<CharSequence, Object>> set =
-            new LinkedHashSet<>(this.entries.length);
+    public java.util.Set<Map.Entry<CharSequence, Object>> entrySet() {
+        final java.util.Set<Map.Entry<CharSequence, Object>> set =
+            new java.util.LinkedHashSet<>(this.entries.length);
         for (final Map.Entry<CharSequence, Object> ent : this.entries) {
             set.add(ent);
         }

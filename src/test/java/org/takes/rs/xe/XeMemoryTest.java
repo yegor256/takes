@@ -14,7 +14,6 @@ import org.takes.rs.RsXslt;
 
 /**
  * Test case for {@link XeMemory}.
- *
  * @since 1.2
  */
 final class XeMemoryTest {

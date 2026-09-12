@@ -13,7 +13,6 @@ import org.llorllale.cactoos.matchers.HasValues;
 
 /**
  * Test case for {@link Href}.
- *
  * @since 0.7
  */
 final class HrefTest {

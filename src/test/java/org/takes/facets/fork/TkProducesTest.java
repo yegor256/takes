@@ -22,7 +22,6 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link TkProduces}.
- *
  * @since 0.14
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

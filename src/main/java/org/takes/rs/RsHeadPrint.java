@@ -14,9 +14,9 @@ import org.takes.Response;
  * <p>This decorator extracts and converts the response headers to a string
  * format with proper HTTP formatting, primarily designed for testing and
  * debugging purposes. The implementation delegates to RsPrint for the
- * actual header extraction and formatting.</p>
+ * actual header extraction and formatting.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
@@ -29,7 +29,6 @@ public final class RsHeadPrint implements Text {
 
     /**
      * Ctor.
-     *
      * @param head Original head
      */
     public RsHeadPrint(final Response head) {

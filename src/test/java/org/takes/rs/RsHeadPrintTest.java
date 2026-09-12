@@ -12,7 +12,6 @@ import org.llorllale.cactoos.matchers.Throws;
 
 /**
  * Test case for {@link RsHeadPrint}.
- *
  * @since 1.19
  */
 final class RsHeadPrintTest {

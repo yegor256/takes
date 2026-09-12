@@ -10,9 +10,9 @@
  * framework for Takes applications. It includes interfaces and implementations
  * for identity management, authentication passes, request/response decorators
  * for authenticated contexts, and integration with various authentication
- * mechanisms including social media OAuth providers.</p>
+ * mechanisms including social media OAuth providers.
  *
- * <p>Key components include:</p>
+ * <p>Key components include:
  * <ul>
  * <li>Core interfaces: Identity for user representation, Pass for authentication</li>
  * <li>Authentication decorators: TkAuth, RqAuth, RsAuth for authenticated contexts</li>

@@ -19,7 +19,6 @@ import org.takes.Take;
 /**
  * Decorator TkRetry, which will not fail immediately on Exception, but
  * will retry a few times.
- *
  * @since 0.28.3
  */
 public final class TkRetry implements Take {
@@ -41,7 +40,6 @@ public final class TkRetry implements Take {
 
     /**
      * Constructor.
-     *
      * @param retries Number of retry attempts
      * @param wait Time between retries
      * @param original Original take

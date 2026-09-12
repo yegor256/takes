@@ -25,7 +25,7 @@ import org.takes.tk.TkWrap;
 /**
  * Fallback.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  * @todo #918:30min {@link TkFallback} class is very complicated, hard to read.
@@ -40,7 +40,6 @@ public final class TkFallback extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param take Original take
      * @param fbk Fallback
      */

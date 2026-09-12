@@ -17,7 +17,6 @@ import org.xembly.Directives;
 
 /**
  * Test case for {@link RsXembly}.
- *
  * @since 0.1
  */
 final class RsXemblyTest {

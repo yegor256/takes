@@ -11,7 +11,6 @@ import org.llorllale.cactoos.matchers.HasString;
 
 /**
  * Test case for {@link RqWithHeader}.
- *
  * @since 0.9
  */
 final class RqWithHeaderTest {

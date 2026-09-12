@@ -23,7 +23,6 @@ final class Item implements XeSource {
 
     /**
      * Ctor.
-     *
      * @param path File path
      */
     Item(final File path) {

@@ -5,7 +5,6 @@
 
 /**
  * Take, tests.
- *
  * @since 0.1
  */
 package org.takes.tk;

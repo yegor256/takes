@@ -26,7 +26,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link SrvTake}.
- *
  * @since 1.16
  */
 final class SrvTakeTest {
@@ -79,7 +78,6 @@ final class SrvTakeTest {
 
     /**
      * Fake TkApp (for {@link SrvTake} test only).
-     *
      * @since 1.16
      */
     static final class TkApp implements Take {
@@ -91,7 +89,6 @@ final class SrvTakeTest {
 
         /**
          * Ctor.
-         *
          * @param ctx A ServletContext
          */
         TkApp(final ServletContext ctx) {

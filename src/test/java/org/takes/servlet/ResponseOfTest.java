@@ -15,7 +15,6 @@ import org.takes.rs.RsWithHeader;
 
 /**
  * Test case for {@link  ResponseOf}.
- *
  * @since 1.14
  */
 final class ResponseOfTest {

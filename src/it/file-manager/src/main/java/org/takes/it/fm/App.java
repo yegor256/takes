@@ -30,7 +30,6 @@ public final class App implements Take {
 
     /**
      * Ctor.
-     *
      * @param dir Home dir
      */
     public App(final File dir) {
@@ -39,7 +38,6 @@ public final class App implements Take {
 
     /**
      * Entry point.
-     *
      * @param args Arguments
      * @throws IOException If fails
      */

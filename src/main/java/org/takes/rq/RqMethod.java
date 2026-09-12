@@ -17,9 +17,9 @@ import org.takes.Request;
  *
  * <p>This interface provides functionality to extract and validate HTTP methods
  * from requests. It includes constants for standard HTTP methods and ensures
- * proper method format validation according to HTTP specifications.</p>
+ * proper method format validation according to HTTP specifications.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.13.7
  */
@@ -72,7 +72,6 @@ public interface RqMethod extends Request {
 
     /**
      * Get method.
-     *
      * @return HTTP method
      * @throws IOException If fails
      */
@@ -81,7 +80,7 @@ public interface RqMethod extends Request {
     /**
      * Request decorator, for HTTP method parsing.
      *
-     * <p>The class is immutable and thread-safe.</p>
+     * <p>The class is immutable and thread-safe.
      *
      * @since 0.13.7
      */
@@ -97,7 +96,6 @@ public interface RqMethod extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         public Base(final Request req) {

@@ -28,7 +28,6 @@ final class RsPage implements Response {
 
     /**
      * Ctor.
-     *
      * @param xsl XSL stylesheet name
      * @param source Xembly source
      */

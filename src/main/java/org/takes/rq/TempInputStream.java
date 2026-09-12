@@ -17,10 +17,10 @@ import java.nio.file.Paths;
  * <p>This input stream decorator wraps another input stream and maintains
  * a reference to a temporary file. When the stream is closed, it ensures
  * that both the underlying stream is closed and the associated temporary
- * file is deleted from the filesystem.</p>
+ * file is deleted from the filesystem.
  *
  * <p>The class is designed for handling temporary files that should be
- * cleaned up after processing, such as uploaded files or cached content.</p>
+ * cleaned up after processing, such as uploaded files or cached content.
  *
  * @since 0.31
  */
@@ -38,7 +38,6 @@ public final class TempInputStream extends InputStream {
 
     /**
      * Ctor.
-     *
      * @param stream Original stream
      * @param temp File instance
      */

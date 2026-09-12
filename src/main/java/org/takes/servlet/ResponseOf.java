@@ -28,10 +28,10 @@ import org.takes.misc.Equality;
  * <p>This class bridges between Takes framework {@link Response} objects
  * and servlet container {@link HttpServletResponse} objects. It's used
  * internally by {@link SrvTake} to convert Takes responses into servlet
- * responses that can be sent to clients by the servlet container.</p>
+ * responses that can be sent to clients by the servlet container.
  *
  * <p>The adapter extracts HTTP information from the Takes response and
- * applies it to the servlet response, including:</p>
+ * applies it to the servlet response, including:
  * <ul>
  * <li>HTTP status code from the response status line</li>
  * <li>HTTP headers (excluding cookies which are handled separately)</li>
@@ -41,11 +41,16 @@ import org.takes.misc.Equality;
  *
  * <p>The implementation handles the complete response conversion process,
  * ensuring that all Takes response data is properly transferred to the
- * servlet response for delivery to the client.</p>
+ * servlet response for delivery to the client.
  *
  * @since 2.0
  */
 final class ResponseOf {
+
+    /**
+     * Buffer size.
+     */
+    private static final int BUFSIZE = 8192;
 
     /**
      * Http response first line head pattern.
@@ -62,7 +67,6 @@ final class ResponseOf {
 
     /**
      * Ctor.
-     *
      * @param response Origin takes response
      */
     ResponseOf(final Response response) {
@@ -71,7 +75,6 @@ final class ResponseOf {
 
     /**
      * Apply to servlet response.
-     *
      * @param sresp Servlet response
      * @throws IOException If fails
      */
@@ -87,7 +90,7 @@ final class ResponseOf {
                 InputStream body = this.rsp.body();
                 OutputStream out = sresp.getOutputStream()
             ) {
-                final byte[] buff = new byte[8192];
+                final byte[] buff = new byte[ResponseOf.BUFSIZE];
                 for (int read = body.read(buff); read >= 0; read = body.read(buff)) {
                     out.write(buff, 0, read);
                 }

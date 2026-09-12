@@ -11,9 +11,9 @@
  * that accepts an HTTP request and returns an HTTP response. The package
  * provides numerous Take implementations and decorators that handle different
  * aspects of web application functionality including routing, static content
- * serving, authentication, compression, caching, and error handling.</p>
+ * serving, authentication, compression, caching, and error handling.
  *
- * <p>Key components include:</p>
+ * <p>Key components include:
  * <ul>
  * <li>Core implementations: TkEmpty, TkFixed, TkWrap, TkClasspath</li>
  * <li>Content serving: TkFiles, TkHtml, TkText, TkRedirect</li>

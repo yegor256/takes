@@ -16,9 +16,9 @@ import org.takes.Request;
  * request decorators. It wraps an original request and delegates all
  * method calls to the wrapped instance. Subclasses can override specific
  * methods to provide additional functionality while maintaining the
- * Request interface contract.</p>
+ * Request interface contract.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.6
  */
@@ -32,7 +32,6 @@ public class RqWrap implements Request {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      */
     public RqWrap(final Request req) {

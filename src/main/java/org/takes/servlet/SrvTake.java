@@ -25,15 +25,15 @@ import org.takes.Take;
  * container (Tomcat, Jetty, etc.) by bridging between the servlet API
  * and Takes' {@link Take} interface. It acts as an entry point that
  * receives servlet requests and delegates them to a Takes application
- * for processing.</p>
+ * for processing.
  *
  * <p>The servlet is configured through the standard servlet initialization
  * parameter "take" which should specify the fully qualified class name
  * of the {@link Take} implementation to use. The Take class must have
  * either a no-argument constructor or a constructor that accepts a
- * {@link ServletContext}.</p>
+ * {@link ServletContext}.
  *
- * <p>Configuration example in web.xml:</p>
+ * <p>Configuration example in web.xml:
  * <pre>{@code
  * <servlet>
  *   <servlet-name>app</servlet-name>
@@ -45,7 +45,7 @@ import org.takes.Take;
  * </servlet>
  * }</pre>
  *
- * <p>The servlet handles the complete request/response lifecycle:</p>
+ * <p>The servlet handles the complete request/response lifecycle:
  * <ul>
  * <li>Converts {@link HttpServletRequest} to Takes {@link org.takes.Request}</li>
  * <li>Processes the request through the configured {@link Take}</li>

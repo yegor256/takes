@@ -16,15 +16,15 @@ import lombok.EqualsAndHashCode;
  * <p>This decorator wraps another {@link Back} implementation and enforces
  * a maximum execution time for request processing. It runs as a separate
  * daemon thread that continuously monitors all active request-processing
- * threads and interrupts any that exceed the specified time limit.</p>
+ * threads and interrupts any that exceed the specified time limit.
  *
  * <p>This decorator is essential for preventing resource exhaustion caused
  * by long-running or hanging requests. When a request takes longer than
  * the configured latency limit, the processing thread is interrupted,
  * which should cause the request to fail quickly rather than consuming
- * server resources indefinitely.</p>
+ * server resources indefinitely.
  *
- * <p>Key features:</p>
+ * <p>Key features:
  * <ul>
  * <li>Monitors all active request-processing threads</li>
  * <li>Interrupts threads that exceed the maximum processing time</li>
@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
  * <li>Automatic cleanup of completed or interrupted threads</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.14.2
  */
@@ -52,7 +52,6 @@ public final class BkTimeable extends Thread implements Back {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      * @param msec Execution latency
      */
@@ -62,7 +61,6 @@ public final class BkTimeable extends Thread implements Back {
 
     /**
      * Ctor.
-     *
      * @param back Original back
      * @param msec Execution latency
      * @param threads Threads storage

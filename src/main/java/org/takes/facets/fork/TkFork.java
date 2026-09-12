@@ -22,7 +22,7 @@ import org.takes.misc.Opt;
  * <p>This is the implementation of {@link org.takes.Take} that
  * routes the requests to another take, using a collection of forks
  * to pick the right one. The best example is a routing by regular
- * expression, for example:</p>
+ * expression, for example:
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex("/home", new TkHome()),
@@ -32,9 +32,9 @@ import org.takes.misc.Opt;
  * <p>Here, {@link TkFork} will try to call these
  * "forks" one by one, asking whether they accept the request. The first
  * one that reacts will get control. Each "fork" is an implementation
- * of {@link org.takes.facets.fork.Fork}.</p>
+ * of {@link org.takes.facets.fork.Fork}.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see org.takes.facets.fork.FkMethods
  * @see org.takes.facets.fork.FkRegex
@@ -59,7 +59,6 @@ public final class TkFork implements Take {
 
     /**
      * Ctor.
-     *
      * @param frks Forks
      */
     public TkFork(final Fork... frks) {
@@ -68,7 +67,6 @@ public final class TkFork implements Take {
 
     /**
      * Ctor.
-     *
      * @param frks Forks
      */
     public TkFork(final Collection<Fork> frks) {

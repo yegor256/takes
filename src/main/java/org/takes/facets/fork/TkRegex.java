@@ -12,7 +12,7 @@ import org.takes.Take;
 /**
  * Target for a {@link FkRegex} fork.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.4
  */
@@ -21,7 +21,6 @@ public interface TkRegex {
 
     /**
      * Route this request.
-     *
      * @param req Request
      * @return Take
      * @throws Exception If fails
@@ -30,7 +29,6 @@ public interface TkRegex {
 
     /**
      * Fake of {@link TkRegex} as {@link org.takes.Take}.
-     *
      * @since 0.28
      */
     final class Fake implements Take {
@@ -47,7 +45,6 @@ public interface TkRegex {
 
         /**
          * Ctor.
-         *
          * @param rgx Original destination
          * @param mtr Matcher
          */

@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeWhen}.
- *
  * @since 0.13
  */
 final class XeWhenTest {

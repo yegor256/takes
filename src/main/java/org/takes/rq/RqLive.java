@@ -25,9 +25,9 @@ import org.takes.misc.Opt;
  * handling the HTTP protocol format including request line parsing,
  * header validation, and proper CRLF line ending handling. It performs
  * strict validation of HTTP format compliance and throws appropriate
- * exceptions for malformed requests.</p>
+ * exceptions for malformed requests.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -36,7 +36,6 @@ public final class RqLive extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param input Input stream
      * @throws IOException If fails
      */

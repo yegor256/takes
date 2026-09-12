@@ -13,7 +13,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkParams}.
- *
  * @since 0.4
  */
 final class FkParamsTest {

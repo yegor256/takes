@@ -36,15 +36,15 @@ import org.takes.rs.RsWithoutHeader;
  * <p>This class provides a test double for {@link HttpServletResponse} that
  * wraps a Takes {@link Response} object. It's designed for unit testing
  * scenarios where you need to simulate servlet container response handling
- * without running an actual servlet container.</p>
+ * without running an actual servlet container.
  *
  * <p>The implementation uses an {@link AtomicReference} to hold the response,
  * allowing it to be modified through servlet API calls (adding headers,
  * setting status, adding cookies, etc.) while maintaining thread safety.
  * These modifications create new decorated Takes response objects rather
- * than mutating state directly.</p>
+ * than mutating state directly.
  *
- * <p>Key features:</p>
+ * <p>Key features:
  * <ul>
  * <li>Wraps Takes {@link Response} to provide servlet {@link HttpServletResponse} API</li>
  * <li>Supports adding headers, cookies, and setting HTTP status codes</li>
@@ -55,7 +55,7 @@ import org.takes.rs.RsWithoutHeader;
  *
  * <p>Many methods throw {@link UnsupportedOperationException} as they
  * represent servlet container features not commonly needed in unit tests
- * (character encoding, buffering, locale handling, etc.).</p>
+ * (character encoding, buffering, locale handling, etc.).
  *
  * @since 1.14
  */
@@ -68,7 +68,6 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Ctor.
-     *
      * @param resp A Takes Response object
      */
     public HttpServletResponseFake(final Response resp) {
@@ -179,7 +178,6 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Encode a URL.
-     *
      * @param url URL to be encoded
      * @return The encoded URL
      * @deprecated It should not be used
@@ -192,7 +190,6 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Encode a redirect URL.
-     *
      * @param url URL to be encoded
      * @return The encoded redirect URL
      * @deprecated It should not be used
@@ -249,7 +246,6 @@ public final class HttpServletResponseFake implements HttpServletResponse {
 
     /**
      * Set the response code status and reason.
-     *
      * @param code The status code
      * @param reason The reason originates this code
      * @deprecated It should not be used

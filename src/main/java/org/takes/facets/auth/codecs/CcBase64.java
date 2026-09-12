@@ -19,13 +19,13 @@ import org.takes.facets.auth.Identity;
  * <p>This codec decorator applies Base64 encoding to make binary data
  * safe for transmission over text-based protocols. It wraps another codec
  * and converts its binary output to Base64-encoded strings, which can be
- * safely transmitted via HTTP headers, URLs, or stored in text formats.</p>
+ * safely transmitted via HTTP headers, URLs, or stored in text formats.
  *
  * <p>During decoding, it validates that all input characters are legal
  * Base64 characters before attempting to decode, throwing a
- * {@link DecodingException} if illegal characters are found.</p>
+ * {@link DecodingException} if illegal characters are found.
  *
- * <p>Usage example:</p>
+ * <p>Usage example:
  * <pre> {@code
  * final Codec codec = new CcBase64(new CcCompact());
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -33,12 +33,18 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded); // validated and decoded
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.13
  */
 @EqualsAndHashCode
 public final class CcBase64 implements Codec {
+
+    /**
+     * All legal Base64 chars.
+     */
+    private static final String BASE64CHARS =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
     /**
      * Original codec.
@@ -47,7 +53,6 @@ public final class CcBase64 implements Codec {
 
     /**
      * Ctor.
-     *
      * @param codec Original codec
      */
     public CcBase64(final Codec codec) {
@@ -78,10 +83,7 @@ public final class CcBase64 implements Codec {
     private static byte[] checkIllegalCharacters(final byte[] bytes) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         for (final byte the : bytes) {
-            final int idx =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
-                    .indexOf(the);
-            if (idx < 0) {
+            if (CcBase64.BASE64CHARS.indexOf(the) < 0) {
                 out.write(the);
             }
         }

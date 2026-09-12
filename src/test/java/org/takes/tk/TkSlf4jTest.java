@@ -12,7 +12,6 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link TkSlf4j}.
- *
  * @since 0.11.2
  */
 final class TkSlf4jTest {

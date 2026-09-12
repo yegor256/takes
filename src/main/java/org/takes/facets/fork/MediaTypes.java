@@ -16,7 +16,7 @@ import org.cactoos.text.UncheckedText;
 /**
  * Media types.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see org.takes.facets.fork.FkTypes
  * @since 0.6
@@ -39,7 +39,6 @@ final class MediaTypes {
 
     /**
      * Ctor.
-     *
      * @param text Text to parse
      */
     MediaTypes(final String text) {
@@ -48,7 +47,6 @@ final class MediaTypes {
 
     /**
      * Ctor.
-     *
      * @param types Set of types
      */
     MediaTypes(final SortedSet<MediaType> types) {
@@ -57,7 +55,6 @@ final class MediaTypes {
 
     /**
      * Contains any of these types?
-     *
      * @param types Types
      * @return TRUE if any of these types are present inside this.list
      */
@@ -74,7 +71,6 @@ final class MediaTypes {
 
     /**
      * Contains this type?
-     *
      * @param type Type
      * @return TRUE if this type is present inside this.list
      */
@@ -91,7 +87,6 @@ final class MediaTypes {
 
     /**
      * Merge with this one.
-     *
      * @param types Types
      * @return Merged list
      */
@@ -104,7 +99,6 @@ final class MediaTypes {
 
     /**
      * Is it empty?
-     *
      * @return TRUE if empty
      */
     boolean isEmpty() {

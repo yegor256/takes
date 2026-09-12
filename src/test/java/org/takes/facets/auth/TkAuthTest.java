@@ -26,7 +26,6 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link TkAuth}.
- *
  * @since 0.9
  */
 final class TkAuthTest {

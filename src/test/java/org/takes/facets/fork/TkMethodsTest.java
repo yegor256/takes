@@ -25,7 +25,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkMethods}.
- *
  * @since 0.17
  */
 final class TkMethodsTest {

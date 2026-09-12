@@ -16,14 +16,14 @@ import org.takes.rq.RqHeaders;
  * Fork by host name.
  *
  * <p>Use this class in combination with {@link TkFork},
- * for example:</p>
+ * for example:
  *
  * <pre> Take take = new TkFork(
  *   new FkHost("www.example.com", new TkText("home")),
  *   new FkHost("doc.example.com", new TkText("doc is here"))
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see TkFork
  * @since 0.32
@@ -33,7 +33,6 @@ public final class FkHost extends FkWrap {
 
     /**
      * Ctor.
-     *
      * @param host Host
      * @param take Take to use
      */

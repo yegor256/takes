@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Tests of {@link Expires} interface and direct implementations.
- *
  * @since 2.0
  */
 final class ExpiresTest {

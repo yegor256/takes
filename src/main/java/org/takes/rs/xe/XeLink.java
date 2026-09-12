@@ -10,7 +10,7 @@ import org.xembly.Directives;
 /**
  * Xembly source to create an Atom LINK element.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -19,7 +19,6 @@ public final class XeLink extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param related Related
      * @param link HREF
      */
@@ -29,7 +28,6 @@ public final class XeLink extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param rel Related
      * @param href HREF
      * @param type Content type

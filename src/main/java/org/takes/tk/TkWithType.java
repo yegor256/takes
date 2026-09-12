@@ -13,9 +13,9 @@ import org.takes.rs.RsWithType;
  * Plain text take.
  *
  * <p>This take wraps all responses of another take, adding
- * content type to them, through {@link RsWithType}.</p>
+ * content type to them, through {@link RsWithType}.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -25,7 +25,6 @@ public final class TkWithType extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param take Original take
      * @param type Content type
      */

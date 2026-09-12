@@ -18,7 +18,6 @@ import org.takes.misc.Expires;
 
 /**
  * Lazily-built previous-cookie response.
- *
  * @since 2.0
  */
 final class LazyResponse implements Response {
@@ -30,7 +29,6 @@ final class LazyResponse implements Response {
 
     /**
      * Ctor.
-     *
      * @param rsp Wrapped response
      * @param location Previous URL
      */

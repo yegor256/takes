@@ -14,7 +14,6 @@ import org.takes.rq.RqWithBody;
 
 /**
  * RqFormFake accepts parameters in the constructor.
- *
  * @since 0.33
  */
 public final class RqFormFake implements RqForm {
@@ -26,7 +25,6 @@ public final class RqFormFake implements RqForm {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      * @param params Parameters
      */

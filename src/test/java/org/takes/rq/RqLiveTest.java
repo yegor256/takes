@@ -17,10 +17,9 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqLive}.
- *
  * @since 0.9
  */
-@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
+@SuppressWarnings("PMD.UnnecessaryLocalRule")
 final class RqLiveTest {
 
     /**

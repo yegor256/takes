@@ -21,7 +21,6 @@ import org.takes.rs.RsHeadPrint;
 
 /**
  * Test case for {@link TkFiles}.
- *
  * @since 0.8
  */
 final class TkFilesTest {

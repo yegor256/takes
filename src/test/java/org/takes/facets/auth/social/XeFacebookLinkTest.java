@@ -16,7 +16,6 @@ import org.takes.rs.xe.XeAppend;
 
 /**
  * Test case for {@link XeFacebookLink}.
- *
  * @since 0.5
  */
 final class XeFacebookLinkTest {

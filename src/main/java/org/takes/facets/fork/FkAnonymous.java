@@ -17,7 +17,7 @@ import org.takes.misc.Opt;
  * Fork if no user is logged in now.
  *
  * <p>Use this class in combination with {@link TkFork},
- * for example:</p>
+ * for example:
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex(
@@ -29,7 +29,7 @@ import org.takes.misc.Opt;
  *   )
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see TkFork
  * @see TkRegex
@@ -45,7 +45,6 @@ public final class FkAnonymous implements Fork {
 
     /**
      * Ctor.
-     *
      * @param that Target
      */
     public FkAnonymous(final Take that) {
@@ -56,7 +55,6 @@ public final class FkAnonymous implements Fork {
 
     /**
      * Ctor.
-     *
      * @param that Target
      * @since 1.4
      */

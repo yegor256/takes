@@ -20,9 +20,9 @@ import org.takes.facets.auth.Identity;
  * encoded identity data. It wraps another codec and compresses its output
  * during encoding, then decompresses during decoding. This is useful for
  * reducing storage space and network bandwidth when dealing with identity
- * tokens.</p>
+ * tokens.
  *
- * <p>Usage example:</p>
+ * <p>Usage example:
  * <pre> {@code
  * final Codec codec = new CcGzip(new CcPlain());
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -30,7 +30,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded); // decompressed
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.16
  */
@@ -44,7 +44,6 @@ public final class CcGzip implements Codec {
 
     /**
      * Ctor.
-     *
      * @param codec Original
      */
     public CcGzip(final Codec codec) {

@@ -25,9 +25,9 @@ import org.cactoos.text.UncheckedText;
  * method in a separate thread, execute a script against it while it's running,
  * and then shut it down. This is particularly useful for integration testing
  * of applications that expose an HTTP interface through their main method.
- * The class automatically manages port allocation and cleanup.</p>
+ * The class automatically manages port allocation and cleanup.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.23
  */
@@ -46,7 +46,6 @@ public final class MainRemote {
 
     /**
      * Ctor.
-     *
      * @param type Class with main method
      */
     public MainRemote(final Class<?> type) {
@@ -55,7 +54,6 @@ public final class MainRemote {
 
     /**
      * Ctor.
-     *
      * @param type Class with main method
      * @param passed Additional arguments to be passed to the main method
      */
@@ -67,7 +65,6 @@ public final class MainRemote {
 
     /**
      * Execute this script against a running front.
-     *
      * @param script Script to run
      * @throws Exception If fails
      */
@@ -160,7 +157,6 @@ public final class MainRemote {
 
     /**
      * Script to execute.
-     *
      * @since 0.23
      */
     @FunctionalInterface
@@ -168,7 +164,6 @@ public final class MainRemote {
 
         /**
          * Execute it against this URI.
-         *
          * @param home URI of the running front
          * @throws IOException If fails
          */

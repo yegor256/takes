@@ -14,7 +14,7 @@ import org.takes.misc.Opt;
  * This implementation effectively logs out any authenticated user
  * by replacing their identity with the anonymous identity.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.5
  */

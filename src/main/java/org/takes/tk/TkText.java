@@ -19,9 +19,9 @@ import org.takes.rs.RsText;
  * plain text content with appropriate Content-Type headers. It serves as
  * a convenient wrapper around {@link RsText} for endpoints that need to
  * return text-based data such as status messages, API responses, logs,
- * configuration data, or any other textual content.</p>
+ * configuration data, or any other textual content.
  *
- * <p>Example usage:</p>
+ * <p>Example usage:
  * <pre>{@code
  * // Simple text response
  * new TkText("Hello, World!");
@@ -39,7 +39,7 @@ import org.takes.rs.RsText;
  * new TkText("Name,Age,City\nJohn,30,NYC\nJane,25,LA");
  * }</pre>
  *
- * <p>The take supports multiple input sources for maximum flexibility:</p>
+ * <p>The take supports multiple input sources for maximum flexibility:
  * <ul>
  * <li>Static strings for fixed responses</li>
  * <li>Dynamic content through {@link Scalar} suppliers</li>
@@ -48,7 +48,7 @@ import org.takes.rs.RsText;
  * <li>Streaming content from InputStreams</li>
  * </ul>
  *
- * <p>Common use cases include:</p>
+ * <p>Common use cases include:
  * <ul>
  * <li>API endpoints returning JSON, XML, or CSV data</li>
  * <li>Status and health check endpoints</li>
@@ -62,13 +62,13 @@ import org.takes.rs.RsText;
  * <p>The response includes standard HTTP headers with Content-Type set to
  * "text/plain; charset=UTF-8" for proper text encoding and browser display.
  * The Content-Length header is automatically calculated based on the text
- * content size.</p>
+ * content size.
  *
  * <p>All constructors create immutable instances that can be safely shared
  * between threads. For dynamic content that may change over time, use the
- * {@link Scalar} constructor which evaluates the content on each request.</p>
+ * {@link Scalar} constructor which evaluates the content on each request.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -79,7 +79,6 @@ public final class TkText extends TkWrap {
     /**
      * Ctor.
      * Creates a text take with empty content.
-     *
      * @since 0.9
      */
     public TkText() {
@@ -88,7 +87,6 @@ public final class TkText extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param body Text content to return in response
      */
     public TkText(final String body) {
@@ -99,7 +97,6 @@ public final class TkText extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param body Scalar supplier of text content for dynamic responses
      * @since 1.4
      */
@@ -111,7 +108,6 @@ public final class TkText extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param body Binary content to return as text
      */
     public TkText(final byte[] body) {
@@ -122,7 +118,6 @@ public final class TkText extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param url URL pointing to text content to serve
      */
     public TkText(final URL url) {
@@ -133,7 +128,6 @@ public final class TkText extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param body Input stream containing text content
      */
     public TkText(final InputStream body) {
@@ -144,7 +138,6 @@ public final class TkText extends TkWrap {
 
     /**
      * Ctor.
-     *
      * @param take Origin take that produces the text response
      */
     public TkText(final Take take) {

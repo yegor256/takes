@@ -10,7 +10,6 @@ import org.takes.Request;
 
 /**
  * Lazily-built request that adds a default header on demand.
- *
  * @since 2.0
  */
 final class LazyRq implements Request {
@@ -32,7 +31,6 @@ final class LazyRq implements Request {
 
     /**
      * Ctor.
-     *
      * @param request Original request
      * @param header Header name
      * @param value Header value

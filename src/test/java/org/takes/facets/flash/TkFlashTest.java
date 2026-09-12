@@ -14,7 +14,6 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link TkFlash}.
- *
  * @since 0.4
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

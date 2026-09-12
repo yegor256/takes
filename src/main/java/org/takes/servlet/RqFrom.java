@@ -20,10 +20,10 @@ import org.takes.Request;
  * <p>This class converts a servlet container's {@link HttpServletRequest}
  * into a Takes framework {@link Request}. It's primarily used internally
  * by {@link SrvTake} to bridge between servlet containers and Takes
- * applications.</p>
+ * applications.
  *
  * <p>The adapter extracts all HTTP information from the servlet request
- * and formats it according to Takes' request structure, including:</p>
+ * and formats it according to Takes' request structure, including:
  * <ul>
  * <li>HTTP method, URI, and query parameters in the first line</li>
  * <li>All HTTP headers from the original request</li>
@@ -34,7 +34,7 @@ import org.takes.Request;
  *
  * <p>This conversion allows Takes applications to run inside servlet
  * containers while maintaining their lightweight, immutable request
- * handling approach.</p>
+ * handling approach.
  *
  * @since 2.0
  */
@@ -47,7 +47,6 @@ final class RqFrom implements Request {
 
     /**
      * Ctor.
-     *
      * @param request Servlet request
      */
     RqFrom(final HttpServletRequest request) {

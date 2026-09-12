@@ -23,7 +23,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link BkTimeable}.
- *
  * @since 0.14.2
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

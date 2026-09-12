@@ -21,7 +21,7 @@ import org.cactoos.text.UncheckedText;
 /**
  * Media type.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @see org.takes.facets.fork.FkTypes
  * @since 0.6
@@ -52,7 +52,6 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Ctor.
-     *
      * @param text Text to parse
      */
     MediaType(final String text) {
@@ -81,7 +80,6 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Matches.
-     *
      * @param type Another type
      * @return TRUE if matches
      * @checkstyle BooleanExpressionComplexityCheck (10 lines)

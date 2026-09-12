@@ -18,7 +18,6 @@ import org.takes.http.FtRemote;
 /**
  * Test case for {@link TkSlf4j} when used in conjunction
  * with {@link FtRemote} and {@link TkEmpty}.
- *
  * @since 0.11.2
  */
 final class TkSlf4jRemoteTest {

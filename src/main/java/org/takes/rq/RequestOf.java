@@ -23,9 +23,9 @@ import org.takes.Request;
  * <p>This class provides a flexible way to create Request instances using
  * functional interfaces for head and body content. It accepts suppliers
  * (Head and Body interfaces) that are called when the respective content
- * is needed, enabling lazy evaluation and custom request construction.</p>
+ * is needed, enabling lazy evaluation and custom request construction.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 2.0
  */
@@ -43,7 +43,6 @@ public final class RequestOf implements Request {
 
     /**
      * Ctor.
-     *
      * @param head Iterable head value
      * @param body InputStream body value
      */
@@ -53,7 +52,6 @@ public final class RequestOf implements Request {
 
     /**
      * Ctor.
-     *
      * @param head Head value
      * @param body Body value
      */

@@ -5,7 +5,6 @@
 
 /**
  * Auth, tests.
- *
  * @since 0.1
  */
 package org.takes.facets.auth;

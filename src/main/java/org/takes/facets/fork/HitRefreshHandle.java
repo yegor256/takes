@@ -17,7 +17,6 @@ import org.takes.misc.Opt;
 
 /**
  * A handle for serving hit-refresh feature.
- *
  * @since 0.9
  */
 final class HitRefreshHandle {
@@ -40,7 +39,6 @@ final class HitRefreshHandle {
 
     /**
      * Ctor.
-     *
      * @param dir Directory to watch
      */
     HitRefreshHandle(final File dir) {
@@ -52,7 +50,6 @@ final class HitRefreshHandle {
 
     /**
      * Ctor.
-     *
      * @param dir Directory to watch
      * @param lock Lock for access to flag file
      */
@@ -64,7 +61,6 @@ final class HitRefreshHandle {
 
     /**
      * Create the file to touch, if it is not yet created.
-     *
      * @return The file to touch
      * @throws IOException If fails
      */
@@ -85,7 +81,6 @@ final class HitRefreshHandle {
 
     /**
      * Touch the temporary file.
-     *
      * @throws IOException If fails
      */
     void touch() throws IOException {

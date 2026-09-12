@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeLocalhost}.
- *
  * @since 0.3
  */
 final class XeLocalhostTest {

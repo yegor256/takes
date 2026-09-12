@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsPrint}.
- *
  * @since 1.19
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

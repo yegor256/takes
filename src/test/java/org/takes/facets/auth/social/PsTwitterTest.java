@@ -19,7 +19,6 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link PsTwitter}.
- *
  * @since 1.0
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

@@ -20,7 +20,7 @@ import org.takes.rq.RqWrap;
  * from the request headers, returning an anonymous identity if no authentication
  * information is present.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -34,7 +34,6 @@ public final class RqAuth extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param request Original
      */
     public RqAuth(final Request request) {
@@ -43,7 +42,6 @@ public final class RqAuth extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param request Original
      * @param hdr Header to read
      */
@@ -54,7 +52,6 @@ public final class RqAuth extends RqWrap {
 
     /**
      * Get the authenticated user's identity.
-     *
      * @return User identity, or anonymous if not authenticated
      * @throws IOException If decoding the identity fails
      */

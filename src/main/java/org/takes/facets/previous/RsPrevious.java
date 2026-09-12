@@ -16,7 +16,7 @@ import org.takes.rs.RsWrap;
  * <p>This decorator adds a cookie containing the current location, which can later
  * be used to redirect users back to where they came from. It is particularly useful
  * in authentication scenarios where users need to return to their intended destination
- * after logging in. The class is immutable and thread-safe.</p>
+ * after logging in. The class is immutable and thread-safe.
  *
  * @since 1.10
  */
@@ -26,7 +26,6 @@ public final class RsPrevious extends RsWrap {
 
     /**
      * Constructor that stores a location as the previous page.
-     *
      * @param rsp The response to decorate
      * @param location The location URL to store as previous page
      * @throws UnsupportedEncodingException If URL encoding fails

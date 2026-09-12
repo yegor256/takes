@@ -16,7 +16,6 @@ import org.takes.misc.Opt;
  * Pass that requires successful authentication through all configured passes.
  * This implementation enforces that a user must satisfy all authentication
  * mechanisms in the list before being granted access.
- *
  * @since 0.22
  */
 public final class PsAll implements Pass {
@@ -33,7 +32,6 @@ public final class PsAll implements Pass {
 
     /**
      * Ctor.
-     *
      * @param passes All Passes to be checked
      * @param identity Index of a Pass whose Identity to return on successful
      *  {@link PsAll#enter(Request)}

@@ -4,16 +4,14 @@
  */
 package org.takes.rq;
 
-import java.util.AbstractList;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.UncheckedText;
 
 /**
  * Lazily-built single-element head list with the request line.
- *
  * @since 2.0
  */
-final class EmptyHeadList extends AbstractList<String> {
+final class EmptyHeadList extends java.util.AbstractList<String> {
 
     /**
      * HTTP method.
@@ -27,7 +25,6 @@ final class EmptyHeadList extends AbstractList<String> {
 
     /**
      * Ctor.
-     *
      * @param mtd Method
      * @param qry Query
      */

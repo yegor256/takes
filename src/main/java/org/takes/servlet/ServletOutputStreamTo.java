@@ -16,14 +16,14 @@ import java.io.OutputStream;
  * as a {@link ServletOutputStream}, which is required by the servlet API.
  * It's used internally by {@link HttpServletResponseFake} to provide
  * servlet-compatible output stream functionality while working with
- * Takes' standard stream-based response handling.</p>
+ * Takes' standard stream-based response handling.
  *
  * <p>The adapter provides basic functionality for synchronous writing
  * and delegates all write operations to the wrapped output stream.
  * It does not support asynchronous I/O features (write listeners),
- * as these are not commonly needed in testing scenarios.</p>
+ * as these are not commonly needed in testing scenarios.
  *
- * <p>Key features:</p>
+ * <p>Key features:
  * <ul>
  * <li>Adapts standard {@link OutputStream} to {@link ServletOutputStream}</li>
  * <li>Always ready for synchronous writing ({@link #isReady()} returns true)</li>
@@ -43,7 +43,6 @@ public final class ServletOutputStreamTo extends ServletOutputStream {
 
     /**
      * Ctor.
-     *
      * @param output The encapsulated OutputStream
      */
     public ServletOutputStreamTo(final OutputStream output) {

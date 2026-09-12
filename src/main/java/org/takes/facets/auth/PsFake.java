@@ -14,7 +14,7 @@ import org.takes.misc.Opt;
  * This implementation provides configurable authentication behavior
  * based on a boolean condition, useful for unit testing and mocking.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.9
  */
@@ -28,7 +28,6 @@ public final class PsFake implements Pass {
 
     /**
      * Ctor.
-     *
      * @param cond Condition
      */
     public PsFake(final boolean cond) {

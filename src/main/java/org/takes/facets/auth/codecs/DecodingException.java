@@ -11,9 +11,9 @@ package org.takes.facets.auth.codecs;
  * when they encounter data that cannot be properly decoded back into an
  * Identity object. This typically occurs when the input data is corrupted,
  * malformed, or was encoded with different parameters than those used for
- * decoding.</p>
+ * decoding.
  *
- * <p>Usage example:</p>
+ * <p>Usage example:
  * <pre> {@code
  * try {
  *     final Identity identity = codec.decode(corruptedBytes);
@@ -34,7 +34,6 @@ public final class DecodingException extends RuntimeException {
 
     /**
      * Public ctor.
-     *
      * @param cause The cause of it
      */
     DecodingException(final Throwable cause) {
@@ -43,7 +42,6 @@ public final class DecodingException extends RuntimeException {
 
     /**
      * Public ctor.
-     *
      * @param cause The cause of it
      */
     DecodingException(final String cause) {
@@ -52,7 +50,6 @@ public final class DecodingException extends RuntimeException {
 
     /**
      * Primary ctor.
-     *
      * @param message Detail message
      * @param cause Throwable cause
      */

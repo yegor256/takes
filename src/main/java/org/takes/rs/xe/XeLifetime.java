@@ -10,14 +10,14 @@ import org.xembly.Directives;
 /**
  * Xembly source to create "lifetime" attribute at the root, in milliseconds.
  *
- * <p>Add this Xembly source to your page like this:</p>
+ * <p>Add this Xembly source to your page like this:
  *
  * <pre> new RsXembly(
  *   new XeStylesheet("/xsl/home.xsl"),
  *   new XeLifetime()
  * )</pre>
  *
- * <p>And expect this attribute in the XML:</p>
+ * <p>And expect this attribute in the XML:
  *
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
@@ -25,7 +25,7 @@ import org.xembly.Directives;
  * &lt;/page&gt;
  * </pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 1.7
  */
@@ -46,7 +46,6 @@ public final class XeLifetime extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param elm Element name
      */
     public XeLifetime(final CharSequence elm) {

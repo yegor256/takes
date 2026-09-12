@@ -22,14 +22,13 @@ import org.takes.Take;
  * for testing purposes. It can start a server on a random or specified port,
  * execute a script against the running server, and then shut it down.
  * This is particularly useful for integration testing where you need to
- * start a real HTTP server, run tests against it, and clean up afterward.</p>
+ * start a real HTTP server, run tests against it, and clean up afterward.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class FtRemote implements Front {
 
     /**
@@ -49,7 +48,6 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     *
      * @param tks Take
      * @throws IOException If fails
      */
@@ -59,7 +57,6 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     *
      * @param that Back
      * @throws IOException If fails
      */
@@ -69,7 +66,6 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     *
      * @param that Back
      * @param skt Server socket to use
      * @since 0.22
@@ -80,7 +76,6 @@ public final class FtRemote implements Front {
 
     /**
      * Ctor.
-     *
      * @param front Original front
      * @param skt ServerSocket used
      * @param sec Value of {@code true} if the front is secure,
@@ -99,7 +94,6 @@ public final class FtRemote implements Front {
 
     /**
      * Execute this script against a running front.
-     *
      * @param script Script to run
      * @throws Exception If fails
      */
@@ -171,12 +165,12 @@ public final class FtRemote implements Front {
      * <p>This interface represents a test script or client code that will
      * be executed against a running HTTP server. The {@link FtRemote#exec(Script)}
      * method starts the server, runs the script with the server's URI, and
-     * then shuts down the server automatically.</p>
+     * then shuts down the server automatically.
      *
      * <p>This is particularly useful for integration testing where you need
      * to test HTTP endpoints with real network communication. The script
      * can make HTTP requests, verify responses, and perform any other
-     * operations against the live server.</p>
+     * operations against the live server.
      *
      * @since 0.1
      */
@@ -189,9 +183,9 @@ public final class FtRemote implements Front {
          * <p>This method is called by {@link FtRemote} after the server
          * has started and is ready to accept connections. The provided URI
          * contains the complete base URL (including protocol, host, and port)
-         * where the server can be reached.</p>
+         * where the server can be reached.
          *
-         * <p>Example usage:</p>
+         * <p>Example usage:
          * <pre>
          * script.exec(URI.create("http://localhost:8080"));
          * // Make HTTP requests to http://localhost:8080/...

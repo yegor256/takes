@@ -14,9 +14,9 @@ import org.takes.Request;
  * access, ensuring that subsequent calls to {@code head()} and {@code body()}
  * return the same cached data. This is useful when working with input streams
  * that can only be read once or when multiple components need to access
- * the same request data.</p>
+ * the same request data.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.36
  */
@@ -25,7 +25,6 @@ public final class RqOnce extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      */
     public RqOnce(final Request req) {

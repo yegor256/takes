@@ -23,7 +23,7 @@ import org.takes.rs.RsRedirect;
  * stored location if found. It clears the cookie after use to prevent repeated
  * redirections. If no previous page cookie exists, it delegates to the original
  * take. This is commonly used in authentication flows to return users to their
- * intended destination after login. The class is immutable and thread-safe.</p>
+ * intended destination after login. The class is immutable and thread-safe.
  *
  * @since 1.10
  */
@@ -38,7 +38,6 @@ public final class TkPrevious implements Take {
 
     /**
      * Constructor that wraps a take with previous page redirect functionality.
-     *
      * @param take The original take to decorate
      */
     public TkPrevious(final Take take) {

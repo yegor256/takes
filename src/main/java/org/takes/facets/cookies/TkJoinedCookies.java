@@ -20,9 +20,9 @@ import org.takes.tk.TkWrap;
  * <p>This decorator combines multiple Set-Cookie headers into one comma-separated
  * header as specified in RFC 6265. However, this approach may not be compatible
  * with all browsers, as most expect separate Set-Cookie headers for each cookie.
- * This class should be used only in specific cases where joined cookies are required.</p>
+ * This class should be used only in specific cases where joined cookies are required.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.11
  */
@@ -39,7 +39,6 @@ public final class TkJoinedCookies extends TkWrap {
 
     /**
      * Constructor that wraps a take to join Set-Cookie headers.
-     *
      * @param take The take to wrap with cookie joining functionality
      */
     public TkJoinedCookies(final Take take) {

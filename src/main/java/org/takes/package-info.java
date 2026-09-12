@@ -12,7 +12,7 @@
  * methods, and 4) no type casting. Due to these principles, the design
  * is loosely coupled, highly cohesive, and easy to test. To start
  * working with the framework, check out our introduction page on GitHub:
- * <a href="https://github.com/yegor256/takes">README</a>.</p>
+ * <a href="https://github.com/yegor256/takes">README</a>.
  *
  * @since 0.1
  * @see <a href="http://www.takes.org">project site www.takes.org</a>

@@ -12,7 +12,6 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkVersioned}.
- *
  * @since 0.4
  */
 final class TkVersionedTest {

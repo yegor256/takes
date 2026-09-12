@@ -15,7 +15,6 @@ import org.takes.HttpException;
 
 /**
  * Request target encoding.
- *
  * @since 2.0
  */
 final class Target {

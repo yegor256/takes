@@ -14,7 +14,6 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link RqCookies.Base}.
- *
  * @since 0.4
  */
 final class RqCookiesTest {

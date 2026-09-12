@@ -16,7 +16,6 @@ import org.takes.rq.RqMultipart;
 
 /**
  * Smart decorator.
- *
  * @since 0.33
  */
 public final class RqMtSmart implements RqMultipart {
@@ -28,7 +27,6 @@ public final class RqMtSmart implements RqMultipart {
 
     /**
      * Ctor.
-     *
      * @param req Original
      * @throws IOException If fails
      */
@@ -38,7 +36,6 @@ public final class RqMtSmart implements RqMultipart {
 
     /**
      * Ctor.
-     *
      * @param req Original
      */
     public RqMtSmart(final RqMultipart req) {
@@ -47,7 +44,6 @@ public final class RqMtSmart implements RqMultipart {
 
     /**
      * Get single part.
-     *
      * @param name Name of the part to get
      * @return Part
      * @throws HttpException If fails

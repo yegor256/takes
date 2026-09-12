@@ -14,7 +14,7 @@ import org.takes.misc.Opt;
  * This implementation always returns an empty identity,
  * effectively denying all authentication attempts.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.14
  */

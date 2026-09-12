@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.fork.FkRegex;
@@ -31,7 +30,7 @@ import org.takes.rs.RsJson;
 /**
  * Test case for {@link PsGoogle}.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.16.3
  */
@@ -52,6 +51,11 @@ final class PsGoogleTest {
      * Url.
      */
     private static final String URL = "url";
+
+    /**
+     * Act head.
+     */
+    private static final String ACT_HEAD = "GET /plus/v1/people/me";
 
     /**
      * Regex pattern.
@@ -153,7 +157,7 @@ final class PsGoogleTest {
                         "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
-                            "GET /plus/v1/people/me"
+                            PsGoogleTest.ACT_HEAD
                         )
                     );
                     MatcherAssert.assertThat(
@@ -230,7 +234,7 @@ final class PsGoogleTest {
         );
     }
 
-    private static Response tokenResponse(final Request req)
+    private static org.takes.Response tokenResponse(final Request req)
         throws IOException {
         MatcherAssert.assertThat(
             "Google OAuth token request must be POST to correct endpoint",

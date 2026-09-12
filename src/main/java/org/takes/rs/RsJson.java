@@ -20,9 +20,9 @@ import org.takes.Response;
  * <p>This decorator converts Java objects to JSON format using Jakarta JSON API
  * and automatically sets the content type to "application/json". It accepts
  * JsonStructure objects or Source implementations that provide JSON content.
- * The serialization is performed using standard JSON writers.</p>
+ * The serialization is performed using standard JSON writers.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -32,7 +32,6 @@ public final class RsJson extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param json JSON object
      * @throws IOException If fails
      */
@@ -44,7 +43,6 @@ public final class RsJson extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param src Source
      * @throws IOException If fails
      */
@@ -54,7 +52,6 @@ public final class RsJson extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param res Resource
      */
     public RsJson(final Response res) {
@@ -76,7 +73,6 @@ public final class RsJson extends RsWrap {
 
     /**
      * Source with JSON.
-     *
      * @since 0.1
      */
     @FunctionalInterface
@@ -84,7 +80,6 @@ public final class RsJson extends RsWrap {
 
         /**
          * Get JSON value.
-         *
          * @return JSON
          */
         JsonStructure toJson();

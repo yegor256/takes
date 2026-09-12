@@ -15,9 +15,9 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Text body matcher.
  *
- * <p>This "matcher" tests given item body, assuming that it has text content.</p>
+ * <p>This "matcher" tests given item body, assuming that it has text content.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @param <T> Item type. Should be able to return own body
  * @since 2.0
@@ -36,7 +36,6 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
-     *
      * @param body Body matcher
      * @param charset Charset of the text
      */
@@ -73,7 +72,6 @@ public abstract class AbstractHmTextBody<T> extends TypeSafeMatcher<T> {
 
     /**
      * Item's body.
-     *
      * @param item Item to retrieve body from
      * @return InputStream of body
      * @throws IOException If some problem inside

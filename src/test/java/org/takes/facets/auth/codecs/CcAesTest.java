@@ -18,7 +18,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcAes}.
- *
  * @since 0.13.8
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -144,7 +143,6 @@ final class CcAesTest {
 
     /**
      * Fake random with provided random result.
-     *
      * @since 0.13.8
      */
     private static final class FkRandom extends SecureRandom {
@@ -156,7 +154,6 @@ final class CcAesTest {
 
         /**
          * Ctor.
-         *
          * @param fake Bytes
          */
         FkRandom(final byte[] fake) {
@@ -166,7 +163,6 @@ final class CcAesTest {
 
     /**
      * Fake random SPI.
-     *
      * @since 0.13.8
      */
     @SuppressWarnings({
@@ -187,7 +183,6 @@ final class CcAesTest {
 
         /**
          * Ctor.
-         *
          * @param fake Bytes
          */
         @SuppressWarnings("PMD.ArrayIsStoredDirectly")

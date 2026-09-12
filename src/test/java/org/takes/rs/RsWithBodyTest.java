@@ -13,7 +13,6 @@ import org.takes.Response;
 
 /**
  * Test case for {@link RsWithBody}.
- *
  * @since 1.22
  */
 final class RsWithBodyTest {

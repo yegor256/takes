@@ -9,7 +9,6 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test codec.
- *
  * @since 1.11.1
  */
 @SuppressWarnings("PMD.TestClassWithoutTestCases")

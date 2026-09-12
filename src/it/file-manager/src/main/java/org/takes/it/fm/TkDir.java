@@ -23,7 +23,6 @@ final class TkDir implements TkRegex {
 
     /**
      * Ctor.
-     *
      * @param dir Home
      */
     TkDir(final File dir) {

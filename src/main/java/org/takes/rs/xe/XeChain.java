@@ -13,7 +13,7 @@ import org.xembly.Directives;
 /**
  * Chain of sources.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.1
  */
@@ -22,7 +22,6 @@ public final class XeChain extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param src Sources
      */
     public XeChain(final XeSource... src) {
@@ -31,7 +30,6 @@ public final class XeChain extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param items Sources
      */
     public XeChain(final Iterable<XeSource> items) {
@@ -42,7 +40,6 @@ public final class XeChain extends XeWrap {
 
     /**
      * Ctor.
-     *
      * @param items Sources
      * @since 1.5
      */

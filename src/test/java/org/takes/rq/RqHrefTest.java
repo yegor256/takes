@@ -15,7 +15,6 @@ import org.takes.HttpException;
 
 /**
  * Test case for {@link RqHref.Base}.
- *
  * @since 0.1
  */
 final class RqHrefTest {

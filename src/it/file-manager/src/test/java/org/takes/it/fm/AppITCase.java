@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link App}.
- *
  * @since 0.16
  */
 final class AppITCase {

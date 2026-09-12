@@ -15,7 +15,6 @@ import org.takes.rq.RqHeaders;
 
 /**
  * A single header of the request, by its name.
- *
  * @since 2.0
  */
 final class Header {
@@ -32,7 +31,6 @@ final class Header {
 
     /**
      * Ctor.
-     *
      * @param req The request
      * @param name Name of the header
      */
@@ -43,7 +41,6 @@ final class Header {
 
     /**
      * All values of it.
-     *
      * @return The values
      */
     Enumeration<String> all() {
@@ -65,7 +62,6 @@ final class Header {
 
     /**
      * The first value of it.
-     *
      * @return The value
      */
     String first() {

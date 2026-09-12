@@ -38,7 +38,6 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkProxy}.
- *
  * @since 0.25
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -71,7 +70,6 @@ final class TkProxyTest {
 
     /**
      * Http methods for testing.
-     *
      * @return The testing data
      */
     static Iterable<Arguments> cases() {
@@ -316,7 +314,6 @@ final class TkProxyTest {
 
     /**
      * Local interface for creating a request with an empty body.
-     *
      * @since 1.24.4
      */
     @FunctionalInterface
@@ -327,7 +324,6 @@ final class TkProxyTest {
 
     /**
      * Wrapper for a request with an empty body.
-     *
      * @since 1.24.4
      */
     private static final class RqWithoutBody implements Request {
@@ -339,7 +335,6 @@ final class TkProxyTest {
 
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         RqWithoutBody(final Request req) {

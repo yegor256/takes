@@ -21,9 +21,9 @@ import org.takes.facets.auth.Identity;
  * <p>This codec provides a space-efficient binary representation of
  * identity objects by serializing the URN and properties using Java's
  * data stream format. It writes strings in UTF-8 encoding and handles
- * the properties as key-value pairs in sequence.</p>
+ * the properties as key-value pairs in sequence.
  *
- * <p>Usage example:</p>
+ * <p>Usage example:
  * <pre> {@code
  * final Codec codec = new CcCompact();
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -31,7 +31,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded);
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.5
  */

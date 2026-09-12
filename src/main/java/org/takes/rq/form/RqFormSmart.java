@@ -18,7 +18,7 @@ import org.takes.rq.RqForm;
 /**
  * Smart decorator, with extra features.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.33
  */
@@ -32,7 +32,6 @@ public final class RqFormSmart implements RqForm {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      * @since 1.4
      */
@@ -42,7 +41,6 @@ public final class RqFormSmart implements RqForm {
 
     /**
      * Ctor.
-     *
      * @param req Original request
      */
     public RqFormSmart(final RqForm req) {
@@ -71,7 +69,6 @@ public final class RqFormSmart implements RqForm {
 
     /**
      * Get single param or throw an HTTP exception.
-     *
      * @param name Name of query param
      * @return Value of it
      * @throws IOException If fails
@@ -93,7 +90,6 @@ public final class RqFormSmart implements RqForm {
 
     /**
      * Get single param or default.
-     *
      * @param name Name of query param
      * @param def Default, if not found
      * @return Value of it

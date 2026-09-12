@@ -17,13 +17,13 @@ import org.takes.facets.auth.Identity;
  * <p>This codec decorator validates that identity URNs conform to the
  * RFC 8141 URN specification. It checks both during encoding and decoding
  * to ensure that only valid URNs are processed. Anonymous identities
- * are allowed to pass through without validation.</p>
+ * are allowed to pass through without validation.
  *
  * <p>The validation ensures URNs follow the format:
  * {@code urn:namespace-id:namespace-specific-string[?query][#fragment]}
- * where each component follows the specified character restrictions.</p>
+ * where each component follows the specified character restrictions.
  *
- * <p>Usage example:</p>
+ * <p>Usage example:
  * <pre> {@code
  * final Codec codec = new CcStrict(new CcPlain());
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -31,7 +31,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded); // validates URN
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.11.2
  */
@@ -51,7 +51,6 @@ public final class CcStrict implements Codec {
 
     /**
      * Ctor.
-     *
      * @param codec Original codec
      */
     public CcStrict(final Codec codec) {

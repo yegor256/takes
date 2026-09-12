@@ -16,7 +16,6 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link org.takes.facets.hamcrest.HmHeader}.
- *
  * @since 0.23.3
  */
 final class HmHeaderTest {

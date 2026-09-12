@@ -25,9 +25,9 @@ import org.takes.misc.Href;
  * <p>This interface provides functionality to parse HTTP request URIs
  * and extract query parameters, host information, and protocol details.
  * It constructs complete HREF objects that can be used to access
- * individual query parameters and manipulate URLs.</p>
+ * individual query parameters and manipulate URLs.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.</p>
+ * <p>All implementations of this interface must be immutable and thread-safe.
  *
  * @since 0.9
  */
@@ -35,7 +35,6 @@ public interface RqHref extends Request {
 
     /**
      * Get HREF.
-     *
      * @return HTTP href
      * @throws IOException If fails
      */
@@ -44,7 +43,7 @@ public interface RqHref extends Request {
     /**
      * Request decorator, for HTTP URI query parsing.
      *
-     * <p>The class is immutable and thread-safe.</p>
+     * <p>The class is immutable and thread-safe.
      *
      * @since 0.13.1
      */
@@ -53,7 +52,6 @@ public interface RqHref extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         public Base(final Request req) {
@@ -94,7 +92,7 @@ public interface RqHref extends Request {
     /**
      * Smart decorator, with extra features.
      *
-     * <p>The class is immutable and thread-safe.</p>
+     * <p>The class is immutable and thread-safe.
      *
      * @since 0.14
      */
@@ -108,7 +106,6 @@ public interface RqHref extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Original request
          * @since 1.4
          */
@@ -118,7 +115,6 @@ public interface RqHref extends Request {
 
         /**
          * Ctor.
-         *
          * @param req Original request
          */
         public Smart(final RqHref req) {
@@ -142,7 +138,6 @@ public interface RqHref extends Request {
 
         /**
          * Get self.
-         *
          * @return Self page, full URL
          * @throws IOException If fails
          * @since 0.14
@@ -162,7 +157,6 @@ public interface RqHref extends Request {
 
         /**
          * Get param or throw an HTTP exception.
-         *
          * @param name Name of query param
          * @return Value of it
          * @throws IOException If fails
@@ -184,7 +178,6 @@ public interface RqHref extends Request {
 
         /**
          * Get param or default.
-         *
          * @param name Name of query param
          * @param def Default, if not found
          * @return Value of it

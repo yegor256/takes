@@ -22,7 +22,7 @@ import org.takes.tk.TkFixed;
 /**
  * Fallback on status code that equals to the provided value.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.13
  */
@@ -36,7 +36,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @since 0.16.10
      */
@@ -46,7 +45,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param check HTTP status code predicate
      * @since 0.16.10
      */
@@ -73,7 +71,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param response Response
      * @since 0.14
@@ -84,7 +81,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param take Take
      */
@@ -97,7 +93,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param fallback Fallback
      */
@@ -110,7 +105,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param code HTTP status code
      * @param fallback Fallback
      */
@@ -123,7 +117,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param check Check
      * @param fallback Fallback
      */
@@ -136,7 +129,6 @@ public final class FbStatus extends FbWrap {
 
     /**
      * Ctor.
-     *
      * @param check Check
      * @param fallback Fallback
      */

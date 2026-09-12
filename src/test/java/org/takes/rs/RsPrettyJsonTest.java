@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsPrettyJson}.
- *
  * @since 1.0
  */
 final class RsPrettyJsonTest {

@@ -13,14 +13,13 @@ import org.cactoos.io.InputStreamOf;
  * <p>This class creates minimal HTTP requests with only the request line
  * and no body content. It's primarily designed for unit testing scenarios
  * where a simple request structure is needed without additional headers
- * or body data.</p>
+ * or body data.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.25
  */
 @EqualsAndHashCode(callSuper = true)
-@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RqEmpty extends RqWrap {
 
     /**
@@ -32,7 +31,6 @@ public final class RqEmpty extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param method HTTP method
      */
     public RqEmpty(final CharSequence method) {
@@ -41,7 +39,6 @@ public final class RqEmpty extends RqWrap {
 
     /**
      * Ctor.
-     *
      * @param method HTTP method
      * @param query HTTP query
      */

@@ -19,7 +19,7 @@ import org.takes.rs.RsWrap;
 /**
  * Response based on forks.
  *
- * <p>The class is immutable and thread-safe.</p>
+ * <p>The class is immutable and thread-safe.
  *
  * @since 0.6
  */
@@ -29,7 +29,6 @@ public final class RsFork extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param req Request
      * @param list List of forks
      */
@@ -39,7 +38,6 @@ public final class RsFork extends RsWrap {
 
     /**
      * Ctor.
-     *
      * @param req Request
      * @param list List of forks
      */
