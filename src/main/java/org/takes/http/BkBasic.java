@@ -19,6 +19,9 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RequestOf;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
@@ -37,7 +40,8 @@ import org.takes.rs.RsWithStatus;
  * <p>Key features:</p>
  * <ul>
  * <li>Handles keep-alive connections by processing multiple requests
- * on the same socket</li>
+ * on the same socket, consuming the body of each one in full so that the
+ * next request is read from the start of its own request line</li>
  * <li>Automatically adds socket information headers (local/remote address
  * and port)</li>
  * <li>Provides comprehensive exception handling with appropriate HTTP
@@ -52,7 +56,7 @@ import org.takes.rs.RsWithStatus;
  * @since 0.1
  */
 @EqualsAndHashCode
-@SuppressWarnings("PMD.CloseInlineResourceRule")
+@SuppressWarnings({"PMD.CloseInlineResourceRule", "PMD.CloseResource"})
 public final class BkBasic implements Back {
 
     /**
@@ -109,13 +113,13 @@ public final class BkBasic implements Back {
         final OutputStream output) throws IOException {
         boolean reusable = true;
         try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                output
+            final Request live = BkBasic.addSocketHeaders(
+                new RqLive(input),
+                socket
             );
+            final InputStream body = new RqLengthAware(live).body();
+            this.print(new RequestOf(live, () -> body), output);
+            BkBasic.skipUnreadBody(live, body);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             output.flush();
@@ -124,6 +128,18 @@ public final class BkBasic implements Back {
         }
         output.flush();
         return reusable;
+    }
+
+    private static void skipUnreadBody(final Request req,
+        final InputStream body) throws IOException {
+        if (new RqHeaders.Base(req).header("Content-Length").iterator()
+            .hasNext()) {
+            final byte[] buf = new byte[8192];
+            int count = body.read(buf);
+            while (count >= 0) {
+                count = body.read(buf);
+            }
+        }
     }
 
     private static void linger(final InputStream input) throws IOException {
