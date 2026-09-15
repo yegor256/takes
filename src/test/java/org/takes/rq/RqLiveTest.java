@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
@@ -162,6 +163,28 @@ final class RqLiveTest {
         );
     }
 
+    @Test
+    void parsesHeadWhenStreamReportsNothingAvailable() throws IOException {
+        final Request req = new RqLive(
+            new RqLiveTest.Trickling(
+                new InputStreamOf(
+                    new Joined(
+                        RqLiveTest.CRLF,
+                        "GET /trickle HTTP/1.1",
+                        "Host:e",
+                        "",
+                        ""
+                    )
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            "Request-line must survive a stream that reports nothing available",
+            new RqRequestLine.Base(req).uri(),
+            Matchers.equalTo("/trickle")
+        );
+    }
+
     private static Request simpleRequest() throws IOException {
         return new RqLive(
             new InputStreamOf(
@@ -175,5 +198,49 @@ final class RqLiveTest {
                 )
             )
         );
+    }
+
+    /**
+     * Stream that says nothing can be read without blocking, while still
+     * delivering every byte when actually read.
+     *
+     * <p>This is what a socket does when the rest of the request has not
+     * arrived yet: {@link java.io.InputStream#available()} is only an
+     * estimate of what can be read without blocking, and zero from it does
+     * not mean the end of the stream.</p>
+     *
+     * @since 2.0
+     */
+    private static final class Trickling extends InputStream {
+
+        /**
+         * Original stream.
+         */
+        private final InputStream origin;
+
+        /**
+         * Ctor.
+         *
+         * @param stream Stream to read from
+         */
+        Trickling(final InputStream stream) {
+            this.origin = stream;
+        }
+
+        @Override
+        public int read() throws IOException {
+            return this.origin.read();
+        }
+
+        @Override
+        public int read(final byte[] buf, final int off, final int len)
+            throws IOException {
+            return this.origin.read(buf, off, len);
+        }
+
+        @Override
+        public int available() {
+            return 0;
+        }
     }
 }
