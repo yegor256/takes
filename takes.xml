@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1447750">
+<fb version="0.19.6" size="1448373">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
+    <error t="S">deadlock; recursive locking</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">688.612763506</seconds>
+    <seconds t="F">279.608312525</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-09-15T04:06:11Z</when>
+    <when t="T">2026-09-16T03:59:38Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85412,18 +85413,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">445</assignees_were_scanned>
-    <closures_were_checked t="I">0</closures_were_checked>
+    <assignees_were_scanned t="I">718</assignees_were_scanned>
+    <closures_were_checked t="I">1346</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">15040048753</events_were_scanned>
+    <events_were_scanned t="I">21250876611</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">1448</labels_were_scanned>
+    <labels_were_scanned t="I">388</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1293</min_issue_was_found>
-    <min_pull_was_found t="I">860</min_pull_was_found>
+    <min_issue_was_found t="I">1299</min_issue_was_found>
+    <min_pull_was_found t="I">867</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">491</types_were_scanned>
+    <types_were_scanned t="I">735</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -91413,19 +91414,6 @@
     <when t="T">2026-09-11T03:56:35Z</when>
   </f>
   <f>
-    <_id t="I">21042</_id>
-    <_job t="I">91854</_job>
-    <_time t="T">2026-09-11T04:04:36Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (172.0) is increasing (R=0.26).
-The average number of commits per week (8.0) is increasing (R=0.11).
-The average number of releases per month (0.2) is staying still.
-The average monthly turnover (3.0 developers) is increasing (R=0.48).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-09-11T04:04:36Z</when>
-  </f>
-  <f>
     <_id t="I">21043</_id>
     <_job t="I">34671560223</_job>
     <_time t="T">2026-09-12T03:56:50Z</_time>
@@ -91583,6 +91571,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1750 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 13h39m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1750</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91601,6 +91590,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1751 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 8h51m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1751</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91619,6 +91609,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">4</comments>
     <details t="S">The pull request yegor256/takes#1752 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 13h48m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1752</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91637,6 +91628,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">4</comments>
     <details t="S">The pull request yegor256/takes#1753 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 6h32m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1753</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91655,6 +91647,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1754 with 4 HoC created by @renovate[bot] was reviewed by @yegor256 after 0h35m and 0 comments.</details>
     <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1754</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91673,6 +91666,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">3</comments>
     <details t="S">The pull request yegor256/takes#1755 with 2 HoC created by @renovate[bot] was reviewed by @yegor256 after 6h11m and 0 comments.</details>
     <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
     <issue t="I">1755</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91691,6 +91685,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <comments t="I">0</comments>
     <details t="S">The pull request yegor256/takes#1745 with 33 HoC created by @yegor256 was reviewed by @copilot after 532h5m and 0 comments.</details>
     <hoc t="I">33</hoc>
+    <is_human t="I">0</is_human>
     <issue t="I">1745</issue>
     <repository t="I">28924109</repository>
     <review_comments t="I">0</review_comments>
@@ -91706,6 +91701,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <_time t="T">2026-09-15T04:06:07Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.23</_version>
     <details t="S">Apparently, yegor256/takes#1299 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1299</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-closed</what>
@@ -91719,6 +91715,7 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <_time t="T">2026-09-15T04:06:09Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.23</_version>
     <details t="S">Apparently, yegor256/takes#1440 has been "issue-was-closed".</details>
+    <is_human t="I">1</is_human>
     <issue t="I">1440</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-closed</what>
@@ -91732,11 +91729,59 @@ The average monthly turnover (3.0 developers) is increasing (R=0.58).</text>
     <_time t="T">2026-09-15T04:06:10Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.23</_version>
     <details t="S">Apparently, yegor256/takes#1719 has been "issue-was-closed".</details>
+    <is_human t="I">0</is_human>
     <issue t="I">1719</issue>
     <repository t="I">28924109</repository>
     <what t="S">issue-was-closed</what>
     <when t="T">2026-08-07T07:17:57Z</when>
     <where t="S">github</where>
     <who t="I">24456188</who>
+  </f>
+  <f>
+    <_id t="I">21061</_id>
+    <_job t="I">92650</_job>
+    <_time t="T">2026-09-15T04:06:32Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (171.4) is increasing (R=0.24).
+The average number of commits per week (7.9) is staying still.
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (3.0 developers) is increasing (R=0.28).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-09-15T04:06:32Z</when>
+  </f>
+  <f>
+    <_id t="I">21062</_id>
+    <_job t="I">92650</_job>
+    <_time t="T">2026-09-15T04:06:55Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">2.8556274002911737</cost_of_qod>
+    <ev t="I">765</ev>
+    <pv t="I">11320</pv>
+    <qod t="I">268</qod>
+    <qod_per_day t="F">10.927486662642895</qod_per_day>
+    <qod_per_sec t="F">8.562624215762123e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2026-09-15T04:06:55Z</when>
+  </f>
+  <f>
+    <_id t="I">21063</_id>
+    <_job t="I">35053535563</_job>
+    <_time t="T">2026-09-16T03:58:08Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <total_active_contributors t="I">2</total_active_contributors>
+    <total_commits t="I">3925</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">594</total_files>
+    <total_forks t="I">214</total_forks>
+    <total_issues t="I">757</total_issues>
+    <total_pulls t="I">1007</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">878</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-09-16T03:58:08Z</when>
   </f>
 </fb>

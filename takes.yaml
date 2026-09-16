@@ -2,11 +2,12 @@
 - added: 8
   cycles: 2
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 688.612763506
+  seconds: 279.608312525
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-15 04:06:11.367981643 Z
+  when: 2026-09-16 03:59:38.233123539 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76682,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 445
-  closures_were_checked: 0
+  assignees_were_scanned: 718
+  closures_were_checked: 1346
   earliest_issue_was_found: 1
-  events_were_scanned: 15040048753
+  events_were_scanned: 21250876611
   issues_were_scanned: 0
-  labels_were_scanned: 1448
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1293
-  min_pull_was_found: 860
+  min_issue_was_found: 1299
+  min_pull_was_found: 867
   repository: 28924109
-  types_were_scanned: 491
+  types_were_scanned: 735
   what: iterate
   where: github
 - _id: 20665
@@ -82056,18 +82057,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-09-11 03:56:35.257132588 Z
-- _id: 21042
-  _job: 91854
-  _time: 2026-09-11 04:04:36.482315926 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (172.0) is increasing (R=0.26).
-    The average number of commits per week (8.0) is increasing (R=0.11).
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (3.0 developers) is increasing (R=0.48).
-  what: assessment
-  when: 2026-09-11 04:04:36.499594464 Z
 - _id: 21043
   _job: 34671560223
   _time: 2026-09-12 03:56:50.132857148 Z
@@ -82211,6 +82200,7 @@
   details: The pull request yegor256/takes#1750 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 13h39m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1750
   repository: 28924109
   review_comments: 0
@@ -82228,6 +82218,7 @@
   details: The pull request yegor256/takes#1751 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 8h51m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1751
   repository: 28924109
   review_comments: 0
@@ -82245,6 +82236,7 @@
   details: The pull request yegor256/takes#1752 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 13h48m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1752
   repository: 28924109
   review_comments: 0
@@ -82262,6 +82254,7 @@
   details: The pull request yegor256/takes#1753 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 6h32m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1753
   repository: 28924109
   review_comments: 0
@@ -82279,6 +82272,7 @@
   details: The pull request yegor256/takes#1754 with 4 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 0h35m and 0 comments.
   hoc: 4
+  is_human: 1
   issue: 1754
   repository: 28924109
   review_comments: 0
@@ -82296,6 +82290,7 @@
   details: The pull request yegor256/takes#1755 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 6h11m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1755
   repository: 28924109
   review_comments: 0
@@ -82313,6 +82308,7 @@
   details: The pull request yegor256/takes#1745 with 33 HoC created by @yegor256 was
     reviewed by @copilot after 532h5m and 0 comments.
   hoc: 33
+  is_human: 0
   issue: 1745
   repository: 28924109
   review_comments: 0
@@ -82326,6 +82322,7 @@
   _time: 2026-09-15 04:06:07.918875668 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, yegor256/takes#1299 has been "issue-was-closed".
+  is_human: 1
   issue: 1299
   repository: 28924109
   what: issue-was-closed
@@ -82337,6 +82334,7 @@
   _time: 2026-09-15 04:06:09.460630176 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, yegor256/takes#1440 has been "issue-was-closed".
+  is_human: 1
   issue: 1440
   repository: 28924109
   what: issue-was-closed
@@ -82348,9 +82346,52 @@
   _time: 2026-09-15 04:06:10.143427161 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, yegor256/takes#1719 has been "issue-was-closed".
+  is_human: 0
   issue: 1719
   repository: 28924109
   what: issue-was-closed
   when: 2026-08-07 07:17:57.000000000 Z
   where: github
   who: 24456188
+- _id: 21061
+  _job: 92650
+  _time: 2026-09-15 04:06:32.626680777 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (171.4) is increasing (R=0.24).
+    The average number of commits per week (7.9) is staying still.
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is increasing (R=0.28).
+  what: assessment
+  when: 2026-09-15 04:06:32.647572315 Z
+- _id: 21062
+  _job: 92650
+  _time: 2026-09-15 04:06:55.693188547 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  ac: 24
+  cost_of_qod: 2.8556274002911737
+  ev: 765
+  pv: 11320
+  qod: 268
+  qod_per_day: 10.927486662642895
+  qod_per_sec: 8.562624215762123e-06
+  start: *3
+  what: earned-value
+  when: 2026-09-15 04:06:55.693403864 Z
+- _id: 21063
+  _job: 35053535563
+  _time: 2026-09-16 03:58:08.596366472 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 2
+  total_commits: 3925
+  total_contributors: 89
+  total_files: 594
+  total_forks: 214
+  total_issues: 757
+  total_pulls: 1007
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-09-16 03:58:08.543176890 Z
