@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1451173">
+<fb version="0.19.6" size="1457268">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">535.196710174</seconds>
+    <seconds t="F">360.315601453</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-09-22T04:03:32Z</when>
+    <when t="T">2026-09-23T04:00:30Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85412,18 +85412,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">953</assignees_were_scanned>
-    <closures_were_checked t="I">1346</closures_were_checked>
+    <assignees_were_scanned t="I">1687</assignees_were_scanned>
+    <closures_were_checked t="I">0</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">21737919128</events_were_scanned>
+    <events_were_scanned t="I">15554192611</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">388</labels_were_scanned>
+    <labels_were_scanned t="I">754</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1405</min_issue_was_found>
-    <min_pull_was_found t="I">891</min_pull_was_found>
+    <min_issue_was_found t="I">1408</min_issue_was_found>
+    <min_pull_was_found t="I">896</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">826</types_were_scanned>
+    <types_were_scanned t="I">1054</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -91963,5 +91963,305 @@ The average number of releases per month (0.2) is staying still.
 The average monthly turnover (4.0 developers) is decreasing (R=0.20).</text>
     <what t="S">assessment</what>
     <when t="T">2026-09-21T04:06:22Z</when>
+  </f>
+  <f>
+    <_id t="I">21079</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:55:49Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <total_active_contributors t="I">3</total_active_contributors>
+    <total_commits t="I">3934</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">594</total_files>
+    <total_forks t="I">214</total_forks>
+    <total_issues t="I">758</total_issues>
+    <total_pulls t="I">1017</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">878</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-09-23T03:55:49Z</when>
+  </f>
+  <f>
+    <_id t="I">21080</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:57:26Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <details t="S">The issue yegor256/takes#1775 has been earlier opened by @gemshrine.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1775</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2026-09-22T15:34:35Z</when>
+    <where t="S">github</where>
+    <who t="I">113778529</who>
+  </f>
+  <f>
+    <_id t="I">21081</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:58:58Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <details t="S">We found out that the user #113778529 is known in GitHub as @gemshrine.</details>
+    <is_human t="I">1</is_human>
+    <name t="S">gemshrine</name>
+    <what t="S">who-has-name</what>
+    <when t="T">2026-09-23T03:58:58Z</when>
+    <where t="S">github</where>
+    <who t="I">113778529</who>
+  </f>
+  <f>
+    <_id t="I">21082</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:00Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <details t="S">The missing pull yegor256/takes#1756 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1756</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-04T00:57:59Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21083</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:00Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/slf4j-monorepo</branch>
+    <details t="S">The missing pull yegor256/takes#1757 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1757</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-04T13:23:47Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21084</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:01Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1758 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1758</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-07T14:51:21Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21085</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:02Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x</branch>
+    <details t="S">The missing pull yegor256/takes#1759 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1759</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-07T17:04:02Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21086</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:02Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">claude/qulice-upgrade-0-35-2-zg9o3f</branch>
+    <details t="S">The missing pull yegor256/takes#1760 has been opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1760</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-09T06:29:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21087</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:03Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x</branch>
+    <details t="S">The missing pull yegor256/takes#1761 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1761</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-12T04:00:10Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21088</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:04Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">up</branch>
+    <details t="S">The missing pull yegor256/takes#1762 has been opened by @github-actions[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1762</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-12T04:09:50Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">21089</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:04Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/reviewdog-action-actionlint-1.x</branch>
+    <details t="S">The missing pull yegor256/takes#1763 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1763</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-13T14:01:49Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21090</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:05Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">claude/assigned-issues-hx11pd</branch>
+    <details t="S">The missing pull yegor256/takes#1764 has been opened by @yegor256.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1764</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-14T14:13:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21091</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:06Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.cactoos-cactoos-0.x</branch>
+    <details t="S">The missing pull yegor256/takes#1765 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1765</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-14T19:15:40Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21092</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:06Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/crate-ci-typos-1.x</branch>
+    <details t="S">The missing pull yegor256/takes#1766 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1766</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-16T04:00:52Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21093</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:07Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/java-jdk-17.x</branch>
+    <details t="S">The missing pull yegor256/takes#1767 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1767</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-16T04:00:56Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21094</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:08Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/java-jdk-25.x</branch>
+    <details t="S">The missing pull yegor256/takes#1768 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1768</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-16T06:06:08Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21095</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:08Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/reviewdog-action-actionlint-1.x</branch>
+    <details t="S">The missing pull yegor256/takes#1769 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1769</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-16T08:54:12Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21096</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:09Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/reviewdog-action-actionlint-1.x</branch>
+    <details t="S">The missing pull yegor256/takes#1770 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1770</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-18T06:12:05Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21097</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:10Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/reviewdog-action-actionlint-1.x</branch>
+    <details t="S">The missing pull yegor256/takes#1771 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1771</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-19T04:05:21Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21098</_id>
+    <_job t="I">35816134550</_job>
+    <_time t="T">2026-09-23T03:59:10Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/ubuntu-26.x</branch>
+    <details t="S">The missing pull yegor256/takes#1772 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1772</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-19T04:05:29Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
   </f>
 </fb>

@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 535.196710174
+  seconds: 360.315601453
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-22 04:03:32.446686305 Z
+  when: 2026-09-23 04:00:30.611444187 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76681,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 953
-  closures_were_checked: 1346
+  assignees_were_scanned: 1687
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 21737919128
+  events_were_scanned: 15554192611
   issues_were_scanned: 0
-  labels_were_scanned: 388
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1405
-  min_pull_was_found: 891
+  min_issue_was_found: 1408
+  min_pull_was_found: 896
   repository: 28924109
-  types_were_scanned: 826
+  types_were_scanned: 1054
   what: iterate
   where: github
 - _id: 20665
@@ -82551,3 +82551,263 @@
     The average monthly turnover (4.0 developers) is decreasing (R=0.20).
   what: assessment
   when: 2026-09-21 04:06:22.468363357 Z
+- _id: 21079
+  _job: 35816134550
+  _time: 2026-09-23 03:55:49.887552213 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3934
+  total_contributors: 89
+  total_files: 594
+  total_forks: 214
+  total_issues: 758
+  total_pulls: 1017
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-09-23 03:55:49.816191897 Z
+- _id: 21080
+  _job: 35816134550
+  _time: 2026-09-23 03:57:26.054555858 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1775 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 1775
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-09-22 15:34:35.000000000 Z
+  where: github
+  who: 113778529
+- _id: 21081
+  _job: 35816134550
+  _time: 2026-09-23 03:58:58.062983159 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'We found out that the user #113778529 is known in GitHub as @gemshrine.'
+  is_human: 1
+  name: gemshrine
+  what: who-has-name
+  when: 2026-09-23 03:58:58.066455864 Z
+  where: github
+  who: 113778529
+- _id: 21082
+  _job: 35816134550
+  _time: 2026-09-23 03:59:00.210923045 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  details: The missing pull yegor256/takes#1756 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1756
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-04 00:57:59.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21083
+  _job: 35816134550
+  _time: 2026-09-23 03:59:00.795189406 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/slf4j-monorepo
+  details: The missing pull yegor256/takes#1757 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1757
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-04 13:23:47.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21084
+  _job: 35816134550
+  _time: 2026-09-23 03:59:01.609004316 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull yegor256/takes#1758 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1758
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-07 14:51:21.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21085
+  _job: 35816134550
+  _time: 2026-09-23 03:59:02.204043984 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  details: The missing pull yegor256/takes#1759 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1759
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-07 17:04:02.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21086
+  _job: 35816134550
+  _time: 2026-09-23 03:59:02.854262267 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: claude/qulice-upgrade-0-35-2-zg9o3f
+  details: The missing pull yegor256/takes#1760 has been opened by @yegor256.
+  is_human: 1
+  issue: 1760
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-09 06:29:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 21087
+  _job: 35816134550
+  _time: 2026-09-23 03:59:03.536359848 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  details: The missing pull yegor256/takes#1761 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1761
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-12 04:00:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21088
+  _job: 35816134550
+  _time: 2026-09-23 03:59:04.217023797 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  details: The missing pull yegor256/takes#1762 has been opened by @github-actions[bot].
+  is_human: 0
+  issue: 1762
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-12 04:09:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21089
+  _job: 35816134550
+  _time: 2026-09-23 03:59:04.830751260 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1763 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1763
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-13 14:01:49.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21090
+  _job: 35816134550
+  _time: 2026-09-23 03:59:05.473443791 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: claude/assigned-issues-hx11pd
+  details: The missing pull yegor256/takes#1764 has been opened by @yegor256.
+  is_human: 1
+  issue: 1764
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-14 14:13:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 21091
+  _job: 35816134550
+  _time: 2026-09-23 03:59:06.243781522 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.cactoos-cactoos-0.x
+  details: The missing pull yegor256/takes#1765 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1765
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-14 19:15:40.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21092
+  _job: 35816134550
+  _time: 2026-09-23 03:59:06.861601266 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1766 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1766
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-16 04:00:52.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21093
+  _job: 35816134550
+  _time: 2026-09-23 03:59:07.532789448 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/java-jdk-17.x
+  details: The missing pull yegor256/takes#1767 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1767
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-16 04:00:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21094
+  _job: 35816134550
+  _time: 2026-09-23 03:59:08.192761067 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/java-jdk-25.x
+  details: The missing pull yegor256/takes#1768 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1768
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-16 06:06:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21095
+  _job: 35816134550
+  _time: 2026-09-23 03:59:08.954213477 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1769 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1769
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-16 08:54:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21096
+  _job: 35816134550
+  _time: 2026-09-23 03:59:09.515962056 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1770 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1770
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-18 06:12:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21097
+  _job: 35816134550
+  _time: 2026-09-23 03:59:10.145255707 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1771 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1771
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-19 04:05:21.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21098
+  _job: 35816134550
+  _time: 2026-09-23 03:59:10.772991715 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/ubuntu-26.x
+  details: The missing pull yegor256/takes#1772 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1772
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-19 04:05:29.000000000 Z
+  where: github
+  who: 29139614
