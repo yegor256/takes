@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 360.315601453
+  seconds: 464.865697338
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-23 04:00:30.611444187 Z
+  when: 2026-09-24 04:02:55.010769058 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76681,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1687
-  closures_were_checked: 0
+  assignees_were_scanned: 0
+  closures_were_checked: 603
   earliest_issue_was_found: 1
-  events_were_scanned: 15554192611
+  events_were_scanned: 15599873876
   issues_were_scanned: 0
-  labels_were_scanned: 754
+  labels_were_scanned: 991
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1408
-  min_pull_was_found: 896
+  min_issue_was_found: 1409
+  min_pull_was_found: 897
   repository: 28924109
-  types_were_scanned: 1054
+  types_were_scanned: 1292
   what: iterate
   where: github
 - _id: 20665
@@ -82495,18 +82495,6 @@
   since: *173
   what: quality-of-service
   when: 2026-09-19 04:03:59.892903310 Z
-- _id: 21075
-  _job: 93746
-  _time: 2026-09-19 04:04:37.730421756 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (176.9) is increasing (R=0.25).
-    The average number of commits per week (8.0) is staying still.
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.20).
-  what: assessment
-  when: 2026-09-19 04:04:37.761118119 Z
 - _id: 21076
   _job: 35487743490
   _time: 2026-09-20 04:00:53.734206889 Z
@@ -82809,5 +82797,482 @@
   repository: 28924109
   what: pull-was-opened
   when: 2026-09-19 04:05:29.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21099
+  _job: 94407
+  _time: 2026-09-23 04:00:55.247787053 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (176.9) is increasing (R=0.25).
+    The average number of commits per week (8.0) is staying still.
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (4.0 developers) is decreasing (R=0.20).
+  what: assessment
+  when: 2026-09-23 04:00:55.269768346 Z
+- _id: 21100
+  _job: 35953372650
+  _time: 2026-09-24 03:55:14.036618456 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1777 has been opened by @gemshrine.
+  event_id: 15599873876
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1777
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-09-23 16:03:50.000000000 Z
+  where: github
+  who: 113778529
+- _id: 21101
+  _job: 35953372650
+  _time: 2026-09-24 03:55:36.411588318 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1756 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1756
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-04 06:09:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 21102
+  _job: 35953372650
+  _time: 2026-09-24 03:55:51.991375586 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/slf4j-monorepo
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1757 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  is_human: 1
+  issue: 1757
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-04 13:34:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 21103
+  _job: 35953372650
+  _time: 2026-09-24 03:56:02.819632636 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1758 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1758
+  repository: 28924109
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:02:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 21104
+  _job: 35953372650
+  _time: 2026-09-24 03:56:13.854011114 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1759 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1759
+  repository: 28924109
+  review: 2026-09-08 02:44:30.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-08 02:58:41.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21105
+  _job: 35953372650
+  _time: 2026-09-24 03:56:35.194554567 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: claude/qulice-upgrade-0-35-2-zg9o3f
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1760 has been "pull-was-merged".
+  failed_builds: 0
+  files: 536
+  hoc: 2569
+  is_human: 1
+  issue: 1760
+  repository: 28924109
+  review: 2026-09-09 13:03:35.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-09 13:03:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 21106
+  _job: 35953372650
+  _time: 2026-09-24 03:56:45.214275964 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1761 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1761
+  repository: 28924109
+  review: 2026-09-12 08:29:30.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-12 08:41:49.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21107
+  _job: 35953372650
+  _time: 2026-09-24 03:57:06.612255043 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1762 has been "pull-was-closed".
+  failed_builds: 0
+  files: 534
+  hoc: 2565
+  is_human: 0
+  issue: 1762
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-09-12 08:42:19.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21108
+  _job: 35953372650
+  _time: 2026-09-24 03:57:09.044684529 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1763 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1763
+  repository: 28924109
+  review: 2026-09-14 08:49:39.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-14 09:02:47.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21109
+  _job: 35953372650
+  _time: 2026-09-24 03:57:29.588376451 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.cactoos-cactoos-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1765 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1765
+  repository: 28924109
+  review: 2026-09-15 03:06:12.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-15 03:33:08.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21110
+  _job: 35953372650
+  _time: 2026-09-24 03:57:51.049335958 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1766 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1766
+  repository: 28924109
+  review: 2026-09-16 08:38:10.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-16 09:28:25.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21111
+  _job: 35953372650
+  _time: 2026-09-24 03:58:01.902514897 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/java-jdk-17.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1767 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1767
+  repository: 28924109
+  review: 2026-09-16 08:38:08.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-09-16 08:54:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21112
+  _job: 35953372650
+  _time: 2026-09-24 03:58:13.395845227 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/java-jdk-25.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1768 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1768
+  repository: 28924109
+  review: 2026-09-16 08:38:05.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-16 08:53:18.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21113
+  _job: 35953372650
+  _time: 2026-09-24 03:58:32.875552573 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1769 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1769
+  repository: 28924109
+  review: 2026-09-17 16:56:37.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-17 17:22:18.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21114
+  _job: 35953372650
+  _time: 2026-09-24 03:58:53.248659619 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1770 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1770
+  repository: 28924109
+  review: 2026-09-18 08:38:04.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-18 08:54:27.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21115
+  _job: 35953372650
+  _time: 2026-09-24 03:59:13.669871945 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1771 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1771
+  repository: 28924109
+  review: 2026-09-19 16:26:49.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-19 16:55:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21116
+  _job: 35953372650
+  _time: 2026-09-24 03:59:24.947612774 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/ubuntu-26.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1772 has been "pull-was-merged".
+  failed_builds: 0
+  files: 13
+  hoc: 26
+  is_human: 0
+  issue: 1772
+  repository: 28924109
+  review: 2026-09-19 16:26:46.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-19 16:40:12.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21117
+  _job: 35953372650
+  _time: 2026-09-24 04:00:29.966207022 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3936
+  total_contributors: 89
+  total_files: 594
+  total_forks: 214
+  total_issues: 759
+  total_pulls: 1017
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-09-24 04:00:29.909543399 Z
+- _id: 21118
+  _job: 35953372650
+  _time: 2026-09-24 04:01:35.311306989 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/hibernate-validator
+  details: The missing pull yegor256/takes#1773 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1773
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-20 18:22:41.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21119
+  _job: 35953372650
+  _time: 2026-09-24 04:01:35.967176766 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1774 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1774
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-22 04:05:11.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21120
+  _job: 35953372650
+  _time: 2026-09-24 04:01:36.722319217 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/slf4j-monorepo
+  details: The missing pull yegor256/takes#1776 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1776
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-23 00:31:27.000000000 Z
   where: github
   who: 29139614
