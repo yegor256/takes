@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 382.935906782
+  seconds: 307.851562503
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-27 04:02:16.329038064 Z
+  when: 2026-09-28 04:05:09.053515262 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76681,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 821
-  closures_were_checked: 1695
+  assignees_were_scanned: 1117
+  closures_were_checked: 603
   earliest_issue_was_found: 1
-  events_were_scanned: 22222128114
+  events_were_scanned: 22313351872
   issues_were_scanned: 0
-  labels_were_scanned: 991
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1435
-  min_pull_was_found: 922
+  min_issue_was_found: 1437
+  min_pull_was_found: 931
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 826
   what: iterate
   where: github
 - _id: 20665
@@ -83266,18 +83266,6 @@
   when: 2026-09-23 00:31:27.000000000 Z
   where: github
   who: 29139614
-- _id: 21121
-  _job: 94555
-  _time: 2026-09-24 04:03:20.670987192 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (180.7) is increasing (R=0.22).
-    The average number of commits per week (8.3) is staying still.
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.20).
-  what: assessment
-  when: 2026-09-24 04:03:20.692281286 Z
 - _id: 21122
   _job: 36092257971
   _time: 2026-09-25 03:56:37.722152077 Z
@@ -83461,3 +83449,69 @@
   since: *175
   what: quality-of-service
   when: 2026-09-27 03:59:09.110739131 Z
+- _id: 21133
+  _job: 95232
+  _time: 2026-09-27 04:02:40.673773214 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (179.6) is increasing (R=0.20).
+    The average number of commits per week (8.2) is staying still.
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (4.0 developers) is decreasing (R=0.20).
+  what: assessment
+  when: 2026-09-27 04:02:40.692699526 Z
+- _id: 21134
+  _job: 36375827931
+  _time: 2026-09-28 04:01:26.583692113 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3939
+  total_contributors: 89
+  total_files: 594
+  total_forks: 215
+  total_issues: 760
+  total_pulls: 1019
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-09-28 04:01:26.522198092 Z
+- _id: 21135
+  _job: 36375827931
+  _time: 2026-09-28 04:02:43.385931654 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1780 has been earlier opened by @revive-code-bot[bot].
+  is_human: 0
+  issue: 1780
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-09-27 05:00:06.000000000 Z
+  where: github
+  who: 166734835
+- _id: 21136
+  _job: 36375827931
+  _time: 2026-09-28 04:04:19.649218002 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  details: The missing pull yegor256/takes#1778 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1778
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-27 04:03:55.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21137
+  _job: 36375827931
+  _time: 2026-09-28 04:04:20.296694017 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/mockito-monorepo
+  details: The missing pull yegor256/takes#1779 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1779
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-27 04:04:00.000000000 Z
+  where: github
+  who: 29139614

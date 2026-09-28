@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1467926">
+<fb version="0.19.6" size="1469056">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">382.935906782</seconds>
+    <seconds t="F">307.851562503</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-09-27T04:02:16Z</when>
+    <when t="T">2026-09-28T04:05:09Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85412,18 +85412,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">821</assignees_were_scanned>
-    <closures_were_checked t="I">1695</closures_were_checked>
+    <assignees_were_scanned t="I">1117</assignees_were_scanned>
+    <closures_were_checked t="I">603</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">22222128114</events_were_scanned>
+    <events_were_scanned t="I">22313351872</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">991</labels_were_scanned>
+    <labels_were_scanned t="I">0</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1435</min_issue_was_found>
-    <min_pull_was_found t="I">922</min_pull_was_found>
+    <min_issue_was_found t="I">1437</min_issue_was_found>
+    <min_pull_was_found t="I">931</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">609</types_were_scanned>
+    <types_were_scanned t="I">826</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -92760,19 +92760,6 @@
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">21121</_id>
-    <_job t="I">94555</_job>
-    <_time t="T">2026-09-24T04:03:20Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (180.7) is increasing (R=0.22).
-The average number of commits per week (8.3) is staying still.
-The average number of releases per month (0.2) is staying still.
-The average monthly turnover (4.0 developers) is decreasing (R=0.20).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-09-24T04:03:20Z</when>
-  </f>
-  <f>
     <_id t="I">21122</_id>
     <_job t="I">36092257971</_job>
     <_time t="T">2026-09-25T03:56:37Z</_time>
@@ -92975,5 +92962,80 @@ The average monthly turnover (4.0 developers) is decreasing (R=0.20).</text>
     <since t="T">2026-09-19T04:03:59Z</since>
     <what t="S">quality-of-service</what>
     <when t="T">2026-09-27T03:59:09Z</when>
+  </f>
+  <f>
+    <_id t="I">21133</_id>
+    <_job t="I">95232</_job>
+    <_time t="T">2026-09-27T04:02:40Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (179.6) is increasing (R=0.20).
+The average number of commits per week (8.2) is staying still.
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (4.0 developers) is decreasing (R=0.20).</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-09-27T04:02:40Z</when>
+  </f>
+  <f>
+    <_id t="I">21134</_id>
+    <_job t="I">36375827931</_job>
+    <_time t="T">2026-09-28T04:01:26Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <total_active_contributors t="I">3</total_active_contributors>
+    <total_commits t="I">3939</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">594</total_files>
+    <total_forks t="I">215</total_forks>
+    <total_issues t="I">760</total_issues>
+    <total_pulls t="I">1019</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">878</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-09-28T04:01:26Z</when>
+  </f>
+  <f>
+    <_id t="I">21135</_id>
+    <_job t="I">36375827931</_job>
+    <_time t="T">2026-09-28T04:02:43Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <details t="S">The issue yegor256/takes#1780 has been earlier opened by @revive-code-bot[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1780</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2026-09-27T05:00:06Z</when>
+    <where t="S">github</where>
+    <who t="I">166734835</who>
+  </f>
+  <f>
+    <_id t="I">21136</_id>
+    <_job t="I">36375827931</_job>
+    <_time t="T">2026-09-28T04:04:19Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/crate-ci-typos-1.x</branch>
+    <details t="S">The missing pull yegor256/takes#1778 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1778</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-27T04:03:55Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21137</_id>
+    <_job t="I">36375827931</_job>
+    <_time t="T">2026-09-28T04:04:20Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/mockito-monorepo</branch>
+    <details t="S">The missing pull yegor256/takes#1779 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1779</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-27T04:04:00Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
   </f>
 </fb>
