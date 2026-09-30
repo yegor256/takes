@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1470083">
+<fb version="0.19.6" size="1471391">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">525.407491538</seconds>
+    <seconds t="F">446.112062259</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-09-29T04:05:36Z</when>
+    <when t="T">2026-09-30T04:05:02Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85412,18 +85412,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
-    <closures_were_checked t="I">1695</closures_were_checked>
+    <assignees_were_scanned t="I">342</assignees_were_scanned>
+    <closures_were_checked t="I">603</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">15974957864</events_were_scanned>
+    <events_were_scanned t="I">22541945957</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">609</labels_were_scanned>
+    <labels_were_scanned t="I">991</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1440</min_issue_was_found>
-    <min_pull_was_found t="I">934</min_pull_was_found>
+    <min_issue_was_found t="I">1443</min_issue_was_found>
+    <min_pull_was_found t="I">939</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1054</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -92951,19 +92951,6 @@
     <when t="T">2026-09-27T03:59:09Z</when>
   </f>
   <f>
-    <_id t="I">21133</_id>
-    <_job t="I">95232</_job>
-    <_time t="T">2026-09-27T04:02:40Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (179.6) is increasing (R=0.20).
-The average number of commits per week (8.2) is staying still.
-The average number of releases per month (0.2) is staying still.
-The average monthly turnover (4.0 developers) is decreasing (R=0.20).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-09-27T04:02:40Z</when>
-  </f>
-  <f>
     <_id t="I">21134</_id>
     <_job t="I">36375827931</_job>
     <_time t="T">2026-09-28T04:01:26Z</_time>
@@ -93111,5 +93098,95 @@ The average monthly turnover (3.0 developers) is staying still.</text>
     <total_stars t="I">878</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-09-29T04:02:49Z</when>
+  </f>
+  <f>
+    <_id t="I">21142</_id>
+    <_job t="I">95978</_job>
+    <_time t="T">2026-09-29T04:06:01Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (179.6) is increasing (R=0.20).
+The average number of commits per week (8.2) is staying still.
+The average number of releases per month (0.2) is staying still.
+The average monthly turnover (3.0 developers) is staying still.</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-09-29T04:06:01Z</when>
+  </f>
+  <f>
+    <_id t="I">21143</_id>
+    <_job t="I">36666663585</_job>
+    <_time t="T">2026-09-30T03:57:41Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.cactoos-cactoos-0.x</branch>
+    <details t="S">The pull request yegor256/takes#1781 has been opened by @renovate[bot].</details>
+    <event_id t="I">16041833395</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">1781</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-09-29T19:52:48Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21144</_id>
+    <_job t="I">36666663585</_job>
+    <_time t="T">2026-09-30T03:57:41Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <details t="S">The issue yegor256/takes#1227 has been closed by @yegor256.</details>
+    <event_id t="I">16021938736</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">1227</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2026-09-29T15:25:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21145</_id>
+    <_job t="I">36666663585</_job>
+    <_time t="T">2026-09-30T03:57:42Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <details t="S">The issue yegor256/takes#1780 has been closed by @yegor256.</details>
+    <event_id t="I">15982074371</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">1780</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2026-09-29T06:25:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21146</_id>
+    <_job t="I">36666663585</_job>
+    <_time t="T">2026-09-30T03:58:24Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">claude/assigned-issues-hx11pd</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1764 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">3</files>
+    <hoc t="I">111</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1764</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-09-29T15:25:28Z</review>
+    <review_comments t="I">0</review_comments>
+    <succeeded_builds t="I">12</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-09-29T15:25:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
   </f>
 </fb>

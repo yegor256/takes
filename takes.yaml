@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 525.407491538
+  seconds: 446.112062259
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-29 04:05:36.636495045 Z
+  when: 2026-09-30 04:05:02.828855471 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76681,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 1695
+  assignees_were_scanned: 342
+  closures_were_checked: 603
   earliest_issue_was_found: 1
-  events_were_scanned: 15974957864
+  events_were_scanned: 22541945957
   issues_were_scanned: 0
-  labels_were_scanned: 609
+  labels_were_scanned: 991
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1440
-  min_pull_was_found: 934
+  min_issue_was_found: 1443
+  min_pull_was_found: 939
   repository: 28924109
-  types_were_scanned: 1054
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -83437,18 +83437,6 @@
   since: *175
   what: quality-of-service
   when: 2026-09-27 03:59:09.110739131 Z
-- _id: 21133
-  _job: 95232
-  _time: 2026-09-27 04:02:40.673773214 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (179.6) is increasing (R=0.20).
-    The average number of commits per week (8.2) is staying still.
-    The average number of releases per month (0.2) is staying still.
-    The average monthly turnover (4.0 developers) is decreasing (R=0.20).
-  what: assessment
-  when: 2026-09-27 04:02:40.692699526 Z
 - _id: 21134
   _job: 36375827931
   _time: 2026-09-28 04:01:26.583692113 Z
@@ -83583,3 +83571,84 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-09-29 04:02:49.190679763 Z
+- _id: 21142
+  _job: 95978
+  _time: 2026-09-29 04:06:01.620012546 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (179.6) is increasing (R=0.20).
+    The average number of commits per week (8.2) is staying still.
+    The average number of releases per month (0.2) is staying still.
+    The average monthly turnover (3.0 developers) is staying still.
+  what: assessment
+  when: 2026-09-29 04:06:01.640474172 Z
+- _id: 21143
+  _job: 36666663585
+  _time: 2026-09-30 03:57:41.137013658 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.cactoos-cactoos-0.x
+  details: The pull request yegor256/takes#1781 has been opened by @renovate[bot].
+  event_id: 16041833395
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1781
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-09-29 19:52:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21144
+  _job: 36666663585
+  _time: 2026-09-30 03:57:41.539741130 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1227 has been closed by @yegor256.
+  event_id: 16021938736
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1227
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-09-29 15:25:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 21145
+  _job: 36666663585
+  _time: 2026-09-30 03:57:42.570972926 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1780 has been closed by @yegor256.
+  event_id: 15982074371
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1780
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-09-29 06:25:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 21146
+  _job: 36666663585
+  _time: 2026-09-30 03:58:24.859137605 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: claude/assigned-issues-hx11pd
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1764 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 111
+  is_human: 1
+  issue: 1764
+  repository: 28924109
+  review: 2026-09-29 15:25:28.000000000 Z
+  review_comments: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-29 15:25:43.000000000 Z
+  where: github
+  who: 526301
