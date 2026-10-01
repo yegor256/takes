@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 446.112062259
+  seconds: 488.872905742
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-30 04:05:02.828855471 Z
+  when: 2026-10-01 04:08:20.267329871 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76681,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 342
-  closures_were_checked: 603
+  assignees_were_scanned: 581
+  closures_were_checked: 1695
   earliest_issue_was_found: 1
-  events_were_scanned: 22541945957
+  events_were_scanned: 22640630556
   issues_were_scanned: 0
-  labels_were_scanned: 991
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1443
-  min_pull_was_found: 939
+  min_issue_was_found: 1451
+  min_pull_was_found: 941
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 277
   what: iterate
   where: github
 - _id: 20665
@@ -83652,3 +83652,45 @@
   when: 2026-09-29 15:25:43.000000000 Z
   where: github
   who: 526301
+- _id: 21147
+  _job: 36813006685
+  _time: 2026-10-01 04:00:56.458999203 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.cactoos-cactoos-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1781 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1781
+  repository: 28924109
+  review: 2026-09-30 08:41:31.000000000 Z
+  review_comments: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-30 08:55:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21148
+  _job: 36813006685
+  _time: 2026-10-01 04:02:06.191865271 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3941
+  total_contributors: 89
+  total_files: 594
+  total_forks: 216
+  total_issues: 760
+  total_pulls: 1020
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-10-01 04:02:06.112491226 Z
