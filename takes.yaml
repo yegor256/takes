@@ -2,11 +2,12 @@
 - added: 8
   cycles: 2
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 484.909600211
+  seconds: 324.112425558
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-07 04:07:40.731341836 Z
+  when: 2026-10-08 04:05:53.318775212 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76681,18 +76682,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 821
-  closures_were_checked: 1695
+  assignees_were_scanned: 1117
+  closures_were_checked: 603
   earliest_issue_was_found: 1
-  events_were_scanned: 16600177599
+  events_were_scanned: 23304632214
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 609
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1603
-  min_pull_was_found: 969
+  min_issue_was_found: 1708
+  min_pull_was_found: 971
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 609
   what: iterate
   where: github
 - _id: 20665
@@ -83723,18 +83724,6 @@
   since: *177
   what: quality-of-service
   when: 2026-10-04 05:19:03.291999960 Z
-- _id: 21155
-  _job: 97338
-  _time: 2026-10-04 05:20:48.825581289 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (184.7) is increasing (R=0.15).
-    The average number of commits per week (8.4) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.10).
-    The average monthly turnover (3.0 developers) is staying still.
-  what: assessment
-  when: 2026-10-04 05:20:48.845232532 Z
 - _id: 21156
   _job: 37411443468
   _time: 2026-10-06 03:58:40.914880184 Z
@@ -83833,3 +83822,192 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-10-07 04:01:13.286091295 Z
+- _id: 21162
+  _job: 98074
+  _time: 2026-10-07 04:08:02.590314822 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (184.7) is increasing (R=0.15).
+    The average number of commits per week (8.4) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.10).
+    The average monthly turnover (4.0 developers) is increasing (R=0.34).
+  what: assessment
+  when: 2026-10-07 04:08:02.602817900 Z
+- _id: 21163
+  _job: 37725333365
+  _time: 2026-10-08 04:00:33.450435281 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1786 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 16622339146
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1786
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-10-07 08:51:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 21164
+  _job: 37725333365
+  _time: 2026-10-08 04:01:04.710231583 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull yegor256/takes#1786 has been opened earlier by @renovate[bot].
+  is_human: 0
+  issue: 1786
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-07 02:03:04.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21165
+  _job: 37725333365
+  _time: 2026-10-08 04:01:07.979131459 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1786 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1786
+  repository: 28924109
+  review: 2026-10-07 08:51:48.000000000 Z
+  review_comments: 0
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-07 09:27:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21166
+  _job: 37725333365
+  _time: 2026-10-08 04:01:56.263601334 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3948
+  total_contributors: 89
+  total_files: 594
+  total_forks: 216
+  total_issues: 760
+  total_pulls: 1025
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-10-08 04:01:56.207537610 Z
+- _id: 21167
+  _job: 37725333365
+  _time: 2026-10-08 04:02:03.914565488 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/jersey-monorepo
+  details: The missing pull yegor256/takes#1782 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1782
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-03 04:12:33.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21168
+  _job: 37725333365
+  _time: 2026-10-08 04:02:04.464951467 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1783 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1783
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-03 04:12:38.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21169
+  _job: 37725333365
+  _time: 2026-10-08 04:02:04.958194636 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.glassfish.grizzly-grizzly-http-servlet-server-5.x
+  details: The missing pull yegor256/takes#1784 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1784
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-05 04:13:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21170
+  _job: 37725333365
+  _time: 2026-10-08 04:02:05.801349642 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The missing pull yegor256/takes#1785 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1785
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-05 04:13:09.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21171
+  _job: 37725333365
+  _time: 2026-10-08 04:03:51.192643506 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/jersey-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1782 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  is_human: 0
+  issue: 1782
+  repository: 28924109
+  review: 2026-10-03 08:48:24.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-03 09:23:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21172
+  _job: 37725333365
+  _time: 2026-10-08 04:04:04.322701997 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1783 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1783
+  repository: 28924109
+  review: 2026-10-03 08:48:21.000000000 Z
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-03 09:06:59.000000000 Z
+  where: github
+  who: 8086956
