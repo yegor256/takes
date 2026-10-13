@@ -2,12 +2,11 @@
 - added: 8
   cycles: 2
   deleted: 8
-  error: deadlock; recursive locking
   inserted: 8
-  seconds: 381.542136986
+  seconds: 517.556426622
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-12 04:14:04.016704519 Z
+  when: 2026-10-13 04:13:23.140746432 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76682,18 +76681,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 821
-  closures_were_checked: 603
+  assignees_were_scanned: 1117
+  closures_were_checked: 1695
   earliest_issue_was_found: 1
-  events_were_scanned: 23662268054
+  events_were_scanned: 23791365268
   issues_were_scanned: 0
-  labels_were_scanned: 991
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1780
-  min_pull_was_found: 985
+  min_issue_was_found: 1091
+  min_pull_was_found: 987
   repository: 28924109
-  types_were_scanned: 277
+  types_were_scanned: 491
   what: iterate
   where: github
 - _id: 20665
@@ -84005,18 +84004,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-10-09 04:02:08.328107449 Z
-- _id: 21174
-  _job: 98355
-  _time: 2026-10-09 04:06:01.188349314 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (184.7) is increasing (R=0.15).
-    The average number of commits per week (8.4) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.10).
-    The average monthly turnover (4.0 developers) is decreasing (R=0.18).
-  what: assessment
-  when: 2026-10-09 04:06:01.210867467 Z
 - _id: 21175
   _job: 38022427668
   _time: 2026-10-10 04:03:50.360975270 Z
@@ -84098,3 +84085,31 @@
   since: *179
   what: quality-of-service
   when: 2026-10-12 04:11:17.768894634 Z
+- _id: 21181
+  _job: 98747
+  _time: 2026-10-12 04:14:27.134299737 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (185.7) is staying still.
+    The average number of commits per week (8.5) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.13).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-10-12 04:14:27.153893716 Z
+- _id: 21182
+  _job: 38344647382
+  _time: 2026-10-13 04:10:48.915430444 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3948
+  total_contributors: 89
+  total_files: 594
+  total_forks: 216
+  total_issues: 760
+  total_pulls: 1025
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-10-13 04:10:48.858242510 Z
