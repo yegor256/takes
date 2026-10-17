@@ -50,7 +50,7 @@ final class CapInputStream extends InputStream {
     public int available() throws IOException {
         return (int) Math.min(
             (long) Integer.MAX_VALUE,
-            Math.max((long) this.origin.available(), this.more)
+            Math.min((long) this.origin.available(), this.more)
         );
     }
 
