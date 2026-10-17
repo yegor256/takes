@@ -7,7 +7,7 @@ package org.takes.rq;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,23 @@ final class CapInputStreamTest {
 
     @Test
     void putsCapOnStream() throws IOException {
-        final long length = 50L;
+        final InputStream stream = new ByteArrayInputStream(new byte[1000]);
+        final CapInputStream wrapper = new CapInputStream(stream, 5L);
         MatcherAssert.assertThat(
-            "Available bytes must equal the specified capacity limit",
-            (long) new CapInputStream(
-                new ByteArrayInputStream("test".getBytes(StandardCharsets.UTF_8)),
-                length
-            ).available(),
-            Matchers.equalTo(length)
+            "Available bytes must not exceed the capacity limit",
+            wrapper.available(),
+            Matchers.equalTo(5)
+        );
+    }
+
+    @Test
+    void availableDoesNotExceedOrigin() throws IOException {
+        final InputStream stream = new ByteArrayInputStream(new byte[4]);
+        final CapInputStream wrapper = new CapInputStream(stream, 50L);
+        MatcherAssert.assertThat(
+            "Available bytes must not exceed the origin availability",
+            wrapper.available(),
+            Matchers.equalTo(4)
         );
     }
 
