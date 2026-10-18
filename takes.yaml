@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 331.575243557
+  seconds: 294.469221456
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-17 04:00:11.511692177 Z
+  when: 2026-10-18 03:59:52.402464158 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 445
-  closures_were_checked: 603
+  assignees_were_scanned: 581
+  closures_were_checked: 1346
   earliest_issue_was_found: 1
-  events_were_scanned: 17442172916
+  events_were_scanned: 24365211887
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1121
-  min_pull_was_found: 1001
+  min_issue_was_found: 1133
+  min_pull_was_found: 1003
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -84079,18 +84079,6 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-10-13 04:10:48.858242510 Z
-- _id: 21183
-  _job: 99524
-  _time: 2026-10-14 04:02:50.641082751 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (185.7) is staying still.
-    The average number of commits per week (8.5) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.13).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-10-14 04:02:50.658673649 Z
 - _id: 21184
   _job: 38678720562
   _time: 2026-10-15 03:58:26.071483752 Z
@@ -84139,5 +84127,132 @@
   _job: 39000527326
   _time: 2026-10-17 04:00:07.428886650 Z
   _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 3
+  total_commits: 3952
+  total_contributors: 89
+  total_files: 594
+  total_forks: 217
+  total_issues: 760
+  total_pulls: 1029
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
   what: dimensions-of-terrain
   when: 2026-10-17 04:00:07.376054402 Z
+- _id: 21188
+  _job: 100159
+  _time: 2026-10-17 04:00:37.266385227 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (185.7) is staying still.
+    The average number of commits per week (8.5) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.13).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-10-17 04:00:37.289211098 Z
+- _id: 21189
+  _job: 100159
+  _time: 2026-10-17 04:01:02.644393345 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  ac: 24
+  cost_of_qod: 2.3482471255444626
+  ev: 683
+  pv: 15250
+  qod: 291
+  qod_per_day: 16.45033503262167
+  qod_per_sec: 8.534413037617404e-06
+  start: *3
+  what: earned-value
+  when: 2026-10-17 04:01:02.644623246 Z
+- _id: 21190
+  _job: 39095234809
+  _time: 2026-10-18 03:55:01.599096286 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-cap-input-stream-1777
+  details: The pull request yegor256/takes#1790 has been opened by @vis-halv.
+  event_id: 17491756487
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1790
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-17 18:01:28.000000000 Z
+  where: github
+  who: 168957641
+- _id: 21191
+  _job: 39095234809
+  _time: 2026-10-18 03:55:02.121078843 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-cap-input-stream-1777
+  details: The pull request yegor256/takes#1789 has been opened by @vis-halv.
+  event_id: 17488478688
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1789
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-17 16:41:59.000000000 Z
+  where: github
+  who: 168957641
+- _id: 21192
+  _job: 39095234809
+  _time: 2026-10-18 03:55:46.495747941 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-cap-input-stream-1777
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1789 has been "pull-was-closed".
+  failed_builds: 6
+  files: 2
+  hoc: 27
+  is_human: 1
+  issue: 1789
+  repository: 28924109
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-10-17 17:46:03.000000000 Z
+  where: github
+  who: 168957641
+- _id: 21193
+  _job: 39095234809
+  _time: 2026-10-18 03:57:09.609850112 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'We found out that the user #168957641 is known in GitHub as @vis-halv.'
+  is_human: 1
+  name: vis-halv
+  what: who-has-name
+  when: 2026-10-18 03:57:09.613365390 Z
+  where: github
+  who: 168957641
+- _id: 21194
+  _job: 39095234809
+  _time: 2026-10-18 03:57:52.771998796 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/hibernate-validator
+  details: The missing pull yegor256/takes#1787 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1787
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-13 20:01:09.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21195
+  _job: 39095234809
+  _time: 2026-10-18 03:57:53.493048196 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/net.sf.saxon-saxon-he-13.x
+  details: The missing pull yegor256/takes#1788 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1788
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-15 17:44:40.000000000 Z
+  where: github
+  who: 29139614

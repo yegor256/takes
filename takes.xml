@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1480099">
+<fb version="0.19.6" size="1482379">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">331.575243557</seconds>
+    <seconds t="F">294.469221456</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-10-17T04:00:11Z</when>
+    <when t="T">2026-10-18T03:59:52Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85400,18 +85400,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">445</assignees_were_scanned>
-    <closures_were_checked t="I">603</closures_were_checked>
+    <assignees_were_scanned t="I">581</assignees_were_scanned>
+    <closures_were_checked t="I">1346</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">17442172916</events_were_scanned>
+    <events_were_scanned t="I">24365211887</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">0</labels_were_scanned>
+    <labels_were_scanned t="I">388</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1121</min_issue_was_found>
-    <min_pull_was_found t="I">1001</min_pull_was_found>
+    <min_issue_was_found t="I">1133</min_issue_was_found>
+    <min_pull_was_found t="I">1003</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -93666,19 +93666,6 @@
     <when t="T">2026-10-13T04:10:48Z</when>
   </f>
   <f>
-    <_id t="I">21183</_id>
-    <_job t="I">99524</_job>
-    <_time t="T">2026-10-14T04:02:50Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (185.7) is staying still.
-The average number of commits per week (8.5) is staying still.
-The average number of releases per month (0.2) is decreasing (R=-0.13).
-The average monthly turnover (4.0 developers) is staying still.</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-10-14T04:02:50Z</when>
-  </f>
-  <f>
     <_id t="I">21184</_id>
     <_job t="I">38678720562</_job>
     <_time t="T">2026-10-15T03:58:26Z</_time>
@@ -93732,7 +93719,149 @@ The average monthly turnover (4.0 developers) is staying still.</text>
     <_job t="I">39000527326</_job>
     <_time t="T">2026-10-17T04:00:07Z</_time>
     <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <total_active_contributors t="I">3</total_active_contributors>
+    <total_commits t="I">3952</total_commits>
+    <total_contributors t="I">89</total_contributors>
+    <total_files t="I">594</total_files>
+    <total_forks t="I">217</total_forks>
+    <total_issues t="I">760</total_issues>
+    <total_pulls t="I">1029</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">878</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-10-17T04:00:07Z</when>
+  </f>
+  <f>
+    <_id t="I">21188</_id>
+    <_job t="I">100159</_job>
+    <_time t="T">2026-10-17T04:00:37Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (185.7) is staying still.
+The average number of commits per week (8.5) is staying still.
+The average number of releases per month (0.2) is decreasing (R=-0.13).
+The average monthly turnover (4.0 developers) is staying still.</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-10-17T04:00:37Z</when>
+  </f>
+  <f>
+    <_id t="I">21189</_id>
+    <_job t="I">100159</_job>
+    <_time t="T">2026-10-17T04:01:02Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">2.3482471255444626</cost_of_qod>
+    <ev t="I">683</ev>
+    <pv t="I">15250</pv>
+    <qod t="I">291</qod>
+    <qod_per_day t="F">16.45033503262167</qod_per_day>
+    <qod_per_sec t="F">8.534413037617404e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2026-10-17T04:01:02Z</when>
+  </f>
+  <f>
+    <_id t="I">21190</_id>
+    <_job t="I">39095234809</_job>
+    <_time t="T">2026-10-18T03:55:01Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">fix-cap-input-stream-1777</branch>
+    <details t="S">The pull request yegor256/takes#1790 has been opened by @vis-halv.</details>
+    <event_id t="I">17491756487</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">1790</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-17T18:01:28Z</when>
+    <where t="S">github</where>
+    <who t="I">168957641</who>
+  </f>
+  <f>
+    <_id t="I">21191</_id>
+    <_job t="I">39095234809</_job>
+    <_time t="T">2026-10-18T03:55:02Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">fix-cap-input-stream-1777</branch>
+    <details t="S">The pull request yegor256/takes#1789 has been opened by @vis-halv.</details>
+    <event_id t="I">17488478688</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">1789</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-17T16:41:59Z</when>
+    <where t="S">github</where>
+    <who t="I">168957641</who>
+  </f>
+  <f>
+    <_id t="I">21192</_id>
+    <_job t="I">39095234809</_job>
+    <_time t="T">2026-10-18T03:55:46Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">fix-cap-input-stream-1777</branch>
+    <comments t="I">1</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">1</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1789 has been "pull-was-closed".</details>
+    <failed_builds t="I">6</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">27</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1789</issue>
+    <repository t="I">28924109</repository>
+    <succeeded_builds t="I">10</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2026-10-17T17:46:03Z</when>
+    <where t="S">github</where>
+    <who t="I">168957641</who>
+  </f>
+  <f>
+    <_id t="I">21193</_id>
+    <_job t="I">39095234809</_job>
+    <_time t="T">2026-10-18T03:57:09Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <details t="S">We found out that the user #168957641 is known in GitHub as @vis-halv.</details>
+    <is_human t="I">1</is_human>
+    <name t="S">vis-halv</name>
+    <what t="S">who-has-name</what>
+    <when t="T">2026-10-18T03:57:09Z</when>
+    <where t="S">github</where>
+    <who t="I">168957641</who>
+  </f>
+  <f>
+    <_id t="I">21194</_id>
+    <_job t="I">39095234809</_job>
+    <_time t="T">2026-10-18T03:57:52Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/hibernate-validator</branch>
+    <details t="S">The missing pull yegor256/takes#1787 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1787</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-13T20:01:09Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21195</_id>
+    <_job t="I">39095234809</_job>
+    <_time t="T">2026-10-18T03:57:53Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/net.sf.saxon-saxon-he-13.x</branch>
+    <details t="S">The missing pull yegor256/takes#1788 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1788</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-15T17:44:40Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
   </f>
 </fb>
