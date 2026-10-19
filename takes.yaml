@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 294.469221456
+  seconds: 461.293940232
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-18 03:59:52.402464158 Z
+  when: 2026-10-19 04:05:47.039251970 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 581
-  closures_were_checked: 1346
+  assignees_were_scanned: 718
+  closures_were_checked: 1695
   earliest_issue_was_found: 1
-  events_were_scanned: 24365211887
+  events_were_scanned: 24441655332
   issues_were_scanned: 0
-  labels_were_scanned: 388
+  labels_were_scanned: 609
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1133
-  min_pull_was_found: 1003
+  min_issue_was_found: 1137
+  min_pull_was_found: 1006
   repository: 28924109
-  types_were_scanned: 0
+  types_were_scanned: 163
   what: iterate
   where: github
 - _id: 20665
@@ -84256,3 +84256,93 @@
   when: 2026-10-15 17:44:40.000000000 Z
   where: github
   who: 29139614
+- _id: 21196
+  _job: 39197081956
+  _time: 2026-10-19 03:59:02.959887349 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/hibernate-validator
+  comments: 4
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 4
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1787 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1787
+  repository: 28924109
+  review: 2026-10-14 02:56:21.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-16 06:35:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21197
+  _job: 39197081956
+  _time: 2026-10-19 03:59:20.923246061 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/net.sf.saxon-saxon-he-13.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1788 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1788
+  repository: 28924109
+  review: 2026-10-16 02:42:43.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-16 02:58:32.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21198
+  _job: 39197081956
+  _time: 2026-10-19 03:59:42.623208604 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-cap-input-stream-1777
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1790 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 30
+  is_human: 1
+  issue: 1790
+  repository: 28924109
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-18 06:09:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 21199
+  _job: 39197081956
+  _time: 2026-10-19 04:01:12.854904029 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 4
+  total_commits: 3953
+  total_contributors: 90
+  total_files: 594
+  total_forks: 217
+  total_issues: 760
+  total_pulls: 1029
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-10-19 04:01:12.780682387 Z
