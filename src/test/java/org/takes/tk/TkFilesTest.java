@@ -57,4 +57,23 @@ final class TkFilesTest {
             )
         );
     }
+
+    @Test
+    @DisabledOnOs(OS.WINDOWS)
+    void rejectsPathTraversalOutsideBase(@TempDir final Path temp)
+        throws Exception {
+        final File base = temp.resolve("base").toFile();
+        FileUtils.forceMkdir(base);
+        FileUtils.write(
+            temp.resolve("secret.txt").toFile(), "top secret",
+            StandardCharsets.UTF_8
+        );
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> new TkFiles(base).act(
+                new RqFake("GET", "/../secret.txt", "")
+            ),
+            "TkFiles must not serve files outside of the base directory"
+        );
+    }
 }

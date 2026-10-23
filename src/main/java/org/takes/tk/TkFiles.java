@@ -94,7 +94,10 @@ public final class TkFiles extends TkWrap {
                 final File file = new File(
                     base, new RqHref.Base(request).href().path()
                 );
-                if (!file.exists()) {
+                if (!file.exists() || !file.toPath().toAbsolutePath()
+                    .normalize().startsWith(
+                        base.toPath().toAbsolutePath().normalize()
+                    )) {
                     throw new HttpException(
                         HttpURLConnection.HTTP_NOT_FOUND,
                         new UncheckedText(
