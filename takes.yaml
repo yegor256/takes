@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 230.913161138
+  seconds: 247.952027941
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-23 04:00:41.401806248 Z
+  when: 2026-10-24 03:59:47.772456975 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1687
-  closures_were_checked: 1695
+  assignees_were_scanned: 0
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17980439112
+  events_were_scanned: 24981794329
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1207
-  min_pull_was_found: 1028
+  min_issue_was_found: 1225
+  min_pull_was_found: 1030
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
 - _id: 20665
@@ -84406,5 +84406,29 @@
   _job: 39897605559
   _time: 2026-10-23 04:00:37.977036479 Z
   _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 5
+  total_commits: 3957
+  total_contributors: 91
+  total_files: 594
+  total_forks: 218
+  total_issues: 760
+  total_pulls: 1032
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
   what: dimensions-of-terrain
   when: 2026-10-23 04:00:37.929999741 Z
+- _id: 21208
+  _job: 40060223783
+  _time: 2026-10-24 03:55:44.296968536 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1775 has been closed by @yegor256.
+  event_id: 17987461521
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1775
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-10-23 06:08:08.000000000 Z
+  where: github
+  who: 526301
