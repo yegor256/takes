@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1485733">
+<fb version="0.19.6" size="1489681">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">355.568352946</seconds>
+    <seconds t="F">237.68823871</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-10-26T04:06:19Z</when>
+    <when t="T">2026-10-27T04:02:08Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85400,18 +85400,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">342</assignees_were_scanned>
-    <closures_were_checked t="I">1346</closures_were_checked>
+    <assignees_were_scanned t="I">445</assignees_were_scanned>
+    <closures_were_checked t="I">1695</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">18151824385</events_were_scanned>
+    <events_were_scanned t="I">25288823337</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">754</labels_were_scanned>
+    <labels_were_scanned t="I">991</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1293</min_issue_was_found>
-    <min_pull_was_found t="I">1034</min_pull_was_found>
+    <min_issue_was_found t="I">1295</min_issue_was_found>
+    <min_pull_was_found t="I">1037</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">933</types_were_scanned>
+    <types_were_scanned t="I">1054</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -94035,19 +94035,6 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">21209</_id>
-    <_job t="I">101632</_job>
-    <_time t="T">2026-10-24T04:00:09Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (185.4) is staying still.
-The average number of commits per week (8.6) is decreasing (R=-0.15).
-The average number of releases per month (0.2) is decreasing (R=-0.15).
-The average monthly turnover (4.0 developers) is staying still.</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-10-24T04:00:09Z</when>
-  </f>
-  <f>
     <_id t="I">21210</_id>
     <_job t="I">40160061798</_job>
     <_time t="T">2026-10-25T03:59:09Z</_time>
@@ -94095,5 +94082,233 @@ The average monthly turnover (4.0 developers) is staying still.</text>
     <total_stars t="I">878</total_stars>
     <what t="S">dimensions-of-terrain</what>
     <when t="T">2026-10-26T04:02:16Z</when>
+  </f>
+  <f>
+    <_id t="I">21213</_id>
+    <_job t="I">102238</_job>
+    <_time t="T">2026-10-26T04:06:43Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (188.2) is staying still.
+The average number of commits per week (8.8) is decreasing (R=-0.19).
+The average number of releases per month (0.2) is decreasing (R=-0.17).
+The average monthly turnover (4.0 developers) is staying still.</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-10-26T04:06:43Z</when>
+  </f>
+  <f>
+    <_id t="I">21214</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:58:14Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <comments t="I">3</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1795 has been reviewed by @yegor256 with 2 HoC and 3 comments.</details>
+    <event_id t="I">18214895345</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1795</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2026-10-26T08:54:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21215</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:58:15Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <comments t="I">3</comments>
+    <commits t="I">1</commits>
+    <details t="S">The pull request yegor256/takes#1796 has been reviewed by @yegor256 with 2 HoC and 3 comments.</details>
+    <event_id t="I">18214894260</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1796</issue>
+    <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2026-10-26T08:54:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21216</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:58:16Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/davidanson-markdownlint-cli2-action-25.x</branch>
+    <details t="S">The pull request yegor256/takes#1796 has been opened by @renovate[bot].</details>
+    <event_id t="I">18197624716</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">1796</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-26T04:07:49Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21217</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:58:16Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <details t="S">The pull request yegor256/takes#1795 has been opened by @renovate[bot].</details>
+    <event_id t="I">18197621379</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">1795</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-26T04:07:45Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21218</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:58:36Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <since t="T">2026-10-20T03:56:50Z</since>
+    <total_builds_ran t="I">177</total_builds_ran>
+    <total_commits_pushed t="I">7</total_commits_pushed>
+    <total_hoc_committed t="I">40</total_hoc_committed>
+    <total_issues_created t="I">6</total_issues_created>
+    <total_pulls_submitted t="I">6</total_pulls_submitted>
+    <total_releases_published t="I">0</total_releases_published>
+    <total_reviews_submitted t="I">4</total_reviews_submitted>
+    <what t="S">quantity-of-deliverables</what>
+    <when t="T">2026-10-27T03:58:36Z</when>
+  </f>
+  <f>
+    <_id t="I">21219</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:59:04Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1795 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1795</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-10-26T08:54:49Z</review>
+    <succeeded_builds t="I">9</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-10-26T09:32:04Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">21220</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T03:59:11Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/davidanson-markdownlint-cli2-action-25.x</branch>
+    <comments t="I">3</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1796 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">1</files>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">1796</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-10-26T08:54:46Z</review>
+    <succeeded_builds t="I">11</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-10-26T09:15:33Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">21221</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T04:00:15Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/java-jdk-25.x</branch>
+    <details t="S">The missing pull yegor256/takes#1791 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1791</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-22T14:41:27Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21222</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T04:00:16Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">renovate/error-prone-monorepo</branch>
+    <details t="S">The missing pull yegor256/takes#1792 has been opened by @renovate[bot].</details>
+    <is_human t="I">0</is_human>
+    <issue t="I">1792</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-22T14:41:33Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">21223</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T04:00:16Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">fix/issue-1775-tkfiles-allows-path-traversal-outside-th</branch>
+    <details t="S">The missing pull yegor256/takes#1793 has been opened by @shryukgrandhi.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1793</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-23T03:12:50Z</when>
+    <where t="S">github</where>
+    <who t="I">85529990</who>
+  </f>
+  <f>
+    <_id t="I">21224</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T04:00:17Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">fix/issue-1434-improve-tkmeasuredtest-coverage-related</branch>
+    <details t="S">The missing pull yegor256/takes#1794 has been opened by @shryukgrandhi.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">1794</issue>
+    <repository t="I">28924109</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2026-10-25T10:31:17Z</when>
+    <where t="S">github</where>
+    <who t="I">85529990</who>
+  </f>
+  <f>
+    <_id t="I">21225</_id>
+    <_job t="I">40447034571</_job>
+    <_time t="T">2026-10-27T04:01:21Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <since t="T">2026-10-20T03:59:29Z</since>
+    <what t="S">quality-of-service</what>
+    <when t="T">2026-10-27T04:01:21Z</when>
   </f>
 </fb>

@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 355.568352946
+  seconds: 237.68823871
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-26 04:06:19.164862716 Z
+  when: 2026-10-27 04:02:08.215336753 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 342
-  closures_were_checked: 1346
+  assignees_were_scanned: 445
+  closures_were_checked: 1695
   earliest_issue_was_found: 1
-  events_were_scanned: 18151824385
+  events_were_scanned: 25288823337
   issues_were_scanned: 0
-  labels_were_scanned: 754
+  labels_were_scanned: 991
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1293
-  min_pull_was_found: 1034
+  min_issue_was_found: 1295
+  min_pull_was_found: 1037
   repository: 28924109
-  types_were_scanned: 933
+  types_were_scanned: 1054
   what: iterate
   where: github
 - _id: 20665
@@ -84338,14 +84338,14 @@
   total_releases_published: 0
   total_reviews_submitted: 2
   what: quantity-of-deliverables
-  when: 2026-10-20 03:56:50.236028343 Z
+  when: &182 2026-10-20 03:56:50.236028343 Z
 - _id: 21202
   _job: 39366832006
   _time: 2026-10-20 03:59:29.180685560 Z
   _version: 0.19.16/0.61.1/0.17.23
   since: *181
   what: quality-of-service
-  when: 2026-10-20 03:59:29.171343556 Z
+  when: &183 2026-10-20 03:59:29.171343556 Z
 - _id: 21203
   _job: 39541240996
   _time: 2026-10-21 03:58:03.206409628 Z
@@ -84408,18 +84408,6 @@
   when: 2026-10-23 06:08:08.000000000 Z
   where: github
   who: 526301
-- _id: 21209
-  _job: 101632
-  _time: 2026-10-24 04:00:09.899906736 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (185.4) is staying still.
-    The average number of commits per week (8.6) is decreasing (R=-0.15).
-    The average number of releases per month (0.2) is decreasing (R=-0.15).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-10-24 04:00:09.920288887 Z
 - _id: 21210
   _job: 40160061798
   _time: 2026-10-25 03:59:09.620111927 Z
@@ -84464,3 +84452,208 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-10-26 04:02:16.168304467 Z
+- _id: 21213
+  _job: 102238
+  _time: 2026-10-26 04:06:43.421617874 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (188.2) is staying still.
+    The average number of commits per week (8.8) is decreasing (R=-0.19).
+    The average number of releases per month (0.2) is decreasing (R=-0.17).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-10-26 04:06:43.443805641 Z
+- _id: 21214
+  _job: 40447034571
+  _time: 2026-10-27 03:58:14.895990670 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1795 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 18214895345
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1795
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-10-26 08:54:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 21215
+  _job: 40447034571
+  _time: 2026-10-27 03:58:15.511185761 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1796 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 18214894260
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1796
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-10-26 08:54:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 21216
+  _job: 40447034571
+  _time: 2026-10-27 03:58:16.053416544 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/davidanson-markdownlint-cli2-action-25.x
+  details: The pull request yegor256/takes#1796 has been opened by @renovate[bot].
+  event_id: 18197624716
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1796
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-26 04:07:49.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21217
+  _job: 40447034571
+  _time: 2026-10-27 03:58:16.413943610 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  details: The pull request yegor256/takes#1795 has been opened by @renovate[bot].
+  event_id: 18197621379
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1795
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-26 04:07:45.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21218
+  _job: 40447034571
+  _time: 2026-10-27 03:58:36.448038435 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *182
+  total_builds_ran: 177
+  total_commits_pushed: 7
+  total_hoc_committed: 40
+  total_issues_created: 6
+  total_pulls_submitted: 6
+  total_releases_published: 0
+  total_reviews_submitted: 4
+  what: quantity-of-deliverables
+  when: 2026-10-27 03:58:36.439418951 Z
+- _id: 21219
+  _job: 40447034571
+  _time: 2026-10-27 03:59:04.284997524 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.apache.maven.plugins-maven-surefire-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1795 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1795
+  repository: 28924109
+  review: 2026-10-26 08:54:49.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-26 09:32:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21220
+  _job: 40447034571
+  _time: 2026-10-27 03:59:11.118705020 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/davidanson-markdownlint-cli2-action-25.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1796 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1796
+  repository: 28924109
+  review: 2026-10-26 08:54:46.000000000 Z
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-26 09:15:33.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21221
+  _job: 40447034571
+  _time: 2026-10-27 04:00:15.724988454 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/java-jdk-25.x
+  details: The missing pull yegor256/takes#1791 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1791
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-22 14:41:27.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21222
+  _job: 40447034571
+  _time: 2026-10-27 04:00:16.344779777 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/error-prone-monorepo
+  details: The missing pull yegor256/takes#1792 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1792
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-22 14:41:33.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21223
+  _job: 40447034571
+  _time: 2026-10-27 04:00:16.977758155 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/issue-1775-tkfiles-allows-path-traversal-outside-th
+  details: The missing pull yegor256/takes#1793 has been opened by @shryukgrandhi.
+  is_human: 1
+  issue: 1793
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-23 03:12:50.000000000 Z
+  where: github
+  who: 85529990
+- _id: 21224
+  _job: 40447034571
+  _time: 2026-10-27 04:00:17.716249315 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/issue-1434-improve-tkmeasuredtest-coverage-related
+  details: The missing pull yegor256/takes#1794 has been opened by @shryukgrandhi.
+  is_human: 1
+  issue: 1794
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-10-25 10:31:17.000000000 Z
+  where: github
+  who: 85529990
+- _id: 21225
+  _job: 40447034571
+  _time: 2026-10-27 04:01:21.177231805 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *183
+  what: quality-of-service
+  when: 2026-10-27 04:01:21.168896348 Z
