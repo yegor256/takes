@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 237.68823871
+  seconds: 399.634626568
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-27 04:02:08.215336753 Z
+  when: 2026-10-28 04:00:53.465299882 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 445
-  closures_were_checked: 1695
+  assignees_were_scanned: 581
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 25288823337
+  events_were_scanned: 25378495320
   issues_were_scanned: 0
-  labels_were_scanned: 991
+  labels_were_scanned: 1448
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1295
-  min_pull_was_found: 1037
+  min_issue_was_found: 1299
+  min_pull_was_found: 1038
   repository: 28924109
-  types_were_scanned: 1054
+  types_were_scanned: 1292
   what: iterate
   where: github
 - _id: 20665
@@ -84567,6 +84567,7 @@
   issue: 1795
   repository: 28924109
   review: 2026-10-26 08:54:49.000000000 Z
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -84592,6 +84593,7 @@
   issue: 1796
   repository: 28924109
   review: 2026-10-26 08:54:46.000000000 Z
+  review_comments: 0
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
@@ -84657,3 +84659,129 @@
   since: *183
   what: quality-of-service
   when: 2026-10-27 04:01:21.168896348 Z
+- _id: 21226
+  _job: 102405
+  _time: 2026-10-27 04:02:50.355265216 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  ac: 24
+  cost_of_qod: 35.3379476056188
+  ev: 10530
+  pv: 235314
+  qod: 298
+  qod_per_day: 16.45033503262167
+  qod_per_sec: 8.531211301151704e-06
+  start: *3
+  what: earned-value
+  when: 2026-10-27 04:02:50.355479575 Z
+- _id: 21227
+  _job: 40629199311
+  _time: 2026-10-28 03:55:13.710436447 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/java-jdk-25.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1791 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1791
+  repository: 28924109
+  review: 2026-10-22 16:59:54.000000000 Z
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-22 19:19:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21228
+  _job: 40629199311
+  _time: 2026-10-28 03:55:31.698285399 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/error-prone-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1792 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1792
+  repository: 28924109
+  review: 2026-10-22 16:59:50.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-22 18:41:46.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21229
+  _job: 40629199311
+  _time: 2026-10-28 03:55:51.861516951 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/issue-1775-tkfiles-allows-path-traversal-outside-th
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1793 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 24
+  is_human: 1
+  issue: 1793
+  repository: 28924109
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-23 06:08:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 21230
+  _job: 40629199311
+  _time: 2026-10-28 03:57:19.211855984 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 5
+  total_commits: 3960
+  total_contributors: 91
+  total_files: 594
+  total_forks: 218
+  total_issues: 761
+  total_pulls: 1035
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 876
+  what: dimensions-of-terrain
+  when: 2026-10-28 03:57:19.145338708 Z
+- _id: 21231
+  _job: 40629199311
+  _time: 2026-10-28 03:57:30.312311410 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'We found out that the user #85529990 is known in GitHub as @shryukgrandhi.'
+  is_human: 1
+  name: shryukgrandhi
+  what: who-has-name
+  when: 2026-10-28 03:57:30.316135837 Z
+  where: github
+  who: 85529990
+- _id: 21232
+  _job: 40629199311
+  _time: 2026-10-28 03:59:22.647851891 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1797 has been earlier opened by @revive-code-bot[bot].
+  issue: 1797
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-10-27 05:00:07.000000000 Z
+  where: github
+  who: 166734835
