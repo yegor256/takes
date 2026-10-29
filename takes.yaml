@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 399.634626568
+  seconds: 172.425624837
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-28 04:00:53.465299882 Z
+  when: 2026-10-29 03:56:56.658381112 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 581
-  closures_were_checked: 0
+  assignees_were_scanned: 718
+  closures_were_checked: 603
   earliest_issue_was_found: 1
-  events_were_scanned: 25378495320
+  events_were_scanned: 25456039688
   issues_were_scanned: 0
-  labels_were_scanned: 1448
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1299
-  min_pull_was_found: 1038
+  min_issue_was_found: 1300
+  min_pull_was_found: 1039
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -84424,18 +84424,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-10-25 03:59:09.574964109 Z
-- _id: 21211
-  _job: 102078
-  _time: 2026-10-25 04:03:02.054044122 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (188.2) is staying still.
-    The average number of commits per week (8.8) is decreasing (R=-0.19).
-    The average number of releases per month (0.2) is decreasing (R=-0.17).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-10-25 04:03:02.077760812 Z
 - _id: 21212
   _job: 40266753836
   _time: 2026-10-26 04:02:16.234256858 Z
@@ -84692,6 +84680,7 @@
   issue: 1791
   repository: 28924109
   review: 2026-10-22 16:59:54.000000000 Z
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -84717,6 +84706,7 @@
   issue: 1792
   repository: 28924109
   review: 2026-10-22 16:59:50.000000000 Z
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -84741,6 +84731,7 @@
   is_human: 1
   issue: 1793
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
@@ -84779,9 +84770,22 @@
   _time: 2026-10-28 03:59:22.647851891 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/takes#1797 has been earlier opened by @revive-code-bot[bot].
+  is_human: 0
   issue: 1797
   repository: 28924109
   what: issue-was-opened
   when: 2026-10-27 05:00:07.000000000 Z
   where: github
   who: 166734835
+- _id: 21233
+  _job: 102607
+  _time: 2026-10-28 04:01:36.940442038 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (187.9) is staying still.
+    The average number of commits per week (8.7) is decreasing (R=-0.19).
+    The average number of releases per month (0.2) is decreasing (R=-0.18).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-10-28 04:01:36.958873859 Z
