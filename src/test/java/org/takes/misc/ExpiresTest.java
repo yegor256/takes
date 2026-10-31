@@ -35,13 +35,13 @@ final class ExpiresTest {
     }
 
     @Test
-    void returnsHour() {
+    void returnsHourAfterGivenTime() {
         MatcherAssert.assertThat(
-            "Wrong expiration time for Hour",
+            "Hour does not shift the given time one hour forward",
             new Expires.Hour(
-                new Expires.Date(Instant.ofEpochSecond(3600).toEpochMilli())
+                Instant.ofEpochSecond(7200).toEpochMilli()
             ).print(),
-            new IsEqual<>("Expires=Thu, 01 Jan 1970 01:00:00 GMT")
+            new IsEqual<>("Expires=Thu, 01 Jan 1970 03:00:00 GMT")
         );
     }
 
