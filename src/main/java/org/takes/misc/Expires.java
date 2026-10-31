@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 
@@ -90,9 +91,8 @@ public interface Expires {
     /**
      * Implementation that represents content expiring in one hour.
      *
-     * <p>This implementation wraps another Expires instance and represents
-     * content that expires one hour from the given base time. It delegates
-     * to the wrapped instance for the actual expiration formatting.</p>
+     * <p>This implementation represents content that expires one hour
+     * after the given base time, or one hour from now by default.</p>
      *
      * @since 2.0
      */
@@ -104,11 +104,29 @@ public interface Expires {
         private final Expires origin;
 
         /**
-         * Constructor.
+         * Ctor.
+         *
+         * <p>Will create instance that expires one hour from now.</p>
+         */
+        Hour() {
+            this(System.currentTimeMillis());
+        }
+
+        /**
+         * Ctor.
+         *
+         * @param base Base time in millis
+         */
+        Hour(final long base) {
+            this(new Expires.Date(base + TimeUnit.HOURS.toMillis(1L)));
+        }
+
+        /**
+         * Ctor.
          *
          * @param origin Original time
          */
-        Hour(final Expires origin) {
+        private Hour(final Expires origin) {
             this.origin = origin;
         }
 
