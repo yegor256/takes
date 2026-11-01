@@ -89,7 +89,7 @@ public final class CcPlain implements Codec {
             try {
                 map.put(
                     new UncheckedText(pair.get(0)).asString(),
-                    CcPlain.decode(new UncheckedText(pair.get(1)).asString())
+                    CcPlain.decode(CcPlain.value(pair))
                 );
             } catch (final IllegalArgumentException ex) {
                 throw new DecodingException(ex);
@@ -100,6 +100,16 @@ public final class CcPlain implements Codec {
                 new UncheckedText(parts.get(0)).asString()
             ), map
         );
+    }
+
+    private static String value(final List<Text> pair) {
+        final String value;
+        if (pair.size() > 1) {
+            value = new UncheckedText(pair.get(1)).asString();
+        } else {
+            value = "";
+        }
+        return value;
     }
 
     private static String decode(final String text) {
