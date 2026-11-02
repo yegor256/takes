@@ -112,8 +112,7 @@ public final class RqLive extends RqWrap {
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
-        if ((data.get() > 0x7F || data.get() < 0x20)
-            && data.get() != '\t') {
+        if (data.get() < 0x20 && data.get() != '\t') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 new UncheckedText(
