@@ -70,6 +70,27 @@ final class RqLiveTest {
     }
 
     @Test
+    void acceptsUtfEightFileNameInHeader() throws IOException {
+        MatcherAssert.assertThat(
+            "Header with non-ASCII file name must not be rejected",
+            new RqHeaders.Base(
+                new RqLive(
+                    new InputStreamOf(
+                        new Joined(
+                            RqLiveTest.CRLF,
+                            "POST /upload HTTP/1.1",
+                            "Content-Disposition: filename=\"teść.txt\"",
+                            "",
+                            "hello"
+                        )
+                    )
+                )
+            ).header("Content-Disposition"),
+            Matchers.hasItem("filename=\"teść.txt\"")
+        );
+    }
+
+    @Test
     void supportMultiLineHeadersWithColon() throws IOException {
         final Request req = new RqLive(
             new InputStreamOf(
@@ -96,8 +117,9 @@ final class RqLiveTest {
             () -> new RqLive(
                 new ByteArrayInputStream(
                     String.format(
-                        "GET /test HTTP/1.1%sHost: €",
-                        RqLiveTest.CRLF
+                        "GET /test HTTP/1.1%sHost: %s",
+                        RqLiveTest.CRLF,
+                        (char) 7
                     ).getBytes(StandardCharsets.UTF_8)
                 )
             )
