@@ -107,7 +107,7 @@
     <dependency>
       <groupId>xml-apis</groupId>
       <artifactId>xml-apis</artifactId>
-      <version>1.0.b2</version>
+      <version>1.4.01</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -802,7 +802,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.36.1</version>
+            <version>0.36.0</version>
           </plugin>
         </plugins>
       </build>

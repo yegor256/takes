@@ -71,7 +71,7 @@ may help you as well.
 * [Form Processing](#form-processing)
 * [Exception Handling](#exception-handling)
 * [Redirects](#redirects)
-* [RsJson](#rsjson)
+* [RsJSON](#rsjson)
 * [RsXembly](#rsxembly)
 * [GZIP Compression](#gzip-compression)
 * [SSL Configuration](#ssl-configuration)
@@ -718,15 +718,15 @@ public final class App {
 }
 ```
 
-## RsJson
+## RsJSON
 
 Here is how we can deal with JSON:
 
 ```java
-public final class TkBalance implements TkRegex {
+public final class TkBalance extends TkFixed {
   @Override
-  public Response act(final RqRegex request) throws IOException {
-    return new RsJson(
+  public Response act(final RqRegex request) {
+    return new RsJSON(
       new User(request.matcher().group("user"))
     );
   }
@@ -736,9 +736,9 @@ public final class TkBalance implements TkRegex {
 This is the method to add to `User`:
 
 ```java
-public final class User implements XeSource, RsJson.Source {
+public final class User implements XeSource, RsJSON.Source {
   @Override
-  public JsonObject toJson() {
+  public JsonObject toJSON() {
     return Json.createObjectBuilder()
       .add("balance", this.balance)
       .build();
