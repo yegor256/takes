@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 706.896837833
+  seconds: 334.018969015
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-02 04:06:12.337021470 Z
+  when: 2026-11-03 03:59:42.444485747 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1687
-  closures_were_checked: 1346
+  assignees_were_scanned: 0
+  closures_were_checked: 1695
   earliest_issue_was_found: 1
-  events_were_scanned: 18847856030
+  events_were_scanned: 18957938399
   issues_were_scanned: 0
-  labels_were_scanned: 1448
+  labels_were_scanned: 0
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1358
-  min_pull_was_found: 1045
+  min_issue_was_found: 1366
+  min_pull_was_found: 1046
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
 - _id: 20665
@@ -84523,7 +84523,7 @@
   total_releases_published: 0
   total_reviews_submitted: 4
   what: quantity-of-deliverables
-  when: 2026-10-27 03:58:36.439418951 Z
+  when: &184 2026-10-27 03:58:36.439418951 Z
 - _id: 21219
   _job: 40447034571
   _time: 2026-10-27 03:59:04.284997524 Z
@@ -84781,18 +84781,6 @@
   total_stars: 876
   what: dimensions-of-terrain
   when: 2026-10-30 03:56:22.845977949 Z
-- _id: 21235
-  _job: 103202
-  _time: 2026-10-30 04:00:45.671861081 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (187.9) is staying still.
-    The average number of commits per week (8.7) is decreasing (R=-0.19).
-    The average number of releases per month (0.2) is decreasing (R=-0.18).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-10-30 04:00:45.697050774 Z
 - _id: 21236
   _job: 41166259692
   _time: 2026-10-31 03:58:22.200265505 Z
@@ -85280,33 +85268,6 @@
   when: 2026-11-01 05:25:17.000000000 Z
   where: github
   who: 526301
-- _id: 21264
-  _job: 41385456761
-  _time: 2026-11-02 03:54:52.782963827 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  branch: renovate/xml-apis-xml-apis-1.x
-  comments: 1
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 1
-  comments_resolved: 0
-  comments_to_code: 0
-  details: The pull request yegor256/takes#1742 has been closed by @renovate[bot],
-    with 2 HoC and 1 comments.
-  event_id: 18787695795
-  event_type: PullRequestEvent
-  failed_builds: 3
-  files: 1
-  hoc: 2
-  is_human: 0
-  issue: 1742
-  repository: 28924109
-  succeeded_builds: 6
-  suggestions: 0
-  what: pull-was-closed
-  when: 2026-10-31 16:48:23.000000000 Z
-  where: github
-  who: 29139614
 - _id: 21265
   _job: 41385456761
   _time: 2026-11-02 03:54:53.410296421 Z
@@ -85341,6 +85302,7 @@
   issue: 1802
   repository: 28924109
   review: 2026-11-01 01:04:54.000000000 Z
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
@@ -85365,6 +85327,7 @@
   is_human: 1
   issue: 1803
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -85390,6 +85353,7 @@
   issue: 1804
   repository: 28924109
   review: 2026-11-01 09:42:44.000000000 Z
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -85415,6 +85379,7 @@
   issue: 1806
   repository: 28924109
   review: 2026-11-02 02:46:28.000000000 Z
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -85437,3 +85402,393 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-02 04:03:01.663121106 Z
+- _id: 21271
+  _job: 103883
+  _time: 2026-11-02 04:06:38.085140270 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (189.7) is staying still.
+    The average number of commits per week (9.0) is decreasing (R=-0.24).
+    The average number of releases per month (0.2) is decreasing (R=-0.20).
+    The average monthly turnover (4.0 developers) is decreasing (R=-0.20).
+  what: assessment
+  when: 2026-11-02 04:06:38.109827964 Z
+- _id: 21272
+  _job: 41574840842
+  _time: 2026-11-03 03:54:12.705801864 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  commits: 1
+  details: The pull request yegor256/takes#1811 has been reviewed by @yegor256 with
+    2 HoC and 1 comments.
+  event_id: 18954923667
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1811
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-03 02:29:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 21273
+  _job: 41574840842
+  _time: 2026-11-03 03:54:13.614335137 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  commits: 1
+  details: The pull request yegor256/takes#1812 has been reviewed by @yegor256 with
+    2 HoC and 1 comments.
+  event_id: 18954920150
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1812
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-03 02:29:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 21274
+  _job: 41574840842
+  _time: 2026-11-03 03:54:14.190028739 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1814 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 18954916412
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1814
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-03 02:29:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 21275
+  _job: 41574840842
+  _time: 2026-11-03 03:54:14.675080176 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/takes#1814 has been opened by @renovate[bot].
+  event_id: 18950864139
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1814
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 01:25:50.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21276
+  _job: 41574840842
+  _time: 2026-11-03 03:54:15.728491287 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1813 has been closed by @github-actions[bot],
+    with 51 HoC and 0 comments.
+  event_id: 18920152478
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 5
+  hoc: 51
+  is_human: 0
+  issue: 1813
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-11-02 18:59:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21277
+  _job: 41574840842
+  _time: 2026-11-03 03:54:22.775358137 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  details: The pull request yegor256/takes#1813 has been opened by @github-actions[bot].
+  event_id: 18920148624
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1813
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 18:59:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21278
+  _job: 41574840842
+  _time: 2026-11-03 03:54:22.890370196 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1812 has been opened by @renovate[bot].
+  event_id: 18920117574
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1812
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 18:59:29.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21279
+  _job: 41574840842
+  _time: 2026-11-03 03:54:23.095747133 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/error-prone-monorepo
+  details: The pull request yegor256/takes#1811 has been opened by @renovate[bot].
+  event_id: 18920088500
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1811
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 18:59:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21280
+  _job: 41574840842
+  _time: 2026-11-03 03:54:23.928065970 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/hibernate-validator
+  details: The pull request yegor256/takes#1810 has been opened by @renovate[bot].
+  event_id: 18872036890
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1810
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 09:43:27.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21281
+  _job: 41574840842
+  _time: 2026-11-03 03:54:24.006825355 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  details: The pull request yegor256/takes#1809 has been opened by @renovate[bot].
+  event_id: 18872030960
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1809
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 09:43:22.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21282
+  _job: 41574840842
+  _time: 2026-11-03 03:54:24.320160491 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1057 has been closed by @yegor256.
+  event_id: 18871968084
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1057
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-11-02 09:42:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 21283
+  _job: 41574840842
+  _time: 2026-11-03 03:54:24.497233601 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1051 has been closed by @yegor256.
+  event_id: 18871959376
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1051
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-11-02 09:42:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 21284
+  _job: 41574840842
+  _time: 2026-11-03 03:54:25.651835949 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1051'
+  details: The pull request yegor256/takes#1808 has been opened by @yegor256.
+  event_id: 18864313194
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1808
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 08:07:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 21285
+  _job: 41574840842
+  _time: 2026-11-03 03:54:26.156754629 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1057'
+  details: The pull request yegor256/takes#1807 has been opened by @yegor256.
+  event_id: 18863203847
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1807
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-02 07:50:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 21286
+  _job: 41574840842
+  _time: 2026-11-03 03:54:29.410361582 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  assigner: 526301
+  details: yegor256/takes#1748 was assigned to @yegor256 by @yegor256.
+  is_human: 1
+  issue: 1748
+  repository: 28924109
+  what: issue-was-assigned
+  when: 2026-10-31 19:52:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 21287
+  _job: 41574840842
+  _time: 2026-11-03 03:54:48.685699337 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1057'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1807 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 14
+  is_human: 1
+  issue: 1807
+  repository: 28924109
+  review: 2026-11-02 07:52:16.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-02 09:42:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 21288
+  _job: 41574840842
+  _time: 2026-11-03 03:54:57.574163211 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1051'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, yegor256/takes#1808 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 29
+  is_human: 1
+  issue: 1808
+  repository: 28924109
+  review: 2026-11-02 08:11:20.000000000 Z
+  succeeded_builds: 8
+  suggestions: 2
+  what: pull-was-merged
+  when: 2026-11-02 09:42:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 21289
+  _job: 41574840842
+  _time: 2026-11-03 03:55:07.142491958 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/com.qulice-qulice-maven-plugin-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1809 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 1
+  issue: 1809
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-02 09:54:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 21290
+  _job: 41574840842
+  _time: 2026-11-03 03:55:16.584228291 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/hibernate-validator
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1810 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1810
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-02 09:54:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 21291
+  _job: 41574840842
+  _time: 2026-11-03 03:55:24.782008710 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1814 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1814
+  repository: 28924109
+  review: 2026-11-03 02:29:17.000000000 Z
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 03:01:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21292
+  _job: 41574840842
+  _time: 2026-11-03 03:58:50.320498139 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *184
+  what: quantity-of-deliverables
+  when: 2026-11-03 03:58:50.314956995 Z
