@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 334.018969015
+  seconds: 462.918110496
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-03 03:59:42.444485747 Z
+  when: 2026-11-04 04:02:02.590860200 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76671,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 1695
+  assignees_were_scanned: 211
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 18957938399
+  events_were_scanned: 26096269552
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1366
-  min_pull_was_found: 1046
+  min_issue_was_found: 1371
+  min_pull_was_found: 1047
   repository: 28924109
-  types_were_scanned: 735
+  types_were_scanned: 826
   what: iterate
   where: github
 - _id: 20665
@@ -84634,7 +84634,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   since: *183
   what: quality-of-service
-  when: 2026-10-27 04:01:21.168896348 Z
+  when: &185 2026-10-27 04:01:21.168896348 Z
 - _id: 21226
   _job: 102405
   _time: 2026-10-27 04:02:50.355265216 Z
@@ -85681,6 +85681,7 @@
   issue: 1807
   repository: 28924109
   review: 2026-11-02 07:52:16.000000000 Z
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -85706,6 +85707,7 @@
   issue: 1808
   repository: 28924109
   review: 2026-11-02 08:11:20.000000000 Z
+  review_comments: 2
   succeeded_builds: 8
   suggestions: 2
   what: pull-was-merged
@@ -85730,6 +85732,7 @@
   is_human: 1
   issue: 1809
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -85754,6 +85757,7 @@
   is_human: 1
   issue: 1810
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -85779,6 +85783,7 @@
   issue: 1814
   repository: 28924109
   review: 2026-11-03 02:29:17.000000000 Z
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -85790,5 +85795,389 @@
   _time: 2026-11-03 03:58:50.320498139 Z
   _version: 0.19.16/0.61.1/0.17.23
   since: *184
+  total_builds_ran: 517
+  total_commits_pushed: 35
+  total_hoc_committed: 278
+  total_issues_created: 25
+  total_pulls_submitted: 24
+  total_releases_published: 0
+  total_reviews_submitted: 10
   what: quantity-of-deliverables
   when: 2026-11-03 03:58:50.314956995 Z
+- _id: 21293
+  _job: 41769837622
+  _time: 2026-11-04 03:54:27.012160034 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1820 has been closed by @yegor256, with
+    2 HoC and 2 comments.
+  event_id: 19030782403
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1820
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-11-03 17:19:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 21294
+  _job: 41769837622
+  _time: 2026-11-04 03:54:43.385254100 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1821 has been closed by @github-actions[bot],
+    with 0 HoC and 0 comments.
+  event_id: 19023596481
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 0
+  hoc: 0
+  is_human: 0
+  issue: 1821
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-11-03 17:19:54.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21295
+  _job: 41769837622
+  _time: 2026-11-04 03:55:01.032708878 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  details: The pull request yegor256/takes#1821 has been opened by @github-actions[bot].
+  event_id: 19023582684
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1821
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 17:19:53.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21296
+  _job: 41769837622
+  _time: 2026-11-04 03:55:01.228922634 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1820 has been opened by @renovate[bot].
+  event_id: 19023518503
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1820
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 17:19:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21297
+  _job: 41769837622
+  _time: 2026-11-04 03:55:01.853168373 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1819 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 19020363721
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1819
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-03 16:47:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 21299
+  _job: 41769837622
+  _time: 2026-11-04 03:55:12.920505396 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull request yegor256/takes#1819 has been opened by @renovate[bot].
+  event_id: 18991546081
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1819
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 11:38:13.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21300
+  _job: 41769837622
+  _time: 2026-11-04 03:55:13.986751816 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/takes#1818 has been closed by @github-actions[bot],
+    with 6 HoC and 0 comments.
+  event_id: 18966162315
+  event_type: PullRequestEvent
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  is_human: 0
+  issue: 1818
+  repository: 28924109
+  succeeded_builds: 0
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-11-03 05:46:52.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21301
+  _job: 41769837622
+  _time: 2026-11-04 03:55:16.774040247 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: up
+  details: The pull request yegor256/takes#1818 has been opened by @github-actions[bot].
+  event_id: 18966146705
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1818
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 05:46:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 21302
+  _job: 41769837622
+  _time: 2026-11-04 03:55:17.363596064 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate-automerge
+  details: The pull request yegor256/takes#1817 has been opened by @yegor256.
+  event_id: 18965912291
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1817
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 05:42:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 21303
+  _job: 41769837622
+  _time: 2026-11-04 03:55:17.475864840 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-2.x
+  details: The pull request yegor256/takes#1816 has been opened by @renovate[bot].
+  event_id: 18965580326
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1816
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 05:36:45.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21305
+  _job: 41769837622
+  _time: 2026-11-04 03:55:18.374119356 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-replacement
+  details: The pull request yegor256/takes#1815 has been opened by @renovate[bot].
+  event_id: 18964110647
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1815
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-03 05:10:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21306
+  _job: 41769837622
+  _time: 2026-11-04 03:56:20.384418765 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/error-prone-monorepo
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1811 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1811
+  repository: 28924109
+  review: 2026-11-03 02:29:23.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 05:35:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 21307
+  _job: 41769837622
+  _time: 2026-11-04 03:56:31.017046224 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1812 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1812
+  repository: 28924109
+  review: 2026-11-03 02:29:20.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 05:09:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21308
+  _job: 41769837622
+  _time: 2026-11-04 03:56:41.768810235 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1815 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1815
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 05:36:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 21309
+  _job: 41769837622
+  _time: 2026-11-04 03:56:51.725282916 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-2.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1816 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1816
+  repository: 28924109
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 11:37:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 21310
+  _job: 41769837622
+  _time: 2026-11-04 03:57:00.841113397 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate-automerge
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 1
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1817 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 0
+  issue: 1817
+  repository: 28924109
+  review: 2026-11-03 05:42:51.000000000 Z
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 10:54:27.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21311
+  _job: 41769837622
+  _time: 2026-11-04 03:57:17.064293661 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/xml-apis-xml-apis-replacement
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1819 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1819
+  repository: 28924109
+  review: 2026-11-03 16:47:15.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 17:17:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21312
+  _job: 41769837622
+  _time: 2026-11-04 03:58:19.086492807 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 5
+  total_commits: 3997
+  total_contributors: 91
+  total_files: 594
+  total_forks: 218
+  total_issues: 761
+  total_pulls: 1059
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-11-04 03:58:19.036251321 Z
+- _id: 21313
+  _job: 41769837622
+  _time: 2026-11-04 04:00:48.656078390 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *185
+  what: quality-of-service
+  when: 2026-11-04 04:00:48.647956421 Z
