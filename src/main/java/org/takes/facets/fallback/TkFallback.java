@@ -4,22 +4,9 @@
  */
 package org.takes.facets.fallback;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
-import org.takes.HttpException;
-import org.takes.Request;
-import org.takes.Response;
 import org.takes.Take;
-import org.takes.misc.Opt;
-import org.takes.rq.RqHref;
-import org.takes.rq.RqMethod;
-import org.takes.rs.ResponseOf;
 import org.takes.tk.TkWrap;
 
 /**
@@ -28,11 +15,6 @@ import org.takes.tk.TkWrap;
  * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
- * @todo #918:30min {@link TkFallback} class is very complicated, hard to read.
- *  Please consider removing static methods and replace them by dedicated
- *  elegant classes according to
- *  https://www.yegor256.com/2017/02/07/private-method-is-new-class.html
- * @checkstyle IllegalCatchCheck (500 lines)
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -45,180 +27,6 @@ public final class TkFallback extends TkWrap {
      * @param fbk Fallback
      */
     public TkFallback(final Take take, final Fallback fbk) {
-        super(
-            req -> TkFallback.route(take, fbk, req)
-        );
-    }
-
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    private static Response route(final Take take, final Fallback fbk,
-        final Request req) throws Exception {
-        final long start = System.currentTimeMillis();
-        Response res;
-        try {
-            res = TkFallback.wrap(
-                take.act(req), fbk, req
-            );
-        } catch (final HttpException ex) {
-            final Opt<Response> fbres = fbk.route(
-                TkFallback.fallback(req, start, ex, ex.code())
-            );
-            if (!fbres.has()) {
-                throw new IOException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "There is no fallback available in %s",
-                            fbk.getClass().getCanonicalName()
-                        )
-                    ).asString(),
-                    TkFallback.error(ex, req, start)
-                );
-            }
-            res = TkFallback.wrap(fbres.get(), fbk, req);
-        // @checkstyle IllegalCatchCheck (1 line)
-        } catch (final Throwable ex) {
-            final Opt<Response> fbres = fbk.route(
-                TkFallback.fallback(
-                    req, start, ex,
-                    HttpURLConnection.HTTP_INTERNAL_ERROR
-                )
-            );
-            if (!fbres.has()) {
-                throw new IOException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "There is no fallback available for %s in %s",
-                            ex.getClass().getCanonicalName(),
-                            fbk.getClass().getCanonicalName()
-                        )
-                    ).asString(),
-                    TkFallback.error(ex, req, start)
-                );
-            }
-            res = TkFallback.wrap(
-                fbres.get(),
-                fbk, req
-            );
-        }
-        return res;
-    }
-
-    private static RqFallback.Fake fallback(final Request req, final long start,
-        final Throwable throwable, final int code) throws IOException {
-        return new RqFallback.Fake(
-            req, code, TkFallback.error(throwable, req, start)
-        );
-    }
-
-    private static Response wrap(final Response res, final Fallback fbk,
-        final Request req) {
-        return new ResponseOf(
-            () -> TkFallback.head(res, fbk, req),
-            () -> TkFallback.body(res, fbk, req)
-        );
-    }
-
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    private static Iterable<String> head(final Response res, final Fallback fbk,
-        final Request req) throws IOException {
-        final long start = System.currentTimeMillis();
-        Iterable<String> head;
-        try {
-            head = res.head();
-        } catch (final HttpException ex) {
-            try {
-                head = fbk.route(
-                    TkFallback.fallback(req, start, ex, ex.code())
-                ).get().head();
-            } catch (final Exception exx) {
-                throw (IOException) new IOException(exx).initCause(ex);
-            }
-        // @checkstyle IllegalCatchCheck (1 line)
-        } catch (final Throwable ex) {
-            try {
-                head = fbk.route(
-                    TkFallback.fallback(
-                        req, start, ex,
-                        HttpURLConnection.HTTP_INTERNAL_ERROR
-                    )
-                ).get().head();
-            } catch (final Exception exx) {
-                throw (IOException) new IOException(exx).initCause(ex);
-            }
-        }
-        return head;
-    }
-
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    private static InputStream body(final Response res, final Fallback fbk,
-        final Request req) throws IOException {
-        final long start = System.currentTimeMillis();
-        InputStream body;
-        try {
-            body = res.body();
-        } catch (final HttpException ex) {
-            try {
-                body = fbk.route(
-                    TkFallback.fallback(req, start, ex, ex.code())
-                ).get().body();
-            } catch (final Exception exx) {
-                throw (IOException) new IOException(exx).initCause(ex);
-            }
-        // @checkstyle IllegalCatchCheck (1 line)
-        } catch (final Throwable ex) {
-            try {
-                body = fbk.route(
-                    TkFallback.fallback(
-                        req, start, ex,
-                        HttpURLConnection.HTTP_INTERNAL_ERROR
-                    )
-                ).get().body();
-            } catch (final Exception exx) {
-                throw (IOException) new IOException(exx).initCause(ex);
-            }
-        }
-        return body;
-    }
-
-    private static Throwable error(final Throwable exp, final Request req,
-        final long start) throws IOException {
-        final String time;
-        final long msec = System.currentTimeMillis() - start;
-        if (msec < TimeUnit.SECONDS.toMillis(1L)) {
-            time = new UncheckedText(new FormattedText("%dms", msec)).asString();
-        } else {
-            time = new UncheckedText(
-                new FormattedText(
-                    "%ds",
-                    msec / TimeUnit.SECONDS.toMillis(1L)
-                )
-            ).asString();
-        }
-        return new IllegalStateException(
-            new UncheckedText(
-                new FormattedText(
-                    "[%s %s] failed in %s: %s",
-                    new RqMethod.Base(req).method(),
-                    new RqHref.Base(req).href(),
-                    time, TkFallback.msg(exp)
-                )
-            ).asString(),
-            exp
-        );
-    }
-
-    private static String msg(final Throwable exp) {
-        final StringBuilder txt = new StringBuilder(6);
-        final String localized = exp.getLocalizedMessage();
-        if (localized == null) {
-            txt.append("NULL");
-        } else {
-            txt.append(localized);
-        }
-        final Throwable cause = exp.getCause();
-        if (cause != null) {
-            txt.append("; ").append(TkFallback.msg(cause));
-        }
-        return txt.toString();
+        super(new FbRoute(take, fbk));
     }
 }
