@@ -13,7 +13,10 @@ import org.cactoos.Text;
  * <p>This decorator wraps an existing iterable and provides custom error messages
  * when iteration fails or when attempting to access elements that don't exist.
  * It delegates to VerboseIterator for the actual verbose error handling during
- * iteration operations.</p>
+ * iteration operations. Each call to {@link #iterator()} returns a new
+ * VerboseIterator over a fresh iterator of the wrapped iterable, so repeated
+ * iterations are independent of each other, provided the wrapped iterable
+ * produces independent iterators; all of them carry the same error message.</p>
  *
  * <p>The class is immutable and thread-safe.</p>
  *
