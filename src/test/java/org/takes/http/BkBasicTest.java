@@ -34,6 +34,7 @@ import org.takes.rq.RqHeaders;
 import org.takes.rq.RqPrint;
 import org.takes.rq.RqSocket;
 import org.takes.rs.ResponseOf;
+import org.takes.rs.RsText;
 import org.takes.tk.TkText;
 
 /**
@@ -212,6 +213,62 @@ final class BkBasicTest {
             RegexMatchers.containsPattern(
                 String.format("(?s)%s.*?%s", text, text)
             )
+        );
+    }
+
+    @Test
+    void endsChunkedBodyWhileConnectionStaysOpen() throws Exception {
+        final String text = "Hello Chunked!";
+        final StringBuilder body = new StringBuilder();
+        try (ServerSocket server = new ServerSocket(0)) {
+            final Thread thread = new Thread(
+                () -> {
+                    try {
+                        new BkBasic(
+                            req -> {
+                                body.append(
+                                    new String(
+                                        req.body().readAllBytes(),
+                                        StandardCharsets.UTF_8
+                                    )
+                                );
+                                return new RsText("done");
+                            }
+                        ).accept(server.accept());
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
+                    }
+                }
+            );
+            thread.start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(),
+                    server.getLocalPort()
+                )
+            ) {
+                socket.setSoTimeout(3000);
+                socket.getOutputStream().write(
+                    new Joined(
+                        BkBasicTest.CRLF,
+                        BkBasicTest.POST,
+                        BkBasicTest.HOST,
+                        "Transfer-Encoding: chunked",
+                        "",
+                        "e",
+                        text,
+                        "0",
+                        ""
+                    ).asString().getBytes(StandardCharsets.UTF_8)
+                );
+                socket.getInputStream().readAllBytes();
+            }
+            thread.join(3000);
+        }
+        MatcherAssert.assertThat(
+            "Chunked body must end without waiting for the socket to close",
+            body.toString(),
+            Matchers.equalTo(text)
         );
     }
 
