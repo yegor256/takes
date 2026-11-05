@@ -266,7 +266,7 @@ public final class AppTest {
 You can create a fake request with form parameters like this:
 
 ```java
-new RqForm.Fake(
+new RqFormFake(
   new RqFake(),
   "foo", "value-1",
   "bar", "value-2"
@@ -629,7 +629,7 @@ Here is an example:
 public final class TkSavePhoto implements Take {
   @Override
   public Response act(final Request req) {
-    final String name = new RqForm(req).param("name");
+    final String name = new RqFormSmart(req).single("name");
     return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
   }
 }
