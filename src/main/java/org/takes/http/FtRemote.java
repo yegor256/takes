@@ -81,12 +81,22 @@ public final class FtRemote implements Front {
     /**
      * Ctor.
      *
+     * <p>This is the only way to start an HTTPS server in tests: combine
+     * it with {@link FtSecure} and an {@link javax.net.ssl.SSLServerSocket}
+     * obtained from a properly configured
+     * {@link javax.net.ssl.SSLServerSocketFactory}, e.g.
+     * <code>new FtRemote(new FtSecure(back, skt), skt, true)</code>.
+     * When {@code sec} is {@code true}, {@link FtRemote#exec(Script)}
+     * delivers an {@code https://} URI to the script, and
+     * {@code http://} otherwise.</p>
+     *
      * @param front Original front
      * @param skt ServerSocket used
      * @param sec Value of {@code true} if the front is secure,
      *  {@code false} otherwise
+     * @since 2.0
      */
-    FtRemote(final Front front, final ServerSocket skt, final boolean sec) {
+    public FtRemote(final Front front, final ServerSocket skt, final boolean sec) {
         this.origin = front;
         this.socket = skt;
         this.secured = sec;
