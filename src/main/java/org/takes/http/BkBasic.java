@@ -20,6 +20,7 @@ import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
 import org.takes.rq.RequestOf;
+import org.takes.rq.RqChunk;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
@@ -117,7 +118,9 @@ public final class BkBasic implements Back {
                 new RqLive(input),
                 socket
             );
-            final InputStream body = new RqLengthAware(live).body();
+            final InputStream body = new RqChunk(
+                new RqLengthAware(live)
+            ).body();
             this.print(new RequestOf(live, () -> body), output);
             BkBasic.skipUnreadBody(live, body);
         } catch (final HttpException ex) {
@@ -132,8 +135,11 @@ public final class BkBasic implements Back {
 
     private static void skipUnreadBody(final Request req,
         final InputStream body) throws IOException {
-        if (new RqHeaders.Base(req).header("Content-Length").iterator()
-            .hasNext()) {
+        final RqHeaders headers = new RqHeaders.Base(req);
+        if (
+            headers.header("Content-Length").iterator().hasNext()
+                || headers.header("Transfer-Encoding").iterator().hasNext()
+        ) {
             final byte[] buf = new byte[8192];
             int count = body.read(buf);
             while (count >= 0) {
