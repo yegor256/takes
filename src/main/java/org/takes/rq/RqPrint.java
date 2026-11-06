@@ -61,12 +61,6 @@ public final class RqPrint extends RqWrap implements Text, Printable {
         );
     }
 
-    /**
-     * Print it all.
-     *
-     * @return Text form of request
-     * @throws IOException If fails
-     */
     @Override
     public String print() throws IOException {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -75,12 +69,6 @@ public final class RqPrint extends RqWrap implements Text, Printable {
         }
     }
 
-    /**
-     * Print it all.
-     *
-     * @param output Output stream
-     * @throws IOException If fails
-     */
     @Override
     public void print(final OutputStream output) throws IOException {
         new IoChecked<>(
@@ -88,12 +76,6 @@ public final class RqPrint extends RqWrap implements Text, Printable {
         ).value();
     }
 
-    /**
-     * Print it all.
-     *
-     * @return Text form of request
-     * @throws IOException If fails
-     */
     @Override
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -101,12 +83,6 @@ public final class RqPrint extends RqWrap implements Text, Printable {
         return new TextOf(baos.toByteArray()).toString();
     }
 
-    /**
-     * Print it all.
-     *
-     * @param output Output stream
-     * @throws IOException If fails
-     */
     @Override
     public void printHead(final OutputStream output) throws IOException {
         final String eol = new String(
@@ -122,12 +98,6 @@ public final class RqPrint extends RqWrap implements Text, Printable {
         }
     }
 
-    /**
-     * Print body.
-     *
-     * @return Text form of request
-     * @throws IOException If fails
-     */
     @Override
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -135,12 +105,6 @@ public final class RqPrint extends RqWrap implements Text, Printable {
         return new TextOf(baos.toByteArray()).toString();
     }
 
-    /**
-     * Print body.
-     *
-     * @param output Output stream to print to
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.CloseResource")
     @Override
     public void printBody(final OutputStream output) throws IOException {

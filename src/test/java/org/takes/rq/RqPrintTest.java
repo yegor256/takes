@@ -25,32 +25,47 @@ final class RqPrintTest {
     private static final String CRLF =
         String.valueOf((char) 13) + (char) 10;
 
+    /**
+     * Expected head of the printed request.
+     */
+    private static final String HEAD = String.join(
+        RqPrintTest.CRLF,
+        "POST /print HTTP/1.1",
+        "Host: www.example.com",
+        "Content-Length: 4",
+        ""
+    ) + RqPrintTest.CRLF;
+
+    /**
+     * Body of the printed request.
+     */
+    private static final String BODY = "body";
+
     @Test
-    void printsHttpRequestThroughContract() throws Exception {
-        final String head = String.join(
-            RqPrintTest.CRLF,
-            "POST /print HTTP/1.1",
-            "Host: www.example.com",
-            "Content-Length: 4",
-            ""
-        ) + RqPrintTest.CRLF;
-        final String body = "body";
-        final String request = head + body;
+    void printsRequestPartsAsStrings() throws Exception {
         MatcherAssert.assertThat(
             "must print every request part as a string",
             Arrays.asList(
-                RqPrintTest.request(body).print(),
-                RqPrintTest.request(body).printHead(),
-                RqPrintTest.request(body).printBody()
+                RqPrintTest.request().print(),
+                RqPrintTest.request().printHead(),
+                RqPrintTest.request().printBody()
             ),
-            Matchers.contains(request, head, body)
+            Matchers.contains(
+                RqPrintTest.HEAD + RqPrintTest.BODY,
+                RqPrintTest.HEAD,
+                RqPrintTest.BODY
+            )
         );
+    }
+
+    @Test
+    void printsRequestPartsToStreams() throws Exception {
         final ByteArrayOutputStream entire = new ByteArrayOutputStream();
         final ByteArrayOutputStream headers = new ByteArrayOutputStream();
         final ByteArrayOutputStream content = new ByteArrayOutputStream();
-        RqPrintTest.request(body).print(entire);
-        RqPrintTest.request(body).printHead(headers);
-        RqPrintTest.request(body).printBody(content);
+        RqPrintTest.request().print(entire);
+        RqPrintTest.request().printHead(headers);
+        RqPrintTest.request().printBody(content);
         MatcherAssert.assertThat(
             "must print every request part to a stream",
             Arrays.asList(
@@ -58,16 +73,15 @@ final class RqPrintTest {
                 new String(headers.toByteArray(), StandardCharsets.UTF_8),
                 new String(content.toByteArray(), StandardCharsets.UTF_8)
             ),
-            Matchers.contains(request, head, body)
+            Matchers.contains(
+                RqPrintTest.HEAD + RqPrintTest.BODY,
+                RqPrintTest.HEAD,
+                RqPrintTest.BODY
+            )
         );
     }
 
-    /**
-     * Request printer referenced through its contract.
-     * @param body Request body
-     * @return Request printer
-     */
-    private static Printable request(final String body) {
+    private static Printable request() {
         return new RqPrint(
             new RqFake(
                 Arrays.asList(
@@ -75,7 +89,7 @@ final class RqPrintTest {
                     "Host: www.example.com",
                     "Content-Length: 4"
                 ),
-                body
+                RqPrintTest.BODY
             )
         );
     }

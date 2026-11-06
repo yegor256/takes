@@ -65,12 +65,6 @@ public final class RsPrint extends RsWrap implements Text, Printable {
         return this.print();
     }
 
-    /**
-     * Print it into string.
-     *
-     * @return Entire HTTP response
-     * @throws IOException If fails
-     */
     @Override
     public String print() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -78,12 +72,6 @@ public final class RsPrint extends RsWrap implements Text, Printable {
         return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
-    /**
-     * Print body into string.
-     *
-     * @return Entire body of HTTP response
-     * @throws IOException If fails
-     */
     @Override
     public String printBody() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -91,13 +79,6 @@ public final class RsPrint extends RsWrap implements Text, Printable {
         return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
-    /**
-     * Print head into string.
-     *
-     * @return Entire head of HTTP response
-     * @throws IOException If fails
-     * @since 0.10
-     */
     @Override
     public String printHead() throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -105,25 +86,12 @@ public final class RsPrint extends RsWrap implements Text, Printable {
         return new String(baos.toByteArray(), StandardCharsets.UTF_8);
     }
 
-    /**
-     * Print it into output stream.
-     *
-     * @param output Output to print into
-     * @throws IOException If fails
-     */
     @Override
     public void print(final OutputStream output) throws IOException {
         this.printHead(output);
         this.printBody(output);
     }
 
-    /**
-     * Print it into output stream.
-     *
-     * @param output Output to print into
-     * @throws IOException If fails
-     * @since 0.10
-     */
     @Override
     public void printHead(final OutputStream output) throws IOException {
         final String eol = new String(
@@ -161,12 +129,6 @@ public final class RsPrint extends RsWrap implements Text, Printable {
         writer.flush();
     }
 
-    /**
-     * Print it into output stream.
-     *
-     * @param output Output to print into
-     * @throws IOException If fails
-     */
     @Override
     public void printBody(final OutputStream output) throws IOException {
         try (InputStream body = this.body()) {
