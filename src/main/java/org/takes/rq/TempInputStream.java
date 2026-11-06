@@ -20,7 +20,14 @@ import java.nio.file.Paths;
  * file is deleted from the filesystem.</p>
  *
  * <p>The class is designed for handling temporary files that should be
- * cleaned up after processing, such as uploaded files or cached content.</p>
+ * cleaned up after processing, such as uploaded files or cached content.
+ * {@link #close()} deletes the file even if closing the wrapped stream
+ * fails, but a deletion failure replaces the stream's own exception, as
+ * the deletion runs in a {@code finally} block; the file is deleted only
+ * while it still exists, so closing repeatedly is safe with respect to
+ * the file. Read operations simply delegate to the wrapped stream, so
+ * their behavior after {@link #close()} is entirely determined by that
+ * stream (typically an {@link IOException}).</p>
  *
  * @since 0.31
  */
