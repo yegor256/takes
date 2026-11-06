@@ -2,11 +2,13 @@
 - added: 8
   cycles: 2
   deleted: 8
+  error: 'GET https://api.github.com/user/89358123: 504 - We couldn''t respond to
+    your request in time. Sorr... (Octokit::ServerError)'
   inserted: 8
-  seconds: 243.538443027
+  seconds: 236.726968362
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-05 03:58:27.258024086 Z
+  when: 2026-11-06 03:58:06.157301271 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76671,18 +76673,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 342
-  closures_were_checked: 603
+  assignees_were_scanned: 445
+  closures_were_checked: 1346
   earliest_issue_was_found: 1
-  events_were_scanned: 26193321249
+  events_were_scanned: 19268528487
   issues_were_scanned: 0
-  labels_were_scanned: 609
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1380
-  min_pull_was_found: 1052
+  min_issue_was_found: 1402
+  min_pull_was_found: 1053
   repository: 28924109
-  types_were_scanned: 933
+  types_were_scanned: 1054
   what: iterate
   where: github
 - _id: 20665
@@ -86191,5 +86193,15 @@
   _job: 41964366897
   _time: 2026-11-05 03:58:23.792482300 Z
   _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 5
+  total_commits: 4003
+  total_contributors: 91
+  total_files: 602
+  total_forks: 219
+  total_issues: 761
+  total_pulls: 1065
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-05 03:58:23.740818051 Z
