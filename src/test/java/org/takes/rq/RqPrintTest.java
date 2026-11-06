@@ -14,6 +14,7 @@ import org.takes.Printable;
 
 /**
  * Test case for {@link RqPrint}.
+ *
  * @since 0.1
  */
 final class RqPrintTest {

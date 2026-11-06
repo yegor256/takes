@@ -16,9 +16,9 @@ import org.takes.Request;
  * subsequent calls to {@code head()} return the same cached data. The body
  * is delegated to the original request without caching. This is useful when
  * the head is computed lazily and we want to make sure it is not produced
- * more than once, while still allowing the body to be streamed normally.
+ * more than once, while still allowing the body to be streamed normally.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
@@ -27,6 +27,7 @@ public final class HeadOnce extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     public HeadOnce(final Request req) {

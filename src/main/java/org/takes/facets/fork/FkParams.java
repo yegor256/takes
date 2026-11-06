@@ -16,7 +16,7 @@ import org.takes.rq.RqHref;
 /**
  * Fork by query params and their values, matched by regular express.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see TkFork
  * @since 0.4
@@ -41,6 +41,7 @@ public final class FkParams implements Fork {
 
     /**
      * Ctor.
+     *
      * @param param Name of param
      * @param ptn Pattern
      * @param that Take

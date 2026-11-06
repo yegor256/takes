@@ -16,7 +16,7 @@ import org.takes.tk.TkFixed;
 /**
  * Fork by Content-type accepted by "Content-Type" HTTP header.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see RsFork
  * @since 1.0
@@ -36,6 +36,7 @@ public final class FkContentType implements Fork {
 
     /**
      * Ctor.
+     *
      * @param atype Accepted type
      * @param response Response to return
      */
@@ -45,6 +46,7 @@ public final class FkContentType implements Fork {
 
     /**
      * Ctor.
+     *
      * @param atype Accepted type
      * @param take Take to handle the request dynamically
      */
@@ -64,12 +66,6 @@ public final class FkContentType implements Fork {
         return resp;
     }
 
-    /**
-     * Get Content-Type type provided by the client.
-     * @param req Request
-     * @return Media type
-     * @throws IOException If fails
-     */
     private static MediaTypes getType(final Request req) throws IOException {
         MediaTypes list = new MediaTypes();
         final Iterable<String> headers = new RqHeaders.Base(req)

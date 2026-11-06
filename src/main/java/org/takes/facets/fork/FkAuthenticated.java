@@ -17,7 +17,7 @@ import org.takes.misc.Opt;
  * Fork if user is logged in now.
  *
  * <p>Use this class in combination with {@link TkFork},
- * for example:
+ * for example:</p>
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex(
@@ -29,7 +29,7 @@ import org.takes.misc.Opt;
  *   )
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see TkFork
  * @see TkRegex
@@ -45,6 +45,7 @@ public final class FkAuthenticated implements Fork {
 
     /**
      * Ctor.
+     *
      * @param that Target
      */
     public FkAuthenticated(final Take that) {
@@ -55,6 +56,7 @@ public final class FkAuthenticated implements Fork {
 
     /**
      * Ctor.
+     *
      * @param that Target
      * @since 1.4
      */

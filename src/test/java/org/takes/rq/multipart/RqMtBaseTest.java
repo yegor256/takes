@@ -20,6 +20,7 @@ import org.takes.rq.RqWithHeaders;
 
 /**
  * Test case for {@link RqMtBase}.
+ *
  * @since 0.33
  * @link <a href="http://www.w3.org/TR/html401/interact/forms.html">Forms in HTML</a>
  */
@@ -49,15 +50,10 @@ final class RqMtBaseTest {
         String.valueOf((char) 13) + (char) 10;
 
     /**
-     * Content disposition.
-     */
-    private static final String DISPOSITION = "Content-Disposition";
-
-    /**
      * Content disposition plus form data.
      */
     private static final String CONTENT = String.format(
-        "%s: %s", RqMtBaseTest.DISPOSITION, RqMtBaseTest.FORM_DATA
+        "%s: %s", "Content-Disposition", RqMtBaseTest.FORM_DATA
     );
 
     @Test
@@ -149,29 +145,14 @@ final class RqMtBaseTest {
         }
     }
 
-    /**
-     * Format Content-Disposition header.
-     * @param dsp Disposition
-     * @return Content-Disposition header
-     */
     private static String contentDispositionHeader(final String dsp) {
         return String.format("Content-Disposition: %s", dsp);
     }
 
-    /**
-     * Format Content-Length header.
-     * @param length Body length
-     * @return Content-Length header
-     */
     private static String contentLengthHeader(final long length) {
         return String.format("Content-Length: %d", length);
     }
 
-    /**
-     * Try to parse a multipart request that has no closing boundary.
-     * Parsing is lazy, so {@code names()} is called to force it.
-     * @throws Exception If fails
-     */
     private static void parseWithoutClosingBoundary() throws Exception {
         final String host = "Host: rtw.example.com";
         final String length = "Content-Length: 100007";

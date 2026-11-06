@@ -12,7 +12,7 @@ import org.takes.rs.RsRedirect;
 /**
  * Take that redirects.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -29,6 +29,7 @@ public final class TkRedirect extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param location Location to redirect to
      */
     public TkRedirect(final String location) {
@@ -37,6 +38,7 @@ public final class TkRedirect extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param location Location to redirect to
      * @param code Redirection status code
      */

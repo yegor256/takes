@@ -16,6 +16,7 @@ import org.takes.rs.xe.XeAppend;
 
 /**
  * Test case for {@link XeLogoutLink}.
+ *
  * @since 0.8
  */
 final class XeLogoutLinkTest {

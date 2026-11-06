@@ -30,35 +30,10 @@ import org.xembly.Directives;
 
 /**
  * Test case for {@link org.takes.rq.RqMethod}.
+ *
  * @since 0.15.2
  */
 final class PsGithubTest {
-
-    /**
-     * GitHubToken.
-     */
-    private static final String GIT_HUB_TOKEN = "GitHubToken";
-
-    /**
-     * XPath access_token string.
-     */
-    private static final String ACCESS_TOKEN = "access_token";
-
-    /**
-     * XPath login string.
-     */
-    private static final String LOGIN = "login";
-
-    /**
-     * Octocat URL string.
-     */
-    private static final String OCTOCAT_GIF_URL =
-        "https://github.com/img/octocat.gif";
-
-    /**
-     * XPath octocat string.
-     */
-    private static final String OCTOCAT = "octocat";
 
     @Test
     @Tag("deep")
@@ -76,19 +51,13 @@ final class PsGithubTest {
             "GitHub identity URN must match expected format with user ID",
             this.performLogin(
                 PsGithubTest.directiveWithoutAccessToken()
-                    .add(PsGithubTest.ACCESS_TOKEN)
-                    .set(PsGithubTest.GIT_HUB_TOKEN)
+                    .add("access_token")
+                    .set("GitHubToken")
             ).urn(),
             Matchers.equalTo("urn:github:1")
         );
     }
 
-    /**
-     * Performs the basic login.
-     * @param directive The directive object
-     * @return The identity from login
-     * @throws Exception If some problem inside
-     */
     private Identity performLogin(final Directives directive) throws Exception {
         final String app = "app";
         final String key = "key";
@@ -125,23 +94,12 @@ final class PsGithubTest {
         return identity.get();
     }
 
-    /**
-     * Creates the basic directives, without access token.
-     * @return A basic directive
-     */
     private static Directives directiveWithoutAccessToken() {
         return new Directives().add("OAuth")
             .add("token_type").set("bearer").up()
             .add("scope").set("repo,gist").up();
     }
 
-    /**
-     * Checks the parameter value for the expected value.
-     * @param req Request
-     * @param param Parameter name
-     * @param value Parameter value
-     * @throws IOException  If some problem inside
-     */
     private static void assertParam(final Request req,
         final CharSequence param, final String value) throws IOException {
         MatcherAssert.assertThat(
@@ -153,6 +111,7 @@ final class PsGithubTest {
 
     /**
      * An inner class for the Take implementation testing.
+     *
      * @since 0.15.2
      */
     private static final class TkFakeLogin implements Take {
@@ -161,10 +120,10 @@ final class PsGithubTest {
         public Response act(final Request req) throws IOException {
             return new RsJson(
                 Json.createObjectBuilder().add(
-                    PsGithubTest.LOGIN, PsGithubTest.OCTOCAT
+                    "login", "octocat"
                 ).add("id", 1).add(
                     "avatar_url",
-                    PsGithubTest.OCTOCAT_GIF_URL
+                    "https://github.com/img/octocat.gif"
                 ).build()
             );
         }

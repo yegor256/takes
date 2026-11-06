@@ -14,6 +14,7 @@ import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkRegex}.
+ *
  * @since 0.4
  */
 final class FkRegexTest {

@@ -14,7 +14,7 @@ import org.xembly.Directives;
 /**
  * Xembly source to create SLA attribute with server load average.
  *
- * <p>Add this Xembly source to your page like this:
+ * <p>Add this Xembly source to your page like this:</p>
  *
  * <pre> new RsXembly(
  *   new XsStylesheet("/xsl/home.xsl"),
@@ -24,14 +24,14 @@ import org.xembly.Directives;
  *   )
  * )</pre>
  *
- * <p>And expect this attribute in the XML:
+ * <p>And expect this attribute in the XML:</p>
  *
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page sla="1.908"/&gt;
  * </pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.3
  */
@@ -47,6 +47,7 @@ public final class XeSla extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param attr Attribute name
      */
     public XeSla(final CharSequence attr) {

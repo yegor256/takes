@@ -17,23 +17,18 @@ import org.takes.Response;
  * <p>Verifies only the cookie's name and value, ignoring attributes such as
  * {@code Path}, {@code Domain}, {@code HttpOnly}, {@code Secure}, or
  * {@code Expires}. Use it instead of a hand-rolled {@link HmHeader}
- * assertion against {@code Set-Cookie}:
+ * assertion against {@code Set-Cookie}:</p>
  *
  * <pre> MatcherAssert.assertThat(
  *     response,
  *     new HmRsCookie("session", "abc")
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
 public final class HmRsCookie extends TypeSafeMatcher<Response> {
-
-    /**
-     * Set-Cookie header name.
-     */
-    private static final String SET_COOKIE = "set-cookie";
 
     /**
      * Cookie name matcher.
@@ -52,6 +47,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
+     *
      * @param cookie Exact cookie name
      * @param val Exact cookie value
      */
@@ -61,6 +57,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
+     *
      * @param cookie Exact cookie name
      * @param val Cookie value matcher
      */
@@ -70,6 +67,7 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
 
     /**
      * Ctor.
+     *
      * @param cookie Cookie name matcher
      * @param val Cookie value matcher
      */
@@ -120,12 +118,6 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
         }
     }
 
-    /**
-     * Tries to match a single name=value pair against this matcher, storing
-     * the observed value if the name is a match.
-     * @param crumb Name/value pair as "name=value"
-     * @return True if both name and value match
-     */
     private boolean matchCrumb(final String crumb) {
         final int sign = crumb.indexOf('=');
         boolean matched = false;
@@ -138,25 +130,14 @@ public final class HmRsCookie extends TypeSafeMatcher<Response> {
         return matched;
     }
 
-    /**
-     * Checks whether a header line is a {@code Set-Cookie} header.
-     * @param header Raw header line ("Name: value")
-     * @return True if the header name equals "Set-Cookie" ignoring case
-     */
     private static boolean isSetCookie(final String header) {
         final int colon = header.indexOf(':');
         return colon >= 0
-            && HmRsCookie.SET_COOKIE.equalsIgnoreCase(
+            && "set-cookie".equalsIgnoreCase(
                 header.substring(0, colon).trim()
             );
     }
 
-    /**
-     * Extracts the first {@code name=value} crumb from a Set-Cookie header,
-     * stripping off any {@code ;}-separated attributes.
-     * @param header Raw header line ("Set-Cookie: name=value; Path=/")
-     * @return The first crumb ("name=value")
-     */
     private static String firstCrumb(final String header) {
         return header.substring(header.indexOf(':') + 1)
             .trim().split(";", 2)[0].trim();

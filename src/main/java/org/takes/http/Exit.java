@@ -10,9 +10,9 @@ package org.takes.http;
  * <p>This interface defines when an HTTP server front-end should stop
  * accepting new connections and shut down. The {@link Front} implementations
  * check this condition periodically in their main loop to determine when
- * to terminate gracefully.
+ * to terminate gracefully.</p>
  *
- * <p>The interface provides several implementations for common exit scenarios:
+ * <p>The interface provides several implementations for common exit scenarios:</p>
  * <ul>
  * <li>{@link #NEVER} - Server runs indefinitely until externally terminated</li>
  * <li>{@link Exit.Or} - Logical OR combination of two exit conditions</li>
@@ -20,7 +20,7 @@ package org.takes.http;
  * <li>{@link Exit.Not} - Logical NOT inversion of an exit condition</li>
  * </ul>
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -32,7 +32,7 @@ public interface Exit {
      *
      * <p>This is useful for long-running production servers that should
      * continue running until explicitly terminated by external means
-     * (e.g., SIGTERM, system shutdown, or application container lifecycle).
+     * (e.g., SIGTERM, system shutdown, or application container lifecycle).</p>
      */
     Exit NEVER = () -> false;
 
@@ -41,7 +41,7 @@ public interface Exit {
      *
      * <p>This method is called periodically by the {@link Front} to determine
      * whether it should stop accepting new connections and shut down gracefully.
-     * Implementations should return {@code true} when the exit condition is met.
+     * Implementations should return {@code true} when the exit condition is met.</p>
      *
      * @return TRUE if the Front should stop, FALSE otherwise
      */
@@ -53,7 +53,7 @@ public interface Exit {
      * <p>This exit condition is ready when either of the two wrapped
      * exit conditions is ready. This is useful for combining multiple
      * termination triggers, such as "exit when timeout expires OR when
-     * external signal received".
+     * external signal received".</p>
      *
      * @since 0.28
      */
@@ -71,6 +71,7 @@ public interface Exit {
 
         /**
          * Ctor.
+         *
          * @param lft Left
          * @param rht Right
          */
@@ -91,7 +92,7 @@ public interface Exit {
      * <p>This exit condition is ready only when both wrapped exit
      * conditions are ready simultaneously. This is useful for ensuring
      * that multiple conditions must be satisfied before shutdown,
-     * such as "exit only when all requests completed AND timeout reached".
+     * such as "exit only when all requests completed AND timeout reached".</p>
      *
      * @since 0.28
      */
@@ -109,6 +110,7 @@ public interface Exit {
 
         /**
          * Ctor.
+         *
          * @param lft Left
          * @param rht Right
          */
@@ -129,7 +131,7 @@ public interface Exit {
      * <p>This exit condition inverts the logic of the wrapped exit condition.
      * It's ready when the wrapped condition is NOT ready, and vice versa.
      * This is useful for creating inverse conditions, such as "continue running
-     * while NOT in maintenance mode" or "exit when NOT healthy".
+     * while NOT in maintenance mode" or "exit when NOT healthy".</p>
      *
      * @since 0.28
      */
@@ -142,6 +144,7 @@ public interface Exit {
 
         /**
          * Ctor.
+         *
          * @param exit Original
          */
         public Not(final Exit exit) {

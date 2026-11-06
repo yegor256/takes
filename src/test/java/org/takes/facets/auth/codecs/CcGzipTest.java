@@ -12,6 +12,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcGzip}.
+ *
  * @since 0.16
  */
 final class CcGzipTest {

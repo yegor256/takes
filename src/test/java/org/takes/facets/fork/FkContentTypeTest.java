@@ -15,6 +15,7 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test case for {@link FkContentType}.
+ *
  * @since 1.0
  */
 final class FkContentTypeTest {
@@ -124,10 +125,6 @@ final class FkContentTypeTest {
         );
     }
 
-    /**
-     * Create a Take instance with empty response.
-     * @return Take
-     */
     private static Take emptyResponse() {
         return req -> new RsEmpty();
     }

@@ -24,9 +24,9 @@ import org.takes.Response;
  * <p>This decorator transforms JSON response bodies to include proper
  * indentation and formatting for better readability. It parses the JSON
  * content and reformats it using Jakarta JSON API with pretty printing
- * enabled. The transformation is cached to avoid repeated processing.
+ * enabled. The transformation is cached to avoid repeated processing.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 1.0
  */
@@ -46,6 +46,7 @@ public final class RsPrettyJson implements Response {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      */
     public RsPrettyJson(final Response res) {
@@ -63,11 +64,6 @@ public final class RsPrettyJson implements Response {
         return this.make().body();
     }
 
-    /**
-     * Make a response.
-     * @return Response just made
-     * @throws IOException If fails
-     */
     private Response make() throws IOException {
         if (this.transformed.isEmpty()) {
             this.transformed.add(
@@ -80,12 +76,6 @@ public final class RsPrettyJson implements Response {
         return this.transformed.get(0);
     }
 
-    /**
-     * Format body with proper indents.
-     * @param body Response body
-     * @return New properly formatted body
-     * @throws IOException If fails
-     */
     private static byte[] transform(final InputStream body) throws IOException {
         final ByteArrayOutputStream res = new ByteArrayOutputStream();
         try (
@@ -93,7 +83,7 @@ public final class RsPrettyJson implements Response {
                 Collections.singletonMap(JsonGenerator.PRETTY_PRINTING, true)
             ).createWriter(res)
         ) {
-            wrt.writeObject(Json.createReader(body).readObject());
+            wrt.write(Json.createReader(body).readValue());
         } catch (final JsonException ex) {
             throw new IOException(ex);
         }

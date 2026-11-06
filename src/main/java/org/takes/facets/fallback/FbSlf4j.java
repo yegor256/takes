@@ -17,7 +17,7 @@ import org.takes.rq.RqMethod;
 /**
  * Fallback that logs all problems through SFL4J.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.25
  */
@@ -41,11 +41,6 @@ public final class FbSlf4j extends FbWrap {
         );
     }
 
-    /**
-     * Log this request.
-     * @param req Request
-     * @throws IOException If fails
-     */
     private static void log(final RqFallback req) throws IOException {
         FbSlf4j.LOGGER.error(
             "{} {} failed with {}: {}",

@@ -29,7 +29,7 @@ import org.takes.misc.Opt;
 /**
  * Twitter OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16
  */
@@ -74,6 +74,7 @@ public final class PsTwitter implements Pass {
 
     /**
      * Ctor.
+     *
      * @param name Twitter app
      * @param keys Twitter key
      */
@@ -88,6 +89,7 @@ public final class PsTwitter implements Pass {
 
     /**
      * Ctor with proper requestor for testing purposes.
+     *
      * @param tkn HTTP request for getting token
      * @param creds HTTP request for verifying credentials
      * @param name Facebook app
@@ -113,12 +115,6 @@ public final class PsTwitter implements Pass {
         return response;
     }
 
-    /**
-     * Get the user name from Twitter with the provided token.
-     * @param tkn Twitter access token
-     * @return The user found in Twitter
-     * @throws IOException If fails
-     */
     private Identity identity(final String tkn) throws IOException {
         return parse(
             this.user.uri().set(
@@ -136,11 +132,6 @@ public final class PsTwitter implements Pass {
         );
     }
 
-    /**
-     * Make identity from JSON object.
-     * @param json JSON received from Twitter
-     * @return Identity found
-     */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
         props.put(PsTwitter.NAME, json.getString(PsTwitter.NAME));
@@ -151,11 +142,6 @@ public final class PsTwitter implements Pass {
         );
     }
 
-    /**
-     * Retrieve Twitter access token.
-     * @return The Twitter access token
-     * @throws IOException If failed
-     */
     private String fetch() throws IOException {
         return this.token.method("POST").header(
             "Content-Type",

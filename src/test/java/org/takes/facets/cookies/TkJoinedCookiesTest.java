@@ -15,6 +15,7 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link TkJoinedCookies}.
+ *
  * @since 0.11
  */
 final class TkJoinedCookiesTest {

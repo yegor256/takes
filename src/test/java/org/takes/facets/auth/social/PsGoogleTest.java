@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.takes.Request;
+import org.takes.Response;
 import org.takes.Take;
 import org.takes.facets.auth.Identity;
 import org.takes.facets.fork.FkRegex;
@@ -30,7 +31,7 @@ import org.takes.rs.RsJson;
 /**
  * Test case for {@link PsGoogle}.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16.3
  */
@@ -51,11 +52,6 @@ final class PsGoogleTest {
      * Url.
      */
     private static final String URL = "url";
-
-    /**
-     * Act head.
-     */
-    private static final String ACT_HEAD = "GET /plus/v1/people/me";
 
     /**
      * Regex pattern.
@@ -157,7 +153,7 @@ final class PsGoogleTest {
                         "Google API request must contain correct HEAD path for user info",
                         new RqPrint(req).printHead(),
                         Matchers.containsString(
-                            PsGoogleTest.ACT_HEAD
+                            "GET /plus/v1/people/me"
                         )
                     );
                     MatcherAssert.assertThat(
@@ -227,10 +223,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Build a token request fork.
-     * @return Returns the token request
-     */
     private FkRegex requestToken() {
         return new FkRegex(
             "/o/oauth2/token",
@@ -238,13 +230,7 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Validate token request and produce response.
-     * @param req Request
-     * @return Token response
-     * @throws IOException If some problem inside
-     */
-    private static org.takes.Response tokenResponse(final Request req)
+    private static Response tokenResponse(final Request req)
         throws IOException {
         MatcherAssert.assertThat(
             "Google OAuth token request must be POST to correct endpoint",
@@ -285,13 +271,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Checks the parameter value for the expected value.
-     * @param req Request
-     * @param param Parameter name
-     * @param value Parameter value
-     * @throws IOException If some problem inside
-     */
     private static void assertParam(
         final Request req,
         final CharSequence param, final String value
@@ -303,11 +282,6 @@ final class PsGoogleTest {
         );
     }
 
-    /**
-     * Construct a error response with google json syntax for errors.
-     * @return Json with error
-     * @throws IOException If some problem inside
-     */
     private static RsJson createErrorJson() throws IOException {
         final String message = "message";
         return new RsJson(

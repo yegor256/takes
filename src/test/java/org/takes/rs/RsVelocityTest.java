@@ -16,6 +16,7 @@ import org.takes.misc.StateAwareInputStream;
 
 /**
  * Test case for {@link RsVelocity}.
+ *
  * @since 0.1
  */
 final class RsVelocityTest {
@@ -27,7 +28,7 @@ final class RsVelocityTest {
             IOUtils.toString(
                 new RsVelocity(
                     "hello, ${name}!",
-                    new RsVelocity.Pair("name", "Jeffrey")
+                    new RsVelocityPair("name", "Jeffrey")
                 ).body(),
                 StandardCharsets.UTF_8
             ),

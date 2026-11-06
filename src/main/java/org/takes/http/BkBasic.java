@@ -19,6 +19,10 @@ import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.RequestOf;
+import org.takes.rq.RqChunk;
+import org.takes.rq.RqHeaders;
+import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeaders;
 import org.takes.rs.RsPrint;
@@ -32,12 +36,13 @@ import org.takes.rs.RsWithStatus;
  * sequentially. It reads HTTP requests from the socket's input stream,
  * processes them through a {@link Take}, and writes the responses back
  * to the socket's output stream. It also automatically adds socket-related
- * headers to each request for debugging and monitoring purposes.
+ * headers to each request for debugging and monitoring purposes.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Handles keep-alive connections by processing multiple requests
- * on the same socket</li>
+ * on the same socket, consuming the body of each one in full so that the
+ * next request is read from the start of its own request line</li>
  * <li>Automatically adds socket information headers (local/remote address
  * and port)</li>
  * <li>Provides comprehensive exception handling with appropriate HTTP
@@ -47,11 +52,12 @@ import org.takes.rs.RsWithStatus;
  * <li>Maps all other exceptions to HTTP 500 Internal Server Error</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @EqualsAndHashCode
+@SuppressWarnings({"PMD.CloseInlineResourceRule", "PMD.CloseResource"})
 public final class BkBasic implements Back {
 
     /**
@@ -75,17 +81,13 @@ public final class BkBasic implements Back {
     public static final String REMOTEPORT = "X-Takes-RemotePort";
 
     /**
-     * How many bytes of a broken request to read away before closing.
-     */
-    private static final long LINGER = 64L * 1024L;
-
-    /**
      * Take.
      */
     private final Take take;
 
     /**
      * Ctor.
+     *
      * @param tks Take
      */
     public BkBasic(final Take tks) {
@@ -108,36 +110,19 @@ public final class BkBasic implements Back {
         }
     }
 
-    /**
-     * Read one request and print the response to the output.
-     *
-     * <p>The request is built here, and not by the caller, because
-     * {@link RqLive} throws {@link HttpException} on a malformed request
-     * line and that exception has to be turned into a response, instead of
-     * killing the thread.
-     *
-     * <p>A request that can't be parsed leaves the input stream in an
-     * unpredictable state, so the connection can't carry another request
-     * after it and FALSE is returned. This is what RFC 7230, section 3.5,
-     * recommends for a malformed request line.
-     *
-     * @param input Stream to read the request from
-     * @param socket Socket the request arrived through
-     * @param output Stream to print the response to
-     * @return TRUE if the connection may carry one more request
-     * @throws IOException If fails
-     */
     private boolean exchange(final InputStream input, final Socket socket,
         final OutputStream output) throws IOException {
         boolean reusable = true;
         try {
-            this.print(
-                BkBasic.addSocketHeaders(
-                    new RqLive(input),
-                    socket
-                ),
-                output
+            final Request live = BkBasic.addSocketHeaders(
+                new RqLive(input),
+                socket
             );
+            final InputStream body = new RqChunk(
+                new RqLengthAware(live)
+            ).body();
+            this.print(new RequestOf(live, () -> body), output);
+            BkBasic.skipUnreadBody(live, body);
         } catch (final HttpException ex) {
             new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
             output.flush();
@@ -148,25 +133,25 @@ public final class BkBasic implements Back {
         return reusable;
     }
 
-    /**
-     * Read away what is left of a request that couldn't be parsed.
-     *
-     * <p>Closing a socket that still has unread bytes in its receive buffer
-     * makes TCP send RST instead of FIN, and then the client sees a reset
-     * connection instead of the response we have just written for it.
-     * Reading the leftovers away first lets the close be graceful.
-     *
-     * <p>Only the bytes that have already arrived are read, and no more than
-     * {@link BkBasic#LINGER} of them, so this can neither block nor be used
-     * to keep a connection busy.
-     *
-     * @param input The stream to drain
-     * @throws IOException If fails
-     */
+    private static void skipUnreadBody(final Request req,
+        final InputStream body) throws IOException {
+        final RqHeaders headers = new RqHeaders.Base(req);
+        if (
+            headers.header("Content-Length").iterator().hasNext()
+                || headers.header("Transfer-Encoding").iterator().hasNext()
+        ) {
+            final byte[] buf = new byte[8192];
+            int count = body.read(buf);
+            while (count >= 0) {
+                count = body.read(buf);
+            }
+        }
+    }
+
     private static void linger(final InputStream input) throws IOException {
         final byte[] buf = new byte[8192];
         long total = 0L;
-        while (total < BkBasic.LINGER && input.available() > 0) {
+        while (total < 64L * 1024L && input.available() > 0) {
             final int read = input.read(buf);
             if (read < 0) {
                 break;
@@ -175,12 +160,6 @@ public final class BkBasic implements Back {
         }
     }
 
-    /**
-     * Print response to output stream, safely.
-     * @param req Request
-     * @param output Output
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private void print(final Request req, final OutputStream output)
         throws IOException {
@@ -204,12 +183,6 @@ public final class BkBasic implements Back {
         new RsPrint(handled).print(output);
     }
 
-    /**
-     * Make a failure response.
-     * @param err Error
-     * @param code HTTP error code
-     * @return Response
-     */
     private static Response failure(final Throwable err, final int code) {
         return new RsWithStatus(
             new RsText(
@@ -221,12 +194,6 @@ public final class BkBasic implements Back {
         );
     }
 
-    /**
-     * Adds custom headers with information about socket.
-     * @param req Request
-     * @param socket Socket
-     * @return Request with custom headers
-     */
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
         return new RqWithHeaders(

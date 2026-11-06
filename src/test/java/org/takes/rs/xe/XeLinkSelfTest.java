@@ -14,6 +14,7 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link XeLinkSelf}.
+ *
  * @since 0.4
  */
 final class XeLinkSelfTest {

@@ -16,9 +16,9 @@ import org.takes.Request;
  * <p>This decorator examines the Transfer-Encoding header and, if it
  * indicates chunked encoding, wraps the request body with a
  * ChunkedInputStream that properly decodes the chunked format.
- * For non-chunked requests, the original body stream is preserved.
+ * For non-chunked requests, the original body stream is preserved.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see org.takes.rq.RqPrint
  * @since 0.15
@@ -28,6 +28,7 @@ public final class RqChunk extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     public RqChunk(final Request req) {
@@ -39,12 +40,6 @@ public final class RqChunk extends RqWrap {
         );
     }
 
-    /**
-     * Cap the steam.
-     * @param req Request
-     * @return Stream with a cap
-     * @throws IOException If fails
-     */
     private static InputStream cap(final Request req) throws IOException {
         final Iterator<String> hdr = new RqHeaders.Base(req)
             .header("Transfer-Encoding").iterator();

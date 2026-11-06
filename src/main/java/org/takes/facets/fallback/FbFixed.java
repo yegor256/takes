@@ -13,7 +13,7 @@ import org.takes.tk.TkFixed;
 /**
  * Fallback with a fixed response.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.13
  */
@@ -22,6 +22,7 @@ public final class FbFixed extends FbWrap {
 
     /**
      * Ctor.
+     *
      * @param response Response to return
      */
     public FbFixed(final Response response) {
@@ -30,6 +31,7 @@ public final class FbFixed extends FbWrap {
 
     /**
      * Ctor.
+     *
      * @param take Take to use
      * @since 0.14
      */

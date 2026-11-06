@@ -17,9 +17,9 @@ import org.takes.Response;
  * response decorators. It wraps an original response and delegates
  * all method calls to the wrapped instance. Subclasses can override
  * specific methods to add functionality while maintaining the
- * Response interface contract.
+ * Response interface contract.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -34,6 +34,7 @@ public class RsWrap implements Response {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      */
     public RsWrap(final Response res) {

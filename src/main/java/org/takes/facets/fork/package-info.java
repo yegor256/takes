@@ -11,9 +11,9 @@
  * criteria. The TkFork class accepts multiple Fork implementations, each
  * checking if it can handle the request and providing the appropriate Take.
  * This enables flexible request routing based on paths, methods, headers,
- * parameters, and custom conditions.
+ * parameters, and custom conditions.</p>
  *
- * <p>Key components include:
+ * <p>Key components include:</p>
  * <ul>
  * <li>Core classes: TkFork for request dispatching, Fork interface for routing rules</li>
  * <li>Path-based routing: FkRegex for regex patterns, FkFixed for exact paths</li>

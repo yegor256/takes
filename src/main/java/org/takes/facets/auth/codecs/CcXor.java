@@ -16,9 +16,9 @@ import org.takes.facets.auth.Identity;
  * algorithm to the resulting bytes. The secret key is cycled through when
  * it is shorter than the data being encrypted, providing a basic form of
  * stream cipher encryption. If the secret key is empty, the data passes
- * through unchanged.
+ * through unchanged.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Codec codec = new CcXor(new CcPlain(), keyBytes);
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -26,7 +26,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded);
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -45,6 +45,7 @@ public final class CcXor implements Codec {
 
     /**
      * Ctor.
+     *
      * @param codec Original codec
      * @param key Secret key for encoding
      */
@@ -64,11 +65,6 @@ public final class CcXor implements Codec {
         return this.origin.decode(this.xor(bytes));
     }
 
-    /**
-     * XOR array of bytes.
-     * @param input The input to XOR
-     * @return Encrypted output
-     */
     private byte[] xor(final byte[] input) {
         final byte[] output = new byte[input.length];
         if (this.secret.length == 0) {

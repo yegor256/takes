@@ -5,6 +5,7 @@
 
 /**
  * Flash, tests.
+ *
  * @since 0.4
  */
 package org.takes.facets.flash;

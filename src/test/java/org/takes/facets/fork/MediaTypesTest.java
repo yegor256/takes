@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link MediaTypes}.
+ *
  * @since 0.6
  */
 final class MediaTypesTest {

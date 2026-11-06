@@ -20,7 +20,7 @@ import org.takes.rq.RqHeaders;
 /**
  * Fork by user agent criteria accepted by "User-Agent" HTTP header.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 1.7.2
  */
@@ -45,6 +45,7 @@ public final class FkAgent implements Fork {
 
     /**
      * Ctor.
+     *
      * @param take Take to handle the request dynamically
      * @param match Matcher
      */
@@ -66,12 +67,6 @@ public final class FkAgent implements Fork {
         return resp;
     }
 
-    /**
-     * Extract tokens from request.
-     * @param req Request
-     * @return List of user agent tokens
-     * @throws IOException If some problems inside.
-     */
     private static List<String> tokens(final Request req) throws IOException {
         final List<String> tokens = new ArrayList<>(0);
         final Iterable<String> headers =

@@ -7,7 +7,7 @@ package org.takes.facets.fork.am;
 /**
  * Agent match.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 1.7.2
  */
@@ -16,6 +16,7 @@ public interface AgentMatch {
 
     /**
      * Returns true if specified token is acceptable.
+     *
      * @param token Token
      * @return Whether specified token matches
      */

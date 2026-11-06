@@ -18,6 +18,7 @@ import org.takes.rs.RsWithHeader;
 
 /**
  * Test case for {@link  HttpServletResponseFake}.
+ *
  * @since 1.14
  */
 final class HttpServletResponseFakeTest {
@@ -31,17 +32,6 @@ final class HttpServletResponseFakeTest {
      * HTTP/1.1 header name.
      */
     private static final String VERSION = "HTTP/1.1";
-
-    /**
-     * HTTP/1.1 502 bad gateway.
-     */
-    private static final String ERROR = "HTTP/1.1 502 Bad Gateway";
-
-    /**
-     * HTTP/1.1 101 custom error message.
-     */
-    private static final String INFO =
-        "HTTP/1.1 101 Switching Protocol";
 
     @Test
     void cookie() throws Exception {
@@ -117,7 +107,7 @@ final class HttpServletResponseFakeTest {
             "Can't set a status in servlet response",
             sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
             new HasValues<>(
-                HttpServletResponseFakeTest.ERROR
+                "HTTP/1.1 502 Bad Gateway"
             )
         );
     }
@@ -132,7 +122,7 @@ final class HttpServletResponseFakeTest {
             "Can't send a error in servlet response",
             sresp.getHeaders(HttpServletResponseFakeTest.VERSION),
             new HasValues<>(
-                HttpServletResponseFakeTest.INFO
+                "HTTP/1.1 101 Switching Protocol"
             )
         );
     }

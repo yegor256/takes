@@ -17,6 +17,7 @@ import org.takes.tk.TkFailure;
 
 /**
  * Test case for {@link TkFallback}.
+ *
  * @since 0.9.6
  */
 final class TkFallbackTest {

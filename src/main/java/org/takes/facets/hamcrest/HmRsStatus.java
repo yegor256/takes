@@ -13,9 +13,9 @@ import org.takes.Response;
 /**
  * Response Status Matcher.
  *
- * <p>This "matcher" tests given response status code.
+ * <p>This "matcher" tests given response status code.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.13
  */
@@ -28,6 +28,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
 
     /**
      * Create matcher using HTTP code.
+     *
      * @param val HTTP code value
      * @since 0.17
      */
@@ -37,6 +38,7 @@ public final class HmRsStatus extends FeatureMatcher<Response, Integer> {
 
     /**
      * Create matcher using HTTP code matcher.
+     *
      * @param matcher HTTP code matcher
      */
     public HmRsStatus(final Matcher<Integer> matcher) {

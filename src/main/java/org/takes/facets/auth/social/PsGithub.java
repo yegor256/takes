@@ -29,17 +29,12 @@ import org.takes.rq.RqHref;
 /**
  * Github OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @EqualsAndHashCode(of = { "app", "key" })
 public final class PsGithub implements Pass {
-
-    /**
-     * Access token.
-     */
-    private static final String ACCESS_TOKEN = "access_token";
 
     /**
      * Code.
@@ -73,6 +68,7 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Github app
      * @param gkey Github key
      */
@@ -82,6 +78,7 @@ public final class PsGithub implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Github app
      * @param gkey Github key
      * @param gurl Github OAuth server
@@ -115,13 +112,6 @@ public final class PsGithub implements Pass {
         return response;
     }
 
-    /**
-     * Get the user name from GitHub with the provided token.
-     * @param token GitHub access token
-     * @return The user found in GitHub
-     * @throws IOException If fails
-     * @see <a href="https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param/">Deprecating auth through query param</a>
-     */
     private Identity fetch(final String token) throws IOException {
         return PsGithub.parse(
             new JdkRequest(new Href(this.api).path("user").toString())
@@ -135,18 +125,11 @@ public final class PsGithub implements Pass {
         );
     }
 
-    /**
-     * Retrieve Github access token.
-     * @param home Home of this page
-     * @param code Github "authorization code"
-     * @return The token
-     * @throws IOException If failed
-     */
     private String token(final String home, final String code)
         throws IOException {
         return new JdkRequest(
             new Href(this.github)
-                .path(PsGithub.LOGIN).path("oauth").path(PsGithub.ACCESS_TOKEN)
+                .path(PsGithub.LOGIN).path("oauth").path("access_token")
                 .toString()
         ).method("POST")
             .header("Accept", "application/xml")
@@ -165,22 +148,12 @@ public final class PsGithub implements Pass {
             .get(0);
     }
 
-    /**
-     * Value of the {@code Authorization} header for the given token.
-     * @param token GitHub access token
-     * @return The header value
-     */
     private static String authorization(final String token) {
         return new UncheckedText(
             new FormattedText("token %s", token)
         ).asString();
     }
 
-    /**
-     * Make identity from JSON object.
-     * @param json JSON received from Github
-     * @return Identity found
-     */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
         props.put(PsGithub.LOGIN, json.getString(PsGithub.LOGIN, "unknown"));

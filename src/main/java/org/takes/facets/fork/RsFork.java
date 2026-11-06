@@ -19,7 +19,7 @@ import org.takes.rs.RsWrap;
 /**
  * Response based on forks.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.6
  */
@@ -29,6 +29,7 @@ public final class RsFork extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param list List of forks
      */
@@ -38,6 +39,7 @@ public final class RsFork extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      * @param list List of forks
      */
@@ -50,13 +52,6 @@ public final class RsFork extends RsWrap {
         );
     }
 
-    /**
-     * Pick the right one.
-     * @param req Request
-     * @param forks List of forks
-     * @return Response
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.AvoidCatchingGenericException")
     private static Response pick(final Request req,
         final Iterable<Fork> forks) throws IOException {

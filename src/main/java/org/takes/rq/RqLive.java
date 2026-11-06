@@ -25,9 +25,9 @@ import org.takes.misc.Opt;
  * handling the HTTP protocol format including request line parsing,
  * header validation, and proper CRLF line ending handling. It performs
  * strict validation of HTTP format compliance and throws appropriate
- * exceptions for malformed requests.
+ * exceptions for malformed requests.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -36,6 +36,7 @@ public final class RqLive extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param input Input stream
      * @throws IOException If fails
      */
@@ -43,18 +44,12 @@ public final class RqLive extends RqWrap {
         super(RqLive.parse(input));
     }
 
-    /**
-     * Parse input stream.
-     * @param input Input stream
-     * @return Request
-     * @throws IOException If fails
-     */
     private static Request parse(final InputStream input) throws IOException {
         boolean eof = true;
         final Collection<String> head = new ArrayList<>(0);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<>();
-        data = RqLive.data(input, data, false);
+        data = RqLive.data(input, data);
         while (data.get() > 0) {
             eof = false;
             if (data.get() == '\r') {
@@ -63,7 +58,7 @@ public final class RqLive extends RqWrap {
                     break;
                 }
                 if (baos.size() == 0) {
-                    data = RqLive.data(input, new Opt.Empty<>(), false);
+                    data = RqLive.data(input, new Opt.Empty<>());
                     continue;
                 }
                 data = new Opt.Single<>(input.read());
@@ -71,11 +66,11 @@ public final class RqLive extends RqWrap {
                 if (header.has()) {
                     head.add(header.get());
                 }
-                data = RqLive.data(input, data, false);
+                data = RqLive.data(input, data);
                 continue;
             }
             baos.write(RqLive.legalCharacter(data, baos, head.size() + 1));
-            data = RqLive.data(input, new Opt.Empty<>(), true);
+            data = RqLive.data(input, new Opt.Empty<>());
         }
         if (eof) {
             throw new IOException("empty request");
@@ -83,17 +78,6 @@ public final class RqLive extends RqWrap {
         return new RequestOf(head, input);
     }
 
-    /**
-     * Checks whether or not the next byte to read is a Line Feed.
-     *
-     * <p><i>Please note that this method assumes that the previous byte read
-     * was a Carriage Return.</i>
-     *
-     * @param input The input stream to read
-     * @param baos Current read header
-     * @param position Header line number
-     * @throws IOException If the next byte is not a Line Feed as expected
-     */
     private static void checkLineFeed(final InputStream input,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
@@ -109,12 +93,6 @@ public final class RqLive extends RqWrap {
         }
     }
 
-    /**
-     * Builds current read header.
-     * @param data Current read character
-     * @param baos Current read header
-     * @return Read header
-     */
     private static Opt<String> newHeader(final Opt<Integer> data,
         final ByteArrayOutputStream baos) {
         Opt<String> header = new Opt.Empty<>();
@@ -131,19 +109,10 @@ public final class RqLive extends RqWrap {
         return header;
     }
 
-    /**
-     * Returns a legal character based n the read character.
-     * @param data Character read
-     * @param baos Byte stream containing read header
-     * @param position Header line number
-     * @return A legal character
-     * @throws IOException if character is illegal
-     */
     private static Integer legalCharacter(final Opt<Integer> data,
         final ByteArrayOutputStream baos, final Integer position)
         throws IOException {
-        if ((data.get() > 0x7F || data.get() < 0x20)
-            && data.get() != '\t') {
+        if (data.get() < 0x20 && data.get() != '\t') {
             throw new HttpException(
                 HttpURLConnection.HTTP_BAD_REQUEST,
                 new UncheckedText(
@@ -159,22 +128,11 @@ public final class RqLive extends RqWrap {
         return data.get();
     }
 
-    /**
-     * Obtains new byte if hasn't.
-     * @param input Stream
-     * @param data Empty or current data
-     * @param available Indicates whether or not it should check first if there
-     *  are available bytes
-     * @return Next or current data
-     * @throws IOException if input.read() fails
-     */
     private static Opt<Integer> data(final InputStream input,
-        final Opt<Integer> data, final boolean available) throws IOException {
+        final Opt<Integer> data) throws IOException {
         final Opt<Integer> ret;
         if (data.has()) {
             ret = data;
-        } else if (available && input.available() <= 0) {
-            ret = new Opt.Single<>(-1);
         } else {
             ret = new Opt.Single<>(input.read());
         }

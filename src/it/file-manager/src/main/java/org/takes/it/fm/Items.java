@@ -27,6 +27,7 @@ final class Items implements XeSource {
 
     /**
      * Ctor.
+     *
      * @param dir Home directory
      */
     Items(final File dir) {

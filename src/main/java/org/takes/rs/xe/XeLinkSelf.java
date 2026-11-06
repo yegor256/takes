@@ -11,7 +11,7 @@ import org.takes.rq.RqHref;
 /**
  * Xembly source to create an SELF Atom LINK element.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.4
  */
@@ -20,6 +20,7 @@ public final class XeLinkSelf extends XeWrap {
 
     /**
      * Ctor.
+     *
      * @param req Request
      */
     public XeLinkSelf(final Request req) {

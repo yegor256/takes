@@ -7,8 +7,6 @@ package org.takes.http;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
@@ -27,9 +25,9 @@ import org.cactoos.text.UncheckedText;
  * method in a separate thread, execute a script against it while it's running,
  * and then shut it down. This is particularly useful for integration testing
  * of applications that expose an HTTP interface through their main method.
- * The class automatically manages port allocation and cleanup.
+ * The class automatically manages port allocation and cleanup.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.23
  */
@@ -48,6 +46,7 @@ public final class MainRemote {
 
     /**
      * Ctor.
+     *
      * @param type Class with main method
      */
     public MainRemote(final Class<?> type) {
@@ -56,6 +55,7 @@ public final class MainRemote {
 
     /**
      * Ctor.
+     *
      * @param type Class with main method
      * @param passed Additional arguments to be passed to the main method
      */
@@ -67,6 +67,7 @@ public final class MainRemote {
 
     /**
      * Execute this script against a running front.
+     *
      * @param script Script to run
      * @throws Exception If fails
      */
@@ -92,7 +93,7 @@ public final class MainRemote {
             passed[idx + 1] = this.args[idx];
         }
         final Thread thread = new Thread(
-            new MainRemote.MainMethod(
+            new MainMethod(
                 this.app.getDeclaredMethod("main", String[].class),
                 passed
             )
@@ -138,12 +139,6 @@ public final class MainRemote {
         }
     }
 
-    /**
-     * Read port number from file.
-     * @param file The file
-     * @return Port number
-     * @throws Exception If fails
-     */
     private static int port(final File file) throws Exception {
         while (!file.exists()) {
             TimeUnit.MILLISECONDS.sleep(1L);
@@ -165,6 +160,7 @@ public final class MainRemote {
 
     /**
      * Script to execute.
+     *
      * @since 0.23
      */
     @FunctionalInterface
@@ -172,62 +168,10 @@ public final class MainRemote {
 
         /**
          * Execute it against this URI.
+         *
          * @param home URI of the running front
          * @throws IOException If fails
          */
         void exec(URI home) throws IOException;
-    }
-
-    /**
-     * Runnable main method.
-     * @since 0.32.5
-     */
-    private static final class MainMethod implements Runnable {
-
-        /**
-         * Method.
-         */
-        private final Method method;
-
-        /**
-         * Additional arguments.
-         */
-        private final String[] passed;
-
-        /**
-         * Ctor.
-         * @param method Main method
-         * @param passed Additional arguments to be passed to the main method
-         */
-        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
-        MainMethod(final Method method, final String... passed) {
-            this.method = method;
-            this.passed = passed;
-        }
-
-        @Override
-        public void run() {
-            try {
-                this.method.invoke(null, (Object) this.passed);
-            } catch (final InvocationTargetException ex) {
-                throw new IllegalStateException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "The %s method has been invoked at an illegal time.",
-                            this.method.getName()
-                        )
-                    ).asString(), ex
-                );
-            } catch (final IllegalAccessException ex) {
-                throw new IllegalStateException(
-                    new UncheckedText(
-                        new FormattedText(
-                            "The visibility of the %s method do not allow access.",
-                            this.method.getName()
-                        )
-                    ).asString(), ex
-                );
-            }
-        }
     }
 }

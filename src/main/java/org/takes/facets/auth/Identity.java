@@ -14,7 +14,7 @@ import java.util.Map;
  * authentication, including a unique identifier (URN) and optional
  * properties such as name, email, or other user attributes.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -44,12 +44,14 @@ public interface Identity {
 
     /**
      * URN of it, in "urn:PASS:ID" format.
+     *
      * @return URN of the user
      */
     String urn();
 
     /**
      * Properties of it, like name, photo, etc.
+     *
      * @return Properties
      */
     Map<String, String> properties();
@@ -58,6 +60,7 @@ public interface Identity {
      * Simple implementation of Identity interface.
      * This class provides a straightforward implementation that stores
      * a URN and an immutable map of properties.
+     *
      * @since 0.1
      */
     final class Simple implements Identity {
@@ -74,6 +77,7 @@ public interface Identity {
 
         /**
          * Ctor.
+         *
          * @param urn URN of the identity
          */
         public Simple(final String urn) {
@@ -82,6 +86,7 @@ public interface Identity {
 
         /**
          * Ctor.
+         *
          * @param urn URN of the identity
          * @param map Map of properties
          */

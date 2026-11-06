@@ -71,7 +71,7 @@ may help you as well.
 * [Form Processing](#form-processing)
 * [Exception Handling](#exception-handling)
 * [Redirects](#redirects)
-* [RsJSON](#rsjson)
+* [RsJson](#rsjson)
 * [RsXembly](#rsxembly)
 * [GZIP Compression](#gzip-compression)
 * [SSL Configuration](#ssl-configuration)
@@ -266,7 +266,7 @@ public final class AppTest {
 You can create a fake request with form parameters like this:
 
 ```java
-new RqForm.Fake(
+new RqFormFake(
   new RqFake(),
   "foo", "value-1",
   "bar", "value-2"
@@ -629,7 +629,7 @@ Here is an example:
 public final class TkSavePhoto implements Take {
   @Override
   public Response act(final Request req) {
-    final String name = new RqForm(req).param("name");
+    final String name = new RqFormSmart(req).single("name");
     return new RsWithStatus(HttpURLConnection.HTTP_NO_CONTENT);
   }
 }
@@ -718,15 +718,15 @@ public final class App {
 }
 ```
 
-## RsJSON
+## RsJson
 
 Here is how we can deal with JSON:
 
 ```java
-public final class TkBalance extends TkFixed {
+public final class TkBalance implements TkRegex {
   @Override
-  public Response act(final RqRegex request) {
-    return new RsJSON(
+  public Response act(final RqRegex request) throws IOException {
+    return new RsJson(
       new User(request.matcher().group("user"))
     );
   }
@@ -736,9 +736,9 @@ public final class TkBalance extends TkFixed {
 This is the method to add to `User`:
 
 ```java
-public final class User implements XeSource, RsJSON.Source {
+public final class User implements XeSource, RsJson.Source {
   @Override
-  public JsonObject toJSON() {
+  public JsonObject toJson() {
     return Json.createObjectBuilder()
       .add("balance", this.balance)
       .build();

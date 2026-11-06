@@ -12,6 +12,7 @@ import org.takes.rq.RqFake;
 
 /**
  * Test case for {@link TkSmartRedirect}.
+ *
  * @since 0.10
  */
 final class TkSmartRedirectTest {

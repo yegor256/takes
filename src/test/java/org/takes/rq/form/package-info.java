@@ -5,6 +5,7 @@
 
 /**
  * Form tests.
+ *
  * @since 0.33
  */
 package org.takes.rq.form;

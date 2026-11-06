@@ -8,12 +8,14 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.takes.facets.fork.am.AmVersion;
+import org.takes.facets.fork.am.VmGreater;
 import org.takes.rq.RqFake;
 import org.takes.rq.RqWithHeader;
 import org.takes.tk.TkEmpty;
 
 /**
  * Test case for {@link FkAgent}.
+ *
  * @since 1.7.2
  */
 final class FkAgentTest {
@@ -24,7 +26,7 @@ final class FkAgentTest {
             "FkAgent must match when user agent version is greater than minimum",
             new FkAgent(
                 new TkEmpty(),
-                new AmVersion("Chrome", new AmVersion.VmGreater(12))
+                new AmVersion("Chrome", new VmGreater(12))
             ).route(
                 new RqWithHeader(
                     new RqFake(),
@@ -42,7 +44,7 @@ final class FkAgentTest {
             "FkAgent must not match when user agent version is less than minimum",
             new FkAgent(
                 new TkEmpty(),
-                new AmVersion("Chrome", new AmVersion.VmGreater(90))
+                new AmVersion("Chrome", new VmGreater(90))
             ).route(
                 new RqWithHeader(
                     new RqFake(),

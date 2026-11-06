@@ -28,9 +28,9 @@ import org.takes.Request;
  * including both headers and body content. It provides methods to print
  * the complete request, just the headers, or just the body to various
  * output destinations. The implementation handles proper formatting with
- * CRLF line endings as required by HTTP specification.
+ * CRLF line endings as required by HTTP specification.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -44,6 +44,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      */
     public RqPrint(final Request req) {
@@ -62,6 +63,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Print it all.
+     *
      * @return Text form of request
      * @throws IOException If fails
      */
@@ -75,6 +77,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Print it all.
+     *
      * @param output Output stream
      * @throws IOException If fails
      */
@@ -87,6 +90,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Print it all.
+     *
      * @return Text form of request
      * @throws IOException If fails
      */
@@ -99,6 +103,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Print it all.
+     *
      * @param output Output stream
      * @throws IOException If fails
      */
@@ -119,6 +124,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Print body.
+     *
      * @return Text form of request
      * @throws IOException If fails
      */
@@ -131,6 +137,7 @@ public final class RqPrint extends RqWrap implements Text, Printable {
 
     /**
      * Print body.
+     *
      * @param output Output stream to print to
      * @throws IOException If fails
      */

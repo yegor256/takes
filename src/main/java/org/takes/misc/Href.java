@@ -16,7 +16,10 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import org.cactoos.Scalar;
 import org.cactoos.Text;
+import org.cactoos.scalar.Sticky;
+import org.cactoos.scalar.Unchecked;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.Split;
 import org.cactoos.text.UncheckedText;
@@ -28,9 +31,9 @@ import org.cactoos.text.UncheckedText;
  * and manipulating HTTP URIs and HREFs. It supports automatic URL encoding/decoding,
  * query parameter management, path construction, and fragment handling.
  * The implementation handles malformed URIs by automatically encoding problematic
- * characters and provides a fluent interface for URI construction.
+ * characters and provides a fluent interface for URI construction.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Automatic URL encoding and decoding</li>
  * <li>Query parameter addition, removal, and retrieval</li>
@@ -39,7 +42,7 @@ import org.cactoos.text.UncheckedText;
  * <li>Verbose error messages for missing parameters</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.7
  */
@@ -54,17 +57,17 @@ public final class Href implements CharSequence {
     /**
      * URI (without query and fragment parts).
      */
-    private final org.cactoos.Scalar<URI> link;
+    private final Scalar<URI> link;
 
     /**
      * Params.
      */
-    private final org.cactoos.Scalar<SortedMap<String, List<String>>> params;
+    private final Scalar<SortedMap<String, List<String>>> params;
 
     /**
      * Fragment.
      */
-    private final org.cactoos.Scalar<Opt<String>> frag;
+    private final Scalar<Opt<String>> frag;
 
     /**
      * Ctor.
@@ -75,17 +78,18 @@ public final class Href implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param txt Text of the link
      */
     public Href(final CharSequence txt) {
         this(
-            (org.cactoos.Scalar<URI>) () -> Href.createBare(
+            (Scalar<URI>) () -> Href.createBare(
                 Href.createUri(txt.toString())
             ),
-            (org.cactoos.Scalar<SortedMap<String, List<String>>>) () -> Href.asMap(
+            (Scalar<SortedMap<String, List<String>>>) () -> Href.asMap(
                 Href.createUri(txt.toString()).getRawQuery()
             ),
-            (org.cactoos.Scalar<Opt<String>>) () -> Href.readFragment(
+            (Scalar<Opt<String>>) () -> Href.readFragment(
                 Href.createUri(txt.toString())
             )
         );
@@ -93,6 +97,7 @@ public final class Href implements CharSequence {
 
     /**
      * Ctor.
+     *
      * @param link The link
      * @param map Map of params
      * @param frgmnt Fragment part
@@ -101,24 +106,25 @@ public final class Href implements CharSequence {
         final SortedMap<String, List<String>> map,
         final Opt<String> frgmnt) {
         this(
-            (org.cactoos.Scalar<URI>) () -> link,
-            (org.cactoos.Scalar<SortedMap<String, List<String>>>) () -> map,
-            (org.cactoos.Scalar<Opt<String>>) () -> frgmnt
+            (Scalar<URI>) () -> link,
+            (Scalar<SortedMap<String, List<String>>>) () -> map,
+            (Scalar<Opt<String>>) () -> frgmnt
         );
     }
 
     /**
      * Primary constructor with lazy holders.
+     *
      * @param uri URI scalar
      * @param map Params scalar
      * @param frg Fragment scalar
      */
-    private Href(final org.cactoos.Scalar<URI> uri,
-        final org.cactoos.Scalar<SortedMap<String, List<String>>> map,
-        final org.cactoos.Scalar<Opt<String>> frg) {
-        this.link = new org.cactoos.scalar.Sticky<>(uri);
-        this.params = new org.cactoos.scalar.Sticky<>(map);
-        this.frag = new org.cactoos.scalar.Sticky<>(frg);
+    private Href(final Scalar<URI> uri,
+        final Scalar<SortedMap<String, List<String>>> map,
+        final Scalar<Opt<String>> frg) {
+        this.link = new Sticky<>(uri);
+        this.params = new Sticky<>(map);
+        this.frag = new Sticky<>(frg);
     }
 
     @Override
@@ -149,6 +155,7 @@ public final class Href implements CharSequence {
 
     /**
      * Get path part of the HREF.
+     *
      * @return Path
      * @since 0.9
      */
@@ -158,6 +165,7 @@ public final class Href implements CharSequence {
 
     /**
      * Get URI without params.
+     *
      * @return Bare URI
      * @since 0.14
      */
@@ -171,6 +179,7 @@ public final class Href implements CharSequence {
 
     /**
      * Get query param.
+     *
      * @param key Param name
      * @return Values (could be empty)
      * @since 0.9
@@ -203,6 +212,7 @@ public final class Href implements CharSequence {
 
     /**
      * Add this path to the URI.
+     *
      * @param suffix The suffix
      * @return New HREF
      */
@@ -226,6 +236,7 @@ public final class Href implements CharSequence {
 
     /**
      * Add this extra param.
+     *
      * @param key Key of the param
      * @param value The value
      * @return New HREF
@@ -241,6 +252,7 @@ public final class Href implements CharSequence {
 
     /**
      * Without this query param.
+     *
      * @param key Key of the param
      * @return New HREF
      */
@@ -250,10 +262,6 @@ public final class Href implements CharSequence {
         return new Href(this.uri(), map, this.fragment());
     }
 
-    /**
-     * Append parameters to StringBuilder.
-     * @param text StringBuilder to append to
-     */
     private void appendParams(final StringBuilder text) {
         if (!this.params().isEmpty()) {
             boolean first = true;
@@ -264,13 +272,6 @@ public final class Href implements CharSequence {
         }
     }
 
-    /**
-     * Append single parameter to StringBuilder.
-     * @param text StringBuilder to append to
-     * @param ent Parameter entry
-     * @param first Whether this is the first parameter
-     * @return Whether next parameter will be first
-     */
     private static boolean appendParam(final StringBuilder text,
         final Map.Entry<String, List<String>> ent, final boolean first) {
         boolean result = first;
@@ -289,10 +290,6 @@ public final class Href implements CharSequence {
         return result;
     }
 
-    /**
-     * Append fragment to StringBuilder.
-     * @param text StringBuilder to append to
-     */
     private void appendFragment(final StringBuilder text) {
         if (this.fragment().has()) {
             text.append('#');
@@ -300,34 +297,15 @@ public final class Href implements CharSequence {
         }
     }
 
-    /**
-     * Encode into URL.
-     * @param txt Text
-     * @return Encoded
-     */
     private static String encode(final String txt) {
         return URLEncoder.encode(txt, Charset.defaultCharset())
             .replace("+", "%20");
     }
 
-    /**
-     * Decode from URL.
-     * @param txt Text
-     * @return Decoded
-     */
     private static String decode(final String txt) {
         return URLDecoder.decode(txt, Charset.defaultCharset());
     }
 
-    /**
-     * Parses the specified content to create the corresponding {@code URI}
-     * instance. In case of an {@code URISyntaxException}, it will automatically
-     * encode the character that causes the issue then it will try again
-     * if it is possible otherwise an {@code IllegalArgumentException} will
-     * be thrown.
-     * @param txt The content to parse
-     * @return The {@code URI} corresponding to the specified content
-     */
     private static URI createUri(final String txt) {
         final StringBuilder value = new StringBuilder(txt);
         while (true) {
@@ -359,11 +337,6 @@ public final class Href implements CharSequence {
         }
     }
 
-    /**
-     * Convert the provided query into a Map.
-     * @param query The query to parse
-     * @return A map containing all the query arguments and their values
-     */
     private static SortedMap<String, List<String>> asMap(final String query) {
         final SortedMap<String, List<String>> params = new TreeMap<>();
         if (query != null) {
@@ -386,13 +359,6 @@ public final class Href implements CharSequence {
         return params;
     }
 
-    /**
-     * Remove query and fragment parts from the provided URI and
-     * return the resulting URI.
-     * @param link The link from which parts need to be removed
-     * @return The URI corresponding to the same provided URI but without
-     *  query and fragment parts
-     */
     private static URI createBare(final URI link) {
         final URI uri;
         if (link.getRawQuery() == null && link.getRawFragment() == null) {
@@ -410,11 +376,6 @@ public final class Href implements CharSequence {
         return uri;
     }
 
-    /**
-     * Read fragment part from the given URI.
-     * @param link The link from which the fragment needs to be returned
-     * @return Opt with fragment or empty if there is no fragment
-     */
     private static Opt<String> readFragment(final URI link) {
         final Opt<String> fragment;
         if (link.getRawFragment() == null) {
@@ -425,27 +386,15 @@ public final class Href implements CharSequence {
         return fragment;
     }
 
-    /**
-     * Get the URI.
-     * @return URI
-     */
     private URI uri() {
-        return new org.cactoos.scalar.Unchecked<>(this.link).value();
+        return new Unchecked<>(this.link).value();
     }
 
-    /**
-     * Get the params map.
-     * @return Map
-     */
     private SortedMap<String, List<String>> params() {
-        return new org.cactoos.scalar.Unchecked<>(this.params).value();
+        return new Unchecked<>(this.params).value();
     }
 
-    /**
-     * Get the fragment.
-     * @return Fragment
-     */
     private Opt<String> fragment() {
-        return new org.cactoos.scalar.Unchecked<>(this.frag).value();
+        return new Unchecked<>(this.frag).value();
     }
 }

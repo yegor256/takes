@@ -36,12 +36,13 @@ import org.xembly.Xembler;
 /**
  * Response that converts Xembly object to XML.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsXembly extends RsWrap {
 
     /**
@@ -51,6 +52,7 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param sources Sources
      */
     public RsXembly(final XeSource... sources) {
@@ -59,6 +61,7 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param dom DOM node to build upon
      * @param sources Sources
      */
@@ -68,6 +71,7 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param sources Sources
      */
     public RsXembly(final Iterable<XeSource> sources) {
@@ -76,6 +80,7 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param dom DOM node to build upon
      * @param sources Sources
      */
@@ -85,6 +90,7 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param src Source
      */
     public RsXembly(final XeSource src) {
@@ -93,6 +99,7 @@ public final class RsXembly extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param dom DOM node to build upon
      * @param src Source
      */
@@ -109,13 +116,6 @@ public final class RsXembly extends RsWrap {
         );
     }
 
-    /**
-     * Render source as XML.
-     * @param dom DOM node to build upon
-     * @param src Source
-     * @return XML
-     * @throws IOException If fails
-     */
     private static InputStream render(final Node dom,
         final XeSource src) throws IOException {
         final ByteArrayOutputStream baos =
@@ -138,10 +138,6 @@ public final class RsXembly extends RsWrap {
         return new ByteArrayInputStream(baos.toByteArray());
     }
 
-    /**
-     * Create empty DOM Document.
-     * @return Document
-     */
     private static Document emptyDocument() {
         try {
             return DocumentBuilderFactory.newInstance()
@@ -155,11 +151,6 @@ public final class RsXembly extends RsWrap {
         }
     }
 
-    /**
-     * Create Node clone.
-     * @param dom Node to clone
-     * @return Cloned Node
-     */
     private static Node cloneNode(final Node dom) {
         final Transformer transformer;
         try {

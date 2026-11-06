@@ -21,9 +21,9 @@ import org.takes.facets.auth.Identity;
  * <p>This codec provides a space-efficient binary representation of
  * identity objects by serializing the URN and properties using Java's
  * data stream format. It writes strings in UTF-8 encoding and handles
- * the properties as key-value pairs in sequence.
+ * the properties as key-value pairs in sequence.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Codec codec = new CcCompact();
  * final Identity identity = new Identity.Simple("urn:user:john", props);
@@ -31,7 +31,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded);
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.5
  */
@@ -42,6 +42,7 @@ public final class CcCompact implements Codec {
      * Ctor.
      */
     public CcCompact() {
+        // nothing to initialize
     }
 
     @Override
@@ -79,13 +80,6 @@ public final class CcCompact implements Codec {
         }
     }
 
-    /**
-     * Read properties from stream into map.
-     * @param stream Data stream
-     * @param map Map to populate
-     * @return The populated map
-     * @throws IOException If reading fails
-     */
     private static Map<String, String> props(
         final DataInputStream stream,
         final Map<String, String> map

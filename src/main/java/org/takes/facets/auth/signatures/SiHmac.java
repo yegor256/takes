@@ -19,7 +19,7 @@ import org.cactoos.text.UncheckedText;
  *
  * <p>This class provides HMAC (Hash-based Message Authentication Code) signature
  * functionality using SHA-256, SHA-384, or SHA-512 algorithms. It creates hex-encoded
- * signatures from input data using a secret key. The class is immutable and thread-safe.
+ * signatures from input data using a secret key. The class is immutable and thread-safe.</p>
  *
  * @since 1.4
  */
@@ -53,6 +53,7 @@ public final class SiHmac implements Signature {
 
     /**
      * Primary constructor with byte array key and specified bit length.
+     *
      * @param key The encryption key as a byte array
      * @param bits The signature bit length (256, 384, or 512)
      */
@@ -64,6 +65,7 @@ public final class SiHmac implements Signature {
 
     /**
      * Returns the corrected signature bit length.
+     *
      * @return The bit length used for HMAC signature, normalised to 256
      *  if the configured value is not 256, 384 or 512
      */
@@ -76,11 +78,6 @@ public final class SiHmac implements Signature {
         return this.encrypt(data);
     }
 
-    /**
-     * Validates and returns the correct bit length.
-     * @param bits The given bit length
-     * @return The original bit length if valid (256, 384, or 512), otherwise 256
-     */
     private static int bitLength(final int bits) {
         int correct = bits;
         if (bits != SiHmac.HMAC256
@@ -91,12 +88,6 @@ public final class SiHmac implements Signature {
         return correct;
     }
 
-    /**
-     * Encrypts the given bytes using HMAC and returns hex-encoded result.
-     * @param bytes The bytes to encrypt
-     * @return The encrypted bytes as hex-encoded string bytes
-     * @throws IOException If encryption fails
-     */
     private byte[] encrypt(final byte[] bytes) throws IOException {
         final byte[] result = this.create().doFinal(bytes);
         final char[] hex = new char[result.length * 2];
@@ -108,11 +99,6 @@ public final class SiHmac implements Signature {
         return new String(hex).getBytes(StandardCharsets.UTF_8);
     }
 
-    /**
-     * Creates a new MAC instance based on the configured bit length.
-     * @return The configured MAC instance
-     * @throws IOException If MAC creation fails
-     */
     private Mac create() throws IOException {
         final String algo = new UncheckedText(
             new FormattedText(

@@ -15,7 +15,7 @@ import org.llorllale.cactoos.matchers.IsText;
 /**
  * Test case for {@link RsWithStatus}.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.16.9
  */

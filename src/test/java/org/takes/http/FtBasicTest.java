@@ -38,9 +38,10 @@ import org.takes.tk.TkText;
 
 /**
  * Test case for {@link FtBasic}.
+ *
  * @since 0.1
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class FtBasicTest {
 
     /**
@@ -249,11 +250,6 @@ final class FtBasicTest {
         );
     }
 
-    /**
-     * Mocked ServerSocket so that Socket will throw SocketException.
-     * @return Mocked instance of ServerSocket
-     * @throws IOException If some problem inside
-     */
     @SuppressWarnings("PMD.CloseResource")
     private static ServerSocket server() throws IOException {
         final ServerSocket server = Mockito.mock(ServerSocket.class);

@@ -20,23 +20,23 @@ import org.takes.facets.cookies.RsWithCookie;
  * flash cookies in incoming requests and expiring them in the response. When a
  * flash cookie is present, it adds a Set-Cookie header with an expired date to
  * remove the cookie from the browser, preventing the flash message from being
- * displayed multiple times.
+ * displayed multiple times.</p>
  *
- * <p>For example, when a browser sends:
+ * <p>For example, when a browser sends:</p>
  *
  * <pre> GET / HTTP/1.1
  * Host: www.example.com
  * Cookie: RsFlash=can%27t%20save%20your%20post%2C%20sorry/SEVERE</pre>
  *
  * <p>This decorator adds a Set-Cookie header with an expired date to the response,
- * effectively deleting the cookie. Use it to decorate your existing take:
+ * effectively deleting the cookie. Use it to decorate your existing take:</p>
  *
  * <pre> new FtBasic(
  *   new TkFlash(TkFork(new FkRegex("/", "hello, world!"))), 8080
  *  ).start(Exit.NEVER);
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -56,6 +56,7 @@ public final class TkFlash implements Take {
 
     /**
      * Constructor with default cookie name.
+     *
      * @param take The original take to decorate
      */
     public TkFlash(final Take take) {
@@ -64,6 +65,7 @@ public final class TkFlash implements Take {
 
     /**
      * Constructor with custom cookie name.
+     *
      * @param take The original take to decorate
      * @param name The name of the flash cookie to handle
      */

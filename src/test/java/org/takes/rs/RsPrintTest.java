@@ -19,6 +19,7 @@ import org.takes.Printable;
 
 /**
  * Test case for {@link RsPrint}.
+ *
  * @since 1.19
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

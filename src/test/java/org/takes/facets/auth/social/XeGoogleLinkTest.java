@@ -16,6 +16,7 @@ import org.takes.rs.xe.XeAppend;
 
 /**
  * Test case for {@link XeGoogleLink}.
+ *
  * @since 0.9
  */
 final class XeGoogleLinkTest {

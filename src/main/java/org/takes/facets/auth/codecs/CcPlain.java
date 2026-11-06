@@ -27,12 +27,12 @@ import org.takes.facets.auth.Identity;
  * <p>This codec provides a human-readable text representation of identity
  * objects. It encodes the URN and properties as a semicolon-separated string
  * where the URN comes first, followed by key=value pairs for each property.
- * All values are URL-encoded to handle special characters safely.
+ * All values are URL-encoded to handle special characters safely.</p>
  *
  * <p>The format is: {@code urn;key1=value1;key2=value2;...} where both
- * the URN and property values are URL-encoded using the default charset.
+ * the URN and property values are URL-encoded using the default charset.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final Codec codec = new CcPlain();
  * final Map<String, String> props = Map.of("name", "John Doe");
@@ -42,7 +42,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decoded = codec.decode(encoded);
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -53,6 +53,7 @@ public final class CcPlain implements Codec {
      * Ctor.
      */
     public CcPlain() {
+        // nothing to initialize
     }
 
     @Override
@@ -88,7 +89,7 @@ public final class CcPlain implements Codec {
             try {
                 map.put(
                     new UncheckedText(pair.get(0)).asString(),
-                    CcPlain.decode(new UncheckedText(pair.get(1)).asString())
+                    CcPlain.decode(CcPlain.value(pair))
                 );
             } catch (final IllegalArgumentException ex) {
                 throw new DecodingException(ex);
@@ -101,11 +102,16 @@ public final class CcPlain implements Codec {
         );
     }
 
-    /**
-     * Decode from URL.
-     * @param text The text
-     * @return Decoded
-     */
+    private static String value(final List<Text> pair) {
+        final String value;
+        if (pair.size() > 1) {
+            value = new UncheckedText(pair.get(1)).asString();
+        } else {
+            value = "";
+        }
+        return value;
+    }
+
     private static String decode(final String text) {
         try {
             return URLDecoder.decode(text, Charset.defaultCharset());

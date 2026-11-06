@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsPrettyJson}.
+ *
  * @since 1.0
  */
 final class RsPrettyJsonTest {
@@ -41,6 +42,37 @@ final class RsPrettyJsonTest {
                     RsPrettyJsonTest.LF
                 )
             )
+        );
+    }
+
+    @Test
+    void formatsJsonArrayBody() throws Exception {
+        MatcherAssert.assertThat(
+            "Pretty JSON formatter must format a JSON array too",
+            new RsBodyPrint(
+                new RsPrettyJson(
+                    new RsWithBody("[{\"a\": 1 },2]")
+                )
+            ).asString(),
+            Matchers.is(
+                String.format(
+                    "[%1$s    {%1$s        \"a\": 1%1$s    },%1$s    2%1$s]",
+                    RsPrettyJsonTest.LF
+                )
+            )
+        );
+    }
+
+    @Test
+    void formatsJsonScalarBody() throws Exception {
+        MatcherAssert.assertThat(
+            "Pretty JSON formatter must format a bare JSON value too",
+            new RsBodyPrint(
+                new RsPrettyJson(
+                    new RsWithBody("42")
+                )
+            ).asString(),
+            Matchers.is("42")
         );
     }
 

@@ -31,18 +31,18 @@ import org.takes.facets.auth.Identity;
  * <p>This codec decorator encrypts identity data using the Advanced Encryption
  * Standard (AES) algorithm with Cipher Block Chaining (CBC) mode and PKCS5
  * padding. It generates a random initialization vector (IV) for each encryption
- * operation, ensuring that identical plaintexts produce different ciphertexts.
+ * operation, ensuring that identical plaintexts produce different ciphertexts.</p>
  *
  * <p>The encrypted format is: [16-byte IV][encrypted_data] where the IV is
  * prepended to allow for proper decryption. The key must be exactly 16 bytes
- * (128 bits) long.
+ * (128 bits) long.</p>
  *
  * <p>It's recommended to use it in conjunction with {@link CcSigned} codec
  * for authentication, which can be applied
  * <a href="https://crypto.stackexchange.com/a/205">before or after</a>
- * encryption to provide both confidentiality and authenticity.
+ * encryption to provide both confidentiality and authenticity.</p>
  *
- * <p>Usage example:
+ * <p>Usage example:</p>
  * <pre> {@code
  * final String key = "1234567890123456"; // 16 bytes
  * final Codec codec = new CcAes(new CcPlain(), key);
@@ -51,7 +51,7 @@ import org.takes.facets.auth.Identity;
  * final Identity decrypted = codec.decode(encrypted);
  * }</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.13.8
  */
@@ -85,6 +85,7 @@ public final class CcAes implements Codec {
 
     /**
      * Constructor for the class.
+     *
      * @param codec Original codec
      * @param key The encryption key
      * @since 0.22
@@ -108,6 +109,7 @@ public final class CcAes implements Codec {
 
     /**
      * Constructor for the class.
+     *
      * @param codec Original codec
      * @param key The encryption key
      */
@@ -127,6 +129,7 @@ public final class CcAes implements Codec {
 
     /**
      * Constructor for the class.
+     *
      * @param codec Original codec
      * @param random Random generator
      * @param key The encryption key
@@ -141,6 +144,7 @@ public final class CcAes implements Codec {
 
     /**
      * Primary constructor.
+     *
      * @param codec Original codec
      * @param random Random generator
      * @param key The encryption key wrapped in Unchecked
@@ -165,12 +169,6 @@ public final class CcAes implements Codec {
         return this.origin.decode(this.decrypt(bytes));
     }
 
-    /**
-     * Encrypt the given bytes using AES.
-     * @param bytes Bytes to encrypt
-     * @return Encrypted byte using AES algorithm
-     * @throws IOException for all unexpected exceptions
-     */
     private byte[] encrypt(final byte[] bytes) throws IOException {
         try {
             final byte[] vector = new byte[CcAes.BLOCK];
@@ -194,11 +192,6 @@ public final class CcAes implements Codec {
         }
     }
 
-    /**
-     * Check the block size of the key.
-     * @param key The encryption key
-     * @return The verified encryption key
-     */
     private static byte[] withCorrectBlockSize(final byte[] key) {
         if (key.length != CcAes.BLOCK) {
             throw new IllegalArgumentException(
@@ -213,12 +206,6 @@ public final class CcAes implements Codec {
         return key;
     }
 
-    /**
-     * Decrypt the given bytes using AES.
-     * @param bytes Bytes to decrypt
-     * @return Decrypted bytes
-     * @throws IOException for all unexpected exceptions
-     */
     private byte[] decrypt(final byte[] bytes) throws IOException {
         if (bytes.length < CcAes.BLOCK << 1) {
             throw new DecodingException("Invalid encrypted message format");
@@ -243,13 +230,6 @@ public final class CcAes implements Codec {
         }
     }
 
-    /**
-     * Create new cipher based on the valid mode from {@link Cipher} class.
-     * @param mode Either Cipher.ENCRYPT_MODE or Cipher.DECRYPT_MODE
-     * @param spec Param spec (IV)
-     * @return The cipher
-     * @throws IOException For any unexpected exceptions
-     */
     private Cipher cipher(final int mode, final AlgorithmParameterSpec spec)
         throws IOException {
         try {

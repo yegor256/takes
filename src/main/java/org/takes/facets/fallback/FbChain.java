@@ -12,7 +12,7 @@ import org.takes.misc.Opt;
 /**
  * Fallback chain.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.13
  */
@@ -21,6 +21,7 @@ public final class FbChain extends FbWrap {
 
     /**
      * Ctor.
+     *
      * @param fallbacks Fallbacks to chain
      */
     public FbChain(final Fallback... fallbacks) {
@@ -29,6 +30,7 @@ public final class FbChain extends FbWrap {
 
     /**
      * Ctor.
+     *
      * @param fallbacks Fallbacks
      */
     public FbChain(final Iterable<Fallback> fallbacks) {

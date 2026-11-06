@@ -24,12 +24,15 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link TkHtml}.
+ *
  * @since 0.10
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TkHtmlTest {
 
     /**
      * Input Bodies for testing.
+     *
      * @return The testing data
      */
     static Iterable<Arguments> cases() {
@@ -135,11 +138,6 @@ final class TkHtmlTest {
         );
     }
 
-    /**
-     * Creates text matcher for HTML response.
-     * @param body Response body
-     * @return Text matcher
-     */
     private IsText textMatcher(final String body) {
         return new IsText(
             new Joined(

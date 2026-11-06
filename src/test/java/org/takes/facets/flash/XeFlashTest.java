@@ -25,6 +25,7 @@ import org.takes.rs.xe.XeStylesheet;
 
 /**
  * Test case for {@link XeFlash}.
+ *
  * @since 0.4
  */
 final class XeFlashTest {

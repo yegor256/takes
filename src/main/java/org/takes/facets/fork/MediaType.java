@@ -21,7 +21,7 @@ import org.cactoos.text.UncheckedText;
 /**
  * Media type.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see org.takes.facets.fork.FkTypes
  * @since 0.6
@@ -52,6 +52,7 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Ctor.
+     *
      * @param text Text to parse
      */
     MediaType(final String text) {
@@ -80,6 +81,7 @@ final class MediaType implements Comparable<MediaType> {
 
     /**
      * Matches.
+     *
      * @param type Another type
      * @return TRUE if matches
      * @checkstyle BooleanExpressionComplexityCheck (10 lines)
@@ -94,11 +96,6 @@ final class MediaType implements Comparable<MediaType> {
             || this.low.value().equals(type.low.value()));
     }
 
-    /**
-     * Splits the text parts.
-     * @param text The text to be split
-     * @return Two first parts of the media type
-     */
     private static List<Text> split(final String text) {
         return new ListOf<>(
             new Split(
@@ -109,11 +106,6 @@ final class MediaType implements Comparable<MediaType> {
         );
     }
 
-    /**
-     * Returns the media type priority.
-     * @param text The media type text
-     * @return The priority of the media type
-     */
     private static Double priority(final String text) {
         final List<Text> parts = MediaType.split(text);
         final Double priority;
@@ -134,22 +126,12 @@ final class MediaType implements Comparable<MediaType> {
         return priority;
     }
 
-    /**
-     * Returns the high part of the media type.
-     * @param text The media type text
-     * @return The high part of the media type
-     */
     private static String highPart(final String text) {
         return new UncheckedText(
             MediaType.sectors(text).get(0)
         ).asString();
     }
 
-    /**
-     * Returns the low part of the media type.
-     * @param text The media type text
-     * @return The low part of the media type
-     */
     private static String lowPart(final String text) {
         final List<Text> sectors = MediaType.sectors(text);
         final Text sector;
@@ -161,11 +143,6 @@ final class MediaType implements Comparable<MediaType> {
         return new UncheckedText(sector).asString();
     }
 
-    /**
-     * Returns the media type sectors.
-     * @param text The media type text
-     * @return Sectors of the media type
-     */
     private static List<Text> sectors(final String text) {
         return new ListOf<>(
             new Split(

@@ -21,6 +21,7 @@ import org.takes.http.FtRemote;
 
 /**
  * Test case for {@link org.takes.http.FtBasic}.
+ *
  * @since 0.1
  */
 final class AppTest {
@@ -41,6 +42,7 @@ final class AppTest {
 
     /**
      * Helper that fetches XPath results from the app.
+     *
      * @since 0.1
      */
     private static final class Fetcher implements FtRemote.Script {
@@ -56,6 +58,7 @@ final class AppTest {
 
         /**
          * Ctor.
+         *
          * @param directory Target directory
          */
         Fetcher(final File directory) {
@@ -75,6 +78,7 @@ final class AppTest {
 
         /**
          * Fetch xpath results.
+         *
          * @return XPath matches
          * @throws Exception On error
          */

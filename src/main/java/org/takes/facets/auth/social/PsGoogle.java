@@ -28,7 +28,7 @@ import org.takes.rq.RqHref;
 /**
  * Google OAuth landing/callback page.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.9
  */
@@ -46,19 +46,9 @@ public final class PsGoogle implements Pass {
     private static final String PICTURE = "picture";
 
     /**
-     * Display name.
-     */
-    private static final String DISPLAY_NAME = "displayName";
-
-    /**
      * Access token.
      */
     private static final String ACCESS_TOKEN = "access_token";
-
-    /**
-     * Name.
-     */
-    private static final String NAME = "name";
 
     /**
      * Code.
@@ -92,6 +82,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Google app
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
@@ -108,6 +99,7 @@ public final class PsGoogle implements Pass {
 
     /**
      * Ctor.
+     *
      * @param gapp Google app
      * @param gkey Google key
      * @param uri Redirect URI (exactly as registered in Google console)
@@ -141,12 +133,6 @@ public final class PsGoogle implements Pass {
         return response;
     }
 
-    /**
-     * Get the user name from Google with the provided token.
-     * @param token Google access token
-     * @return The user found in Google
-     * @throws IOException If fails
-     */
     private Identity fetch(final String token) throws IOException {
         final JsonObject json = new JdkRequest(
             new Href(this.gapi).path("plus").path("v1")
@@ -171,12 +157,6 @@ public final class PsGoogle implements Pass {
         return PsGoogle.parse(json);
     }
 
-    /**
-     * Retrieve Google access token.
-     * @param code Google "authorization code"
-     * @return The token
-     * @throws IOException If failed
-     */
     private String token(final String code) throws IOException {
         return new JdkRequest(
             new Href(this.gauth).path("o").path("oauth2").path("token")
@@ -197,11 +177,6 @@ public final class PsGoogle implements Pass {
             .getString(PsGoogle.ACCESS_TOKEN);
     }
 
-    /**
-     * Make identity from JSON object.
-     * @param json JSON received from Google
-     * @return Identity found
-     */
     private static Identity parse(final JsonObject json) {
         final Map<String, String> props = new HashMap<>(json.size());
         final Opt<JsonObject> image = new Opt.Single<>(
@@ -212,9 +187,7 @@ public final class PsGoogle implements Pass {
         } else {
             props.put(PsGoogle.PICTURE, "#");
         }
-        props.put(
-            PsGoogle.NAME, json.getString(PsGoogle.DISPLAY_NAME, "unknown")
-        );
+        props.put("name", json.getString("displayName", "unknown"));
         return new Identity.Simple(
             new UncheckedText(
                 new FormattedText(

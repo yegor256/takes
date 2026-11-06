@@ -6,8 +6,6 @@ package org.takes.rq;
 
 import lombok.EqualsAndHashCode;
 import org.cactoos.io.InputStreamOf;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
 
 /**
  * Empty HTTP request implementation for testing purposes.
@@ -15,13 +13,14 @@ import org.cactoos.text.UncheckedText;
  * <p>This class creates minimal HTTP requests with only the request line
  * and no body content. It's primarily designed for unit testing scenarios
  * where a simple request structure is needed without additional headers
- * or body data.
+ * or body data.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.25
  */
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RqEmpty extends RqWrap {
 
     /**
@@ -33,6 +32,7 @@ public final class RqEmpty extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param method HTTP method
      */
     public RqEmpty(final CharSequence method) {
@@ -41,59 +41,16 @@ public final class RqEmpty extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param method HTTP method
      * @param query HTTP query
      */
     public RqEmpty(final CharSequence method, final CharSequence query) {
         super(
             new RequestOf(
-                new RqEmpty.HeadList(method, query),
+                new EmptyHeadList(method, query),
                 new InputStreamOf("")
             )
         );
-    }
-
-    /**
-     * Lazily-built single-element head list with the request line.
-     * @since 2.0
-     */
-    private static final class HeadList extends java.util.AbstractList<String> {
-
-        /**
-         * HTTP method.
-         */
-        private final CharSequence method;
-
-        /**
-         * HTTP query.
-         */
-        private final CharSequence query;
-
-        /**
-         * Ctor.
-         * @param mtd Method
-         * @param qry Query
-         */
-        HeadList(final CharSequence mtd, final CharSequence qry) {
-            this.method = mtd;
-            this.query = qry;
-        }
-
-        @Override
-        public String get(final int index) {
-            if (index != 0) {
-                throw new IndexOutOfBoundsException(index);
-            }
-            return new UncheckedText(
-                new FormattedText(
-                    "%s %s", this.method, this.query
-                )
-            ).asString();
-        }
-
-        @Override
-        public int size() {
-            return 1;
-        }
     }
 }

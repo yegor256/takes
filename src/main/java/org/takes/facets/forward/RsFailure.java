@@ -16,7 +16,7 @@ import org.takes.facets.flash.RsFlash;
  * users while displaying error messages. It combines the redirect capabilities of
  * {@link org.takes.facets.forward.RsForward} with the flash message functionality
  * of {@link org.takes.facets.flash.RsFlash}, making it ideal for error handling
- * scenarios. The class is immutable and thread-safe.
+ * scenarios. The class is immutable and thread-safe.</p>
  *
  * @since 0.18
  */
@@ -35,6 +35,7 @@ public final class RsFailure extends RsForward {
 
     /**
      * Constructor with throwable cause and default home location.
+     *
      * @param cause The throwable that caused the failure
      * @throws UnsupportedEncodingException If URL encoding fails
      */
@@ -45,6 +46,7 @@ public final class RsFailure extends RsForward {
 
     /**
      * Constructor with string cause and default home location.
+     *
      * @param cause The error message that caused the failure
      * @throws UnsupportedEncodingException If URL encoding fails
      */
@@ -54,6 +56,7 @@ public final class RsFailure extends RsForward {
 
     /**
      * Constructor with string cause and custom redirect location.
+     *
      * @param cause The error message that caused the failure
      * @param loc The location URL to redirect to
      * @throws UnsupportedEncodingException If URL encoding fails
@@ -66,6 +69,7 @@ public final class RsFailure extends RsForward {
 
     /**
      * Constructor with throwable cause and custom redirect location.
+     *
      * @param cause The throwable that caused the failure
      * @param loc The location URL to redirect to
      * @throws UnsupportedEncodingException If URL encoding fails
@@ -78,6 +82,7 @@ public final class RsFailure extends RsForward {
 
     /**
      * Primary constructor with flash response and redirect location.
+     *
      * @param flash The flash response with the failure message
      * @param loc The location URL to redirect to
      * @throws UnsupportedEncodingException If URL encoding fails

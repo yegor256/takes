@@ -12,14 +12,14 @@ import jakarta.servlet.ServletConnection;
  * <p>This class provides a test double for {@link ServletConnection} that
  * allows testing of servlet-based code without requiring a real servlet
  * container. It provides configurable connection properties including
- * connection ID, protocol, and security status.
+ * connection ID, protocol, and security status.</p>
  *
  * <p>The implementation is minimal and focused on testing needs, providing
  * basic connection metadata that can be customized through constructor
  * parameters. It defaults to a localhost HTTP/1.0 non-secure connection
- * when no parameters are provided.
+ * when no parameters are provided.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Configurable connection ID, protocol, and security flag</li>
  * <li>Default configuration for simple testing scenarios</li>
@@ -29,7 +29,7 @@ import jakarta.servlet.ServletConnection;
  *
  * <p>This is primarily used in conjunction with {@link HttpServletRequestFake}
  * and {@link HttpServletResponseFake} to provide a complete fake servlet
- * environment for unit testing.
+ * environment for unit testing.</p>
  *
  * @since 2.0
  */
@@ -59,6 +59,7 @@ public final class ServletConnectionFake implements ServletConnection {
 
     /**
      * Ctor.
+     *
      * @param conn Connection
      * @param proto Protocol
      * @param sec Secure flag

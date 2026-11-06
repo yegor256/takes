@@ -18,9 +18,9 @@ import org.takes.Response;
  * and provides multiple constructor overloads for creating text responses
  * from various sources including strings, byte arrays, input streams,
  * and URLs. It's ideal for serving plain text content, API responses,
- * or simple text-based data.
+ * or simple text-based data.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -30,6 +30,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @since 0.10
      */
     public RsText() {
@@ -38,6 +39,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param body Plain text body
      */
     public RsText(final CharSequence body) {
@@ -46,6 +48,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param body Plain text body
      */
     public RsText(final byte[] body) {
@@ -54,6 +57,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param body Plain text body
      */
     public RsText(final InputStream body) {
@@ -62,6 +66,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param url URL with body
      * @since 0.10
      */
@@ -71,6 +76,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param body HTML body
      */
@@ -80,6 +86,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param body HTML body
      */
@@ -89,6 +96,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param body HTML body
      */
@@ -98,6 +106,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @param url URL with body
      */
@@ -107,6 +116,7 @@ public final class RsText extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      * @since 0.10
      */

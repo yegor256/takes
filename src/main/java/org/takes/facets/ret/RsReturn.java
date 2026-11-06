@@ -5,20 +5,11 @@
 package org.takes.facets.ret;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import lombok.ToString;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.Sticky;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.UncheckedText;
 import org.takes.Response;
-import org.takes.facets.cookies.RsWithCookie;
-import org.takes.misc.Expires;
 import org.takes.rs.RsWrap;
 
 /**
@@ -28,7 +19,7 @@ import org.takes.rs.RsWrap;
  * location. The location is validated against RFC 3987 and URL-encoded before
  * being stored in the cookie. This mechanism allows applications to remember
  * where users came from and redirect them back after completing an action.
- * The class is immutable and thread-safe.
+ * The class is immutable and thread-safe.</p>
  *
  * @since 0.20
  */
@@ -37,6 +28,7 @@ public final class RsReturn extends RsWrap {
 
     /**
      * Location value validation regex.
+     *
      * @see <a href="https://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url">SO thread about URI check</a>
      */
     private static final Pattern LOC_PTRN = Pattern.compile(
@@ -45,6 +37,7 @@ public final class RsReturn extends RsWrap {
 
     /**
      * Constructor with default cookie name.
+     *
      * @param res The response to decorate
      * @param loc The location URL to store as return location
      * @throws IOException If location validation or encoding fails
@@ -55,6 +48,7 @@ public final class RsReturn extends RsWrap {
 
     /**
      * Constructor with custom cookie name.
+     *
      * @param res The response to decorate
      * @param loc The location URL to store as return location
      * @param cookie The name of the cookie to use
@@ -62,16 +56,10 @@ public final class RsReturn extends RsWrap {
      */
     public RsReturn(final Response res, final String loc, final String cookie)
         throws IOException {
-        super(new RsReturn.LazyResponse(res, loc, cookie));
+        super(new LazyResponse(res, loc, cookie));
     }
 
-    /**
-     * Validates the location URL according to RFC 3987.
-     * @param loc The location URL to validate
-     * @return The validated location URL
-     * @throws IOException If the location URL is invalid
-     */
-    private static String validLocation(final String loc) throws IOException {
+    static String validLocation(final String loc) throws IOException {
         if (!RsReturn.LOC_PTRN.matcher(loc).matches()) {
             throw new IOException(
                 new UncheckedText(
@@ -83,51 +71,5 @@ public final class RsReturn extends RsWrap {
             );
         }
         return loc;
-    }
-
-    /**
-     * Lazily-built return-cookie response.
-     * @since 2.0
-     */
-    private static final class LazyResponse implements Response {
-
-        /**
-         * Cached underlying response.
-         */
-        private final Scalar<Response> inner;
-
-        /**
-         * Ctor.
-         * @param res Wrapped response
-         * @param loc Return location URL
-         * @param cookie Cookie name
-         */
-        LazyResponse(final Response res, final String loc, final String cookie) {
-            this.inner = new Sticky<>(
-                () -> new RsWithCookie(
-                    res,
-                    cookie,
-                    URLEncoder.encode(
-                        RsReturn.validLocation(loc),
-                        Charset.defaultCharset()
-                    ),
-                    "Path=/",
-                    new Expires.Date(
-                        System.currentTimeMillis()
-                            + TimeUnit.HOURS.toMillis(1L)
-                    ).print()
-                )
-            );
-        }
-
-        @Override
-        public Iterable<String> head() throws IOException {
-            return new IoChecked<>(this.inner).value().head();
-        }
-
-        @Override
-        public InputStream body() throws IOException {
-            return new IoChecked<>(this.inner).value().body();
-        }
     }
 }

@@ -11,7 +11,7 @@ import org.xembly.Directive;
 /**
  * Source with Xembly directives.
  *
- * <p>All implementations of this interface must be immutable and thread-safe.
+ * <p>All implementations of this interface must be immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -25,6 +25,7 @@ public interface XeSource {
 
     /**
      * Get Xembly directives.
+     *
      * @return Directives
      * @throws IOException If fails
      */

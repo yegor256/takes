@@ -15,7 +15,7 @@ import org.cactoos.iterator.Mapped;
  *
  * <p>Use this class to create a collection of
  * {@link XeSource} objects and pass them to,
- * for example, {@link org.takes.rs.xe.XeAppend}:
+ * for example, {@link org.takes.rs.xe.XeAppend}:</p>
  *
  * <pre> return new RsXembly(
  *   new XeAppend(
@@ -39,7 +39,7 @@ import org.cactoos.iterator.Mapped;
  *   )
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @param <T> Type of item
  * @since 0.1
@@ -59,6 +59,7 @@ public final class XeTransform<T> implements Iterable<XeSource> {
 
     /**
      * Ctor.
+     *
      * @param list List of objects
      * @param fnc Function
      */

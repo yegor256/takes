@@ -11,6 +11,7 @@ import org.llorllale.cactoos.matchers.IsText;
 
 /**
  * Test case for {@link RsWithHeaders}.
+ *
  * @since 0.1
  */
 final class RsWithHeadersTest {

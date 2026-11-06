@@ -17,7 +17,7 @@ import org.takes.rq.RqWithoutHeader;
  * This decorator wraps an existing take and ensures that requests
  * are authenticated before being processed by the underlying take.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -42,6 +42,7 @@ public final class TkAuth implements Take {
 
     /**
      * Ctor.
+     *
      * @param take Original
      * @param pss Pass
      */
@@ -51,6 +52,7 @@ public final class TkAuth implements Take {
 
     /**
      * Ctor.
+     *
      * @param take Original
      * @param pss Pass
      * @param hdr Header to set
@@ -73,13 +75,6 @@ public final class TkAuth implements Take {
         return response;
     }
 
-    /**
-     * Process the request with the authenticated identity.
-     * @param req Request to process
-     * @param identity Authenticated identity
-     * @return Response from the wrapped take
-     * @throws Exception If processing fails
-     */
     private Response act(final Request req, final Identity identity)
         throws Exception {
         Request wrap = new RqWithoutHeader(req, this.header);

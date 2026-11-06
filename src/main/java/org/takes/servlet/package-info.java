@@ -9,9 +9,9 @@
  * <p>This package provides integration between the Takes framework and
  * Java servlet containers (Tomcat, Jetty, etc.). It enables Takes
  * applications to run inside servlet containers while maintaining
- * the framework's lightweight and immutable design principles.
+ * the framework's lightweight and immutable design principles.</p>
  *
- * <p>The main components include:
+ * <p>The main components include:</p>
  *
  * <h2>Production Components</h2>
  * <ul>
@@ -39,7 +39,7 @@
  *
  * <p>This integration allows developers to deploy Takes applications
  * in enterprise servlet containers while benefiting from Takes'
- * object-oriented, immutable approach to HTTP request handling.
+ * object-oriented, immutable approach to HTTP request handling.</p>
  *
  * @since 2.0
  */

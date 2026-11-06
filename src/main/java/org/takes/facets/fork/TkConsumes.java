@@ -12,7 +12,7 @@ import org.takes.tk.TkWrap;
 /**
  * Take that acts on request with specified "Content-Type" HTTP headers only.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 1.0
  */
@@ -22,6 +22,7 @@ public final class TkConsumes extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Original take
      * @param type Content-Type
      */

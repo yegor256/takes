@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqChunk}.
+ *
  * @since 0.1
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

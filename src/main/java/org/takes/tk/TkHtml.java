@@ -19,9 +19,9 @@ import org.takes.rs.RsHtml;
  * HTML content with appropriate Content-Type headers. It serves as a
  * convenient wrapper around {@link org.takes.rs.RsHtml} for web endpoints
  * that need to return HTML documents, web pages, or HTML fragments for
- * dynamic web applications.
+ * dynamic web applications.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Static HTML page
  * new TkHtml("<html><body><h1>Welcome</h1></body></html>");
@@ -36,7 +36,7 @@ import org.takes.rs.RsHtml;
  * new TkHtml(new FileInputStream("page.html"));
  * }</pre>
  *
- * <p>The take supports multiple HTML content sources:
+ * <p>The take supports multiple HTML content sources:</p>
  * <ul>
  * <li>Static HTML strings for fixed web pages</li>
  * <li>Dynamic content through {@link Scalar} suppliers for templates</li>
@@ -45,7 +45,7 @@ import org.takes.rs.RsHtml;
  * <li>Streaming HTML content from InputStreams</li>
  * </ul>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>Web page endpoints serving complete HTML documents</li>
  * <li>API endpoints returning HTML fragments for AJAX requests</li>
@@ -60,15 +60,15 @@ import org.takes.rs.RsHtml;
  * <p>The response includes standard HTTP headers with Content-Type set to
  * "text/html; charset=UTF-8" for proper HTML rendering in web browsers.
  * The Content-Length header is automatically calculated based on the HTML
- * content size, ensuring proper HTTP protocol compliance.
+ * content size, ensuring proper HTTP protocol compliance.</p>
  *
  * <p>All constructors create immutable instances that can be safely shared
  * between threads. For dynamic HTML content that may change based on request
  * parameters or application state, use the {@link Scalar} constructor which
  * evaluates the content on each request, allowing for template rendering
- * and real-time content generation.
+ * and real-time content generation.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -78,6 +78,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param body HTML content to return in response
      */
     public TkHtml(final String body) {
@@ -88,6 +89,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param body Scalar supplier of HTML content for dynamic pages
      * @since 1.4
      */
@@ -99,6 +101,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param body Binary HTML content to return
      */
     public TkHtml(final byte[] body) {
@@ -109,6 +112,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param url URL pointing to HTML content to serve
      */
     public TkHtml(final URL url) {
@@ -119,6 +123,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param body Input stream containing HTML content
      */
     public TkHtml(final InputStream body) {
@@ -129,6 +134,7 @@ public final class TkHtml extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Origin take that produces the HTML response
      */
     public TkHtml(final Take take) {

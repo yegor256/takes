@@ -28,6 +28,7 @@ import org.takes.tk.TkText;
 
 /**
  * Test of {@link PsBasic}.
+ *
  * @since 0.20
  */
 final class PsBasicTest {
@@ -81,7 +82,7 @@ final class PsBasicTest {
         try {
             new PsBasic(
                 "RealmB",
-                new PsBasic.Empty()
+                new PsBasicEmpty()
             ).enter(
                 new RqWithHeaders(
                     new RqFake(
@@ -147,7 +148,7 @@ final class PsBasicTest {
                     ),
                     new PsBasic(
                         "myrealm",
-                        new PsBasic.Default("mike secret11 urn:users:michael")
+                        new PsBasicDefault("mike secret11 urn:users:michael")
                     )
                 ).act(
                     new RqWithHeader(
@@ -172,7 +173,7 @@ final class PsBasicTest {
                         ),
                         new PsBasic(
                             "the realm 5",
-                            new PsBasic.Default("bob pwd88 urn:users:bob")
+                            new PsBasicDefault("bob pwd88 urn:users:bob")
                         )
                     )
                 ).act(new RqFake())
@@ -190,7 +191,7 @@ final class PsBasicTest {
         final String user,
         final String pass
     ) throws IOException {
-        return new PsBasic("RealmA", new PsBasic.Fake(true)).enter(
+        return new PsBasic("RealmA", new PsBasicFake(true)).enter(
             new RqWithHeaders(
                 new RqFake(
                     RqMethod.GET,
@@ -210,7 +211,7 @@ final class PsBasicTest {
     ) throws IOException {
         return new PsBasic(
             "RealmAA",
-            new PsBasic.Default(
+            new PsBasicDefault(
                 "mike my%20password1 urn:basic:michael",
                 String.format("%s %s urn:basic:%s", user, pass, user)
             )
@@ -232,7 +233,7 @@ final class PsBasicTest {
         final String user,
         final String pass
     ) throws IOException {
-        return new PsBasic("RealmC", new PsBasic.Fake(true)).enter(
+        return new PsBasic("RealmC", new PsBasicFake(true)).enter(
             new RqWithHeaders(
                 new RqFake(
                     RqMethod.GET,
@@ -265,16 +266,12 @@ final class PsBasicTest {
         );
     }
 
-    /**
-     * Assert invalid headers don't provide identity.
-     * @throws Exception If fails
-     */
     private static void assertInvalidHeaders() throws Exception {
         MatcherAssert.assertThat(
             "Invalid headers must not provide identity",
             new PsBasic(
                 "RealmD",
-                new PsBasic.Fake(true)
+                new PsBasicFake(true)
             ).enter(
                 new RqWithHeaders(
                     new RqFake(

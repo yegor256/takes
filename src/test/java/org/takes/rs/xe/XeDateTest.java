@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeDate}.
+ *
  * @since 0.3
  */
 final class XeDateTest {

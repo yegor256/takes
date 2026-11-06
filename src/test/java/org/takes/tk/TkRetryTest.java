@@ -22,6 +22,7 @@ import org.takes.rs.RsText;
 
 /**
  * TkRetry can retry till success or retry count is reached.
+ *
  * @since 0.28.3
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -107,10 +108,6 @@ final class TkRetryTest {
         );
     }
 
-    /**
-     * Retry on exception till count and assert minimum spent time.
-     * @throws Exception If fails
-     */
     private static void retryAndAssertSpent() throws Exception {
         final Take take = Mockito.mock(Take.class);
         Mockito

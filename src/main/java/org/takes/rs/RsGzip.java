@@ -22,9 +22,9 @@ import org.takes.Response;
  * according to RFC 1952 and adds the appropriate Content-Encoding header.
  * The compression is performed lazily when the response is first accessed
  * and cached for subsequent requests. This can significantly reduce
- * bandwidth usage for text-based responses.
+ * bandwidth usage for text-based responses.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.10
  */
@@ -44,6 +44,7 @@ public final class RsGzip implements Response {
 
     /**
      * Ctor.
+     *
      * @param res Original response
      */
     public RsGzip(final Response res) {
@@ -61,11 +62,6 @@ public final class RsGzip implements Response {
         return this.make().body();
     }
 
-    /**
-     * Make a response.
-     * @return Response just made
-     * @throws IOException If fails
-     */
     private Response make() throws IOException {
         if (this.zipped.isEmpty()) {
             this.zipped.add(
@@ -82,12 +78,6 @@ public final class RsGzip implements Response {
         return this.zipped.get(0);
     }
 
-    /**
-     * Gzip input stream.
-     * @param input Input stream
-     * @return New input stream
-     * @throws IOException If fails
-     */
     private static byte[] gzip(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] buf = new byte[4096];

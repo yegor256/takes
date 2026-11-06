@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsBodyPrint}.
+ *
  * @since 1.19
  */
 final class RsBodyPrintTest {

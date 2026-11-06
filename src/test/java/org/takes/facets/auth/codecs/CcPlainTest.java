@@ -15,6 +15,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcPlain}.
+ *
  * @since 0.4
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -53,6 +54,24 @@ final class CcPlainTest {
                 " % tjw".getBytes(StandardCharsets.UTF_8)
             ),
             Matchers.equalTo(Identity.ANONYMOUS)
+        );
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void decodesEmptyPropertyValue() throws IOException {
+        final CcPlain codec = new CcPlain();
+        MatcherAssert.assertThat(
+            "Empty property value must survive the encoding round trip",
+            codec.decode(
+                codec.encode(
+                    new Identity.Simple(
+                        "urn:test:7",
+                        new MapOf<>(new MapEntry<>("key", ""))
+                    )
+                )
+            ).properties(),
+            Matchers.hasEntry("key", "")
         );
     }
 }

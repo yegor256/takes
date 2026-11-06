@@ -19,14 +19,14 @@ import org.takes.rs.RsGzip;
  * applies GZIP compression to responses when the client supports it.
  * It examines the Accept-Encoding header in incoming requests and
  * conditionally compresses the response body to reduce bandwidth
- * usage and improve transfer speeds.
+ * usage and improve transfer speeds.</p>
  *
  * <p>The decorator uses content negotiation to determine whether to
  * apply compression. If the client indicates GZIP support through
  * the Accept-Encoding header, responses are compressed using {@link RsGzip}.
- * Otherwise, the original uncompressed response is returned.
+ * Otherwise, the original uncompressed response is returned.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Compress HTML pages for better performance
  * new TkGzip(
@@ -44,7 +44,7 @@ import org.takes.rs.RsGzip;
  * );
  * }</pre>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>Web page compression for faster loading times</li>
  * <li>API response compression to reduce bandwidth</li>
@@ -55,7 +55,7 @@ import org.takes.rs.RsGzip;
  * <li>Bandwidth-limited network optimization</li>
  * </ul>
  *
- * <p>Performance benefits:
+ * <p>Performance benefits:</p>
  * <ul>
  * <li>Reduces response size by 60-80% for text content</li>
  * <li>Decreases network transfer time</li>
@@ -66,14 +66,14 @@ import org.takes.rs.RsGzip;
  * <p>The decorator automatically handles compression headers including
  * Content-Encoding and adjusts Content-Length appropriately. Clients
  * that don't support GZIP receive uncompressed responses without any
- * compatibility issues.
+ * compatibility issues.</p>
  *
  * <p>Compression is applied on-the-fly during response generation,
  * balancing CPU usage with network efficiency. The implementation
  * is optimized for typical web content patterns and provides good
- * compression ratios with reasonable processing overhead.
+ * compression ratios with reasonable processing overhead.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.10
  */
@@ -83,6 +83,7 @@ public final class TkGzip extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Original take to wrap with GZIP compression
      */
     public TkGzip(final Take take) {

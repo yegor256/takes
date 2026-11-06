@@ -16,6 +16,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcStrict}.
+ *
  * @since 0.11.2
  */
 final class CcStrictTest {

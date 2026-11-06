@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqWithoutHeader}.
+ *
  * @since 0.9
  */
 final class RqWithoutHeaderTest {

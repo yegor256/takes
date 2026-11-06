@@ -14,6 +14,7 @@ import org.takes.rq.RqWithHeader;
 
 /**
  * Test case for {@link org.takes.facets.hamcrest.HmRqCookie}.
+ *
  * @since 2.0
  */
 final class HmRqCookieTest {

@@ -10,9 +10,9 @@
  * HTTP requests in the Takes framework. It provides a comprehensive set
  * of request decorators that follow the decorator pattern to add various
  * functionalities such as header manipulation, body processing, caching,
- * parsing, and validation.
+ * parsing, and validation.</p>
  *
- * <p>Key components include:
+ * <p>Key components include:</p>
  * <ul>
  * <li>Core interfaces: Request, RqHeaders, RqForm, RqHref, RqMultipart</li>
  * <li>Request decorators: RqWrap and its various implementations</li>

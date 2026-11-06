@@ -38,6 +38,7 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkProxy}.
+ *
  * @since 0.25
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -70,6 +71,7 @@ final class TkProxyTest {
 
     /**
      * Http methods for testing.
+     *
      * @return The testing data
      */
     static Iterable<Arguments> cases() {
@@ -237,14 +239,6 @@ final class TkProxyTest {
         return TkProxyTest.NOBODIES.getOrDefault(method, rq -> req).create(req);
     }
 
-    /**
-     * Capture proxied response and modified host header.
-     * @param home Home URI
-     * @param method HTTP method
-     * @param captured Captured URI holder
-     * @param result Result holder
-     * @throws Exception If fails
-     */
     private static void captureModifyHost(final URI home, final String method,
         final AtomicReference<URI> captured,
         final AtomicReference<String> result) throws Exception {
@@ -269,15 +263,6 @@ final class TkProxyTest {
         );
     }
 
-    /**
-     * Capture proxied response with specific header.
-     * @param home Home URI
-     * @param method HTTP method
-     * @param mark Mark for proxy
-     * @param captured Captured URI holder
-     * @param result Result holder
-     * @throws Exception If fails
-     */
     private static void captureSpecificHeader(final URI home, final String method,
         final String mark, final AtomicReference<URI> captured,
         final AtomicReference<String> result) throws Exception {
@@ -303,13 +288,6 @@ final class TkProxyTest {
         );
     }
 
-    /**
-     * Capture proxied response with all initial headers.
-     * @param home Home URI
-     * @param body Request body
-     * @param result Result holder
-     * @throws Exception If fails
-     */
     private static void captureAllInitialHeaders(final URI home, final String body,
         final AtomicReference<String> result) throws Exception {
         result.set(
@@ -338,6 +316,7 @@ final class TkProxyTest {
 
     /**
      * Local interface for creating a request with an empty body.
+     *
      * @since 1.24.4
      */
     @FunctionalInterface
@@ -348,6 +327,7 @@ final class TkProxyTest {
 
     /**
      * Wrapper for a request with an empty body.
+     *
      * @since 1.24.4
      */
     private static final class RqWithoutBody implements Request {
@@ -359,6 +339,7 @@ final class TkProxyTest {
 
         /**
          * Ctor.
+         *
          * @param req Original request
          */
         RqWithoutBody(final Request req) {

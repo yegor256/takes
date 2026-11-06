@@ -14,7 +14,6 @@ import org.cactoos.scalar.And;
 import org.cactoos.scalar.Equality;
 import org.cactoos.scalar.HashCode;
 import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.Or;
 import org.cactoos.scalar.Unchecked;
 import org.takes.Response;
 
@@ -25,9 +24,9 @@ import org.takes.Response;
  * functional interfaces (scalars) for head and body content. It accepts
  * suppliers that are called when the respective content is needed, enabling
  * lazy evaluation and custom response construction. This is particularly
- * useful for building responses dynamically.
+ * useful for building responses dynamically.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 2.0
  */
@@ -45,6 +44,7 @@ public final class ResponseOf implements Response {
 
     /**
      * Ctor.
+     *
      * @param head Iterable head value
      * @param body InputStream body value
      */
@@ -54,6 +54,7 @@ public final class ResponseOf implements Response {
 
     /**
      * Ctor.
+     *
      * @param head Scalar to provide head value
      * @param body Scalar to provide body value
      */
@@ -76,23 +77,20 @@ public final class ResponseOf implements Response {
     @Override
     @SuppressFBWarnings("EQ_UNUSUAL")
     public boolean equals(final Object that) {
-        return new Unchecked<>(
-            new Or(
-                () -> this == that,
-                new And(
-                    () -> that != null,
-                    () -> ResponseOf.class.equals(that.getClass()),
-                    () -> {
-                        final ResponseOf other = (ResponseOf) that;
-                        return new And(
-                            () -> ResponseOf.sameHead(this.head(), other.head()),
-                            () -> new Equality<>(
-                                new BytesOf(this.body()),
-                                new BytesOf(other.body())
-                            ).value() == 0
-                        ).value();
-                    }
-                )
+        return this == that || new Unchecked<>(
+            new And(
+                () -> that != null,
+                () -> ResponseOf.class.equals(that.getClass()),
+                () -> {
+                    final ResponseOf other = (ResponseOf) that;
+                    return new And(
+                        () -> ResponseOf.sameHead(this.head(), other.head()),
+                        () -> new Equality<>(
+                            new BytesOf(this.body()),
+                            new BytesOf(other.body())
+                        ).value() == 0
+                    ).value();
+                }
             )
         ).value();
     }
@@ -102,12 +100,6 @@ public final class ResponseOf implements Response {
         return new HashCode(new Unchecked<>(this.shead).value()).value();
     }
 
-    /**
-     * Compare two head iterables element by element.
-     * @param mine Head of this response
-     * @param theirs Head of the other response
-     * @return TRUE if both iterables yield identical sequences
-     */
     private static boolean sameHead(final Iterable<String> mine,
         final Iterable<String> theirs) {
         final Iterator<String> first = mine.iterator();

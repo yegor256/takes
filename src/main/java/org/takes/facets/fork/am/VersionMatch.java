@@ -6,6 +6,7 @@ package org.takes.facets.fork.am;
 
 /**
  * Version match.
+ *
  * @since 1.7.2
  */
 @FunctionalInterface
@@ -13,6 +14,7 @@ public interface VersionMatch {
 
     /**
      * Returns true if specified version is acceptable.
+     *
      * @param version Request
      * @return Whether specified version matches
      */

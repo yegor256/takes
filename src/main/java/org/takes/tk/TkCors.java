@@ -25,14 +25,14 @@ import org.takes.rs.RsWithStatus;
  * <p>This {@link Take} implementation enforces CORS policy by validating
  * request origins against a whitelist of allowed domains. It automatically
  * adds appropriate CORS headers to responses for allowed origins and
- * rejects requests from unauthorized origins with HTTP 403 Forbidden status.
+ * rejects requests from unauthorized origins with HTTP 403 Forbidden status.</p>
  *
  * <p>CORS is a security mechanism implemented by web browsers to control
  * access to resources from different origins (domains, protocols, or ports).
  * This take provides server-side CORS enforcement to complement browser
- * security policies and enable controlled cross-origin access.
+ * security policies and enable controlled cross-origin access.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Allow requests from specific domains
  * new TkCors(
@@ -49,21 +49,21 @@ import org.takes.rs.RsWithStatus;
  * );
  * }</pre>
  *
- * <p>For allowed origins, the response includes:
+ * <p>For allowed origins, the response includes:</p>
  * <ul>
  * <li>Access-Control-Allow-Origin header matching request origin</li>
  * <li>Access-Control-Allow-Credentials: true for authenticated requests</li>
  * <li>Access-Control-Allow-Methods with common HTTP methods</li>
  * </ul>
  *
- * <p>For disallowed origins, the response includes:
+ * <p>For disallowed origins, the response includes:</p>
  * <ul>
  * <li>HTTP 403 Forbidden status</li>
  * <li>Access-Control-Allow-Credentials: false</li>
  * <li>No Access-Control-Allow-Origin header</li>
  * </ul>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>API endpoints accessed by web applications</li>
  * <li>Microservices with cross-domain communication</li>
@@ -74,11 +74,11 @@ import org.takes.rs.RsWithStatus;
  *
  * <p>The take validates the Origin header from incoming requests against
  * the configured whitelist. Origin validation is case-sensitive and must
- * match exactly, including protocol and port specifications.
+ * match exactly, including protocol and port specifications.</p>
  *
  * <p>The specification of CORS can be found on the W3C web site on the
  * following <a href="http://www.w3.org/TR/cors/">link</a> or even on the <a
- * href="https://tools.ietf.org/html/rfc6454">RFC-6454</a> specification.
+ * href="https://tools.ietf.org/html/rfc6454">RFC-6454</a> specification.</p>
  *
  * @since 0.20
  */
@@ -98,6 +98,7 @@ public final class TkCors implements Take {
 
     /**
      * Ctor.
+     *
      * @param take Original take to wrap with CORS policy
      * @param domains Allowed origin domains for CORS requests
      */

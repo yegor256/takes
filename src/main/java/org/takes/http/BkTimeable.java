@@ -6,10 +6,8 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -18,15 +16,15 @@ import lombok.EqualsAndHashCode;
  * <p>This decorator wraps another {@link Back} implementation and enforces
  * a maximum execution time for request processing. It runs as a separate
  * daemon thread that continuously monitors all active request-processing
- * threads and interrupts any that exceed the specified time limit.
+ * threads and interrupts any that exceed the specified time limit.</p>
  *
  * <p>This decorator is essential for preventing resource exhaustion caused
  * by long-running or hanging requests. When a request takes longer than
  * the configured latency limit, the processing thread is interrupted,
  * which should cause the request to fail quickly rather than consuming
- * server resources indefinitely.
+ * server resources indefinitely.</p>
  *
- * <p>Key features:
+ * <p>Key features:</p>
  * <ul>
  * <li>Monitors all active request-processing threads</li>
  * <li>Interrupts threads that exceed the maximum processing time</li>
@@ -35,7 +33,7 @@ import lombok.EqualsAndHashCode;
  * <li>Automatic cleanup of completed or interrupted threads</li>
  * </ul>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.14.2
  */
@@ -54,6 +52,7 @@ public final class BkTimeable extends Thread implements Back {
 
     /**
      * Ctor.
+     *
      * @param back Original back
      * @param msec Execution latency
      */
@@ -63,13 +62,14 @@ public final class BkTimeable extends Thread implements Back {
 
     /**
      * Ctor.
+     *
      * @param back Original back
      * @param msec Execution latency
      * @param threads Threads storage
      */
     private BkTimeable(final Back back, final long msec,
         final ConcurrentMap<Thread, Long> threads) {
-        super(new BkTimeable.Monitoring(threads, msec));
+        super(new Monitoring(threads, msec));
         this.back = back;
         this.threads = threads;
     }
@@ -81,65 +81,5 @@ public final class BkTimeable extends Thread implements Back {
             System.currentTimeMillis()
         );
         this.back.accept(socket);
-    }
-
-    /**
-     * Watcher of long-running threads.
-     * @since 2.0
-     */
-    private static final class Monitoring implements Runnable {
-
-        /**
-         * Threads storage.
-         */
-        private final ConcurrentMap<Thread, Long> threads;
-
-        /**
-         * Maximum latency in milliseconds.
-         */
-        private final long latency;
-
-        /**
-         * Ctor.
-         * @param map Threads storage
-         * @param msec Execution latency
-         */
-        Monitoring(final ConcurrentMap<Thread, Long> map, final long msec) {
-            this.threads = map;
-            this.latency = msec;
-        }
-
-        @Override
-        public void run() {
-            while (true) {
-                this.check();
-                try {
-                    TimeUnit.SECONDS.sleep(1L);
-                } catch (final InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                    throw new IllegalStateException(
-                        "Interrupted while waiting",
-                        ex
-                    );
-                }
-            }
-        }
-
-        /**
-         * Check threads storage and interrupt long-running threads.
-         */
-        private void check() {
-            for (final Map.Entry<Thread, Long> entry
-                : this.threads.entrySet()) {
-                final long time = System.currentTimeMillis();
-                if (time - entry.getValue() > this.latency) {
-                    final Thread thread = entry.getKey();
-                    if (thread.isAlive()) {
-                        thread.interrupt();
-                    }
-                    this.threads.remove(thread);
-                }
-            }
-        }
     }
 }

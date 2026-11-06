@@ -6,6 +6,7 @@ package org.takes.rq;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.text.Joined;
@@ -17,9 +18,10 @@ import org.takes.Request;
 
 /**
  * Test case for {@link RqLive}.
+ *
  * @since 0.9
  */
-@SuppressWarnings("PMD.UnnecessaryLocalRule")
+@SuppressWarnings({"PMD.UnnecessaryLocalRule", "PMD.CloseInlineResourceRule"})
 final class RqLiveTest {
 
     /**
@@ -68,6 +70,27 @@ final class RqLiveTest {
     }
 
     @Test
+    void acceptsUtfEightFileNameInHeader() throws IOException {
+        MatcherAssert.assertThat(
+            "Header with non-ASCII file name must not be rejected",
+            new RqHeaders.Base(
+                new RqLive(
+                    new InputStreamOf(
+                        new Joined(
+                            RqLiveTest.CRLF,
+                            "POST /upload HTTP/1.1",
+                            "Content-Disposition: filename=\"teść.txt\"",
+                            "",
+                            "hello"
+                        )
+                    )
+                )
+            ).header("Content-Disposition"),
+            Matchers.hasItem("filename=\"teść.txt\"")
+        );
+    }
+
+    @Test
     void supportMultiLineHeadersWithColon() throws IOException {
         final Request req = new RqLive(
             new InputStreamOf(
@@ -94,8 +117,9 @@ final class RqLiveTest {
             () -> new RqLive(
                 new ByteArrayInputStream(
                     String.format(
-                        "GET /test HTTP/1.1%sHost: €",
-                        RqLiveTest.CRLF
+                        "GET /test HTTP/1.1%sHost: %s",
+                        RqLiveTest.CRLF,
+                        (char) 7
                     ).getBytes(StandardCharsets.UTF_8)
                 )
             )
@@ -161,6 +185,28 @@ final class RqLiveTest {
         );
     }
 
+    @Test
+    void parsesHeadWhenStreamReportsNothingAvailable() throws IOException {
+        final Request req = new RqLive(
+            new RqLiveTest.Trickling(
+                new InputStreamOf(
+                    new Joined(
+                        RqLiveTest.CRLF,
+                        "GET /trickle HTTP/1.1",
+                        "Host:e",
+                        "",
+                        ""
+                    )
+                )
+            )
+        );
+        MatcherAssert.assertThat(
+            "Request-line must survive a stream that reports nothing available",
+            new RqRequestLine.Base(req).uri(),
+            Matchers.equalTo("/trickle")
+        );
+    }
+
     private static Request simpleRequest() throws IOException {
         return new RqLive(
             new InputStreamOf(
@@ -174,5 +220,49 @@ final class RqLiveTest {
                 )
             )
         );
+    }
+
+    /**
+     * Stream that says nothing can be read without blocking, while still
+     * delivering every byte when actually read.
+     *
+     * <p>This is what a socket does when the rest of the request has not
+     * arrived yet: {@link java.io.InputStream#available()} is only an
+     * estimate of what can be read without blocking, and zero from it does
+     * not mean the end of the stream.</p>
+     *
+     * @since 2.0
+     */
+    private static final class Trickling extends InputStream {
+
+        /**
+         * Original stream.
+         */
+        private final InputStream origin;
+
+        /**
+         * Ctor.
+         *
+         * @param stream Stream to read from
+         */
+        Trickling(final InputStream stream) {
+            this.origin = stream;
+        }
+
+        @Override
+        public int read() throws IOException {
+            return this.origin.read();
+        }
+
+        @Override
+        public int read(final byte[] buf, final int off, final int len)
+            throws IOException {
+            return this.origin.read(buf, off, len);
+        }
+
+        @Override
+        public int available() {
+            return 0;
+        }
     }
 }

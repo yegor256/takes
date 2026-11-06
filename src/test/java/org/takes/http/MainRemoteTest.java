@@ -15,6 +15,7 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link MainRemote}.
+ *
  * @since 0.23
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -59,6 +60,7 @@ final class MainRemoteTest {
 
     /**
      * Demo app.
+     *
      * @since 0.23
      */
     static final class DemoApp {
@@ -72,6 +74,7 @@ final class MainRemoteTest {
 
         /**
          * Main entry point.
+         *
          * @param args Command line args
          * @throws IOException If fails
          */
@@ -82,6 +85,7 @@ final class MainRemoteTest {
 
     /**
      * Demo app.
+     *
      * @since 0.23
      */
     static final class DemoAppArgs {
@@ -95,6 +99,7 @@ final class MainRemoteTest {
 
         /**
          * Main entry point.
+         *
          * @param args Command line args
          * @throws IOException If fails
          */

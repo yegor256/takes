@@ -15,14 +15,14 @@ import org.takes.rq.RqGreedy;
  * <p>This {@link Take} decorator wraps another take and ensures that
  * the entire request body is read into memory before processing begins.
  * It uses {@link RqGreedy} to convert streaming request bodies into
- * fully materialized content that can be accessed multiple times.
+ * fully materialized content that can be accessed multiple times.</p>
  *
  * <p>The decorator is essential for takes that need to access request
  * body content multiple times or require random access to body data.
  * It addresses the limitation that HTTP request bodies are typically
- * streaming and can only be read once from their underlying input stream.
+ * streaming and can only be read once from their underlying input stream.</p>
  *
- * <p>Example usage:
+ * <p>Example usage:</p>
  * <pre>{@code
  * // Ensure request body is fully read for processing
  * new TkGreedy(
@@ -38,7 +38,7 @@ import org.takes.rq.RqGreedy;
  * new TkGreedy(new TkFormProcessor());
  * }</pre>
  *
- * <p>Common use cases include:
+ * <p>Common use cases include:</p>
  * <ul>
  * <li>Form processing requiring validation and data extraction</li>
  * <li>JSON/XML parsing with error handling and retry logic</li>
@@ -49,7 +49,7 @@ import org.takes.rq.RqGreedy;
  * <li>Request body caching and replay scenarios</li>
  * </ul>
  *
- * <p>Performance considerations:
+ * <p>Performance considerations:</p>
  * <ul>
  * <li>Entire request body is loaded into memory</li>
  * <li>Memory usage increases with request body size</li>
@@ -60,9 +60,9 @@ import org.takes.rq.RqGreedy;
  * <p>The decorator preserves all request metadata including headers,
  * URI, and method while only modifying how the body content is accessed.
  * The wrapped take receives a request with identical semantics but with
- * the body fully materialized and reusable.
+ * the body fully materialized and reusable.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.10
  */
@@ -72,6 +72,7 @@ public final class TkGreedy extends TkWrap {
 
     /**
      * Ctor.
+     *
      * @param take Original take to wrap with greedy request reading
      */
     public TkGreedy(final Take take) {

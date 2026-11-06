@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqLengthAware}.
+ *
  * @since 0.1
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -43,7 +44,7 @@ final class RqLengthAwareTest {
     @Test
     void addsBigLengthToBody() throws IOException {
         MatcherAssert.assertThat(
-            "Large Content-Length must be capped at Integer.MAX_VALUE",
+            "Available bytes must not exceed the actual body length",
             new RqLengthAware(
                 new RqFake(
                     Arrays.asList(
@@ -55,7 +56,7 @@ final class RqLengthAwareTest {
                     "HI"
                 )
             ).body().available(),
-            Matchers.equalTo(Integer.MAX_VALUE)
+            Matchers.equalTo(2)
         );
     }
 

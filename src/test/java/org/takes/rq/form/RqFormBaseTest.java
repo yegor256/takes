@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.hamcrest.core.IsSame;
 import org.junit.jupiter.api.Test;
 import org.takes.rq.RqBuffered;
 import org.takes.rq.RqFake;
@@ -16,6 +17,7 @@ import org.takes.rq.RqForm;
 
 /**
  * Test case for {@link RqFormBase}.
+ *
  * @since 0.33
  */
 final class RqFormBaseTest {
@@ -53,8 +55,8 @@ final class RqFormBaseTest {
         );
         MatcherAssert.assertThat(
             "Form names method must return same instance on multiple calls",
-            req.names() == req.names(),
-            Matchers.is(Boolean.TRUE)
+            req.names(),
+            new IsSame<>(req.names())
         );
     }
 

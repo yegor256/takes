@@ -18,6 +18,7 @@ import org.takes.rs.RsPrint;
 
 /**
  * Test case for {@link RsFlash}.
+ *
  * @since 0.9.6
  */
 final class RsFlashTest {

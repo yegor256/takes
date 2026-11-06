@@ -90,19 +90,19 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.46</version>
+      <version>1.18.48</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.errorprone</groupId>
       <artifactId>error_prone_annotations</artifactId>
-      <version>2.50.0</version>
+      <version>2.52.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
       <artifactId>cactoos</artifactId>
-      <version>0.61.1</version>
+      <version>0.63.0</version>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
@@ -177,7 +177,7 @@
     <dependency>
       <groupId>org.glassfish.grizzly</groupId>
       <artifactId>grizzly-http-servlet-server</artifactId>
-      <version>5.0.2</version>
+      <version>5.0.3</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -225,21 +225,21 @@
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
-      <version>4.0.2</version>
+      <version>4.0.3</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-server</artifactId>
-      <version>4.0.2</version>
+      <version>4.0.3</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>net.sf.saxon</groupId>
       <artifactId>Saxon-HE</artifactId>
-      <version>13.0</version>
+      <version>13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -251,13 +251,13 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>2.0.18</version>
+      <version>2.0.20</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-reload4j</artifactId>
-      <version>2.0.18</version>
+      <version>2.0.20</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -281,13 +281,13 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
-      <version>5.23.0</version>
+      <version>5.24.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>5.23.0</version>
+      <version>5.24.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -354,6 +354,94 @@
           <analysisConfiguration>
             <revapi.differences>
               <differences>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsBasic.Default</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsBasic.Empty</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsBasic.Fake</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.auth.PsByFlag.Pair</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.facets.fork.am.AmVersion.VmGreater</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsVelocity.Pair</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Html</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Json</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Text</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.class.removed</code>
+                  <old>class org.takes.rs.RsWithType.Xml</old>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(===org.takes.facets.auth.PsByFlag.Pair[]===)</old>
+                  <new>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(===org.takes.facets.auth.PsByFlagPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(java.lang.String, ===org.takes.facets.auth.PsByFlag.Pair[]===)</old>
+                  <new>parameter void org.takes.facets.auth.PsByFlag::&lt;init&gt;(java.lang.String, ===org.takes.facets.auth.PsByFlagPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.io.InputStream, ===org.takes.rs.RsVelocity.Pair[]===)</old>
+                  <new>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.io.InputStream, ===org.takes.rs.RsVelocityPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.parameterTypeChanged</code>
+                  <old>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.lang.CharSequence, ===org.takes.rs.RsVelocity.Pair[]===)</old>
+                  <new>parameter void org.takes.rs.RsVelocity::&lt;init&gt;(java.lang.CharSequence, ===org.takes.rs.RsVelocityPair[]===)</new>
+                  <justification>Moved into its own file, because qulice 0.31.1 ProhibitStaticNestedClassesCheck does not allow static nested classes</justification>
+                </item>
                 <item>
                   <ignore>true</ignore>
                   <code>java.method.varargOverloadsOnlyDifferInVarargParameter</code>
@@ -624,7 +712,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>2.7.1</version>
+        <version>2.8.0</version>
         <executions>
           <execution>
             <id>check-licenses</id>
@@ -684,7 +772,7 @@
             <path>
               <groupId>org.projectlombok</groupId>
               <artifactId>lombok</artifactId>
-              <version>1.18.46</version>
+              <version>1.18.48</version>
             </path>
           </annotationProcessorPaths>
         </configuration>
@@ -699,7 +787,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.5.6</version>
+            <version>3.6.1</version>
             <configuration>
               <groups>org.takes.misc.PerformanceTests</groups>
             </configuration>
@@ -714,15 +802,7 @@
           <plugin>
             <groupId>com.qulice</groupId>
             <artifactId>qulice-maven-plugin</artifactId>
-            <version>0.30.13</version>
-            <configuration>
-              <excludes>
-                <exclude>checkstyle:/src/site/resources/.*</exclude>
-                <exclude>duplicatefinder:javax.json:javax.json-api:1.1.4</exclude>
-                <exclude>duplicatefinder:javax.xml.bind:jaxb-api:2.3.1</exclude>
-                <exclude>dependencies:.*</exclude>
-              </excludes>
-            </configuration>
+            <version>0.36.1</version>
           </plugin>
         </plugins>
       </build>
@@ -749,7 +829,7 @@
           <plugin>
             <groupId>org.sonarsource.scanner.maven</groupId>
             <artifactId>sonar-maven-plugin</artifactId>
-            <version>5.7.0.6970</version>
+            <version>5.8.0.7211</version>
             <executions>
               <execution>
                 <phase>package</phase>

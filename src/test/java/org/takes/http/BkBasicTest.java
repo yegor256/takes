@@ -34,10 +34,12 @@ import org.takes.rq.RqHeaders;
 import org.takes.rq.RqPrint;
 import org.takes.rq.RqSocket;
 import org.takes.rs.ResponseOf;
+import org.takes.rs.RsText;
 import org.takes.tk.TkText;
 
 /**
  * Test case for {@link BkBasic}.
+ *
  * @since 0.15.2
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")
@@ -214,9 +216,66 @@ final class BkBasicTest {
         );
     }
 
+    @Test
+    void endsChunkedBodyWhileConnectionStaysOpen() throws Exception {
+        final String text = "Hello Chunked!";
+        final StringBuilder body = new StringBuilder();
+        try (ServerSocket server = new ServerSocket(0)) {
+            final Thread thread = new Thread(
+                () -> {
+                    try {
+                        new BkBasic(
+                            req -> {
+                                body.append(
+                                    new String(
+                                        req.body().readAllBytes(),
+                                        StandardCharsets.UTF_8
+                                    )
+                                );
+                                return new RsText("done");
+                            }
+                        ).accept(server.accept());
+                    } catch (final IOException exception) {
+                        throw new IllegalStateException(exception);
+                    }
+                }
+            );
+            thread.start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(),
+                    server.getLocalPort()
+                )
+            ) {
+                socket.setSoTimeout(3000);
+                socket.getOutputStream().write(
+                    new Joined(
+                        BkBasicTest.CRLF,
+                        BkBasicTest.POST,
+                        BkBasicTest.HOST,
+                        "Transfer-Encoding: chunked",
+                        "",
+                        "e",
+                        text,
+                        "0",
+                        ""
+                    ).asString().getBytes(StandardCharsets.UTF_8)
+                );
+                socket.getInputStream().readAllBytes();
+            }
+            thread.join(3000);
+        }
+        MatcherAssert.assertThat(
+            "Chunked body must end without waiting for the socket to close",
+            body.toString(),
+            Matchers.equalTo(text)
+        );
+    }
+
     /**
      * BkBasic can return HTTP status 411 when a persistent connection request
      * has no Content-Length.
+     *
      * @throws Exception If some problem inside
      */
     @Disabled
@@ -274,6 +333,7 @@ final class BkBasicTest {
 
     /**
      * BkBasic can accept no content-length on closed connection.
+     *
      * @throws Exception If some problem inside
      */
     @Disabled
@@ -347,6 +407,7 @@ final class BkBasicTest {
     /**
      * BkBasic can return HTTP status 400 (Bad Request) when a request has an
      * unencodable URI.
+     *
      * @throws Exception If some problem inside
      */
     @Test
@@ -391,14 +452,6 @@ final class BkBasicTest {
         }
     }
 
-    /**
-     * Starts a new clean server with only root path and tries to send a
-     * request.
-     * @param method HTTP method to be called
-     * @param path Endpoint to be called
-     * @return Server textual response
-     * @throws Exception If some problem inside
-     */
     private String responseForPath(final String method, final String path)
         throws Exception {
         final ByteArrayOutputStream output = new ByteArrayOutputStream();

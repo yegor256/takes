@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsBody.ByteArray}.
+ *
  * @since 1.15
  */
 final class RsBodyByteArrayTest {

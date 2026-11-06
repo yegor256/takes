@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RqTemp}.
+ *
  * @since 0.33
  */
 final class RqTempTest {

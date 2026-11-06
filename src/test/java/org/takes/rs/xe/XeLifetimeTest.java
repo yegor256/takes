@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link XeLifetime}.
+ *
  * @since 1.7
  */
 final class XeLifetimeTest {

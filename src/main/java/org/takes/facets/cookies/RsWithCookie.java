@@ -4,19 +4,13 @@
  */
 package org.takes.facets.cookies;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.cactoos.Scalar;
-import org.cactoos.scalar.IoChecked;
-import org.cactoos.scalar.Sticky;
 import org.cactoos.text.FormattedText;
 import org.cactoos.text.UncheckedText;
 import org.takes.Response;
 import org.takes.rs.RsEmpty;
-import org.takes.rs.RsWithHeader;
 import org.takes.rs.RsWrap;
 
 /**
@@ -27,10 +21,10 @@ import org.takes.rs.RsWrap;
  * and cookie values according to
  * <a href="http://tools.ietf.org/html/rfc6265#section-4.1.1">RFC 6265</a>.
  * It adds a Set-Cookie header to responses with the specified cookie name,
- * value, and optional attributes.
+ * value, and optional attributes.</p>
  *
  * <p>Use this decorator to return a response with a "Set-Cookie"
- * header, for example:
+ * header, for example:</p>
  *
  * <pre> return new RsWithCookie(
  *   new RsText("hello, world!"),
@@ -38,17 +32,22 @@ import org.takes.rs.RsWrap;
  *   "Path=/", "Expires=Wed, 13 Jan 2021 22:23:01 GMT"
  * );</pre>
  *
- * <p>This response will contain this header:
+ * <p>This response will contain this header:</p>
  *
  * <pre> Set-Cookie: u=Jeff;Path=/;Expires=Wed, 13 Jan 2021 22:23:01 GMT</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public final class RsWithCookie extends RsWrap {
+
+    /**
+     * Cookie header name.
+     */
+    static final CharSequence SET_COOKIE = "Set-Cookie";
 
     /**
      * Cookie value validation regexp.
@@ -65,12 +64,8 @@ public final class RsWithCookie extends RsWrap {
     );
 
     /**
-     * Cookie header name.
-     */
-    private static final CharSequence SET_COOKIE = "Set-Cookie";
-
-    /**
      * Constructor with cookie name, value, and optional attributes.
+     *
      * @param name The cookie name
      * @param value The cookie value
      * @param attrs Optional cookie attributes such as "Path=/" or "Secure"
@@ -82,6 +77,7 @@ public final class RsWithCookie extends RsWrap {
 
     /**
      * Constructor that decorates an existing response with a cookie.
+     *
      * @param res The original response to decorate
      * @param name The cookie name
      * @param value The cookie value
@@ -90,17 +86,10 @@ public final class RsWithCookie extends RsWrap {
      */
     public RsWithCookie(final Response res, final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
-        super(new RsWithCookie.LazyResponse(res, name, value, attrs));
+        super(new LazyResponse(res, name, value, attrs));
     }
 
-    /**
-     * Builds the cookie string for the Set-Cookie header.
-     * @param name The cookie name
-     * @param value The cookie value
-     * @param attrs Optional cookie attributes such as "Path=/" or "Secure"
-     * @return The formatted cookie string
-     */
-    private static String make(final CharSequence name,
+    static String make(final CharSequence name,
         final CharSequence value, final CharSequence... attrs) {
         final StringBuilder text = new StringBuilder(
             new UncheckedText(new FormattedText("%s=%s;", name, value)).asString()
@@ -111,12 +100,7 @@ public final class RsWithCookie extends RsWrap {
         return text.toString();
     }
 
-    /**
-     * Validates cookie value according to RFC 6265 section 4.1.1.
-     * @param value The cookie value to validate
-     * @return The validated cookie value
-     */
-    private static CharSequence validValue(final CharSequence value) {
+    static CharSequence validValue(final CharSequence value) {
         if (!RsWithCookie.CVALUE_PTRN.matcher(value).matches()) {
             throw new IllegalArgumentException(
                 new UncheckedText(
@@ -130,12 +114,7 @@ public final class RsWithCookie extends RsWrap {
         return value;
     }
 
-    /**
-     * Validates cookie name according to RFC 2616, section 2.2.
-     * @param name The cookie name to validate
-     * @return The validated cookie name
-     */
-    private static CharSequence validName(final CharSequence name) {
+    static CharSequence validName(final CharSequence name) {
         if (!RsWithCookie.CNAME_PTRN.matcher(name).matches()) {
             throw new IllegalArgumentException(
                 new UncheckedText(
@@ -147,50 +126,5 @@ public final class RsWithCookie extends RsWrap {
             );
         }
         return name;
-    }
-
-    /**
-     * Lazily-built cookie response.
-     * @since 2.0
-     */
-    private static final class LazyResponse implements Response {
-
-        /**
-         * Cached underlying response.
-         */
-        private final Scalar<Response> inner;
-
-        /**
-         * Ctor.
-         * @param res Wrapped response
-         * @param name Cookie name
-         * @param value Cookie value
-         * @param attrs Cookie attributes
-         * @checkstyle ParameterNumberCheck (4 lines)
-         */
-        LazyResponse(final Response res, final CharSequence name,
-            final CharSequence value, final CharSequence... attrs) {
-            this.inner = new Sticky<>(
-                () -> new RsWithHeader(
-                    res,
-                    RsWithCookie.SET_COOKIE,
-                    RsWithCookie.make(
-                        RsWithCookie.validName(name),
-                        RsWithCookie.validValue(value),
-                        attrs
-                    )
-                )
-            );
-        }
-
-        @Override
-        public Iterable<String> head() throws IOException {
-            return new IoChecked<>(this.inner).value().head();
-        }
-
-        @Override
-        public InputStream body() throws IOException {
-            return new IoChecked<>(this.inner).value().body();
-        }
     }
 }

@@ -17,6 +17,7 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test of {@link PsAll}.
+ *
  * @since 0.22
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

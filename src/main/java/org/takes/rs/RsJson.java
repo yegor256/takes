@@ -9,7 +9,6 @@ import jakarta.json.JsonStructure;
 import jakarta.json.JsonWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -21,9 +20,9 @@ import org.takes.Response;
  * <p>This decorator converts Java objects to JSON format using Jakarta JSON API
  * and automatically sets the content type to "application/json". It accepts
  * JsonStructure objects or Source implementations that provide JSON content.
- * The serialization is performed using standard JSON writers.
+ * The serialization is performed using standard JSON writers.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
  */
@@ -33,6 +32,7 @@ public final class RsJson extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param json JSON object
      * @throws IOException If fails
      */
@@ -44,15 +44,17 @@ public final class RsJson extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param src Source
      * @throws IOException If fails
      */
     public RsJson(final RsJson.Source src) throws IOException {
-        this(new RsWithBody(new RsJson.JsonBody(src)));
+        this(new RsWithBody(new JsonBody(src)));
     }
 
     /**
      * Ctor.
+     *
      * @param res Resource
      */
     public RsJson(final Response res) {
@@ -60,16 +62,11 @@ public final class RsJson extends RsWrap {
             new RsWithType(
                 new RsWithStatus(res, HttpURLConnection.HTTP_OK),
                 "application/json"
-        )
+            )
         );
     }
 
-    /**
-     * Print JSON.
-     * @param src Source
-     * @return JSON
-     */
-    private static byte[] print(final RsJson.Source src) {
+    static byte[] print(final RsJson.Source src) {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try (JsonWriter writer = Json.createWriter(baos)) {
             writer.write(src.toJson());
@@ -79,6 +76,7 @@ public final class RsJson extends RsWrap {
 
     /**
      * Source with JSON.
+     *
      * @since 0.1
      */
     @FunctionalInterface
@@ -86,69 +84,9 @@ public final class RsJson extends RsWrap {
 
         /**
          * Get JSON value.
+         *
          * @return JSON
          */
         JsonStructure toJson();
-    }
-
-    /**
-     * Lazy InputStream that prints JSON from a {@link Source} on demand.
-     * @since 2.0
-     */
-    private static final class JsonBody extends InputStream {
-
-        /**
-         * JSON source.
-         */
-        private final RsJson.Source src;
-
-        /**
-         * Cached delegate.
-         */
-        private InputStream delegate;
-
-        /**
-         * Ctor.
-         * @param source JSON source
-         */
-        JsonBody(final RsJson.Source source) {
-            this.src = source;
-        }
-
-        @Override
-        public int read() throws IOException {
-            return this.body().read();
-        }
-
-        @Override
-        public int read(final byte[] buf, final int off, final int len)
-            throws IOException {
-            return this.body().read(buf, off, len);
-        }
-
-        @Override
-        public int available() throws IOException {
-            return this.body().available();
-        }
-
-        @Override
-        public void close() throws IOException {
-            if (this.delegate != null) {
-                this.delegate.close();
-            }
-        }
-
-        /**
-         * Lazily resolve the underlying byte stream.
-         * @return Cached InputStream
-         */
-        private InputStream body() {
-            if (this.delegate == null) {
-                this.delegate = new java.io.ByteArrayInputStream(
-                    RsJson.print(this.src)
-                );
-            }
-            return this.delegate;
-        }
     }
 }

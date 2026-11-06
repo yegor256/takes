@@ -23,10 +23,10 @@ import org.cactoos.text.UncheckedText;
  * that use chunked transfer encoding as specified in RFC 2616. It handles
  * the chunk size parsing (including hexadecimal format and optional comments),
  * CRLF validation, and proper end-of-stream detection when the final
- * zero-length chunk is encountered.
+ * zero-length chunk is encountered.</p>
  *
  * <p>The implementation includes a finite state machine for robust parsing
- * of chunk headers and handles quoted strings within chunk extensions.
+ * of chunk headers and handles quoted strings within chunk extensions.</p>
  *
  * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1">Chunked Transfer Coding</a>
  * @since 0.31.2
@@ -60,6 +60,7 @@ final class ChunkedInputStream extends InputStream {
 
     /**
      * Ctor.
+     *
      * @param stream The raw input stream
      */
     ChunkedInputStream(final InputStream stream) {
@@ -116,10 +117,6 @@ final class ChunkedInputStream extends InputStream {
         return this.read(buf, 0, buf.length);
     }
 
-    /**
-     * Read the CRLF terminator.
-     * @throws IOException If an IO error occurs.
-     */
     private void readCrlf() throws IOException {
         final int crsymbol = this.origin.read();
         final int lfsymbol = this.origin.read();
@@ -138,10 +135,6 @@ final class ChunkedInputStream extends InputStream {
         }
     }
 
-    /**
-     * Read the next chunk.
-     * @throws IOException If an IO error occurs.
-     */
     private void nextChunk() throws IOException {
         if (!this.bof) {
             this.readCrlf();
@@ -154,14 +147,6 @@ final class ChunkedInputStream extends InputStream {
         }
     }
 
-    /**
-     * Expects the stream to start with a chunksize in hex with optional
-     * comments after a semicolon. The line must end with a CRLF: "a3; some
-     * comment\r\n" Positions the stream at the start of the next line.
-     * @param stream The new input stream
-     * @return The chunk size as integer
-     * @throws IOException when the chunk size could not be parsed
-     */
     private static int chunkSize(final InputStream stream) throws IOException {
         final ByteArrayOutputStream baos = ChunkedInputStream.sizeLine(stream);
         final String data = baos.toString(Charset.defaultCharset());
@@ -217,12 +202,6 @@ final class ChunkedInputStream extends InputStream {
         END
     }
 
-    /**
-     * Extract line with chunk size from stream.
-     * @param stream Input stream
-     * @return Line with chunk size
-     * @throws IOException If fails
-     */
     private static ByteArrayOutputStream sizeLine(final InputStream stream)
         throws IOException {
         State state = State.NORMAL;
@@ -233,14 +212,6 @@ final class ChunkedInputStream extends InputStream {
         return result;
     }
 
-    /**
-     * Get next state for FSM.
-     * @param stream Input stream
-     * @param state Current state
-     * @param line Current chunk size line
-     * @return New state
-     * @throws IOException If fails
-     */
     private static State next(final InputStream stream, final State state,
         final ByteArrayOutputStream line) throws IOException {
         final int next = stream.read();
@@ -271,13 +242,6 @@ final class ChunkedInputStream extends InputStream {
         return result;
     }
 
-    /**
-     * Maintain next symbol for current state = State.NORMAL.
-     * @param state Current state
-     * @param line Current chunk size line
-     * @param next Next symbol
-     * @return New state
-     */
     private static State nextNormal(final State state,
         final ByteArrayOutputStream line, final int next) {
         final State result;
@@ -292,15 +256,6 @@ final class ChunkedInputStream extends InputStream {
         return result;
     }
 
-    /**
-     * Maintain next symbol for current state = State.QUOTED_STRING.
-     * @param stream Input stream
-     * @param state Current state
-     * @param line Current chunk size line
-     * @param next Next symbol
-     * @return New state
-     * @throws IOException If fails
-     */
     private static State nextQuoted(final InputStream stream, final State state,
         final ByteArrayOutputStream line, final int next)
         throws IOException {

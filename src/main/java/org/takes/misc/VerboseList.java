@@ -18,9 +18,9 @@ import org.cactoos.text.UncheckedText;
  * <p>This decorator wraps an existing list and replaces generic
  * IndexOutOfBoundsException messages with custom, more descriptive error messages.
  * It intercepts all index-based operations and provides better debugging
- * information when operations fail due to invalid indices.
+ * information when operations fail due to invalid indices.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @param <T> Type of item
  * @since 0.31.1
@@ -39,6 +39,7 @@ public final class VerboseList<T> implements List<T> {
 
     /**
      * Ctor.
+     *
      * @param list Original list
      * @param msg Error message for IndexOutOfBoundsException
      */
@@ -190,11 +191,6 @@ public final class VerboseList<T> implements List<T> {
         }
     }
 
-    /**
-     * Wraps {@link IndexOutOfBoundsException} with custom message.
-     * @param cause Original exception
-     * @return Wrapped exception
-     */
     private IndexOutOfBoundsException wrapException(
         final IndexOutOfBoundsException cause) {
         final IndexOutOfBoundsException exc =

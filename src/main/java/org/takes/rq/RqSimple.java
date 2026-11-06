@@ -12,9 +12,9 @@ import lombok.EqualsAndHashCode;
  *
  * <p>This class provides a straightforward way to create Request instances
  * from an iterable of header strings and an input stream for the body.
- * It serves as a convenient wrapper around RequestOf for common use cases.
+ * It serves as a convenient wrapper around RequestOf for common use cases.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.17
  */
@@ -23,6 +23,7 @@ public final class RqSimple extends RqWrap {
 
     /**
      * Ctor.
+     *
      * @param head Head
      * @param body Body
      */

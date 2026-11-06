@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link ChunkedInputStream}.
+ *
  * @since 0.31.2
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

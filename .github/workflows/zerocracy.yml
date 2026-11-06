@@ -12,11 +12,11 @@ concurrency:
 jobs:
   zerocracy:
     if: github.repository_owner == 'yegor256'
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
-      - uses: zerocracy/judges-action@0.17.21
+      - uses: zerocracy/judges-action@0.17.23
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           repositories: yegor256/takes

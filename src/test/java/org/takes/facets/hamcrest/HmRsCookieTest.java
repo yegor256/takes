@@ -14,6 +14,7 @@ import org.takes.rs.RsEmpty;
 
 /**
  * Test case for {@link org.takes.facets.hamcrest.HmRsCookie}.
+ *
  * @since 2.0
  */
 final class HmRsCookieTest {

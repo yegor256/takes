@@ -20,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * Tests for {@link VerboseList}.
+ *
  * @since 0.32
  */
 @ExtendWith(MockitoExtension.class)
@@ -288,10 +289,6 @@ final class VerboseListTest {
         );
     }
 
-    /**
-     * Build a fresh decorated list using the mocked origin.
-     * @return Decorator wrapping the mock origin
-     */
     private VerboseList<Object> verboseList() {
         return new VerboseList<>(
             this.origin,
@@ -299,11 +296,6 @@ final class VerboseListTest {
         );
     }
 
-    /**
-     * Assert cause.
-     * @param exec Code block
-     * @param cause Cause
-     */
     private void assertThat(final Executable exec, final Exception cause) {
         MatcherAssert.assertThat(
             "Exception must have expected message and cause",

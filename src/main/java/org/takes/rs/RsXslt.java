@@ -7,7 +7,6 @@ package org.takes.rs;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.XMLConstants;
@@ -36,18 +35,18 @@ import org.takes.Response;
  * processing instructions and transforms them into HTML or other formats.
  * The stylesheet location is resolved using a configurable URIResolver,
  * with classpath resolution as the default. Transformer factories are
- * cached for performance.
+ * cached for performance.</p>
  *
- * <p>Expected XML format:
+ * <p>Expected XML format:</p>
  * <pre>&lt;?xml version="1.0"?&gt;
  * &lt;?xml-stylesheet href="/xsl/home.xsl" type="text/xsl"?&gt;
  * &lt;page/&gt;
  * </pre>
  *
  * <p>The stylesheet {@code /xsl/home.xsl} will be resolved on the classpath.
- * If not found, a runtime exception is thrown.
+ * If not found, a runtime exception is thrown.</p>
  *
- * <p>Example usage with RsXembly:
+ * <p>Example usage with RsXembly:</p>
  * <pre>new RsXslt(
  *   new RsXembly(
  *     new XeStylesheet("/xsl/home.xsl"),
@@ -61,15 +60,16 @@ import org.takes.Response;
  * )</pre>
  *
  * <p><strong>Note:</strong> Saxon is recommended as the XSL transformer
- * for best compatibility and performance.
+ * for best compatibility and performance.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see org.takes.rs.xe.RsXembly
  * @since 0.1
  */
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 public final class RsXslt extends RsWrap {
 
     /**
@@ -80,14 +80,16 @@ public final class RsXslt extends RsWrap {
 
     /**
      * Ctor.
+     *
      * @param rsp Original response
      */
     public RsXslt(final Response rsp) {
-        this(rsp, new RsXslt.InClasspath());
+        this(rsp, new InClasspath());
     }
 
     /**
      * Ctor.
+     *
      * @param rsp Original response
      * @param resolver URI resolver
      */
@@ -108,11 +110,6 @@ public final class RsXslt extends RsWrap {
         );
     }
 
-    /**
-     * Get factory for the given resolver.
-     * @param resolver Resolver
-     * @return Factory
-     */
     private static TransformerFactory factory(final URIResolver resolver) {
         return RsXslt.FACTORIES.computeIfAbsent(
             resolver,
@@ -133,13 +130,6 @@ public final class RsXslt extends RsWrap {
         );
     }
 
-    /**
-     * Build body.
-     * @param origin Original body
-     * @param resolver Resolver
-     * @return Body
-     * @throws IOException If fails
-     */
     private static InputStream transform(final InputStream origin,
         final URIResolver resolver) throws IOException {
         final TransformerFactory fct = RsXslt.factory(resolver);
@@ -158,13 +148,6 @@ public final class RsXslt extends RsWrap {
         }
     }
 
-    /**
-     * Transform XML into HTML.
-     * @param factory Transformer factory
-     * @param xml XML page to be transformed
-     * @return Resulting HTML page
-     * @throws TransformerException If fails
-     */
     private static InputStream transform(final TransformerFactory factory,
         final InputStream xml) throws TransformerException {
         final byte[] input;
@@ -191,12 +174,6 @@ public final class RsXslt extends RsWrap {
         return new InputStreamOf(baos.toByteArray());
     }
 
-    /**
-     * Consume input stream.
-     * @param input Input stream
-     * @return Bytes found
-     * @throws IOException If fails
-     */
     private static byte[] consume(final InputStream input) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final byte[] buf = new byte[4096];
@@ -212,14 +189,6 @@ public final class RsXslt extends RsWrap {
         return baos.toByteArray();
     }
 
-    /**
-     * Retrieve a stylesheet from this XML (throws an exception if
-     * no stylesheet is attached).
-     * @param factory Transformer factory
-     * @param xml The XML
-     * @return Stylesheet found
-     * @throws TransformerConfigurationException If fails
-     */
     private static Source stylesheet(final TransformerFactory factory,
         final Source xml) throws TransformerConfigurationException {
         final Source stylesheet = factory.getAssociatedStylesheet(
@@ -233,13 +202,6 @@ public final class RsXslt extends RsWrap {
         return stylesheet;
     }
 
-    /**
-     * Make a transformer from this stylesheet.
-     * @param factory Transformer factory
-     * @param stylesheet The stylesheet
-     * @return Transformer
-     * @throws TransformerConfigurationException If fails
-     */
     private static Transformer transformer(final TransformerFactory factory,
         final Source stylesheet) throws TransformerConfigurationException {
         final Transformer tnfr = factory.newTransformer(stylesheet);
@@ -255,53 +217,5 @@ public final class RsXslt extends RsWrap {
             );
         }
         return tnfr;
-    }
-
-    /**
-     * Classpath URI resolver.
-     * @since 0.1
-     */
-    private static final class InClasspath implements URIResolver {
-
-        @Override
-        public Source resolve(final String href, final String base)
-            throws TransformerException {
-            final URI uri;
-            if (base == null || base.isEmpty()) {
-                uri = URI.create(href);
-            } else {
-                uri = URI.create(base).resolve(href);
-            }
-            final InputStream input;
-            if (uri.isAbsolute() && !"file".equals(uri.getScheme())) {
-                try {
-                    input = uri.toURL().openStream();
-                } catch (final IOException ex) {
-                    throw new IllegalStateException(
-                        new UncheckedText(
-                            new FormattedText(
-                                "Failed to open URL '%s'", uri
-                            )
-                        ).asString(),
-                        ex
-                    );
-                }
-            } else {
-                input = this.getClass().getResourceAsStream(uri.getPath());
-                if (input == null) {
-                    throw new TransformerException(
-                        new UncheckedText(
-                            new FormattedText(
-                                "\"%s\" not found in classpath, base=\"%s\"",
-                                href, base
-                            )
-                        ).asString()
-                    );
-                }
-            }
-            return new StreamSource(
-                new ReaderOf(input)
-            );
-        }
     }
 }

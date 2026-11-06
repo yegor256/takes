@@ -5,6 +5,7 @@
 
 /**
  * Codecs, tests.
+ *
  * @since 0.5
  */
 package org.takes.facets.auth.codecs;

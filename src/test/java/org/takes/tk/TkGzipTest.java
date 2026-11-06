@@ -26,8 +26,10 @@ import org.takes.rs.RsText;
 
 /**
  * Test case for {@link TkGzip}.
+ *
  * @since 0.17
  */
+@SuppressWarnings("PMD.CloseInlineResourceRule")
 final class TkGzipTest {
 
     @Test

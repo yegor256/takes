@@ -21,9 +21,9 @@ import org.takes.Head;
 /**
  * Header Matcher.
  *
- * <p>This "matcher" tests given item headers.
+ * <p>This "matcher" tests given item headers.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @param <T> Item type. Should be able to return own headers
  * @since 0.31.2
@@ -52,6 +52,7 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     *
      * @param hdr Header name
      * @param vlm Value matcher
      */
@@ -61,6 +62,7 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
 
     /**
      * Ctor.
+     *
      * @param hdrm Header matcher
      * @param vlm Value matcher
      */
@@ -113,23 +115,11 @@ public final class HmHeader<T extends Head> extends TypeSafeMatcher<T> {
             .appendValue(this.failed);
     }
 
-    /**
-     * Returns item's headers.
-     * @param item To extract headers from
-     * @return Header lines
-     * @throws IOException If something goes wrong
-     */
     private static Iterable<String> headers(final Head item) throws
         IOException {
         return item.head();
     }
 
-    /**
-     * Splits the given header to [name, value] array.
-     * @param header Header
-     * @return Array in which the first element is header name,
-     *  the second is header value
-     */
     private static String[] split(final String header) {
         return header.split(":", 2);
     }

@@ -21,6 +21,7 @@ import org.takes.rs.RsHeadPrint;
 
 /**
  * Test case for {@link TkFiles}.
+ *
  * @since 0.8
  */
 final class TkFilesTest {
@@ -54,6 +55,25 @@ final class TkFilesTest {
             () -> new TkFiles("/absent-dir-for-sure").act(
                 new RqFake("PUT", "/something-else.txt", "")
             )
+        );
+    }
+
+    @Test
+    @DisabledOnOs(OS.WINDOWS)
+    void rejectsPathTraversalOutsideBase(@TempDir final Path temp)
+        throws Exception {
+        final File base = temp.resolve("base").toFile();
+        FileUtils.forceMkdir(base);
+        FileUtils.write(
+            temp.resolve("secret.txt").toFile(), "top secret",
+            StandardCharsets.UTF_8
+        );
+        Assertions.assertThrows(
+            HttpException.class,
+            () -> new TkFiles(base).act(
+                new RqFake("GET", "/../secret.txt", "")
+            ),
+            "TkFiles must not serve files outside of the base directory"
         );
     }
 }

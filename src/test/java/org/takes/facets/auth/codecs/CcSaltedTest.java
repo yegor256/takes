@@ -14,6 +14,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcSalted}.
+ *
  * @since 0.5
  */
 final class CcSaltedTest {

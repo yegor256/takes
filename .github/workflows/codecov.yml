@@ -13,13 +13,13 @@ concurrency:
 jobs:
   codecov:
     timeout-minutes: 15
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
-          java-version: 23
+          java-version: 25.0.5+8.0.LTS
       - uses: actions/cache@v6
         with:
           path: ~/.m2/repository

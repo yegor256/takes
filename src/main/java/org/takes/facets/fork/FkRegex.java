@@ -4,8 +4,6 @@
  */
 package org.takes.facets.fork;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
@@ -24,7 +22,7 @@ import org.takes.tk.TkText;
  * Fork by regular expression pattern.
  *
  * <p>Use this class in combination with {@link TkFork},
- * for example:
+ * for example:</p>
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex("/home", new TkHome()),
@@ -35,12 +33,12 @@ import org.takes.tk.TkText;
  * asked only once by {@link TkFork} whether the
  * request is good enough to be processed. If the request is suitable
  * for this particular fork, it will return the relevant
- * {@link org.takes.Take}.
+ * {@link org.takes.Take}.</p>
  *
  * <p>Also, keep in mind that the second argument of the constructor may
  * be of type {@link TkRegex} and accept an
  * instance of {@link org.takes.facets.fork.RqRegex}, which makes it very
- * convenient to reuse regular expression matcher, for example:
+ * convenient to reuse regular expression matcher, for example:</p>
  *
  * <pre> Take take = new TkFork(
  *   new FkRegex(
@@ -57,7 +55,7 @@ import org.takes.tk.TkText;
  *   )
  * );</pre>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see TkFork
  * @see TkRegex
@@ -88,6 +86,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param text Text
      */
@@ -97,6 +96,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param rsp Response
      * @since 0.16
@@ -107,6 +107,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param rsp Response
      * @since 0.16
@@ -117,6 +118,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -126,6 +128,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -135,6 +138,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -144,6 +148,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      */
@@ -153,6 +158,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern
      * @param that Take
      * @since 1.4
@@ -163,6 +169,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern (lazy)
      * @param that Take
      */
@@ -172,6 +179,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Ctor.
+     *
      * @param ptn Pattern (lazy)
      * @param that Take
      */
@@ -183,6 +191,7 @@ public final class FkRegex implements Fork {
 
     /**
      * Allows disabling the standard way for handling trailing slashes.
+     *
      * @param enabled Enables/Disables the removal of a trailing slash
      * @return FkRegex
      */
@@ -207,54 +216,12 @@ public final class FkRegex implements Fork {
         if (matcher.matches()) {
             resp = new Opt.Single<>(
                 this.target.value().act(
-                    new FkRegex.RqMatcher(matcher, req)
+                    new RqMatcher(matcher, req)
                 )
             );
         } else {
             resp = new Opt.Empty<>();
         }
         return resp;
-    }
-
-    /**
-     * Request with a matcher inside.
-     * @since 0.32.5
-     */
-    private static final class RqMatcher implements RqRegex {
-
-        /**
-         * Matcher.
-         */
-        private final Matcher mtr;
-
-        /**
-         * Original request.
-         */
-        private final Request req;
-
-        /**
-         * Ctor.
-         * @param matcher Matcher
-         * @param request Request
-         */
-        RqMatcher(final Matcher matcher, final Request request) {
-            this.mtr = matcher;
-            this.req = request;
-        }
-
-        @Override
-        public Iterable<String> head() throws IOException {
-            return this.req.head();
-        }
-
-        @Override
-        public InputStream body() throws IOException {
-            return this.req.body();
-        }
-
-        @Override
-        public Matcher matcher() {
-            return this.mtr;
-        }
     }
 }

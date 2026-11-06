@@ -16,7 +16,7 @@ import org.takes.rs.RsRedirect;
 /**
  * Take that redirects to HTTPS if it's HTTP.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @since 1.9
  */
@@ -31,6 +31,7 @@ public final class TkSslOnly implements Take {
 
     /**
      * Ctor.
+     *
      * @param take Original take
      */
     public TkSslOnly(final Take take) {

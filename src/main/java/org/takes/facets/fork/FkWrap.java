@@ -12,7 +12,7 @@ import org.takes.misc.Opt;
 /**
  * Wrap for the fork.
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see RsFork
  * @since 0.13
@@ -27,6 +27,7 @@ public class FkWrap implements Fork {
 
     /**
      * Ctor.
+     *
      * @param fork Original fork
      */
     public FkWrap(final Fork fork) {

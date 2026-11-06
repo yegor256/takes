@@ -44,12 +44,12 @@ import org.takes.rq.RqMultipart;
  * {@code multipart/form-data} format (RFC 2045).
  *
  * <p>For {@code application/x-www-form-urlencoded}
- * format use {@link org.takes.rq.RqForm}.
+ * format use {@link org.takes.rq.RqForm}.</p>
  *
  * <p>It is highly recommended to use {@link org.takes.rq.RqGreedy}
- * decorator before passing request to this class.
+ * decorator before passing request to this class.</p>
  *
- * <p>The class is immutable and thread-safe.
+ * <p>The class is immutable and thread-safe.</p>
  *
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *  Forms in HTML</a>
@@ -105,6 +105,7 @@ public final class RqMtBase implements RqMultipart {
 
     /**
      * Ctor.
+     *
      * @param req Original request
      * @throws IOException If fails
      */
@@ -164,12 +165,6 @@ public final class RqMtBase implements RqMultipart {
         return new RqMtBase.CloseMultipart(this.origin.body());
     }
 
-    /**
-     * Build a request for each part of the origin request.
-     * @param req Origin request
-     * @return The requests map that use the part name as a map key
-     * @throws IOException If fails
-     */
     @SuppressWarnings("PMD.CloseResource")
     private Map<String, List<Request>> requests(
         final Request req) throws IOException {
@@ -232,15 +227,6 @@ public final class RqMtBase implements RqMultipart {
         return RqMtBase.asMap(requests);
     }
 
-    /**
-     * Make a request.
-     * Scans the origin request until the boundary reached. Caches
-     * the  content into a temporary file and returns it as a new request.
-     * @param boundary Boundary
-     * @param body Origin request body
-     * @return Request
-     * @throws IOException If fails
-     */
     private Request make(final byte[] boundary,
         final ReadableByteChannel body) throws IOException {
         final File file = File.createTempFile(
@@ -269,12 +255,6 @@ public final class RqMtBase implements RqMultipart {
         return new RqTemp(file);
     }
 
-    /**
-     * Convert a list of requests to a map.
-     * @param reqs Requests
-     * @return Map of them
-     * @throws IOException If fails
-     */
     private static Map<String, List<Request>> asMap(
         final Collection<Request> reqs) throws IOException {
         final Map<String, List<Request>> map = new HashMap<>(reqs.size());
@@ -304,12 +284,14 @@ public final class RqMtBase implements RqMultipart {
 
     /**
      * Decorator allowing to close all the parts of the request.
+     *
      * @since 0.33
      */
     private class CloseMultipart extends FilterInputStream {
 
         /**
          * Creates a {@code CloseParts} with the specified input.
+         *
          * @param input The underlying input stream
          */
         CloseMultipart(final InputStream input) {

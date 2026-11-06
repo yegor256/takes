@@ -18,6 +18,7 @@ import org.takes.tk.TkFixed;
 
 /**
  * Test case for {@link RsFork}.
+ *
  * @since 0.6
  */
 @SuppressWarnings("PMD.UnnecessaryLocalRule")

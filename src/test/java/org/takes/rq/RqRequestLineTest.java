@@ -15,6 +15,7 @@ import org.takes.HttpException;
 
 /**
  * Test case for {@link RqRequestLine.Base}.
+ *
  * @since 0.29.1
  */
 final class RqRequestLineTest {

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link RsStatus}.
+ *
  * @since 1.22
  */
 final class RsStatusTest {

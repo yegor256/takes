@@ -16,6 +16,7 @@ import org.takes.facets.auth.Identity;
 
 /**
  * Test case for {@link CcBase64}.
+ *
  * @since 0.13
  */
 final class CcBase64Test {
