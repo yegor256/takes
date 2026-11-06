@@ -681,6 +681,12 @@
                   <new>method void org.takes.servlet.HttpServletResponseFake::setStatus(int, java.lang.String)</new>
                   <justification>Added ErrorProne DoNotCall annotation to satisfy DoNotCallSuggester check on a method that always throws</justification>
                 </item>
+                <item>
+                  <ignore>true</ignore>
+                  <code>java.method.visibilityIncreased</code>
+                  <old>method void org.takes.http.FtRemote::&lt;init&gt;(org.takes.http.Front, java.net.ServerSocket, boolean)</old>
+                  <justification>Constructor made public intentionally so users can start an HTTPS server in their tests, solves #993</justification>
+                </item>
               </differences>
             </revapi.differences>
           </analysisConfiguration>
