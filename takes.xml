@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="1523463">
+<fb version="0.19.6" size="1525073">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
     <inserted t="I">8</inserted>
-    <seconds t="F">235.335701805</seconds>
+    <seconds t="F">369.558553913</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-11-07T03:58:07Z</when>
+    <when t="T">2026-11-08T04:00:26Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -85401,18 +85401,18 @@
     <_job t="I">28918418014</_job>
     <_time t="T">2026-07-08T04:54:06Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">581</assignees_were_scanned>
-    <closures_were_checked t="I">1695</closures_were_checked>
+    <assignees_were_scanned t="I">718</assignees_were_scanned>
+    <closures_were_checked t="I">0</closures_were_checked>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">26391657129</events_were_scanned>
+    <events_were_scanned t="I">26502962691</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
-    <labels_were_scanned t="I">991</labels_were_scanned>
+    <labels_were_scanned t="I">1448</labels_were_scanned>
     <latest_issue_was_found t="I">1463</latest_issue_was_found>
     <merges_were_scanned t="I">0</merges_were_scanned>
-    <min_issue_was_found t="I">1404</min_issue_was_found>
-    <min_pull_was_found t="I">1056</min_pull_was_found>
+    <min_issue_was_found t="I">1405</min_issue_was_found>
+    <min_pull_was_found t="I">1059</min_pull_was_found>
     <repository t="I">28924109</repository>
-    <types_were_scanned t="I">1292</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -95954,19 +95954,6 @@
     <when t="T">2026-11-04T04:00:48Z</when>
   </f>
   <f>
-    <_id t="I">21314</_id>
-    <_job t="I">104343</_job>
-    <_time t="T">2026-11-04T04:02:27Z</_time>
-    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
-    <analyzers t="I">18</analyzers>
-    <text t="S">The average number of builds per week (199.3) is staying still.
-The average number of commits per week (9.7) is staying still.
-The average number of releases per month (0.2) is decreasing (R=-0.20).
-The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
-    <what t="S">assessment</what>
-    <when t="T">2026-11-04T04:02:27Z</when>
-  </f>
-  <f>
     <_id t="I">21315</_id>
     <_job t="I">41964366897</_job>
     <_time t="T">2026-11-05T03:58:23Z</_time>
@@ -96178,6 +96165,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <issue t="I">1823</issue>
     <repository t="I">28924109</repository>
     <review t="T">2026-11-06T13:50:10Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">8</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -96205,6 +96193,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <issue t="I">1827</issue>
     <repository t="I">28924109</repository>
     <review t="T">2026-11-06T13:50:17Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">8</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -96231,6 +96220,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <is_human t="I">1</is_human>
     <issue t="I">1828</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">9</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -96257,6 +96247,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <is_human t="I">1</is_human>
     <issue t="I">1829</issue>
     <repository t="I">28924109</repository>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">9</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -96284,6 +96275,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <issue t="I">1830</issue>
     <repository t="I">28924109</repository>
     <review t="T">2026-11-06T13:52:31Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">9</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -96311,6 +96303,7 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <issue t="I">1831</issue>
     <repository t="I">28924109</repository>
     <review t="T">2026-11-06T19:35:39Z</review>
+    <review_comments t="I">0</review_comments>
     <succeeded_builds t="I">10</succeeded_builds>
     <suggestions t="I">0</suggestions>
     <what t="S">pull-was-merged</what>
@@ -96408,5 +96401,133 @@ The average monthly turnover (4.0 developers) is decreasing (R=-0.20).</text>
     <when t="T">2026-11-05T05:27:52Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21338</_id>
+    <_job t="I">105672</_job>
+    <_time t="T">2026-11-07T04:21:20Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <analyzers t="I">18</analyzers>
+    <text t="S">The average number of builds per week (199.3) is staying still.
+The average number of commits per week (9.7) is staying still.
+The average number of releases per month (0.2) is decreasing (R=-0.20).
+The average monthly turnover (4.0 developers) is staying still.</text>
+    <what t="S">assessment</what>
+    <when t="T">2026-11-07T04:21:20Z</when>
+  </f>
+  <f>
+    <_id t="I">21339</_id>
+    <_job t="I">105672</_job>
+    <_time t="T">2026-11-07T04:21:41Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <ac t="I">24</ac>
+    <cost_of_qod t="F">2.3482471255444626</cost_of_qod>
+    <ev t="I">718</ev>
+    <pv t="I">16062</pv>
+    <qod t="I">306</qod>
+    <qod_per_day t="F">16.45033503262167</qod_per_day>
+    <qod_per_sec t="F">8.520578149490452e-06</qod_per_sec>
+    <start t="T">2025-09-17T09:00:17Z</start>
+    <what t="S">earned-value</what>
+    <when t="T">2026-11-07T04:21:41Z</when>
+  </f>
+  <f>
+    <_id t="I">21340</_id>
+    <_job t="I">42444547644</_job>
+    <_time t="T">2026-11-08T03:55:16Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">983</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1824 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">37</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1824</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-11-05T05:17:14Z</review>
+    <succeeded_builds t="I">9</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-11-05T05:21:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21341</_id>
+    <_job t="I">42444547644</_job>
+    <_time t="T">2026-11-08T03:55:32Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">1000</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1825 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">8</files>
+    <hoc t="I">673</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1825</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-11-05T05:18:55Z</review>
+    <succeeded_builds t="I">8</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-11-05T05:23:29Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21342</_id>
+    <_job t="I">42444547644</_job>
+    <_time t="T">2026-11-08T03:55:42Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <branch t="S">1116</branch>
+    <comments t="I">0</comments>
+    <comments_appreciated t="I">0</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">0</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">Apparently, yegor256/takes#1826 has been "pull-was-merged".</details>
+    <failed_builds t="I">0</failed_builds>
+    <files t="I">2</files>
+    <hoc t="I">69</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1826</issue>
+    <repository t="I">28924109</repository>
+    <review t="T">2026-11-05T05:28:02Z</review>
+    <succeeded_builds t="I">8</succeeded_builds>
+    <suggestions t="I">0</suggestions>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2026-11-05T05:32:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">21343</_id>
+    <_job t="I">42444547644</_job>
+    <_time t="T">2026-11-08T03:57:05Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.23</_version>
+    <total_active_contributors t="I">6</total_active_contributors>
+    <total_commits t="I">4016</total_commits>
+    <total_contributors t="I">91</total_contributors>
+    <total_files t="I">603</total_files>
+    <total_forks t="I">218</total_forks>
+    <total_issues t="I">761</total_issues>
+    <total_pulls t="I">1068</total_pulls>
+    <total_releases t="I">158</total_releases>
+    <total_repositories t="I">1</total_repositories>
+    <total_stars t="I">877</total_stars>
+    <what t="S">dimensions-of-terrain</what>
+    <when t="T">2026-11-08T03:57:05Z</when>
   </f>
 </fb>

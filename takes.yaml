@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 235.335701805
+  seconds: 369.558553913
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-07 03:58:07.209588512 Z
+  when: 2026-11-08 04:00:26.495146040 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76672,18 +76672,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 581
-  closures_were_checked: 1695
+  assignees_were_scanned: 718
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26391657129
+  events_were_scanned: 26502962691
   issues_were_scanned: 0
-  labels_were_scanned: 991
+  labels_were_scanned: 1448
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1404
-  min_pull_was_found: 1056
+  min_issue_was_found: 1405
+  min_pull_was_found: 1059
   repository: 28924109
-  types_were_scanned: 1292
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 20665
@@ -86157,18 +86157,6 @@
   since: *185
   what: quality-of-service
   when: 2026-11-04 04:00:48.647956421 Z
-- _id: 21314
-  _job: 104343
-  _time: 2026-11-04 04:02:27.667692556 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (199.3) is staying still.
-    The average number of commits per week (9.7) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.20).
-    The average monthly turnover (4.0 developers) is decreasing (R=-0.20).
-  what: assessment
-  when: 2026-11-04 04:02:27.686211342 Z
 - _id: 21315
   _job: 41964366897
   _time: 2026-11-05 03:58:23.792482300 Z
@@ -86362,6 +86350,7 @@
   issue: 1823
   repository: 28924109
   review: 2026-11-06 13:50:10.000000000 Z
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
@@ -86387,6 +86376,7 @@
   issue: 1827
   repository: 28924109
   review: 2026-11-06 13:50:17.000000000 Z
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
@@ -86411,6 +86401,7 @@
   is_human: 1
   issue: 1828
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -86435,6 +86426,7 @@
   is_human: 1
   issue: 1829
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -86460,6 +86452,7 @@
   issue: 1830
   repository: 28924109
   review: 2026-11-06 13:52:31.000000000 Z
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -86485,6 +86478,7 @@
   issue: 1831
   repository: 28924109
   review: 2026-11-06 19:35:39.000000000 Z
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -86570,3 +86564,120 @@
   when: 2026-11-05 05:27:52.000000000 Z
   where: github
   who: 526301
+- _id: 21338
+  _job: 105672
+  _time: 2026-11-07 04:21:20.912966690 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (199.3) is staying still.
+    The average number of commits per week (9.7) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.20).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-11-07 04:21:20.935407503 Z
+- _id: 21339
+  _job: 105672
+  _time: 2026-11-07 04:21:41.835098783 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  ac: 24
+  cost_of_qod: 2.3482471255444626
+  ev: 718
+  pv: 16062
+  qod: 306
+  qod_per_day: 16.45033503262167
+  qod_per_sec: 8.520578149490452e-06
+  start: *3
+  what: earned-value
+  when: 2026-11-07 04:21:41.835310421 Z
+- _id: 21340
+  _job: 42444547644
+  _time: 2026-11-08 03:55:16.884520158 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '983'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1824 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 37
+  is_human: 1
+  issue: 1824
+  repository: 28924109
+  review: 2026-11-05 05:17:14.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-05 05:21:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 21341
+  _job: 42444547644
+  _time: 2026-11-08 03:55:32.756145710 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1000'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1825 has been "pull-was-merged".
+  failed_builds: 0
+  files: 8
+  hoc: 673
+  is_human: 1
+  issue: 1825
+  repository: 28924109
+  review: 2026-11-05 05:18:55.000000000 Z
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-05 05:23:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 21342
+  _job: 42444547644
+  _time: 2026-11-08 03:55:42.317559279 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1116'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1826 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 69
+  is_human: 1
+  issue: 1826
+  repository: 28924109
+  review: 2026-11-05 05:28:02.000000000 Z
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-05 05:32:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 21343
+  _job: 42444547644
+  _time: 2026-11-08 03:57:05.605166717 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 6
+  total_commits: 4016
+  total_contributors: 91
+  total_files: 603
+  total_forks: 218
+  total_issues: 761
+  total_pulls: 1068
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-11-08 03:57:05.540998016 Z
