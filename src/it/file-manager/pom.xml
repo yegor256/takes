@@ -14,7 +14,6 @@
   <artifactId>file-manager</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
-    <saxon.version>9.1.0.8</saxon.version>
     <jdk.version>1.8</jdk.version>
   </properties>
   <dependencies>
@@ -78,16 +77,9 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>net.sourceforge.saxon</groupId>
-      <artifactId>saxon</artifactId>
-      <version>${saxon.version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>net.sourceforge.saxon</groupId>
-      <artifactId>saxon</artifactId>
-      <version>${saxon.version}</version>
-      <classifier>dom</classifier>
+      <groupId>net.sf.saxon</groupId>
+      <artifactId>Saxon-HE</artifactId>
+      <version>13.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
