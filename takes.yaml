@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 282.369195715
+  seconds: 199.424665985
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-09 03:59:13.358226235 Z
+  when: 2026-11-10 03:57:17.638670107 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76672,18 +76672,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 821
-  closures_were_checked: 603
+  assignees_were_scanned: 953
+  closures_were_checked: 1346
   earliest_issue_was_found: 1
-  events_were_scanned: 26565035047
+  events_were_scanned: 19623692112
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1407
-  min_pull_was_found: 1061
+  min_issue_was_found: 1408
+  min_pull_was_found: 1063
   repository: 28924109
-  types_were_scanned: 163
+  types_were_scanned: 277
   what: iterate
   where: github
 - _id: 20665
@@ -86173,18 +86173,6 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-05 03:58:23.740818051 Z
-- _id: 21316
-  _job: 104840
-  _time: 2026-11-06 03:58:32.675979590 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (199.3) is staying still.
-    The average number of commits per week (9.7) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.20).
-    The average monthly turnover (4.0 developers) is decreasing (R=-0.20).
-  what: assessment
-  when: 2026-11-06 03:58:32.694373537 Z
 - _id: 21317
   _job: 42336001458
   _time: 2026-11-07 03:54:17.182573888 Z
@@ -86688,5 +86676,38 @@
   _job: 42558807889
   _time: 2026-11-09 03:59:10.520903330 Z
   _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 6
+  total_commits: 4017
+  total_contributors: 91
+  total_files: 603
+  total_forks: 218
+  total_issues: 762
+  total_pulls: 1072
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-09 03:59:10.455239140 Z
+- _id: 21345
+  _job: 106889
+  _time: 2026-11-09 03:59:40.535119102 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (199.3) is staying still.
+    The average number of commits per week (9.7) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.20).
+    The average monthly turnover (4.0 developers) is decreasing (R=-0.20).
+  what: assessment
+  when: 2026-11-09 03:59:40.561537636 Z
+- _id: 21346
+  _job: 42752294133
+  _time: 2026-11-10 03:56:28.347125497 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1834 has been earlier opened by @yegor256.
+  issue: 1834
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-11-09 14:12:57.000000000 Z
+  where: github
+  who: 526301
