@@ -152,4 +152,32 @@ final class HrefTest {
             Matchers.equalTo("http://example.com/#hello")
         );
     }
+
+    @Test
+    void doesNotModifyOriginalWhenAddingExistingParameter() {
+        final Href original = new Href(
+            "http://example.com?name=Bhakti"
+        );
+        original.with("name", "Priya");
+        MatcherAssert.assertThat(
+            "Original HREF must not be modified",
+            original.toString(),
+            Matchers.equalTo("http://example.com/?name=Bhakti")
+        );
+    }
+
+    @Test
+    void addsValueToExistingParameter() {
+        final Href original = new Href(
+            "http://example.com?name=Bhakti"
+        );
+        final Href updated = original.with("name", "Priya");
+        MatcherAssert.assertThat(
+            "New HREF must contain both parameter values",
+            updated.toString(),
+            Matchers.equalTo(
+                "http://example.com/?name=Bhakti&name=Priya"
+            )
+        );
+    }
 }
