@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 274.318537915
+  seconds: 404.70018774
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-11 03:58:45.497991478 Z
+  when: 2026-11-12 04:00:55.070675343 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76672,18 +76672,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1117
-  closures_were_checked: 1695
+  assignees_were_scanned: 1687
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19738363289
+  events_were_scanned: 26898846245
   issues_were_scanned: 0
-  labels_were_scanned: 609
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1409
-  min_pull_was_found: 1064
+  min_issue_was_found: 1414
+  min_pull_was_found: 1065
   repository: 28924109
-  types_were_scanned: 387
+  types_were_scanned: 491
   what: iterate
   where: github
 - _id: 20665
@@ -86156,7 +86156,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   since: *185
   what: quality-of-service
-  when: 2026-11-04 04:00:48.647956421 Z
+  when: &187 2026-11-04 04:00:48.647956421 Z
 - _id: 21315
   _job: 41964366897
   _time: 2026-11-05 03:58:23.792482300 Z
@@ -86552,18 +86552,6 @@
   when: 2026-11-05 05:27:52.000000000 Z
   where: github
   who: 526301
-- _id: 21338
-  _job: 105672
-  _time: 2026-11-07 04:21:20.912966690 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (199.3) is staying still.
-    The average number of commits per week (9.7) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.20).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-11-07 04:21:20.935407503 Z
 - _id: 21339
   _job: 105672
   _time: 2026-11-07 04:21:41.835098783 Z
@@ -86809,6 +86797,7 @@
   issue: 1733
   repository: 28924109
   review: 2026-11-10 23:27:34.000000000 Z
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
@@ -86833,6 +86822,7 @@
   is_human: 1
   issue: 1838
   repository: 28924109
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -86920,3 +86910,301 @@
   when: 2026-11-10 02:26:25.000000000 Z
   where: github
   who: 29139614
+- _id: 21360
+  _job: 107826
+  _time: 2026-11-11 03:59:11.850495990 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (211.0) is increasing (R=0.16).
+    The average number of commits per week (10.2) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.23).
+    The average monthly turnover (4.0 developers) is decreasing (R=-0.14).
+  what: assessment
+  when: 2026-11-11 03:59:11.871349789 Z
+- _id: 21361
+  _job: 43151150137
+  _time: 2026-11-12 03:54:16.196167142 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-href-immutability
+  details: The pull request yegor256/takes#1843 has been opened by @bskalpavrukshab25-sketch.
+  event_id: 19807232538
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1843
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-11 17:41:56.000000000 Z
+  where: github
+  who: 273828012
+- _id: 21362
+  _job: 43151150137
+  _time: 2026-11-12 03:54:16.852016787 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1840 has been reviewed by @yegor256 with
+    4 HoC and 3 comments.
+  event_id: 19799904711
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 4
+  is_human: 1
+  issue: 1840
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-11 16:20:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 21363
+  _job: 43151150137
+  _time: 2026-11-12 03:54:17.806275461 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/1834-href-with-immutability
+  details: The pull request yegor256/takes#1842 has been opened by @inf1mum.
+  event_id: 19799202675
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1842
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-11 16:14:52.000000000 Z
+  where: github
+  who: 8135225
+- _id: 21364
+  _job: 43151150137
+  _time: 2026-11-12 03:54:18.398530781 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1841 has been opened by @baudoliver7.
+  event_id: 19794137040
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1841
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-11-11 15:20:40.000000000 Z
+  where: github
+  who: 7813046
+- _id: 21365
+  _job: 43151150137
+  _time: 2026-11-12 03:54:18.919169383 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  details: The pull request yegor256/takes#1840 has been opened by @renovate[bot].
+  event_id: 19789989957
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1840
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-11 14:32:54.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21366
+  _job: 43151150137
+  _time: 2026-11-12 03:55:03.511885127 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1832 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1832
+  repository: 28924109
+  review: 2026-11-07 16:40:21.000000000 Z
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-07 17:30:38.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21367
+  _job: 43151150137
+  _time: 2026-11-12 03:55:21.005539565 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: deps/refresh-20261109
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1833 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 14
+  is_human: 1
+  issue: 1833
+  repository: 28924109
+  review: 2026-11-09 14:01:12.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-10 21:27:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 21368
+  _job: 43151150137
+  _time: 2026-11-12 03:55:31.360781380 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1835 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1835
+  repository: 28924109
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-10 02:26:03.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21369
+  _job: 43151150137
+  _time: 2026-11-12 03:55:43.111868215 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.codehaus.mojo-build-helper-maven-plugin-3.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1836 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1836
+  repository: 28924109
+  review: 2026-11-10 02:36:55.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-10 03:56:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21370
+  _job: 43151150137
+  _time: 2026-11-12 03:56:03.239791672 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.codehaus.mojo-license-maven-plugin-2.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1837 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1837
+  repository: 28924109
+  review: 2026-11-10 02:36:52.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-10 04:41:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21371
+  _job: 43151150137
+  _time: 2026-11-12 03:56:14.805499741 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/crate-ci-typos-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1839 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1839
+  repository: 28924109
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-11 04:00:07.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21372
+  _job: 43151150137
+  _time: 2026-11-12 03:56:26.468783711 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/com.jcabi-jcabi-xml-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1840 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 4
+  is_human: 0
+  issue: 1840
+  repository: 28924109
+  review: 2026-11-11 16:20:53.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-11 16:34:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21373
+  _job: 43151150137
+  _time: 2026-11-12 03:57:43.519206851 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 7
+  total_commits: 4025
+  total_contributors: 92
+  total_files: 604
+  total_forks: 219
+  total_issues: 763
+  total_pulls: 1077
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
+  what: dimensions-of-terrain
+  when: 2026-11-12 03:57:43.421640082 Z
+- _id: 21374
+  _job: 43151150137
+  _time: 2026-11-12 03:57:55.329309331 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'We found out that the user #273828012 is known in GitHub as @bskalpavrukshab25-sketch.'
+  is_human: 1
+  name: bskalpavrukshab25-sketch
+  what: who-has-name
+  when: 2026-11-12 03:57:55.332968016 Z
+  where: github
+  who: 273828012
+- _id: 21375
+  _job: 43151150137
+  _time: 2026-11-12 03:59:33.956388580 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *187
+  what: quality-of-service
+  when: 2026-11-12 03:59:33.945126257 Z
