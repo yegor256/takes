@@ -17,14 +17,18 @@
  * <pre> public Response act(final Request req) throws IOException {
  *   return new RsReturn(
  *     new RsText("here is the page"),
- *     new RqHref(req).href().toString()
+ *     new RqHref.Base(req).href().toString()
  *   );
  * }</pre>
  *
  * <p>Later, wrap your application into {@link org.takes.facets.ret.TkReturn}:
  * every request carrying the cookie is answered with a redirect to the stored
- * location and the cookie is cleared, so the redirect happens only once;
- * requests without the cookie go to the wrapped take as usual.</p>
+ * location and the wrapper then responds with an empty cookie that attempts to
+ * clear it. Mind that this clearing response does not repeat the
+ * {@code Path=/} attribute set by {@link org.takes.facets.ret.RsReturn}, so the
+ * browser only drops a copy scoped to the current request path and keeps
+ * sending the original root cookie, which means the redirect may happen more
+ * than once; requests without the cookie go to the wrapped take as usual.</p>
  *
  * @since 0.20
  */
