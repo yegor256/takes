@@ -243,10 +243,11 @@ public final class Href implements CharSequence {
      */
     public Href with(final Object key, final Object value) {
         final SortedMap<String, List<String>> map = new TreeMap<>(this.params());
-        if (!map.containsKey(key.toString())) {
-            map.put(key.toString(), new ArrayList<>(0));
-        }
-        map.get(key.toString()).add(value.toString());
+        final List<String> values = new ArrayList<>(
+            map.getOrDefault(key.toString(), Collections.emptyList())
+        );
+        values.add(value.toString());
+        map.put(key.toString(), values);
         return new Href(this.uri(), map, this.fragment());
     }
 

@@ -152,4 +152,44 @@ final class HrefTest {
             Matchers.equalTo("http://example.com/#hello")
         );
     }
+
+    @Test
+    void keepsOriginalUnchangedWhenAppendingExistingKey() {
+        final Href original = new Href("/search?tag=one");
+        original.with("tag", "two");
+        MatcherAssert.assertThat(
+            "Original Href must stay unchanged when with() appends an existing key",
+            original.toString(),
+            Matchers.equalTo("/search?tag=one")
+        );
+    }
+
+    @Test
+    void appendsValueToNewHrefWhenAppendingExistingKey() {
+        MatcherAssert.assertThat(
+            "Extended Href must contain both values of the repeated key",
+            new Href("/search?tag=one").with("tag", "two").toString(),
+            Matchers.equalTo("/search?tag=one&tag=two")
+        );
+    }
+
+    @Test
+    void keepsOriginalUnchangedWhenAddingFreshKey() {
+        final Href original = new Href("/search?tag=one");
+        original.with("page", "2");
+        MatcherAssert.assertThat(
+            "Original Href must stay unchanged when with() adds a fresh key",
+            original.toString(),
+            Matchers.equalTo("/search?tag=one")
+        );
+    }
+
+    @Test
+    void appendsValueToNewHrefWhenAddingFreshKey() {
+        MatcherAssert.assertThat(
+            "with() on a fresh key must add the parameter to the new Href",
+            new Href("/search?tag=one").with("page", "2").toString(),
+            Matchers.equalTo("/search?page=2&tag=one")
+        );
+    }
 }
