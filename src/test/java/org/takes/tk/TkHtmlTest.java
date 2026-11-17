@@ -166,7 +166,8 @@ final class TkHtmlTest {
     void failsOnNullInputString() {
         Assertions.assertThrows(
             IllegalStateException.class,
-            () -> new TkHtml((String) null).act(new RqFake())
+            () -> new TkHtml((String) null).act(new RqFake()),
+            "TkHtml must not accept a null string body"
         );
     }
 
@@ -174,7 +175,8 @@ final class TkHtmlTest {
     void failsOnNullInputByteArray() {
         Assertions.assertThrows(
             NullPointerException.class,
-            () -> new RsPrint(new TkHtml((byte[]) null).act(new RqFake())).printHead()
+            () -> new RsPrint(new TkHtml((byte[]) null).act(new RqFake())).printHead(),
+            "TkHtml must not accept a null byte array body"
         );
     }
 
@@ -182,7 +184,8 @@ final class TkHtmlTest {
     void failsOnNullInputStream() {
         Assertions.assertThrows(
             NullPointerException.class,
-            () -> new RsPrint(new TkHtml((InputStream) null).act(new RqFake())).printHead()
+            () -> new RsPrint(new TkHtml((InputStream) null).act(new RqFake())).printHead(),
+            "TkHtml must not accept a null input stream body"
         );
     }
 
