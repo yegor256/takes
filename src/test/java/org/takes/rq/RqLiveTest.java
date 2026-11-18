@@ -127,6 +127,22 @@ final class RqLiveTest {
     }
 
     @Test
+    void failsOnZeroByteInHead() {
+        Assertions.assertThrows(
+            IOException.class,
+            () -> new RqLive(
+                new ByteArrayInputStream(
+                    String.format(
+                        "GET /test HTTP/1.1%sHost: %s",
+                        RqLiveTest.CRLF,
+                        (char) 0
+                    ).getBytes(StandardCharsets.UTF_8)
+                )
+            )
+        );
+    }
+
+    @Test
     void failsOnInvalidCrLfInRequest() {
         Assertions.assertThrows(
             IOException.class,
