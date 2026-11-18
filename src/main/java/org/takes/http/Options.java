@@ -25,8 +25,8 @@ import org.cactoos.text.UncheckedText;
  *
  * <p>This class parses and provides access to command-line options
  * for configuring the HTTP server. It supports options such as port
- * specification, daemon mode, thread count, hit-refresh mode, and
- * maximum latency settings.</p>
+ * specification, daemon mode, thread count, hit-refresh mode,
+ * maximum latency, and keep-alive idle timeout settings.</p>
  *
  * <p>The class is immutable and thread-safe.</p>
  *
@@ -153,6 +153,16 @@ final class Options {
                 String.valueOf(Long.MAX_VALUE)
             )
         );
+    }
+
+    /**
+     * Get the idle timeout of a keep-alive connection in milliseconds.
+     *
+     * @return Idle timeout
+     * @since 1.20
+     */
+    long idle() {
+        return Long.parseLong(this.map.getOrDefault("idle", "5000"));
     }
 
     static Map<String, String> asMap(final Iterable<String> args) {

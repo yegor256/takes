@@ -18,6 +18,12 @@ import org.takes.Take;
  * and dispatches them to a back-end for processing. It runs a loop
  * that continuously accepts connections until the exit condition is met.</p>
  *
+ * <p>It serves one connection at a time. A keep-alive client therefore
+ * keeps all other clients waiting until it closes its connection or
+ * stays idle longer than the idle timeout of the back, which is one
+ * second for the constructors taking a {@link Take}. Use {@link FtCli},
+ * or a back decorated with {@link BkParallel}, in production.</p>
+ *
  * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
@@ -44,7 +50,7 @@ public final class FtBasic implements Front {
      * @since 0.24
      */
     public FtBasic(final Take tks) throws IOException {
-        this(new BkSafe(new BkBasic(tks)), 80);
+        this(new BkSafe(new BkIdle(new BkBasic(tks), 1000L)), 80);
     }
 
     /**
@@ -55,7 +61,7 @@ public final class FtBasic implements Front {
      * @throws IOException If fails
      */
     public FtBasic(final Take tks, final int prt) throws IOException {
-        this(new BkSafe(new BkBasic(tks)), prt);
+        this(new BkSafe(new BkIdle(new BkBasic(tks), 1000L)), prt);
     }
 
     /**

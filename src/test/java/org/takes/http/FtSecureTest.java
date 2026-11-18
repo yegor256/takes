@@ -125,7 +125,7 @@ final class FtSecureTest {
         try {
             skt = SSLServerSocketFactory.getDefault().createServerSocket(0);
             return new FtRemote(
-                new FtSecure(new BkBasic(take), skt),
+                new FtSecure(new BkIdle(new BkBasic(take), 1000L), skt),
                 skt,
                 true
             );

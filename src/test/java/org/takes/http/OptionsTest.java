@@ -4,6 +4,7 @@
  */
 package org.takes.http;
 
+import java.security.SecureRandom;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,27 @@ final class OptionsTest {
             "Thread count should be set to 2",
             new Options("--hit-refresh --threads=2".split(" ")).threads(),
             Matchers.is(2)
+        );
+    }
+
+    @Test
+    void understandsIdleArg() {
+        final long idle = 1L + new SecureRandom().nextInt(Integer.MAX_VALUE);
+        MatcherAssert.assertThat(
+            "Idle timeout was not taken from the --idle argument",
+            new Options(
+                "--threads=3", String.format("--idle=%d", idle)
+            ).idle(),
+            Matchers.is(idle)
+        );
+    }
+
+    @Test
+    void waitsFiveSecondsForIdleConnectionByDefault() {
+        MatcherAssert.assertThat(
+            "Idle timeout did not default to five seconds",
+            new Options("--hit-refresh", "--threads=7").idle(),
+            Matchers.is(5000L)
         );
     }
 }

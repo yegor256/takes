@@ -74,7 +74,7 @@ final class BkParallelTest {
                     try {
                         new FtBasic(
                             new BkParallel(
-                                new BkBasic(take),
+                                new BkIdle(new BkBasic(take), 1000L),
                                 count
                             ),
                             socket

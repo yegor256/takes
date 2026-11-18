@@ -54,7 +54,7 @@ public final class FtRemote implements Front {
      * @throws IOException If fails
      */
     public FtRemote(final Take tks) throws IOException {
-        this(new BkParallel(new BkBasic(tks)));
+        this(new BkParallel(new BkIdle(new BkBasic(tks), 1000L)));
     }
 
     /**

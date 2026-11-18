@@ -8,8 +8,10 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PushbackInputStream;
 import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputStreamOf;
@@ -40,9 +42,14 @@ import org.takes.rs.RsWithStatus;
  *
  * <p>Key features:</p>
  * <ul>
- * <li>Handles keep-alive connections by processing multiple requests
+ * <li>Handles keep-alive connections by waiting for the next request
  * on the same socket, consuming the body of each one in full so that the
- * next request is read from the start of its own request line</li>
+ * next request is read from the start of its own request line; the
+ * connection ends when the client closes it, when the socket read
+ * timeout expires between requests, or when the exchange cannot persist,
+ * in which case the response carries {@code Connection: close}</li>
+ * <li>Answers 408 Request Timeout and closes the connection when the
+ * socket read timeout expires in the middle of a request head</li>
  * <li>Automatically adds socket information headers (local/remote address
  * and port)</li>
  * <li>Provides comprehensive exception handling with appropriate HTTP
@@ -55,6 +62,17 @@ import org.takes.rs.RsWithStatus;
  * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
+ * @todo #1748:30min Bound the total time spent reading a request head.
+ *  The socket read timeout only limits each single read, so a client
+ *  sending one byte at a time keeps the connection busy forever. Answer
+ *  408 and close once the whole head takes longer than a fixed budget.
+ * @todo #1748:30min Skip the unread request body in exchange() when the
+ *  connection is about to close. Reading it to the end is unbounded,
+ *  while the lingering close that follows already drains the socket
+ *  within a fixed time.
+ * @todo #1748:30min Close with lingering when ready() gives up on an idle
+ *  connection. A request arriving at the very moment the idle timeout
+ *  expires is now lost with a TCP reset instead of being drained.
  */
 @EqualsAndHashCode
 @SuppressWarnings({"PMD.CloseInlineResourceRule", "PMD.CloseResource"})
@@ -97,40 +115,78 @@ public final class BkBasic implements Back {
     @Override
     public void accept(final Socket socket) throws IOException {
         try (
-            InputStream input = socket.getInputStream();
+            PushbackInputStream input = new PushbackInputStream(
+                socket.getInputStream()
+            );
             BufferedOutputStream output = new BufferedOutputStream(
                 socket.getOutputStream()
             )
         ) {
-            while (this.exchange(input, socket, output)) {
-                if (input.available() <= 0) {
-                    break;
-                }
+            boolean open = true;
+            while (open) {
+                open = this.exchange(input, socket, output);
             }
         }
     }
 
-    private boolean exchange(final InputStream input, final Socket socket,
-        final OutputStream output) throws IOException {
-        boolean reusable = true;
+    private boolean exchange(final PushbackInputStream input,
+        final Socket socket, final OutputStream output) throws IOException {
+        boolean reusable = false;
+        if (BkBasic.ready(input)) {
+            try {
+                final Request live = BkBasic.live(input, socket);
+                final InputStream body = new RqChunk(
+                    new RqLengthAware(live)
+                ).body();
+                final Response response = this.response(
+                    new RequestOf(live, () -> body)
+                );
+                reusable = new Persistence(live, response).value();
+                if (reusable) {
+                    new RsPrint(response).print(output);
+                } else {
+                    new RsPrint(new RsClosing(response)).print(output);
+                }
+                BkBasic.skipUnreadBody(live, body);
+            } catch (final HttpException ex) {
+                new RsPrint(
+                    new RsClosing(BkBasic.failure(ex, ex.code()))
+                ).print(output);
+                reusable = false;
+            }
+            output.flush();
+            if (!reusable) {
+                BkBasic.linger(input, socket);
+            }
+        }
+        return reusable;
+    }
+
+    private static boolean ready(final PushbackInputStream input)
+        throws IOException {
+        boolean ready;
         try {
-            final Request live = BkBasic.addSocketHeaders(
-                new RqLive(input),
+            final int head = input.read();
+            ready = head >= 0;
+            if (ready) {
+                input.unread(head);
+            }
+        } catch (final SocketTimeoutException ex) {
+            ready = false;
+        }
+        return ready;
+    }
+
+    private static Request live(final InputStream input, final Socket socket)
+        throws IOException {
+        try {
+            return BkBasic.addSocketHeaders(
+                new RqLive(new UnclosedInputStream(input)),
                 socket
             );
-            final InputStream body = new RqChunk(
-                new RqLengthAware(live)
-            ).body();
-            this.print(new RequestOf(live, () -> body), output);
-            BkBasic.skipUnreadBody(live, body);
-        } catch (final HttpException ex) {
-            new RsPrint(BkBasic.failure(ex, ex.code())).print(output);
-            output.flush();
-            BkBasic.linger(input);
-            reusable = false;
+        } catch (final SocketTimeoutException ex) {
+            throw new HttpException(HttpURLConnection.HTTP_CLIENT_TIMEOUT, ex);
         }
-        output.flush();
-        return reusable;
     }
 
     private static void skipUnreadBody(final Request req,
@@ -148,21 +204,33 @@ public final class BkBasic implements Back {
         }
     }
 
-    private static void linger(final InputStream input) throws IOException {
+    private static void linger(final PushbackInputStream input,
+        final Socket socket) throws IOException {
+        socket.shutdownOutput();
+        final long deadline = System.currentTimeMillis() + 2000L;
         final byte[] buf = new byte[8192];
-        long total = 0L;
-        while (total < 64L * 1024L && input.available() > 0) {
-            final int read = input.read(buf);
-            if (read < 0) {
-                break;
-            }
-            total += read;
+        int count = 0;
+        long remaining = 2000L;
+        while (count >= 0 && remaining > 0L) {
+            socket.setSoTimeout(Math.toIntExact(remaining));
+            count = BkBasic.drained(input, buf);
+            remaining = deadline - System.currentTimeMillis();
         }
     }
 
-    @SuppressWarnings("PMD.AvoidCatchingGenericException")
-    private void print(final Request req, final OutputStream output)
+    private static int drained(final InputStream input, final byte[] buf)
         throws IOException {
+        int count;
+        try {
+            count = input.read(buf);
+        } catch (final SocketTimeoutException ex) {
+            count = -1;
+        }
+        return count;
+    }
+
+    @SuppressWarnings("PMD.AvoidCatchingGenericException")
+    private Response response(final Request req) {
         Response handled;
         try {
             handled = this.take.act(req);
@@ -180,7 +248,7 @@ public final class BkBasic implements Back {
                 HttpURLConnection.HTTP_INTERNAL_ERROR
             );
         }
-        new RsPrint(handled).print(output);
+        return handled;
     }
 
     private static Response failure(final Throwable err, final int code) {

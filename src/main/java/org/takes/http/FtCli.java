@@ -80,7 +80,7 @@ public final class FtCli implements Front {
             tks = this.take;
         }
         final BkTimeable timeable = new BkTimeable(
-            new BkSafe(new BkBasic(tks)),
+            new BkSafe(new BkIdle(new BkBasic(tks), this.options.idle())),
             this.options.maxLatency()
         );
         timeable.setDaemon(true);
