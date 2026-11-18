@@ -2,12 +2,11 @@
 - added: 8
   cycles: 2
   deleted: 8
-  error: deadlock; recursive locking
   inserted: 8
-  seconds: 386.440157173
+  seconds: 304.161701934
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-17 04:00:27.389446486 Z
+  when: 2026-11-18 03:59:06.494061490 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76673,18 +76672,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 581
-  closures_were_checked: 603
+  assignees_were_scanned: 718
+  closures_were_checked: 1346
   earliest_issue_was_found: 1
-  events_were_scanned: 20346853009
+  events_were_scanned: 20473016121
   issues_were_scanned: 0
-  labels_were_scanned: 609
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1435
-  min_pull_was_found: 1084
+  min_issue_was_found: 1436
+  min_pull_was_found: 1085
   repository: 28924109
-  types_were_scanned: 1054
+  types_were_scanned: 1292
   what: iterate
   where: github
 - _id: 20665
@@ -86766,7 +86765,7 @@
   total_releases_published: 0
   total_reviews_submitted: 16
   what: quantity-of-deliverables
-  when: 2026-11-11 03:54:39.466893391 Z
+  when: &188 2026-11-11 03:54:39.466893391 Z
 - _id: 21352
   _job: 42955645669
   _time: 2026-11-11 03:55:05.959164123 Z
@@ -87208,18 +87207,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-11-13 03:59:19.212404693 Z
-- _id: 21378
-  _job: 108825
-  _time: 2026-11-14 03:58:44.394918976 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (211.0) is increasing (R=0.16).
-    The average number of commits per week (10.2) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.23).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-11-14 03:58:44.416351928 Z
 - _id: 21379
   _job: 43674335381
   _time: 2026-11-15 03:55:48.833488126 Z
@@ -87441,5 +87428,242 @@
   _job: 44013301454
   _time: 2026-11-17 04:00:23.462764248 Z
   _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 6
+  total_commits: 4031
+  total_contributors: 92
+  total_files: 604
+  total_forks: 219
+  total_issues: 765
+  total_pulls: 1084
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 878
   what: dimensions-of-terrain
   when: 2026-11-17 04:00:23.402849179 Z
+- _id: 21395
+  _job: 109643
+  _time: 2026-11-17 04:00:50.759034033 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (211.0) is increasing (R=0.16).
+    The average number of commits per week (10.2) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.23).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-11-17 04:00:50.777668690 Z
+- _id: 21396
+  _job: 44233494129
+  _time: 2026-11-18 03:54:07.172190122 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1851 has been closed by @baudoliver7.
+  event_id: 20473016121
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1851
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-11-18 03:44:32.000000000 Z
+  where: github
+  who: 7813046
+- _id: 21397
+  _job: 44233494129
+  _time: 2026-11-18 03:54:09.751551349 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  commits: 1
+  details: The pull request yegor256/takes#1847 has been reviewed by @yegor256 with
+    195 HoC and 0 comments.
+  event_id: 20384783944
+  event_type: PullRequestReviewEvent
+  files: 6
+  hoc: 195
+  is_human: 1
+  issue: 1847
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-17 11:30:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 21398
+  _job: 44233494129
+  _time: 2026-11-18 03:54:10.677538111 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/takes#1852 has been reviewed by @yegor256 with
+    2 HoC and 3 comments.
+  event_id: 20369435475
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1852
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-17 08:38:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 21399
+  _job: 44233494129
+  _time: 2026-11-18 03:54:11.614848504 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1434 has been closed by @yegor256.
+  event_id: 20352630728
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1434
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-11-17 04:54:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 21400
+  _job: 44233494129
+  _time: 2026-11-18 03:54:11.759003879 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  commits: 1
+  details: The pull request yegor256/takes#1845 has been reviewed by @yegor256 with
+    117 HoC and 0 comments.
+  event_id: 20352618286
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 117
+  is_human: 1
+  issue: 1845
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-17 04:54:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 21401
+  _job: 44233494129
+  _time: 2026-11-18 03:54:12.363423558 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  commits: 1
+  details: The pull request yegor256/takes#1842 has been reviewed by @yegor256 with
+    49 HoC and 0 comments.
+  event_id: 20348760774
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 49
+  is_human: 1
+  issue: 1842
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-17 03:57:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 21402
+  _job: 44233494129
+  _time: 2026-11-18 03:54:52.603398555 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/1834-href-with-immutability
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1842 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 49
+  is_human: 1
+  issue: 1842
+  repository: 28924109
+  review: 2026-11-17 03:57:45.000000000 Z
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-17 03:58:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 21403
+  _job: 44233494129
+  _time: 2026-11-18 03:55:05.066855073 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1844 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1844
+  repository: 28924109
+  review: 2026-11-12 16:40:50.000000000 Z
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-12 17:31:48.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21404
+  _job: 44233494129
+  _time: 2026-11-18 03:55:28.874668531 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: feat/1434-tkmeasured-tests
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1845 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 117
+  is_human: 1
+  issue: 1845
+  repository: 28924109
+  review: 2026-11-17 04:54:28.000000000 Z
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-17 04:54:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 21405
+  _job: 44233494129
+  _time: 2026-11-18 03:55:37.725608801 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.sonarsource.scanner.maven-sonar-maven-plugin-5.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1852 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 1852
+  repository: 28924109
+  review: 2026-11-17 08:38:33.000000000 Z
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-17 08:51:47.000000000 Z
+  where: github
+  who: 8086956
+- _id: 21406
+  _job: 44233494129
+  _time: 2026-11-18 03:58:25.670855013 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *188
+  what: quantity-of-deliverables
+  when: 2026-11-18 03:58:25.662124495 Z
