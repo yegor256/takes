@@ -18,7 +18,7 @@
  * <li>RqMtBase: Base implementation for parsing multipart requests</li>
  * <li>RqMtFake: Test implementation for creating fake multipart requests</li>
  * <li>RqMtSmart: Decorator with additional convenience methods</li>
- * <li>RqPart interface: Represents individual parts within a multipart request</li>
+ * <li>RqTemp: Part body served from a temporary file, deleted when closed</li>
  * </ul>
  *
  * @since 0.33
