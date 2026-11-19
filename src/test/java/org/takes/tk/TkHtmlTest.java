@@ -4,6 +4,7 @@
  */
 package org.takes.tk;
 
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.cactoos.io.InputStreamOf;
 import org.cactoos.iterable.IterableOf;
@@ -20,6 +21,7 @@ import org.llorllale.cactoos.matchers.IsText;
 import org.takes.Take;
 import org.takes.rq.RqFake;
 import org.takes.rs.RsBodyPrint;
+import org.takes.rs.RsHeaders;
 import org.takes.rs.RsPrint;
 
 /**
@@ -82,6 +84,28 @@ final class TkHtmlTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("cases")
+    void declaresHtmlContentTypeHeader(final String body) throws Exception {
+        MatcherAssert.assertThat(
+            "HTML response must not declare a content type other than text/html",
+            new RsHeaders.Base(new TkHtml(body).act(new RqFake())).header("Content-Type"),
+            Matchers.hasItem("text/html")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("cases")
+    void declaresContentLengthMatchingBodySize(final String body) throws Exception {
+        MatcherAssert.assertThat(
+            "HTML response must not declare a content length other than the body byte size",
+            new RsHeaders.Base(new TkHtml(body).act(new RqFake())).header("Content-Length"),
+            Matchers.hasItem(
+                String.valueOf(body.getBytes(StandardCharsets.UTF_8).length)
+            )
+        );
+    }
+
     @Test
     void printsResourceFirstTime() throws Exception {
         final String body = "<html>hello, dude!</html>";
@@ -135,6 +159,33 @@ final class TkHtmlTest {
                 new RsPrint(new TkHtml(() -> null).act(new RqFake())),
                 this.textMatcher("Unreachable text")
             )
+        );
+    }
+
+    @Test
+    void failsOnNullInputString() {
+        Assertions.assertThrows(
+            IllegalStateException.class,
+            () -> new TkHtml((String) null).act(new RqFake()),
+            "TkHtml must not accept a null string body"
+        );
+    }
+
+    @Test
+    void failsOnNullInputByteArray() {
+        Assertions.assertThrows(
+            NullPointerException.class,
+            () -> new RsPrint(new TkHtml((byte[]) null).act(new RqFake())).printHead(),
+            "TkHtml must not accept a null byte array body"
+        );
+    }
+
+    @Test
+    void failsOnNullInputStream() {
+        Assertions.assertThrows(
+            NullPointerException.class,
+            () -> new RsPrint(new TkHtml((InputStream) null).act(new RqFake())).printHead(),
+            "TkHtml must not accept a null input stream body"
         );
     }
 
