@@ -45,10 +45,10 @@ final class MkFtBasic {
     /**
      * Ctor.
      *
-     * @param bck Back serving every connection
+     * @param that Back serving every connection
      */
-    MkFtBasic(final Back bck) {
-        this.back = bck;
+    MkFtBasic(final Back that) {
+        this.back = that;
     }
 
     /**
