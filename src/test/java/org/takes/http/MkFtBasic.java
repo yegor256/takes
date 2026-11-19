@@ -14,23 +14,24 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.takes.Take;
 
 /**
- * {@link FtBasic} built from a take and running on a free port.
+ * Single-threaded {@link FtBasic} running on a free port.
  *
- * <p>The constructors of {@link FtBasic} that take a {@link Take} pick
- * the back-end themselves and accept only a port number, so a test of
- * that wiring has to find a free port, bind to it, and start the front
- * beside the client. Another test may grab the same port in between,
- * so binding is retried a few times, before the script runs. The front
- * is stopped after the script and given five seconds to end.</p>
+ * <p>{@link FtBasic} serves one connection at a time, so whether one
+ * client can keep others waiting is only visible with the front running
+ * on a real port beside several clients. This fixture finds a free
+ * port, binds to it, and starts the front in a background thread.
+ * Another test may grab the same port in between, so binding is retried
+ * a few times, before the script runs. The front is stopped after the
+ * script and given five seconds to end.</p>
  *
  * @since 1.20
  */
 final class MkFtBasic {
 
     /**
-     * Take to serve.
+     * Back serving every connection.
      */
-    private final Take take;
+    private final Back back;
 
     /**
      * Ctor.
@@ -38,7 +39,16 @@ final class MkFtBasic {
      * @param tks Take to serve
      */
     MkFtBasic(final Take tks) {
-        this.take = tks;
+        this(new BkSafe(new BkBasic(tks)));
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param bck Back serving every connection
+     */
+    MkFtBasic(final Back bck) {
+        this.back = bck;
     }
 
     /**
@@ -55,7 +65,7 @@ final class MkFtBasic {
         throws Exception {
         final int port = MkFtBasic.free();
         try {
-            MkFtBasic.run(new FtBasic(this.take, port), port, script);
+            MkFtBasic.run(new FtBasic(this.back, port), port, script);
         } catch (final BindException ex) {
             if (attempts <= 1) {
                 throw ex;

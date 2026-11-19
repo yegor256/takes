@@ -286,10 +286,11 @@ final class FtBasicTest {
 
     @Test
     @Tag("deep")
-    void servesAnotherClientWhileKeepAliveConnectionIdles() throws Exception {
+    void servesAnotherClientWhileKeepAliveConnectionIdlesOnSingleThread()
+        throws Exception {
         final String text = "Next in line №2";
         final AtomicReference<String> output = new AtomicReference<>();
-        new MkFtBasic(new TkText(text)).exec(
+        new MkFtBasic(new BkBasic(new TkText(text))).exec(
             home -> {
                 try (
                     Socket first = new Socket(home.getHost(), home.getPort());
@@ -312,6 +313,34 @@ final class FtBasicTest {
         );
         MatcherAssert.assertThat(
             "Another client was not served while a keep-alive connection idled",
+            output.get(),
+            Matchers.containsString(text)
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void servesAnotherClientWhileFreshConnectionSendsNothing()
+        throws Exception {
+        final String text = "Silence is not golden ☂";
+        final AtomicReference<String> output = new AtomicReference<>();
+        new MkFtBasic(new BkBasic(new TkText(text))).exec(
+            home -> {
+                try (
+                    Socket mute = new Socket(home.getHost(), home.getPort());
+                    Socket other = new Socket(home.getHost(), home.getPort())
+                ) {
+                    mute.setSoTimeout(5000);
+                    new MkClient(other).send(
+                        "GET /talk HTTP/1.1", "Host: z", "Connection: close",
+                        "", ""
+                    );
+                    output.set(new MkClient(other).rest());
+                }
+            }
+        );
+        MatcherAssert.assertThat(
+            "Another client was not served while a fresh one stayed mute",
             output.get(),
             Matchers.containsString(text)
         );

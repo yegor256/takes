@@ -161,8 +161,21 @@ final class Options {
      * @return Idle timeout
      * @since 1.20
      */
-    long idle() {
-        return Long.parseLong(this.map.getOrDefault("idle", "5000"));
+    int idle() {
+        final String value = this.map.getOrDefault("idle", "5000");
+        final long msec = Long.parseLong(value);
+        if (msec <= 0L || msec > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException(
+                new UncheckedText(
+                    new FormattedText(
+                        "--idle must be between 1 and %d ms, got '%s'",
+                        Integer.MAX_VALUE,
+                        value
+                    )
+                ).asString()
+            );
+        }
+        return (int) msec;
     }
 
     static Map<String, String> asMap(final Iterable<String> args) {

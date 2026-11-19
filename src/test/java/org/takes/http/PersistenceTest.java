@@ -109,6 +109,18 @@ final class PersistenceTest {
     }
 
     @Test
+    void closesWhenRequestHeadHasLineWithoutColon() throws Exception {
+        MatcherAssert.assertThat(
+            "Connection was kept although a request header had no colon",
+            new Persistence(
+                new RqFake(Arrays.asList("GET /p HTTP/1.1", "weird line"), ""),
+                new RsText("odd")
+            ).value(),
+            Matchers.is(false)
+        );
+    }
+
+    @Test
     void closesWhenResponseHasNoLength() throws Exception {
         MatcherAssert.assertThat(
             "Connection was kept although the response had no length",

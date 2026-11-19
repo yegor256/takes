@@ -329,15 +329,19 @@ final class BkBasicTest {
         try (ServerSocket server = new ServerSocket(0)) {
             final MkServed served = new MkServed(
                 server,
-                req -> new ResponseOf(
-                    () -> Arrays.asList(
-                        "HTTP/1.1 200 OK",
-                        String.format(
-                            "Content-Length: %s",
-                            new RqHeaders.Smart(req).single("Content-Length")
-                        )
-                    ),
-                    req::body
+                new BkBasic(
+                    req -> new ResponseOf(
+                        () -> Arrays.asList(
+                            "HTTP/1.1 200 OK",
+                            String.format(
+                                "Content-Length: %s",
+                                new RqHeaders.Smart(req).single(
+                                    "Content-Length"
+                                )
+                            )
+                        ),
+                        req::body
+                    )
                 ),
                 5000
             ).start();
@@ -484,11 +488,137 @@ final class BkBasicTest {
     }
 
     @Test
+    void readsBodyThatStallsLongerThanIdleTimeout() throws Exception {
+        final String body = String.format(
+            "Lent, très lent %d…", System.nanoTime()
+        );
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new BkBasic(req -> new RsText(req.body()), 200), 0
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    String.format(
+                        "Content-Length: %d",
+                        body.getBytes(StandardCharsets.UTF_8).length
+                    ),
+                    "",
+                    body.substring(0, body.length() / 2)
+                );
+                Thread.sleep(800L);
+                client.send(body.substring(body.length() / 2));
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Body stalling longer than the idle timeout was not read in full",
+            output,
+            Matchers.containsString(body)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenClientResetsWhileLingering() throws Exception {
+        final String text = "Reset ahead ⚡";
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(server, new TkText(text), 0).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /reset HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    "",
+                    "junk ¤ that nobody reads"
+                );
+                client.until(text);
+                socket.setSoLinger(true, 0);
+            }
+        }
+        MatcherAssert.assertThat(
+            "Reset while lingering did not end the connection quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenClientResetsIdleConnection() throws Exception {
+        final String text = "Idle until reset ☂";
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(server, new TkText(text), 0).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send("GET /idle HTTP/1.1", BkBasicTest.HOST, "", "");
+                client.until(text);
+                socket.setSoLinger(true, 0);
+            }
+        }
+        MatcherAssert.assertThat(
+            "Reset of an idle connection did not end it quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenUnreadChunkedBodyIsMalformed() throws Exception {
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(
+                server, new TkText("not reading that"), 5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Transfer-Encoding: chunked",
+                    "",
+                    "zq",
+                    "ünread",
+                    ""
+                );
+                client.rest();
+            }
+        }
+        MatcherAssert.assertThat(
+            "Malformed unread chunked body did not end the connection quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
     void endsQuietlyWhenIdleConnectionTimesOut() throws Exception {
         final MkServed served;
         try (ServerSocket server = new ServerSocket(0)) {
             served = new MkServed(
-                server, new TkText("Idle after this"), 300
+                server, new BkBasic(new TkText("Idle after this"), 300), 0
             ).start();
             try (
                 Socket socket = new Socket(

@@ -7,6 +7,7 @@ package org.takes.http;
 import java.security.SecureRandom;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,7 +37,7 @@ final class OptionsTest {
 
     @Test
     void understandsIdleArg() {
-        final long idle = 1L + new SecureRandom().nextInt(Integer.MAX_VALUE);
+        final int idle = 1 + new SecureRandom().nextInt(Integer.MAX_VALUE);
         MatcherAssert.assertThat(
             "Idle timeout was not taken from the --idle argument",
             new Options(
@@ -51,7 +52,36 @@ final class OptionsTest {
         MatcherAssert.assertThat(
             "Idle timeout did not default to five seconds",
             new Options("--hit-refresh", "--threads=7").idle(),
-            Matchers.is(5000L)
+            Matchers.is(5000)
+        );
+    }
+
+    @Test
+    void rejectsZeroIdle() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> new Options("--threads=2", "--idle=0").idle()
+        );
+    }
+
+    @Test
+    void rejectsNegativeIdle() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> new Options(
+                String.format(
+                    "--idle=-%d",
+                    1 + new SecureRandom().nextInt(Integer.MAX_VALUE)
+                )
+            ).idle()
+        );
+    }
+
+    @Test
+    void rejectsIdleBeyondIntegerRange() {
+        Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> new Options("--idle=3000000000", "--daemon").idle()
         );
     }
 }

@@ -15,18 +15,17 @@ import java.net.SocketTimeoutException;
 import lombok.EqualsAndHashCode;
 import org.cactoos.bytes.BytesOf;
 import org.cactoos.io.InputStreamOf;
-import org.cactoos.text.FormattedText;
-import org.cactoos.text.UncheckedText;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.rq.HeadOnce;
 import org.takes.rq.RequestOf;
 import org.takes.rq.RqChunk;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
-import org.takes.rq.RqWithHeaders;
+import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsText;
 import org.takes.rs.RsWithStatus;
@@ -45,11 +44,17 @@ import org.takes.rs.RsWithStatus;
  * <li>Handles keep-alive connections by waiting for the next request
  * on the same socket, consuming the body of each one in full so that the
  * next request is read from the start of its own request line; the
- * connection ends when the client closes it, when the socket read
- * timeout expires between requests, or when the exchange cannot persist,
- * in which case the response carries {@code Connection: close}</li>
- * <li>Answers 408 Request Timeout and closes the connection when the
- * socket read timeout expires in the middle of a request head</li>
+ * connection ends when the client closes or resets it, when the exchange
+ * cannot persist, in which case the response carries
+ * {@code Connection: close}, or when no request starts within the idle
+ * timeout</li>
+ * <li>Applies the idle timeout, one second unless given, to every wait
+ * for the first byte of a request, including the first request of a
+ * fresh connection; the head and the body are then read under the
+ * socket's own read timeout, so slow uploads are not cut short</li>
+ * <li>Answers 408 Request Timeout and closes the connection only when
+ * the socket's own read timeout expires in the middle of a request
+ * head</li>
  * <li>Automatically adds socket information headers (local/remote address
  * and port)</li>
  * <li>Provides comprehensive exception handling with appropriate HTTP
@@ -63,9 +68,11 @@ import org.takes.rs.RsWithStatus;
  *
  * @since 0.1
  * @todo #1748:30min Bound the total time spent reading a request head.
- *  The socket read timeout only limits each single read, so a client
- *  sending one byte at a time keeps the connection busy forever. Answer
- *  408 and close once the whole head takes longer than a fixed budget.
+ *  Once its first byte arrives, the head is read only under the socket's
+ *  own read timeout, which is zero, meaning forever, by default, and
+ *  which limits each single read anyway, so a client sending one byte at
+ *  a time keeps the connection busy forever. Answer 408 and close once
+ *  the whole head takes longer than a fixed budget.
  * @todo #1748:30min Skip the unread request body in exchange() when the
  *  connection is about to close. Reading it to the end is unbounded,
  *  while the lingering close that follows already drains the socket
@@ -104,12 +111,29 @@ public final class BkBasic implements Back {
     private final Take take;
 
     /**
+     * How long to wait for the next request, in milliseconds.
+     */
+    private final int idle;
+
+    /**
      * Ctor.
      *
      * @param tks Take
      */
     public BkBasic(final Take tks) {
+        this(tks, 1000);
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param tks Take
+     * @param msec How long to wait for the next request, in milliseconds
+     * @since 1.20
+     */
+    public BkBasic(final Take tks, final int msec) {
         this.take = tks;
+        this.idle = msec;
     }
 
     @Override
@@ -132,14 +156,14 @@ public final class BkBasic implements Back {
     private boolean exchange(final PushbackInputStream input,
         final Socket socket, final OutputStream output) throws IOException {
         boolean reusable = false;
-        if (BkBasic.ready(input)) {
+        if (this.ready(input, socket)) {
             try {
-                final Request live = BkBasic.live(input, socket);
+                final Request live = new HeadOnce(BkBasic.live(input, socket));
                 final InputStream body = new RqChunk(
                     new RqLengthAware(live)
                 ).body();
-                final Response response = this.response(
-                    new RequestOf(live, () -> body)
+                final Response response = new RsHeadOnce(
+                    this.response(new RequestOf(live, () -> body))
                 );
                 reusable = new Persistence(live, response).value();
                 if (reusable) {
@@ -147,7 +171,7 @@ public final class BkBasic implements Back {
                 } else {
                     new RsPrint(new RsClosing(response)).print(output);
                 }
-                BkBasic.skipUnreadBody(live, body);
+                reusable = BkBasic.skipped(live, body) && reusable;
             } catch (final HttpException ex) {
                 new RsPrint(
                     new RsClosing(BkBasic.failure(ex, ex.code()))
@@ -162,8 +186,10 @@ public final class BkBasic implements Back {
         return reusable;
     }
 
-    private static boolean ready(final PushbackInputStream input)
-        throws IOException {
+    private boolean ready(final PushbackInputStream input,
+        final Socket socket) throws IOException {
+        final int origin = socket.getSoTimeout();
+        socket.setSoTimeout(this.idle);
         boolean ready;
         try {
             final int head = input.read();
@@ -171,8 +197,10 @@ public final class BkBasic implements Back {
             if (ready) {
                 input.unread(head);
             }
-        } catch (final SocketTimeoutException ex) {
+        } catch (final IOException ex) {
             ready = false;
+        } finally {
+            socket.setSoTimeout(origin);
         }
         return ready;
     }
@@ -189,41 +217,58 @@ public final class BkBasic implements Back {
         }
     }
 
-    private static void skipUnreadBody(final Request req,
-        final InputStream body) throws IOException {
-        final RqHeaders headers = new RqHeaders.Base(req);
-        if (
-            headers.header("Content-Length").iterator().hasNext()
-                || headers.header("Transfer-Encoding").iterator().hasNext()
-        ) {
-            final byte[] buf = new byte[8192];
-            int count = body.read(buf);
-            while (count >= 0) {
-                count = body.read(buf);
+    private static boolean skipped(final Request req, final InputStream body) {
+        boolean skipped;
+        try {
+            final RqHeaders headers = new RqHeaders.Base(req);
+            if (
+                headers.header("Content-Length").iterator().hasNext()
+                    || headers.header("Transfer-Encoding").iterator().hasNext()
+            ) {
+                final byte[] buf = new byte[8192];
+                int count = body.read(buf);
+                while (count >= 0) {
+                    count = body.read(buf);
+                }
             }
+            skipped = true;
+        } catch (final IOException ex) {
+            skipped = false;
         }
+        return skipped;
     }
 
     private static void linger(final PushbackInputStream input,
         final Socket socket) throws IOException {
-        socket.shutdownOutput();
-        final long deadline = System.currentTimeMillis() + 2000L;
-        final byte[] buf = new byte[8192];
-        int count = 0;
-        long remaining = 2000L;
-        while (count >= 0 && remaining > 0L) {
-            socket.setSoTimeout(Math.toIntExact(remaining));
-            count = BkBasic.drained(input, buf);
-            remaining = deadline - System.currentTimeMillis();
+        if (BkBasic.shut(socket)) {
+            final long deadline = System.currentTimeMillis() + 2000L;
+            final byte[] buf = new byte[8192];
+            int count = 0;
+            long remaining = deadline - System.currentTimeMillis();
+            while (count >= 0 && remaining > 0L) {
+                socket.setSoTimeout(Math.toIntExact(remaining));
+                count = BkBasic.drained(input, buf);
+                remaining = deadline - System.currentTimeMillis();
+            }
         }
     }
 
-    private static int drained(final InputStream input, final byte[] buf)
-        throws IOException {
+    private static boolean shut(final Socket socket) {
+        boolean shut;
+        try {
+            socket.shutdownOutput();
+            shut = true;
+        } catch (final IOException ex) {
+            shut = false;
+        }
+        return shut;
+    }
+
+    private static int drained(final InputStream input, final byte[] buf) {
         int count;
         try {
             count = input.read(buf);
-        } catch (final SocketTimeoutException ex) {
+        } catch (final IOException ex) {
             count = -1;
         }
         return count;
@@ -264,32 +309,22 @@ public final class BkBasic implements Back {
 
     private static Request addSocketHeaders(final Request req,
         final Socket socket) {
-        return new RqWithHeaders(
-            req,
-            new UncheckedText(
-                new FormattedText(
-                    "%s: %s",
-                    BkBasic.LOCALADDR,
-                    socket.getLocalAddress().getHostAddress()
-                )
-            ).asString(),
-            new UncheckedText(
-                new FormattedText(
-                    "%s: %d", BkBasic.LOCALPORT, socket.getLocalPort()
-                )
-            ).asString(),
-            new UncheckedText(
-                new FormattedText(
-                    "%s: %s",
-                    BkBasic.REMOTEADDR,
-                    socket.getInetAddress().getHostAddress()
-                )
-            ).asString(),
-            new UncheckedText(
-                new FormattedText(
-                    "%s: %d", BkBasic.REMOTEPORT, socket.getPort()
-                )
-            ).asString()
+        return new RqWithHeader(
+            new RqWithHeader(
+                new RqWithHeader(
+                    new RqWithHeader(
+                        req,
+                        BkBasic.LOCALADDR,
+                        socket.getLocalAddress().getHostAddress()
+                    ),
+                    BkBasic.LOCALPORT,
+                    String.valueOf(socket.getLocalPort())
+                ),
+                BkBasic.REMOTEADDR,
+                socket.getInetAddress().getHostAddress()
+            ),
+            BkBasic.REMOTEPORT,
+            String.valueOf(socket.getPort())
         );
     }
 }

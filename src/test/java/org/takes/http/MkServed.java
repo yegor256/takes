@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.takes.Take;
 
 /**
- * One connection served by {@link BkBasic} in a background thread.
+ * One connection served by a back-end in a background thread.
  *
  * <p>Connection reuse can only be observed on a real socket, with the
  * back-end running beside the client. This fixture accepts one
@@ -36,12 +36,23 @@ final class MkServed {
      * @param msec Read timeout of the accepted socket, zero for none
      */
     MkServed(final ServerSocket server, final Take take, final int msec) {
+        this(server, new BkBasic(take), msec);
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param server Server socket to accept the connection from
+     * @param back Back to serve the connection
+     * @param msec Read timeout of the accepted socket, zero for none
+     */
+    MkServed(final ServerSocket server, final Back back, final int msec) {
         this(
             new FutureTask<>(
                 () -> {
                     try (Socket socket = server.accept()) {
                         socket.setSoTimeout(msec);
-                        new BkBasic(take).accept(socket);
+                        back.accept(socket);
                     }
                     return true;
                 }
