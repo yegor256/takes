@@ -6,6 +6,7 @@ package org.takes.http;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 import lombok.EqualsAndHashCode;
@@ -16,7 +17,12 @@ import org.takes.Take;
  *
  * <p>This front accepts incoming HTTP connections on a server socket
  * and dispatches them to a back-end for processing. It runs a loop
- * that continuously accepts connections until the exit condition is met.</p>
+ * that continuously accepts connections until the exit condition is met.
+ * The exit condition is checked before every accept, so a front that is
+ * not needed anymore does not wait for the accept timeout to finish.</p>
+ *
+ * <p>The loop can also be stopped by closing the server socket from
+ * another thread, which wakes the blocked accept() up immediately.</p>
  *
  * <p>The class is immutable and thread-safe.</p>
  *
@@ -86,9 +92,9 @@ public final class FtBasic implements Front {
     public void start(final Exit exit) throws IOException {
         this.socket.setSoTimeout((int) TimeUnit.SECONDS.toMillis(1L));
         try {
-            do {
+            while (!exit.ready()) {
                 this.loop(this.socket);
-            } while (!exit.ready());
+            }
         } finally {
             this.socket.close();
         }
@@ -99,6 +105,10 @@ public final class FtBasic implements Front {
             this.back.accept(server.accept());
         } catch (final SocketTimeoutException ignored) {
             // timeout is expected, the loop continues
+        } catch (final SocketException ex) {
+            if (!server.isClosed()) {
+                throw ex;
+            }
         }
     }
 }
