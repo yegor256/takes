@@ -60,6 +60,11 @@ public final class MkSocket extends Socket {
     }
 
     @Override
+    public void shutdownOutput() {
+        // an unconnected socket has no output to shut down
+    }
+
+    @Override
     public InetAddress getInetAddress() {
         return this.address;
     }

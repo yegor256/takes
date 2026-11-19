@@ -18,6 +18,14 @@ import org.takes.Take;
  * and dispatches them to a back-end for processing. It runs a loop
  * that continuously accepts connections until the exit condition is met.</p>
  *
+ * <p>It serves one connection at a time. A connected client therefore
+ * keeps all other clients waiting until it closes its connection or
+ * stays idle longer than the idle timeout of the back. That timeout is
+ * one second for any {@link BkBasic} built from a take alone, which
+ * includes the back of the constructors taking a {@link Take}. Use
+ * {@link FtCli}, or a back decorated with {@link BkParallel}, in
+ * production.</p>
+ *
  * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1

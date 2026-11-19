@@ -17,6 +17,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReference;
 import org.cactoos.bytes.BytesOf;
@@ -191,6 +192,7 @@ final class BkBasicTest {
                         "Hello First",
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
+                        "Connection: close",
                         "Content-Length: 12",
                         "",
                         "Hello Second"
@@ -253,6 +255,7 @@ final class BkBasicTest {
                         BkBasicTest.CRLF,
                         BkBasicTest.POST,
                         BkBasicTest.HOST,
+                        "Connection: close",
                         "Transfer-Encoding: chunked",
                         "",
                         "e",
@@ -269,6 +272,449 @@ final class BkBasicTest {
             "Chunked body must end without waiting for the socket to close",
             body.toString(),
             Matchers.equalTo(text)
+        );
+    }
+
+    @Test
+    void answersSecondRequestSentAfterFirstResponse() throws Exception {
+        final String text = "Twice, à l'identique";
+        final StringBuilder output = new StringBuilder();
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new TkText(text), 5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /first?n=1 HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "Content-Length: 0",
+                    "",
+                    ""
+                );
+                output.append(client.until(text));
+                client.send(
+                    "GET /second?n=2 HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    "",
+                    ""
+                );
+                output.append(client.rest());
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Second request sent after the first response was not answered",
+            output.toString(),
+            RegexMatchers.containsPattern(
+                String.format("(?s)%s.*?%s", text, text)
+            )
+        );
+    }
+
+    @Test
+    void answersPipelinedRequestWhenTakeEchoesItsBody() throws Exception {
+        final String first = String.format(
+            "écho %x", Double.doubleToLongBits(Math.random())
+        );
+        final String second = String.format(
+            "%s, %x bis", first, System.nanoTime()
+        );
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server,
+                new BkBasic(
+                    req -> new ResponseOf(
+                        () -> Arrays.asList(
+                            "HTTP/1.1 200 OK",
+                            String.format(
+                                "Content-Length: %s",
+                                new RqHeaders.Smart(req).single(
+                                    "Content-Length"
+                                )
+                            )
+                        ),
+                        req::body
+                    )
+                ),
+                5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    String.format(
+                        "Content-Length: %d",
+                        first.getBytes(StandardCharsets.UTF_8).length
+                    ),
+                    "",
+                    String.format("%s%s", first, BkBasicTest.POST),
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    String.format(
+                        "Content-Length: %d",
+                        second.getBytes(StandardCharsets.UTF_8).length
+                    ),
+                    "",
+                    second
+                );
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Pipelined request was not answered after a take echoed its body",
+            output,
+            Matchers.containsString(second)
+        );
+    }
+
+    @Test
+    void ignoresRequestPipelinedAfterConnectionClose() throws Exception {
+        final String text = "Only once ✓";
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new TkText(text), 5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /one HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    "",
+                    "GET /two HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "",
+                    ""
+                );
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Request pipelined after Connection: close was answered",
+            output,
+            Matchers.not(
+                RegexMatchers.containsPattern(
+                    String.format("(?s)%s.*%s", text, text)
+                )
+            )
+        );
+    }
+
+    @Test
+    void ignoresRequestPipelinedAfterLegacyRequest() throws Exception {
+        final String text = "Vieux protocole";
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new TkText(text), 5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /legacy HTTP/1.0",
+                    BkBasicTest.HOST,
+                    "",
+                    "GET /legacy/again HTTP/1.0",
+                    BkBasicTest.HOST,
+                    "",
+                    ""
+                );
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Request pipelined after an HTTP/1.0 request was answered",
+            output,
+            Matchers.not(
+                RegexMatchers.containsPattern(
+                    String.format("(?s)%s.*%s", text, text)
+                )
+            )
+        );
+    }
+
+    @Test
+    void endsLingeringWhenClientNeverCloses() throws Exception {
+        final boolean done;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new TkText("linger"), 0
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /stay HTTP/1.0",
+                    BkBasicTest.HOST,
+                    "",
+                    "ŧrailing junk §7f3"
+                );
+                client.rest();
+                done = served.done();
+            }
+        }
+        MatcherAssert.assertThat(
+            "Lingering close did not end while the client kept its socket open",
+            done,
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void readsBodyThatStallsLongerThanIdleTimeout() throws Exception {
+        final String body = String.format(
+            "Lent, très lent %d…", System.nanoTime()
+        );
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new BkBasic(req -> new RsText(req.body()), 200), 0
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    String.format(
+                        "Content-Length: %d",
+                        body.getBytes(StandardCharsets.UTF_8).length
+                    ),
+                    "",
+                    body.substring(0, body.length() / 2)
+                );
+                Thread.sleep(800L);
+                client.send(body.substring(body.length() / 2));
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Body stalling longer than the idle timeout was not read in full",
+            output,
+            Matchers.containsString(body)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenClientResetsWhileLingering() throws Exception {
+        final String text = "Reset ahead ⚡";
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(server, new TkText(text), 0).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /reset HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    "",
+                    "junk ¤ that nobody reads"
+                );
+                client.until(text);
+                socket.setSoLinger(true, 0);
+            }
+        }
+        MatcherAssert.assertThat(
+            "Reset while lingering did not end the connection quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenClientResetsIdleConnection() throws Exception {
+        final String text = "Idle until reset ☂";
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(server, new TkText(text), 0).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send("GET /idle HTTP/1.1", BkBasicTest.HOST, "", "");
+                client.until(text);
+                socket.setSoLinger(true, 0);
+            }
+        }
+        MatcherAssert.assertThat(
+            "Reset of an idle connection did not end it quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenUnreadChunkedBodyIsMalformed() throws Exception {
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(
+                server, new TkText("not reading that"), 5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    BkBasicTest.POST,
+                    BkBasicTest.HOST,
+                    "Transfer-Encoding: chunked",
+                    "",
+                    "zq",
+                    "ünread",
+                    ""
+                );
+                client.rest();
+            }
+        }
+        MatcherAssert.assertThat(
+            "Malformed unread chunked body did not end the connection quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenIdleConnectionTimesOut() throws Exception {
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(
+                server, new BkBasic(new TkText("Idle after this"), 300), 0
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send("GET /idle HTTP/1.1", BkBasicTest.HOST, "", "");
+                client.rest();
+            }
+        }
+        MatcherAssert.assertThat(
+            "Idle keep-alive connection did not end quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void endsQuietlyWhenClientClosesBetweenRequests() throws Exception {
+        final String text = "Then the client leaves";
+        final MkServed served;
+        try (ServerSocket server = new ServerSocket(0)) {
+            served = new MkServed(server, new TkText(text), 5000).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send("GET /leave HTTP/1.1", BkBasicTest.HOST, "", "");
+                client.until(text);
+                client.leave();
+                client.rest();
+            }
+        }
+        MatcherAssert.assertThat(
+            "Connection closed by the client did not end quietly",
+            served.done(),
+            Matchers.is(true)
+        );
+    }
+
+    @Test
+    void echoesCloseWhenClosingConnection() throws Exception {
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new TkText("Au revoir"), 5000
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send(
+                    "GET /bye HTTP/1.1",
+                    BkBasicTest.HOST,
+                    "Connection: close",
+                    "",
+                    ""
+                );
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Response closing the connection did not carry Connection: close",
+            output,
+            Matchers.containsString("Connection: close")
+        );
+    }
+
+    @Test
+    void answersTimeoutWhenRequestHeadStalls() throws Exception {
+        final String output;
+        try (ServerSocket server = new ServerSocket(0)) {
+            final MkServed served = new MkServed(
+                server, new TkText("never"), 300
+            ).start();
+            try (
+                Socket socket = new Socket(
+                    InetAddress.getLoopbackAddress(), server.getLocalPort()
+                )
+            ) {
+                final MkClient client = new MkClient(socket);
+                client.send("GET /slow/лорис HTTP/1.1", "Host: stalled");
+                output = client.rest();
+            }
+            served.done();
+        }
+        MatcherAssert.assertThat(
+            "Stalled request head was not answered with 408",
+            output,
+            Matchers.startsWith("HTTP/1.1 408")
         );
     }
 
@@ -478,6 +924,7 @@ final class BkBasicTest {
                     new RqPrint(new RqFake(method, path))
                         .asString().getBytes(StandardCharsets.UTF_8)
                 );
+                socket.shutdownOutput();
                 final byte[] buffer = new byte[4096];
                 for (
                     int count = sockerInStream.read(buffer); count != -1;

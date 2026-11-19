@@ -32,6 +32,11 @@ import org.takes.rq.RqWithHeader;
  * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.1
+ * @todo #1748:30min Measure --max-latency per request, not per keep-alive
+ *  connection. BkTimeable starts its clock when the back accepts the
+ *  socket, so a long-lived connection is interrupted while it idles, and
+ *  the interrupt flag left on the thread breaks later requests served by
+ *  it.
  */
 @EqualsAndHashCode
 public final class FtCli implements Front {
@@ -80,7 +85,7 @@ public final class FtCli implements Front {
             tks = this.take;
         }
         final BkTimeable timeable = new BkTimeable(
-            new BkSafe(new BkBasic(tks)),
+            new BkSafe(new BkBasic(tks, this.options.idle())),
             this.options.maxLatency()
         );
         timeable.setDaemon(true);
