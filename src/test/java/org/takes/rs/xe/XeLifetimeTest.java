@@ -36,4 +36,23 @@ final class XeLifetimeTest {
             )
         );
     }
+
+    @Test
+    void buildsXmlAttributeWithCustomName() throws IOException {
+        MatcherAssert.assertThat(
+            "XeLifetime must use the custom element name as the attribute name",
+            IOUtils.toString(
+                new RsXembly(
+                    new XeAppend(
+                        "root",
+                        new XeLifetime("uptime")
+                    )
+                ).body(),
+                StandardCharsets.UTF_8
+            ),
+            XhtmlMatchers.hasXPaths(
+                "/root[@uptime]"
+            )
+        );
+    }
 }
