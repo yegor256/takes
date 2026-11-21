@@ -94,20 +94,16 @@ final class ChunkedInputStream extends InputStream {
         if (this.eof) {
             result = -1;
         } else {
-            final int shift = Math.min(len, this.size - this.pos);
-            final int count = this.origin.read(buf, off, shift);
-            this.pos += count;
-            if (shift == len) {
-                result = len;
-            } else {
-                result = shift + Math.max(
-                    this.read(
-                        buf,
-                        off + shift,
-                    len - shift
-                    ), 0
+            final int count = this.origin.read(
+                buf, off, Math.min(len, this.size - this.pos)
+            );
+            if (count < 0) {
+                throw new IOException(
+                    "Chunked body ended before the declared chunk size"
                 );
             }
+            this.pos += count;
+            result = count;
         }
         return result;
     }

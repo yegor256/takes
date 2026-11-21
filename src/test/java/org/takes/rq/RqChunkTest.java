@@ -66,9 +66,16 @@ final class RqChunkTest {
         final String second = "a true object-";
         final String third = "oriented framework";
         final String data = first + second + third;
+        final byte[] buf = new byte[data.length()];
         try (InputStream stream = RqChunkTest.multiChunkBody(first, second, third)) {
-            final byte[] buf = new byte[data.length()];
-            stream.read(buf);
+            int total = 0;
+            while (total < data.length()) {
+                final int count = stream.read(buf, total, data.length() - total);
+                if (count < 0) {
+                    break;
+                }
+                total += count;
+            }
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
@@ -84,9 +91,16 @@ final class RqChunkTest {
         final String third = "oriented framework";
         final int length = (first + second + third).length();
         try (InputStream stream = RqChunkTest.multiChunkBody(first, second, third)) {
+            final byte[] buf = new byte[length];
+            int total = 0;
+            int count = stream.read(buf);
+            while (count >= 0) {
+                total += count;
+                count = stream.read(buf);
+            }
             MatcherAssert.assertThat(
                 "Number of bytes read must equal the total length of all chunks",
-                stream.read(new byte[length]),
+                total,
                 Matchers.equalTo(length)
             );
         }
