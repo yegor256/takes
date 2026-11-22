@@ -50,7 +50,7 @@ public final class RqLive extends RqWrap {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Opt<Integer> data = new Opt.Empty<>();
         data = RqLive.data(input, data);
-        while (data.get() > 0) {
+        while (data.get() >= 0) {
             eof = false;
             if (data.get() == '\r') {
                 RqLive.checkLineFeed(input, baos, head.size() + 1);
