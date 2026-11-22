@@ -37,7 +37,7 @@
  *     final Iterable&lt;String&gt; param =
  *       new RqHref(req).href().param("name");
  *     if (!param.iterator().hasNext()) {
- *       throw RsForward(
+ *       throw new RsForward(
  *         new RsFlash("query param NAME is mandatory"),
  *         HttpURLConnection.HTTP_SEE_OTHER,
  *         "/files"
@@ -47,14 +47,20 @@
  *   }
  * }</pre>
  *
- * <p>This example will work only if you wrap your entire "take" into
+ * <p>This works because {@link org.takes.facets.forward.RsForward} is both an
+ * {@link org.takes.HttpException} and a {@link org.takes.Response} at the same
+ * time, so it can be thrown and, once caught, used as a response. This example
+ * will work only if you wrap your entire "take" into
  * {@link org.takes.facets.forward.TkForward} decorator:</p>
  *
  * <pre>Take take = new TkForward(take);</pre>
  *
  * <p>This {@link org.takes.facets.forward.TkForward} decorator will catch
  * all exceptions of type {@link org.takes.facets.forward.RsForward} and
- * convert them to responses.</p>
+ * convert them to responses. For error scenarios,
+ * {@link org.takes.facets.forward.RsFailure} is a ready-made subclass of
+ * {@link org.takes.facets.forward.RsForward} that combines the redirect with
+ * a flash message carried in the {@code Set-Cookie} header.</p>
  *
  * @since 0.1
  */
