@@ -8,11 +8,13 @@ import com.jcabi.http.Request;
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -23,6 +25,7 @@ import org.takes.rq.form.RqFormBase;
 import org.takes.rs.RsText;
 import org.takes.tk.TkEmpty;
 import org.takes.tk.TkFixed;
+import org.takes.tk.TkText;
 
 /**
  * Test case for {@link FtRemote}.
@@ -110,6 +113,22 @@ final class FtRemoteTest {
             "TkEmpty must return HTTP 204 with empty body",
             resp.get().status(),
             Matchers.equalTo(HttpURLConnection.HTTP_NO_CONTENT)
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void execDoesNotWaitForAcceptTimeouts() throws Exception {
+        final AtomicReference<URI> home = new AtomicReference<>();
+        final long start = System.nanoTime();
+        new FtRemote(new TkText("ok")).exec(home::set);
+        MatcherAssert.assertThat(
+            "FtRemote.exec() must not wait for accept() timeouts",
+            TimeUnit.MILLISECONDS.convert(
+                System.nanoTime() - start,
+                TimeUnit.NANOSECONDS
+            ),
+            Matchers.lessThan(500L)
         );
     }
 }

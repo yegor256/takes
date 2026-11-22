@@ -154,6 +154,7 @@ public final class FtRemote implements Front {
             )
         );
         exit.set(true);
+        this.socket.close();
         try {
             thread.join();
         } catch (final InterruptedException ex) {
