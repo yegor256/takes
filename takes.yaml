@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 280.194228178
+  seconds: 208.699904827
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-21 03:58:51.728784702 Z
+  when: 2026-11-22 03:57:41.823822413 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -2629,17 +2629,6 @@
   when: 2025-09-29 16:00:29.159690991 Z
   where: github
   who: 160975
-- _id: 1079
-  _job: 18102982919
-  _time: 2025-09-29 16:00:29.174977043 Z
-  _version: 0.16.7/0.54.0/0.15.48
-  details: 'We found out that the user #4052869 is known in GitHub as @grzechol.'
-  is_human: 1
-  name: grzechol
-  what: who-has-name
-  when: 2025-09-29 16:00:29.183305811 Z
-  where: github
-  who: 4052869
 - _id: 1080
   _job: 18102982919
   _time: 2025-09-29 16:00:29.196449944 Z
@@ -21568,6 +21557,7 @@
   is_human: 1
   issue: 858
   repository: 28924109
+  stale: who
   what: issue-was-opened
   when: 2018-10-10 06:17:38.000000000 Z
   where: github
@@ -37483,6 +37473,7 @@
   is_human: 1
   issue: 858
   repository: 28924109
+  stale: who
   what: issue-was-closed
   when: 2018-10-10 06:17:59.000000000 Z
   where: github
@@ -76672,18 +76663,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1117
-  closures_were_checked: 603
+  assignees_were_scanned: 1687
+  closures_were_checked: 1346
   earliest_issue_was_found: 1
-  events_were_scanned: 20825891700
+  events_were_scanned: 27880085271
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 388
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1440
-  min_pull_was_found: 1092
+  min_issue_was_found: 1441
+  min_pull_was_found: 1093
   repository: 28924109
-  types_were_scanned: 277
+  types_were_scanned: 387
   what: iterate
   where: github
 - _id: 20665
@@ -87428,18 +87419,6 @@
   total_stars: 878
   what: dimensions-of-terrain
   when: 2026-11-17 04:00:23.402849179 Z
-- _id: 21395
-  _job: 109643
-  _time: 2026-11-17 04:00:50.759034033 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (211.0) is increasing (R=0.16).
-    The average number of commits per week (10.2) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.23).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-11-17 04:00:50.777668690 Z
 - _id: 21396
   _job: 44233494129
   _time: 2026-11-18 03:54:07.172190122 Z
@@ -87883,5 +87862,143 @@
   _job: 44863352374
   _time: 2026-11-21 03:58:48.071056374 Z
   _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 6
+  total_commits: 4034
+  total_contributors: 92
+  total_files: 607
+  total_forks: 220
+  total_issues: 766
+  total_pulls: 1093
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-21 03:58:47.996473095 Z
+- _id: 21422
+  _job: 110537
+  _time: 2026-11-21 03:59:18.984398498 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (216.1) is increasing (R=0.15).
+    The average number of commits per week (10.2) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.26).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-11-21 03:59:19.000227679 Z
+- _id: 21423
+  _job: 44982623674
+  _time: 2026-11-22 03:54:17.211771605 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/davidanson-markdownlint-cli2-action-25.x
+  details: The pull request yegor256/takes#1862 has been opened by @renovate[bot].
+  event_id: 20892012191
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1862
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-22 00:59:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21424
+  _job: 44982623674
+  _time: 2026-11-22 03:54:17.673039829 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1722 has been closed by @yegor256.
+  event_id: 20887966748
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1722
+  repository: 28924109
+  what: issue-was-closed
+  when: 2026-11-21 23:25:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 21425
+  _job: 44982623674
+  _time: 2026-11-22 03:54:18.016384058 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  commits: 1
+  details: The pull request yegor256/takes#1854 has been reviewed by @yegor256 with
+    18 HoC and 0 comments.
+  event_id: 20887010539
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 18
+  is_human: 1
+  issue: 1854
+  repository: 28924109
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-21 23:03:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 21426
+  _job: 44982623674
+  _time: 2026-11-22 03:54:18.761875790 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/1860-chunked-short-read
+  details: The pull request yegor256/takes#1861 has been opened by @inf1mum.
+  event_id: 20871894775
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1861
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-21 17:53:58.000000000 Z
+  where: github
+  who: 8135225
+- _id: 21427
+  _job: 44982623674
+  _time: 2026-11-22 03:54:19.064390734 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/takes#1860 has been opened by @yegor256.
+  event_id: 20841582089
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1860
+  repository: 28924109
+  what: issue-was-opened
+  when: 2026-11-21 07:53:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 21428
+  _job: 44982623674
+  _time: 2026-11-22 03:54:49.444791189 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/1722-checklist-remainder
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/takes#1847 has been "pull-was-merged".
+  failed_builds: 0
+  files: 6
+  hoc: 195
+  is_human: 1
+  issue: 1847
+  repository: 28924109
+  review: 2026-11-17 11:30:34.000000000 Z
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-21 23:25:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 21429
+  _job: 44982623674
+  _time: 2026-11-22 03:55:57.670811160 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/hibernate-validator
+  details: The missing pull yegor256/takes#1859 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1859
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-21 02:15:27.000000000 Z
+  where: github
+  who: 29139614
