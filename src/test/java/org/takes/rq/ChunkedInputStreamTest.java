@@ -13,6 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -214,6 +215,33 @@ final class ChunkedInputStreamTest {
         }
     }
 
+    @Test
+    void failsOnChunkShorterThanDeclaredSize() {
+        final InputStream raw = ChunkedInputStreamTest.truncatedStream();
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                try (InputStream stream = new ChunkedInputStream(raw)) {
+                    MatcherAssert.assertThat(
+                        "Payload bytes present before the cut must be read",
+                        stream.read(new byte[2]),
+                        Matchers.equalTo(2)
+                    );
+                    stream.read(new byte[8]);
+                } catch (final IOException ex) {
+                    MatcherAssert.assertThat(
+                        "Exception message must mention the declared size",
+                        ex.getMessage(),
+                        Matchers.containsString(
+                            "Chunked body ended before the declared chunk size"
+                        )
+                    );
+                    throw ex;
+                }
+            }
+        );
+    }
+
     private static InputStream stream(final String data) {
         return new ChunkedInputStream(
             IOUtils.toInputStream(
@@ -266,5 +294,15 @@ final class ChunkedInputStreamTest {
                 return super.read(buf, off, Math.min(len, 1));
             }
         };
+    }
+
+    private static InputStream truncatedStream() {
+        return new ByteArrayInputStream(
+            new Joined(
+                String.valueOf((char) 13) + (char) 10,
+                "4",
+                "ab"
+            ).toString().getBytes(StandardCharsets.US_ASCII)
+        );
     }
 }
