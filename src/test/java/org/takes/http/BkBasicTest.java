@@ -566,7 +566,7 @@ final class BkBasicTest {
 
     @Test
     void deliversResponseBeforeReadingBodyTakeIgnored() throws Exception {
-        final String text = "Répondu d'abord";
+        final String text = "Answered first ✓";
         MatcherAssert.assertThat(
             "Response was held back until the ignored body arrived",
             new MkDialog(new BkBasic(new TkText(text), 1000), 0).output(
@@ -584,7 +584,7 @@ final class BkBasicTest {
 
     @Test
     void endsWithoutReadingUnreadBodyWhenClosing() throws Exception {
-        final String text = "Pas besoin du reste";
+        final String text = "No need for the body ✂";
         MatcherAssert.assertThat(
             "Closing connection waited for a body nobody reads",
             new MkDialog(new BkBasic(new TkText(text)), 0).ended(

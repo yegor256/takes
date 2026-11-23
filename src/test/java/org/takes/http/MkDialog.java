@@ -48,11 +48,11 @@ final class MkDialog {
     /**
      * Ctor.
      *
-     * @param bck Back serving the connection
+     * @param that Back serving the connection
      * @param timeout Read timeout of the accepted socket, zero for none
      */
-    MkDialog(final Back bck, final int timeout) {
-        this.back = bck;
+    MkDialog(final Back that, final int timeout) {
+        this.back = that;
         this.msec = timeout;
     }
 
