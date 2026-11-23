@@ -4,6 +4,8 @@
  */
 package org.takes.rq;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.cactoos.text.Joined;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -66,9 +69,16 @@ final class ChunkedInputStreamTest {
         final String second = "a true object-";
         final String third = "oriented framework";
         final String data = first + second + third;
+        final byte[] buf = new byte[data.length()];
         try (InputStream stream = ChunkedInputStreamTest.multiStream(first, second, third)) {
-            final byte[] buf = new byte[data.length()];
-            stream.read(buf);
+            int total = 0;
+            while (total < data.length()) {
+                final int count = stream.read(buf, total, data.length() - total);
+                if (count < 0) {
+                    break;
+                }
+                total += count;
+            }
             MatcherAssert.assertThat(
                 "Buffer content must match the expected data bytes",
                 buf,
@@ -84,9 +94,16 @@ final class ChunkedInputStreamTest {
         final String third = "oriented framework";
         final int length = (first + second + third).length();
         try (InputStream stream = ChunkedInputStreamTest.multiStream(first, second, third)) {
+            final byte[] buf = new byte[length];
+            int total = 0;
+            int count = stream.read(buf);
+            while (count >= 0) {
+                total += count;
+                count = stream.read(buf);
+            }
             MatcherAssert.assertThat(
                 "Number of bytes read must equal the total length of all chunks",
-                stream.read(new byte[length]),
+                total,
                 Matchers.equalTo(length)
             );
         }
@@ -166,6 +183,65 @@ final class ChunkedInputStreamTest {
         }
     }
 
+    @Test
+    void returnsActualCountOnShortUnderlyingRead() throws IOException {
+        final InputStream raw = ChunkedInputStreamTest.shortStream();
+        try (InputStream stream = new ChunkedInputStream(raw)) {
+            final byte[] buf = new byte[4];
+            MatcherAssert.assertThat(
+                "Count must equal the bytes actually read, not requested",
+                stream.read(buf),
+                Matchers.equalTo(1)
+            );
+        }
+    }
+
+    @Test
+    void decodesCompleteBodyWithShortUnderlyingReads() throws IOException {
+        final InputStream raw = ChunkedInputStreamTest.shortStream();
+        try (InputStream stream = new ChunkedInputStream(raw)) {
+            final ByteArrayOutputStream out = new ByteArrayOutputStream();
+            final byte[] buf = new byte[4];
+            int count = stream.read(buf);
+            while (count >= 0) {
+                out.write(buf, 0, count);
+                count = stream.read(buf);
+            }
+            MatcherAssert.assertThat(
+                "Complete decoded body must survive short underlying reads",
+                out.toByteArray(),
+                Matchers.equalTo("abcd".getBytes(StandardCharsets.US_ASCII))
+            );
+        }
+    }
+
+    @Test
+    void failsOnChunkShorterThanDeclaredSize() {
+        final InputStream raw = ChunkedInputStreamTest.truncatedStream();
+        Assertions.assertThrows(
+            IOException.class,
+            () -> {
+                try (InputStream stream = new ChunkedInputStream(raw)) {
+                    MatcherAssert.assertThat(
+                        "Payload bytes present before the cut must be read",
+                        stream.read(new byte[2]),
+                        Matchers.equalTo(2)
+                    );
+                    stream.read(new byte[8]);
+                } catch (final IOException ex) {
+                    MatcherAssert.assertThat(
+                        "Exception message must mention the declared size",
+                        ex.getMessage(),
+                        Matchers.containsString(
+                            "Chunked body ended before the declared chunk size"
+                        )
+                    );
+                    throw ex;
+                }
+            }
+        );
+    }
+
     private static InputStream stream(final String data) {
         return new ChunkedInputStream(
             IOUtils.toInputStream(
@@ -199,6 +275,34 @@ final class ChunkedInputStreamTest {
                 ).toString(),
                 StandardCharsets.UTF_8
             )
+        );
+    }
+
+    private static InputStream shortStream() {
+        return new ByteArrayInputStream(
+            new Joined(
+                String.valueOf((char) 13) + (char) 10,
+                "4",
+                "abcd",
+                "0",
+                "",
+                ""
+            ).toString().getBytes(StandardCharsets.US_ASCII)
+        ) {
+            @Override
+            public int read(final byte[] buf, final int off, final int len) {
+                return super.read(buf, off, Math.min(len, 1));
+            }
+        };
+    }
+
+    private static InputStream truncatedStream() {
+        return new ByteArrayInputStream(
+            new Joined(
+                String.valueOf((char) 13) + (char) 10,
+                "4",
+                "ab"
+            ).toString().getBytes(StandardCharsets.US_ASCII)
         );
     }
 }
