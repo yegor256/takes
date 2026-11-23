@@ -6,6 +6,7 @@ package org.takes.http;
 
 import com.jcabi.http.request.JdkRequest;
 import com.jcabi.http.response.RestResponse;
+import com.jcabi.matchers.RegexMatchers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -247,6 +248,124 @@ final class FtBasicTest {
             ).start(
                 () -> true
             )
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void tellsClientToCloseWhenServedByTakeAlone() throws Exception {
+        final String text = "Один раз";
+        final AtomicReference<String> output = new AtomicReference<>();
+        new MkFtBasic(new TkText(text)).exec(
+            home -> {
+                try (
+                    Socket socket = new Socket(home.getHost(), home.getPort())
+                ) {
+                    final MkClient client = new MkClient(socket);
+                    client.send("GET /alone HTTP/1.1", "Host: w", "", "");
+                    output.set(client.rest());
+                }
+            }
+        );
+        MatcherAssert.assertThat(
+            "Front built from a take alone did not tell the client to close",
+            output.get(),
+            Matchers.containsString("Connection: close")
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void servesSecondRequestOnSameConnection() throws Exception {
+        final String text = "Ещё раз, s'il vous plaît";
+        final AtomicReference<String> output = new AtomicReference<>();
+        new MkFtBasic(new BkBasic(new TkText(text), 1000)).exec(
+            home -> {
+                try (
+                    Socket socket = new Socket(home.getHost(), home.getPort())
+                ) {
+                    final MkClient client = new MkClient(socket);
+                    client.send(
+                        "GET /once HTTP/1.1", "Host: x", "Content-Length: 0",
+                        "", ""
+                    );
+                    final String first = client.until(text);
+                    client.send(
+                        "GET /twice HTTP/1.1", "Host: x", "Connection: close",
+                        "", ""
+                    );
+                    output.set(first.concat(client.rest()));
+                }
+            }
+        );
+        MatcherAssert.assertThat(
+            "Second request on the same connection was not served",
+            output.get(),
+            RegexMatchers.containsPattern(
+                String.format("(?s)%s.*?%s", text, text)
+            )
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void servesAnotherClientWhileKeepAliveConnectionIdlesOnSingleThread()
+        throws Exception {
+        final String text = "Next in line №2";
+        final AtomicReference<String> output = new AtomicReference<>();
+        new MkFtBasic(new BkBasic(new TkText(text), 1000)).exec(
+            home -> {
+                try (
+                    Socket first = new Socket(home.getHost(), home.getPort());
+                    Socket second = new Socket(home.getHost(), home.getPort())
+                ) {
+                    final MkClient idle = new MkClient(first);
+                    final MkClient other = new MkClient(second);
+                    idle.send(
+                        "GET /idle HTTP/1.1", "Host: y", "Content-Length: 0",
+                        "", ""
+                    );
+                    idle.until(text);
+                    other.send(
+                        "GET /other HTTP/1.1", "Host: y", "Connection: close",
+                        "", ""
+                    );
+                    output.set(other.rest());
+                }
+            }
+        );
+        MatcherAssert.assertThat(
+            "Another client was not served while a keep-alive connection idled",
+            output.get(),
+            Matchers.containsString(text)
+        );
+    }
+
+    @Test
+    @Tag("deep")
+    void servesAnotherClientWhileFreshConnectionSendsNothing()
+        throws Exception {
+        final String text = "Silence is not golden ☂";
+        final AtomicReference<String> output = new AtomicReference<>();
+        new MkFtBasic(new BkBasic(new TkText(text))).exec(
+            home -> {
+                try (
+                    Socket mute = new Socket(home.getHost(), home.getPort());
+                    Socket other = new Socket(home.getHost(), home.getPort())
+                ) {
+                    mute.setSoTimeout(5000);
+                    new MkClient(other).send(
+                        "GET /talk HTTP/1.1", "Host: z", "Connection: close",
+                        "", ""
+                    );
+                    output.set(new MkClient(other).rest());
+                }
+            }
+        );
+        MatcherAssert.assertThat(
+            "Another client was not served while a fresh one stayed mute",
+            output.get(),
+            Matchers.containsString(text)
         );
     }
 

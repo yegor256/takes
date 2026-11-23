@@ -33,6 +33,11 @@ import lombok.EqualsAndHashCode;
  * <li>Automatic cleanup of completed or interrupted threads</li>
  * </ul>
  *
+ * <p>The latency is measured from the moment the original back accepts
+ * the socket, that is per connection, not per request: a keep-alive
+ * connection serving many requests, or idling between them, counts as a
+ * single long request.</p>
+ *
  * <p>The class is immutable and thread-safe.</p>
  *
  * @since 0.14.2
@@ -80,6 +85,11 @@ public final class BkTimeable extends Thread implements Back {
             Thread.currentThread(),
             System.currentTimeMillis()
         );
-        this.back.accept(socket);
+        try {
+            this.back.accept(socket);
+        } finally {
+            this.threads.remove(Thread.currentThread());
+            Thread.interrupted();
+        }
     }
 }

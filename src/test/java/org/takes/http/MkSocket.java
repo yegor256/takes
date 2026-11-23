@@ -5,10 +5,13 @@
 package org.takes.http;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import org.cactoos.Proc;
+import org.cactoos.proc.IoCheckedProc;
 
 /**
  * Socket mock for reuse.
@@ -38,15 +41,32 @@ public final class MkSocket extends Socket {
     private final InputStream input;
 
     /**
+     * What happens when the output is shut down.
+     */
+    private final Proc<Socket> shutdown;
+
+    /**
      * Constructs a {@code MkSocket} with the specified input stream.
      *
      * @param input The input stream of the socket
      */
     public MkSocket(final InputStream input) {
+        this(input, skt -> { });
+    }
+
+    /**
+     * Constructs a {@code MkSocket} with the specified input stream and
+     * reaction to shutting its output down.
+     *
+     * @param input The input stream of the socket
+     * @param shutdown What happens when the output is shut down
+     */
+    public MkSocket(final InputStream input, final Proc<Socket> shutdown) {
         super();
         this.address = MkSocket.LOOPBACK;
         this.output = new ByteArrayOutputStream();
         this.input = input;
+        this.shutdown = shutdown;
     }
 
     @Override
@@ -57,6 +77,11 @@ public final class MkSocket extends Socket {
     @Override
     public OutputStream getOutputStream() {
         return this.output;
+    }
+
+    @Override
+    public void shutdownOutput() throws IOException {
+        new IoCheckedProc<>(this.shutdown).exec(this);
     }
 
     @Override
