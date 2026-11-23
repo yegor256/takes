@@ -20,11 +20,11 @@ import org.takes.Take;
  *
  * <p>It serves one connection at a time. A connected client therefore
  * keeps all other clients waiting until it closes its connection or
- * stays idle longer than the idle timeout of the back. That timeout is
- * one second for any {@link BkBasic} built from a take alone, which
- * includes the back of the constructors taking a {@link Take}. Use
- * {@link FtCli}, or a back decorated with {@link BkParallel}, in
- * production.</p>
+ * stays idle longer than the idle timeout of the back. The constructors
+ * taking a {@link Take} use a {@link BkBasic} built from the take alone,
+ * which never reuses a connection and waits one second at most for a
+ * request to start. Use {@link FtCli}, or a back decorated with
+ * {@link BkParallel}, in production.</p>
  *
  * <p>The class is immutable and thread-safe.</p>
  *

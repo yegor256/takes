@@ -54,6 +54,26 @@ final class FtRemoteTest {
 
     @Test
     @Tag("deep")
+    void tellsClientNotToReuseConnection() throws Exception {
+        final AtomicReference<String> header = new AtomicReference<>();
+        new FtRemote(new TkFixed(new RsText("once ♣"))).exec(
+            home -> header.set(
+                new JdkRequest(home)
+                    .fetch()
+                    .headers()
+                    .get("Connection")
+                    .get(0)
+            )
+        );
+        MatcherAssert.assertThat(
+            "FtRemote did not tell the client to close the connection",
+            header.get(),
+            Matchers.equalToIgnoringCase("close")
+        );
+    }
+
+    @Test
+    @Tag("deep")
     void worksInParallelThreads() throws Exception {
         final Take take = req -> {
             MatcherAssert.assertThat(

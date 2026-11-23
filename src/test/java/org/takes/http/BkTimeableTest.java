@@ -9,10 +9,13 @@ import com.jcabi.http.response.RestResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -81,5 +84,35 @@ final class BkTimeableTest {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(ex);
         }
+    }
+
+    @Test
+    void clearsInterruptBeforeThreadServesNextConnection() throws Exception {
+        final BkTimeable timeable = new BkTimeable(
+            socket -> {
+                try {
+                    TimeUnit.SECONDS.sleep(5L);
+                } catch (final InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+            },
+            100L
+        );
+        timeable.setDaemon(true);
+        timeable.start();
+        final FutureTask<Boolean> task = new FutureTask<>(
+            () -> {
+                try (Socket socket = new Socket()) {
+                    timeable.accept(socket);
+                }
+                return Thread.currentThread().isInterrupted();
+            }
+        );
+        new Thread(task).start();
+        MatcherAssert.assertThat(
+            "Interrupt of a slow connection leaked to the serving thread",
+            task.get(10L, TimeUnit.SECONDS),
+            Matchers.is(false)
+        );
     }
 }

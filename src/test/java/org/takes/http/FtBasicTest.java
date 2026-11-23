@@ -253,10 +253,33 @@ final class FtBasicTest {
 
     @Test
     @Tag("deep")
+    void tellsClientToCloseWhenServedByTakeAlone() throws Exception {
+        final String text = "Один раз";
+        final AtomicReference<String> output = new AtomicReference<>();
+        new MkFtBasic(new TkText(text)).exec(
+            home -> {
+                try (
+                    Socket socket = new Socket(home.getHost(), home.getPort())
+                ) {
+                    final MkClient client = new MkClient(socket);
+                    client.send("GET /alone HTTP/1.1", "Host: w", "", "");
+                    output.set(client.rest());
+                }
+            }
+        );
+        MatcherAssert.assertThat(
+            "Front built from a take alone did not tell the client to close",
+            output.get(),
+            Matchers.containsString("Connection: close")
+        );
+    }
+
+    @Test
+    @Tag("deep")
     void servesSecondRequestOnSameConnection() throws Exception {
         final String text = "Ещё раз, s'il vous plaît";
         final AtomicReference<String> output = new AtomicReference<>();
-        new MkFtBasic(new TkText(text)).exec(
+        new MkFtBasic(new BkBasic(new TkText(text), 1000)).exec(
             home -> {
                 try (
                     Socket socket = new Socket(home.getHost(), home.getPort())
@@ -290,7 +313,7 @@ final class FtBasicTest {
         throws Exception {
         final String text = "Next in line №2";
         final AtomicReference<String> output = new AtomicReference<>();
-        new MkFtBasic(new BkBasic(new TkText(text))).exec(
+        new MkFtBasic(new BkBasic(new TkText(text), 1000)).exec(
             home -> {
                 try (
                     Socket first = new Socket(home.getHost(), home.getPort());

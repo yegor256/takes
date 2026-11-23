@@ -163,17 +163,14 @@ final class Options {
      */
     int idle() {
         final String value = this.map.getOrDefault("idle", "5000");
-        final long msec = Long.parseLong(value);
+        final long msec;
+        try {
+            msec = Long.parseLong(value);
+        } catch (final NumberFormatException ex) {
+            throw new IllegalArgumentException(Options.range(value), ex);
+        }
         if (msec <= 0L || msec > Integer.MAX_VALUE) {
-            throw new IllegalArgumentException(
-                new UncheckedText(
-                    new FormattedText(
-                        "--idle must be between 1 and %d ms, got '%s'",
-                        Integer.MAX_VALUE,
-                        value
-                    )
-                ).asString()
-            );
+            throw new IllegalArgumentException(Options.range(value));
         }
         return (int) msec;
     }
@@ -200,5 +197,15 @@ final class Options {
             }
         }
         return map;
+    }
+
+    private static String range(final String value) {
+        return new UncheckedText(
+            new FormattedText(
+                "--idle must be between 1 and %d ms, got '%s'",
+                Integer.MAX_VALUE,
+                value
+            )
+        ).asString();
     }
 }

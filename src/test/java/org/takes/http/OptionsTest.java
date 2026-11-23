@@ -78,6 +78,30 @@ final class OptionsTest {
     }
 
     @Test
+    void rejectsIdleWithoutValueWithRangeMessage() {
+        MatcherAssert.assertThat(
+            "Missing --idle value was not rejected with the range message",
+            Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Options("--idle", "--threads=4").idle()
+            ).getMessage(),
+            Matchers.startsWith("--idle must be between")
+        );
+    }
+
+    @Test
+    void rejectsIdleWithUnitWithRangeMessage() {
+        MatcherAssert.assertThat(
+            "--idle value with a unit was not rejected with the range message",
+            Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Options("--hit-refresh", "--idle=5s").idle()
+            ).getMessage(),
+            Matchers.startsWith("--idle must be between")
+        );
+    }
+
+    @Test
     void rejectsIdleBeyondIntegerRange() {
         Assertions.assertThrows(
             IllegalArgumentException.class,

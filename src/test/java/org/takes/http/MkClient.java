@@ -49,6 +49,16 @@ final class MkClient {
     }
 
     /**
+     * Abort the connection with a TCP reset.
+     *
+     * @throws IOException If fails
+     */
+    void reset() throws IOException {
+        this.socket.setSoLinger(true, 0);
+        this.socket.close();
+    }
+
+    /**
      * Stop sending, while still reading what the server answers.
      *
      * @throws IOException If fails

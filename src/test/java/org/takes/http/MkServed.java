@@ -17,7 +17,9 @@ import org.takes.Take;
  * back-end running beside the client. This fixture accepts one
  * connection with the given read timeout, serves it, and reports any
  * failure of the back-end to the test instead of losing it in the
- * thread, never waiting longer than five seconds for it to end.</p>
+ * thread, never waiting longer than five seconds for it to end. Given a
+ * take, it serves with a {@link BkBasic} that keeps connections open and
+ * waits one second for each next request.</p>
  *
  * @since 1.20
  */
@@ -32,11 +34,11 @@ final class MkServed {
      * Ctor.
      *
      * @param server Server socket to accept the connection from
-     * @param take Take to serve
+     * @param take Take to serve over a kept connection
      * @param msec Read timeout of the accepted socket, zero for none
      */
     MkServed(final ServerSocket server, final Take take, final int msec) {
-        this(server, new BkBasic(take), msec);
+        this(server, new BkBasic(take, 1000), msec);
     }
 
     /**

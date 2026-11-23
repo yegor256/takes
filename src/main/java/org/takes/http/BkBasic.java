@@ -13,8 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import lombok.EqualsAndHashCode;
-import org.cactoos.bytes.BytesOf;
-import org.cactoos.io.InputStreamOf;
 import org.takes.HttpException;
 import org.takes.Request;
 import org.takes.Response;
@@ -27,8 +25,6 @@ import org.takes.rq.RqLengthAware;
 import org.takes.rq.RqLive;
 import org.takes.rq.RqWithHeader;
 import org.takes.rs.RsPrint;
-import org.takes.rs.RsText;
-import org.takes.rs.RsWithStatus;
 
 /**
  * Basic back-end implementation.
@@ -41,11 +37,15 @@ import org.takes.rs.RsWithStatus;
  *
  * <p>Key features:</p>
  * <ul>
- * <li>Handles keep-alive connections by waiting for the next request
- * on the same socket, consuming the body of each one in full so that the
- * next request is read from the start of its own request line; the
- * connection ends when the client closes or resets it, when the exchange
- * cannot persist, in which case the response carries
+ * <li>Serves one request per connection when built from a take alone:
+ * every response carries {@code Connection: close}</li>
+ * <li>Keeps connections open when built with an idle timeout: it then
+ * waits for the next request on the same socket, consuming the body of
+ * each one in full so that the next request is read from the start of
+ * its own request line, and answers with {@code Connection: keep-alive}
+ * and, from one second on, {@code Keep-Alive: timeout=N} in whole
+ * seconds; the connection ends when the client closes or resets it, when
+ * the exchange cannot persist, in which case the response carries
  * {@code Connection: close}, or when no request starts within the idle
  * timeout</li>
  * <li>Applies the idle timeout, one second unless given, to every wait
@@ -73,16 +73,12 @@ import org.takes.rs.RsWithStatus;
  *  which limits each single read anyway, so a client sending one byte at
  *  a time keeps the connection busy forever. Answer 408 and close once
  *  the whole head takes longer than a fixed budget.
- * @todo #1748:30min Skip the unread request body in exchange() when the
- *  connection is about to close. Reading it to the end is unbounded,
- *  while the lingering close that follows already drains the socket
- *  within a fixed time.
  * @todo #1748:30min Close with lingering when ready() gives up on an idle
  *  connection. A request arriving at the very moment the idle timeout
  *  expires is now lost with a TCP reset instead of being drained.
  */
 @EqualsAndHashCode
-@SuppressWarnings({"PMD.CloseInlineResourceRule", "PMD.CloseResource"})
+@SuppressWarnings("PMD.CloseResource")
 public final class BkBasic implements Back {
 
     /**
@@ -116,12 +112,35 @@ public final class BkBasic implements Back {
     private final int idle;
 
     /**
+     * Whether a connection may serve more than one request.
+     */
+    private final boolean keep;
+
+    /**
      * Ctor.
+     *
+     * <p>The back never reuses a connection: every response tells the
+     * client to close it, and the back waits one second at most for the
+     * request to start.</p>
      *
      * @param tks Take
      */
     public BkBasic(final Take tks) {
-        this(tks, 1000);
+        this(tks, 1000, false);
+    }
+
+    /**
+     * Ctor.
+     *
+     * <p>The back keeps a connection open whenever both peers can, and
+     * waits for each next request up to the given time.</p>
+     *
+     * @param tks Take
+     * @param msec How long to wait for the next request, in milliseconds
+     * @since 1.20
+     */
+    public BkBasic(final Take tks, final int msec) {
+        this(tks, msec, true);
     }
 
     /**
@@ -129,15 +148,23 @@ public final class BkBasic implements Back {
      *
      * @param tks Take
      * @param msec How long to wait for the next request, in milliseconds
-     * @since 1.20
+     * @param persistent Whether a connection may serve more than one request
      */
-    public BkBasic(final Take tks, final int msec) {
+    private BkBasic(final Take tks, final int msec, final boolean persistent) {
         this.take = tks;
         this.idle = msec;
+        this.keep = persistent;
     }
 
     @Override
     public void accept(final Socket socket) throws IOException {
+        if (this.idle < 1) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "Idle timeout must be positive, got %d ms", this.idle
+                )
+            );
+        }
         try (
             PushbackInputStream input = new PushbackInputStream(
                 socket.getInputStream()
@@ -165,20 +192,23 @@ public final class BkBasic implements Back {
                 final Response response = new RsHeadOnce(
                     this.response(new RequestOf(live, () -> body))
                 );
-                reusable = new Persistence(live, response).value();
+                reusable = this.keep
+                    && new Persistence(live, response).value();
                 if (reusable) {
-                    new RsPrint(response).print(output);
+                    new RsPrint(new RsKeeping(response, this.idle))
+                        .print(output);
                 } else {
                     new RsPrint(new RsClosing(response)).print(output);
                 }
-                reusable = BkBasic.skipped(live, body) && reusable;
+                output.flush();
+                reusable = reusable && BkBasic.skipped(live, body);
             } catch (final HttpException ex) {
                 new RsPrint(
-                    new RsClosing(BkBasic.failure(ex, ex.code()))
+                    new RsClosing(new RsFault(ex, ex.code()))
                 ).print(output);
+                output.flush();
                 reusable = false;
             }
-            output.flush();
             if (!reusable) {
                 BkBasic.linger(input, socket);
             }
@@ -187,22 +217,34 @@ public final class BkBasic implements Back {
     }
 
     private boolean ready(final PushbackInputStream input,
-        final Socket socket) throws IOException {
-        final int origin = socket.getSoTimeout();
-        socket.setSoTimeout(this.idle);
+        final Socket socket) {
         boolean ready;
         try {
-            final int head = input.read();
-            ready = head >= 0;
-            if (ready) {
-                input.unread(head);
-            }
+            ready = this.waited(input, socket, socket.getSoTimeout());
         } catch (final IOException ex) {
             ready = false;
+        }
+        return ready;
+    }
+
+    private boolean waited(final PushbackInputStream input,
+        final Socket socket, final int origin) throws IOException {
+        try {
+            socket.setSoTimeout(this.idle);
+            return BkBasic.peeked(input);
         } finally {
             socket.setSoTimeout(origin);
         }
-        return ready;
+    }
+
+    private static boolean peeked(final PushbackInputStream input)
+        throws IOException {
+        final int head = input.read();
+        final boolean peeked = head >= 0;
+        if (peeked) {
+            input.unread(head);
+        }
+        return peeked;
     }
 
     private static Request live(final InputStream input, final Socket socket)
@@ -239,15 +281,14 @@ public final class BkBasic implements Back {
     }
 
     private static void linger(final PushbackInputStream input,
-        final Socket socket) throws IOException {
+        final Socket socket) {
         if (BkBasic.shut(socket)) {
             final long deadline = System.currentTimeMillis() + 2000L;
             final byte[] buf = new byte[8192];
             int count = 0;
             long remaining = deadline - System.currentTimeMillis();
             while (count >= 0 && remaining > 0L) {
-                socket.setSoTimeout(Math.toIntExact(remaining));
-                count = BkBasic.drained(input, buf);
+                count = BkBasic.drained(input, socket, buf, remaining);
                 remaining = deadline - System.currentTimeMillis();
             }
         }
@@ -258,15 +299,17 @@ public final class BkBasic implements Back {
         try {
             socket.shutdownOutput();
             shut = true;
-        } catch (final IOException ex) {
+        } catch (final IOException | UnsupportedOperationException ex) {
             shut = false;
         }
         return shut;
     }
 
-    private static int drained(final InputStream input, final byte[] buf) {
+    private static int drained(final InputStream input, final Socket socket,
+        final byte[] buf, final long remaining) {
         int count;
         try {
+            socket.setSoTimeout(Math.toIntExact(remaining));
             count = input.read(buf);
         } catch (final IOException ex) {
             count = -1;
@@ -280,31 +323,14 @@ public final class BkBasic implements Back {
         try {
             handled = this.take.act(req);
         } catch (final HttpException ex) {
-            handled = BkBasic.failure(ex, ex.code());
+            handled = new RsFault(ex, ex.code());
         } catch (final IllegalArgumentException ex) {
-            handled = BkBasic.failure(
-                ex,
-                HttpURLConnection.HTTP_BAD_REQUEST
-            );
+            handled = new RsFault(ex, HttpURLConnection.HTTP_BAD_REQUEST);
         // @checkstyle IllegalCatchCheck (1 line)
         } catch (final Throwable ex) {
-            handled = BkBasic.failure(
-                ex,
-                HttpURLConnection.HTTP_INTERNAL_ERROR
-            );
+            handled = new RsFault(ex, HttpURLConnection.HTTP_INTERNAL_ERROR);
         }
         return handled;
-    }
-
-    private static Response failure(final Throwable err, final int code) {
-        return new RsWithStatus(
-            new RsText(
-                new InputStreamOf(
-                    new BytesOf(err)
-                )
-            ),
-            code
-        );
     }
 
     private static Request addSocketHeaders(final Request req,

@@ -85,6 +85,11 @@ public final class BkTimeable extends Thread implements Back {
             Thread.currentThread(),
             System.currentTimeMillis()
         );
-        this.back.accept(socket);
+        try {
+            this.back.accept(socket);
+        } finally {
+            this.threads.remove(Thread.currentThread());
+            Thread.interrupted();
+        }
     }
 }
