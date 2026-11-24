@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 195.11478717
+  seconds: 235.547657278
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-23 03:57:11.584744500 Z
+  when: 2026-11-24 03:58:09.921004055 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76663,18 +76663,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 1695
+  assignees_were_scanned: 211
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20959103732
+  events_were_scanned: 21087284078
   issues_were_scanned: 0
-  labels_were_scanned: 609
+  labels_were_scanned: 754
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1443
-  min_pull_was_found: 1094
+  min_issue_was_found: 1448
+  min_pull_was_found: 1096
   repository: 28924109
-  types_were_scanned: 491
+  types_were_scanned: 609
   what: iterate
   where: github
 - _id: 20665
@@ -87803,18 +87803,6 @@
   when: 2026-11-19 03:56:33.965598984 Z
   where: github
   who: 58995855
-- _id: 21417
-  _job: 110132
-  _time: 2026-11-19 04:00:04.842408372 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (216.1) is increasing (R=0.15).
-    The average number of commits per week (10.2) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.26).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-11-19 04:00:04.863491540 Z
 - _id: 21418
   _job: 44670713440
   _time: 2026-11-20 03:54:10.907939806 Z
@@ -88019,3 +88007,59 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-23 03:54:58.509603956 Z
+- _id: 21431
+  _job: 111114
+  _time: 2026-11-23 03:57:38.798943597 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (216.1) is increasing (R=0.15).
+    The average number of commits per week (10.2) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.26).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-11-23 03:57:38.819584443 Z
+- _id: 21432
+  _job: 45322565745
+  _time: 2026-11-24 03:54:20.623684359 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/com.restfb-restfb-2026.x
+  details: The pull request yegor256/takes#1864 has been opened by @renovate[bot].
+  event_id: 20978770517
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1864
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-23 07:14:55.000000000 Z
+  where: github
+  who: 29139614
+- _id: 21433
+  _job: 45322565745
+  _time: 2026-11-24 03:55:39.809372819 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 5
+  total_commits: 4034
+  total_contributors: 92
+  total_files: 607
+  total_forks: 220
+  total_issues: 766
+  total_pulls: 1095
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-11-24 03:55:39.749915195 Z
+- _id: 21434
+  _job: 45322565745
+  _time: 2026-11-24 03:55:57.919644399 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/org.codehaus.mojo-license-maven-plugin-2.x
+  details: The missing pull yegor256/takes#1863 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1863
+  repository: 28924109
+  what: pull-was-opened
+  when: 2026-11-23 01:33:49.000000000 Z
+  where: github
+  who: 29139614
