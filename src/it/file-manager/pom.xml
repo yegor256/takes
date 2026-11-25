@@ -16,6 +16,19 @@
   <properties>
     <jdk.version>1.8</jdk.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <!--
+        jcabi-log 0.24.3 still pulls slf4j-api 2.0.16, while
+        slf4j-reload4j pulls 2.0.20; enforcer requires the upper bound.
+        -->
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.20</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>@project.groupId@</groupId>
