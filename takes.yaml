@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 235.547657278
+  seconds: 388.259301951
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-24 03:58:09.921004055 Z
+  when: 2026-11-25 04:00:34.040776965 Z
 - _id: 1
   _job: 17792286313
   _time: 2025-09-17 08:57:08.019374483 Z
@@ -76663,18 +76663,18 @@
   _job: 28918418014
   _time: 2026-07-08 04:54:06.887150272 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 211
-  closures_were_checked: 0
+  assignees_were_scanned: 342
+  closures_were_checked: 603
   earliest_issue_was_found: 1
-  events_were_scanned: 21087284078
+  events_were_scanned: 21183002982
   issues_were_scanned: 0
-  labels_were_scanned: 754
+  labels_were_scanned: 994
   latest_issue_was_found: 1463
   merges_were_scanned: 0
-  min_issue_was_found: 1448
-  min_pull_was_found: 1096
+  min_issue_was_found: 1451
+  min_pull_was_found: 1097
   repository: 28924109
-  types_were_scanned: 609
+  types_were_scanned: 735
   what: iterate
   where: github
 - _id: 20665
@@ -87644,7 +87644,7 @@
   total_releases_published: 0
   total_reviews_submitted: 10
   what: quantity-of-deliverables
-  when: 2026-11-18 03:58:25.662124495 Z
+  when: &190 2026-11-18 03:58:25.662124495 Z
 - _id: 21407
   _job: 109952
   _time: 2026-11-18 03:59:50.566096368 Z
@@ -87862,18 +87862,6 @@
   total_stars: 877
   what: dimensions-of-terrain
   when: 2026-11-21 03:58:47.996473095 Z
-- _id: 21422
-  _job: 110537
-  _time: 2026-11-21 03:59:18.984398498 Z
-  _version: 0.19.16/0.61.1/0.17.23
-  analyzers: 18
-  text: |-
-    The average number of builds per week (216.1) is increasing (R=0.15).
-    The average number of commits per week (10.2) is staying still.
-    The average number of releases per month (0.2) is decreasing (R=-0.26).
-    The average monthly turnover (4.0 developers) is staying still.
-  what: assessment
-  when: 2026-11-21 03:59:19.000227679 Z
 - _id: 21423
   _job: 44982623674
   _time: 2026-11-22 03:54:17.211771605 Z
@@ -88063,3 +88051,38 @@
   when: 2026-11-23 01:33:49.000000000 Z
   where: github
   who: 29139614
+- _id: 21435
+  _job: 111316
+  _time: 2026-11-24 03:58:36.311361413 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  analyzers: 18
+  text: |-
+    The average number of builds per week (216.1) is increasing (R=0.15).
+    The average number of commits per week (10.2) is staying still.
+    The average number of releases per month (0.2) is decreasing (R=-0.26).
+    The average monthly turnover (4.0 developers) is staying still.
+  what: assessment
+  when: 2026-11-24 03:58:36.333700317 Z
+- _id: 21436
+  _job: 45543013957
+  _time: 2026-11-25 03:56:09.441093697 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 5
+  total_commits: 4034
+  total_contributors: 92
+  total_files: 607
+  total_forks: 220
+  total_issues: 766
+  total_pulls: 1095
+  total_releases: 158
+  total_repositories: 1
+  total_stars: 877
+  what: dimensions-of-terrain
+  when: 2026-11-25 03:56:09.372995233 Z
+- _id: 21437
+  _job: 45543013957
+  _time: 2026-11-25 03:59:29.340307825 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *190
+  what: quantity-of-deliverables
+  when: 2026-11-25 03:59:29.329992604 Z
